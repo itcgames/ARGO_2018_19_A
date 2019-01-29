@@ -117,4 +117,9 @@
       <Filter>Header Files\deleters</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="res\.gitkeep">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
