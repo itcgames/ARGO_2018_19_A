@@ -109,23 +109,28 @@
 // Entt Library
 #include <Entt/entt.hpp>
 
-////
-//// Includes here
-////
+// cutec2 Library
+#include "utilities/cute_c2.h"
+
 //
-//#include "input/Keyhandler.h"
-//#include "input/MouseHandler.h"
+// Includes here
 //
-//#include "math/Math.h"
-//#include "math/Vector2.h"
-//
-//#include "utilities/Time.h"
-//#include "utilities/Console.h"
-//
-//#include "Registry.h"
-//
-//namespace app::inp
-//{
-//	using KeyHandler = Keyhandler<sf::Keyboard::Key>;
-//	using MouseHandler = Mousehandler<sf::Mouse::Button>;
-//}
+
+#include "input/Keyhandler.h"
+#include "input/MouseHandler.h"
+
+#include "math/Math.h"
+#include "math/Vector2.h"
+
+#include "utilities/Time.h"
+#include "utilities/Console.h"
+
+#include "Registry.h"
+
+namespace app::inp
+{
+	using KeyCode = SDL_Keycode;
+	using KeyHandler = Keyhandler<KeyCode>;
+	using MouseButtonCode = std::uint8_t;
+	using MouseHandler = Mousehandler<MouseButtonCode>;
+}
