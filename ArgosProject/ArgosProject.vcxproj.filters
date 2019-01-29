@@ -81,6 +81,9 @@
     <ClCompile Include="src\deleters\SdlDeleter.cpp">
       <Filter>Source Files\deleters</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\WindowParameters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="src\deleters\SdlDeleter.h">
       <Filter>Header Files\deleters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\WindowParameters.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

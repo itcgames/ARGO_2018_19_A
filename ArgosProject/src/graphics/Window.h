@@ -4,13 +4,14 @@
 #include "input/Keyhandler.h"
 #include "input/Mousehandler.h"
 #include "deleters/SdlDeleter.h"
+#include "graphics/WindowParameters.h"
 
 namespace app::gra
 {
 	class Window
 	{
 	public: // Constructors/Destructor/Assignments
-		Window(app::inp::KeyHandler & keyHandler, app::inp::MouseHandler & mouseHandler, std::string const & title, std::size_t const & width, std::size_t const & height);
+		Window(app::inp::KeyHandler & keyHandler, app::inp::MouseHandler & mouseHandler, WindowParameters params);
 		~Window();
 
 	public: // Public Member Functions

@@ -4,16 +4,14 @@
 app::gra::Window::Window(
 	app::inp::KeyHandler & keyHandler
 	, app::inp::MouseHandler & mouseHandler
-	, std::string const & title
-	, std::size_t const & width
-	, std::size_t const & height
+	, app::gra::WindowParameters params
 )
 	: m_keyhandler(keyHandler)
 	, m_mousehandler(mouseHandler)
 	, m_open(true)
-	, m_title(title)
-	, m_width(width)
-	, m_height(height)
+	, m_title(params.title)
+	, m_width(params.width)
+	, m_height(params.height)
 	, m_window(nullptr)
 	, m_renderer(nullptr)
 {
