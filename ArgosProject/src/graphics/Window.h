@@ -5,6 +5,7 @@
 #include "input/Mousehandler.h"
 #include "deleters/SdlDeleter.h"
 #include "graphics/WindowParameters.h"
+#include "graphics/RenderRect.h"
 
 namespace app::gra
 {
@@ -18,10 +19,13 @@ namespace app::gra
 
 		void pollEvents();
 		void clear() const;
+		void draw(app::gra::RenderRect const & rect) const;
+		void draw(std::unique_ptr<SDL_Texture> const & texture, SDL_Rect const & rect, std::optional<SDL_Rect> source = std::nullopt) const;
+		void draw(std::shared_ptr<SDL_Texture> texture, SDL_Rect const & rect, std::optional<SDL_Rect> source = std::nullopt) const;
 		void display() const;
 
 		inline constexpr bool const & isOpen() { return m_open; }
-		inline std::shared_ptr<SDL_Renderer> getRenderer() { return m_renderer; }
+		inline constexpr app::del::UPtrRenderer const & getRenderer() { return m_renderer; }
 	public: // Public Member Variables
 	protected: // Protected Member Functions
 	protected: // Protected Member Variables
@@ -40,7 +44,7 @@ namespace app::gra
 		std::size_t m_width;
 		std::size_t m_height;
 		app::del::UPtrWindow m_window;
-		std::shared_ptr<SDL_Renderer> m_renderer;
+		app::del::UPtrRenderer m_renderer;
 	};
 
 }

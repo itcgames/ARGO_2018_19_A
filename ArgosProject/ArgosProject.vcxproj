@@ -176,6 +176,8 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   <ItemGroup>
     <ClCompile Include="src\deleters\SdlDeleter.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\graphics\RenderRect.cpp" />
+    <ClCompile Include="src\graphics\Texture.cpp" />
     <ClCompile Include="src\graphics\Window.cpp" />
     <ClCompile Include="src\graphics\WindowParameters.cpp" />
     <ClCompile Include="src\input\Keyhandler.cpp" />
@@ -196,6 +198,8 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   <ItemGroup>
     <ClInclude Include="src\deleters\SdlDeleter.h" />
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\graphics\RenderRect.h" />
+    <ClInclude Include="src\graphics\Texture.h" />
     <ClInclude Include="src\graphics\Window.h" />
     <ClInclude Include="src\graphics\WindowParameters.h" />
     <ClInclude Include="src\input\Keyhandler.h" />
@@ -209,6 +213,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   </ItemGroup>
   <ItemGroup>
     <None Include="res\.gitkeep" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\image.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

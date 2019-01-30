@@ -61,6 +61,28 @@ void app::gra::Window::clear() const
 	SDL_RenderClear(m_renderer.get());
 }
 
+void app::gra::Window::draw(app::gra::RenderRect const & rect) const
+{
+	constexpr auto FLIP_FLAG = SDL_RendererFlip::SDL_FLIP_NONE;
+	auto const & position = static_cast<math::Vector2i>(rect.getPosition());
+	auto const & origin = static_cast<math::Vector2i>(rect.getOrigin());
+	auto const & size = static_cast<math::Vector2i>(rect.getSize());
+	auto const & destination = SDL_Rect{ position.x - origin.x, position.y - origin.y, size.x, size.y };
+	auto const & center = SDL_Point{ origin.x, origin.y };
+
+	SDL_RenderCopyEx(m_renderer.get(), rect.getTexture(), nullptr, &destination, rect.getRotation(), &center, FLIP_FLAG);
+}
+
+void app::gra::Window::draw(std::unique_ptr<SDL_Texture> const & texture, SDL_Rect const & rect, std::optional<SDL_Rect> source) const
+{
+	SDL_RenderCopy(m_renderer.get(), texture.get(), source.has_value() ? &source.value() : nullptr, &rect);
+}
+
+void app::gra::Window::draw(std::shared_ptr<SDL_Texture> texture, SDL_Rect const & rect, std::optional<SDL_Rect> source) const
+{
+	SDL_RenderCopy(m_renderer.get(), texture.get(), source.has_value() ? &source.value() : nullptr, &rect);
+}
+
 void app::gra::Window::display() const
 {
 	SDL_RenderPresent(m_renderer.get());
@@ -116,6 +138,6 @@ bool app::gra::Window::initRenderer(app::del::UPtrWindow const & uptrSdlWindow)
 	pRenderer = SDL_CreateRenderer(uptrSdlWindow.get(), -1, SDL_RendererFlags::SDL_RENDERER_ACCELERATED);
 
 	const bool success = nullptr != pRenderer;
-	if (success) { m_renderer.reset(pRenderer, del::SdlDeleter()); }
+	if (success) { m_renderer.reset(pRenderer); }
 	return success;
 }

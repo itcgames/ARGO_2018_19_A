@@ -15,6 +15,10 @@ namespace app::math
 	public: // Constructors/Destructor/Assignments
 		Vector2();
 		Vector2(T const & _x, T const & _y);
+		template<typename O>
+		Vector2(O const & _x, O const & _y);
+		template<typename O>
+		Vector2(Vector2<O> const & v);
 
 		~Vector2() = default;
 
@@ -54,8 +58,6 @@ namespace app::math
 		T angleBetween(Vector2<T> const & other) const;
 
 		operator std::string() const;
-		
-		template<typename O> operator Vector2<O>() const;
 
 	public: // Public Static Variables
 	public: // Public Member Variables
@@ -70,6 +72,22 @@ namespace app::math
 		constexpr static T const zero = static_cast<T>(0u);
 	private: // Private Member Variables
 	};
+
+	template<typename T>
+	template<typename O>
+	app::math::Vector2<T>::Vector2(O const & _x, O const & _y)
+		: x(static_cast<T>(_x))
+		, y(static_cast<T>(_y))
+	{
+	}
+
+	template<typename T>
+	template<typename O>
+	app::math::Vector2<T>::Vector2(Vector2<O> const & v)
+		: x(static_cast<T>(v.x))
+		, y(static_cast<T>(v.y))
+	{
+	}
 
 	// Plus operators
 

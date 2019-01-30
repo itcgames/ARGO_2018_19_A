@@ -181,13 +181,6 @@ app::math::Vector2<T>::operator std::string() const
 	return std::to_string(this->x) + ", " + std::to_string(this->y);
 }
 
-template<typename T>
-template<typename O>
-app::math::Vector2<T>::operator app::math::Vector2<O>() const
-{
-	return app::math::Vector2<O>(static_cast<O>(this->x), static_cast<O>(this->y));
-}
-
 template class app::math::Vector2<double>;
 template class app::math::Vector2<float>;
 template class app::math::Vector2<int32_t>;

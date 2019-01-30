@@ -82,7 +82,13 @@
       <Filter>Source Files\deleters</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\WindowParameters.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\Texture.cpp">
+      <Filter>Source Files\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\RenderRect.cpp">
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -120,6 +126,12 @@
       <Filter>Header Files\deleters</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\WindowParameters.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\Texture.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\RenderRect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -127,5 +139,10 @@
     <None Include="res\.gitkeep">
       <Filter>Resource Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\image.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
