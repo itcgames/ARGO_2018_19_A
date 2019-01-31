@@ -3,10 +3,19 @@
 
 #include "graphics/Window.h"
 
+// systems
+#include "systems/MotionSystem.h"
+#include "systems/RenderSystem.h"
+
 namespace app
 {
 	class Game
 	{
+	private: // Private typedefs/Enums/Usings
+		using UpdateSystem = std::variant<sys::MotionSystem>;
+		using UpdateSystems = std::array<UpdateSystem, 1>;
+		using DrawSystem = std::variant<sys::RenderSystem>;
+		using DrawSystems = std::array<DrawSystem, 1>;
 	public: // Constructors/Destructor/Assignments
 		Game();
 		~Game();
@@ -38,6 +47,9 @@ namespace app
 		app::inp::KeyHandler m_keyHandler;
 		app::inp::MouseHandler m_mouseHandler;
 		app::gra::Window m_window;
+		app::Registry & m_registry;
+		UpdateSystems m_updateSystems;
+		DrawSystems m_drawSystems;
 	};
 }
 

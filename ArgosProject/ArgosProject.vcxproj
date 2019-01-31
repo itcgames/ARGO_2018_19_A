@@ -174,6 +174,10 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\Dimensions.cpp" />
+    <ClCompile Include="src\components\Location.cpp" />
+    <ClCompile Include="src\components\Motion.cpp" />
+    <ClCompile Include="src\components\Render.cpp" />
     <ClCompile Include="src\deleters\SdlDeleter.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\graphics\RenderRect.cpp" />
@@ -186,17 +190,25 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\math\Math.cpp" />
     <ClCompile Include="src\math\Vector2.cpp" />
+    <ClCompile Include="src\Registry.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\systems\BaseSystem.cpp" />
+    <ClCompile Include="src\systems\MotionSystem.cpp" />
+    <ClCompile Include="src\systems\RenderSystem.cpp" />
     <ClCompile Include="src\utilities\Console.cpp" />
     <ClCompile Include="src\utilities\cute_c2.cpp" />
     <ClCompile Include="src\utilities\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\Dimensions.h" />
+    <ClInclude Include="src\components\Location.h" />
+    <ClInclude Include="src\components\Motion.h" />
+    <ClInclude Include="src\components\Render.h" />
     <ClInclude Include="src\deleters\SdlDeleter.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\graphics\RenderRect.h" />
@@ -208,7 +220,11 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\input\Mousehandler.h" />
     <ClInclude Include="src\math\Math.h" />
     <ClInclude Include="src\math\Vector2.h" />
+    <ClInclude Include="src\Registry.h" />
     <ClInclude Include="src\stdafx.h" />
+    <ClInclude Include="src\systems\BaseSystem.h" />
+    <ClInclude Include="src\systems\MotionSystem.h" />
+    <ClInclude Include="src\systems\RenderSystem.h" />
     <ClInclude Include="src\utilities\Console.h" />
     <ClInclude Include="src\utilities\cute_c2.h" />
     <ClInclude Include="src\utilities\Time.h" />

@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "Game.h"
+#include "Registry.h"
 
 #include "graphics/Texture.h"
 
@@ -8,7 +9,15 @@ app::Game::Game()
 	, m_controllerHandler()
 	, m_keyHandler()
 	, m_mouseHandler()
-	, m_window(m_keyHandler, m_mouseHandler, gra::WindowParameters{ "ARGOS Souls", 1366u, 768u })
+	, m_window(m_keyHandler, m_mouseHandler, m_controllerHandler, gra::WindowParameters{ "ARGOS Souls", 1366u, 768u })
+	, m_registry(app::Reg::get())
+
+	, m_updateSystems{
+		UpdateSystem(std::in_place_type<app::sys::MotionSystem>)
+	}
+	, m_drawSystems{
+		DrawSystem(std::in_place_type<app::sys::RenderSystem>, m_window)
+	}
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != NULL)
 	{
@@ -28,17 +37,15 @@ void app::Game::pollEvents()
 
 void app::Game::update(app::time::seconds const & dt)
 {
+	for (auto & variantSystem : m_updateSystems) { std::visit([&dt](auto & system) { system.update(dt); }, variantSystem); }
+	m_controllerHandler.update();
+	m_keyHandler.update();
+	m_mouseHandler.update();
 }
 
 void app::Game::render(app::time::seconds const & dt)
 {
 	m_window.clear();
-	auto rect = app::gra::RenderRect();
-	rect.setPosition({ 600.0, 300.0 });
-	rect.setTexture(app::gra::Texture(m_window.getRenderer(), "./res/image.png"));
-	rect.setSize({ 400.0, 400.0 });
-	rect.setOrigin(rect.getSize() / 2.0);
-	rect.setRotation(45.0);
-	m_window.draw(rect);
+	for (auto & variantSystem : m_drawSystems) { std::visit([&dt](auto & system) { system.update(dt); }, variantSystem); }
 	m_window.display();
 }

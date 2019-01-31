@@ -27,6 +27,8 @@ namespace app::math
 			((point.y - v.y) * cosine) - ((v.x - point.x) * sine) + point.y
 		};
 	}
+	template<typename T> constexpr math::Vector2<T> toVector(T const & deg) { return toVectorRad(toRadians(deg)); }
+	template<typename T> constexpr math::Vector2<T> toVectorRad(T const & rad) { return math::Vector2<T>{ std::cos(rad), std::sin(rad) }; }
 }
 
 #endif // !_MATH_H

@@ -30,3 +30,9 @@ void app::del::SdlDeleter::operator()(SDL_GameController * pGameController) cons
 	if (pGameController == nullptr) { return; }
 	SDL_GameControllerClose(pGameController);
 }
+
+void app::del::SdlDeleter::operator()(SDL_Haptic * pHaptic) const
+{
+	if (pHaptic == nullptr) { return; }
+	SDL_HapticClose(pHaptic);
+}

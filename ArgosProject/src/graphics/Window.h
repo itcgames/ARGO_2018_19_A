@@ -12,7 +12,7 @@ namespace app::gra
 	class Window
 	{
 	public: // Constructors/Destructor/Assignments
-		Window(app::inp::KeyHandler & keyHandler, app::inp::MouseHandler & mouseHandler, WindowParameters params);
+		Window(app::inp::KeyHandler & keyHandler, app::inp::MouseHandler & mouseHandler, app::inp::ControllerHandler & controllerHandler, WindowParameters params);
 		~Window();
 
 	public: // Public Member Functions
@@ -39,6 +39,7 @@ namespace app::gra
 	private: // Private Member Variables
 		app::inp::KeyHandler & m_keyhandler;
 		app::inp::MouseHandler & m_mousehandler;
+		app::inp::ControllerHandler & m_controllerHandler;
 		bool m_open;
 		std::string m_title;
 		std::size_t m_width;

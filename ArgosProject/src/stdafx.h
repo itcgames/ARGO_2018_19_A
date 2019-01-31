@@ -126,16 +126,20 @@
 #include "utilities/Time.h"
 #include "utilities/Console.h"
 
-#include "Registry.h"
-
-namespace app::inp
+namespace app
 {
-	using KeyCode = SDL_Keycode;
-	using KeyHandler = Keyhandler<KeyCode>;
-	using MouseButtonCode = std::uint8_t;
-	using MouseHandler = Mousehandler<MouseButtonCode>;
-	using ControllerIndex = std::int16_t;
-	using ControllerButtonCode = SDL_GameControllerButton;
-	using ControllerAxisCode = SDL_GameControllerAxis;
-	using ControllerHandler = Controllerhandler<ControllerIndex, ControllerAxisCode, ControllerButtonCode>;
+	using Entity = std::uint32_t;
+	using Registry = entt::Registry<Entity>;
+	namespace inp
+	{
+		using KeyCode = SDL_Keycode;
+		using KeyHandler = Keyhandler<KeyCode>;
+		using MouseButtonCode = std::uint8_t;
+		using MouseHandler = Mousehandler<MouseButtonCode>;
+		using ControllerIndex = std::int16_t;
+		using ControllerButtonCode = SDL_GameControllerButton;
+		using ControllerAxisCode = SDL_GameControllerAxis;
+		using ControllerAxisValue = Sint16;
+		using ControllerHandler = Controllerhandler<ControllerIndex, ControllerAxisCode, ControllerAxisValue, ControllerButtonCode>;
+	}
 }

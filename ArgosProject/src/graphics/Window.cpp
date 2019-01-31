@@ -4,10 +4,12 @@
 app::gra::Window::Window(
 	app::inp::KeyHandler & keyHandler
 	, app::inp::MouseHandler & mouseHandler
+	, app::inp::ControllerHandler & controllerHandler
 	, app::gra::WindowParameters params
 )
 	: m_keyhandler(keyHandler)
 	, m_mousehandler(mouseHandler)
+	, m_controllerHandler(controllerHandler)
 	, m_open(true)
 	, m_title(params.title)
 	, m_width(params.width)
@@ -48,6 +50,21 @@ void app::gra::Window::pollEvents()
 		case EventType::SDL_KEYDOWN:
 			m_keyhandler.updateKey(sdlEvent.key.keysym.sym, true);
 			if (sdlEvent.key.keysym.sym == SDLK_ESCAPE) { m_open = false; }
+			break;
+		case EventType::SDL_CONTROLLERBUTTONUP:
+			m_controllerHandler.updateButton(sdlEvent.cbutton.which, static_cast<app::inp::ControllerButtonCode>(sdlEvent.cbutton.button), false);
+			break;
+		case EventType::SDL_CONTROLLERBUTTONDOWN:
+			m_controllerHandler.updateButton(sdlEvent.cbutton.which, static_cast<app::inp::ControllerButtonCode>(sdlEvent.cbutton.button), true);
+			break;
+		case EventType::SDL_CONTROLLERAXISMOTION:
+			m_controllerHandler.updateAxis(sdlEvent.caxis.which, static_cast<app::inp::ControllerAxisCode>(sdlEvent.caxis.axis), sdlEvent.caxis.value);
+			break;
+		case EventType::SDL_CONTROLLERDEVICEADDED:
+			m_controllerHandler.addController(sdlEvent.cdevice.which);
+			break;
+		case EventType::SDL_CONTROLLERDEVICEREMOVED:
+			m_controllerHandler.removeController(sdlEvent.cdevice.which);
 			break;
 		default:
 			break;
