@@ -1,6 +1,8 @@
 ﻿#ifndef _COMPONENT_RENDER_H
 #define _COMPONENT_RENDER_H
 
+#include "graphics/Texture.h"
+
 namespace app::comp
 {
 	struct Render

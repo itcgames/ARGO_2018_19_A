@@ -1,31 +1,30 @@
-﻿#ifndef _COMPONENT_MOTION_H
-#define _COMPONENT_MOTION_H
+﻿#ifndef _FACTORY_ENTITY_H
+#define _FACTORY_ENTITY_H
 
-namespace app::comp
+namespace app::fact
 {
-	struct Motion
+	class EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		Motion() = default;
-		~Motion() = default;
+		EntityFactory();
+		virtual ~EntityFactory() = default;
 
-		Motion(Motion const &) = default;
-		Motion(Motion &&) = default;
+		EntityFactory(EntityFactory const &) = default;
+		EntityFactory & operator=(EntityFactory const &) = default;
 
-		Motion & operator=(Motion const &) = default;
-		Motion & operator=(Motion &&) = default;
+		EntityFactory(EntityFactory &&) = default;
+		EntityFactory & operator=(EntityFactory &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
+		virtual std::optional<app::Entity> create() abstract;
 	public: // Public Static Variables
 	public: // Public Member Variables
-		float speed;
-		float angularSpeed;
-		float direction;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
+		app::Registry & m_registry;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables
@@ -33,4 +32,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENT_MOTION_H
+#endif // !_FACTORY_ENTITY_H

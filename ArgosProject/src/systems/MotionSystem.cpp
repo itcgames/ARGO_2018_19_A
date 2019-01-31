@@ -11,6 +11,7 @@ void app::sys::MotionSystem::update(app::time::seconds const & dt)
 		.each([&, this](app::Entity const entity, comp::Location & location, comp::Motion & motion)
 	{
 		auto const & velocity = math::toVector(motion.direction) * motion.speed;
-		location.position += velocity;
+		location.position += velocity * dt.count();
+		location.orientation += motion.angularSpeed * dt.count();
 	});
 }

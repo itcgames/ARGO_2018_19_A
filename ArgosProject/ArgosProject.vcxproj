@@ -179,6 +179,8 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\Motion.cpp" />
     <ClCompile Include="src\components\Render.cpp" />
     <ClCompile Include="src\deleters\SdlDeleter.cpp" />
+    <ClCompile Include="src\factories\EntityFactory.cpp" />
+    <ClCompile Include="src\factories\PlayerFactory.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\graphics\RenderRect.cpp" />
     <ClCompile Include="src\graphics\Texture.cpp" />
@@ -210,6 +212,8 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\Motion.h" />
     <ClInclude Include="src\components\Render.h" />
     <ClInclude Include="src\deleters\SdlDeleter.h" />
+    <ClInclude Include="src\factories\EntityFactory.h" />
+    <ClInclude Include="src\factories\PlayerFactory.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\graphics\RenderRect.h" />
     <ClInclude Include="src\graphics\Texture.h" />

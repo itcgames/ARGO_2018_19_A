@@ -55,6 +55,12 @@
     <Filter Include="Source Files\components">
       <UniqueIdentifier>{0b8f7bcd-bf11-4985-9fbb-5f74f6d3a7b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\factories">
+      <UniqueIdentifier>{dd707211-ded3-42e1-afe6-b5d0681026ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\factories">
+      <UniqueIdentifier>{06b18961-4100-485b-8e2a-1ceccdcd6819}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -129,6 +135,12 @@
     <ClCompile Include="src\components\Render.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
+    <ClCompile Include="src\factories\EntityFactory.cpp">
+      <Filter>Source Files\factories</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\PlayerFactory.cpp">
+      <Filter>Source Files\factories</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -199,6 +211,12 @@
     </ClInclude>
     <ClInclude Include="src\components\Render.h">
       <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\EntityFactory.h">
+      <Filter>Header Files\factories</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\PlayerFactory.h">
+      <Filter>Header Files\factories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

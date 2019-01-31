@@ -2,7 +2,8 @@
 #include "Game.h"
 #include "Registry.h"
 
-#include "graphics/Texture.h"
+// factories
+#include "factories/PlayerFactory.h"
 
 app::Game::Game()
 	: m_running(true)
@@ -22,7 +23,9 @@ app::Game::Game()
 	if (SDL_Init(SDL_INIT_EVERYTHING) != NULL)
 	{
 		Console::writeLine({ "ERROR: SDL Failed to initialize [", SDL_GetError(), "]" });
+		m_running = false;
 	}
+	m_running = m_running ? this->initEntities() : false;
 }
 
 app::Game::~Game()
@@ -48,4 +51,18 @@ void app::Game::render(app::time::seconds const & dt)
 	m_window.clear();
 	for (auto & variantSystem : m_drawSystems) { std::visit([&dt](auto & system) { system.update(dt); }, variantSystem); }
 	m_window.display();
+}
+
+bool app::Game::initEntities()
+{
+	try
+	{
+		fact::PlayerFactory(m_window.getRenderer()).create();
+		return true;
+	}
+	catch (const std::exception&)
+	{
+		Console::writeLine({ "ERROR: " });
+		return false;
+	}
 }
