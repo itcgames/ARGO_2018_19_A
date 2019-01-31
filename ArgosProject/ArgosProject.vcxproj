@@ -180,6 +180,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\graphics\Texture.cpp" />
     <ClCompile Include="src\graphics\Window.cpp" />
     <ClCompile Include="src\graphics\WindowParameters.cpp" />
+    <ClCompile Include="src\input\Controllerhandler.cpp" />
     <ClCompile Include="src\input\Keyhandler.cpp" />
     <ClCompile Include="src\input\Mousehandler.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -202,6 +203,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\graphics\Texture.h" />
     <ClInclude Include="src\graphics\Window.h" />
     <ClInclude Include="src\graphics\WindowParameters.h" />
+    <ClInclude Include="src\input\Controllerhandler.h" />
     <ClInclude Include="src\input\Keyhandler.h" />
     <ClInclude Include="src\input\Mousehandler.h" />
     <ClInclude Include="src\math\Math.h" />

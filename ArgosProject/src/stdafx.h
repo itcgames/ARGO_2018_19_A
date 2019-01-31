@@ -116,6 +116,7 @@
 // Includes here
 //
 
+#include "input/ControllerHandler.h"
 #include "input/Keyhandler.h"
 #include "input/MouseHandler.h"
 
@@ -133,4 +134,8 @@ namespace app::inp
 	using KeyHandler = Keyhandler<KeyCode>;
 	using MouseButtonCode = std::uint8_t;
 	using MouseHandler = Mousehandler<MouseButtonCode>;
+	using ControllerIndex = std::int16_t;
+	using ControllerButtonCode = SDL_GameControllerButton;
+	using ControllerAxisCode = SDL_GameControllerAxis;
+	using ControllerHandler = Controllerhandler<ControllerIndex, ControllerAxisCode, ControllerButtonCode>;
 }

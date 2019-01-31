@@ -24,3 +24,9 @@ void app::del::SdlDeleter::operator()(SDL_Surface * pSurface) const
 	if (pSurface == nullptr) { return; }
 	SDL_FreeSurface(pSurface);
 }
+
+void app::del::SdlDeleter::operator()(SDL_GameController * pGameController) const
+{
+	if (pGameController == nullptr) { return; }
+	SDL_GameControllerClose(pGameController);
+}

@@ -5,10 +5,15 @@
 
 app::Game::Game()
 	: m_running(true)
+	, m_controllerHandler()
 	, m_keyHandler()
 	, m_mouseHandler()
 	, m_window(m_keyHandler, m_mouseHandler, gra::WindowParameters{ "ARGOS Souls", 1366u, 768u })
 {
+	if (SDL_Init(SDL_INIT_EVERYTHING) != NULL)
+	{
+		Console::writeLine({ "ERROR: SDL Failed to initialize [", SDL_GetError(), "]" });
+	}
 }
 
 app::Game::~Game()
