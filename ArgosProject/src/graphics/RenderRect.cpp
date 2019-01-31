@@ -1,9 +1,9 @@
 ﻿#include "stdafx.h"
 #include "RenderRect.h"
 
-app::gra::RenderRect & app::gra::RenderRect::setTexture(app::gra::Texture texture)
+app::gra::RenderRect & app::gra::RenderRect::setTexture(std::shared_ptr<app::gra::Texture> texture)
 {
-	m_texture = std::move(texture);
+	m_texture = texture;
 	return *this;
 }
 

@@ -1,7 +1,12 @@
 ﻿#include "stdafx.h"
 #include "RenderSystem.h"
 
-app::sys::RenderSystem::RenderSystem(app::gra::Window & window)
+// components
+#include "components/Location.h"
+#include "components/Dimensions.h"
+#include "components/Render.h"
+
+app::sys::RenderSystem::RenderSystem(app::gra::Window const & window)
 	: BaseSystem()
 	, m_window(window)
 {
@@ -9,11 +14,14 @@ app::sys::RenderSystem::RenderSystem(app::gra::Window & window)
 
 void app::sys::RenderSystem::update(app::time::seconds const & dt)
 {
-	auto rect = app::gra::RenderRect();
-	rect.setPosition({ 600.0, 300.0 });
-	rect.setTexture(app::gra::Texture(m_window.getRenderer(), "./res/image.png"));
-	rect.setSize({ 400.0, 400.0 });
-	rect.setOrigin(rect.getSize() / 2.0);
-	rect.setRotation(45.0);
-	m_window.draw(rect);
+	m_registry.view<comp::Location, comp::Dimensions, comp::Render>()
+		.each([&, this](app::Entity const entity, comp::Location & location, comp::Dimensions & dimensions, comp::Render & render)
+	{
+		m_renderRect.setPosition(location.position);
+		m_renderRect.setRotation(location.orientation);
+		m_renderRect.setSize(dimensions.size);
+		m_renderRect.setOrigin(dimensions.origin);
+		m_renderRect.setTexture(render.texture);
+		m_window.draw(m_renderRect);
+	});
 }

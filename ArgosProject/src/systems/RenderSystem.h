@@ -3,13 +3,14 @@
 
 #include "BaseSystem.h"
 #include "graphics/Window.h"
+#include "graphics/RenderRect.h"
 
 namespace app::sys
 {
 	class RenderSystem : public BaseSystem
 	{
 	public: // Constructors/Destructor/Assignments
-		RenderSystem(app::gra::Window & window);
+		RenderSystem(app::gra::Window const & window);
 		~RenderSystem() = default;
 
 		RenderSystem(RenderSystem const &) = default;
@@ -31,7 +32,8 @@ namespace app::sys
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
-		app::gra::Window & m_window;
+		app::gra::Window const & m_window;
+		app::gra::RenderRect m_renderRect;
 	};
 }
 

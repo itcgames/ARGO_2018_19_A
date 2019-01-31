@@ -19,13 +19,13 @@ namespace app::gra
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		constexpr SDL_Texture * getTexture() const { return m_texture.has_value() ? m_texture.value().get() : nullptr; }
+		constexpr SDL_Texture * getTexture() const { return m_texture ? m_texture->get() : nullptr; }
 		constexpr math::Vector2d const & getPosition() const { return m_position; }
 		constexpr double const & getRotation() const { return m_rotation; }
 		constexpr math::Vector2d const & getOrigin() const { return m_origin; }
 		constexpr math::Vector2d const & getSize() const { return m_size; }
 
-		RenderRect & setTexture(app::gra::Texture texture);
+		RenderRect & setTexture(std::shared_ptr<app::gra::Texture> texture);
 		RenderRect & setPosition(app::math::Vector2f const & position);
 		RenderRect & setRotation(double const & rotation);
 		RenderRect & setOrigin(app::math::Vector2d const & origin);
@@ -40,7 +40,7 @@ namespace app::gra
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
-		std::optional<gra::Texture> m_texture;
+		std::shared_ptr<app::gra::Texture> m_texture;
 		math::Vector2d m_position;
 		math::Vector2d m_origin;
 		math::Vector2d m_size;

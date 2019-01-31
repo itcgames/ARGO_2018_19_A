@@ -67,6 +67,7 @@ namespace app::inp
 		static double getAxis(AxisMap const & map, Axis const & axis);
 	private: // Private Member Functions
 	private: // Private Static Variables
+		constexpr static bool DEBUG_CLASS = false;
 	private: // Private Member Variables
 		Controllers m_controllers;
 	};
@@ -200,6 +201,11 @@ namespace app::inp
 				controller.buttonNowMap = decltype(controller.buttonNowMap)();
 				controller.buttonPrevMap = decltype(controller.buttonPrevMap)();
 				controller.axisMap = decltype(controller.axisMap)();
+				m_controllers.insert({ index, std::move(controller) });
+				if constexpr (DEBUG_CLASS)
+				{
+					Console::writeLine({ "ControllerHandler: Controller[id=", std::to_string(index), "] added" });
+				}
 			}
 		}
 	}
@@ -208,39 +214,18 @@ namespace app::inp
 	void Controllerhandler<Index, Axis, AxisValue, Button>::removeController(Index const & index)
 	{
 		m_controllers.erase(index);
+		if constexpr (DEBUG_CLASS)
+		{
+			Console::writeLine({ "ControllerHandler: Controller[id=", std::to_string(index), "] removed" });
+		}
 	}
 
 	template<typename Index, typename Axis, typename AxisValue, typename Button>
 	inline void Controllerhandler<Index, Axis, AxisValue, Button>::updateControllers(Controllers & controllers)
 	{
-		int const numJoysticks = SDL_NumJoysticks();
-		for (int i = 0; i < numJoysticks; ++i)
+		for (auto &[index, controller] : controllers)
 		{
-			if (!SDL_IsGameController(i)) { continue; }
-			SDL_GameController * pController = nullptr;
-			pController = SDL_GameControllerOpen(i);
-			auto const key = static_cast<Index>(i);
-			if (pController != nullptr)
-			{
-				if (auto const & itt = controllers.find(key); itt != controllers.end())
-				{
-					auto &[index, controllerMaps] = *itt;
-					controllerMaps.buttonPrevMap.swap(controllerMaps.buttonNowMap);
-				}
-				else
-				{
-					auto controllerMaps = Controller();
-					controllerMaps.controller = del::UPtrGameController(pController);
-					controllerMaps.buttonNowMap = decltype(controllerMaps.buttonNowMap)();
-					controllerMaps.buttonPrevMap = decltype(controllerMaps.buttonPrevMap)();
-					controllerMaps.axisMap = decltype(controllerMaps.axisMap)();
-					controllers.insert({ key, std::move(controllerMaps) });
-				}
-			}
-			else
-			{
-				controllers.erase(key);
-			}
+			controller.buttonPrevMap = controller.buttonNowMap;
 		}
 	}
 
@@ -257,6 +242,10 @@ namespace app::inp
 			map.insert({ button, pressed });
 			prevMap.insert({ button, !pressed });
 		}
+		if constexpr (DEBUG_CLASS)
+		{
+			Console::writeLine({ "ControllerHandler: Key[", std::to_string(button), "] updated to ", (pressed ? "down" : "up") });
+		}
 	}
 
 	template<typename Index, typename Axis, typename AxisValue, typename Button>
@@ -266,11 +255,15 @@ namespace app::inp
 		constexpr auto min = static_cast<double>(std::numeric_limits<AxisValue>::min());
 		auto const & value = static_cast<double>(axisValue);
 		static_assert(max != min, "ERROR: in 'Controllerhandler<Index, Axis, AxisValue, Button>::updateAxis' Max cannot be the same as Min");
-		auto const result = (value - min) / (max - min);
+		auto const result = (((value - min) / (max - min)) * 2.0) - 1.0 ;
 		if (auto const & itt = controller.axisMap.find(axis); itt != controller.axisMap.end())
 			itt->second = result;
 		else
 			controller.axisMap.insert({ axis, result });
+		if constexpr (DEBUG_CLASS)
+		{
+			Console::writeLine({ "ControllerHandler: Axis[", std::to_string(axis), "] updated to [", std::to_string(axisValue), "]" });
+		}
 	}
 
 	template<typename Index, typename Axis, typename AxisValue, typename Button>
