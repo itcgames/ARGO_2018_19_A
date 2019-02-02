@@ -85,6 +85,10 @@ namespace app::inp
 		if (auto const & controllerItt = m_controllers.find(index); controllerItt != m_controllers.end())
 		{
 			auto & controller = std::get<Controller>(*controllerItt);
+			if constexpr (DEBUG_CLASS)
+			{
+				Console::write({ "ControllerHandler[", std::to_string(index), "]: " });
+			}
 			Controllerhandler<Index, Axis, AxisValue, Button>::updateButton(controller.buttonNowMap, controller.buttonPrevMap, button, pressed);
 		}
 	}
@@ -95,6 +99,10 @@ namespace app::inp
 		if (auto const & controllerItt = m_controllers.find(index); controllerItt != m_controllers.end())
 		{
 			auto & controller = std::get<Controller>(*controllerItt);
+			if constexpr (DEBUG_CLASS)
+			{
+				Console::write({ "ControllerHandler[", std::to_string(index), "]: " });
+			}
 			Controllerhandler<Index, Axis, AxisValue, Button>::updateAxis(controller, axis, amount);
 		}
 	}
@@ -244,7 +252,7 @@ namespace app::inp
 		}
 		if constexpr (DEBUG_CLASS)
 		{
-			Console::writeLine({ "ControllerHandler: Key[", std::to_string(button), "] updated to ", (pressed ? "down" : "up") });
+			Console::writeLine({ "Key[", std::to_string(button), "] updated to ", (pressed ? "down" : "up") });
 		}
 	}
 
@@ -262,7 +270,7 @@ namespace app::inp
 			controller.axisMap.insert({ axis, result });
 		if constexpr (DEBUG_CLASS)
 		{
-			Console::writeLine({ "ControllerHandler: Axis[", std::to_string(axis), "] updated to [", std::to_string(axisValue), "]" });
+			Console::writeLine({ "Axis[", std::to_string(axis), "] updated to [", std::to_string(axisValue), "]" });
 		}
 	}
 
