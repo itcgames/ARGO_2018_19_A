@@ -10,7 +10,7 @@ app::Game::Game()
 	, m_controllerHandler()
 	, m_keyHandler()
 	, m_mouseHandler()
-	, m_window(m_keyHandler, m_mouseHandler, m_controllerHandler, gra::WindowParameters{ "ARGOS Souls", 1366u, 768u })
+	, m_window(m_keyHandler, m_mouseHandler, m_controllerHandler, gra::WindowParameters{ "ARGO Souls", 1366u, 768u })
 	, m_registry(app::Reg::get())
 
 	, m_updateSystems{
