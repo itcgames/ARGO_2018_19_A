@@ -84,10 +84,11 @@ void app::gra::Window::draw(app::gra::RenderRect const & rect) const
 	auto const & position = static_cast<math::Vector2i>(rect.getPosition());
 	auto const & origin = static_cast<math::Vector2i>(rect.getOrigin());
 	auto const & size = static_cast<math::Vector2i>(rect.getSize());
+	auto const & source = rect.getSourceRect();
 	auto const & destination = SDL_Rect{ position.x - origin.x, position.y - origin.y, size.x, size.y };
 	auto const & center = SDL_Point{ origin.x, origin.y };
 
-	SDL_RenderCopyEx(m_renderer.get(), rect.getTexture(), nullptr, &destination, rect.getRotation(), &center, FLIP_FLAG);
+	SDL_RenderCopyEx(m_renderer.get(), rect.getTexture(), source.has_value() ? &source.value() : nullptr, &destination, rect.getRotation(), &center, FLIP_FLAG);
 }
 
 void app::gra::Window::draw(std::unique_ptr<SDL_Texture> const & texture, SDL_Rect const & rect, std::optional<SDL_Rect> source) const

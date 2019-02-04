@@ -122,6 +122,7 @@
 
 #include "math/Math.h"
 #include "math/Vector2.h"
+#include "math/Rect.h"
 
 #include "utilities/Time.h"
 #include "utilities/Console.h"

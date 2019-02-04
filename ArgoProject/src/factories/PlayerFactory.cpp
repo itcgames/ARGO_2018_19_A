@@ -5,12 +5,13 @@
 #include "components/Location.h"
 #include "components/Dimensions.h"
 #include "components/Motion.h"
+#include "components/Animator.h"
 #include "components/Render.h"
 
 app::fact::PlayerFactory::PlayerFactory(app::del::UPtrRenderer const & renderer)
 	: m_texture(std::make_shared<decltype(m_texture)::element_type>())
 {
-	m_texture->load(renderer, "./res/image.png");
+	m_texture->load(renderer, "./res/Animations/test.png");
 }
 
 std::optional<app::Entity> app::fact::PlayerFactory::create()
@@ -32,6 +33,19 @@ std::optional<app::Entity> app::fact::PlayerFactory::create()
 	motion.direction = 0.0f;
 	motion.angularSpeed = 60.0f;
 	m_registry.assign<decltype(motion)>(entity, std::move(motion));
+
+	auto animator = comp::Animator();
+	animator.time = 0.0f;
+	animator.currentFrame = 0u;
+	auto const & frameSize = math::Vector2i{ 200, 150 };
+	auto const & frameStep = math::Vector2i{ frameSize.x, 0 };
+	animator.frames = {
+		math::Recti{ frameStep * 0, frameSize },
+		math::Recti{ frameStep * 1, frameSize },
+		math::Recti{ frameStep * 2, frameSize }
+	};
+	animator.perFrame = 100.0f / animator.frames.size();
+	m_registry.assign<decltype(animator)>(entity, std::move(animator));
 
 	auto render = comp::Render();
 	render.texture = m_texture;

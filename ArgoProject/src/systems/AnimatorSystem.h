@@ -1,28 +1,27 @@
-﻿#ifndef _COMPONENT_RENDER_H
-#define _COMPONENT_RENDER_H
+﻿#ifndef _SYSTEMS_ANIMATOR_H
+#define _SYSTEMS_ANIMATOR_H
 
-#include "graphics/Texture.h"
+#include "BaseSystem.h"
 
-namespace app::comp
+namespace app::sys
 {
-	struct Render
+	class AnimatorSystem : public BaseSystem
 	{
 	public: // Constructors/Destructor/Assignments
-		Render() = default;
-		~Render() = default;
+		AnimatorSystem() = default;
+		virtual ~AnimatorSystem() = default;
 
-		Render(Render const &) = default;
-		Render(Render &&) = default;
+		AnimatorSystem(AnimatorSystem const &) = default;
+		AnimatorSystem & operator=(AnimatorSystem const &) = default;
 
-		Render & operator=(Render const &) = default;
-		Render & operator=(Render &&) = default;
+		AnimatorSystem(AnimatorSystem &&) = default;
+		AnimatorSystem & operator=(AnimatorSystem &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
+		virtual void update(app::time::seconds const & dt) override;
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::shared_ptr<app::gra::Texture> texture;
-		std::optional<SDL_Rect> source;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -34,4 +33,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENT_RENDER_H
+#endif // !_SYSTEMS_ANIMATOR_H

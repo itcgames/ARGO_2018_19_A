@@ -22,6 +22,7 @@ void app::sys::RenderSystem::update(app::time::seconds const & dt)
 		m_renderRect.setSize(dimensions.size);
 		m_renderRect.setOrigin(dimensions.origin);
 		m_renderRect.setTexture(render.texture);
+		m_renderRect.setSourceRect(render.source);
 		m_window.draw(m_renderRect);
 	});
 }
