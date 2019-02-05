@@ -7,6 +7,12 @@ app::gra::RenderRect & app::gra::RenderRect::setTexture(std::shared_ptr<app::gra
 	return *this;
 }
 
+app::gra::RenderRect & app::gra::RenderRect::setSourceRect(std::optional<SDL_Rect> const & sourceRect)
+{
+	m_sourceRect = sourceRect;
+	return *this;
+}
+
 app::gra::RenderRect & app::gra::RenderRect::setPosition(app::math::Vector2f const & position)
 {
 	m_position = position;

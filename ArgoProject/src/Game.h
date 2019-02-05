@@ -5,6 +5,7 @@
 
 // systems
 #include "systems/MotionSystem.h"
+#include "systems/AnimatorSystem.h"
 #include "systems/RenderSystem.h"
 
 namespace app
@@ -14,8 +15,8 @@ namespace app
 	private: // Private typedefs/Enums/Usings
 		using UpdateSystem = std::variant<sys::MotionSystem>;
 		using UpdateSystems = std::array<UpdateSystem, 1>;
-		using DrawSystem = std::variant<sys::RenderSystem>;
-		using DrawSystems = std::array<DrawSystem, 1>;
+		using DrawSystem = std::variant<sys::RenderSystem, sys::AnimatorSystem>;
+		using DrawSystems = std::array<DrawSystem, 2>;
 	public: // Constructors/Destructor/Assignments
 		Game();
 		~Game();

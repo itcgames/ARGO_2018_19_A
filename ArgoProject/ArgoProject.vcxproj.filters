@@ -61,6 +61,9 @@
     <Filter Include="Source Files\factories">
       <UniqueIdentifier>{06b18961-4100-485b-8e2a-1ceccdcd6819}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Animations">
+      <UniqueIdentifier>{062b658f-59f1-44ad-8665-8f2a693ac7ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -141,6 +144,15 @@
     <ClCompile Include="src\factories\PlayerFactory.cpp">
       <Filter>Source Files\factories</Filter>
     </ClCompile>
+    <ClCompile Include="src\math\Rect.cpp">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\AnimatorSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Animator.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -218,6 +230,15 @@
     <ClInclude Include="src\factories\PlayerFactory.h">
       <Filter>Header Files\factories</Filter>
     </ClInclude>
+    <ClInclude Include="src\math\Rect.h">
+      <Filter>Header Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\AnimatorSystem.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Animator.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\.gitkeep">
@@ -227,6 +248,9 @@
   <ItemGroup>
     <Image Include="res\image.png">
       <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Animations\test.png">
+      <Filter>Resource Files\Animations</Filter>
     </Image>
   </ItemGroup>
 </Project>

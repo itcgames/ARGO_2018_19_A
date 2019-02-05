@@ -17,6 +17,7 @@ app::Game::Game()
 		UpdateSystem(std::in_place_type<app::sys::MotionSystem>)
 	}
 	, m_drawSystems{
+		DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
 		DrawSystem(std::in_place_type<app::sys::RenderSystem>, m_window)
 	}
 {
