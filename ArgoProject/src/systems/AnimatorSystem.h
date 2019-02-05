@@ -27,9 +27,11 @@ namespace app::sys
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
 	private: // Private Static Functions
+		static constexpr int calculateStep(math::Vector2i const & frameStep);
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
+		SDL_Rect m_rect;
 	};
 }
 

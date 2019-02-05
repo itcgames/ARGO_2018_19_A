@@ -233,11 +233,11 @@
     <ClInclude Include="src\math\Rect.h">
       <Filter>Header Files\math</Filter>
     </ClInclude>
-    <ClInclude Include="src\systems\AnimatorSystem.h">
-      <Filter>Header Files\graphics</Filter>
-    </ClInclude>
     <ClInclude Include="src\components\Animator.h">
       <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\AnimatorSystem.h">
+      <Filter>Header Files\systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

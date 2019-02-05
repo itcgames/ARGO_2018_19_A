@@ -19,9 +19,12 @@ namespace app::comp
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::size_t currentFrame;
+		math::Vector2i currentFrame;
 		float time, perFrame;
-		std::vector<SDL_Rect> frames;
+		bool loop;
+		math::Vector2i position;
+		math::Vector2i numOfFrames;
+		math::Vector2f frameSize;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables

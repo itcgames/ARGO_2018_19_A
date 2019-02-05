@@ -35,6 +35,8 @@ namespace app::math
 		static T angleBetween(Vector2<T> const & left, Vector2<T> const & right);
 
 	public: // Public Member Functions
+		Vector2 & operator=(T const & t);
+
 		Vector2 & operator+=(Vector2 const & v);
 		Vector2 & operator+=(T const & t);
 
@@ -60,6 +62,7 @@ namespace app::math
 		operator std::string() const;
 
 	public: // Public Static Variables
+		constexpr static T const zero = static_cast<T>(0u);
 	public: // Public Member Variables
 		T x, y;
 	protected: // Protected Static Functions
@@ -69,7 +72,6 @@ namespace app::math
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables
-		constexpr static T const zero = static_cast<T>(0u);
 	private: // Private Member Variables
 	};
 
