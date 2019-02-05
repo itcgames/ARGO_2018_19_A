@@ -11,8 +11,22 @@ void app::sys::AnimatorSystem::update(app::time::seconds const & dt)
 		.each([&dt, this](app::Entity const entity, comp::Render & render, comp::Animator & animator)
 	{
 		animator.time += dt.count();
-		while (animator.perFrame * static_cast<decltype(animator.perFrame)>(animator.currentFrame + 1u) < animator.time) { ++animator.currentFrame; }
-		if (animator.currentFrame >= animator.frames.size()) { animator.currentFrame = 0u; animator.time = 0.0f; }
-		render.source = animator.frames.at(animator.currentFrame);
+		auto const & zero = decltype(animator.currentFrame)::zero;
+		while (animator.perFrame * calculateStep(animator.currentFrame) < animator.time)
+		{
+			if (animator.currentFrame.x < (animator.numOfFrames.x - 1)) { ++animator.currentFrame.x; }
+			else if (animator.currentFrame.y < (animator.numOfFrames.y - 1)) { animator.currentFrame.x = zero; ++animator.currentFrame.y; }
+			else if (animator.loop) { animator.currentFrame = zero; animator.time = 0.0f; }
+			else { animator.time = 0.0f; }
+		}
+		m_rect.x = animator.position.x + (animator.frameSize.x * animator.currentFrame.x);
+		m_rect.y = animator.position.y + (animator.frameSize.y * animator.currentFrame.y);
+		m_rect.w = animator.frameSize.x; m_rect.h = animator.frameSize.y;
+		render.source = m_rect;
 	});
+}
+
+constexpr int app::sys::AnimatorSystem::calculateStep(math::Vector2i const & frameStep)
+{
+	return (frameStep.x + 1) * (frameStep.y + 1);
 }

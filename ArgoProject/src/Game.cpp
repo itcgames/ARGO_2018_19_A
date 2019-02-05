@@ -18,6 +18,7 @@ app::Game::Game()
 
 	, m_updateSystems{
 		UpdateSystem(std::in_place_type<app::sys::MotionSystem>),
+		UpdateSystem(std::in_place_type<app::sys::StateMachineSystem>),
 		UpdateSystem(std::in_place_type<app::sys::CameraSystem>)
 	}
 	, m_drawSystems{
