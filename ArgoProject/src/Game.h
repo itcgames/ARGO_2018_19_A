@@ -3,6 +3,7 @@
 
 #include "graphics/Window.h"
 
+
 // systems
 #include "systems/MotionSystem.h"
 #include "systems/AnimatorSystem.h"
@@ -42,6 +43,7 @@ namespace app
 	private: // Private Static Functions
 	private: // Private Member Functions
 		bool initEntities();
+		app::Entity createCamera();
 	private: // Private Static Variables
 	private: // Private Member Variables
 		bool m_running;

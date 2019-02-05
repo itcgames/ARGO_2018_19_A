@@ -14,6 +14,7 @@ app::gra::Window::Window(
 	, m_title(params.title)
 	, m_width(params.width)
 	, m_height(params.height)
+	, m_view{ {params.width / 2, params.height / 2}, {params.width, params.height} }
 	, m_window(nullptr)
 	, m_renderer(nullptr)
 {
@@ -22,6 +23,16 @@ app::gra::Window::Window(
 
 app::gra::Window::~Window()
 {
+}
+
+void app::gra::Window::setView(app::gra::View const & view)
+{
+	m_view = view;
+}
+
+void app::gra::Window::resetView()
+{
+	m_view = app::gra::View{ {m_width / 2, m_height / 2}, {m_width, m_height} };
 }
 
 void app::gra::Window::pollEvents()
@@ -85,8 +96,18 @@ void app::gra::Window::draw(app::gra::RenderRect const & rect) const
 	auto const & origin = static_cast<math::Vector2i>(rect.getOrigin());
 	auto const & size = static_cast<math::Vector2i>(rect.getSize());
 	auto const & source = rect.getSourceRect();
-	auto const & destination = SDL_Rect{ position.x - origin.x, position.y - origin.y, size.x, size.y };
-	auto const & center = SDL_Point{ origin.x, origin.y };
+	auto const & screenSize = math::Vector2f{ static_cast<float>(m_width), static_cast<float>(m_height) };
+	auto const & scale = screenSize / static_cast<math::Vector2f>(m_view.size);
+	auto const & destination = SDL_Rect{
+		position.x - origin.x - m_view.position.x,
+		position.y - origin.y - m_view.position.y,
+		static_cast<int32_t>(size.x * scale.x),
+		static_cast<int32_t>(size.y * scale.y)
+	};
+	auto const & center = SDL_Point{
+		static_cast<int32_t>(origin.x * scale.x),
+		static_cast<int32_t>(origin.y * scale.y)
+	};
 
 	SDL_RenderCopyEx(m_renderer.get(), rect.getTexture(), source.has_value() ? &source.value() : nullptr, &destination, rect.getRotation(), &center, FLIP_FLAG);
 }

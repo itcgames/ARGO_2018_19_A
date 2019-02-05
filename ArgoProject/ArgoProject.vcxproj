@@ -175,6 +175,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\components\Animator.cpp" />
+    <ClCompile Include="src\components\Camera.cpp" />
     <ClCompile Include="src\components\Dimensions.cpp" />
     <ClCompile Include="src\components\Location.cpp" />
     <ClCompile Include="src\components\Motion.cpp" />
@@ -185,6 +186,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\graphics\RenderRect.cpp" />
     <ClCompile Include="src\graphics\Texture.cpp" />
+    <ClCompile Include="src\graphics\View.cpp" />
     <ClCompile Include="src\graphics\Window.cpp" />
     <ClCompile Include="src\graphics\WindowParameters.cpp" />
     <ClCompile Include="src\input\Controllerhandler.cpp" />
@@ -211,6 +213,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\components\Animator.h" />
+    <ClInclude Include="src\components\Camera.h" />
     <ClInclude Include="src\components\Dimensions.h" />
     <ClInclude Include="src\components\Location.h" />
     <ClInclude Include="src\components\Motion.h" />
@@ -221,6 +224,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\graphics\RenderRect.h" />
     <ClInclude Include="src\graphics\Texture.h" />
+    <ClInclude Include="src\graphics\View.h" />
     <ClInclude Include="src\graphics\Window.h" />
     <ClInclude Include="src\graphics\WindowParameters.h" />
     <ClInclude Include="src\input\Controllerhandler.h" />

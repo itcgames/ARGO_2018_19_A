@@ -2,6 +2,9 @@
 #include "Game.h"
 #include "Registry.h"
 
+// components
+#include "components/Camera.h"
+
 // factories
 #include "factories/PlayerFactory.h"
 
@@ -58,6 +61,7 @@ bool app::Game::initEntities()
 {
 	try
 	{
+		this->createCamera();
 		fact::PlayerFactory(m_window.getRenderer()).create();
 		return true;
 	}
@@ -66,4 +70,16 @@ bool app::Game::initEntities()
 		Console::writeLine({ "ERROR: " });
 		return false;
 	}
+}
+
+app::Entity app::Game::createCamera()
+{
+	app::Entity const entity = m_registry.create();
+
+	auto camera = comp::Camera();
+	camera.position = { 250.0f, 50.0f };
+	camera.size = { 1366.0f, 768.0f };
+	m_registry.assign<decltype(camera)>(entity, std::move(camera));
+
+	return entity;
 }
