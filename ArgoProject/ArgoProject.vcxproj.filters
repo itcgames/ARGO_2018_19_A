@@ -64,6 +64,12 @@
     <Filter Include="Resource Files\Animations">
       <UniqueIdentifier>{062b658f-59f1-44ad-8665-8f2a693ac7ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\stateMachines">
+      <UniqueIdentifier>{5d1b9ecb-904c-4590-aca2-9a07c78b2aef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\stateMachines">
+      <UniqueIdentifier>{5bedb84e-4cf5-4904-8885-51c2195d0dd3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -153,6 +159,12 @@
     <ClCompile Include="src\components\Animator.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
+    <ClCompile Include="src\stateMachines\BaseStateMachine.cpp">
+      <Filter>Source Files\stateMachines</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stateMachines\BaseState.cpp">
+      <Filter>Source Files\stateMachines</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -238,6 +250,12 @@
     </ClInclude>
     <ClInclude Include="src\systems\AnimatorSystem.h">
       <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stateMachines\BaseStateMachine.h">
+      <Filter>Header Files\stateMachines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stateMachines\BaseState.h">
+      <Filter>Header Files\stateMachines</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
