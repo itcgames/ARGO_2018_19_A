@@ -2,6 +2,9 @@
 #include "Game.h"
 #include "Registry.h"
 
+// components
+#include "components/Camera.h"
+
 // factories
 #include "factories/PlayerFactory.h"
 
@@ -14,8 +17,9 @@ app::Game::Game()
 	, m_registry(app::Reg::get())
 
 	, m_updateSystems{
+		UpdateSystem(std::in_place_type<app::sys::MotionSystem>),
 		UpdateSystem(std::in_place_type<app::sys::StateMachineSystem>),
-		UpdateSystem(std::in_place_type<app::sys::MotionSystem>)
+		UpdateSystem(std::in_place_type<app::sys::CameraSystem>)
 	}
 	, m_drawSystems{
 		DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
@@ -59,7 +63,8 @@ bool app::Game::initEntities()
 {
 	try
 	{
-		fact::PlayerFactory(m_window.getRenderer()).create();
+		auto playerEntity = fact::PlayerFactory(m_window.getRenderer()).create();
+		this->createCamera(playerEntity);
 		return true;
 	}
 	catch (const std::exception&)
@@ -67,4 +72,17 @@ bool app::Game::initEntities()
 		Console::writeLine({ "ERROR: " });
 		return false;
 	}
+}
+
+app::Entity app::Game::createCamera(std::optional<app::Entity> target)
+{
+	app::Entity const entity = m_registry.create();
+
+	auto camera = comp::Camera();
+	camera.position = {  };
+	camera.size = { 1366.0f, 768.0f };
+	camera.target = target;
+	m_registry.assign<decltype(camera)>(entity, std::move(camera));
+
+	return entity;
 }

@@ -1,23 +1,21 @@
-﻿#ifndef _SYSTEM_RENDER_H
-#define _SYSTEM_RENDER_H
+﻿#ifndef _SYSTEM_CAMERA
+#define _SYSTEM_CAMERA
 
 #include "BaseSystem.h"
-#include "graphics/Window.h"
-#include "graphics/RenderRect.h"
 
 namespace app::sys
 {
-	class RenderSystem : public BaseSystem
+	class CameraSystem : public BaseSystem
 	{
 	public: // Constructors/Destructor/Assignments
-		RenderSystem(app::gra::Window & window);
-		~RenderSystem() = default;
+		CameraSystem();
+		~CameraSystem() = default;
 
-		RenderSystem(RenderSystem const &) = default;
-		RenderSystem(RenderSystem &&) = default;
+		CameraSystem(CameraSystem const &) = default;
+		CameraSystem(CameraSystem &&) = default;
 
-		RenderSystem & operator=(RenderSystem const &) = default;
-		RenderSystem & operator=(RenderSystem &&) = default;
+		CameraSystem & operator=(CameraSystem const &) = default;
+		CameraSystem & operator=(CameraSystem &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
@@ -32,10 +30,7 @@ namespace app::sys
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
-		app::gra::Window & m_window;
-		app::gra::RenderRect m_renderRect;
-		app::gra::View m_view;
 	};
 }
 
-#endif // !_SYSTEM_RENDER_H
+#endif // !_SYSTEM_CAMERA

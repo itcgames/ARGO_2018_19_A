@@ -165,6 +165,15 @@
     <ClCompile Include="src\components\Animator.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
+    <ClCompile Include="src\components\Camera.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\View.cpp">
+      <Filter>Source Files\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\CameraSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
     <ClCompile Include="src\fsm\BaseState.cpp">
       <Filter>Source Files\fsm</Filter>
     </ClCompile>
@@ -283,6 +292,15 @@
     </ClInclude>
     <ClInclude Include="src\components\StateMachine.h">
       <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Camera.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\View.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\CameraSystem.h">
+      <Filter>Header Files\systems</Filter>
     </ClInclude>
     <ClInclude Include="src\systems\StateMachineSystem.h">
       <Filter>Header Files\systems</Filter>
