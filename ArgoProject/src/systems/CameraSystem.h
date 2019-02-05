@@ -1,29 +1,27 @@
-#ifndef _CAMERA_H
-#define _CAMERA_H
+﻿#ifndef _SYSTEM_CAMERA
+#define _SYSTEM_CAMERA
 
-#include "math/Vector2.h"
+#include "BaseSystem.h"
 
-namespace app::comp
+namespace app::sys
 {
-	class Camera
+	class CameraSystem : public BaseSystem
 	{
 	public: // Constructors/Destructor/Assignments
-		Camera() = default;
-		~Camera() = default;
+		CameraSystem();
+		~CameraSystem() = default;
 
-		Camera(Camera const &) = default;
-		Camera & operator=(Camera const &) = default;
+		CameraSystem(CameraSystem const &) = default;
+		CameraSystem(CameraSystem &&) = default;
 
-		Camera(Camera &&) = default;
-		Camera & operator=(Camera &&) = default;
+		CameraSystem & operator=(CameraSystem const &) = default;
+		CameraSystem & operator=(CameraSystem &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
+		virtual void update(app::time::seconds const & dt) override;
 	public: // Public Static Variables
 	public: // Public Member Variables
-		math::Vector2f position;
-		math::Vector2f size;
-		std::optional<app::Entity> target;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -35,4 +33,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_CAMERA_H
+#endif // !_SYSTEM_CAMERA

@@ -8,14 +8,15 @@
 #include "systems/MotionSystem.h"
 #include "systems/AnimatorSystem.h"
 #include "systems/RenderSystem.h"
+#include "systems/CameraSystem.h"
 
 namespace app
 {
 	class Game
 	{
 	private: // Private typedefs/Enums/Usings
-		using UpdateSystem = std::variant<sys::MotionSystem>;
-		using UpdateSystems = std::array<UpdateSystem, 1>;
+		using UpdateSystem = std::variant<sys::MotionSystem, sys::CameraSystem>;
+		using UpdateSystems = std::array<UpdateSystem, 2>;
 		using DrawSystem = std::variant<sys::RenderSystem, sys::AnimatorSystem>;
 		using DrawSystems = std::array<DrawSystem, 2>;
 	public: // Constructors/Destructor/Assignments
@@ -43,7 +44,7 @@ namespace app
 	private: // Private Static Functions
 	private: // Private Member Functions
 		bool initEntities();
-		app::Entity createCamera();
+		app::Entity createCamera(std::optional<app::Entity> target = std::nullopt);
 	private: // Private Static Variables
 	private: // Private Member Variables
 		bool m_running;
