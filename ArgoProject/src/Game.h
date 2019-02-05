@@ -7,14 +7,18 @@
 #include "systems/MotionSystem.h"
 #include "systems/AnimatorSystem.h"
 #include "systems/RenderSystem.h"
+#include "systems/CommandSystem.h"
+#include "systems/InputSystem.h"
+#include "systems/AirMotionSystem.h"
+
 
 namespace app
 {
 	class Game
 	{
 	private: // Private typedefs/Enums/Usings
-		using UpdateSystem = std::variant<sys::MotionSystem>;
-		using UpdateSystems = std::array<UpdateSystem, 1>;
+		using UpdateSystem = std::variant<sys::MotionSystem, sys::CommandSystem, sys::InputSystem, sys::AirMotionSystem>;
+		using UpdateSystems = std::array<UpdateSystem, 4>;
 		using DrawSystem = std::variant<sys::RenderSystem, sys::AnimatorSystem>;
 		using DrawSystems = std::array<DrawSystem, 2>;
 	public: // Constructors/Destructor/Assignments

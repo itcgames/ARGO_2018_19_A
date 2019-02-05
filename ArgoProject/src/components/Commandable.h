@@ -1,30 +1,27 @@
-﻿#ifndef _COMPONENT_MOTION_H
-#define _COMPONENT_MOTION_H
+﻿#ifndef _COMP_COMMANDABLE_H
+#define _COMP_COMMANDABLE_H
+
+#include "commands/BaseCommand.h"
 
 namespace app::comp
 {
-	struct Motion
+	struct Commandable
 	{
 	public: // Constructors/Destructor/Assignments
-		Motion() = default;
-		~Motion() = default;
+		Commandable() = default;
+		~Commandable() = default;
 
-		Motion(Motion const &) = default;
-		Motion(Motion &&) = default;
+		Commandable(Commandable const &) = default;
+		Commandable & operator=(Commandable const &) = default;
 
-		Motion & operator=(Motion const &) = default;
-		Motion & operator=(Motion &&) = default;
+		Commandable(Commandable &&) = default;
+		Commandable & operator=(Commandable &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		float speed;
-		float angularSpeed;
-		float direction;
-		float drag;
-		float dragCutoff;
-		float maxSpeed;
+		std::forward_list<std::shared_ptr<app::cmnd::BaseCommand>> list;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -36,4 +33,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENT_MOTION_H
+#endif // !_COMP_COMMANDABLE_H
