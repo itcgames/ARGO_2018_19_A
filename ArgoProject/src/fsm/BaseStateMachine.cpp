@@ -2,6 +2,7 @@
 #include "BaseStateMachine.h"
 
 app::fsm::BaseStateMachine::BaseStateMachine(std::shared_ptr<BaseState> state)
+	: m_state(state)
 {
 }
 

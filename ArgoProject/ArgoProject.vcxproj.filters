@@ -64,11 +64,17 @@
     <Filter Include="Resource Files\Animations">
       <UniqueIdentifier>{062b658f-59f1-44ad-8665-8f2a693ac7ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\stateMachines">
+    <Filter Include="Header Files\fsm">
       <UniqueIdentifier>{5d1b9ecb-904c-4590-aca2-9a07c78b2aef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\stateMachines">
+    <Filter Include="Source Files\fsm">
       <UniqueIdentifier>{5bedb84e-4cf5-4904-8885-51c2195d0dd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fsm\states">
+      <UniqueIdentifier>{5f31b855-419c-46a0-9583-5a0d7b34d9a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fsm\states">
+      <UniqueIdentifier>{e89bc110-9a05-44c2-8df5-15659dd6de31}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -159,11 +165,23 @@
     <ClCompile Include="src\components\Animator.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
-    <ClCompile Include="src\stateMachines\BaseStateMachine.cpp">
-      <Filter>Source Files\stateMachines</Filter>
+    <ClCompile Include="src\fsm\BaseState.cpp">
+      <Filter>Source Files\fsm</Filter>
     </ClCompile>
-    <ClCompile Include="src\stateMachines\BaseState.cpp">
-      <Filter>Source Files\stateMachines</Filter>
+    <ClCompile Include="src\fsm\BaseStateMachine.cpp">
+      <Filter>Source Files\fsm</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fsm\states\EntityState.cpp">
+      <Filter>Source Files\fsm\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fsm\states\AnimationState.cpp">
+      <Filter>Source Files\fsm\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\StateMachine.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\StateMachineSystem.cpp">
+      <Filter>Source Files\systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -251,11 +269,23 @@
     <ClInclude Include="src\systems\AnimatorSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
-    <ClInclude Include="src\stateMachines\BaseStateMachine.h">
-      <Filter>Header Files\stateMachines</Filter>
+    <ClInclude Include="src\fsm\BaseStateMachine.h">
+      <Filter>Header Files\fsm</Filter>
     </ClInclude>
-    <ClInclude Include="src\stateMachines\BaseState.h">
-      <Filter>Header Files\stateMachines</Filter>
+    <ClInclude Include="src\fsm\BaseState.h">
+      <Filter>Header Files\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="src\fsm\states\EntityState.h">
+      <Filter>Header Files\fsm\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\fsm\states\AnimationState.h">
+      <Filter>Header Files\fsm\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\StateMachine.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\StateMachineSystem.h">
+      <Filter>Header Files\systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

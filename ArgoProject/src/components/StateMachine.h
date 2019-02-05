@@ -1,24 +1,27 @@
-﻿#ifndef _FINITE_STATE_MACHINES_BASE_STATE_H
-#define _FINITE_STATE_MACHINES_BASE_STATE_H
+﻿#ifndef _COMPONENTS_STATE_MACHINE_H
+#define _COMPONENTS_STATE_MACHINE_H
 
-namespace app::fsm
+#include "fsm/BaseStateMachine.h"
+
+namespace app::comp
 {
-	class BaseState
+	struct StateMachine
 	{
 	public: // Constructors/Destructor/Assignments
-		BaseState() = default;
-		~BaseState() = default;
+		StateMachine() = default;
+		~StateMachine() = default;
 
-		BaseState(BaseState const &) = default;
-		BaseState & operator=(BaseState const &) = default;
+		StateMachine(StateMachine const &) = default;
+		StateMachine & operator=(StateMachine const &) = default;
 
-		BaseState(BaseState &&) = default;
-		BaseState & operator=(BaseState &&) = default;
+		StateMachine(StateMachine &&) = default;
+		StateMachine & operator=(StateMachine &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
+		std::unique_ptr<fsm::BaseStateMachine> instance;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -30,4 +33,4 @@ namespace app::fsm
 	};
 }
 
-#endif // !_FINITE_STATE_MACHINES_BASE_STATE_H
+#endif // !_COMPONENTS_STATE_MACHINE_H

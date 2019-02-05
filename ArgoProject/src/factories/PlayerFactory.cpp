@@ -7,6 +7,7 @@
 #include "components/Motion.h"
 #include "components/Animator.h"
 #include "components/Render.h"
+#include "components/StateMachine.h"
 
 app::fact::PlayerFactory::PlayerFactory(app::del::UPtrRenderer const & renderer)
 	: m_texture(std::make_shared<decltype(m_texture)::element_type>())
@@ -50,6 +51,10 @@ std::optional<app::Entity> app::fact::PlayerFactory::create()
 	auto render = comp::Render();
 	render.texture = m_texture;
 	m_registry.assign<decltype(render)>(entity, std::move(render));
+
+	auto stateMachine = comp::StateMachine();
+	stateMachine.instance = nullptr;
+	m_registry.assign<decltype(stateMachine)>(entity, std::move(stateMachine));
 
 	return entity;
 }
