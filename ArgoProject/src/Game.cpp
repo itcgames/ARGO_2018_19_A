@@ -14,6 +14,7 @@ app::Game::Game()
 	, m_registry(app::Reg::get())
 
 	, m_updateSystems{
+		UpdateSystem(std::in_place_type<app::sys::StateMachineSystem>),
 		UpdateSystem(std::in_place_type<app::sys::MotionSystem>)
 	}
 	, m_drawSystems{
