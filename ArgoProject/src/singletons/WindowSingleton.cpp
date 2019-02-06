@@ -8,7 +8,7 @@ std::unique_ptr<app::gra::Window> app::sin::Window::s_window = nullptr;
 
 app::gra::Window & app::sin::Window::get()
 {
-	if (s_window)
+	if (!s_window)
 	{
 		s_window = std::make_unique<app::gra::Window>(
 			sin::KeyHandler::get()

@@ -27,7 +27,6 @@ namespace app::fact::sce
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
-		app::del::UPtrRenderer const & m_renderer;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables

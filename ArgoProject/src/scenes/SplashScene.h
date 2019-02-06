@@ -8,8 +8,8 @@ namespace app::sce
 	class SplashScene : public BaseScene
 	{
 	public: // Constructors/Destructor/Assignments
-		SplashScene();
-		virtual ~SplashScene() = default;
+		SplashScene(SceneType & sceneManagerType);
+		virtual ~SplashScene();
 
 		SplashScene(SplashScene const &) = default;
 		SplashScene & operator=(SplashScene const &) = default;
@@ -19,6 +19,8 @@ namespace app::sce
 
 	public: // Public Static Functions
 	public: // Public Member Functions
+		virtual void start() final override;
+		virtual void end() final override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions

@@ -22,9 +22,9 @@ namespace app::gra
 		void resetView();
 		void pollEvents();
 		void clear() const;
-		void draw(app::gra::RenderRect const & rect) const;
-		void draw(std::unique_ptr<SDL_Texture> const & texture, SDL_Rect const & rect, std::optional<SDL_Rect> source = std::nullopt) const;
-		void draw(std::shared_ptr<SDL_Texture> texture, SDL_Rect const & rect, std::optional<SDL_Rect> source = std::nullopt) const;
+		void render(app::gra::RenderRect const & rect) const;
+		void render(std::unique_ptr<SDL_Texture> const & texture, SDL_Rect const & rect, std::optional<SDL_Rect> source = std::nullopt) const;
+		void render(std::shared_ptr<SDL_Texture> texture, SDL_Rect const & rect, std::optional<SDL_Rect> source = std::nullopt) const;
 		void display() const;
 
 		inline constexpr bool const & isOpen() { return m_open; }

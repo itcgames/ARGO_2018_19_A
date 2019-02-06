@@ -30,7 +30,7 @@ namespace app::sce
 		using DrawSystem = std::variant<sys::RenderSystem, sys::AnimatorSystem>;
 		using DrawSystems = std::vector<DrawSystem>;
 	public: // Constructors/Destructor/Assignments
-		BaseScene(SceneType const & type, UpdateSystems && updateSystems, DrawSystems && drawSystems);
+		BaseScene(SceneType & sceneManagerType, UpdateSystems && updateSystems, DrawSystems && drawSystems);
 		virtual ~BaseScene();
 
 		BaseScene(BaseScene const &) = default;
@@ -41,8 +41,10 @@ namespace app::sce
 
 	public: // Public Static Functions
 	public: // Public Member Functions
+		virtual void start() abstract;
 		virtual void update(app::time::seconds const & dt);
 		virtual void render(app::time::seconds const & dt);
+		virtual void end() abstract;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -51,7 +53,7 @@ namespace app::sce
 		constexpr static bool DEBUG_MODE = true;
 	protected: // Protected Member Variables
 		app::Registry & m_registry;
-		SceneType m_type;
+		SceneType & m_sceneManagerType;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables

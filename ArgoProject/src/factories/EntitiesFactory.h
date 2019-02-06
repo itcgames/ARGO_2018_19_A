@@ -3,6 +3,7 @@
 
 #include "BaseFactory.h"
 #include "EntityFactory.h"
+#include "deleters/SdlDeleter.h"
 
 namespace app::fact
 {
@@ -28,6 +29,7 @@ namespace app::fact
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
 		app::Registry & m_registry;
+		app::del::UPtrRenderer const & m_renderer;
 		app::fact::EntityFactory m_entityFactory;
 	private: // Private Static Functions
 	private: // Private Member Functions

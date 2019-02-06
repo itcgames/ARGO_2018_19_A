@@ -2,32 +2,12 @@
 #define _APP_GAME_H
 
 #include "graphics/Window.h"
-
-
-// systems
-#include "systems/StateMachineSystem.h"
-#include "systems/MotionSystem.h"
-#include "systems/AnimatorSystem.h"
-#include "systems/RenderSystem.h"
-#include "systems/CommandSystem.h"
-#include "systems/InputSystem.h"
-#include "systems/AirMotionSystem.h"
-#include "systems/CameraSystem.h"
+#include "scenes/SceneManager.h"
 
 namespace app
 {
 	class Game
 	{
-	private: // Private typedefs/Enums/Usings
-		using UpdateSystem = std::variant<sys::MotionSystem
-			, sys::StateMachineSystem
-			, sys::CameraSystem
-			, sys::CommandSystem
-			, sys::InputSystem
-			, sys::AirMotionSystem>;
-		using UpdateSystems = std::array<UpdateSystem, 6>;
-		using DrawSystem = std::variant<sys::RenderSystem, sys::AnimatorSystem>;
-		using DrawSystems = std::array<DrawSystem, 2>;
 	public: // Constructors/Destructor/Assignments
 		Game();
 		~Game();
@@ -52,8 +32,6 @@ namespace app
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
-		bool initEntities();
-		app::Entity createCamera(std::optional<app::Entity> target = std::nullopt);
 	private: // Private Static Variables
 	private: // Private Member Variables
 		bool m_running;
@@ -62,8 +40,7 @@ namespace app
 		app::inp::MouseHandler & m_mouseHandler;
 		app::gra::Window & m_window;
 		app::Registry & m_registry;
-		UpdateSystems m_updateSystems;
-		DrawSystems m_drawSystems;
+		app::sce::SceneManager m_sceneManager;
 	};
 }
 

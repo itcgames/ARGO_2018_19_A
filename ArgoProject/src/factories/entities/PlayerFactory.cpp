@@ -14,11 +14,11 @@
 #include "commands/JumpCommand.h"
 #include "components/StateMachine.h"
 
-app::fact::PlayerFactory::PlayerFactory(app::del::UPtrRenderer const & renderer)
+app::fact::PlayerFactory::PlayerFactory()
 	: EntityFactory()
 	, m_texture(std::make_shared<decltype(m_texture)::element_type>())
 {
-	m_texture->load(renderer, "./res/Animations/test.png");
+	m_texture->load(m_renderer, "./res/Animations/test.png");
 }
 
 app::Entity const app::fact::PlayerFactory::create()

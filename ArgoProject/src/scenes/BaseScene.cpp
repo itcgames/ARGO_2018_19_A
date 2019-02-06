@@ -2,11 +2,11 @@
 #include "BaseScene.h"
 #include "singletons/RegistrySingleton.h"
 
-app::sce::BaseScene::BaseScene(app::sce::SceneType const & type, UpdateSystems && updateSystems, DrawSystems && drawSystems)
+app::sce::BaseScene::BaseScene(app::sce::SceneType & sceneManagerType, UpdateSystems && updateSystems, DrawSystems && drawSystems)
 	: m_registry(app::sin::Registry::get())
-	, m_type(type)
-	, m_updateSystems(updateSystems)
-	, m_drawSystems(drawSystems)
+	, m_sceneManagerType(sceneManagerType)
+	, m_updateSystems(std::make_move_iterator(updateSystems.begin()), std::make_move_iterator(updateSystems.end()))
+	, m_drawSystems(std::make_move_iterator(drawSystems.begin()), std::make_move_iterator(drawSystems.end()))
 {
 }
 
