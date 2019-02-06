@@ -20,17 +20,14 @@ void app::sys::InputSystem::update(app::time::seconds const & dt)
 		{
 			if (m_keyHandler.isKeyDown(key)) 
 			{ 
-				if (key != SDLK_SPACE) 
-				{
-					commandable.list.push_front(command);
-				}
+				commandable.list.push_front(command);
 			}
+		}
+		for (auto const &[key, command] : input.keyPressedCommands)
+		{
 			if (m_keyHandler.isKeyPressed(key))
 			{
-				if (key == SDLK_SPACE)
-				{
-					commandable.list.push_front(command);
-				}
+				commandable.list.push_front(command);
 			}
 		}
 	});
