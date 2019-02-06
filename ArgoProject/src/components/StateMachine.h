@@ -1,30 +1,27 @@
-﻿#ifndef _COMPONENTS_ANIMATOR_H
-#define _COMPONENTS_ANIMATOR_H
+﻿#ifndef _COMPONENTS_STATE_MACHINE_H
+#define _COMPONENTS_STATE_MACHINE_H
+
+#include "fsm/BaseStateMachine.h"
 
 namespace app::comp
 {
-	struct Animator
+	struct StateMachine
 	{
 	public: // Constructors/Destructor/Assignments
-		Animator() = default;
-		~Animator() = default;
+		StateMachine() = default;
+		~StateMachine() = default;
 
-		Animator(Animator const &) = default;
-		Animator & operator=(Animator const &) = default;
+		StateMachine(StateMachine const &) = default;
+		StateMachine & operator=(StateMachine const &) = default;
 
-		Animator(Animator &&) = default;
-		Animator & operator=(Animator &&) = default;
+		StateMachine(StateMachine &&) = default;
+		StateMachine & operator=(StateMachine &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		math::Vector2i currentFrame;
-		float time, perFrame;
-		bool loop;
-		math::Vector2i position;
-		math::Vector2i numOfFrames;
-		math::Vector2f frameSize;
+		std::unique_ptr<fsm::BaseStateMachine> instance;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -36,4 +33,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENTS_ANIMATOR_H
+#endif // !_COMPONENTS_STATE_MACHINE_H

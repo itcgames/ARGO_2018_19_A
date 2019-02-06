@@ -1,30 +1,29 @@
-﻿#ifndef _COMPONENTS_ANIMATOR_H
-#define _COMPONENTS_ANIMATOR_H
+#ifndef _CAMERA_H
+#define _CAMERA_H
+
+#include "math/Vector2.h"
 
 namespace app::comp
 {
-	struct Animator
+	class Camera
 	{
 	public: // Constructors/Destructor/Assignments
-		Animator() = default;
-		~Animator() = default;
+		Camera() = default;
+		~Camera() = default;
 
-		Animator(Animator const &) = default;
-		Animator & operator=(Animator const &) = default;
+		Camera(Camera const &) = default;
+		Camera & operator=(Camera const &) = default;
 
-		Animator(Animator &&) = default;
-		Animator & operator=(Animator &&) = default;
+		Camera(Camera &&) = default;
+		Camera & operator=(Camera &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		math::Vector2i currentFrame;
-		float time, perFrame;
-		bool loop;
-		math::Vector2i position;
-		math::Vector2i numOfFrames;
-		math::Vector2f frameSize;
+		math::Vector2f position;
+		math::Vector2f size;
+		std::optional<app::Entity> target;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -36,4 +35,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENTS_ANIMATOR_H
+#endif // !_CAMERA_H

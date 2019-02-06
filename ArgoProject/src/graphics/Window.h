@@ -6,6 +6,7 @@
 #include "deleters/SdlDeleter.h"
 #include "graphics/WindowParameters.h"
 #include "graphics/RenderRect.h"
+#include "graphics/View.h"
 
 namespace app::gra
 {
@@ -17,6 +18,8 @@ namespace app::gra
 
 	public: // Public Member Functions
 
+		void setView(app::gra::View const & view);
+		void resetView();
 		void pollEvents();
 		void clear() const;
 		void draw(app::gra::RenderRect const & rect) const;
@@ -44,6 +47,7 @@ namespace app::gra
 		std::string m_title;
 		std::size_t m_width;
 		std::size_t m_height;
+		View m_view;
 		app::del::UPtrWindow m_window;
 		app::del::UPtrRenderer m_renderer;
 	};

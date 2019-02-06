@@ -1,30 +1,26 @@
-﻿#ifndef _COMPONENTS_ANIMATOR_H
-#define _COMPONENTS_ANIMATOR_H
+﻿#ifndef _GRAPHICS_VIEW_H
+#define _GRAPHICS_VIEW_H
 
-namespace app::comp
+namespace app::gra
 {
-	struct Animator
+	class View
 	{
 	public: // Constructors/Destructor/Assignments
-		Animator() = default;
-		~Animator() = default;
+		View() = default;
+		~View() = default;
 
-		Animator(Animator const &) = default;
-		Animator & operator=(Animator const &) = default;
+		View(View const &) = default;
+		View & operator=(View const &) = default;
 
-		Animator(Animator &&) = default;
-		Animator & operator=(Animator &&) = default;
+		View(View &&) = default;
+		View & operator=(View &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		math::Vector2i currentFrame;
-		float time, perFrame;
-		bool loop;
 		math::Vector2i position;
-		math::Vector2i numOfFrames;
-		math::Vector2f frameSize;
+		math::Vector2i size;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -36,4 +32,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENTS_ANIMATOR_H
+#endif // !_GRAPHICS_VIEW_H

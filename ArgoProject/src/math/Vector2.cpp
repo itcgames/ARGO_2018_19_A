@@ -46,6 +46,14 @@ T app::math::Vector2<T>::angleBetween(Vector2<T> const & left, Vector2<T> const 
 }
 
 template<typename T>
+app::math::Vector2<T> & app::math::Vector2<T>::operator=(T const & t)
+{
+	this->x = t;
+	this->y = t;
+	return *this;
+}
+
+template<typename T>
 app::math::Vector2<T> & app::math::Vector2<T>::operator+=(Vector2 const & v)
 {
 	this->x += v.x;

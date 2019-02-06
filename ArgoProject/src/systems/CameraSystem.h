@@ -1,30 +1,27 @@
-﻿#ifndef _COMPONENTS_ANIMATOR_H
-#define _COMPONENTS_ANIMATOR_H
+﻿#ifndef _SYSTEM_CAMERA
+#define _SYSTEM_CAMERA
 
-namespace app::comp
+#include "BaseSystem.h"
+
+namespace app::sys
 {
-	struct Animator
+	class CameraSystem : public BaseSystem
 	{
 	public: // Constructors/Destructor/Assignments
-		Animator() = default;
-		~Animator() = default;
+		CameraSystem();
+		~CameraSystem() = default;
 
-		Animator(Animator const &) = default;
-		Animator & operator=(Animator const &) = default;
+		CameraSystem(CameraSystem const &) = default;
+		CameraSystem(CameraSystem &&) = default;
 
-		Animator(Animator &&) = default;
-		Animator & operator=(Animator &&) = default;
+		CameraSystem & operator=(CameraSystem const &) = default;
+		CameraSystem & operator=(CameraSystem &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
+		virtual void update(app::time::seconds const & dt) override;
 	public: // Public Static Variables
 	public: // Public Member Variables
-		math::Vector2i currentFrame;
-		float time, perFrame;
-		bool loop;
-		math::Vector2i position;
-		math::Vector2i numOfFrames;
-		math::Vector2f frameSize;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -36,4 +33,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENTS_ANIMATOR_H
+#endif // !_SYSTEM_CAMERA
