@@ -1,30 +1,30 @@
-﻿#ifndef _COMPONENT_MOTION_H
-#define _COMPONENT_MOTION_H
+﻿#ifndef _COMP_AIR_MOTION_H
+#define _COMP_AIR_MOTION_H
 
 namespace app::comp
 {
-	struct Motion
+	struct AirMotion
 	{
 	public: // Constructors/Destructor/Assignments
-		Motion() = default;
-		~Motion() = default;
+		AirMotion() = default;
+		~AirMotion() = default;
 
-		Motion(Motion const &) = default;
-		Motion(Motion &&) = default;
+		AirMotion(AirMotion const &) = default;
+		AirMotion & operator=(AirMotion const &) = default;
 
-		Motion & operator=(Motion const &) = default;
-		Motion & operator=(Motion &&) = default;
+		AirMotion(AirMotion &&) = default;
+		AirMotion & operator=(AirMotion &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
+		math::Vector2f gravity = { 0.0f, 9.8f};
 		float speed;
 		float angularSpeed;
 		float direction;
-		float drag;
-		float dragCutoff;
 		float maxSpeed;
+		float lateralConstraint = 0.2f;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -36,4 +36,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENT_MOTION_H
+#endif // !_COMP_AIR_MOTION_H

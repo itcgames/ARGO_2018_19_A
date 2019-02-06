@@ -1,30 +1,27 @@
-﻿#ifndef _COMPONENT_MOTION_H
-#define _COMPONENT_MOTION_H
+﻿#ifndef _INPUT_H
+#define _INPUT_H
+
+#include "commands/BaseCommand.h"
 
 namespace app::comp
 {
-	struct Motion
+	struct Input
 	{
 	public: // Constructors/Destructor/Assignments
-		Motion() = default;
-		~Motion() = default;
+		Input() = default;
+		~Input() = default;
 
-		Motion(Motion const &) = default;
-		Motion(Motion &&) = default;
+		Input(Input const &) = default;
+		Input(Input &&) = default;
 
-		Motion & operator=(Motion const &) = default;
-		Motion & operator=(Motion &&) = default;
+		Input & operator=(Input const &) = default;
+		Input & operator=(Input &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		float speed;
-		float angularSpeed;
-		float direction;
-		float drag;
-		float dragCutoff;
-		float maxSpeed;
+		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyDownCommands;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -36,4 +33,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENT_MOTION_H
+#endif // !_INPUT_H

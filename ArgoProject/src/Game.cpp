@@ -7,7 +7,6 @@
 
 // factories
 #include "factories/PlayerFactory.h"
-
 app::Game::Game()
 	: m_running(true)
 	, m_controllerHandler()
@@ -17,8 +16,11 @@ app::Game::Game()
 	, m_registry(app::Reg::get())
 
 	, m_updateSystems{
-		UpdateSystem(std::in_place_type<app::sys::MotionSystem>),
+		UpdateSystem(std::in_place_type<app::sys::InputSystem>, m_keyHandler),
+		UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
+		UpdateSystem(std::in_place_type<app::sys::AirMotionSystem>),
 		UpdateSystem(std::in_place_type<app::sys::StateMachineSystem>),
+		UpdateSystem(std::in_place_type<app::sys::MotionSystem>),
 		UpdateSystem(std::in_place_type<app::sys::CameraSystem>)
 	}
 	, m_drawSystems{

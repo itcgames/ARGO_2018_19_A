@@ -174,7 +174,7 @@ T app::math::Vector2<T>::det(Vector2<T> const & other) const
 template<typename T>
 T app::math::Vector2<T>::toAngle() const
 {
-	return static_cast<T>(math::toDegrees(std::atan2(this->x, this->y)));
+	return static_cast<T>(math::toDegrees(std::atan2(this->y, this->x)));
 }
 
 template<typename T>

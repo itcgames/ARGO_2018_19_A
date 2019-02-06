@@ -1,39 +1,36 @@
-﻿#ifndef _COMPONENT_MOTION_H
-#define _COMPONENT_MOTION_H
+﻿#ifndef _BASE_COMMAND_H
+#define _BASE_COMMAND_H
 
-namespace app::comp
+namespace app::cmnd
 {
-	struct Motion
+	class BaseCommand
 	{
 	public: // Constructors/Destructor/Assignments
-		Motion() = default;
-		~Motion() = default;
+		BaseCommand();
+		virtual ~BaseCommand() = default;
 
-		Motion(Motion const &) = default;
-		Motion(Motion &&) = default;
+		BaseCommand(BaseCommand const &) = default;
+		BaseCommand(BaseCommand &&) = default;
 
-		Motion & operator=(Motion const &) = default;
-		Motion & operator=(Motion &&) = default;
+		BaseCommand & operator=(BaseCommand const &) = default;
+		BaseCommand & operator=(BaseCommand &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
+		virtual void execute() abstract;
 	public: // Public Static Variables
 	public: // Public Member Variables
-		float speed;
-		float angularSpeed;
-		float direction;
-		float drag;
-		float dragCutoff;
-		float maxSpeed;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
+		app::Registry & m_registry;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
+
 	};
 }
 
-#endif // !_COMPONENT_MOTION_H
+#endif // !_BASE_COMMAND_H
