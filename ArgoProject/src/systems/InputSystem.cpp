@@ -2,6 +2,7 @@
 #include "InputSystem.h"
 #include "components/Input.h"
 #include "components/Commandable.h"
+#include "commands/JumpCommand.h"
 
 app::sys::InputSystem::InputSystem(app::inp::KeyHandler& handler)
 	: BaseSystem()
@@ -19,6 +20,13 @@ void app::sys::InputSystem::update(app::time::seconds const & dt)
 		{
 			if (m_keyHandler.isKeyDown(key)) 
 			{ 
+				commandable.list.push_front(command);
+			}
+		}
+		for (auto const &[key, command] : input.keyPressedCommands)
+		{
+			if (m_keyHandler.isKeyPressed(key))
+			{
 				commandable.list.push_front(command);
 			}
 		}
