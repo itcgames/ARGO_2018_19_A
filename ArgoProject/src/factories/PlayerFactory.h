@@ -21,7 +21,7 @@ namespace app::fact
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		virtual std::optional<app::Entity> create() override;
+		virtual app::Entity const create() override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions

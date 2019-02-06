@@ -1,6 +1,10 @@
 ﻿#include "stdafx.h"
 #include "Game.h"
-#include "Registry.h"
+#include "singletons/ControllerHandlerSingleton.h"
+#include "singletons/KeyHandlerSingleton.h"
+#include "singletons/MouseHandlerSingleton.h"
+#include "singletons/RegistrySingleton.h"
+#include "singletons/WindowSingleton.h"
 
 // components
 #include "components/Camera.h"
@@ -9,14 +13,14 @@
 #include "factories/PlayerFactory.h"
 app::Game::Game()
 	: m_running(true)
-	, m_controllerHandler()
-	, m_keyHandler()
-	, m_mouseHandler()
-	, m_window(m_keyHandler, m_mouseHandler, m_controllerHandler, gra::WindowParameters{ "ARGO Souls", 1366u, 768u })
-	, m_registry(app::Reg::get())
+	, m_controllerHandler(app::sin::ControllerHandler::get())
+	, m_keyHandler(app::sin::KeyHandler::get())
+	, m_mouseHandler(app::sin::MouseHandler::get())
+	, m_window(app::sin::Window::get())
+	, m_registry(app::sin::Registry::get())
 
 	, m_updateSystems{
-		UpdateSystem(std::in_place_type<app::sys::InputSystem>, m_keyHandler),
+		UpdateSystem(std::in_place_type<app::sys::InputSystem>),
 		UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
 		UpdateSystem(std::in_place_type<app::sys::AirMotionSystem>),
 		UpdateSystem(std::in_place_type<app::sys::StateMachineSystem>),
@@ -25,7 +29,7 @@ app::Game::Game()
 	}
 	, m_drawSystems{
 		DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
-		DrawSystem(std::in_place_type<app::sys::RenderSystem>, m_window)
+		DrawSystem(std::in_place_type<app::sys::RenderSystem>)
 	}
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != NULL)

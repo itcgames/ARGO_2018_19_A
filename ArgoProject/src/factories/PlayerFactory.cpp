@@ -15,14 +15,15 @@
 #include "components/StateMachine.h"
 
 app::fact::PlayerFactory::PlayerFactory(app::del::UPtrRenderer const & renderer)
-	: m_texture(std::make_shared<decltype(m_texture)::element_type>())
+	: EntityFactory()
+	, m_texture(std::make_shared<decltype(m_texture)::element_type>())
 {
 	m_texture->load(renderer, "./res/Animations/test.png");
 }
 
-std::optional<app::Entity> app::fact::PlayerFactory::create()
+app::Entity const app::fact::PlayerFactory::create()
 {
-	app::Entity const entity = m_registry.create();
+	app::Entity const entity = EntityFactory::create();
 
 	auto location = comp::Location();
 	location.position = { 680.0f, 380.0f };

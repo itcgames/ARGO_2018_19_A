@@ -57,10 +57,10 @@ namespace app
 	private: // Private Static Variables
 	private: // Private Member Variables
 		bool m_running;
-		app::inp::ControllerHandler m_controllerHandler;
-		app::inp::KeyHandler m_keyHandler;
-		app::inp::MouseHandler m_mouseHandler;
-		app::gra::Window m_window;
+		app::inp::ControllerHandler & m_controllerHandler;
+		app::inp::KeyHandler & m_keyHandler;
+		app::inp::MouseHandler & m_mouseHandler;
+		app::gra::Window & m_window;
 		app::Registry & m_registry;
 		UpdateSystems m_updateSystems;
 		DrawSystems m_drawSystems;

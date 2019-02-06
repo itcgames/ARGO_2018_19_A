@@ -1,0 +1,64 @@
+﻿#ifndef _BASE_SCENE_H
+#define _BASE_SCENE_H
+
+#include "systems/AirMotionSystem.h"
+#include "systems/AnimatorSystem.h"
+#include "systems/CameraSystem.h"
+#include "systems/CommandSystem.h"
+#include "systems/InputSystem.h"
+#include "systems/MotionSystem.h"
+#include "systems/RenderSystem.h"
+#include "systems/StateMachineSystem.h"
+
+namespace app::sce
+{
+	enum class SceneType
+	{
+		Splash,
+		Count
+	};
+	class BaseScene
+	{
+	protected: // Protected typedefs/Enums/Usings
+		using UpdateSystem = std::variant<sys::MotionSystem
+			, sys::StateMachineSystem
+			, sys::CameraSystem
+			, sys::CommandSystem
+			, sys::InputSystem
+			, sys::AirMotionSystem>;
+		using UpdateSystems = std::vector<UpdateSystem>;
+		using DrawSystem = std::variant<sys::RenderSystem, sys::AnimatorSystem>;
+		using DrawSystems = std::vector<DrawSystem>;
+	public: // Constructors/Destructor/Assignments
+		BaseScene(SceneType const & type, UpdateSystems && updateSystems, DrawSystems && drawSystems);
+		virtual ~BaseScene();
+
+		BaseScene(BaseScene const &) = default;
+		BaseScene & operator=(BaseScene const &) = default;
+
+		BaseScene(BaseScene &&) = default;
+		BaseScene & operator=(BaseScene &&) = default;
+
+	public: // Public Static Functions
+	public: // Public Member Functions
+		virtual void update(app::time::seconds const & dt);
+		virtual void render(app::time::seconds const & dt);
+	public: // Public Static Variables
+	public: // Public Member Variables
+	protected: // Protected Static Functions
+	protected: // Protected Member Functions
+	protected: // Protected Static Variables
+		constexpr static bool DEBUG_MODE = true;
+	protected: // Protected Member Variables
+		app::Registry & m_registry;
+		SceneType m_type;
+	private: // Private Static Functions
+	private: // Private Member Functions
+	private: // Private Static Variables
+	private: // Private Member Variables
+		UpdateSystems m_updateSystems;
+		DrawSystems m_drawSystems;
+	};
+}
+
+#endif // !_BASE_SCENE_H

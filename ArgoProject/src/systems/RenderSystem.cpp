@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "RenderSystem.h"
+#include "singletons/WindowSingleton.h"
 
 // components
 #include "components/Location.h"
@@ -7,9 +8,9 @@
 #include "components/Render.h"
 #include "components/Camera.h"
 
-app::sys::RenderSystem::RenderSystem(app::gra::Window & window)
+app::sys::RenderSystem::RenderSystem()
 	: BaseSystem()
-	, m_window(window)
+	, m_window(app::sin::Window::get())
 {
 }
 

@@ -1,11 +1,12 @@
 ﻿#include "stdafx.h"
 #include "InputSystem.h"
+#include "singletons/KeyHandlerSingleton.h"
 #include "components/Input.h"
 #include "components/Commandable.h"
 
-app::sys::InputSystem::InputSystem(app::inp::KeyHandler& handler)
+app::sys::InputSystem::InputSystem()
 	: BaseSystem()
-	, m_keyHandler(handler)
+	, m_keyHandler(app::sin::KeyHandler::get())
 {
 }
 

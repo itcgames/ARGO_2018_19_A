@@ -1,25 +1,26 @@
-﻿#ifndef _FACTORY_ENTITY_H
-#define _FACTORY_ENTITY_H
+﻿#ifndef _FACTORY_ENTITIES_H
+#define _FACTORY_ENTITIES_H
 
 #include "BaseFactory.h"
+#include "EntityFactory.h"
 
 namespace app::fact
 {
-	class EntityFactory : public BaseFactory<app::Entity const>
+	class EntitiesFactory : public BaseFactory<std::vector<app::Entity>>
 	{
 	public: // Constructors/Destructor/Assignments
-		EntityFactory();
-		virtual ~EntityFactory() = default;
+		EntitiesFactory();
+		virtual ~EntitiesFactory() = default;
 
-		EntityFactory(EntityFactory const &) = default;
-		EntityFactory & operator=(EntityFactory const &) = default;
+		EntitiesFactory(EntitiesFactory const &) = default;
+		EntitiesFactory & operator=(EntitiesFactory const &) = default;
 
-		EntityFactory(EntityFactory &&) = default;
-		EntityFactory & operator=(EntityFactory &&) = default;
+		EntitiesFactory(EntitiesFactory &&) = default;
+		EntitiesFactory & operator=(EntitiesFactory &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		virtual app::Entity const create() override;
+		virtual std::vector<app::Entity> create() abstract;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -27,6 +28,7 @@ namespace app::fact
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
 		app::Registry & m_registry;
+		app::fact::EntityFactory m_entityFactory;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables
@@ -34,4 +36,4 @@ namespace app::fact
 	};
 }
 
-#endif // !_FACTORY_ENTITY_H
+#endif // !_FACTORY_ENTITIES_H

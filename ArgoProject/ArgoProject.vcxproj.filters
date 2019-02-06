@@ -82,6 +82,24 @@
     <Filter Include="Source Files\fsm\states">
       <UniqueIdentifier>{e89bc110-9a05-44c2-8df5-15659dd6de31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\scenes">
+      <UniqueIdentifier>{f8f55e1e-a50c-4215-bd94-32017a15a9f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\scenes">
+      <UniqueIdentifier>{aec3a802-59af-47f9-b68e-8254dc367904}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\factories\scenes">
+      <UniqueIdentifier>{9f0134dc-34a7-4868-b6a6-1b648da06bad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\factories\scenes">
+      <UniqueIdentifier>{4040404d-a35e-49a7-b901-3721d0326b1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\singletons">
+      <UniqueIdentifier>{6ea302cd-4459-43bd-903d-f0eb039e6cfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\singletons">
+      <UniqueIdentifier>{091535f0-6e98-4046-9ce9-b5f7357486d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -131,9 +149,6 @@
     </ClCompile>
     <ClCompile Include="src\input\Controllerhandler.cpp">
       <Filter>Source Files\input</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Registry.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\systems\BaseSystem.cpp">
       <Filter>Source Files\systems</Filter>
@@ -225,6 +240,39 @@
     <ClCompile Include="src\systems\StateMachineSystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenes\SceneManager.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\BaseScene.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\SplashScene.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\BaseFactory.cpp">
+      <Filter>Source Files\factories</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\EntitiesFactory.cpp">
+      <Filter>Source Files\factories</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\scenes\SplashSceneFactory.cpp">
+      <Filter>Source Files\factories\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\singletons\WindowSingleton.cpp">
+      <Filter>Source Files\singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\singletons\RegistrySingleton.cpp">
+      <Filter>Source Files\singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\singletons\MouseHandlerSingleton.cpp">
+      <Filter>Source Files\singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\singletons\KeyHandlerSingleton.cpp">
+      <Filter>Source Files\singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\singletons\ControllerHandlerSingleton.cpp">
+      <Filter>Source Files\singletons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -271,9 +319,6 @@
     </ClInclude>
     <ClInclude Include="src\input\Controllerhandler.h">
       <Filter>Header Files\input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Registry.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\systems\BaseSystem.h">
       <Filter>Header Files\systems</Filter>
@@ -364,6 +409,39 @@
     </ClInclude>
     <ClInclude Include="src\systems\StateMachineSystem.h">
       <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\SceneManager.h">
+      <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\BaseScene.h">
+      <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\SplashScene.h">
+      <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\BaseFactory.h">
+      <Filter>Header Files\factories</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\EntitiesFactory.h">
+      <Filter>Header Files\factories</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\scenes\SplashSceneFactory.h">
+      <Filter>Header Files\factories\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\singletons\WindowSingleton.h">
+      <Filter>Header Files\singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\singletons\RegistrySingleton.h">
+      <Filter>Header Files\singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\singletons\MouseHandlerSingleton.h">
+      <Filter>Header Files\singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\singletons\KeyHandlerSingleton.h">
+      <Filter>Header Files\singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\singletons\ControllerHandlerSingleton.h">
+      <Filter>Header Files\singletons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
