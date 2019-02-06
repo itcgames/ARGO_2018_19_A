@@ -66,7 +66,8 @@ bool app::Game::initEntities()
 	try
 	{
 		auto playerEntity = fact::PlayerFactory(m_window.getRenderer()).create();
-		this->createCamera(playerEntity);
+		//TODO: uncomment when finished feature
+		this->createCamera(/*playerEntity*/);
 		return true;
 	}
 	catch (const std::exception&)

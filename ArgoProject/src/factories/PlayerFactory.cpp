@@ -64,7 +64,8 @@ std::optional<app::Entity> app::fact::PlayerFactory::create()
 	//Here is where commands get binded to keys
 	input.keyDownCommands.insert(std::pair(SDLK_RIGHT, std::make_shared<app::cmnd::MoveCommand>(entity, 0, 20)));
 	input.keyDownCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::MoveCommand>(entity, 180, 20)));
-	input.keyDownCommands.insert(std::pair(SDLK_SPACE, std::make_shared<app::cmnd::JumpCommand>(entity, 500.0f)));
+	input.keyDownCommands.insert(std::pair(SDLK_SPACE, std::make_shared<app::cmnd::JumpCommand>(entity, 400.0f)));
+
 
 	m_registry.assign<decltype(input)>(entity, std::move(input));
 

@@ -14,6 +14,15 @@ void app::cmnd::JumpCommand::execute()
 	if (m_registry.has<comp::AirMotion>(m_entity))
 	{
 		//handle double jump later
+		auto & airMotion = m_registry.get<comp::AirMotion>(m_entity);
+		if (airMotion.canDoubleJump)
+		{
+			auto impulse = math::Vector2f(0.0f, -1.0f) * m_force;
+			auto const & velocity = (math::toVector(airMotion.direction) * airMotion.speed) + impulse;
+			airMotion.direction = velocity.toAngle();
+			airMotion.speed = velocity.magnitude();
+			airMotion.canDoubleJump = false;
+		}
 	}
 	else
 	{
