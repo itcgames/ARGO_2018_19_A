@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{8E6F05B0-513B-4DEF-81CB-E22DDF08B6E0}</ProjectGuid>
     <RootNamespace>ArgoProject</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -179,6 +179,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\commands\MoveCommand.cpp" />
     <ClCompile Include="src\components\AirMotion.cpp" />
     <ClCompile Include="src\components\Animator.cpp" />
+    <ClCompile Include="src\components\Collision.cpp" />
     <ClCompile Include="src\components\Commandable.cpp" />
     <ClCompile Include="src\components\Camera.cpp" />
     <ClCompile Include="src\components\Dimensions.cpp" />
@@ -217,6 +218,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\AirMotionSystem.cpp" />
     <ClCompile Include="src\systems\AnimatorSystem.cpp" />
     <ClCompile Include="src\systems\BaseSystem.cpp" />
+    <ClCompile Include="src\systems\CollisionSystem.cpp" />
     <ClCompile Include="src\systems\CommandSystem.cpp" />
     <ClCompile Include="src\systems\InputSystem.cpp" />
     <ClCompile Include="src\systems\CameraSystem.cpp" />
@@ -233,6 +235,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\commands\MoveCommand.h" />
     <ClInclude Include="src\components\AirMotion.h" />
     <ClInclude Include="src\components\Animator.h" />
+    <ClInclude Include="src\components\Collision.h" />
     <ClInclude Include="src\components\Commandable.h" />
     <ClInclude Include="src\components\Camera.h" />
     <ClInclude Include="src\components\Dimensions.h" />
@@ -265,6 +268,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\systems\AirMotionSystem.h" />
     <ClInclude Include="src\systems\AnimatorSystem.h" />
     <ClInclude Include="src\systems\BaseSystem.h" />
+    <ClInclude Include="src\systems\CollisionSystem.h" />
     <ClInclude Include="src\systems\CommandSystem.h" />
     <ClInclude Include="src\systems\InputSystem.h" />
     <ClInclude Include="src\systems\CameraSystem.h" />

@@ -225,6 +225,12 @@
     <ClCompile Include="src\systems\StateMachineSystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
+    <ClCompile Include="src\components\Collision.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\CollisionSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -363,6 +369,12 @@
       <Filter>Header Files\systems</Filter>
     </ClInclude>
     <ClInclude Include="src\systems\StateMachineSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Collision.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\CollisionSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
   </ItemGroup>
