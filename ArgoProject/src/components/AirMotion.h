@@ -24,6 +24,7 @@ namespace app::comp
 		float angularSpeed;
 		float direction;
 		float maxSpeed;
+		float lateralConstraint = 0.2f;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables

@@ -22,7 +22,7 @@ void app::cmnd::MoveCommand::execute()
 	else if (m_registry.has<comp::AirMotion>(m_entity))
 	{
 		auto & motion = m_registry.get<comp::AirMotion>(m_entity);
-		auto const & impulseForce = math::toVector(m_direction) * (m_speed * 0.2f);
+		auto const & impulseForce = math::toVector(m_direction) * (m_speed * motion.lateralConstraint);
 		auto const & velocity = (math::toVector(motion.direction) * (motion.speed)) + impulseForce;
 		motion.direction = velocity.toAngle();
 		motion.speed = velocity.magnitude();

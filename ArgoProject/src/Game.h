@@ -19,7 +19,12 @@ namespace app
 	class Game
 	{
 	private: // Private typedefs/Enums/Usings
-		using UpdateSystem = std::variant<sys::MotionSystem, sys::StateMachineSystem, sys::CameraSystem, sys::CommandSystem, sys::InputSystem, sys::AirMotionSystem>;
+		using UpdateSystem = std::variant<sys::MotionSystem
+			, sys::StateMachineSystem
+			, sys::CameraSystem
+			, sys::CommandSystem
+			, sys::InputSystem
+			, sys::AirMotionSystem>;
 		using UpdateSystems = std::array<UpdateSystem, 6>;
 		using DrawSystem = std::variant<sys::RenderSystem, sys::AnimatorSystem>;
 		using DrawSystems = std::array<DrawSystem, 2>;
