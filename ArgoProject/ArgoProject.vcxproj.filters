@@ -225,6 +225,9 @@
     <ClCompile Include="src\systems\StateMachineSystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
+    <ClCompile Include="src\factories\WallFactory.cpp">
+      <Filter>Source Files\factories</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -364,6 +367,9 @@
     </ClInclude>
     <ClInclude Include="src\systems\StateMachineSystem.h">
       <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\WallFactory.h">
+      <Filter>Header Files\factories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

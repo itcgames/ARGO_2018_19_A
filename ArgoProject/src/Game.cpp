@@ -7,6 +7,7 @@
 
 // factories
 #include "factories/PlayerFactory.h"
+#include "factories/WallFactory.h"
 app::Game::Game()
 	: m_running(true)
 	, m_controllerHandler()
@@ -66,6 +67,7 @@ bool app::Game::initEntities()
 	try
 	{
 		auto playerEntity = fact::PlayerFactory(m_window.getRenderer()).create();
+		auto wallEntity = fact::WallFactory(m_window.getRenderer()).create();
 		this->createCamera(playerEntity);
 		return true;
 	}

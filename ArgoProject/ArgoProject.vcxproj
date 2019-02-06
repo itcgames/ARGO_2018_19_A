@@ -190,6 +190,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\deleters\SdlDeleter.cpp" />
     <ClCompile Include="src\factories\EntityFactory.cpp" />
     <ClCompile Include="src\factories\PlayerFactory.cpp" />
+    <ClCompile Include="src\factories\WallFactory.cpp" />
     <ClCompile Include="src\fsm\BaseState.cpp" />
     <ClCompile Include="src\fsm\BaseStateMachine.cpp" />
     <ClCompile Include="src\fsm\states\AnimationState.cpp" />
@@ -244,6 +245,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\deleters\SdlDeleter.h" />
     <ClInclude Include="src\factories\EntityFactory.h" />
     <ClInclude Include="src\factories\PlayerFactory.h" />
+    <ClInclude Include="src\factories\WallFactory.h" />
     <ClInclude Include="src\fsm\BaseState.h" />
     <ClInclude Include="src\fsm\BaseStateMachine.h" />
     <ClInclude Include="src\fsm\states\AnimationState.h" />
