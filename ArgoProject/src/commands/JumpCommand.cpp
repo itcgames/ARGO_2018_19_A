@@ -13,7 +13,6 @@ void app::cmnd::JumpCommand::execute()
 {
 	if (m_registry.has<comp::AirMotion>(m_entity))
 	{
-		//handle double jump later
 		auto & airMotion = m_registry.get<comp::AirMotion>(m_entity);
 		if (airMotion.canDoubleJump)
 		{
