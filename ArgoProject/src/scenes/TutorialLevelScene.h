@@ -1,21 +1,21 @@
-﻿#ifndef _SPLASH_SCENE_H
-#define _SPLASH_SCENE_H
+﻿#ifndef _TUTORIAL_LEVEL_SCENE_H
+#define _TUTORIAL_LEVEL_SCENE_H
 
 #include "BaseScene.h"
 
 namespace app::sce
 {
-	class SplashScene : public BaseScene
+	class TutorialLevelScene : public BaseScene
 	{
 	public: // Constructors/Destructor/Assignments
-		SplashScene(SceneType & sceneManagerType);
-		virtual ~SplashScene() = default;
+		TutorialLevelScene(SceneType & sceneManagerType);
+		virtual ~TutorialLevelScene() = default;
 
-		SplashScene(SplashScene const &) = default;
-		SplashScene & operator=(SplashScene const &) = default;
+		TutorialLevelScene(TutorialLevelScene const &) = default;
+		TutorialLevelScene & operator=(TutorialLevelScene const &) = default;
 
-		SplashScene(SplashScene &&) = default;
-		SplashScene & operator=(SplashScene &&) = default;
+		TutorialLevelScene(TutorialLevelScene &&) = default;
+		TutorialLevelScene & operator=(TutorialLevelScene &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
@@ -34,4 +34,4 @@ namespace app::sce
 	};
 }
 
-#endif // !_SPLASH_SCENE_H
+#endif // !_TUTORIAL_LEVEL_SCENE_H

@@ -1,8 +1,8 @@
 ﻿#include "stdafx.h"
-#include "SplashScene.h"
-#include "factories/scenes/SplashSceneFactory.h"
+#include "CreditsScene.h"
+#include "factories/scenes/CreditsSceneFactory.h"
 
-app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
+app::sce::CreditsScene::CreditsScene(SceneType & sceneManagerType)
 	: BaseScene(sceneManagerType
 		, util::make_vector<UpdateSystem>({
 			UpdateSystem(std::in_place_type<app::sys::InputSystem>),
@@ -16,16 +16,16 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 {
 	if constexpr (DEBUG_MODE)
 	{
-		Console::writeLine("SPLASH SCENE Constructed");
+		Console::writeLine("CREDITS SCENE Constructed");
 	}
 }
 
-void app::sce::SplashScene::start()
+void app::sce::CreditsScene::start()
 {
-	auto const & entities = fact::sce::SplashSceneFactory().create();
+	auto const & entities = fact::sce::CreditsSceneFactory().create();
 	if constexpr (DEBUG_MODE)
 	{
-		Console::writeLine("SPLASH SCENE: Creating entities");
+		Console::writeLine("CREDITS SCENE: Creating entities");
 		for (auto const & entity : entities)
 		{
 			Console::writeLine({ "  Created entity[", std::to_string(entity), "]" });
@@ -33,11 +33,11 @@ void app::sce::SplashScene::start()
 	}
 }
 
-void app::sce::SplashScene::end()
+void app::sce::CreditsScene::end()
 {
 	if constexpr (DEBUG_MODE)
 	{
-		Console::writeLine("SPLASH SCENE: Destroying entities");
+		Console::writeLine("CREDITS SCENE: Destroying entities");
 		m_registry.each([](app::Entity const entity)
 		{
 			Console::writeLine({ "  Destroyed entity[", std::to_string(entity), "]" });

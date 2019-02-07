@@ -1,8 +1,8 @@
 ﻿#include "stdafx.h"
-#include "SplashScene.h"
-#include "factories/scenes/SplashSceneFactory.h"
+#include "TutorialLevelScene.h"
+#include "factories/scenes/TutorialLevelSceneFactory.h"
 
-app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
+app::sce::TutorialLevelScene::TutorialLevelScene(SceneType & sceneManagerType)
 	: BaseScene(sceneManagerType
 		, util::make_vector<UpdateSystem>({
 			UpdateSystem(std::in_place_type<app::sys::InputSystem>),
@@ -16,16 +16,16 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 {
 	if constexpr (DEBUG_MODE)
 	{
-		Console::writeLine("SPLASH SCENE Constructed");
+		Console::writeLine("TUTORIAL LEVEL SCENE Constructed");
 	}
 }
 
-void app::sce::SplashScene::start()
+void app::sce::TutorialLevelScene::start()
 {
-	auto const & entities = fact::sce::SplashSceneFactory().create();
+	auto const & entities = fact::sce::TutorialLevelSceneFactory().create();
 	if constexpr (DEBUG_MODE)
 	{
-		Console::writeLine("SPLASH SCENE: Creating entities");
+		Console::writeLine("TUTORIAL LEVEL SCENE: Creating entities");
 		for (auto const & entity : entities)
 		{
 			Console::writeLine({ "  Created entity[", std::to_string(entity), "]" });
@@ -33,11 +33,11 @@ void app::sce::SplashScene::start()
 	}
 }
 
-void app::sce::SplashScene::end()
+void app::sce::TutorialLevelScene::end()
 {
 	if constexpr (DEBUG_MODE)
 	{
-		Console::writeLine("SPLASH SCENE: Destroying entities");
+		Console::writeLine("TUTORIAL LEVEL SCENE: Destroying entities");
 		m_registry.each([](app::Entity const entity)
 		{
 			Console::writeLine({ "  Destroyed entity[", std::to_string(entity), "]" });

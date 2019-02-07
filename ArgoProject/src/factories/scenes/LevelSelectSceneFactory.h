@@ -1,21 +1,21 @@
-﻿#ifndef _FACTORY_SPLASH_SCENE_H
-#define _FACTORY_SPLASH_SCENE_H
+﻿#ifndef _FACTORY_LEVEL_SELECT_SCENE_H
+#define _FACTORY_LEVEL_SELECT_SCENE_H
 
 #include "../EntitiesFactory.h"
 
 namespace app::fact::sce
 {
-	class SplashSceneFactory : public EntitiesFactory
+	class LevelSelectSceneFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		SplashSceneFactory() = default;
-		virtual ~SplashSceneFactory() = default;
+		LevelSelectSceneFactory() = default;
+		virtual ~LevelSelectSceneFactory() = default;
 
-		SplashSceneFactory(SplashSceneFactory const &) = default;
-		SplashSceneFactory & operator=(SplashSceneFactory const &) = default;
+		LevelSelectSceneFactory(LevelSelectSceneFactory const &) = default;
+		LevelSelectSceneFactory & operator=(LevelSelectSceneFactory const &) = default;
 
-		SplashSceneFactory(SplashSceneFactory &&) = default;
-		SplashSceneFactory & operator=(SplashSceneFactory &&) = default;
+		LevelSelectSceneFactory(LevelSelectSceneFactory &&) = default;
+		LevelSelectSceneFactory & operator=(LevelSelectSceneFactory &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
@@ -33,4 +33,4 @@ namespace app::fact::sce
 	};
 }
 
-#endif // !_FACTORY_SPLASH_SCENE_H
+#endif // !_FACTORY_LEVEL_SELECT_SCENE_H

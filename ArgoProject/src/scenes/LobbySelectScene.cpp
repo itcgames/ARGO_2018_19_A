@@ -1,8 +1,8 @@
 ﻿#include "stdafx.h"
-#include "SplashScene.h"
-#include "factories/scenes/SplashSceneFactory.h"
+#include "LobbySelectScene.h"
+#include "factories/scenes/LobbySelectSceneFactory.h"
 
-app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
+app::sce::LobbySelectScene::LobbySelectScene(SceneType & sceneManagerType)
 	: BaseScene(sceneManagerType
 		, util::make_vector<UpdateSystem>({
 			UpdateSystem(std::in_place_type<app::sys::InputSystem>),
@@ -20,9 +20,9 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 	}
 }
 
-void app::sce::SplashScene::start()
+void app::sce::LobbySelectScene::start()
 {
-	auto const & entities = fact::sce::SplashSceneFactory().create();
+	auto const & entities = fact::sce::LobbySelectSceneFactory().create();
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("SPLASH SCENE: Creating entities");
@@ -33,7 +33,7 @@ void app::sce::SplashScene::start()
 	}
 }
 
-void app::sce::SplashScene::end()
+void app::sce::LobbySelectScene::end()
 {
 	if constexpr (DEBUG_MODE)
 	{

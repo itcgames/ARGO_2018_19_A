@@ -1,21 +1,21 @@
-﻿#ifndef _SPLASH_SCENE_H
-#define _SPLASH_SCENE_H
+﻿#ifndef _MULTIPLAYER_LEVEL_SCENE_H
+#define _MULTIPLAYER_LEVEL_SCENE_H
 
 #include "BaseScene.h"
 
 namespace app::sce
 {
-	class SplashScene : public BaseScene
+	class MultiplayerLevelScene : public BaseScene
 	{
 	public: // Constructors/Destructor/Assignments
-		SplashScene(SceneType & sceneManagerType);
-		virtual ~SplashScene() = default;
+		MultiplayerLevelScene(SceneType & sceneManagerType);
+		virtual ~MultiplayerLevelScene() = default;
 
-		SplashScene(SplashScene const &) = default;
-		SplashScene & operator=(SplashScene const &) = default;
+		MultiplayerLevelScene(MultiplayerLevelScene const &) = default;
+		MultiplayerLevelScene & operator=(MultiplayerLevelScene const &) = default;
 
-		SplashScene(SplashScene &&) = default;
-		SplashScene & operator=(SplashScene &&) = default;
+		MultiplayerLevelScene(MultiplayerLevelScene &&) = default;
+		MultiplayerLevelScene & operator=(MultiplayerLevelScene &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
@@ -34,4 +34,4 @@ namespace app::sce
 	};
 }
 
-#endif // !_SPLASH_SCENE_H
+#endif // !_MULTIPLAYER_LEVEL_SCENE_H

@@ -1,21 +1,21 @@
-﻿#ifndef _SPLASH_SCENE_H
-#define _SPLASH_SCENE_H
+﻿#ifndef _LOBBY_SELECT_SCENE_H
+#define _LOBBY_SELECT_SCENE_H
 
 #include "BaseScene.h"
 
 namespace app::sce
 {
-	class SplashScene : public BaseScene
+	class LobbySelectScene : public BaseScene
 	{
 	public: // Constructors/Destructor/Assignments
-		SplashScene(SceneType & sceneManagerType);
-		virtual ~SplashScene() = default;
+		LobbySelectScene(SceneType & sceneManagerType);
+		virtual ~LobbySelectScene() = default;
 
-		SplashScene(SplashScene const &) = default;
-		SplashScene & operator=(SplashScene const &) = default;
+		LobbySelectScene(LobbySelectScene const &) = default;
+		LobbySelectScene & operator=(LobbySelectScene const &) = default;
 
-		SplashScene(SplashScene &&) = default;
-		SplashScene & operator=(SplashScene &&) = default;
+		LobbySelectScene(LobbySelectScene &&) = default;
+		LobbySelectScene & operator=(LobbySelectScene &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
@@ -34,4 +34,4 @@ namespace app::sce
 	};
 }
 
-#endif // !_SPLASH_SCENE_H
+#endif // !_LOBBY_SELECT_SCENE_H

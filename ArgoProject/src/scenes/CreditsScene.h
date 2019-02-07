@@ -1,21 +1,21 @@
-﻿#ifndef _SPLASH_SCENE_H
-#define _SPLASH_SCENE_H
+﻿#ifndef _CREDITS_SCENE_H
+#define _CREDITS_SCENE_H
 
 #include "BaseScene.h"
 
 namespace app::sce
 {
-	class SplashScene : public BaseScene
+	class CreditsScene : public BaseScene
 	{
 	public: // Constructors/Destructor/Assignments
-		SplashScene(SceneType & sceneManagerType);
-		virtual ~SplashScene() = default;
+		CreditsScene(SceneType & sceneManagerType);
+		virtual ~CreditsScene() = default;
 
-		SplashScene(SplashScene const &) = default;
-		SplashScene & operator=(SplashScene const &) = default;
+		CreditsScene(CreditsScene const &) = default;
+		CreditsScene & operator=(CreditsScene const &) = default;
 
-		SplashScene(SplashScene &&) = default;
-		SplashScene & operator=(SplashScene &&) = default;
+		CreditsScene(CreditsScene &&) = default;
+		CreditsScene & operator=(CreditsScene &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
@@ -34,4 +34,4 @@ namespace app::sce
 	};
 }
 
-#endif // !_SPLASH_SCENE_H
+#endif // !_CREDITS_SCENE_H
