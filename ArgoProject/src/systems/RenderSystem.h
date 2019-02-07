@@ -10,7 +10,7 @@ namespace app::sys
 	class RenderSystem : public BaseSystem
 	{
 	public: // Constructors/Destructor/Assignments
-		RenderSystem(app::gra::Window & window);
+		RenderSystem();
 		~RenderSystem() = default;
 
 		RenderSystem(RenderSystem const &) = default;

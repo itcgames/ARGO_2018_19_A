@@ -1,6 +1,5 @@
 ﻿#include "stdafx.h"
 #include "CameraSystem.h"
-#include "Registry.h"
 
 // components
 #include "components/Location.h"
