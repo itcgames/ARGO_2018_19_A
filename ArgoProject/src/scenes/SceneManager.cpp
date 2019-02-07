@@ -3,7 +3,8 @@
 
 app::sce::SceneManager::SceneManager()
 	: m_scenes(util::make_unordered_map<SceneType, Scene>({
-		std::make_pair(SceneType::Splash, Scene(std::in_place_type<sce::SplashScene>, m_targetScene))
+		  std::make_pair(SceneType::CharacterSelect, Scene(std::in_place_type<sce::CharacterSelectScene>, m_targetScene))
+		, std::make_pair(SceneType::Splash, Scene(std::in_place_type<sce::SplashScene>, m_targetScene))
 	}))
 	, m_currentScene(SceneType::Count)
 	, m_targetScene(SceneType::Splash)

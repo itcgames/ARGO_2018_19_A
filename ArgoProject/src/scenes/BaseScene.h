@@ -15,6 +15,15 @@ namespace app::sce
 {
 	enum class SceneType
 	{
+		CharacterSelect,
+		Credits,
+		Level,
+		LevelSelect,
+		MainMenu,
+		LobbySelect,
+		Lobby,
+		MultiplayerLevel,
+		TutorialLevel,
 		Splash,
 		Count
 	};
