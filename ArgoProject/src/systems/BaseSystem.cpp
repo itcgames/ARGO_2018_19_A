@@ -1,8 +1,8 @@
 ﻿#include "stdafx.h"
 #include "BaseSystem.h"
-#include "Registry.h"
+#include "singletons/RegistrySingleton.h"
 
 app::sys::BaseSystem::BaseSystem()
-	: m_registry(app::Reg::get())
+	: m_registry(app::sin::Registry::get())
 {
 }

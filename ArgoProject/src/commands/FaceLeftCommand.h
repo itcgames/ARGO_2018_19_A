@@ -1,21 +1,21 @@
-﻿#ifndef _DASH_COMMAND_H
-#define _DASH_COMMAND_H
+﻿#ifndef _FACE_LEFT_COMMAND_H
+#define _FACE_LEFT_COMMAND_H
 
 #include "BaseCommand.h"
 
 namespace app::cmnd
 {
-	class DashCommand : public BaseCommand
+	class FaceLeftCommand : public BaseCommand
 	{
 	public: // Constructors/Destructor/Assignments
-		DashCommand(app::Entity const _entity);
-		virtual ~DashCommand() = default;
+		FaceLeftCommand(app::Entity const _entity);
+		virtual ~FaceLeftCommand() = default;
 
-		DashCommand(DashCommand const &) = default;
-		DashCommand & operator=(DashCommand const &) = default;
+		FaceLeftCommand(FaceLeftCommand const &) = default;
+		FaceLeftCommand & operator=(FaceLeftCommand const &) = default;
 
-		DashCommand(DashCommand &&) = default;
-		DashCommand & operator=(DashCommand &&) = default;
+		FaceLeftCommand(FaceLeftCommand &&) = default;
+		FaceLeftCommand & operator=(FaceLeftCommand &&) = default;
 
 
 	public: // Public Static Functions
@@ -32,8 +32,7 @@ namespace app::cmnd
 	private: // Private Static Variables
 	private: // Private Member Variables
 		app::Entity const m_entity;
-		app::inp::KeyHandler & m_keyHandler;
 	};
 }
 
-#endif // !_DASH_COMMAND_H
+#endif // !_FACE_LEFT_COMMAND_H

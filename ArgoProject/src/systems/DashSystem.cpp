@@ -4,6 +4,7 @@
 #include "components/Dash.h"
 #include "components/AirMotion.h"
 #include "components/Location.h"
+#include "components/Input.h"
 
 void app::sys::DashSystem::update(app::time::seconds const & dt)
 {
@@ -21,7 +22,9 @@ void app::sys::DashSystem::update(app::time::seconds const & dt)
 		{
 			dash.speed = 0;
 			m_registry.remove<comp::Dash>(entity);
-			m_registry.assign<comp::AirMotion>(entity);
+			auto airComp = comp::AirMotion();
+			airComp.maxSpeed = 500.0f;
+			m_registry.assign<decltype(airComp)>(entity, std::move(airComp));
 		}
 		location.position += velocity * dt.count();
 	});

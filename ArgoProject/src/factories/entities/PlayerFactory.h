@@ -1,7 +1,7 @@
 ﻿#ifndef _FACTORY_PLAYER_H
 #define _FACTORY_PLAYER_H
 
-#include "EntityFactory.h"
+#include "../EntityFactory.h"
 #include "deleters/SdlDeleter.h"
 #include "graphics/Texture.h"
 
@@ -10,7 +10,7 @@ namespace app::fact
 	class PlayerFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		PlayerFactory(app::del::UPtrRenderer const & renderer);
+		PlayerFactory();
 		virtual ~PlayerFactory() = default;
 
 		PlayerFactory(PlayerFactory const &) = default;
@@ -21,7 +21,7 @@ namespace app::fact
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		virtual std::optional<app::Entity> create() override;
+		virtual app::Entity const create() override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions

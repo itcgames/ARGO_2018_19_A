@@ -9,7 +9,7 @@ namespace app::sys
 	class InputSystem : public BaseSystem
 	{
 	public: // Constructors/Destructor/Assignments
-		InputSystem(app::inp::KeyHandler& handler);
+		InputSystem();
 		~InputSystem() = default;
 
 		InputSystem(InputSystem const &) = default;
