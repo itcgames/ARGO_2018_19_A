@@ -1,5 +1,6 @@
-﻿#ifndef _FACTORY_PLAYER_H
-#define _FACTORY_PLAYER_H
+﻿#ifndef _FACTORY_WALL_H
+#define _FACTORY_WALL_H
+
 
 #include "EntityFactory.h"
 #include "deleters/SdlDeleter.h"
@@ -7,21 +8,21 @@
 
 namespace app::fact
 {
-	class PlayerFactory : public EntityFactory
+	class WallFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		PlayerFactory(app::del::UPtrRenderer const & renderer);
-		virtual ~PlayerFactory() = default;
+		WallFactory(app::math::Vector2f pos, app::math::Vector2f size);
+		virtual ~WallFactory() = default;
 
-		PlayerFactory(PlayerFactory const &) = default;
-		PlayerFactory & operator=(PlayerFactory const &) = default;
+		WallFactory(WallFactory const &) = default;
+		WallFactory & operator=(WallFactory const &) = default;
 
-		PlayerFactory(PlayerFactory &&) = default;
-		PlayerFactory & operator=(PlayerFactory &&) = default;
+		WallFactory(WallFactory &&) = default;
+		WallFactory & operator=(WallFactory &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		virtual std::optional<app::Entity> create() override;
+		virtual app::Entity const create() override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -33,7 +34,9 @@ namespace app::fact
 	private: // Private Static Variables
 	private: // Private Member Variables
 		std::shared_ptr<app::gra::Texture> m_texture;
+		app::math::Vector2f const m_position;
+		app::math::Vector2f const m_size;
 	};
 }
 
-#endif // !_FACTORY_PLAYER_H
+#endif // !_FACTORY_WALL_H

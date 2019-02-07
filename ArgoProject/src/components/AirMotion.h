@@ -25,6 +25,7 @@ namespace app::comp
 		float direction;
 		float maxSpeed;
 		float lateralConstraint = 0.2f;
+		//bool canDoubleJump = true;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables

@@ -22,6 +22,10 @@ namespace app::comp
 	public: // Public Static Variables
 	public: // Public Member Variables
 		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyDownCommands;
+		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyPressedCommands;
+		bool m_isRight;
+		bool m_canDoubleJump;
+		bool m_canDash;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables

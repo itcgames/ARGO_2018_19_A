@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "RenderSystem.h"
+#include "singletons/WindowSingleton.h"
 
 // components
 #include "components/Location.h"
@@ -7,9 +8,9 @@
 #include "components/Render.h"
 #include "components/Camera.h"
 
-app::sys::RenderSystem::RenderSystem(app::gra::Window & window)
+app::sys::RenderSystem::RenderSystem()
 	: BaseSystem()
-	, m_window(window)
+	, m_window(app::sin::Window::get())
 {
 }
 
@@ -30,7 +31,7 @@ void app::sys::RenderSystem::update(app::time::seconds const & dt)
 			m_renderRect.setOrigin(dimensions.origin);
 			m_renderRect.setTexture(render.texture);
 			m_renderRect.setSourceRect(render.source);
-			m_window.draw(m_renderRect);
+			m_window.render(m_renderRect);
 		});
 		m_window.resetView();
 	});

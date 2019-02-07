@@ -1,9 +1,11 @@
 ﻿#ifndef _FACTORY_ENTITY_H
 #define _FACTORY_ENTITY_H
 
+#include "BaseFactory.h"
+
 namespace app::fact
 {
-	class EntityFactory
+	class EntityFactory : public BaseFactory<app::Entity const>
 	{
 	public: // Constructors/Destructor/Assignments
 		EntityFactory();
@@ -17,7 +19,7 @@ namespace app::fact
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		virtual std::optional<app::Entity> create() abstract;
+		virtual app::Entity const create() override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -25,6 +27,7 @@ namespace app::fact
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
 		app::Registry & m_registry;
+		app::del::UPtrRenderer const & m_renderer;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables

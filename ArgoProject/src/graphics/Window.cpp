@@ -89,7 +89,7 @@ void app::gra::Window::clear() const
 	SDL_RenderClear(m_renderer.get());
 }
 
-void app::gra::Window::draw(app::gra::RenderRect const & rect) const
+void app::gra::Window::render(app::gra::RenderRect const & rect) const
 {
 	constexpr auto FLIP_FLAG = SDL_RendererFlip::SDL_FLIP_NONE;
 	auto const & position = static_cast<math::Vector2i>(rect.getPosition());
@@ -112,12 +112,12 @@ void app::gra::Window::draw(app::gra::RenderRect const & rect) const
 	SDL_RenderCopyEx(m_renderer.get(), rect.getTexture(), source.has_value() ? &source.value() : nullptr, &destination, rect.getRotation(), &center, FLIP_FLAG);
 }
 
-void app::gra::Window::draw(std::unique_ptr<SDL_Texture> const & texture, SDL_Rect const & rect, std::optional<SDL_Rect> source) const
+void app::gra::Window::render(std::unique_ptr<SDL_Texture> const & texture, SDL_Rect const & rect, std::optional<SDL_Rect> source) const
 {
 	SDL_RenderCopy(m_renderer.get(), texture.get(), source.has_value() ? &source.value() : nullptr, &rect);
 }
 
-void app::gra::Window::draw(std::shared_ptr<SDL_Texture> texture, SDL_Rect const & rect, std::optional<SDL_Rect> source) const
+void app::gra::Window::render(std::shared_ptr<SDL_Texture> texture, SDL_Rect const & rect, std::optional<SDL_Rect> source) const
 {
 	SDL_RenderCopy(m_renderer.get(), texture.get(), source.has_value() ? &source.value() : nullptr, &rect);
 }
