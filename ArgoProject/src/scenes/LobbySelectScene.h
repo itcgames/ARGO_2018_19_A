@@ -9,7 +9,7 @@ namespace app::sce
 	{
 	public: // Constructors/Destructor/Assignments
 		LobbySelectScene(SceneType & sceneManagerType);
-		virtual ~LobbySelectScene();
+		virtual ~LobbySelectScene() = default;
 
 		LobbySelectScene(LobbySelectScene const &) = default;
 		LobbySelectScene & operator=(LobbySelectScene const &) = default;

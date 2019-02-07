@@ -2,14 +2,13 @@
 #define _FACTORY_CREDITS_SCENE_H
 
 #include "../EntitiesFactory.h"
-#include "deleters/SdlDeleter.h"
 
 namespace app::fact::sce
 {
 	class CreditsSceneFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		CreditsSceneFactory();
+		CreditsSceneFactory() = default;
 		virtual ~CreditsSceneFactory() = default;
 
 		CreditsSceneFactory(CreditsSceneFactory const &) = default;

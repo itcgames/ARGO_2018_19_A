@@ -7,28 +7,16 @@ app::sce::CharacterSelectScene::CharacterSelectScene(SceneType & sceneManagerTyp
 		, util::make_vector<UpdateSystem>({
 			UpdateSystem(std::in_place_type<app::sys::InputSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
-			UpdateSystem(std::in_place_type<app::sys::MotionSystem>),
-			UpdateSystem(std::in_place_type<app::sys::AirMotionSystem>),
-			UpdateSystem(std::in_place_type<app::sys::DashSystem>),
-			UpdateSystem(std::in_place_type<app::sys::StateMachineSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CameraSystem>)
-		})
+			})
 		, util::make_vector<DrawSystem>({
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
 			DrawSystem(std::in_place_type<app::sys::RenderSystem>)
-		}))
+			}))
 {
 	if constexpr (DEBUG_MODE)
 	{
-		Console::writeLine("SPLASH SCENE Constructed");
-	}
-}
-
-app::sce::CharacterSelectScene::~CharacterSelectScene()
-{
-	if constexpr (DEBUG_MODE)
-	{
-		Console::writeLine("SPLASH SCENE Destructed");
+		Console::writeLine("CHARACTER SELECT SCENE Constructed");
 	}
 }
 
@@ -37,7 +25,7 @@ void app::sce::CharacterSelectScene::start()
 	auto const & entities = fact::sce::CharacterSelectSceneFactory().create();
 	if constexpr (DEBUG_MODE)
 	{
-		Console::writeLine("SPLASH SCENE: Creating entities");
+		Console::writeLine("CHARACTER SELECT SCENE: Creating entities");
 		for (auto const & entity : entities)
 		{
 			Console::writeLine({ "  Created entity[", std::to_string(entity), "]" });
@@ -49,7 +37,7 @@ void app::sce::CharacterSelectScene::end()
 {
 	if constexpr (DEBUG_MODE)
 	{
-		Console::writeLine("SPLASH SCENE: Destroying entities");
+		Console::writeLine("CHARACTER SELECT SCENE: Destroying entities");
 		m_registry.each([](app::Entity const entity)
 		{
 			Console::writeLine({ "  Destroyed entity[", std::to_string(entity), "]" });

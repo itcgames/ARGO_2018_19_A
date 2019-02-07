@@ -9,7 +9,7 @@ namespace app::sce
 	{
 	public: // Constructors/Destructor/Assignments
 		SplashScene(SceneType & sceneManagerType);
-		virtual ~SplashScene();
+		virtual ~SplashScene() = default;
 
 		SplashScene(SplashScene const &) = default;
 		SplashScene & operator=(SplashScene const &) = default;

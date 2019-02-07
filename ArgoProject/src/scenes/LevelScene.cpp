@@ -20,15 +20,7 @@ app::sce::LevelScene::LevelScene(SceneType & sceneManagerType)
 {
 	if constexpr (DEBUG_MODE)
 	{
-		Console::writeLine("SPLASH SCENE Constructed");
-	}
-}
-
-app::sce::LevelScene::~LevelScene()
-{
-	if constexpr (DEBUG_MODE)
-	{
-		Console::writeLine("SPLASH SCENE Destructed");
+		Console::writeLine("LEVEL SCENE Constructed");
 	}
 }
 
@@ -37,7 +29,7 @@ void app::sce::LevelScene::start()
 	auto const & entities = fact::sce::LevelSceneFactory().create();
 	if constexpr (DEBUG_MODE)
 	{
-		Console::writeLine("SPLASH SCENE: Creating entities");
+		Console::writeLine("LEVEL SCENE: Creating entities");
 		for (auto const & entity : entities)
 		{
 			Console::writeLine({ "  Created entity[", std::to_string(entity), "]" });
@@ -49,7 +41,7 @@ void app::sce::LevelScene::end()
 {
 	if constexpr (DEBUG_MODE)
 	{
-		Console::writeLine("SPLASH SCENE: Destroying entities");
+		Console::writeLine("LEVEL SCENE: Destroying entities");
 		m_registry.each([](app::Entity const entity)
 		{
 			Console::writeLine({ "  Destroyed entity[", std::to_string(entity), "]" });

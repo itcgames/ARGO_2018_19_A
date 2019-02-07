@@ -9,7 +9,7 @@ namespace app::sce
 	{
 	public: // Constructors/Destructor/Assignments
 		MainMenuScene(SceneType & sceneManagerType);
-		virtual ~MainMenuScene();
+		virtual ~MainMenuScene() = default;
 
 		MainMenuScene(MainMenuScene const &) = default;
 		MainMenuScene & operator=(MainMenuScene const &) = default;

@@ -9,7 +9,7 @@ namespace app::fact::sce
 	class LevelSceneFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		LevelSceneFactory();
+		LevelSceneFactory() = default;
 		virtual ~LevelSceneFactory() = default;
 
 		LevelSceneFactory(LevelSceneFactory const &) = default;

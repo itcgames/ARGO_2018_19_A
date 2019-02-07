@@ -9,7 +9,7 @@ namespace app::sce
 	{
 	public: // Constructors/Destructor/Assignments
 		TutorialLevelScene(SceneType & sceneManagerType);
-		virtual ~TutorialLevelScene();
+		virtual ~TutorialLevelScene() = default;
 
 		TutorialLevelScene(TutorialLevelScene const &) = default;
 		TutorialLevelScene & operator=(TutorialLevelScene const &) = default;

@@ -17,7 +17,8 @@ namespace app::sce
 	class SceneManager
 	{
 	protected: // Protected typedefs/Enums/Usings
-		using Scene = std::variant<sce::CharacterSelectScene
+		using Scene = std::variant<
+			  sce::CharacterSelectScene
 			, sce::CreditsScene
 			, sce::LevelScene
 			, sce::LevelSelectScene

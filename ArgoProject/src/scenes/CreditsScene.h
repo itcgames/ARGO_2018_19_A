@@ -9,7 +9,7 @@ namespace app::sce
 	{
 	public: // Constructors/Destructor/Assignments
 		CreditsScene(SceneType & sceneManagerType);
-		virtual ~CreditsScene();
+		virtual ~CreditsScene() = default;
 
 		CreditsScene(CreditsScene const &) = default;
 		CreditsScene & operator=(CreditsScene const &) = default;

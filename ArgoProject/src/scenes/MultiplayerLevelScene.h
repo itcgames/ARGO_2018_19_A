@@ -9,7 +9,7 @@ namespace app::sce
 	{
 	public: // Constructors/Destructor/Assignments
 		MultiplayerLevelScene(SceneType & sceneManagerType);
-		virtual ~MultiplayerLevelScene();
+		virtual ~MultiplayerLevelScene() = default;
 
 		MultiplayerLevelScene(MultiplayerLevelScene const &) = default;
 		MultiplayerLevelScene & operator=(MultiplayerLevelScene const &) = default;

@@ -20,15 +20,7 @@ app::sce::LobbyScene::LobbyScene(SceneType & sceneManagerType)
 {
 	if constexpr (DEBUG_MODE)
 	{
-		Console::writeLine("SPLASH SCENE Constructed");
-	}
-}
-
-app::sce::LobbyScene::~LobbyScene()
-{
-	if constexpr (DEBUG_MODE)
-	{
-		Console::writeLine("SPLASH SCENE Destructed");
+		Console::writeLine("LOBBY SCENE Constructed");
 	}
 }
 
@@ -37,7 +29,7 @@ void app::sce::LobbyScene::start()
 	auto const & entities = fact::sce::LobbySceneFactory().create();
 	if constexpr (DEBUG_MODE)
 	{
-		Console::writeLine("SPLASH SCENE: Creating entities");
+		Console::writeLine("LOBBY SCENE: Creating entities");
 		for (auto const & entity : entities)
 		{
 			Console::writeLine({ "  Created entity[", std::to_string(entity), "]" });
@@ -49,7 +41,7 @@ void app::sce::LobbyScene::end()
 {
 	if constexpr (DEBUG_MODE)
 	{
-		Console::writeLine("SPLASH SCENE: Destroying entities");
+		Console::writeLine("LOBBY SCENE: Destroying entities");
 		m_registry.each([](app::Entity const entity)
 		{
 			Console::writeLine({ "  Destroyed entity[", std::to_string(entity), "]" });

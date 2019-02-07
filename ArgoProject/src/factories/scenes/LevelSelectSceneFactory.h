@@ -2,14 +2,13 @@
 #define _FACTORY_LEVEL_SELECT_SCENE_H
 
 #include "../EntitiesFactory.h"
-#include "deleters/SdlDeleter.h"
 
 namespace app::fact::sce
 {
 	class LevelSelectSceneFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		LevelSelectSceneFactory();
+		LevelSelectSceneFactory() = default;
 		virtual ~LevelSelectSceneFactory() = default;
 
 		LevelSelectSceneFactory(LevelSelectSceneFactory const &) = default;

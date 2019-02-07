@@ -2,7 +2,6 @@
 #define _FACTORY_LOBBY_SELECT_SCENE_H
 
 #include "../EntitiesFactory.h"
-#include "deleters/SdlDeleter.h"
 
 namespace app::fact::sce
 {

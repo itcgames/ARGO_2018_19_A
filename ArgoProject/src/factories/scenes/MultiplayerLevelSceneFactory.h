@@ -2,14 +2,13 @@
 #define _FACTORY_MULTIPLAYER_LEVEL_SCENE_H
 
 #include "../EntitiesFactory.h"
-#include "deleters/SdlDeleter.h"
 
 namespace app::fact::sce
 {
 	class MultiplayerLevelSceneFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		MultiplayerLevelSceneFactory();
+		MultiplayerLevelSceneFactory() = default;
 		virtual ~MultiplayerLevelSceneFactory() = default;
 
 		MultiplayerLevelSceneFactory(MultiplayerLevelSceneFactory const &) = default;

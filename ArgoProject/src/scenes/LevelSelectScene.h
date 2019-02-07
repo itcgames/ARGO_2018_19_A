@@ -9,7 +9,7 @@ namespace app::sce
 	{
 	public: // Constructors/Destructor/Assignments
 		LevelSelectScene(SceneType & sceneManagerType);
-		virtual ~LevelSelectScene();
+		virtual ~LevelSelectScene() = default;
 
 		LevelSelectScene(LevelSelectScene const &) = default;
 		LevelSelectScene & operator=(LevelSelectScene const &) = default;

@@ -2,14 +2,13 @@
 #define _FACTORY_CHARACTER_SELECT_SCENE_H
 
 #include "../EntitiesFactory.h"
-#include "deleters/SdlDeleter.h"
 
 namespace app::fact::sce
 {
 	class CharacterSelectSceneFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		CharacterSelectSceneFactory();
+		CharacterSelectSceneFactory() = default;
 		virtual ~CharacterSelectSceneFactory() = default;
 
 		CharacterSelectSceneFactory(CharacterSelectSceneFactory const &) = default;

@@ -2,14 +2,13 @@
 #define _FACTORY_MAIN_MENU_SCENE_H
 
 #include "../EntitiesFactory.h"
-#include "deleters/SdlDeleter.h"
 
 namespace app::fact::sce
 {
 	class MainMenuSceneFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		MainMenuSceneFactory();
+		MainMenuSceneFactory() = default;
 		virtual ~MainMenuSceneFactory() = default;
 
 		MainMenuSceneFactory(MainMenuSceneFactory const &) = default;

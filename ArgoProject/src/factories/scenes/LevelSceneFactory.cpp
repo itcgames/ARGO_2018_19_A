@@ -4,11 +4,6 @@
 #include "factories/entities/CameraFactory.h"
 #include "factories/LevelFactory.h"
 
-app::fact::sce::LevelSceneFactory::LevelSceneFactory()
-	: EntitiesFactory()
-{
-}
-
 std::vector<app::Entity> app::fact::sce::LevelSceneFactory::create()
 {
 	auto entities = std::vector<app::Entity>();

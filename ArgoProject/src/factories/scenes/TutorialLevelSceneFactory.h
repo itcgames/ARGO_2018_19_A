@@ -2,14 +2,13 @@
 #define _FACTORY_TUTORIAL_LEVEL_SCENE_H
 
 #include "../EntitiesFactory.h"
-#include "deleters/SdlDeleter.h"
 
 namespace app::fact::sce
 {
 	class TutorialLevelSceneFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		TutorialLevelSceneFactory();
+		TutorialLevelSceneFactory() = default;
 		virtual ~TutorialLevelSceneFactory() = default;
 
 		TutorialLevelSceneFactory(TutorialLevelSceneFactory const &) = default;

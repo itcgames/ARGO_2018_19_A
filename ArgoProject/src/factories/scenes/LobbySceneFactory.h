@@ -2,14 +2,13 @@
 #define _FACTORY_LOBBY_SCENE_H
 
 #include "../EntitiesFactory.h"
-#include "deleters/SdlDeleter.h"
 
 namespace app::fact::sce
 {
 	class LobbySceneFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		LobbySceneFactory();
+		LobbySceneFactory() = default;
 		virtual ~LobbySceneFactory() = default;
 
 		LobbySceneFactory(LobbySceneFactory const &) = default;

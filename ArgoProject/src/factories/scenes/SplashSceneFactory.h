@@ -2,14 +2,13 @@
 #define _FACTORY_SPLASH_SCENE_H
 
 #include "../EntitiesFactory.h"
-#include "deleters/SdlDeleter.h"
 
 namespace app::fact::sce
 {
 	class SplashSceneFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		SplashSceneFactory();
+		SplashSceneFactory() = default;
 		virtual ~SplashSceneFactory() = default;
 
 		SplashSceneFactory(SplashSceneFactory const &) = default;
