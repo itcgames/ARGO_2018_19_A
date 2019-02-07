@@ -300,6 +300,12 @@
     <ClCompile Include="src\commands\FaceRightCommand.cpp">
       <Filter>Source Files\commands</Filter>
     </ClCompile>
+    <ClCompile Include="src\factories\LevelFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\WallFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -490,6 +496,12 @@
     </ClInclude>
     <ClInclude Include="src\commands\FaceRightCommand.h">
       <Filter>Header Files\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\LevelFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\WallFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

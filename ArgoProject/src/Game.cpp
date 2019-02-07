@@ -6,6 +6,7 @@
 #include "singletons/RegistrySingleton.h"
 #include "singletons/WindowSingleton.h"
 
+
 app::Game::Game()
 	: m_running(true)
 	, m_controllerHandler(app::sin::ControllerHandler::get())
