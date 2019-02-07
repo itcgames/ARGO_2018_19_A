@@ -6,8 +6,8 @@
 #include "components/Animator.h"
 #include "components/Render.h"
 
-app::fact::WallFactory::WallFactory(app::math::Vector2f v)
-	: m_texture(std::make_shared<decltype(m_texture)::element_type>()), m_position(v)
+app::fact::WallFactory::WallFactory(app::math::Vector2f pos, app::math::Vector2f size)
+	: m_texture(std::make_shared<decltype(m_texture)::element_type>()), m_position(pos), m_size(size)
 {
 	m_texture->load(m_renderer, "./res/Animations/test.png");
 }
@@ -22,7 +22,7 @@ app::Entity const app::fact::WallFactory::create()
 	m_registry.assign<decltype(location)>(entity, std::move(location));
 
 	auto dimensions = comp::Dimensions();
-	dimensions.size = { 50.0f, 50.0f };
+	dimensions.size = m_size;
 	dimensions.origin = dimensions.size / 2.0f;
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
 

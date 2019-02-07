@@ -11,7 +11,7 @@ namespace app::fact
 	class WallFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		WallFactory(app::math::Vector2f v);
+		WallFactory(app::math::Vector2f pos, app::math::Vector2f size);
 		virtual ~WallFactory() = default;
 
 		WallFactory(WallFactory const &) = default;
@@ -35,6 +35,7 @@ namespace app::fact
 	private: // Private Member Variables
 		std::shared_ptr<app::gra::Texture> m_texture;
 		app::math::Vector2f const m_position;
+		app::math::Vector2f const m_size;
 	};
 }
 
