@@ -30,15 +30,20 @@ namespace app::sce
 	class BaseScene
 	{
 	protected: // Protected typedefs/Enums/Usings
-		using UpdateSystem = std::variant<sys::MotionSystem
+		using UpdateSystem = std::variant<
+			  sys::MotionSystem
 			, sys::AirMotionSystem
 			, sys::DashSystem
 			, sys::StateMachineSystem
 			, sys::CameraSystem
 			, sys::CommandSystem
-			, sys::InputSystem>;
+			, sys::InputSystem
+		>;
 		using UpdateSystems = std::vector<UpdateSystem>;
-		using DrawSystem = std::variant<sys::RenderSystem, sys::AnimatorSystem>;
+		using DrawSystem = std::variant<
+			  sys::RenderSystem
+			, sys::AnimatorSystem
+		>;
 		using DrawSystems = std::vector<DrawSystem>;
 	public: // Constructors/Destructor/Assignments
 		BaseScene(SceneType & sceneManagerType, UpdateSystems && updateSystems, DrawSystems && drawSystems);
