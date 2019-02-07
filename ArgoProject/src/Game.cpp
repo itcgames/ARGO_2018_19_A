@@ -67,7 +67,6 @@ bool app::Game::initEntities()
 	try
 	{
 		auto playerEntity = fact::PlayerFactory(m_window.getRenderer()).create();
-		auto wallEntity = fact::WallFactory(m_window.getRenderer()).create();
 		this->createCamera(playerEntity);
 		return true;
 	}

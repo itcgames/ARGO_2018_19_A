@@ -1,24 +1,23 @@
-﻿#ifndef _FACTORY_WALL_H
-#define _FACTORY_WALL_H
+﻿#ifndef _FACTORY_LEVEL_H
+#define _FACTORY_LEVEL_H
 
 
 #include "EntityFactory.h"
 #include "deleters/SdlDeleter.h"
-#include "graphics/Texture.h"
 
 namespace app::fact
 {
-	class WallFactory : public EntityFactory
+	class LevelFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		WallFactory(app::del::UPtrRenderer const & renderer, app::math::Vector2f v);
-		virtual ~WallFactory() = default;
+		LevelFactory(app::del::UPtrRenderer const & renderer);
+		virtual ~LevelFactory() = default;
 
-		WallFactory(WallFactory const &) = default;
-		WallFactory & operator=(WallFactory const &) = default;
+		LevelFactory(LevelFactory const &) = default;
+		LevelFactory & operator=(LevelFactory const &) = default;
 
-		WallFactory(WallFactory &&) = default;
-		WallFactory & operator=(WallFactory &&) = default;
+		LevelFactory(LevelFactory &&) = default;
+		LevelFactory & operator=(LevelFactory &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
@@ -33,9 +32,7 @@ namespace app::fact
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
-		std::shared_ptr<app::gra::Texture> m_texture;
-		app::math::Vector2f const m_position;
 	};
 }
 
-#endif // !_FACTORY_WALL_H
+#endif // !_FACTORY_LEVEL_H
