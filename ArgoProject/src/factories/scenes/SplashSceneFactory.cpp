@@ -14,8 +14,7 @@ std::vector<app::Entity> app::fact::sce::SplashSceneFactory::create()
 
 	auto player = fact::PlayerFactory().create();
 	entities.push_back(player);
-	//TODO:remove comment
-	entities.push_back(fact::CameraFactory(/*player*/).create());
+	entities.push_back(fact::CameraFactory(player).create());
 
 	return entities;
 }
