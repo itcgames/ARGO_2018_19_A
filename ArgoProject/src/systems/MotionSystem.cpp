@@ -10,14 +10,7 @@ void app::sys::MotionSystem::update(app::time::seconds const & dt)
 	m_registry.view<comp::Location, comp::Motion>()
 		.each([&, this](app::Entity const entity, comp::Location & location, comp::Motion & motion)
 	{
-		auto const & velocity = math::toVector(motion.direction) * motion.speed;
-		auto velActual = velocity;
-		if (velActual.magnitude() > motion.maxSpeed)
-		{
-			velActual = velActual.unit() * motion.maxSpeed;
-		}
-		location.position += velActual * dt.count();
-		location.orientation += motion.angularSpeed * dt.count();
+		auto const & velocity = (math::toVector(motion.direction) * motion.speed).truncate(motion.maxSpeed);
 		if (motion.speed >= motion.dragCutoff) 
 		{
 			//simulate drag
@@ -27,5 +20,7 @@ void app::sys::MotionSystem::update(app::time::seconds const & dt)
 		{
 			motion.speed = 0;
 		}
+		location.position += velocity * dt.count();
+		location.orientation += motion.angularSpeed * dt.count();
 	});
 }

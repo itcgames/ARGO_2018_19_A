@@ -1,27 +1,26 @@
-﻿#ifndef _FACTORY_LEVEL_H
-#define _FACTORY_LEVEL_H
+﻿#ifndef _DASH_SYSTEM_H
+#define _DASH_SYSTEM_H
 
+#include "BaseSystem.h"
 
-#include "EntitiesFactory.h"
-#include "deleters/SdlDeleter.h"
-
-namespace app::fact
+namespace app::sys
 {
-	class LevelFactory : public EntitiesFactory
+	class DashSystem : public BaseSystem
 	{
 	public: // Constructors/Destructor/Assignments
-		LevelFactory();
-		virtual ~LevelFactory() = default;
+		DashSystem() = default;
+		virtual ~DashSystem() = default;
 
-		LevelFactory(LevelFactory const &) = default;
-		LevelFactory & operator=(LevelFactory const &) = default;
+		DashSystem(DashSystem const &) = default;
+		DashSystem & operator=(DashSystem const &) = default;
 
-		LevelFactory(LevelFactory &&) = default;
-		LevelFactory & operator=(LevelFactory &&) = default;
+		DashSystem(DashSystem &&) = default;
+		DashSystem & operator=(DashSystem &&) = default;
+
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		virtual std::vector<app::Entity> create() override;
+		virtual void update(app::time::seconds const & dt) override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -35,4 +34,4 @@ namespace app::fact
 	};
 }
 
-#endif // !_FACTORY_LEVEL_H
+#endif // !_DASH_SYSTEM_H

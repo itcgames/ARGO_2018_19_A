@@ -9,7 +9,7 @@
 app::fact::WallFactory::WallFactory(app::math::Vector2f pos, app::math::Vector2f size)
 	: m_texture(std::make_shared<decltype(m_texture)::element_type>()), m_position(pos), m_size(size)
 {
-	m_texture->load(m_renderer, "./res/Animations/test.png");
+	m_texture->load(m_renderer, "./res/image.png");
 }
 
 app::Entity const app::fact::WallFactory::create()
@@ -28,7 +28,6 @@ app::Entity const app::fact::WallFactory::create()
 
 	auto render = comp::Render();
 	render.texture = m_texture;
-	render.source = SDL_Rect{ 0, 0, 200, 150 };
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	return entity;

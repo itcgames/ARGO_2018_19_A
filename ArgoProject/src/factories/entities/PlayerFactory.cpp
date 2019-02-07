@@ -12,6 +12,9 @@
 
 #include "commands/MoveCommand.h"
 #include "commands/JumpCommand.h"
+#include "commands/DashCommand.h"
+#include "commands/FaceLeftCommand.h"
+#include "commands/FaceRightCommand.h"
 #include "components/StateMachine.h"
 
 app::fact::PlayerFactory::PlayerFactory()
@@ -62,10 +65,16 @@ app::Entity const app::fact::PlayerFactory::create()
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	auto input = comp::Input();
+	input.m_isRight = true;
+	input.m_canDoubleJump = true;
+	input.m_canDash = true;
 	//Here is where commands get binded to keys
 	input.keyDownCommands.insert(std::pair(SDLK_RIGHT, std::make_shared<app::cmnd::MoveCommand>(entity, 0, 20)));
 	input.keyDownCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::MoveCommand>(entity, 180, 20)));
 	input.keyPressedCommands.insert(std::pair(SDLK_SPACE, std::make_shared<app::cmnd::JumpCommand>(entity, 400.0f)));
+	input.keyPressedCommands.insert(std::pair(SDLK_z, std::make_shared<app::cmnd::DashCommand>(entity)));
+	input.keyPressedCommands.insert(std::pair(SDLK_RIGHT, std::make_shared<app::cmnd::FaceRightCommand>(entity)));
+	input.keyPressedCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::FaceLeftCommand>(entity)));
 
 
 	m_registry.assign<decltype(input)>(entity, std::move(input));
