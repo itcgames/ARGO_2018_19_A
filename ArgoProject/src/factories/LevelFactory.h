@@ -10,7 +10,7 @@ namespace app::fact
 	class LevelFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		LevelFactory(app::del::UPtrRenderer const & renderer);
+		LevelFactory();
 		virtual ~LevelFactory() = default;
 
 		LevelFactory(LevelFactory const &) = default;
@@ -21,7 +21,7 @@ namespace app::fact
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		virtual std::optional<app::Entity> create() override;
+		virtual app::Entity const create() override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions

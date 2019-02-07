@@ -1,21 +1,21 @@
-﻿#ifndef _FACTORY_ENTITY_H
-#define _FACTORY_ENTITY_H
+﻿#ifndef _FACTORY_CAMERA_H
+#define _FACTORY_CAMERA_H
 
-#include "BaseFactory.h"
+#include "../EntityFactory.h"
 
 namespace app::fact
 {
-	class EntityFactory : public BaseFactory<app::Entity const>
+	class CameraFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		EntityFactory();
-		virtual ~EntityFactory() = default;
+		CameraFactory(std::optional<app::Entity> targetEntity = std::nullopt);
+		virtual ~CameraFactory() = default;
 
-		EntityFactory(EntityFactory const &) = default;
-		EntityFactory & operator=(EntityFactory const &) = default;
+		CameraFactory(CameraFactory const &) = default;
+		CameraFactory & operator=(CameraFactory const &) = default;
 
-		EntityFactory(EntityFactory &&) = default;
-		EntityFactory & operator=(EntityFactory &&) = default;
+		CameraFactory(CameraFactory &&) = default;
+		CameraFactory & operator=(CameraFactory &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
@@ -26,8 +26,7 @@ namespace app::fact
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
-		app::Registry & m_registry;
-		app::del::UPtrRenderer const & m_renderer;
+		std::optional<app::Entity> m_target;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables
@@ -35,4 +34,4 @@ namespace app::fact
 	};
 }
 
-#endif // !_FACTORY_ENTITY_H
+#endif // !_FACTORY_CAMERA_H

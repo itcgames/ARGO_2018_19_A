@@ -1,28 +1,25 @@
-﻿#ifndef _INPUT_H
-#define _INPUT_H
+﻿#ifndef _MOUSE_HANDLER_SINGLETON_H
+#define _MOUSE_HANDLER_SINGLETON_H
 
-#include "commands/BaseCommand.h"
-
-namespace app::comp
+namespace app::sin
 {
-	struct Input
+	class MouseHandler
 	{
 	public: // Constructors/Destructor/Assignments
-		Input() = default;
-		~Input() = default;
+		MouseHandler() = default;
+		~MouseHandler() = default;
 
-		Input(Input const &) = default;
-		Input(Input &&) = default;
+		MouseHandler(MouseHandler const &) = default;
+		MouseHandler & operator=(MouseHandler const &) = default;
 
-		Input & operator=(Input const &) = default;
-		Input & operator=(Input &&) = default;
+		MouseHandler(MouseHandler &&) = default;
+		MouseHandler & operator=(MouseHandler &&) = default;
 
 	public: // Public Static Functions
+		static app::inp::MouseHandler & get();
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyDownCommands;
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyPressedCommands;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -30,8 +27,9 @@ namespace app::comp
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables
+		static std::unique_ptr<app::inp::MouseHandler> s_mouseHandler;
 	private: // Private Member Variables
 	};
 }
 
-#endif // !_INPUT_H
+#endif // !_MOUSE_HANDLER_SINGLETON_H

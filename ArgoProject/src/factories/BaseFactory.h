@@ -1,28 +1,26 @@
-﻿#ifndef _INPUT_H
-#define _INPUT_H
+﻿#ifndef _BASE_FACTORY_H
+#define _BASE_FACTORY_H
 
-#include "commands/BaseCommand.h"
-
-namespace app::comp
+namespace app::fact
 {
-	struct Input
+	template<typename T>
+	class BaseFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		Input() = default;
-		~Input() = default;
+		BaseFactory() = default;
+		~BaseFactory() = default;
 
-		Input(Input const &) = default;
-		Input(Input &&) = default;
+		BaseFactory(BaseFactory const &) = default;
+		BaseFactory & operator=(BaseFactory const &) = default;
 
-		Input & operator=(Input const &) = default;
-		Input & operator=(Input &&) = default;
+		BaseFactory(BaseFactory &&) = default;
+		BaseFactory & operator=(BaseFactory &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
+		virtual T create() abstract;
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyDownCommands;
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyPressedCommands;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -34,4 +32,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_INPUT_H
+#endif // !_BASE_FACTORY_H

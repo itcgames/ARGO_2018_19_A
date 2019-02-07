@@ -11,7 +11,7 @@ namespace app::fact
 	class WallFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		WallFactory(app::del::UPtrRenderer const & renderer, app::math::Vector2f v);
+		WallFactory(app::math::Vector2f v);
 		virtual ~WallFactory() = default;
 
 		WallFactory(WallFactory const &) = default;
@@ -22,7 +22,7 @@ namespace app::fact
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		virtual std::optional<app::Entity> create() override;
+		virtual app::Entity const create() override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions

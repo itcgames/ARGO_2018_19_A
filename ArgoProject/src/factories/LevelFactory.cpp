@@ -3,10 +3,11 @@
 
 #include "factories/WallFactory.h"
 
-app::fact::LevelFactory::LevelFactory(app::del::UPtrRenderer const & renderer) {
+app::fact::LevelFactory::LevelFactory() {
 
 }
 
-std::optional<app::Entity> app::fact::LevelFactory::create() {
-	fact::WallFactory(m_window.getRenderer(), app::math::Vector2f(600, 300)).create();
+app::Entity const app::fact::LevelFactory::create() {
+	auto entity = fact::WallFactory(app::math::Vector2f(600, 300)).create();
+	return entity;
 }

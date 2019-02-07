@@ -1,28 +1,28 @@
-﻿#ifndef _INPUT_H
-#define _INPUT_H
+﻿#ifndef _SPLASH_SCENE_H
+#define _SPLASH_SCENE_H
 
-#include "commands/BaseCommand.h"
+#include "BaseScene.h"
 
-namespace app::comp
+namespace app::sce
 {
-	struct Input
+	class SplashScene : public BaseScene
 	{
 	public: // Constructors/Destructor/Assignments
-		Input() = default;
-		~Input() = default;
+		SplashScene(SceneType & sceneManagerType);
+		virtual ~SplashScene();
 
-		Input(Input const &) = default;
-		Input(Input &&) = default;
+		SplashScene(SplashScene const &) = default;
+		SplashScene & operator=(SplashScene const &) = default;
 
-		Input & operator=(Input const &) = default;
-		Input & operator=(Input &&) = default;
+		SplashScene(SplashScene &&) = default;
+		SplashScene & operator=(SplashScene &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
+		virtual void start() final override;
+		virtual void end() final override;
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyDownCommands;
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyPressedCommands;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -34,4 +34,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_INPUT_H
+#endif // !_SPLASH_SCENE_H

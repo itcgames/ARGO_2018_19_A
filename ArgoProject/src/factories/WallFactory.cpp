@@ -6,13 +6,13 @@
 #include "components/Animator.h"
 #include "components/Render.h"
 
-app::fact::WallFactory::WallFactory(app::del::UPtrRenderer const & renderer, app::math::Vector2f v)
+app::fact::WallFactory::WallFactory(app::math::Vector2f v)
 	: m_texture(std::make_shared<decltype(m_texture)::element_type>()), m_position(v)
 {
-	m_texture->load(renderer, "./res/Animations/test.png");
+	m_texture->load(m_renderer, "./res/Animations/test.png");
 }
 
-std::optional<app::Entity> app::fact::WallFactory::create() 
+app::Entity const app::fact::WallFactory::create()
 {
 	app::Entity const entity = m_registry.create();
 
