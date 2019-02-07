@@ -20,13 +20,10 @@ void app::cmnd::JumpCommand::execute()
 		auto & airMotion = m_registry.get<comp::AirMotion>(m_entity);
 		if (input.m_canDoubleJump)
 		{
-			auto impulse = math::Vector2f(0.0f, -1.0f) * m_force;
-			auto const & velocity = (math::toVector(airMotion.direction) * airMotion.speed);
-			auto velActual = velocity;
-			velActual.y = 0;
-			velActual += impulse;
-			airMotion.direction = velActual.toAngle();
-			airMotion.speed = velActual.magnitude();
+			auto const & impulse = math::Vector2f(0.0f, -1.0f) * m_force;
+			auto const & velocity = ((math::toVector(airMotion.direction) * airMotion.speed) * math::Vector2f(1.0f, 0.0f)) + impulse;
+			airMotion.direction = velocity.toAngle();
+			airMotion.speed = velocity.magnitude();
 			input.m_canDoubleJump = false;
 		}
 	}
@@ -36,13 +33,10 @@ void app::cmnd::JumpCommand::execute()
 		if (m_registry.has<comp::Motion>(m_entity)) //if player on ground
 		{
 			auto & motion = m_registry.get<comp::Motion>(m_entity);
-			auto impulse = math::Vector2f(0.0f, -1.0f) * m_force;
-			auto const & velocity = (math::toVector(motion.direction) * motion.speed);
-			auto velActual = velocity;
-			velActual.y = 0;
-			velActual += impulse;
-			motion.direction = velActual.toAngle();
-			motion.speed = velActual.magnitude();
+			auto const & impulse = math::Vector2f(0.0f, -1.0f) * m_force;
+			auto const & velocity = ((math::toVector(motion.direction) * motion.speed) * math::Vector2f(1.0f, 0.0f)) + impulse;
+			motion.direction = velocity.toAngle();
+			motion.speed = velocity.magnitude();
 
 			auto airMotion = comp::AirMotion();
 			airMotion.speed = motion.speed;
@@ -55,15 +49,10 @@ void app::cmnd::JumpCommand::execute()
 		else if (m_registry.has<comp::Dash>(m_entity)) //if player currently in the middle of a dash
 		{
 			auto & motion = m_registry.get<comp::Dash>(m_entity);
-			auto impulse = math::Vector2f(0.0f, -1.0f) * m_force;
-			auto const & velocity = (math::toVector(motion.direction) * motion.speed);
-			auto velActual = velocity;
-			velActual.y = 0;
-			velActual += impulse;
+			auto const & impulse = math::Vector2f(0.0f, -1.0f) * m_force;
+			auto const & velocity = ((math::toVector(motion.direction) * motion.speed) * math::Vector2f(1.0f,0.0f)) + impulse;
 			motion.direction = velocity.toAngle();
 			motion.speed = velocity.magnitude();
-			motion.direction = velActual.toAngle();
-			motion.speed = velActual.magnitude();
 
 			auto airMotion = comp::AirMotion();
 			airMotion.speed = motion.speed;
