@@ -12,6 +12,7 @@
 
 #include "commands/MoveCommand.h"
 #include "commands/JumpCommand.h"
+#include "commands/DashCommand.h"
 #include "components/StateMachine.h"
 
 app::fact::PlayerFactory::PlayerFactory(app::del::UPtrRenderer const & renderer)
@@ -65,6 +66,7 @@ std::optional<app::Entity> app::fact::PlayerFactory::create()
 	input.keyDownCommands.insert(std::pair(SDLK_RIGHT, std::make_shared<app::cmnd::MoveCommand>(entity, 0, 20)));
 	input.keyDownCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::MoveCommand>(entity, 180, 20)));
 	input.keyPressedCommands.insert(std::pair(SDLK_SPACE, std::make_shared<app::cmnd::JumpCommand>(entity, 400.0f)));
+	input.keyPressedCommands.insert(std::pair(SDLK_z, std::make_shared<app::cmnd::DashCommand>(entity)));
 
 
 	m_registry.assign<decltype(input)>(entity, std::move(input));

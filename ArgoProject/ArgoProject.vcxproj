@@ -175,12 +175,14 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\commands\BaseCommand.cpp" />
+    <ClCompile Include="src\commands\DashCommand.cpp" />
     <ClCompile Include="src\commands\JumpCommand.cpp" />
     <ClCompile Include="src\commands\MoveCommand.cpp" />
     <ClCompile Include="src\components\AirMotion.cpp" />
     <ClCompile Include="src\components\Animator.cpp" />
     <ClCompile Include="src\components\Commandable.cpp" />
     <ClCompile Include="src\components\Camera.cpp" />
+    <ClCompile Include="src\components\Dash.cpp" />
     <ClCompile Include="src\components\Dimensions.cpp" />
     <ClCompile Include="src\components\Input.cpp" />
     <ClCompile Include="src\components\Location.cpp" />
@@ -218,6 +220,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\AnimatorSystem.cpp" />
     <ClCompile Include="src\systems\BaseSystem.cpp" />
     <ClCompile Include="src\systems\CommandSystem.cpp" />
+    <ClCompile Include="src\systems\DashSystem.cpp" />
     <ClCompile Include="src\systems\InputSystem.cpp" />
     <ClCompile Include="src\systems\CameraSystem.cpp" />
     <ClCompile Include="src\systems\MotionSystem.cpp" />
@@ -229,12 +232,14 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\commands\BaseCommand.h" />
+    <ClInclude Include="src\commands\DashCommand.h" />
     <ClInclude Include="src\commands\JumpCommand.h" />
     <ClInclude Include="src\commands\MoveCommand.h" />
     <ClInclude Include="src\components\AirMotion.h" />
     <ClInclude Include="src\components\Animator.h" />
     <ClInclude Include="src\components\Commandable.h" />
     <ClInclude Include="src\components\Camera.h" />
+    <ClInclude Include="src\components\Dash.h" />
     <ClInclude Include="src\components\Dimensions.h" />
     <ClInclude Include="src\components\Input.h" />
     <ClInclude Include="src\components\Location.h" />
@@ -266,6 +271,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\systems\AnimatorSystem.h" />
     <ClInclude Include="src\systems\BaseSystem.h" />
     <ClInclude Include="src\systems\CommandSystem.h" />
+    <ClInclude Include="src\systems\DashSystem.h" />
     <ClInclude Include="src\systems\InputSystem.h" />
     <ClInclude Include="src\systems\CameraSystem.h" />
     <ClInclude Include="src\systems\MotionSystem.h" />

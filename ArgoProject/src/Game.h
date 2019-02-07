@@ -13,6 +13,7 @@
 #include "systems/InputSystem.h"
 #include "systems/AirMotionSystem.h"
 #include "systems/CameraSystem.h"
+#include "systems/DashSystem.h"
 
 namespace app
 {
@@ -24,8 +25,9 @@ namespace app
 			, sys::CameraSystem
 			, sys::CommandSystem
 			, sys::InputSystem
-			, sys::AirMotionSystem>;
-		using UpdateSystems = std::array<UpdateSystem, 6>;
+			, sys::AirMotionSystem
+			, sys::DashSystem>;
+		using UpdateSystems = std::array<UpdateSystem, 7>;
 		using DrawSystem = std::variant<sys::RenderSystem, sys::AnimatorSystem>;
 		using DrawSystems = std::array<DrawSystem, 2>;
 	public: // Constructors/Destructor/Assignments

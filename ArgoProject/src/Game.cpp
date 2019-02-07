@@ -18,9 +18,10 @@ app::Game::Game()
 	, m_updateSystems{
 		UpdateSystem(std::in_place_type<app::sys::InputSystem>, m_keyHandler),
 		UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
-		UpdateSystem(std::in_place_type<app::sys::AirMotionSystem>),
 		UpdateSystem(std::in_place_type<app::sys::StateMachineSystem>),
+		UpdateSystem(std::in_place_type<app::sys::AirMotionSystem>),
 		UpdateSystem(std::in_place_type<app::sys::MotionSystem>),
+		UpdateSystem(std::in_place_type<app::sys::DashSystem>),
 		UpdateSystem(std::in_place_type<app::sys::CameraSystem>)
 	}
 	, m_drawSystems{
@@ -66,7 +67,8 @@ bool app::Game::initEntities()
 	try
 	{
 		auto playerEntity = fact::PlayerFactory(m_window.getRenderer()).create();
-		this->createCamera(playerEntity);
+		//TODO: uncomment
+		this->createCamera(/*playerEntity*/);
 		return true;
 	}
 	catch (const std::exception&)
