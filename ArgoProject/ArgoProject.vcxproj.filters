@@ -243,6 +243,15 @@
     <ClCompile Include="src\systems\StateMachineSystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
+    <ClCompile Include="src\systems\DashSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Dash.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\DashCommand.cpp">
+      <Filter>Source Files\commands</Filter>
+    </ClCompile>
     <ClCompile Include="src\scenes\SceneManager.cpp">
       <Filter>Source Files\scenes</Filter>
     </ClCompile>
@@ -284,6 +293,12 @@
     </ClCompile>
     <ClCompile Include="src\factories\entities\PlayerFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\FaceLeftCommand.cpp">
+      <Filter>Source Files\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\FaceRightCommand.cpp">
+      <Filter>Source Files\commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -419,6 +434,15 @@
     <ClInclude Include="src\systems\StateMachineSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
+    <ClInclude Include="src\systems\DashSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Dash.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\DashCommand.h">
+      <Filter>Header Files\commands</Filter>
+    </ClInclude>
     <ClInclude Include="src\scenes\SceneManager.h">
       <Filter>Header Files\scenes</Filter>
     </ClInclude>
@@ -460,6 +484,12 @@
     </ClInclude>
     <ClInclude Include="src\factories\entities\PlayerFactory.h">
       <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\FaceLeftCommand.h">
+      <Filter>Header Files\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\FaceRightCommand.h">
+      <Filter>Header Files\commands</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

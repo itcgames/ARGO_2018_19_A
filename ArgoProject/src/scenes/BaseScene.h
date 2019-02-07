@@ -9,6 +9,7 @@
 #include "systems/MotionSystem.h"
 #include "systems/RenderSystem.h"
 #include "systems/StateMachineSystem.h"
+#include "systems/DashSystem.h"
 
 namespace app::sce
 {
@@ -21,11 +22,12 @@ namespace app::sce
 	{
 	protected: // Protected typedefs/Enums/Usings
 		using UpdateSystem = std::variant<sys::MotionSystem
+			, sys::AirMotionSystem
+			, sys::DashSystem
 			, sys::StateMachineSystem
 			, sys::CameraSystem
 			, sys::CommandSystem
-			, sys::InputSystem
-			, sys::AirMotionSystem>;
+			, sys::InputSystem>;
 		using UpdateSystems = std::vector<UpdateSystem>;
 		using DrawSystem = std::variant<sys::RenderSystem, sys::AnimatorSystem>;
 		using DrawSystems = std::vector<DrawSystem>;

@@ -1,31 +1,28 @@
-﻿#ifndef _INPUT_H
-#define _INPUT_H
-
-#include "commands/BaseCommand.h"
+﻿#ifndef _COMPONENT_DASH_H
+#define _COMPONENT_DASH_H
 
 namespace app::comp
 {
-	struct Input
+	struct Dash
 	{
 	public: // Constructors/Destructor/Assignments
-		Input() = default;
-		~Input() = default;
+		Dash() = default;
+		~Dash() = default;
 
-		Input(Input const &) = default;
-		Input(Input &&) = default;
+		Dash(Dash const &) = default;
+		Dash & operator=(Dash const &) = default;
 
-		Input & operator=(Input const &) = default;
-		Input & operator=(Input &&) = default;
+		Dash(Dash &&) = default;
+		Dash & operator=(Dash &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyDownCommands;
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyPressedCommands;
-		bool m_isRight;
-		bool m_canDoubleJump;
-		bool m_canDash;
+		float speed;
+		float direction;
+		float drag;
+		float dragCutoff;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -37,4 +34,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_INPUT_H
+#endif // !_COMPONENT_DASH_H

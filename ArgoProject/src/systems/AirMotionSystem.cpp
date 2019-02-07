@@ -12,7 +12,7 @@ void app::sys::AirMotionSystem::update(app::time::seconds const & dt)
 		.each([&, this](app::Entity const entity, comp::Location & location, comp::AirMotion & motion )
 	{
 		auto const & velocity = (math::toVector(motion.direction) * motion.speed) + motion.gravity;
-		auto velActual = velocity;
+ 		auto velActual = velocity;
 		if (velActual.magnitude() > motion.maxSpeed)
 		{
 			velActual = velActual.unit() * motion.maxSpeed;
