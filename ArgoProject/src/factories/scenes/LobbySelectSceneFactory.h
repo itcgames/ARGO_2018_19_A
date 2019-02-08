@@ -8,7 +8,7 @@ namespace app::fact::sce
 	class LobbySelectSceneFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		LobbySelectSceneFactory();
+		LobbySelectSceneFactory() = default;
 		virtual ~LobbySelectSceneFactory() = default;
 
 		LobbySelectSceneFactory(LobbySelectSceneFactory const &) = default;
