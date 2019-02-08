@@ -35,18 +35,6 @@ app::math::Rect<T>::operator std::string() const
 }
 
 template<typename T>
-app::math::Rect<T>::operator cute::c2AABB() const
-{
-	using c2AABB = cute::c2AABB;
-	using c2v = cute::c2v;
-	using c2Type = decltype(c2v::x);
-	auto aabb = c2AABB();
-	aabb.min = c2v{ static_cast<c2Type>(this->x), static_cast<c2Type>(this->y) };
-	aabb.max = c2v{ aabb.min.x + static_cast<c2Type>(this->w), aabb.min.y + static_cast<c2Type>(this->h) };
-	return std::move(aabb);
-}
-
-template<typename T>
 app::math::Rect<T>::operator SDL_Rect() const
 {
 	using rectType = decltype(SDL_Rect::x);

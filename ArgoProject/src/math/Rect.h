@@ -25,7 +25,6 @@ namespace app::math
 		math::Vector2<T> center() const { return math::Vector2<T>{ this->x, this->y } + this->halfSize(); }
 
 		operator std::string() const;
-		operator cute::c2AABB() const;
 		operator SDL_Rect() const;
 	public: // Public Static Variables
 	public: // Public Member Variables

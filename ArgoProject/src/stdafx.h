@@ -109,9 +109,6 @@
 // Entt Library
 #include <Entt/entt.hpp>
 
-// cutec2 Library
-#include "utilities/cute_c2.h"
-
 //
 // Includes here
 //
