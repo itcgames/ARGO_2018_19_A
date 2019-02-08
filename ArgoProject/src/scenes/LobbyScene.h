@@ -1,21 +1,21 @@
-﻿#ifndef _SPLASH_SCENE_H
-#define _SPLASH_SCENE_H
+﻿#ifndef _LOBBY_SCENE_H
+#define _LOBBY_SCENE_H
 
 #include "BaseScene.h"
 
 namespace app::sce
 {
-	class SplashScene : public BaseScene
+	class LobbyScene : public BaseScene
 	{
 	public: // Constructors/Destructor/Assignments
-		SplashScene(SceneType & sceneManagerType);
-		virtual ~SplashScene() = default;
+		LobbyScene(SceneType & sceneManagerType);
+		virtual ~LobbyScene() = default;
 
-		SplashScene(SplashScene const &) = default;
-		SplashScene & operator=(SplashScene const &) = default;
+		LobbyScene(LobbyScene const &) = default;
+		LobbyScene & operator=(LobbyScene const &) = default;
 
-		SplashScene(SplashScene &&) = default;
-		SplashScene & operator=(SplashScene &&) = default;
+		LobbyScene(LobbyScene &&) = default;
+		LobbyScene & operator=(LobbyScene &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
@@ -34,4 +34,4 @@ namespace app::sce
 	};
 }
 
-#endif // !_SPLASH_SCENE_H
+#endif // !_LOBBY_SCENE_H

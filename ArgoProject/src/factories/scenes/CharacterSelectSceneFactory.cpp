@@ -1,8 +1,8 @@
 ﻿#include "stdafx.h"
-#include "SplashSceneFactory.h"
+#include "CharacterSelectSceneFactory.h"
 #include "factories/entities/CameraFactory.h"
 
-std::vector<app::Entity> app::fact::sce::SplashSceneFactory::create()
+std::vector<app::Entity> app::fact::sce::CharacterSelectSceneFactory::create()
 {
 	auto entities = std::vector<app::Entity>();
 

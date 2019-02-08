@@ -312,6 +312,60 @@
     <ClCompile Include="src\factories\WallFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenes\MainMenuScene.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\scenes\MainMenuSceneFactory.cpp">
+      <Filter>Source Files\factories\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\scenes\CreditsSceneFactory.cpp">
+      <Filter>Source Files\factories\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\CreditsScene.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\scenes\CharacterSelectSceneFactory.cpp">
+      <Filter>Source Files\factories\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\CharacterSelectScene.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\scenes\LevelSelectSceneFactory.cpp">
+      <Filter>Source Files\factories\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\LevelScene.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\LevelSelectScene.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\scenes\LevelSceneFactory.cpp">
+      <Filter>Source Files\factories\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\scenes\LobbySelectSceneFactory.cpp">
+      <Filter>Source Files\factories\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\LobbySelectScene.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\LobbyScene.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\scenes\LobbySceneFactory.cpp">
+      <Filter>Source Files\factories\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\MultiplayerLevelScene.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\scenes\MultiplayerLevelSceneFactory.cpp">
+      <Filter>Source Files\factories\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\TutorialLevelScene.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\scenes\TutorialLevelSceneFactory.cpp">
+      <Filter>Source Files\factories\scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -514,6 +568,60 @@
     </ClInclude>
     <ClInclude Include="src\factories\WallFactory.h">
       <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\MainMenuScene.h">
+      <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\scenes\MainMenuSceneFactory.h">
+      <Filter>Header Files\factories\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\CreditsScene.h">
+      <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\scenes\CreditsSceneFactory.h">
+      <Filter>Header Files\factories\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\CharacterSelectScene.h">
+      <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\scenes\CharacterSelectSceneFactory.h">
+      <Filter>Header Files\factories\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\LevelScene.h">
+      <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\LevelSelectScene.h">
+      <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\scenes\LevelSceneFactory.h">
+      <Filter>Header Files\factories\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\scenes\LobbySelectSceneFactory.h">
+      <Filter>Header Files\factories\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\LobbySelectScene.h">
+      <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\scenes\LobbySceneFactory.h">
+      <Filter>Header Files\factories\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\LobbyScene.h">
+      <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\MultiplayerLevelScene.h">
+      <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\scenes\MultiplayerLevelSceneFactory.h">
+      <Filter>Header Files\factories\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\TutorialLevelScene.h">
+      <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\scenes\TutorialLevelSceneFactory.h">
+      <Filter>Header Files\factories\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\scenes\LevelSelectSceneFactory.h">
+      <Filter>Header Files\factories\scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

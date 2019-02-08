@@ -1,14 +1,34 @@
 ﻿#ifndef _SCENE_MANAGER_H
 #define _SCENE_MANAGER_H
 
+#include "CharacterSelectScene.h"
+#include "CreditsScene.h"
+#include "LevelScene.h"
+#include "LevelSelectScene.h"
+#include "LobbyScene.h"
+#include "LobbySelectScene.h"
+#include "MainMenuScene.h"
+#include "MultiplayerLevelScene.h"
 #include "SplashScene.h"
+#include "TutorialLevelScene.h"
 
 namespace app::sce
 {
 	class SceneManager
 	{
 	protected: // Protected typedefs/Enums/Usings
-		using Scene = std::variant<sce::SplashScene>;
+		using Scene = std::variant<
+			  sce::CharacterSelectScene
+			, sce::CreditsScene
+			, sce::LevelScene
+			, sce::LevelSelectScene
+			, sce::LobbyScene
+			, sce::LobbySelectScene
+			, sce::MainMenuScene
+			, sce::MultiplayerLevelScene
+			, sce::SplashScene
+			, sce::TutorialLevelScene
+		>;
 	public: // Constructors/Destructor/Assignments
 		SceneManager();
 		~SceneManager();

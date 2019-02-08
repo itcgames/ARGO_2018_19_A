@@ -1,24 +1,14 @@
 ﻿#include "stdafx.h"
-#include "SplashScene.h"
-#include "factories/scenes/SplashSceneFactory.h"
+#include "LobbySelectScene.h"
+#include "factories/scenes/LobbySelectSceneFactory.h"
 
-app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
+app::sce::LobbySelectScene::LobbySelectScene(SceneType & sceneManagerType)
 	: BaseScene(sceneManagerType
 		, util::make_vector<UpdateSystem>({
 			UpdateSystem(std::in_place_type<app::sys::InputSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
-<<<<<<< HEAD
-			UpdateSystem(std::in_place_type<app::sys::MotionSystem>),
-			UpdateSystem(std::in_place_type<app::sys::AirMotionSystem>),
-			UpdateSystem(std::in_place_type<app::sys::DashSystem>),
-			UpdateSystem(std::in_place_type<app::sys::StateMachineSystem>),
-			UpdateSystem(std::in_place_type<app::sys::CameraSystem>),
-			UpdateSystem(std::in_place_type<app::sys::CollisionSystem>)
-		})
-=======
 			UpdateSystem(std::in_place_type<app::sys::CameraSystem>)
 			})
->>>>>>> 29fbe78b2ecee71ff7b86c4fd11e7fec844a8136
 		, util::make_vector<DrawSystem>({
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
 			DrawSystem(std::in_place_type<app::sys::RenderSystem>)
@@ -30,9 +20,9 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 	}
 }
 
-void app::sce::SplashScene::start()
+void app::sce::LobbySelectScene::start()
 {
-	auto const & entities = fact::sce::SplashSceneFactory().create();
+	auto const & entities = fact::sce::LobbySelectSceneFactory().create();
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("SPLASH SCENE: Creating entities");
@@ -43,7 +33,7 @@ void app::sce::SplashScene::start()
 	}
 }
 
-void app::sce::SplashScene::end()
+void app::sce::LobbySelectScene::end()
 {
 	if constexpr (DEBUG_MODE)
 	{
