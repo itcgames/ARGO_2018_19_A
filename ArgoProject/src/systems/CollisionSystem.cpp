@@ -36,8 +36,8 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 				if (manifoldType == "AABBVSAABB")
 				{
 					//update collision boxes
-					updateAABB(std::get<cute::c2AABB>(collision.collisionBox), location, dimensions);
-					updateAABB(std::get<cute::c2AABB>(secCollision.collisionBox), secLocation, secDimensions);
+					updateAABB(std::get<cute::c2AABB>(collision.collisionBox), location.position, dimensions.size);
+					updateAABB(std::get<cute::c2AABB>(secCollision.collisionBox), secLocation.position, secDimensions.size);
 					//get manifold of AABB to AABB
 					cute::c2AABBtoAABBManifold(std::get<cute::c2AABB>(collision.collisionBox), std::get<cute::c2AABB>(secCollision.collisionBox), &manifold);
 				}
@@ -65,11 +65,11 @@ std::string app::sys::CollisionSystem::checkManifoldType(std::variant<cute::c2AA
 	return s;
 }
 
-void app::sys::CollisionSystem::updateAABB(cute::c2AABB c, comp::Location l, comp::Dimensions d)
+void app::sys::CollisionSystem::updateAABB(cute::c2AABB c, app::math::Vector2<float> l, app::math::Vector2<float> d)
 {
-	c.min.x = l.position.x;
-	c.min.y = l.position.y;
-	c.max.x = d.size.x;
-	c.max.y = d.size.y;
+	c.min.x = l.x;
+	c.min.y = l.y;
+	c.max.x = d.x;
+	c.max.y = d.y;
 }
 
