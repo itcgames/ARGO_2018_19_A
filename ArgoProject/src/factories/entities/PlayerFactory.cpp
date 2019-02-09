@@ -1,4 +1,5 @@
 ﻿#include "stdafx.h"
+#include "utilities/cute_c2.h"
 #include "PlayerFactory.h"
 
 // components

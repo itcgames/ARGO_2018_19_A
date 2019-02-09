@@ -1,6 +1,6 @@
 #ifndef _SYSTEM_COLLISION
 #define _SYSTEM_COLLISION
-
+#include "utilities/cute_c2.h"
 #include "BaseSystem.h"
 
 namespace app::sys

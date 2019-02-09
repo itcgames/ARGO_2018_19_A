@@ -7,18 +7,13 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 		, util::make_vector<UpdateSystem>({
 			UpdateSystem(std::in_place_type<app::sys::InputSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
-<<<<<<< HEAD
 			UpdateSystem(std::in_place_type<app::sys::MotionSystem>),
 			UpdateSystem(std::in_place_type<app::sys::AirMotionSystem>),
 			UpdateSystem(std::in_place_type<app::sys::DashSystem>),
 			UpdateSystem(std::in_place_type<app::sys::StateMachineSystem>),
-			UpdateSystem(std::in_place_type<app::sys::CameraSystem>),
-			UpdateSystem(std::in_place_type<app::sys::CollisionSystem>)
-		})
-=======
 			UpdateSystem(std::in_place_type<app::sys::CameraSystem>)
-			})
->>>>>>> 29fbe78b2ecee71ff7b86c4fd11e7fec844a8136
+		})
+
 		, util::make_vector<DrawSystem>({
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
 			DrawSystem(std::in_place_type<app::sys::RenderSystem>)

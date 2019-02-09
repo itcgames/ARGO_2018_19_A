@@ -38,11 +38,8 @@ namespace app::sce
 			, sys::CameraSystem
 			, sys::CommandSystem
 			, sys::InputSystem
-<<<<<<< HEAD
 			, sys::CollisionSystem>;
-=======
-		>;
->>>>>>> 29fbe78b2ecee71ff7b86c4fd11e7fec844a8136
+
 		using UpdateSystems = std::vector<UpdateSystem>;
 		using DrawSystem = std::variant<
 			  sys::RenderSystem

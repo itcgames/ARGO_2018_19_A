@@ -60,7 +60,7 @@ std::string app::sys::CollisionSystem::checkManifoldType(std::variant<cute::c2AA
 	std::string s = "";
 	if (num1 == 0 && num2 == 0)
 	{
-		s = "AABBBSAABB";
+		s = "AABBBVSAABB";
 	}
 	return s;
 }
