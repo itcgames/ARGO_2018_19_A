@@ -25,36 +25,31 @@ void app::sys::CameraSystem::update(app::time::seconds const & dt)
 			math::Vector2f targetPosition = targetLocation.position;
 			if (camera.internalClampSize.has_value())
 			{
-				math::Vector2f clampPosition;
-				bool followPlayerX = false;
-				bool followPlayerY = false;
+				math::Vector2f clampPosition = camera.center;
+				bool followPlayer = false;
 				if (targetPosition.x > camera.center.x + camera.internalClampSize.value())
 				{
 					clampPosition.x = targetPosition.x - camera.internalClampSize.value();
-					followPlayerX = true;
+					followPlayer = true;
 				}
 				if (targetPosition.x < camera.center.x - camera.internalClampSize.value())
 				{
 					clampPosition.x = targetPosition.x + camera.internalClampSize.value();
-					followPlayerX = true;
+					followPlayer = true;
 				}
 				if (targetPosition.y > camera.center.y + camera.internalClampSize.value())
 				{
 					clampPosition.y = targetPosition.y - camera.internalClampSize.value();
-					followPlayerY = true;
+					followPlayer = true;
 				}
 				if (targetPosition.y < camera.center.y - camera.internalClampSize.value())
 				{
 					clampPosition.y = targetPosition.y + camera.internalClampSize.value();
-					followPlayerY = true;
+					followPlayer = true;
 				}
-				if (followPlayerX)
+				if (followPlayer)
 				{
-					camera.center.x = clampPosition.x;
-				}
-				if (followPlayerY)
-				{
-					camera.center.y = clampPosition.y;
+					camera.center = clampPosition;
 				}
 			}
 			else
