@@ -106,6 +106,12 @@
     <Filter Include="Header Files\factories\entities">
       <UniqueIdentifier>{7ea2d7cc-3b18-41e1-82b6-a1394e7535af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\client">
+      <UniqueIdentifier>{c9bd1b13-15c7-4f3d-a1d3-ee017f24760b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\client">
+      <UniqueIdentifier>{5c5a3bcb-ec9a-4c27-a60a-5293b301ba98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -360,6 +366,9 @@
     <ClCompile Include="src\factories\scenes\TutorialLevelSceneFactory.cpp">
       <Filter>Source Files\factories\scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\client\Client.cpp">
+      <Filter>Source Files\client</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -610,6 +619,9 @@
     </ClInclude>
     <ClInclude Include="src\factories\scenes\LevelSelectSceneFactory.h">
       <Filter>Header Files\factories\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\client\Client.h">
+      <Filter>Header Files\client</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
