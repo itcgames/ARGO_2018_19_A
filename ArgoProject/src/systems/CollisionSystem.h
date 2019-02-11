@@ -25,6 +25,9 @@ namespace app::sys
 		void updateAABB(cute::c2AABB &c, app::math::Vector2<float> l, app::math::Vector2<float> d, app::math::Vector2f o);
 		//general update
 		virtual void update(app::time::seconds const & dt) override;
+		void groundCollisions();
+		void airCollisions();
+		void dashCollisions();
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions

@@ -4,44 +4,47 @@
 // components
 #include "components/Location.h"
 #include "components/Dimensions.h"
-#include "components/Render.h"
 #include "components/Collision.h"
 #include "components/Input.h"
 #include "components/Motion.h"
+#include "components/AirMotion.h"
+#include "components/Dash.h"
 
 app::sys::CollisionSystem::CollisionSystem()
 	: BaseSystem()
 {
 	//prepare these components
-	m_registry.prepare<comp::Collision, comp::Location, comp::Input, comp::Dimensions>();
+	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Motion, comp::AirMotion, comp::Dash>();
 }
 
 void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 {
-	//type of collision
-	std::string manifoldType;
+	groundCollisions();
+	airCollisions();
+	dashCollisions();
+}
 
+void app::sys::CollisionSystem::groundCollisions()
+{
 	//view player
-	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions>(entt::persistent_t())
-		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Input & input, comp::Location & location, comp::Dimensions & dimensions)
+	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Motion>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Input & input, comp::Location & location, comp::Dimensions & dimensions, comp::Motion & motion)
 	{
-		//update collision boxes
-		updateAABB(std::get<cute::c2AABB>(collision.collisionBox), location.position, dimensions.size, dimensions.origin);
 		//view everything with collisions
-		m_registry.view<comp::Collision, comp::Location, comp::Dimensions>(entt::persistent_t())
-			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Location & secLocation, comp::Dimensions & secDimensions)
+		m_registry.view<comp::Collision>()
+			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision)
 		{
 			//if we are not the player
 			if (entity != secEntity)
 			{
 				updateAABB(std::get<cute::c2AABB>(secCollision.collisionBox), secLocation.position, secDimensions.size, secDimensions.origin);
-				
+
 				manifoldType = checkManifoldType(collision.collisionBox, secCollision.collisionBox);
-				//if square to square 
+				//if square to square	
 				if (manifoldType == "AABBVSAABB")
 				{
-				//	std::cout << "Position: " << location.position.x/* - dimensions.size.x / 2*/ << std::endl;
-					//get manifold of AABB to AABB
+					//	std::cout << "Position: " << location.position.x/* - dimensions.size.x / 2*/ << std::endl;
+						//get manifold of AABB to AABB
 					cute::c2Manifold manifold;
 					cute::c2AABBtoAABBManifold(std::get<cute::c2AABB>(secCollision.collisionBox), std::get<cute::c2AABB>(collision.collisionBox), &manifold);
 					if (manifold.count)
@@ -55,6 +58,14 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 			}
 		});
 	});
+}
+
+void app::sys::CollisionSystem::airCollisions()
+{
+}
+
+void app::sys::CollisionSystem::dashCollisions()
+{
 }
 
 std::string app::sys::CollisionSystem::checkManifoldType(std::variant<cute::c2AABB, cute::c2Circle> &left, std::variant<cute::c2AABB, cute::c2Circle> &right)

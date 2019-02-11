@@ -106,6 +106,12 @@
     <Filter Include="Header Files\factories\entities">
       <UniqueIdentifier>{7ea2d7cc-3b18-41e1-82b6-a1394e7535af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\visitors">
+      <UniqueIdentifier>{7459f996-b6b9-479f-aa5b-857585a8e495}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\visitors">
+      <UniqueIdentifier>{f590c2a4-d699-4c25-9b67-895b16d093c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
