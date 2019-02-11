@@ -23,6 +23,9 @@ namespace app::comp
 	public: // Public Member Variables
 		math::Vector2f position;
 		math::Vector2f size;
+		math::Vector2f clampTopLeft;
+		math::Vector2f clampSize;
+		bool clamp = false;
 		std::optional<app::Entity> target;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions

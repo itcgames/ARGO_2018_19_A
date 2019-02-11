@@ -4,9 +4,9 @@
 // components
 #include "components/Camera.h"
 
-app::fact::CameraFactory::CameraFactory(std::optional<app::Entity> target)
+app::fact::CameraFactory::CameraFactory(app::par::CameraParameters param)
 	: EntityFactory()
-	, m_target(target)
+	, parameters(param)
 {
 }
 
@@ -17,7 +17,10 @@ app::Entity const app::fact::CameraFactory::create()
 	auto camera = comp::Camera();
 	camera.position = {  };
 	camera.size = { 1366.0f, 768.0f };
-	camera.target = m_target;
+	camera.target = parameters.targetEntity;
+	camera.clampTopLeft = parameters.clampPos;
+	camera.clampSize = parameters.clampSize;
+	camera.clamp = parameters.clamp;
 	m_registry.assign<decltype(camera)>(entity, std::move(camera));
 
 	return entity;

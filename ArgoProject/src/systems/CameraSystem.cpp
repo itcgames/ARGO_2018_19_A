@@ -23,6 +23,25 @@ void app::sys::CameraSystem::update(app::time::seconds const & dt)
 		{
 			auto const & targetLocation = targetView.get(camera.target.value());
 			camera.position = targetLocation.position - (camera.size / 2.0f);
+			if (camera.clamp)
+			{
+				if (camera.clampTopLeft.x > camera.position.x - (camera.size.x / 2))
+				{
+					camera.position.x = camera.clampTopLeft.x + (camera.size.x / 2);
+				}
+				if (camera.clampTopLeft.x + camera.clampSize.x < camera.position.x + (camera.size.x / 2))
+				{
+					camera.position.x = (camera.clampTopLeft.x + camera.clampSize.x) - (camera.size.x / 2);
+				}
+				if (camera.clampTopLeft.y > camera.position.y - (camera.size.y / 2))
+				{
+					camera.position.y = camera.clampTopLeft.y + (camera.size.y / 2);
+				}
+				if (camera.clampTopLeft.y + camera.clampSize.y < camera.position.y + (camera.size.y / 2))
+				{
+					camera.position.y = (camera.clampTopLeft.y + camera.clampSize.y) - (camera.size.y / 2);
+				}
+			}
 		}
 	});
 }
