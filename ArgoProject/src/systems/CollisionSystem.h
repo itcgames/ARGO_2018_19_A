@@ -20,7 +20,7 @@ namespace app::sys
 	public: // Public Static Functions
 	public: // Public Member Functions
 		std::string checkManifoldType(std::variant<cute::c2AABB, cute::c2Circle> &left, std::variant<cute::c2AABB, cute::c2Circle> &right);
-		void updateAABB(cute::c2AABB c, app::math::Vector2<float> l, app::math::Vector2<float> d);
+		void updateAABB(cute::c2AABB &c, app::math::Vector2<float> l, app::math::Vector2<float> d);
 		virtual void update(app::time::seconds const & dt) override;
 	public: // Public Static Variables
 	public: // Public Member Variables
@@ -32,6 +32,7 @@ namespace app::sys
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
+		bool m_staticUpdateOnce;
 	};
 }
 
