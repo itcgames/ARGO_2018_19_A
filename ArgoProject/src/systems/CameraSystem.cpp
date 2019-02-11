@@ -22,24 +22,64 @@ void app::sys::CameraSystem::update(app::time::seconds const & dt)
 		if (camera.target.has_value())
 		{
 			auto const & targetLocation = targetView.get(camera.target.value());
-			camera.position = targetLocation.position - (camera.size / 2.0f);
-			if (camera.clamp)
+			math::Vector2f targetPosition = targetLocation.position;
+			if (camera.internalClampSize.has_value())
 			{
-				if (camera.clampTopLeft.x > camera.position.x - (camera.size.x / 2))
+				math::Vector2f clampPosition;
+				bool followPlayerX = false;
+				bool followPlayerY = false;
+				if (targetPosition.x > camera.center.x + camera.internalClampSize.value())
 				{
-					camera.position.x = camera.clampTopLeft.x + (camera.size.x / 2);
+					clampPosition.x = targetPosition.x - camera.internalClampSize.value();
+					followPlayerX = true;
 				}
-				if (camera.clampTopLeft.x + camera.clampSize.x < camera.position.x + (camera.size.x / 2))
+				if (targetPosition.x < camera.center.x - camera.internalClampSize.value())
 				{
-					camera.position.x = (camera.clampTopLeft.x + camera.clampSize.x) - (camera.size.x / 2);
+					clampPosition.x = targetPosition.x + camera.internalClampSize.value();
+					followPlayerX = true;
 				}
-				if (camera.clampTopLeft.y > camera.position.y - (camera.size.y / 2))
+				if (targetPosition.y > camera.center.y + camera.internalClampSize.value())
 				{
-					camera.position.y = camera.clampTopLeft.y + (camera.size.y / 2);
+					clampPosition.y = targetPosition.y - camera.internalClampSize.value();
+					followPlayerY = true;
 				}
-				if (camera.clampTopLeft.y + camera.clampSize.y < camera.position.y + (camera.size.y / 2))
+				if (targetPosition.y < camera.center.y - camera.internalClampSize.value())
 				{
-					camera.position.y = (camera.clampTopLeft.y + camera.clampSize.y) - (camera.size.y / 2);
+					clampPosition.y = targetPosition.y + camera.internalClampSize.value();
+					followPlayerY = true;
+				}
+				if (followPlayerX)
+				{
+					camera.center.x = clampPosition.x;
+				}
+				if (followPlayerY)
+				{
+					camera.center.y = clampPosition.y;
+				}
+			}
+			else
+			{
+				camera.center = targetPosition;
+			}
+			//camera.position = targetLocation.position - (camera.size / 2.0f);
+			if (camera.clampRect.has_value())
+			{
+				auto const & rect = camera.clampRect.value();
+				if (rect.x > camera.center.x)
+				{
+					camera.center.x = rect.x;
+				}
+				if (rect.x + rect.w < camera.center.x)
+				{
+					camera.center.x = (rect.x + rect.w);
+				}
+				if (rect.y > camera.center.y)
+				{
+					camera.center.y = rect.y;
+				}
+				if (rect.y + rect.h < camera.center.y)
+				{
+					camera.center.y = (rect.y + rect.h);
 				}
 			}
 		}

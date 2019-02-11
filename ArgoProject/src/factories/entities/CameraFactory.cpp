@@ -15,12 +15,11 @@ app::Entity const app::fact::CameraFactory::create()
 	app::Entity const entity = EntityFactory::create();
 
 	auto camera = comp::Camera();
-	camera.position = {  };
+	camera.center = {  };
 	camera.size = { 1366.0f, 768.0f };
 	camera.target = parameters.targetEntity;
-	camera.clampTopLeft = parameters.clampPos;
-	camera.clampSize = parameters.clampSize;
-	camera.clamp = parameters.clamp;
+	camera.clampRect = parameters.clampRect;
+	camera.internalClampSize = parameters.internalClampSize;
 	m_registry.assign<decltype(camera)>(entity, std::move(camera));
 
 	return entity;
