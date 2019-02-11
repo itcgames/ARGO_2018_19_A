@@ -15,6 +15,8 @@ app::Game::Game()
 	, m_window(app::sin::Window::get())
 	, m_registry(app::sin::Registry::get())
 	, m_sceneManager()
+	, m_resourceManager()
+	, m_syncResourceManager()
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != NULL)
 	{

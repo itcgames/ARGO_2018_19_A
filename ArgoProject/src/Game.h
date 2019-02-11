@@ -3,6 +3,7 @@
 
 #include "graphics/Window.h"
 #include "scenes/SceneManager.h"
+#include "resources/ResourceManager.h"
 
 namespace app
 {
@@ -41,6 +42,8 @@ namespace app
 		app::gra::Window & m_window;
 		app::Registry & m_registry;
 		app::sce::SceneManager m_sceneManager;
+		app::res::ResourceManager<true> m_resourceManager;
+		app::res::ResourceManager<false> m_syncResourceManager;
 	};
 }
 
