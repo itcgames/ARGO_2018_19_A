@@ -26,6 +26,7 @@ namespace app::sys
 		void airCollisions();
 		void dashCollisions();
 		void updateCollisionBoxes();
+		void playerHazardCollisions();
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions

@@ -9,9 +9,12 @@
 #include "components/Motion.h"
 #include "components/AirMotion.h"
 #include "components/Dash.h"
+#include "components/Damage.h"
+#include "components/Health.h"
 //visitors
 #include "visitors/CollisionUpdateVisitor.h"
 #include "visitors/CollisionBoundsManiVisitor.h"
+#include "visitors/CollisionBoundsBoolVisitor.h"
 
 app::sys::CollisionSystem::CollisionSystem()
 	: BaseSystem()
@@ -28,6 +31,7 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 	groundCollisions();
 	airCollisions();
 	dashCollisions();
+	playerHazardCollisions();
 }
 
 void app::sys::CollisionSystem::groundCollisions()
@@ -103,5 +107,26 @@ void app::sys::CollisionSystem::updateCollisionBoxes()
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions)
 	{
 		std::visit(vis::CollisionUpdateVisitor{ location, dimensions }, collision.bounds);
+	});
+}
+
+
+void app::sys::CollisionSystem::playerHazardCollisions()
+{
+	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Health>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Input & input, comp::Location & location, comp::Dimensions & dimensions, comp::Health & health)
+	{
+		m_registry.view<comp::Collision, comp::Damage>()
+			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Damage damage)
+		{
+			if (entity != secEntity)
+			{
+				auto const & collisionCheck = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+				if (collisionCheck)
+				{
+					health.health -= damage.damage;
+				}
+			}
+		});
 	});
 }

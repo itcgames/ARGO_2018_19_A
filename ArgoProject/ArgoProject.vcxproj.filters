@@ -402,6 +402,15 @@
     <ClCompile Include="src\parameters\CameraParameters.cpp">
       <Filter>Source Files\parameters</Filter>
     </ClCompile>
+    <ClCompile Include="src\components\Health.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Damage.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\HazardFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -682,6 +691,15 @@
     </ClInclude>
     <ClInclude Include="src\parameters\CameraParameters.h">
       <Filter>Header Files\parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Health.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Damage.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\HazardFactory.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

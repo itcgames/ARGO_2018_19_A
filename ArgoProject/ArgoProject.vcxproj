@@ -185,8 +185,10 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\Collision.cpp" />
     <ClCompile Include="src\components\Commandable.cpp" />
     <ClCompile Include="src\components\Camera.cpp" />
+    <ClCompile Include="src\components\Damage.cpp" />
     <ClCompile Include="src\components\Dash.cpp" />
     <ClCompile Include="src\components\Dimensions.cpp" />
+    <ClCompile Include="src\components\Health.cpp" />
     <ClCompile Include="src\components\Input.cpp" />
     <ClCompile Include="src\components\Location.cpp" />
     <ClCompile Include="src\components\Motion.cpp" />
@@ -198,6 +200,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\entities\CameraFactory.cpp" />
     <ClCompile Include="src\factories\entities\PlayerFactory.cpp" />
     <ClCompile Include="src\factories\EntityFactory.cpp" />
+    <ClCompile Include="src\factories\HazardFactory.cpp" />
     <ClCompile Include="src\factories\LevelFactory.cpp" />
     <ClCompile Include="src\factories\scenes\MainMenuSceneFactory.cpp" />
     <ClCompile Include="src\factories\scenes\CreditsSceneFactory.cpp" />
@@ -286,8 +289,10 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\Collision.h" />
     <ClInclude Include="src\components\Commandable.h" />
     <ClInclude Include="src\components\Camera.h" />
+    <ClInclude Include="src\components\Damage.h" />
     <ClInclude Include="src\components\Dash.h" />
     <ClInclude Include="src\components\Dimensions.h" />
+    <ClInclude Include="src\components\Health.h" />
     <ClInclude Include="src\components\Input.h" />
     <ClInclude Include="src\components\Location.h" />
     <ClInclude Include="src\components\Motion.h" />
@@ -299,6 +304,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\entities\CameraFactory.h" />
     <ClInclude Include="src\factories\entities\PlayerFactory.h" />
     <ClInclude Include="src\factories\EntityFactory.h" />
+    <ClInclude Include="src\factories\HazardFactory.h" />
     <ClInclude Include="src\factories\LevelFactory.h" />
     <ClInclude Include="src\factories\scenes\MainMenuSceneFactory.h" />
     <ClInclude Include="src\factories\scenes\CreditsSceneFactory.h" />

@@ -2,6 +2,7 @@
 #include "LevelFactory.h"
 
 #include "factories/WallFactory.h"
+#include "factories/HazardFactory.h"
 
 app::fact::LevelFactory::LevelFactory()
 {
@@ -30,6 +31,7 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 	/*entities.push_back(fact::WallFactory(app::math::Vector2f(1150, 450), app::math::Vector2f(50, 50)).create());
 	entities.push_back(fact::WallFactory(app::math::Vector2f(1150, 400), app::math::Vector2f(50, 50)).create());*/
 	entities.push_back(fact::WallFactory(app::math::Vector2f(1150, 350), app::math::Vector2f(50, 250)).create());
+	entities.push_back(fact::HazardFactory(app::math::Vector2f(500, 500), app::math::Vector2f(50, 50)).create());
 
 	return entities;
 }
