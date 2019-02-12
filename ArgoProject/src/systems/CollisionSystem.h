@@ -19,15 +19,13 @@ namespace app::sys
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		//check type of shape were using easy to expand on
-		std::string checkManifoldType(std::variant<cute::c2AABB, cute::c2Circle> &left, std::variant<cute::c2AABB, cute::c2Circle> &right);
-		//update the collision boxes each frame
-		void updateAABB(cute::c2AABB &c, app::math::Vector2<float> l, app::math::Vector2<float> d, app::math::Vector2f o);
 		//general update
 		virtual void update(app::time::seconds const & dt) override;
+		//calls these which updates the collision boxes and checks collisions depending on the current motion the player has
 		void groundCollisions();
 		void airCollisions();
 		void dashCollisions();
+		void updateCollisionBoxes();
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -37,6 +35,7 @@ namespace app::sys
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables
+		constexpr static bool DEBUG_MODE = true;
 	private: // Private Member Variables
 	};
 }

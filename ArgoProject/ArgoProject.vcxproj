@@ -265,6 +265,13 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\utilities\cute_c2.cpp" />
     <ClCompile Include="src\utilities\Time.cpp" />
     <ClCompile Include="src\utilities\makers.cpp" />
+    <ClCompile Include="src\visitors\CollisionAabbBoolVisitor.cpp" />
+    <ClCompile Include="src\visitors\CollisionAabbManiVisitor.cpp" />
+    <ClCompile Include="src\visitors\CollisionBoundsBoolVisitor.cpp" />
+    <ClCompile Include="src\visitors\CollisionBoundsManiVisitor.cpp" />
+    <ClCompile Include="src\visitors\CollisionCircleBoolVisitor.cpp" />
+    <ClCompile Include="src\visitors\CollisionCircleManiVisitor.cpp" />
+    <ClCompile Include="src\visitors\CollisionUpdateVisitor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\commands\BaseCommand.h" />
@@ -352,6 +359,13 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\utilities\cute_c2.h" />
     <ClInclude Include="src\utilities\Time.h" />
     <ClInclude Include="src\utilities\makers.h" />
+    <ClInclude Include="src\visitors\CollisionAabbBoolVisitor.h" />
+    <ClInclude Include="src\visitors\CollisionAabbManiVisitor.h" />
+    <ClInclude Include="src\visitors\CollisionBoundsBoolVisitor.h" />
+    <ClInclude Include="src\visitors\CollisionBoundsManiVisitor.h" />
+    <ClInclude Include="src\visitors\CollisionCircleBoolVisitor.h" />
+    <ClInclude Include="src\visitors\CollisionCircleManiVisitor.h" />
+    <ClInclude Include="src\visitors\CollisionUpdateVisitor.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\.gitkeep" />

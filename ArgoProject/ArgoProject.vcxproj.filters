@@ -372,6 +372,27 @@
     <ClCompile Include="src\factories\scenes\TutorialLevelSceneFactory.cpp">
       <Filter>Source Files\factories\scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\visitors\CollisionUpdateVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visitors\CollisionAabbBoolVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visitors\CollisionAabbManiVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visitors\CollisionBoundsBoolVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visitors\CollisionBoundsManiVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visitors\CollisionCircleBoolVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visitors\CollisionCircleManiVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -628,6 +649,27 @@
     </ClInclude>
     <ClInclude Include="src\factories\scenes\LevelSelectSceneFactory.h">
       <Filter>Header Files\factories\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionUpdateVisitor.h">
+      <Filter>Header Files\visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionAabbBoolVisitor.h">
+      <Filter>Header Files\visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionAabbManiVisitor.h">
+      <Filter>Header Files\visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionBoundsBoolVisitor.h">
+      <Filter>Header Files\visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionBoundsManiVisitor.h">
+      <Filter>Header Files\visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionCircleBoolVisitor.h">
+      <Filter>Header Files\visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionCircleManiVisitor.h">
+      <Filter>Header Files\visitors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
