@@ -2,13 +2,14 @@
 #define _FACTORY_CAMERA_H
 
 #include "../EntityFactory.h"
+#include "parameters/CameraParameters.h"
 
 namespace app::fact
 {
 	class CameraFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		CameraFactory(std::optional<app::Entity> targetEntity = std::nullopt);
+		CameraFactory(app::par::CameraParameters param = app::par::CameraParameters());
 		virtual ~CameraFactory() = default;
 
 		CameraFactory(CameraFactory const &) = default;
@@ -26,7 +27,7 @@ namespace app::fact
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
-		std::optional<app::Entity> m_target;
+		app::par::CameraParameters parameters;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables

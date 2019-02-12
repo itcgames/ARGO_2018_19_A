@@ -19,7 +19,7 @@ void app::sys::RenderSystem::update(app::time::seconds const & dt)
 	m_registry.view<comp::Camera>()
 		.each([&, this](app::Entity const camEntity, comp::Camera & camera)
 	{
-		m_view.position = camera.position;
+		m_view.position = camera.center;
 		m_view.size = camera.size;
 		m_window.setView(m_view);
 		m_registry.view<comp::Location, comp::Dimensions, comp::Render>()
