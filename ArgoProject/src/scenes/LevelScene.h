@@ -29,8 +29,10 @@ namespace app::sce
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
+		void reset(app::Registry & registry, app::Entity inputEntity);
 	private: // Private Static Variables
 	private: // Private Member Variables
+		std::vector<app::Entity> m_entities;
 	};
 }
 
