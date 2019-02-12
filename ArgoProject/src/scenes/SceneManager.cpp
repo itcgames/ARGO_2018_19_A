@@ -14,7 +14,8 @@ app::sce::SceneManager::SceneManager()
 		, std::make_pair(SceneType::Splash, Scene(std::in_place_type<sce::SplashScene>, m_targetScene))
 	}))
 	, m_currentScene(SceneType::Count)
-	, m_targetScene(SceneType::Level)
+	//TODO: change back to SceneType::Level
+	, m_targetScene(SceneType::MainMenu)
 {
 }
 

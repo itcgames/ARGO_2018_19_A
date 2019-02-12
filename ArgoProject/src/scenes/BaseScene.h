@@ -10,6 +10,7 @@
 #include "systems/RenderSystem.h"
 #include "systems/StateMachineSystem.h"
 #include "systems/DashSystem.h"
+#include "systems/DebugSystem.h"
 
 namespace app::sce
 {
@@ -38,6 +39,7 @@ namespace app::sce
 			, sys::CameraSystem
 			, sys::CommandSystem
 			, sys::InputSystem
+			, sys::DebugSystem
 		>;
 		using UpdateSystems = std::vector<UpdateSystem>;
 		using DrawSystem = std::variant<

@@ -28,6 +28,7 @@ void app::client::Client::SendData(uint8_t * data, uint16_t length, uint16_t fla
 
 uint8_t * app::client::Client::RecvData(uint16_t * length)
 {
+	app::Console::writeLine("received some data");
 	std::array<std::uint8_t, MAX_PACKET> temp_data;
 	int num_recv = SDLNet_TCP_Recv(socket, temp_data.data(), MAX_PACKET);
 	if (num_recv <= 0)
@@ -70,9 +71,12 @@ void app::client::Client::ProcessData(uint8_t * data, uint16_t * offset)
 	{
 		case FLAG_WOOD_UPDATE:
 		{
+			app::Console::writeLine({ "Wood amount is currently: ", std::to_string(amt_wood) });
 			//set wood by accessing data size of wood amount
-			amt_wood = *(uint8_t*)&data[*offset];
+			amt_wood += *data;
 			*offset += sizeof(uint8_t);
+			app::Console::writeLine({ "after server update: ", std::to_string(amt_wood) });
+
 		}
 		break;
 		case FLAG_WOOD_GETTIME:
@@ -91,13 +95,23 @@ void app::client::Client::ProcessData(uint8_t * data, uint16_t * offset)
 	}
 }
 
-void app::client::Client::InitNetwork(const char * pIP, int iPort)
+void app::client::Client::InitNetwork(std::string const & pIP, int iPort)
 {
+	socket_set = SDLNet_AllocSocketSet(1);
+
+
+
 	IPaddress ip;
-	if (SDLNet_ResolveHost(&ip, pIP, iPort) == -1);
+	if (SDLNet_ResolveHost(&ip, pIP.c_str(), iPort) != NULL);
 	{
-		app::Console::writeLine({ "ERROR: SDLNer_ResolveHost: [", SDLNet_GetError(), "]" });
+		app::Console::writeLine({ "ERROR: SDLNet_ResolveHost: [", SDLNet_GetError(), "]" });
 	}
+	// Get our IP address in proper dot-quad format by breaking up the 32-bit unsigned host address and splitting it into an array of four 8-bit unsigned numbers...
+	Uint8 * dotQuad = (Uint8*)&ip.host;
+	//... and then outputting them cast to integers. Then read the last 16 bits of the serverIP object to get the port number
+	std::cout << "Successfully resolved server host to IP: " << (unsigned short)dotQuad[0] << "." << (unsigned short)dotQuad[1] << "." << (unsigned short)dotQuad[2] << "." << (unsigned short)dotQuad[3];
+	std::cout << " port " << SDLNet_Read16(&ip.port) << std::endl << std::endl;
+	//open the servers socket
 
 	socket = SDLNet_TCP_Open(&ip);
 	if (socket == NULL)

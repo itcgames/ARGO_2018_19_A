@@ -8,7 +8,6 @@ typedef struct {
 	uint32_t timer_wood;
 } Client;
 
-
 const int MAX_PACKET = 255;
 const int MAX_SOCKETS = 16;
 const int WOOD_WAIT_TIME = 5000;
@@ -144,10 +143,21 @@ int main(int argv, char** argc)
 	//ip of the pc server is on
 	IPaddress ip;
 	//attempt to resolve the host
-	if (SDLNet_ResolveHost(&ip, NULL, 8000) == -1)
+	if (SDLNet_ResolveHost(&ip, NULL, 27000) == -1)
 	{
 		app::Console::writeLine({ "ERROR: SDLNet_ResolveHost: [", SDLNet_GetError(), "]" });
+		exit(EXIT_FAILURE);
 	}
+	if (SDLNet_ResolveIP(&ip) == NULL) {
+		printf("SDLNet_ResolveIP: %s\n", SDLNet_GetError());
+		exit(1);
+	}
+	// Get our IP address in proper dot-quad format by breaking up the 32-bit unsigned host address and splitting it into an array of four 8-bit unsigned numbers...
+	Uint8 * dotQuad = (Uint8*)&ip.host;
+
+	//... and then outputting them cast to integers. Then read the last 16 bits of the serverIP object to get the port number
+	std::cout << "Successfully resolved server host to IP: " << (unsigned short)dotQuad[0] << "." << (unsigned short)dotQuad[1] << "." << (unsigned short)dotQuad[2] << "." << (unsigned short)dotQuad[3];
+	std::cout << " port " << SDLNet_Read16(&ip.port) << std::endl << std::endl;
 	//open the servers socket
 	server_socket = SDLNet_TCP_Open(&ip);
 	if (server_socket == NULL)
@@ -227,6 +237,7 @@ int main(int argv, char** argc)
 						offset += sizeof(uint8_t);
 
 						SendData(ind, send_data, offset, FLAG_WOOD_UPDATE);
+						app::Console::writeLine({ "sending request to update wood of client: ", std::to_string(ind) });
 					}
 						break;
 					case FLAG_QUIT:

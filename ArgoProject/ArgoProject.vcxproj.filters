@@ -369,6 +369,9 @@
     <ClCompile Include="src\client\Client.cpp">
       <Filter>Source Files\client</Filter>
     </ClCompile>
+    <ClCompile Include="src\systems\DebugSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -622,6 +625,9 @@
     </ClInclude>
     <ClInclude Include="src\client\Client.h">
       <Filter>Header Files\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\DebugSystem.h">
+      <Filter>Header Files\systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

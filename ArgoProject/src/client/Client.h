@@ -22,10 +22,15 @@ namespace app::client
 		void SendData(uint8_t* data, uint16_t length, uint16_t flag);
 		uint8_t* RecvData(uint16_t* length);
 		void ProcessData(uint8_t* data, uint16_t* offset);
-		void InitNetwork(const char* pIP, int iPort);
+		void InitNetwork(std::string const & pIP, int iPort);
 		bool CheckSocket();
 		
 	public: // Public Static Variables
+		static constexpr int MAX_PACKET = 255;
+		static constexpr int FLAG_QUIT = 0;
+		static constexpr int FLAG_WOOD_QUEST = 17;
+		static constexpr int FLAG_WOOD_UPDATE = 16;
+		static constexpr int FLAG_WOOD_GETTIME = 18;
 	public: // Public Member Variables
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
@@ -34,11 +39,6 @@ namespace app::client
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables
-		static constexpr int MAX_PACKET = 255;
-		static constexpr int FLAG_QUIT = 0;
-		static constexpr int FLAG_WOOD_QUEST = 17;
-		static constexpr int FLAG_WOOD_UPDATE = 16;
-		static constexpr int FLAG_WOOD_GETTIME = 18;
 	private: // Private Member Variables
 
 

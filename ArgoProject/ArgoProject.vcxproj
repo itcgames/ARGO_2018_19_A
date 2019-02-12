@@ -255,6 +255,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\BaseSystem.cpp" />
     <ClCompile Include="src\systems\CommandSystem.cpp" />
     <ClCompile Include="src\systems\DashSystem.cpp" />
+    <ClCompile Include="src\systems\DebugSystem.cpp" />
     <ClCompile Include="src\systems\InputSystem.cpp" />
     <ClCompile Include="src\systems\CameraSystem.cpp" />
     <ClCompile Include="src\systems\MotionSystem.cpp" />
@@ -341,6 +342,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\systems\BaseSystem.h" />
     <ClInclude Include="src\systems\CommandSystem.h" />
     <ClInclude Include="src\systems\DashSystem.h" />
+    <ClInclude Include="src\systems\DebugSystem.h" />
     <ClInclude Include="src\systems\InputSystem.h" />
     <ClInclude Include="src\systems\CameraSystem.h" />
     <ClInclude Include="src\systems\MotionSystem.h" />

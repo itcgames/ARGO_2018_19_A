@@ -5,6 +5,7 @@
 #include "singletons/MouseHandlerSingleton.h"
 #include "singletons/RegistrySingleton.h"
 #include "singletons/WindowSingleton.h"
+#include "client/Client.h"
 
 
 app::Game::Game()
@@ -21,6 +22,7 @@ app::Game::Game()
 		Console::writeLine({ "ERROR: SDL Failed to initialize [", SDL_GetError(), "]" });
 		m_running = false;
 	}
+
 }
 
 app::Game::~Game()
