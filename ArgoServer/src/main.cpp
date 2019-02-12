@@ -162,7 +162,7 @@ bool processPacket(int ID, Packet _packetType)
 	default:
 		break;
 	}
-	return false;
+	return true;
 }
 
 //TODO: move to a class
