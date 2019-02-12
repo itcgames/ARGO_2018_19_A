@@ -113,12 +113,12 @@ void app::sys::CollisionSystem::dashCollisions()
 				{
 					if (dash.direction == -180)
 					{
-						float blockSize = (secLocation.position.x - secDimensions.origin.x) + secDimensions.size.x;
+						float const & blockSize = (secLocation.position.x - secDimensions.origin.x) + secDimensions.size.x;
 						location.position.x = blockSize + dimensions.origin.x;
 					}
 					else if (dash.direction == 0)
 					{
-						float blockSize = (secLocation.position.x - secDimensions.origin.x);
+						float const & blockSize = (secLocation.position.x - secDimensions.origin.x);
 						location.position.x = (blockSize - dimensions.origin.x);
 					}
 				}
