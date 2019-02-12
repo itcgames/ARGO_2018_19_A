@@ -17,7 +17,9 @@ app::sys::CollisionSystem::CollisionSystem()
 	: BaseSystem()
 {
 	//prepare these components
-	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Motion, comp::AirMotion, comp::Dash>();
+	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Motion>();
+	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::AirMotion>();
+	m_registry.prepare<comp::Collision, comp::Location, comp::Dimensions>();
 }
 
 void app::sys::CollisionSystem::update(app::time::seconds const & dt)
