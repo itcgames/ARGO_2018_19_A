@@ -22,7 +22,7 @@ void app::sys::CameraSystem::update(app::time::seconds const & dt)
 		if (camera.target.has_value())
 		{
 			auto const & targetLocation = targetView.get(camera.target.value());
-			math::Vector2f targetPosition = targetLocation.position;
+			math::Vector2f const & targetPosition = targetLocation.position;
 			if (camera.internalClamp.has_value())
 			{
 				if (targetPosition.x > camera.center.x + camera.internalClamp.value().x)
