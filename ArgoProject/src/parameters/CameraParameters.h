@@ -1,29 +1,25 @@
-#ifndef _CAMERA_H
-#define _CAMERA_H
+﻿#ifndef _PARAMETERS_CAMERA_H
+#define _PARAMETERS_CAMERA_H
 
-#include "math/Vector2.h"
-
-namespace app::comp
+namespace app::par
 {
-	class Camera
+	struct CameraParameters
 	{
 	public: // Constructors/Destructor/Assignments
-		Camera() = default;
-		~Camera() = default;
+		CameraParameters() = default;
+		~CameraParameters() = default;
 
-		Camera(Camera const &) = default;
-		Camera & operator=(Camera const &) = default;
+		CameraParameters(CameraParameters const &) = default;
+		CameraParameters & operator=(CameraParameters const &) = default;
 
-		Camera(Camera &&) = default;
-		Camera & operator=(Camera &&) = default;
+		CameraParameters(CameraParameters &&) = default;
+		CameraParameters & operator=(CameraParameters &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		math::Vector2f center;
-		math::Vector2f size;
-		std::optional<app::Entity> target;
+		std::optional<app::Entity> targetEntity = std::nullopt;
 		std::optional<math::Rectf> clampRect;
 		std::optional<math::Vector2f> internalClamp;
 	protected: // Protected Static Functions
@@ -37,4 +33,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_CAMERA_H
+#endif // !_PARAMETERS_CAMERA_H

@@ -98,9 +98,10 @@ void app::gra::Window::render(app::gra::RenderRect const & rect) const
 	auto const & source = rect.getSourceRect();
 	auto const & screenSize = math::Vector2f{ static_cast<float>(m_width), static_cast<float>(m_height) };
 	auto const & scale = screenSize / static_cast<math::Vector2f>(m_view.size);
+	auto const & halfSize = m_view.size / 2;
 	auto const & destination = SDL_Rect{
-		position.x - origin.x - m_view.position.x,
-		position.y - origin.y - m_view.position.y,
+		position.x - origin.x - (m_view.position.x - halfSize.x),
+		position.y - origin.y - (m_view.position.y - halfSize.y),
 		static_cast<int32_t>(size.x * scale.x),
 		static_cast<int32_t>(size.y * scale.y)
 	};

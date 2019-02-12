@@ -226,6 +226,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\math\Math.cpp" />
     <ClCompile Include="src\math\Rect.cpp" />
     <ClCompile Include="src\math\Vector2.cpp" />
+    <ClCompile Include="src\parameters\CameraParameters.cpp" />
     <ClCompile Include="src\scenes\BaseScene.cpp" />
     <ClCompile Include="src\scenes\SceneManager.cpp" />
     <ClCompile Include="src\scenes\MainMenuScene.cpp" />
@@ -316,6 +317,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\math\Math.h" />
     <ClInclude Include="src\math\Rect.h" />
     <ClInclude Include="src\math\Vector2.h" />
+    <ClInclude Include="src\parameters\CameraParameters.h" />
     <ClInclude Include="src\scenes\BaseScene.h" />
     <ClInclude Include="src\scenes\SceneManager.h" />
     <ClInclude Include="src\scenes\MainMenuScene.h" />

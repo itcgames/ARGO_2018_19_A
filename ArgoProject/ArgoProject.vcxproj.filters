@@ -106,6 +106,12 @@
     <Filter Include="Header Files\factories\entities">
       <UniqueIdentifier>{7ea2d7cc-3b18-41e1-82b6-a1394e7535af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\parameters">
+      <UniqueIdentifier>{718bef72-4331-4e29-b734-e74d02fda77b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\parameters">
+      <UniqueIdentifier>{25fdef00-7d3b-47d0-b5cd-69457666f098}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -360,6 +366,9 @@
     <ClCompile Include="src\factories\scenes\TutorialLevelSceneFactory.cpp">
       <Filter>Source Files\factories\scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\parameters\CameraParameters.cpp">
+      <Filter>Source Files\parameters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -610,6 +619,9 @@
     </ClInclude>
     <ClInclude Include="src\factories\scenes\LevelSelectSceneFactory.h">
       <Filter>Header Files\factories\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\parameters\CameraParameters.h">
+      <Filter>Header Files\parameters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
