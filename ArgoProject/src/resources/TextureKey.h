@@ -6,6 +6,8 @@ namespace app::res
 	enum class TextureKey
 	{
 		Debug,
+		DebugBig,
+		DebugHuge,
 		DebugAnimation,
 		Count // Keep this one at the bottom of the enum list
 	};

@@ -20,7 +20,7 @@ namespace app::res
 		typedef std::conditional_t<_Async, AsyncResourceMap, SyncResourceMap> ResourceMap;
 	public: // Constructors/Destructor/Assignments
 		ResourceHandler() = default;
-		~ResourceHandler() = default;
+		~ResourceHandler();
 
 		ResourceHandler(ResourceHandler const &) = default;
 		ResourceHandler & operator=(ResourceHandler const &) = default;
@@ -32,6 +32,7 @@ namespace app::res
 	public: // Public Member Functions
 		std::shared_ptr<_Resource> get(_Key const & key, std::optional<std::string> const & file = std::nullopt);
 		void load(_Key const & key, std::string const & file);
+		bool isAllLoaded() const;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -44,6 +45,12 @@ namespace app::res
 	private: // Private Member Variables
 		ResourceMap m_resourceMap;
 	};
+
+	template<typename _Key, typename _Resource, bool _Async, typename _Loader>
+	ResourceHandler<_Key, _Resource, _Async, _Loader>::~ResourceHandler()
+	{
+		for (auto &[mapKey, mapValue] : m_resourceMap) { if (mapValue.thread.has_value()) { mapValue.thread->join(); } }
+	}
 
 	template<typename _Key, typename _Resource, bool _Async, typename _Loader>
 	std::shared_ptr<_Resource> ResourceHandler<_Key, _Resource, _Async, _Loader>::get(_Key const & key, std::optional<std::string> const & file)
@@ -89,6 +96,19 @@ namespace app::res
 			_Loader::load(resource, file);
 			m_resourceMap.insert(std::make_pair(key, resource));
 		}
+	}
+
+	template<typename _Key, typename _Resource, bool _Async, typename _Loader>
+	bool ResourceHandler<_Key, _Resource, _Async, _Loader>::isAllLoaded() const
+	{
+		if constexpr (_Async)
+		{
+			for (auto const &[mapKey, mapValue] : m_resourceMap)
+			{
+				if (mapValue.thread.has_value() && !mapValue.resource) { return false; }
+			}
+		}
+		return true;
 	}
 
 }

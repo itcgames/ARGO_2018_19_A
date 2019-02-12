@@ -16,10 +16,16 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 {
 	using TextureKey = app::res::TextureKey;
 	m_resourceManager.loadTexture(TextureKey::Debug, "./res/image.png");
+	m_resourceManager.loadTexture(TextureKey::DebugBig, "./res/BigImage.png");
+	m_resourceManager.loadTexture(TextureKey::DebugHuge, "./res/BigImage.png");
 	m_resourceManager.loadTexture(TextureKey::DebugAnimation, "./res/Animations/test.png");
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("SPLASH SCENE Constructed");
+		while (!m_resourceManager.isLoaded())
+		{
+			Console::writeLine("SPLASH SCENE: Waiting for resources to load");
+		}
 	}
 }
 

@@ -35,6 +35,11 @@ namespace app::res
 
 		std::shared_ptr<int> getAudio(AudioKey const & key);
 		void loadAudio(AudioKey const & key, std::string const & file);
+
+		bool isLoaded();
+		bool isTextureLoaded();
+		bool isFontLoaded();
+		bool isAudioLoaded();
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -84,6 +89,29 @@ namespace app::res
 	void ResourceManager<_Async>::loadAudio(AudioKey const & key, std::string const & file)
 	{
 		m_audioHandler.load(key, file);
+	}
+
+	template<bool _Async>
+	bool ResourceManager<_Async>::isLoaded()
+	{
+		return this->isTextureLoaded() && this->isFontLoaded() && this->isAudioLoaded();
+	}
+	template<bool _Async>
+	bool ResourceManager<_Async>::isTextureLoaded()
+	{
+		return m_textureHandler.isAllLoaded();
+	}
+
+	template<bool _Async>
+	bool ResourceManager<_Async>::isFontLoaded()
+	{
+		return m_fontHandler.isAllLoaded();
+	}
+
+	template<bool _Async>
+	bool ResourceManager<_Async>::isAudioLoaded()
+	{
+		return m_audioHandler.isAllLoaded();
 	}
 }
 
