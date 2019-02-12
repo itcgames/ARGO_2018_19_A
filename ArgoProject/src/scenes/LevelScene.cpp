@@ -11,8 +11,8 @@ app::sce::LevelScene::LevelScene(SceneType & sceneManagerType)
 			UpdateSystem(std::in_place_type<app::sys::AirMotionSystem>),
 			UpdateSystem(std::in_place_type<app::sys::DashSystem>),
 			UpdateSystem(std::in_place_type<app::sys::StateMachineSystem>),
-			UpdateSystem(std::in_place_type<app::sys::CameraSystem>),
-			UpdateSystem(std::in_place_type<app::sys::CollisionSystem>)
+			UpdateSystem(std::in_place_type<app::sys::CollisionSystem>),
+			UpdateSystem(std::in_place_type<app::sys::CameraSystem>)
 		})
 		, util::make_vector<DrawSystem>({
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
