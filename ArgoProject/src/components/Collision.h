@@ -22,7 +22,7 @@ namespace app::comp
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::variant<cute::c2AABB, cute::c2Circle> collisionBox;
+		std::variant<cute::c2AABB, cute::c2Circle> bounds;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables

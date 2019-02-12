@@ -42,7 +42,7 @@ void app::sys::CollisionSystem::groundCollisions()
 			if (entity != secEntity)
 			{
 				//if we collide
-				cute::c2Manifold manifold = app::vis::CollisionBoundsManiVisitor::collisionBetween(collision.collisionBox, secCollision.collisionBox);
+				cute::c2Manifold const & manifold = app::vis::CollisionBoundsManiVisitor::collisionBetween(collision.bounds, secCollision.bounds);
 				if (manifold.count)
 				{
 					// collision has occurred
@@ -50,7 +50,7 @@ void app::sys::CollisionSystem::groundCollisions()
 					auto const & penetration = manifold.depths[0];
 					auto const & pushback = (direction*penetration);
 					location.position += pushback;
-					std::visit(vis::CollisionUpdateVisitor{ location, dimensions}, collision.collisionBox);
+					std::visit(vis::CollisionUpdateVisitor{ location, dimensions}, collision.bounds);
 
 					if constexpr (DEBUG_MODE)
 					{
@@ -76,7 +76,7 @@ void app::sys::CollisionSystem::airCollisions()
 			if (entity != secEntity)
 			{
 				//if we collide
-				auto const & manifold = app::vis::CollisionBoundsManiVisitor::collisionBetween(collision.collisionBox, secCollision.collisionBox);
+				auto const & manifold = app::vis::CollisionBoundsManiVisitor::collisionBetween(collision.bounds, secCollision.bounds);
 				if (manifold.count)
 				{
 					// collision has occurred
@@ -84,7 +84,7 @@ void app::sys::CollisionSystem::airCollisions()
 					auto const & penetration = manifold.depths[0];
 					location.position += direction * penetration;
 
-					std::visit(vis::CollisionUpdateVisitor{ location, dimensions }, collision.collisionBox);
+					std::visit(vis::CollisionUpdateVisitor{ location, dimensions }, collision.bounds);
 				}
 			}
 		});
@@ -100,6 +100,6 @@ void app::sys::CollisionSystem::updateCollisionBoxes()
 	m_registry.view<comp::Collision, comp::Location, comp::Dimensions>(entt::persistent_t())
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions)
 	{
-		std::visit(vis::CollisionUpdateVisitor{ location, dimensions }, collision.collisionBox);
+		std::visit(vis::CollisionUpdateVisitor{ location, dimensions }, collision.bounds);
 	});
 }

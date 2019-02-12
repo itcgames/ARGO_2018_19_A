@@ -7,10 +7,6 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 		, util::make_vector<UpdateSystem>({
 			UpdateSystem(std::in_place_type<app::sys::InputSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
-			UpdateSystem(std::in_place_type<app::sys::MotionSystem>),
-			UpdateSystem(std::in_place_type<app::sys::AirMotionSystem>),
-			UpdateSystem(std::in_place_type<app::sys::DashSystem>),
-			UpdateSystem(std::in_place_type<app::sys::StateMachineSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CameraSystem>)
 		})
 
