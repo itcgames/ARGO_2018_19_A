@@ -87,7 +87,7 @@ app::Entity const app::fact::PlayerFactory::create()
 	m_registry.assign<decltype(stateMachine)>(entity, std::move(stateMachine));
 
 	auto collision = comp::Collision();
-	collision.collisionBox = cute::c2AABB();
+	collision.bounds = cute::c2AABB();
 	m_registry.assign<decltype(collision)>(entity, std::move(collision));
 	return entity;
 }
