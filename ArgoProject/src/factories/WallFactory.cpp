@@ -1,10 +1,12 @@
 ﻿#include "stdafx.h"
+#include "utilities/cute_c2.h"
 #include "WallFactory.h"
 
 #include "components/Location.h"
 #include "components/Dimensions.h"
 #include "components/Animator.h"
 #include "components/Render.h"
+#include "components/Collision.h"
 
 app::fact::WallFactory::WallFactory(app::math::Vector2f pos, app::math::Vector2f size)
 	: m_position(pos), m_size(size)
@@ -29,5 +31,8 @@ app::Entity const app::fact::WallFactory::create()
 	render.texture = m_resourceManager.getTexture(app::res::TextureKey::Debug);
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
+	auto collision = comp::Collision();
+	collision.bounds = cute::c2AABB();
+	m_registry.assign<decltype(collision)>(entity, std::move(collision));
 	return entity;
 }

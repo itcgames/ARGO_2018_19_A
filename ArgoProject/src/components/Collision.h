@@ -1,31 +1,28 @@
-#ifndef _CAMERA_H
-#define _CAMERA_H
+#ifndef _COLLISION_H
+#define _COLLISION_H
 
 #include "math/Vector2.h"
+#include "utilities/cute_c2.h"
 
 namespace app::comp
 {
-	class Camera
+	class Collision
 	{
 	public: // Constructors/Destructor/Assignments
-		Camera() = default;
-		~Camera() = default;
+		Collision() = default;
+		~Collision() = default;
 
-		Camera(Camera const &) = default;
-		Camera & operator=(Camera const &) = default;
+		Collision(Collision const &) = default;
+		Collision & operator=(Collision const &) = default;
 
-		Camera(Camera &&) = default;
-		Camera & operator=(Camera &&) = default;
+		Collision(Collision &&) = default;
+		Collision & operator=(Collision &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		math::Vector2f center;
-		math::Vector2f size;
-		std::optional<app::Entity> target;
-		std::optional<math::Rectf> clampRect;
-		std::optional<math::Vector2f> internalClamp;
+		std::variant<cute::c2AABB, cute::c2Circle> bounds;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -37,4 +34,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_CAMERA_H
+#endif // !_Collision_H

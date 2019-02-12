@@ -112,6 +112,18 @@
     <Filter Include="Header Files\resources">
       <UniqueIdentifier>{5f18330a-3b16-4b76-911f-b709888b2664}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\visitors">
+      <UniqueIdentifier>{7459f996-b6b9-479f-aa5b-857585a8e495}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\visitors">
+      <UniqueIdentifier>{f590c2a4-d699-4c25-9b67-895b16d093c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\parameters">
+      <UniqueIdentifier>{718bef72-4331-4e29-b734-e74d02fda77b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\parameters">
+      <UniqueIdentifier>{25fdef00-7d3b-47d0-b5cd-69457666f098}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -247,6 +259,12 @@
       <Filter>Source Files\components</Filter>
     </ClCompile>
     <ClCompile Include="src\systems\StateMachineSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Collision.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\CollisionSystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
     <ClCompile Include="src\systems\DashSystem.cpp">
@@ -387,6 +405,30 @@
     <ClCompile Include="src\resources\AudioKey.cpp">
       <Filter>Source Files\resources</Filter>
     </ClCompile>
+    <ClCompile Include="src\visitors\CollisionUpdateVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visitors\CollisionAabbBoolVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visitors\CollisionAabbManiVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visitors\CollisionBoundsBoolVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visitors\CollisionBoundsManiVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visitors\CollisionCircleBoolVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visitors\CollisionCircleManiVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parameters\CameraParameters.cpp">
+      <Filter>Source Files\parameters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -519,6 +561,12 @@
       <Filter>Header Files\systems</Filter>
     </ClInclude>
     <ClInclude Include="src\systems\StateMachineSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Collision.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\CollisionSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
     <ClInclude Include="src\systems\DashSystem.h">
@@ -658,6 +706,30 @@
     </ClInclude>
     <ClInclude Include="src\resources\AudioKey.h">
       <Filter>Header Files\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionUpdateVisitor.h">
+      <Filter>Header Files\visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionAabbBoolVisitor.h">
+      <Filter>Header Files\visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionAabbManiVisitor.h">
+      <Filter>Header Files\visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionBoundsBoolVisitor.h">
+      <Filter>Header Files\visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionBoundsManiVisitor.h">
+      <Filter>Header Files\visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionCircleBoolVisitor.h">
+      <Filter>Header Files\visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionCircleManiVisitor.h">
+      <Filter>Header Files\visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\parameters\CameraParameters.h">
+      <Filter>Header Files\parameters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
