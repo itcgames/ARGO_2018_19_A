@@ -33,8 +33,9 @@ namespace app::sys
 	private: // Private Static Variables
 	private: // Private Member Variables
 		app::inp::KeyHandler & m_keyHandler;
-		app::client::Client m_client;
+		app::net::Client m_client;
 		bool updateVariable = false;
+		bool connected;
 
 	};
 }

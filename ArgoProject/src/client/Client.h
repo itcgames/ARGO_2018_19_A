@@ -2,8 +2,12 @@
 #define _CLIENT_H
 #include"stdafx.h"
 
-namespace app::client
+namespace app::net
 {
+
+	enum Packet {
+		P_CLIENT_NAME
+	};
 	class Client
 	{
 	public: // Constructors/Destructor/Assignments
@@ -22,8 +26,17 @@ namespace app::client
 		void SendData(uint8_t* data, uint16_t length, uint16_t flag);
 		uint8_t* RecvData(uint16_t* length);
 		void ProcessData(uint8_t* data, uint16_t* offset);
-		void InitNetwork(std::string const & pIP, int iPort);
+		bool InitNetwork(std::string const & pIP, int iPort);
 		bool CheckSocket();
+		bool sendAll(char* data, int totalBytes);
+		bool sendString(std::string& _string);
+		bool getString(std::string& _string);
+		bool sendPacketType(Packet& _packetType);
+		bool sendInt(int _int);
+		bool recvAll(char * data, int totalBytes);
+		bool getPacketType(Packet& _packetType);
+		bool getInt(int& _int);
+		bool processPacket(Packet _packetType);
 		
 	public: // Public Static Variables
 		static constexpr int MAX_PACKET = 255;

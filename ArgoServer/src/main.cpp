@@ -8,6 +8,10 @@ typedef struct {
 	uint32_t timer_wood;
 } Client;
 
+enum Packet {
+	P_CLIENT_NAME
+};
+
 const int MAX_PACKET = 255;
 const int MAX_SOCKETS = 16;
 const int WOOD_WAIT_TIME = 5000;
@@ -24,6 +28,144 @@ Client clients[MAX_SOCKETS];
 SDLNet_SocketSet socket_set;
 //array of sockets connected to server
 TCPsocket sockets[MAX_SOCKETS];
+
+
+//TODO: move to a class
+
+bool recvAll(int ID, char* data, int totalBytes)
+{
+	int bytesReceived = 0;
+	while (bytesReceived < totalBytes)
+	{
+		int retnCheck = SDLNet_TCP_Recv(sockets[ID], data, totalBytes - bytesReceived);
+		if (retnCheck <= 0)
+		{
+			return false;
+		}
+		bytesReceived += retnCheck;
+	}
+	return true;
+}
+
+bool sendAll(int ID, char* data, int totalBytes)
+{
+	int bytesSent = 0;
+	while (bytesSent < totalBytes)
+	{
+		int retnCheck = SDLNet_TCP_Send(sockets[ID], data + bytesSent, totalBytes - bytesSent);
+		if (retnCheck < bytesSent)
+		{
+			return false;
+		}
+		bytesSent += retnCheck;
+	}
+	return true;
+}
+
+bool sendInt(int ID, int _int)
+{
+	if (!sendAll(ID, (char*)&_int, sizeof(int)))
+	{
+		return false;
+	}
+	return true;
+}
+
+bool getInt(int ID, int& _int)
+{
+	app::Console::writeLine("got an integer");
+	if (!recvAll(ID, (char*)&_int, sizeof(int)))
+	{
+		return false;
+	}
+	return true;
+}
+
+bool sendPacketType(int ID, Packet _packetType)
+{
+	if (!sendAll(ID, (char*)&_packetType, sizeof(Packet)))
+	{
+		return false;
+	}
+	return true;
+}
+
+bool getPacketType(int ID, Packet& _packetType)
+{
+	app::Console::writeLine("got a packet type");
+	if (!recvAll(ID, (char*)&_packetType, sizeof(Packet)))
+	{
+		return false;
+	}
+	return true;
+}
+
+bool sendString(int ID, std::string& _string)
+{
+	if (!sendPacketType(ID, P_CLIENT_NAME))
+	{
+		return false;
+	}
+	int bufferLen = _string.size();
+	if (!sendInt(ID, bufferLen))
+	{
+		return false;
+	}
+	if (!sendAll(ID, (char*)&_string, sizeof(_string)))
+	{
+		return false;
+	}
+	return true;
+}
+
+bool getString(int ID, std::string& _string)
+{
+	app::Console::writeLine("got a string");
+	int bufferLength;
+	if (!getInt(ID, bufferLength))
+	{
+		return false;
+	}
+	char* buffer = new char[bufferLength + 1];
+	buffer[bufferLength] = '\0';
+	if (!recvAll(ID, buffer, bufferLength))
+	{
+		delete[] buffer;
+		return false;
+	}
+	_string = buffer;
+	delete[] buffer;
+	return true;
+}
+
+bool processPacket(int ID, Packet _packetType)
+{
+	/*std::string Message;
+	if (!getString(ID, Message))
+	{
+		return false;
+	}
+	app::Console::writeLine({ "server just got a message from client[", std::to_string(ID), "] - ", Message });*/
+	switch (_packetType)
+	{
+	case P_CLIENT_NAME:
+	{
+		std::string Message;
+		if (!getString(ID, Message))
+		{
+			return false;
+		}
+		std::cout << Message << std::endl;
+		break;
+	}
+	break;
+	default:
+		break;
+	}
+	return false;
+}
+
+//TODO: move to a class
 
 
 /// <summary>
@@ -72,7 +214,7 @@ int AcceptSocket(int index)
 uint8_t* RecvData(int index, uint16_t* length, uint16_t* flag)
 {
 	uint8_t temp_data[MAX_PACKET];
-	int num_recv = SDLNet_TCP_Recv(sockets[index], temp_data, MAX_PACKET);
+ 	int num_recv = SDLNet_TCP_Recv(sockets[index], temp_data, MAX_PACKET);
 
 	if (num_recv <= 0)
 	{
@@ -210,48 +352,22 @@ int main(int argv, char** argc)
 				app::Console::writeLine({ "new connection, next_ind: ", std::to_string(next_ind) });
 				num_rdy--;
 			}
+			Packet packetType;
 
 			for (int ind = 0; ind < MAX_SOCKETS; ++ind)
 			{
 				if (sockets[ind] == NULL) continue;
 
-				uint8_t* data;
-				uint16_t flag;
-				uint16_t length;
-
-				data = RecvData(ind, &length, &flag);
-				if (data == NULL)
+				if (!getPacketType(ind, packetType))
 				{
-					num_rdy--;
-					continue;
+					app::Console::writeLine("could not get packet type");
 				}
-
-				switch (flag)
+				if (!processPacket(ind, packetType))
 				{
-					case FLAG_WOOD_UPDATE: 
-					{
-						uint16_t offset = 0;
-						uint8_t send_data[MAX_PACKET];
-
-						memcpy(send_data + offset, &clients[ind].amt_wood, sizeof(uint8_t));
-						offset += sizeof(uint8_t);
-
-						SendData(ind, send_data, offset, FLAG_WOOD_UPDATE);
-						app::Console::writeLine({ "sending request to update wood of client: ", std::to_string(ind) });
-					}
-						break;
-					case FLAG_QUIT:
-					{
-						running = 0;
-						app::Console::writeLine({ "Shutdown by client id: ", std::to_string(ind) });
-					}
-						break;
-					default:
-						break;
+					app::Console::writeLine("cold not send packet type");
 				}
-
-				free(data);
-				num_rdy--;
+				//std::string name = "bob";
+				//sendString(ind, name);
 			}
 		}
 	}
