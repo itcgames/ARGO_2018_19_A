@@ -20,6 +20,7 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 	m_resourceManager.loadTexture(TextureKey::DebugBig, "./res/BigImage.png");
 	m_resourceManager.loadTexture(TextureKey::DebugHuge, "./res/BigImage.png");
 	m_resourceManager.loadTexture(TextureKey::DebugAnimation, "./res/Animations/test.png");
+	m_resourceManager.loadTexture(TextureKey::DebugEnemyAnimation, "./res/Animations/testEnemy.png");
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("SPLASH SCENE Constructed");

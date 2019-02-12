@@ -25,6 +25,7 @@ namespace app::comp
 		float drag;
 		float dragCutoff;
 		float maxSpeed;
+		bool isPlayer;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables

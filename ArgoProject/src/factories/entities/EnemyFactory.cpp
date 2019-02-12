@@ -1,6 +1,6 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 #include "utilities/cute_c2.h"
-#include "PlayerFactory.h"
+#include "EnemyFactory.h"
 
 // components
 #include "components/Location.h"
@@ -8,39 +8,30 @@
 #include "components/Motion.h"
 #include "components/Animator.h"
 #include "components/Render.h"
-#include "components/Input.h"
-#include "components/Commandable.h"
 #include "components/Collision.h"
 
-#include "commands/MoveCommand.h"
-#include "commands/JumpCommand.h"
-#include "commands/DashCommand.h"
-#include "commands/FaceLeftCommand.h"
-#include "commands/FaceRightCommand.h"
-#include "components/StateMachine.h"
-
-app::fact::PlayerFactory::PlayerFactory()
+app::fact::EnemyFactory::EnemyFactory()
 	: EntityFactory()
 {
 }
 
-app::Entity const app::fact::PlayerFactory::create()
+app::Entity const app::fact::EnemyFactory::create(math::Vector2f position, math::Vector2f size)
 {
 	app::Entity const entity = EntityFactory::create();
 
 	auto location = comp::Location();
-	location.position = { 680.0f, 450.0f };
+	location.position = { position.x, position.y};
 	location.orientation = 0.0f;
 	m_registry.assign<decltype(location)>(entity, std::move(location));
 
 	auto dimensions = comp::Dimensions();
-	dimensions.size = { 100.0f, 100.0f };
+	dimensions.size = {size.x, size.y };
 	dimensions.origin = dimensions.size / 2.0f;
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
 
 	auto motion = comp::Motion();
-	motion.isPlayer = true;
-	motion.speed = 0.0f;
+	motion.isPlayer = false;
+	motion.speed = 20.0f;
 	motion.direction = 0.0f;
 	motion.angularSpeed = 0.0f;
 	motion.drag = 0.95f;
@@ -62,28 +53,8 @@ app::Entity const app::fact::PlayerFactory::create()
 	m_registry.assign<decltype(animator)>(entity, std::move(animator));
 
 	auto render = comp::Render();
-	render.texture = m_resourceManager.getTexture(app::res::TextureKey::DebugAnimation);
+	render.texture = m_resourceManager.getTexture(app::res::TextureKey::DebugEnemyAnimation);
 	m_registry.assign<decltype(render)>(entity, std::move(render));
-
-	auto input = comp::Input();
-	input.m_isRight = true;
-	input.m_canDoubleJump = true;
-	input.m_canDash = true;
-	//Here is where commands get binded to keys
-	input.keyDownCommands.insert(std::pair(SDLK_RIGHT, std::make_shared<app::cmnd::MoveCommand>(entity, 0, 20)));
-	input.keyDownCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::MoveCommand>(entity, 180, 20)));
-	input.keyPressedCommands.insert(std::pair(SDLK_SPACE, std::make_shared<app::cmnd::JumpCommand>(entity, 400.0f)));
-	input.keyPressedCommands.insert(std::pair(SDLK_z, std::make_shared<app::cmnd::DashCommand>(entity)));
-	input.keyPressedCommands.insert(std::pair(SDLK_RIGHT, std::make_shared<app::cmnd::FaceRightCommand>(entity)));
-	input.keyPressedCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::FaceLeftCommand>(entity)));
-	m_registry.assign<decltype(input)>(entity, std::move(input));
-
-	auto commandable = comp::Commandable();
-	m_registry.assign<decltype(commandable)>(entity, std::move(commandable));
-
-	auto stateMachine = comp::StateMachine();
-	stateMachine.instance = nullptr;
-	m_registry.assign<decltype(stateMachine)>(entity, std::move(stateMachine));
 
 	auto collision = comp::Collision();
 	collision.bounds = cute::c2AABB();

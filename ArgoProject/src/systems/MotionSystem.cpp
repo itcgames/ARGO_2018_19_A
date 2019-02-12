@@ -11,14 +11,17 @@ void app::sys::MotionSystem::update(app::time::seconds const & dt)
 		.each([&, this](app::Entity const entity, comp::Location & location, comp::Motion & motion)
 	{
 		auto const & velocity = (math::toVector(motion.direction) * motion.speed).truncate(motion.maxSpeed);
-		if (motion.speed >= motion.dragCutoff) 
+		if (motion.isPlayer)
 		{
-			//simulate drag
-			motion.speed *= motion.drag;
-		}
-		else
-		{
-			motion.speed = 0;
+			if (motion.speed >= motion.dragCutoff)
+			{
+				//simulate drag
+				motion.speed *= motion.drag;
+			}
+			else
+			{
+				motion.speed = 0;
+			}
 		}
 		location.position += velocity * dt.count();
 		location.orientation += motion.angularSpeed * dt.count();

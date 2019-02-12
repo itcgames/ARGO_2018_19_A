@@ -2,12 +2,14 @@
 #include "LevelSceneFactory.h"
 #include "factories/entities/PlayerFactory.h"
 #include "factories/entities/CameraFactory.h"
+#include "factories/entities/EnemyFactory.h"
 #include "factories/LevelFactory.h"
 
 std::vector<app::Entity> app::fact::sce::LevelSceneFactory::create()
 {
 	auto entities = std::vector<app::Entity>();
 
+	auto enemy = fact::EnemyFactory().create(math::Vector2f(800,450),math::Vector2f(50,50));
 	auto player = fact::PlayerFactory().create();
 	auto level = fact::LevelFactory().create();	
 	entities.insert(entities.end(), level.begin(), level.end());
