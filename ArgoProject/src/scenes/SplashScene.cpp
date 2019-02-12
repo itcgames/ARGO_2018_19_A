@@ -8,7 +8,8 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 			UpdateSystem(std::in_place_type<app::sys::InputSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CameraSystem>)
-			})
+		})
+
 		, util::make_vector<DrawSystem>({
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
 			DrawSystem(std::in_place_type<app::sys::RenderSystem>)

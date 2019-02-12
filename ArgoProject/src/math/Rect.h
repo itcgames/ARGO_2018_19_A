@@ -15,7 +15,6 @@ namespace app::math
 
 		Rect(Rect const &) = default;
 		Rect & operator=(Rect const &) = default;
-
 		Rect(Rect &&) = default;
 		Rect & operator=(Rect &&) = default;
 

@@ -106,6 +106,12 @@
     <Filter Include="Header Files\factories\entities">
       <UniqueIdentifier>{7ea2d7cc-3b18-41e1-82b6-a1394e7535af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\visitors">
+      <UniqueIdentifier>{7459f996-b6b9-479f-aa5b-857585a8e495}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\visitors">
+      <UniqueIdentifier>{f590c2a4-d699-4c25-9b67-895b16d093c2}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Header Files\parameters">
       <UniqueIdentifier>{718bef72-4331-4e29-b734-e74d02fda77b}</UniqueIdentifier>
     </Filter>
@@ -249,6 +255,12 @@
     <ClCompile Include="src\systems\StateMachineSystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
+    <ClCompile Include="src\components\Collision.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\CollisionSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
     <ClCompile Include="src\systems\DashSystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
@@ -365,6 +377,27 @@
     </ClCompile>
     <ClCompile Include="src\factories\scenes\TutorialLevelSceneFactory.cpp">
       <Filter>Source Files\factories\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visitors\CollisionUpdateVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visitors\CollisionAabbBoolVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visitors\CollisionAabbManiVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visitors\CollisionBoundsBoolVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visitors\CollisionBoundsManiVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visitors\CollisionCircleBoolVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\visitors\CollisionCircleManiVisitor.cpp">
+      <Filter>Source Files\visitors</Filter>
     </ClCompile>
     <ClCompile Include="src\parameters\CameraParameters.cpp">
       <Filter>Source Files\parameters</Filter>
@@ -503,6 +536,12 @@
     <ClInclude Include="src\systems\StateMachineSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
+    <ClInclude Include="src\components\Collision.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\CollisionSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
     <ClInclude Include="src\systems\DashSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
@@ -619,6 +658,27 @@
     </ClInclude>
     <ClInclude Include="src\factories\scenes\LevelSelectSceneFactory.h">
       <Filter>Header Files\factories\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionUpdateVisitor.h">
+      <Filter>Header Files\visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionAabbBoolVisitor.h">
+      <Filter>Header Files\visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionAabbManiVisitor.h">
+      <Filter>Header Files\visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionBoundsBoolVisitor.h">
+      <Filter>Header Files\visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionBoundsManiVisitor.h">
+      <Filter>Header Files\visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionCircleBoolVisitor.h">
+      <Filter>Header Files\visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\visitors\CollisionCircleManiVisitor.h">
+      <Filter>Header Files\visitors</Filter>
     </ClInclude>
     <ClInclude Include="src\parameters\CameraParameters.h">
       <Filter>Header Files\parameters</Filter>

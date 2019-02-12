@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{8E6F05B0-513B-4DEF-81CB-E22DDF08B6E0}</ProjectGuid>
     <RootNamespace>ArgoProject</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -182,6 +182,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\commands\MoveCommand.cpp" />
     <ClCompile Include="src\components\AirMotion.cpp" />
     <ClCompile Include="src\components\Animator.cpp" />
+    <ClCompile Include="src\components\Collision.cpp" />
     <ClCompile Include="src\components\Commandable.cpp" />
     <ClCompile Include="src\components\Camera.cpp" />
     <ClCompile Include="src\components\Dash.cpp" />
@@ -253,6 +254,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\AirMotionSystem.cpp" />
     <ClCompile Include="src\systems\AnimatorSystem.cpp" />
     <ClCompile Include="src\systems\BaseSystem.cpp" />
+    <ClCompile Include="src\systems\CollisionSystem.cpp" />
     <ClCompile Include="src\systems\CommandSystem.cpp" />
     <ClCompile Include="src\systems\DashSystem.cpp" />
     <ClCompile Include="src\systems\InputSystem.cpp" />
@@ -264,6 +266,13 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\utilities\cute_c2.cpp" />
     <ClCompile Include="src\utilities\Time.cpp" />
     <ClCompile Include="src\utilities\makers.cpp" />
+    <ClCompile Include="src\visitors\CollisionAabbBoolVisitor.cpp" />
+    <ClCompile Include="src\visitors\CollisionAabbManiVisitor.cpp" />
+    <ClCompile Include="src\visitors\CollisionBoundsBoolVisitor.cpp" />
+    <ClCompile Include="src\visitors\CollisionBoundsManiVisitor.cpp" />
+    <ClCompile Include="src\visitors\CollisionCircleBoolVisitor.cpp" />
+    <ClCompile Include="src\visitors\CollisionCircleManiVisitor.cpp" />
+    <ClCompile Include="src\visitors\CollisionUpdateVisitor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\commands\BaseCommand.h" />
@@ -274,6 +283,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\commands\MoveCommand.h" />
     <ClInclude Include="src\components\AirMotion.h" />
     <ClInclude Include="src\components\Animator.h" />
+    <ClInclude Include="src\components\Collision.h" />
     <ClInclude Include="src\components\Commandable.h" />
     <ClInclude Include="src\components\Camera.h" />
     <ClInclude Include="src\components\Dash.h" />
@@ -339,6 +349,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\systems\AirMotionSystem.h" />
     <ClInclude Include="src\systems\AnimatorSystem.h" />
     <ClInclude Include="src\systems\BaseSystem.h" />
+    <ClInclude Include="src\systems\CollisionSystem.h" />
     <ClInclude Include="src\systems\CommandSystem.h" />
     <ClInclude Include="src\systems\DashSystem.h" />
     <ClInclude Include="src\systems\InputSystem.h" />
@@ -350,6 +361,13 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\utilities\cute_c2.h" />
     <ClInclude Include="src\utilities\Time.h" />
     <ClInclude Include="src\utilities\makers.h" />
+    <ClInclude Include="src\visitors\CollisionAabbBoolVisitor.h" />
+    <ClInclude Include="src\visitors\CollisionAabbManiVisitor.h" />
+    <ClInclude Include="src\visitors\CollisionBoundsBoolVisitor.h" />
+    <ClInclude Include="src\visitors\CollisionBoundsManiVisitor.h" />
+    <ClInclude Include="src\visitors\CollisionCircleBoolVisitor.h" />
+    <ClInclude Include="src\visitors\CollisionCircleManiVisitor.h" />
+    <ClInclude Include="src\visitors\CollisionUpdateVisitor.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\.gitkeep" />

@@ -10,7 +10,7 @@
 #include "systems/RenderSystem.h"
 #include "systems/StateMachineSystem.h"
 #include "systems/DashSystem.h"
-
+#include "systems/CollisionSystem.h"
 namespace app::sce
 {
 	enum class SceneType
@@ -38,7 +38,8 @@ namespace app::sce
 			, sys::CameraSystem
 			, sys::CommandSystem
 			, sys::InputSystem
-		>;
+			, sys::CollisionSystem>;
+
 		using UpdateSystems = std::vector<UpdateSystem>;
 		using DrawSystem = std::variant<
 			  sys::RenderSystem
