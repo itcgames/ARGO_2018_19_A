@@ -19,7 +19,7 @@ app::Entity const app::fact::CameraFactory::create()
 	camera.size = { 1366.0f, 768.0f };
 	camera.target = parameters.targetEntity;
 	camera.clampRect = parameters.clampRect;
-	camera.internalClampSize = parameters.internalClampSize;
+	camera.internalClamp = parameters.internalClamp;
 	m_registry.assign<decltype(camera)>(entity, std::move(camera));
 
 	return entity;

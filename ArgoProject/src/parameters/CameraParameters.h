@@ -21,8 +21,7 @@ namespace app::par
 	public: // Public Member Variables
 		std::optional<app::Entity> targetEntity = std::nullopt;
 		std::optional<math::Rectf> clampRect;
-		std::optional<bool> clamp = false;
-		std::optional<float> internalClampSize;
+		std::optional<math::Vector2f> internalClamp;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables

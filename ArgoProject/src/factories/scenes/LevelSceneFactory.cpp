@@ -12,7 +12,11 @@ std::vector<app::Entity> app::fact::sce::LevelSceneFactory::create()
 	auto level = fact::LevelFactory().create();	
 	entities.insert(entities.end(), level.begin(), level.end());
 	entities.push_back(player);
-	entities.push_back(fact::CameraFactory(app::par::CameraParameters{ player, math::Rectf(app::math::Vector2f(-800, 500), app::math::Vector2f(2000, 1000)), true, 20 }).create());
+	auto cameraParams = app::par::CameraParameters();
+	cameraParams.targetEntity = player;
+	cameraParams.clampRect = math::Rectf({ -800.0f, 500.0f }, { 2000.0f, 1000.0f });
+	cameraParams.internalClamp = math::Vector2f(20.0f, 60.0f);
+	entities.push_back(fact::CameraFactory(std::move(cameraParams)).create());
 
 	return entities;
 }

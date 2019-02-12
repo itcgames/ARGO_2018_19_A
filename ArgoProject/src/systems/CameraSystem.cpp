@@ -23,40 +23,29 @@ void app::sys::CameraSystem::update(app::time::seconds const & dt)
 		{
 			auto const & targetLocation = targetView.get(camera.target.value());
 			math::Vector2f targetPosition = targetLocation.position;
-			if (camera.internalClampSize.has_value())
+			if (camera.internalClamp.has_value())
 			{
-				math::Vector2f clampPosition = camera.center;
-				bool followPlayer = false;
-				if (targetPosition.x > camera.center.x + camera.internalClampSize.value())
+				if (targetPosition.x > camera.center.x + camera.internalClamp.value().x)
 				{
-					clampPosition.x = targetPosition.x - camera.internalClampSize.value();
-					followPlayer = true;
+					camera.center.x = targetPosition.x - camera.internalClamp.value().x;
 				}
-				if (targetPosition.x < camera.center.x - camera.internalClampSize.value())
+				if (targetPosition.x < camera.center.x - camera.internalClamp.value().x)
 				{
-					clampPosition.x = targetPosition.x + camera.internalClampSize.value();
-					followPlayer = true;
+					camera.center.x = targetPosition.x + camera.internalClamp.value().x;
 				}
-				if (targetPosition.y > camera.center.y + camera.internalClampSize.value())
+				if (targetPosition.y > camera.center.y + camera.internalClamp.value().y)
 				{
-					clampPosition.y = targetPosition.y - camera.internalClampSize.value();
-					followPlayer = true;
+					camera.center.y = targetPosition.y - camera.internalClamp.value().y;
 				}
-				if (targetPosition.y < camera.center.y - camera.internalClampSize.value())
+				if (targetPosition.y < camera.center.y - camera.internalClamp.value().y)
 				{
-					clampPosition.y = targetPosition.y + camera.internalClampSize.value();
-					followPlayer = true;
-				}
-				if (followPlayer)
-				{
-					camera.center = clampPosition;
+					camera.center.y = targetPosition.y + camera.internalClamp.value().y;
 				}
 			}
 			else
 			{
 				camera.center = targetPosition;
 			}
-			//camera.position = targetLocation.position - (camera.size / 2.0f);
 			if (camera.clampRect.has_value())
 			{
 				auto const & rect = camera.clampRect.value();

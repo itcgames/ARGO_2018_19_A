@@ -25,7 +25,7 @@ namespace app::comp
 		math::Vector2f size;
 		std::optional<app::Entity> target;
 		std::optional<math::Rectf> clampRect;
-		std::optional<float> internalClampSize;
+		std::optional<math::Vector2f> internalClamp;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
