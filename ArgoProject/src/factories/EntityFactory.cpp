@@ -1,11 +1,11 @@
 ﻿#include "stdafx.h"
 #include "EntityFactory.h"
 #include "singletons/RegistrySingleton.h"
-#include "singletons/WindowSingleton.h"
+#include "singletons/ResourceManagerSingleton.h"
 
 app::fact::EntityFactory::EntityFactory()
 	: m_registry(app::sin::Registry::get())
-	, m_renderer(app::sin::Window::get().getRenderer())
+	, m_resourceManager(app::sin::ResourceManager::get())
 {
 }
 

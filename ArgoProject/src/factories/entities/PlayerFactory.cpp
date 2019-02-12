@@ -21,9 +21,7 @@
 
 app::fact::PlayerFactory::PlayerFactory()
 	: EntityFactory()
-	, m_texture(std::make_shared<decltype(m_texture)::element_type>())
 {
-	m_texture->load(m_renderer, "./res/Animations/test.png");
 }
 
 app::Entity const app::fact::PlayerFactory::create()
@@ -63,7 +61,7 @@ app::Entity const app::fact::PlayerFactory::create()
 	m_registry.assign<decltype(animator)>(entity, std::move(animator));
 
 	auto render = comp::Render();
-	render.texture = m_texture;
+	render.texture = m_resourceManager.getTexture(app::res::TextureKey::DebugAnimation);
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	auto input = comp::Input();

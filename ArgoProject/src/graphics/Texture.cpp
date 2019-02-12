@@ -1,6 +1,8 @@
 ﻿#include "stdafx.h"
 #include "Texture.h"
 
+std::mutex app::gra::Texture::s_sdlMutex = std::mutex();
+
 app::gra::Texture::Texture(app::del::UPtrRenderer const & renderer, std::string_view file)
 	: m_texture(nullptr)
 {
@@ -28,8 +30,11 @@ app::del::UPtrTexture app::gra::Texture::loadTexture(app::del::UPtrRenderer cons
 {
 	auto surface = Texture::loadSurface(file);
 	SDL_Texture * texture = nullptr;
-
-	texture = SDL_CreateTextureFromSurface(renderer.get(), surface.get());
+	{
+		// lock SDL access since it is not thread safe operation
+		auto lock = std::lock_guard<decltype(s_sdlMutex)>(s_sdlMutex);
+		texture = SDL_CreateTextureFromSurface(renderer.get(), surface.get());
+	}
 	if (texture == nullptr) { return nullptr; }
 
 	return app::del::UPtrTexture(texture);
@@ -38,7 +43,11 @@ app::del::UPtrTexture app::gra::Texture::loadTexture(app::del::UPtrRenderer cons
 app::del::UPtrSurface app::gra::Texture::loadSurface(std::string_view file)
 {
 	SDL_Surface * surface = nullptr;
-	surface = IMG_Load(file.data());
+	{
+		// lock SDL access since it is not thread safe operation
+		auto lock = std::lock_guard<decltype(s_sdlMutex)>(s_sdlMutex);
+		surface = IMG_Load(file.data());
+	}
 	if (surface == nullptr) { return nullptr; }
 
 	return app::del::UPtrSurface(surface);
