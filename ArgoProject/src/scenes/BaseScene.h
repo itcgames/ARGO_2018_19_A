@@ -1,6 +1,7 @@
 ﻿#ifndef _BASE_SCENE_H
 #define _BASE_SCENE_H
 
+#include "resources/ResourceManager.h"
 #include "systems/AirMotionSystem.h"
 #include "systems/AnimatorSystem.h"
 #include "systems/CameraSystem.h"
@@ -45,6 +46,7 @@ namespace app::sce
 			, sys::AnimatorSystem
 		>;
 		using DrawSystems = std::vector<DrawSystem>;
+		using ResourceManager = app::res::ResourceManager<true>;
 	public: // Constructors/Destructor/Assignments
 		BaseScene(SceneType & sceneManagerType, UpdateSystems && updateSystems, DrawSystems && drawSystems);
 		virtual ~BaseScene();
@@ -70,6 +72,7 @@ namespace app::sce
 	protected: // Protected Member Variables
 		app::Registry & m_registry;
 		SceneType & m_sceneManagerType;
+		ResourceManager & m_resourceManager;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables

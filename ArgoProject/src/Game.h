@@ -41,9 +41,8 @@ namespace app
 		app::inp::MouseHandler & m_mouseHandler;
 		app::gra::Window & m_window;
 		app::Registry & m_registry;
+		app::res::ResourceManager<true> & m_resourceManager;
 		app::sce::SceneManager m_sceneManager;
-		app::res::ResourceManager<true> m_resourceManager;
-		app::res::ResourceManager<false> m_syncResourceManager;
 	};
 }
 

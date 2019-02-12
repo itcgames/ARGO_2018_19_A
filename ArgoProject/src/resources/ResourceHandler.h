@@ -67,7 +67,7 @@ namespace app::res
 		}
 		else
 		{
-			if (!file.has_value()) { std::exception("ERROR in 'ResourceHandler::get': key not found"); }
+			if (!file.has_value()) { throw std::exception("ERROR in 'ResourceHandler::get': key not found and missing file path"); }
 			this->load(key, file.value());
 			return this->get(key, file);
 		}
@@ -76,13 +76,16 @@ namespace app::res
 	template<typename _Key, typename _Resource, bool _Async, typename _Loader>
 	void ResourceHandler<_Key, _Resource, _Async, _Loader>::load(_Key const & key, std::string const & file)
 	{
-		auto resource = std::shared_ptr<_Resource>();
+		if (m_resourceMap.find(key) != m_resourceMap.end()) { return; }
 		if constexpr (_Async)
 		{
-			m_resourceMap.insert(std::make_pair(key, ManagedResource{ resource, std::thread(&_Loader::load, resource, file) }));
+			m_resourceMap.insert(std::make_pair(key, ManagedResource()));
+			auto & managedResource = m_resourceMap.at(key);
+			managedResource.thread = std::thread(&_Loader::load, std::ref(managedResource.resource), file);
 		}
 		else
 		{
+			auto resource = std::shared_ptr<_Resource>();
 			_Loader::load(resource, file);
 			m_resourceMap.insert(std::make_pair(key, resource));
 		}

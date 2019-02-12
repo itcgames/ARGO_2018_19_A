@@ -2,6 +2,7 @@
 #define _FACTORY_ENTITY_H
 
 #include "BaseFactory.h"
+#include "resources/ResourceManager.h"
 
 namespace app::fact
 {
@@ -27,7 +28,7 @@ namespace app::fact
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
 		app::Registry & m_registry;
-		app::del::UPtrRenderer const & m_renderer;
+		app::res::ResourceManager<true> & m_resourceManager;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables
