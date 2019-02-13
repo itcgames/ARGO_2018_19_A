@@ -11,9 +11,9 @@ std::vector<app::Entity> app::fact::sce::LevelSceneFactory::create()
 
 	auto enemy = fact::EnemyFactory().create(math::Vector2f(800,450),math::Vector2f(50,50));
 	auto player = fact::PlayerFactory().create();
+	entities.push_back(player);
 	auto level = fact::LevelFactory().create();	
 	entities.insert(entities.end(), level.begin(), level.end());
-	entities.push_back(player);
 	auto cameraParams = app::par::CameraParameters();
 	cameraParams.targetEntity = player;
 	cameraParams.clampRect = math::Rectf({ -800.0f, 500.0f }, { 2000.0f, 1000.0f });

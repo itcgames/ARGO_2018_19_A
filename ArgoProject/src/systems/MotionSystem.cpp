@@ -4,6 +4,9 @@
 // components
 #include "components/Location.h"
 #include "components/Motion.h"
+#include "components/AirMotion.h"
+#include "components/Player.h"
+#include "components/Dimensions.h"
 
 void app::sys::MotionSystem::update(app::time::seconds const & dt)
 {

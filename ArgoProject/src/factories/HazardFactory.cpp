@@ -1,20 +1,21 @@
 ﻿#include "stdafx.h"
 #include "utilities/cute_c2.h"
-#include "WallFactory.h"
+#include "HazardFactory.h"
 
 #include "components/Location.h"
 #include "components/Dimensions.h"
 #include "components/Animator.h"
 #include "components/Render.h"
 #include "components/Collision.h"
-#include "components/Impenetrable.h"
+#include "components/Damage.h"
 
-app::fact::WallFactory::WallFactory(app::math::Vector2f pos, app::math::Vector2f size)
+app::fact::HazardFactory::HazardFactory(app::math::Vector2f pos, app::math::Vector2f size)
 	: m_position(pos), m_size(size)
 {
+	
 }
 
-app::Entity const app::fact::WallFactory::create()
+app::Entity const app::fact::HazardFactory::create()
 {
 	app::Entity const entity = m_registry.create();
 
@@ -36,8 +37,9 @@ app::Entity const app::fact::WallFactory::create()
 	collision.bounds = cute::c2AABB();
 	m_registry.assign<decltype(collision)>(entity, std::move(collision));
 
-	auto impenetrable = comp::Impenetrable();
-	m_registry.assign<decltype(impenetrable)>(entity, std::move(impenetrable));
+	auto damage = comp::Damage();
+	damage.damage = 1;
+	m_registry.assign<decltype(damage)>(entity, std::move(damage));
 
 	return entity;
 }

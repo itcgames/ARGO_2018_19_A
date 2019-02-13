@@ -11,6 +11,8 @@
 #include "components/Input.h"
 #include "components/Commandable.h"
 #include "components/Collision.h"
+#include "components/Player.h"
+#include "components/CurrentGround.h"
 
 #include "commands/MoveCommand.h"
 #include "commands/JumpCommand.h"
@@ -18,6 +20,7 @@
 #include "commands/FaceLeftCommand.h"
 #include "commands/FaceRightCommand.h"
 #include "components/StateMachine.h"
+#include "components/Health.h"
 
 app::fact::PlayerFactory::PlayerFactory()
 	: EntityFactory()
@@ -88,5 +91,16 @@ app::Entity const app::fact::PlayerFactory::create()
 	auto collision = comp::Collision();
 	collision.bounds = cute::c2AABB();
 	m_registry.assign<decltype(collision)>(entity, std::move(collision));
+
+	auto health = comp::Health();
+	health.health = 1;
+	m_registry.assign<decltype(health)>(entity, std::move(health));
+
+	auto player = comp::Player();
+	m_registry.assign<decltype(player)>(entity, std::move(player));
+
+	auto ground = comp::CurrentGround();
+	m_registry.assign<decltype(ground)>(entity, std::move(ground));
+
 	return entity;
 }
