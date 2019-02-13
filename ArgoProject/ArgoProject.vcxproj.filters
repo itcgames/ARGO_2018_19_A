@@ -429,6 +429,27 @@
     <ClCompile Include="src\parameters\CameraParameters.cpp">
       <Filter>Source Files\parameters</Filter>
     </ClCompile>
+    <ClCompile Include="src\factories\entities\BackgroundImageFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\Font.cpp">
+      <Filter>Source Files\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deleters\SdlTtfDeleter.cpp">
+      <Filter>Source Files\deleters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\RenderText.cpp">
+      <Filter>Source Files\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\RenderTextSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Text.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\entities\TextFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -730,6 +751,27 @@
     </ClInclude>
     <ClInclude Include="src\parameters\CameraParameters.h">
       <Filter>Header Files\parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\entities\BackgroundImageFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\Font.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deleters\SdlTtfDeleter.h">
+      <Filter>Header Files\deleters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\RenderText.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\RenderTextSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Text.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\entities\TextFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

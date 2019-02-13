@@ -5,6 +5,7 @@ namespace app::res
 {
 	enum class FontKey
 	{
+		Debug,
 		Count // Keep this one at the end of the enum
 	};
 }

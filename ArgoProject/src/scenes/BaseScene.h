@@ -12,6 +12,8 @@
 #include "systems/StateMachineSystem.h"
 #include "systems/DashSystem.h"
 #include "systems/CollisionSystem.h"
+#include "systems/RenderTextSystem.h"
+
 namespace app::sce
 {
 	enum class SceneType
@@ -45,6 +47,7 @@ namespace app::sce
 		using DrawSystem = std::variant<
 			  sys::RenderSystem
 			, sys::AnimatorSystem
+			, sys::RenderTextSystem
 		>;
 		using DrawSystems = std::vector<DrawSystem>;
 		using ResourceManager = app::res::ResourceManager<true>;

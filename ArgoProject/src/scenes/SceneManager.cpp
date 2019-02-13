@@ -14,7 +14,7 @@ app::sce::SceneManager::SceneManager()
 		, std::make_pair(SceneType::MultiplayerLevel, Scene(std::in_place_type<sce::MultiplayerLevelScene>, m_targetScene))
 	}))
 	, m_currentScene(SceneType::Count)
-	, m_targetScene(SceneType::Level)
+	, m_targetScene(SceneType::MainMenu)
 {
 }
 

@@ -3,6 +3,17 @@
 
 int main(int argc, char** argv)
 {
+	if (SDL_Init(SDL_INIT_EVERYTHING) != NULL)
+	{
+		app::Console::writeLine({ "ERROR: SDL Failed to initialize [", SDL_GetError(), "]" });
+		return EXIT_FAILURE;
+	}
+	if (TTF_Init() != NULL)
+	{
+		app::Console::writeLine({ "ERROR: SDL_ttf Failed to initialize [", TTF_GetError(), "]" });
+		return EXIT_FAILURE;
+	}
+
 	using clock = std::chrono::high_resolution_clock;
 	constexpr app::time::nanoseconds updateStep =
 		app::time::toNanos(std::chrono::duration<double, std::milli>(1 / 60.0 * 1000.0));

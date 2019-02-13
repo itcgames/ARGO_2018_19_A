@@ -13,7 +13,7 @@ namespace app::res
 	{
 	private: // Private typedefs/enums/usings
 		using TextureHandler = app::res::ResourceHandler<TextureKey, app::gra::Texture, _Async>;
-		using FontHandler = app::res::ResourceHandler<FontKey, int, _Async>; // change `int` when font loading is created
+		using FontHandler = app::res::ResourceHandler<FontKey, app::gra::Font, _Async>; // change `int` when font loading is created
 		using AudioHandler = app::res::ResourceHandler<AudioKey, int, _Async>; // change `int` when audio loading is created
 	public: // Constructors/Destructor/Assignments
 		ResourceManager() = default;
@@ -30,7 +30,7 @@ namespace app::res
 		std::shared_ptr<app::gra::Texture> getTexture(TextureKey const & key);
 		void loadTexture(TextureKey const & key, std::string const & file);
 
-		std::shared_ptr<int> getFont(FontKey const & key);
+		std::shared_ptr<app::gra::Font> getFont(FontKey const & key);
 		void loadFont(FontKey const & key, std::string const & file);
 
 		std::shared_ptr<int> getAudio(AudioKey const & key);
@@ -68,7 +68,7 @@ namespace app::res
 	}
 
 	template<bool _Async>
-	std::shared_ptr<int> ResourceManager<_Async>::getFont(FontKey const & key)
+	std::shared_ptr<app::gra::Font> ResourceManager<_Async>::getFont(FontKey const & key)
 	{
 		return m_fontHandler.get(key);
 	}
