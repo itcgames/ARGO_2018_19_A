@@ -28,6 +28,7 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 	groundCollisions();
 	airCollisions();
 	dashCollisions();
+	enemyWallCollisions();
 }
 
 void app::sys::CollisionSystem::groundCollisions()
@@ -94,6 +95,10 @@ void app::sys::CollisionSystem::airCollisions()
 }
 
 void app::sys::CollisionSystem::dashCollisions()
+{
+}
+
+void app::sys::CollisionSystem::enemyWallCollisions()
 {
 }
 

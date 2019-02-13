@@ -31,7 +31,7 @@ app::Entity const app::fact::EnemyFactory::create(math::Vector2f position, math:
 
 	auto motion = comp::Motion();
 	motion.isPlayer = false;
-	motion.speed = 20.0f;
+	motion.speed = 50.0f;
 	motion.direction = 0.0f;
 	motion.angularSpeed = 0.0f;
 	motion.drag = 0.95f;
