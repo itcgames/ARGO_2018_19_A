@@ -4,8 +4,10 @@
 int main(int argv, char** argc)
 {
 	app::net::Server server(27000);
-
-	server.listenForSockets();
+	while (true)
+	{
+		server.listenForSockets();
+	}
 
 	return EXIT_SUCCESS;
 }

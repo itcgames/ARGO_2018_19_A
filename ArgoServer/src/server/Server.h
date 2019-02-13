@@ -2,6 +2,7 @@
 #define _SERVER_H
 
 #include "stdafx.h"
+#include <windows.h>
 
 namespace app::net
 {
@@ -22,7 +23,7 @@ namespace app::net
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		void listenForSockets();
+		bool listenForSockets();
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -30,9 +31,10 @@ namespace app::net
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
 	private: // Private Static Functions
+		static void clientHandlerThread(int ID);
 	private: // Private Member Functions
 		void initServer(int _port);
-		int acceptSocket(int index);
+		bool acceptSocket(int index);
 		void closeSocket(int index);
 		void sdlCleanup();
 
@@ -49,8 +51,6 @@ namespace app::net
 	private: // Private Static Variables
 		static const int MAX_SOCKETS = 16;
 	private: // Private Member Variables
-		//index into the sockets and clients arrays for the next player that will connect to the server
-		int next_ind = 0;
 		//the servers socket
 		TCPsocket server_socket;
 		//the socket set
@@ -58,7 +58,9 @@ namespace app::net
 		//array of sockets connected to server
 		TCPsocket sockets[MAX_SOCKETS];
 
+		int totalConnections = 0;
 	};
 }
 
+static app::net::Server * serverptr; //Serverptr is necessary so the static ClientHandler method can access the server instance/functions.
 #endif // !_SERVER_H

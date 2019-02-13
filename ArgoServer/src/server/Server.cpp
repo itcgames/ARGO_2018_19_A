@@ -15,56 +15,23 @@ app::net::Server::Server(int _port)
 /// Method will listen for sockets connecting as well as check if any sockets sent anything.
 /// 
 /// </summary>
-void app::net::Server::listenForSockets()
+bool app::net::Server::listenForSockets()
 {
-	//main processing loop
-	int running = 1;
-	while (running)
+	bool got_socket = acceptSocket(totalConnections);
+	if (!got_socket)
 	{
-		int num_rdy = SDLNet_CheckSockets(socket_set, 1000);
-		if (num_rdy <= 0)
-		{
-			//NOTE: none of the sockets are ready.
-		}
-		else
-		{
-			//NOTE: some number of sockets are ready.
-			if (SDLNet_SocketReady(server_socket))
-			{
-				int got_socket = acceptSocket(next_ind);
-				if (!got_socket)
-				{
-					num_rdy--;
-					continue;
-				}
-				//NOTE: get a new index.
-				int chk_count;
-				for (chk_count = 0; chk_count < MAX_SOCKETS; ++chk_count)
-				{
-					if (sockets[(next_ind + chk_count) % MAX_SOCKETS] == NULL) break;
-				}
-				next_ind = (next_ind + chk_count) % MAX_SOCKETS;
-				app::Console::writeLine({ "new connection, next_ind: ", std::to_string(next_ind) });
-				num_rdy--;
-			}
-			Packet packetType;
-
-			for (int ind = 0; ind < MAX_SOCKETS; ++ind)
-			{
-				if (sockets[ind] == NULL) continue;
-
-				if (!getPacketType(ind, packetType))
-				{
-					app::Console::writeLine("could not get packet type");
-				}
-				if (!processPacket(ind, packetType))
-				{
-					app::Console::writeLine("cold not send packet type");
-				}
-			}
-		}
+		//app::Console::writeLine({ "Failed to accept the clients connection" });
+		return false;
+	}
+	else
+	{
+		app::Console::writeLine({ "Client connected! ID: ", std::to_string(totalConnections) });
+		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)clientHandlerThread, (LPVOID)(totalConnections), NULL, NULL);
+		totalConnections += 1;
+		return true;
 	}
 }
+
 
 /// <summary>
 /// Method to initialize the server.
@@ -118,14 +85,15 @@ void app::net::Server::initServer(int _port)
 	{
 		app::Console::writeLine({ "ERROR: SDLNet_TCP_AddSocket [" , SDLNet_GetError(), "]" });
 	}
+	serverptr = this;
 }
 
 /// <summary>
 /// This function will accept a socket trying to connect
 /// </summary>
 /// <param name="index">index of the socket</param>
-/// <returns>whether or not connection is successful</returns>
-int app::net::Server::acceptSocket(int index)
+/// <returns>true if accepted successfully, false if unsuccessful</returns>
+bool app::net::Server::acceptSocket(int index)
 {
 	if (sockets[index])
 	{
@@ -133,13 +101,13 @@ int app::net::Server::acceptSocket(int index)
 	}
 
 	sockets[index] = SDLNet_TCP_Accept(server_socket);
-	if (sockets[index] == NULL) return 0;
+	if (sockets[index] == NULL) return false;
 
 	if (SDLNet_TCP_AddSocket(socket_set, sockets[index]) == -1)
 	{
 		app::Console::writeLine({ "ERROR: SDLNet_TCP_AddSocket [", SDLNet_GetError(), "]" });
 	}
-	return 1;
+	return true;
 }
 
 /// <summary>
@@ -183,3 +151,30 @@ void app::net::Server::sdlCleanup()
 	SDLNet_Quit();
 	SDL_Quit();
 }
+
+/// <summary>
+/// Spin up a thread that will handle receiving and sending of packets.
+/// </summary>
+/// <param name="ID"></param>
+void app::net::Server::clientHandlerThread(int ID)
+{
+	Packet packetType;
+
+	while (true)
+	{
+		if (!serverptr->getPacketType(ID, packetType))
+		{
+			break;
+		}
+		if (!serverptr->processPacket(ID, packetType))
+		{
+			break;
+		}
+	}
+	app::Console::writeLine({ "Lost connection to client ID: ", std::to_string(ID) });
+	serverptr->closeSocket(ID);
+	return;
+}
+
+
+

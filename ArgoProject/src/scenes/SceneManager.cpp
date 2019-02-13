@@ -14,7 +14,6 @@ app::sce::SceneManager::SceneManager()
 		, std::make_pair(SceneType::MultiplayerLevel, Scene(std::in_place_type<sce::MultiplayerLevelScene>, m_targetScene))
 	}))
 	, m_currentScene(SceneType::Count)
-	//TODO: change back to SceneType::Level
 	, m_targetScene(SceneType::MainMenu)
 {
 }
