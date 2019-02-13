@@ -11,6 +11,7 @@
 #include "components/Input.h"
 #include "components/Commandable.h"
 #include "components/Collision.h"
+#include "components/Player.h"
 
 #include "commands/MoveCommand.h"
 #include "commands/JumpCommand.h"
@@ -94,6 +95,9 @@ app::Entity const app::fact::PlayerFactory::create()
 	auto health = comp::Health();
 	health.health = 1;
 	m_registry.assign<decltype(health)>(entity, std::move(health));
+
+	auto player = comp::Player();
+	m_registry.assign<decltype(player)>(entity, std::move(player));
 
 	return entity;
 }
