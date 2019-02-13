@@ -235,6 +235,12 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\math\Math.cpp" />
     <ClCompile Include="src\math\Rect.cpp" />
     <ClCompile Include="src\math\Vector2.cpp" />
+    <ClCompile Include="src\resources\AudioKey.cpp" />
+    <ClCompile Include="src\resources\FontKey.cpp" />
+    <ClCompile Include="src\resources\ResourceLoader.cpp" />
+    <ClCompile Include="src\resources\ResourceHandler.cpp" />
+    <ClCompile Include="src\resources\ResourceManager.cpp" />
+    <ClCompile Include="src\resources\TextureKey.cpp" />
     <ClCompile Include="src\parameters\CameraParameters.cpp" />
     <ClCompile Include="src\scenes\BaseScene.cpp" />
     <ClCompile Include="src\scenes\SceneManager.cpp" />
@@ -246,12 +252,14 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\scenes\LobbySelectScene.cpp" />
     <ClCompile Include="src\scenes\LobbyScene.cpp" />
     <ClCompile Include="src\scenes\MultiplayerLevelScene.cpp" />
+    <ClCompile Include="src\scenes\SceneType.cpp" />
     <ClCompile Include="src\scenes\TutorialLevelScene.cpp" />
     <ClCompile Include="src\scenes\SplashScene.cpp" />
     <ClCompile Include="src\singletons\ControllerHandlerSingleton.cpp" />
     <ClCompile Include="src\singletons\KeyHandlerSingleton.cpp" />
     <ClCompile Include="src\singletons\MouseHandlerSingleton.cpp" />
     <ClCompile Include="src\singletons\RegistrySingleton.cpp" />
+    <ClCompile Include="src\singletons\ResourceManagerSingleton.cpp" />
     <ClCompile Include="src\singletons\WindowSingleton.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -345,6 +353,12 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\math\Math.h" />
     <ClInclude Include="src\math\Rect.h" />
     <ClInclude Include="src\math\Vector2.h" />
+    <ClInclude Include="src\resources\AudioKey.h" />
+    <ClInclude Include="src\resources\FontKey.h" />
+    <ClInclude Include="src\resources\ResourceLoader.h" />
+    <ClInclude Include="src\resources\ResourceHandler.h" />
+    <ClInclude Include="src\resources\ResourceManager.h" />
+    <ClInclude Include="src\resources\TextureKey.h" />
     <ClInclude Include="src\parameters\CameraParameters.h" />
     <ClInclude Include="src\scenes\BaseScene.h" />
     <ClInclude Include="src\scenes\SceneManager.h" />
@@ -356,12 +370,14 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\scenes\LobbySelectScene.h" />
     <ClInclude Include="src\scenes\LobbyScene.h" />
     <ClInclude Include="src\scenes\MultiplayerLevelScene.h" />
+    <ClInclude Include="src\scenes\SceneType.h" />
     <ClInclude Include="src\scenes\TutorialLevelScene.h" />
     <ClInclude Include="src\scenes\SplashScene.h" />
     <ClInclude Include="src\singletons\ControllerHandlerSingleton.h" />
     <ClInclude Include="src\singletons\KeyHandlerSingleton.h" />
     <ClInclude Include="src\singletons\MouseHandlerSingleton.h" />
     <ClInclude Include="src\singletons\RegistrySingleton.h" />
+    <ClInclude Include="src\singletons\ResourceManagerSingleton.h" />
     <ClInclude Include="src\singletons\WindowSingleton.h" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\systems\AirMotionSystem.h" />

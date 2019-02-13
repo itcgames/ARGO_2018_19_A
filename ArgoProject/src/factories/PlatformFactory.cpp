@@ -10,9 +10,9 @@
 #include "components/Platform.h"
 
 app::fact::PlatformFactory::PlatformFactory(app::math::Vector2f position, app::math::Vector2f size)
-	:m_texture(std::make_shared<decltype(m_texture)::element_type>()), m_position(position), m_size(size)
+	: m_position(position), m_size(size)
 {
-	m_texture->load(m_renderer, "./res/image.png");
+	
 }
 
 app::Entity const app::fact::PlatformFactory::create()
@@ -30,7 +30,7 @@ app::Entity const app::fact::PlatformFactory::create()
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
 
 	auto render = comp::Render();
-	render.texture = m_texture;
+	render.texture = m_resourceManager.getTexture(app::res::TextureKey::Debug);
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	auto collision = comp::Collision();

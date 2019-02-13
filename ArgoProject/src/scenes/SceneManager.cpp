@@ -3,7 +3,8 @@
 
 app::sce::SceneManager::SceneManager()
 	: m_scenes(util::make_unordered_map<SceneType, Scene>({
-		  std::make_pair(SceneType::CharacterSelect, Scene(std::in_place_type<sce::CharacterSelectScene>, m_targetScene))
+		  std::make_pair(SceneType::Splash, Scene(std::in_place_type<sce::SplashScene>, m_targetScene))
+		, std::make_pair(SceneType::CharacterSelect, Scene(std::in_place_type<sce::CharacterSelectScene>, m_targetScene))
 		, std::make_pair(SceneType::Credits, Scene(std::in_place_type<sce::CreditsScene>, m_targetScene))
 		, std::make_pair(SceneType::Level, Scene(std::in_place_type<sce::LevelScene>, m_targetScene))
 		, std::make_pair(SceneType::LevelSelect, Scene(std::in_place_type<sce::LevelSelectScene>, m_targetScene))
@@ -11,7 +12,6 @@ app::sce::SceneManager::SceneManager()
 		, std::make_pair(SceneType::LobbySelect, Scene(std::in_place_type<sce::LobbySelectScene>, m_targetScene))
 		, std::make_pair(SceneType::MainMenu, Scene(std::in_place_type<sce::MainMenuScene>, m_targetScene))
 		, std::make_pair(SceneType::MultiplayerLevel, Scene(std::in_place_type<sce::MultiplayerLevelScene>, m_targetScene))
-		, std::make_pair(SceneType::Splash, Scene(std::in_place_type<sce::SplashScene>, m_targetScene))
 	}))
 	, m_currentScene(SceneType::Count)
 	, m_targetScene(SceneType::Level)

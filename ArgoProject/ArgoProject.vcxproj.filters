@@ -106,6 +106,12 @@
     <Filter Include="Header Files\factories\entities">
       <UniqueIdentifier>{7ea2d7cc-3b18-41e1-82b6-a1394e7535af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\resources">
+      <UniqueIdentifier>{c685aa57-778d-491e-b616-951d99ebf5fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\resources">
+      <UniqueIdentifier>{5f18330a-3b16-4b76-911f-b709888b2664}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Header Files\visitors">
       <UniqueIdentifier>{7459f996-b6b9-479f-aa5b-857585a8e495}</UniqueIdentifier>
     </Filter>
@@ -372,6 +378,27 @@
     <ClCompile Include="src\factories\scenes\TutorialLevelSceneFactory.cpp">
       <Filter>Source Files\factories\scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\resources\ResourceLoader.cpp">
+      <Filter>Source Files\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resources\ResourceHandler.cpp">
+      <Filter>Source Files\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resources\ResourceManager.cpp">
+      <Filter>Source Files\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\singletons\ResourceManagerSingleton.cpp">
+      <Filter>Source Files\singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resources\TextureKey.cpp">
+      <Filter>Source Files\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resources\FontKey.cpp">
+      <Filter>Source Files\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resources\AudioKey.cpp">
+      <Filter>Source Files\resources</Filter>
+    </ClCompile>
     <ClCompile Include="src\visitors\CollisionUpdateVisitor.cpp">
       <Filter>Source Files\visitors</Filter>
     </ClCompile>
@@ -429,8 +456,11 @@
     <ClCompile Include="src\components\CurrentGround.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenes\SceneType.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
     <ClCompile Include="src\systems\CurrentGroundSystem.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -689,6 +719,27 @@
     <ClInclude Include="src\factories\scenes\LevelSelectSceneFactory.h">
       <Filter>Header Files\factories\scenes</Filter>
     </ClInclude>
+    <ClInclude Include="src\resources\ResourceLoader.h">
+      <Filter>Header Files\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resources\ResourceHandler.h">
+      <Filter>Header Files\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resources\ResourceManager.h">
+      <Filter>Header Files\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\singletons\ResourceManagerSingleton.h">
+      <Filter>Header Files\singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resources\TextureKey.h">
+      <Filter>Header Files\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resources\FontKey.h">
+      <Filter>Header Files\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resources\AudioKey.h">
+      <Filter>Header Files\resources</Filter>
+    </ClInclude>
     <ClInclude Include="src\visitors\CollisionUpdateVisitor.h">
       <Filter>Header Files\visitors</Filter>
     </ClInclude>
@@ -742,6 +793,9 @@
     </ClInclude>
     <ClInclude Include="src\systems\CurrentGroundSystem.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\SceneType.h">
+      <Filter>Header Files\scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
