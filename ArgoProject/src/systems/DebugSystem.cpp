@@ -2,10 +2,11 @@
 #include "DebugSystem.h"
 #include "singletons/KeyHandlerSingleton.h"
 
-app::sys::DebugSystem::DebugSystem()
+app::sys::DebugSystem::DebugSystem(app::sce::SceneType& _targetScene)
 	: m_keyHandler(app::sin::KeyHandler::get())
 	, m_client()
 	, connected(false)
+	, m_targetScene(_targetScene)
 {
 }
 
@@ -42,9 +43,10 @@ void app::sys::DebugSystem::serverTesting()
 		app::Console::writeLine("sending name to server");
 		std::string name = "Bob";
 		//define the type of packet we are about to send
-		app::net::Packet packetType = app::net::P_CLIENT_NAME_STRING;
+		app::net::Packet packetType = app::net::P_CLIENT_NAME;
 		//send the packet out
-		m_client.sendString(name, packetType);
+		m_client.send(name, packetType);
+		m_targetScene = app::sce::SceneType::LobbySelect;
 	}
 	if (connected)
 	{

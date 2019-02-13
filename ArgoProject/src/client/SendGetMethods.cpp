@@ -5,6 +5,13 @@
 /// Extra cpp to contain the send and get methods for the client.
 /// </summary>
 
+
+/// <summary>
+/// Send all type of data.
+/// </summary>
+/// <param name="data">data to send</param>
+/// <param name="totalBytes">amount of bytes to send</param>
+/// <returns>true if succeeds, false if the sending fails</returns>
 bool app::net::Client::sendAll(char * data, int totalBytes)
 {
 
@@ -27,9 +34,15 @@ bool app::net::Client::sendAll(char * data, int totalBytes)
 	return true;
 }
 
-bool app::net::Client::sendString(std::string & _string, app::net::Packet& _packetToProcessString)
+/// <summary>
+/// Send a string to the server. 
+/// </summary>
+/// <param name="_string">string to send</param>
+/// <param name="_packetToProcessString">the packet type</param>
+/// <returns>true if success, false if sending fails</returns>
+bool app::net::Client::send(std::string & _string, app::net::Packet& _packetType)
 {
-	app::net::Packet type = _packetToProcessString;
+	app::net::Packet type = _packetType;
 	if (!sendPacketType(type))
 	{
 		return false;
@@ -46,6 +59,11 @@ bool app::net::Client::sendString(std::string & _string, app::net::Packet& _pack
 	return true;
 }
 
+/// <summary>
+/// Expect a string from server.
+/// </summary>
+/// <param name="_string">string that will get assigned the value of received string</param>
+/// <returns>true if success, false if receiving of data fails</returns>
 bool app::net::Client::getString(std::string & _string)
 {
 	int bufferLength;
@@ -66,7 +84,11 @@ bool app::net::Client::getString(std::string & _string)
 }
 
 
-
+/// <summary>
+/// Send the packet type to server
+/// </summary>
+/// <param name="_packetType">packet type to send</param>
+/// <returns>true if succeeds, false if sending fails</returns>
 bool app::net::Client::sendPacketType(Packet & _packetType)
 {
 	if (!sendAll((char*)&_packetType, sizeof(Packet)))
@@ -76,6 +98,11 @@ bool app::net::Client::sendPacketType(Packet & _packetType)
 	return true;
 }
 
+/// <summary>
+/// Send an integer to the server
+/// </summary>
+/// <param name="_int">integer value to send</param>
+/// <returns>true if succeeds, false if sending fails</returns>
 bool app::net::Client::sendInt(int _int)
 {
 	if (!sendAll((char*)&_int, sizeof(int)))
@@ -85,13 +112,18 @@ bool app::net::Client::sendInt(int _int)
 	return true;
 }
 
+/// <summary>
+/// receive all types of data
+/// </summary>
+/// <param name="data">data that got received</param>
+/// <param name="totalBytes">size of data</param>
+/// <returns>true if success, false if fail to receive the data</returns>
 bool app::net::Client::recvAll(char * data, int totalBytes)
 {
 	int bytesReceived = 0;
 	while (bytesReceived < totalBytes)
 	{
 		int retnCheck = SDLNet_TCP_Recv(socket, data + bytesReceived, totalBytes - bytesReceived);
-		//can try add data to bytes received
 		if (retnCheck <= 0)
 		{
 			return false;
@@ -102,6 +134,11 @@ bool app::net::Client::recvAll(char * data, int totalBytes)
 	return true;
 }
 
+/// <summary>
+/// Will expect a packet type from server
+/// </summary>
+/// <param name="_packetType">a packet type to set the received packet to</param>
+/// <returns>true if success, false if receive fails</returns>
 bool app::net::Client::getPacketType(Packet & _packetType)
 {
 	if (!recvAll((char*)&_packetType, sizeof(Packet)))
@@ -111,6 +148,11 @@ bool app::net::Client::getPacketType(Packet & _packetType)
 	return true;
 }
 
+/// <summary>
+/// Get an integer from the server
+/// </summary>
+/// <param name="_int">integer variable to assign</param>
+/// <returns>true if success, false if receive fails</returns>
 bool app::net::Client::getInt(int & _int)
 {
 	if (!recvAll((char*)_int, sizeof(int)))
@@ -120,17 +162,16 @@ bool app::net::Client::getInt(int & _int)
 	return true;
 }
 
-bool app::net::Client::sendPlayerName(std::string _name)
-{
-
-	return false;
-}
-
+/// <summary>
+/// Process a packet based on the type of packet received.
+/// </summary>
+/// <param name="_packetType">type of received packet</param>
+/// <returns>true if processes successfuly, false if fails processing</returns>
 bool app::net::Client::processPacket(Packet _packetType)
 {
 	switch (_packetType)
 	{
-	case P_CLIENT_NAME_STRING:
+	case P_CLIENT_NAME:
 	{
 		std::string Message;
 		if (!getString(Message))

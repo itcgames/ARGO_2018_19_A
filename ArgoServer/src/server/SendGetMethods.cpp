@@ -112,11 +112,11 @@ bool app::net::Server::getPacketType(int ID, Packet & _packetType)
 /// </summary>
 /// <param name="ID">ID of the socket to send the string to</param>
 /// <param name="_string">string to send</param>
-/// <param name="_packetToProcessString">type of packet the other socket is to expect (defines how it will be processed by the other socket)</param>
+/// <param name="_packetType">type of packet the other socket is to expect (defines how it will be processed by the other socket)</param>
 /// <returns>true if success, false if any of the sends fail</returns>
-bool app::net::Server::sendString(int ID, std::string & _string, Packet & _packetToProcessString)
+bool app::net::Server::send(int ID, std::string & _string, Packet & _packetType)
 {
-	if (!sendPacketType(ID, _packetToProcessString))
+	if (!sendPacketType(ID, _packetType))
 	{
 		return false;
 	}
@@ -167,7 +167,7 @@ bool app::net::Server::processPacket(int ID, Packet _packetType)
 {
 	switch (_packetType)
 	{
-	case P_CLIENT_NAME_STRING:
+	case P_CLIENT_NAME:
 	{
 		std::string Message;
 		if (!getString(ID, Message))

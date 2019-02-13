@@ -6,7 +6,7 @@
 namespace app::net
 {
 	enum Packet {
-		P_CLIENT_NAME_STRING
+		P_CLIENT_NAME
 	};
 	class Server
 	{
@@ -43,7 +43,7 @@ namespace app::net
 		bool getInt(int ID, int& _int);
 		bool sendPacketType(int ID, Packet _packetType);
 		bool getPacketType(int ID, Packet& _packetType);
-		bool sendString(int ID, std::string& _string, Packet& _packetToProcessString);
+		bool send(int ID, std::string& _string, Packet& _packetToProcessString);
 		bool getString(int ID, std::string& _string);
 		bool processPacket(int ID, Packet _packetType);
 	private: // Private Static Variables

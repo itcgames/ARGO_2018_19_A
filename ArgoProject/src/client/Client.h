@@ -6,7 +6,7 @@ namespace app::net
 {
 
 	enum Packet {
-		P_CLIENT_NAME_STRING
+		P_CLIENT_NAME
 	};
 	class Client
 	{
@@ -32,17 +32,14 @@ namespace app::net
 		bool sendAll(char* data, int totalBytes);
 		bool recvAll(char * data, int totalBytes);
 
-		bool sendString(std::string& _string, app::net::Packet& _packetToProcessString);
+		bool send(std::string& _string, app::net::Packet& _packetToProcessString);
 		bool getString(std::string& _string);
 
 		bool sendPacketType(Packet& _packetType);
 		bool getPacketType(Packet& _packetType);
 
 		bool sendInt(int _int);
-		bool getInt(int& _int);
-
-		bool sendPlayerName(std::string _name);
-		
+		bool getInt(int& _int);		
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions

@@ -3,13 +3,15 @@
 
 #include "BaseSystem.h"
 #include "client/Client.h"
+#include "scenes/SceneType.h"
+
 
 namespace app::sys
 {
 	class DebugSystem : public BaseSystem
 	{
 	public: // Constructors/Destructor/Assignments
-		DebugSystem();
+		DebugSystem(app::sce::SceneType& _targetScene);
 		virtual ~DebugSystem() = default;
 
 		DebugSystem(DebugSystem const &) = default;
@@ -37,6 +39,7 @@ namespace app::sys
 		app::net::Client m_client;
 		bool updateVariable = false;
 		bool connected;
+		app::sce::SceneType& m_targetScene;
 
 	};
 }
