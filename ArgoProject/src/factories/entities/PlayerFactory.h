@@ -32,7 +32,6 @@ namespace app::fact
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
-		std::shared_ptr<app::gra::Texture> m_texture;
 	};
 }
 

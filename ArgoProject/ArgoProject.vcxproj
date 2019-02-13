@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{8E6F05B0-513B-4DEF-81CB-E22DDF08B6E0}</ProjectGuid>
     <RootNamespace>ArgoProject</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -184,6 +184,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\commands\MoveCommand.cpp" />
     <ClCompile Include="src\components\AirMotion.cpp" />
     <ClCompile Include="src\components\Animator.cpp" />
+    <ClCompile Include="src\components\Collision.cpp" />
     <ClCompile Include="src\components\Commandable.cpp" />
     <ClCompile Include="src\components\Camera.cpp" />
     <ClCompile Include="src\components\Dash.cpp" />
@@ -228,6 +229,13 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\math\Math.cpp" />
     <ClCompile Include="src\math\Rect.cpp" />
     <ClCompile Include="src\math\Vector2.cpp" />
+    <ClCompile Include="src\resources\AudioKey.cpp" />
+    <ClCompile Include="src\resources\FontKey.cpp" />
+    <ClCompile Include="src\resources\ResourceLoader.cpp" />
+    <ClCompile Include="src\resources\ResourceHandler.cpp" />
+    <ClCompile Include="src\resources\ResourceManager.cpp" />
+    <ClCompile Include="src\resources\TextureKey.cpp" />
+    <ClCompile Include="src\parameters\CameraParameters.cpp" />
     <ClCompile Include="src\scenes\BaseScene.cpp" />
     <ClCompile Include="src\scenes\SceneManager.cpp" />
     <ClCompile Include="src\scenes\MainMenuScene.cpp" />
@@ -238,12 +246,14 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\scenes\LobbySelectScene.cpp" />
     <ClCompile Include="src\scenes\LobbyScene.cpp" />
     <ClCompile Include="src\scenes\MultiplayerLevelScene.cpp" />
+    <ClCompile Include="src\scenes\SceneType.cpp" />
     <ClCompile Include="src\scenes\TutorialLevelScene.cpp" />
     <ClCompile Include="src\scenes\SplashScene.cpp" />
     <ClCompile Include="src\singletons\ControllerHandlerSingleton.cpp" />
     <ClCompile Include="src\singletons\KeyHandlerSingleton.cpp" />
     <ClCompile Include="src\singletons\MouseHandlerSingleton.cpp" />
     <ClCompile Include="src\singletons\RegistrySingleton.cpp" />
+    <ClCompile Include="src\singletons\ResourceManagerSingleton.cpp" />
     <ClCompile Include="src\singletons\WindowSingleton.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -254,6 +264,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\AirMotionSystem.cpp" />
     <ClCompile Include="src\systems\AnimatorSystem.cpp" />
     <ClCompile Include="src\systems\BaseSystem.cpp" />
+    <ClCompile Include="src\systems\CollisionSystem.cpp" />
     <ClCompile Include="src\systems\CommandSystem.cpp" />
     <ClCompile Include="src\systems\DashSystem.cpp" />
     <ClCompile Include="src\systems\DebugSystem.cpp" />
@@ -266,6 +277,13 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\utilities\cute_c2.cpp" />
     <ClCompile Include="src\utilities\Time.cpp" />
     <ClCompile Include="src\utilities\makers.cpp" />
+    <ClCompile Include="src\visitors\CollisionAabbBoolVisitor.cpp" />
+    <ClCompile Include="src\visitors\CollisionAabbManiVisitor.cpp" />
+    <ClCompile Include="src\visitors\CollisionBoundsBoolVisitor.cpp" />
+    <ClCompile Include="src\visitors\CollisionBoundsManiVisitor.cpp" />
+    <ClCompile Include="src\visitors\CollisionCircleBoolVisitor.cpp" />
+    <ClCompile Include="src\visitors\CollisionCircleManiVisitor.cpp" />
+    <ClCompile Include="src\visitors\CollisionUpdateVisitor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\client\Client.h" />
@@ -277,6 +295,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\commands\MoveCommand.h" />
     <ClInclude Include="src\components\AirMotion.h" />
     <ClInclude Include="src\components\Animator.h" />
+    <ClInclude Include="src\components\Collision.h" />
     <ClInclude Include="src\components\Commandable.h" />
     <ClInclude Include="src\components\Camera.h" />
     <ClInclude Include="src\components\Dash.h" />
@@ -320,6 +339,13 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\math\Math.h" />
     <ClInclude Include="src\math\Rect.h" />
     <ClInclude Include="src\math\Vector2.h" />
+    <ClInclude Include="src\resources\AudioKey.h" />
+    <ClInclude Include="src\resources\FontKey.h" />
+    <ClInclude Include="src\resources\ResourceLoader.h" />
+    <ClInclude Include="src\resources\ResourceHandler.h" />
+    <ClInclude Include="src\resources\ResourceManager.h" />
+    <ClInclude Include="src\resources\TextureKey.h" />
+    <ClInclude Include="src\parameters\CameraParameters.h" />
     <ClInclude Include="src\scenes\BaseScene.h" />
     <ClInclude Include="src\scenes\SceneManager.h" />
     <ClInclude Include="src\scenes\MainMenuScene.h" />
@@ -330,17 +356,20 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\scenes\LobbySelectScene.h" />
     <ClInclude Include="src\scenes\LobbyScene.h" />
     <ClInclude Include="src\scenes\MultiplayerLevelScene.h" />
+    <ClInclude Include="src\scenes\SceneType.h" />
     <ClInclude Include="src\scenes\TutorialLevelScene.h" />
     <ClInclude Include="src\scenes\SplashScene.h" />
     <ClInclude Include="src\singletons\ControllerHandlerSingleton.h" />
     <ClInclude Include="src\singletons\KeyHandlerSingleton.h" />
     <ClInclude Include="src\singletons\MouseHandlerSingleton.h" />
     <ClInclude Include="src\singletons\RegistrySingleton.h" />
+    <ClInclude Include="src\singletons\ResourceManagerSingleton.h" />
     <ClInclude Include="src\singletons\WindowSingleton.h" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\systems\AirMotionSystem.h" />
     <ClInclude Include="src\systems\AnimatorSystem.h" />
     <ClInclude Include="src\systems\BaseSystem.h" />
+    <ClInclude Include="src\systems\CollisionSystem.h" />
     <ClInclude Include="src\systems\CommandSystem.h" />
     <ClInclude Include="src\systems\DashSystem.h" />
     <ClInclude Include="src\systems\DebugSystem.h" />
@@ -353,6 +382,13 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\utilities\cute_c2.h" />
     <ClInclude Include="src\utilities\Time.h" />
     <ClInclude Include="src\utilities\makers.h" />
+    <ClInclude Include="src\visitors\CollisionAabbBoolVisitor.h" />
+    <ClInclude Include="src\visitors\CollisionAabbManiVisitor.h" />
+    <ClInclude Include="src\visitors\CollisionBoundsBoolVisitor.h" />
+    <ClInclude Include="src\visitors\CollisionBoundsManiVisitor.h" />
+    <ClInclude Include="src\visitors\CollisionCircleBoolVisitor.h" />
+    <ClInclude Include="src\visitors\CollisionCircleManiVisitor.h" />
+    <ClInclude Include="src\visitors\CollisionUpdateVisitor.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\.gitkeep" />

@@ -5,8 +5,7 @@
 #include "singletons/MouseHandlerSingleton.h"
 #include "singletons/RegistrySingleton.h"
 #include "singletons/WindowSingleton.h"
-#include "client/Client.h"
-
+#include "singletons/ResourceManagerSingleton.h"
 
 app::Game::Game()
 	: m_running(true)
@@ -15,6 +14,7 @@ app::Game::Game()
 	, m_mouseHandler(app::sin::MouseHandler::get())
 	, m_window(app::sin::Window::get())
 	, m_registry(app::sin::Registry::get())
+	, m_resourceManager(app::sin::ResourceManager::get())
 	, m_sceneManager()
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != NULL)

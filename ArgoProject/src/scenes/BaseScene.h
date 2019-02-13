@@ -1,6 +1,8 @@
 ﻿#ifndef _BASE_SCENE_H
 #define _BASE_SCENE_H
 
+#include "SceneType.h"
+#include "resources/ResourceManager.h"
 #include "systems/AirMotionSystem.h"
 #include "systems/AnimatorSystem.h"
 #include "systems/CameraSystem.h"
@@ -11,23 +13,10 @@
 #include "systems/StateMachineSystem.h"
 #include "systems/DashSystem.h"
 #include "systems/DebugSystem.h"
+#include "systems/CollisionSystem.h"
 
 namespace app::sce
 {
-	enum class SceneType
-	{
-		CharacterSelect,
-		Credits,
-		Level,
-		LevelSelect,
-		MainMenu,
-		LobbySelect,
-		Lobby,
-		MultiplayerLevel,
-		TutorialLevel,
-		Splash,
-		Count
-	};
 	class BaseScene
 	{
 	protected: // Protected typedefs/Enums/Usings
@@ -39,14 +28,17 @@ namespace app::sce
 			, sys::CameraSystem
 			, sys::CommandSystem
 			, sys::InputSystem
+			, sys::CollisionSystem
 			, sys::DebugSystem
 		>;
+
 		using UpdateSystems = std::vector<UpdateSystem>;
 		using DrawSystem = std::variant<
 			  sys::RenderSystem
 			, sys::AnimatorSystem
 		>;
 		using DrawSystems = std::vector<DrawSystem>;
+		using ResourceManager = app::res::ResourceManager<true>;
 	public: // Constructors/Destructor/Assignments
 		BaseScene(SceneType & sceneManagerType, UpdateSystems && updateSystems, DrawSystems && drawSystems);
 		virtual ~BaseScene();
@@ -72,6 +64,7 @@ namespace app::sce
 	protected: // Protected Member Variables
 		app::Registry & m_registry;
 		SceneType & m_sceneManagerType;
+		ResourceManager & m_resourceManager;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables

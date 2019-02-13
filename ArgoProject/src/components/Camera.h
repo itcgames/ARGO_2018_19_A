@@ -21,9 +21,11 @@ namespace app::comp
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		math::Vector2f position;
+		math::Vector2f center;
 		math::Vector2f size;
 		std::optional<app::Entity> target;
+		std::optional<math::Rectf> clampRect;
+		std::optional<math::Vector2f> internalClamp;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables

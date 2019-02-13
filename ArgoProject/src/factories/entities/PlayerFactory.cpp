@@ -1,4 +1,5 @@
 ﻿#include "stdafx.h"
+#include "utilities/cute_c2.h"
 #include "PlayerFactory.h"
 
 // components
@@ -9,6 +10,7 @@
 #include "components/Render.h"
 #include "components/Input.h"
 #include "components/Commandable.h"
+#include "components/Collision.h"
 
 #include "commands/MoveCommand.h"
 #include "commands/JumpCommand.h"
@@ -19,9 +21,7 @@
 
 app::fact::PlayerFactory::PlayerFactory()
 	: EntityFactory()
-	, m_texture(std::make_shared<decltype(m_texture)::element_type>())
 {
-	m_texture->load(m_renderer, "./res/Animations/test.png");
 }
 
 app::Entity const app::fact::PlayerFactory::create()
@@ -61,7 +61,7 @@ app::Entity const app::fact::PlayerFactory::create()
 	m_registry.assign<decltype(animator)>(entity, std::move(animator));
 
 	auto render = comp::Render();
-	render.texture = m_texture;
+	render.texture = m_resourceManager.getTexture(app::res::TextureKey::DebugAnimation);
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	auto input = comp::Input();
@@ -75,15 +75,17 @@ app::Entity const app::fact::PlayerFactory::create()
 	input.keyPressedCommands.insert(std::pair(SDLK_z, std::make_shared<app::cmnd::DashCommand>(entity)));
 	input.keyPressedCommands.insert(std::pair(SDLK_RIGHT, std::make_shared<app::cmnd::FaceRightCommand>(entity)));
 	input.keyPressedCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::FaceLeftCommand>(entity)));
-
-
 	m_registry.assign<decltype(input)>(entity, std::move(input));
 
 	auto commandable = comp::Commandable();
 	m_registry.assign<decltype(commandable)>(entity, std::move(commandable));
+
 	auto stateMachine = comp::StateMachine();
 	stateMachine.instance = nullptr;
 	m_registry.assign<decltype(stateMachine)>(entity, std::move(stateMachine));
 
+	auto collision = comp::Collision();
+	collision.bounds = cute::c2AABB();
+	m_registry.assign<decltype(collision)>(entity, std::move(collision));
 	return entity;
 }
