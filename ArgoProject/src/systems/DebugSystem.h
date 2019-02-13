@@ -30,6 +30,7 @@ namespace app::sys
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
+		void serverTesting();
 	private: // Private Static Variables
 	private: // Private Member Variables
 		app::inp::KeyHandler & m_keyHandler;

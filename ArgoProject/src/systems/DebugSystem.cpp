@@ -11,15 +11,17 @@ app::sys::DebugSystem::DebugSystem()
 
 void app::sys::DebugSystem::update(app::time::seconds const & dt)
 {
-	////////////////////////////////////////////////////////////////////////////
-	/////				* SERVER DEBUG CODE *
-	////////////////////////////////////////////////////////////////////////////
-	//this stuff will happen when the multiplayer button is pressed.
+	serverTesting();
+}
+
+void app::sys::DebugSystem::serverTesting()
+{
+//this stuff will happen when the multiplayer button is pressed.
 	if (m_keyHandler.isKeyPressed(SDLK_p) && !connected)
 	{
 		connected = true;
 
-		app::Console::writeLine("CONNECTION");
+		app::Console::writeLine("CONNECTING TO SERVER");
 		if (SDLNet_Init() != NULL)
 		{
 			std::cout << "Failed to intialise SDN_net: " << SDLNet_GetError() << "\n";
@@ -37,14 +39,12 @@ void app::sys::DebugSystem::update(app::time::seconds const & dt)
 	{
 		updateVariable = false;
 
-		app::Console::writeLine("asking server to update wood");
-		//m_client.SendData(NULL, 0, m_client.FLAG_WOOD_UPDATE);
+		app::Console::writeLine("sending name to server");
 		std::string name = "Bob";
-		auto packetType = app::net::P_CLIENT_NAME;
-		//m_client.sendPacketType(packetType);
-		m_client.sendString(name);
-
-		
+		//define the type of packet we are about to send
+		app::net::Packet packetType = app::net::P_CLIENT_NAME_STRING;
+		//send the packet out
+		m_client.sendString(name, packetType);
 	}
 	if (connected)
 	{
@@ -61,7 +61,4 @@ void app::sys::DebugSystem::update(app::time::seconds const & dt)
 			}
 		}
 	}
-	////////////////////////////////////////////////////////////////////////////
-	/////				* SERVER DEBUG CODE END*
-	////////////////////////////////////////////////////////////////////////////
 }
