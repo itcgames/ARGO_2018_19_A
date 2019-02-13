@@ -1,6 +1,7 @@
 ﻿#ifndef _BASE_SCENE_H
 #define _BASE_SCENE_H
 
+#include "SceneType.h"
 #include "resources/ResourceManager.h"
 #include "systems/AirMotionSystem.h"
 #include "systems/AnimatorSystem.h"
@@ -12,22 +13,9 @@
 #include "systems/StateMachineSystem.h"
 #include "systems/DashSystem.h"
 #include "systems/CollisionSystem.h"
+
 namespace app::sce
 {
-	enum class SceneType
-	{
-		CharacterSelect,
-		Credits,
-		Level,
-		LevelSelect,
-		MainMenu,
-		LobbySelect,
-		Lobby,
-		MultiplayerLevel,
-		TutorialLevel,
-		Splash,
-		Count
-	};
 	class BaseScene
 	{
 	protected: // Protected typedefs/Enums/Usings

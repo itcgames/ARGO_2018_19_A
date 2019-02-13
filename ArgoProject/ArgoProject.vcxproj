@@ -244,6 +244,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\scenes\LobbySelectScene.cpp" />
     <ClCompile Include="src\scenes\LobbyScene.cpp" />
     <ClCompile Include="src\scenes\MultiplayerLevelScene.cpp" />
+    <ClCompile Include="src\scenes\SceneType.cpp" />
     <ClCompile Include="src\scenes\TutorialLevelScene.cpp" />
     <ClCompile Include="src\scenes\SplashScene.cpp" />
     <ClCompile Include="src\singletons\ControllerHandlerSingleton.cpp" />
@@ -351,6 +352,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\scenes\LobbySelectScene.h" />
     <ClInclude Include="src\scenes\LobbyScene.h" />
     <ClInclude Include="src\scenes\MultiplayerLevelScene.h" />
+    <ClInclude Include="src\scenes\SceneType.h" />
     <ClInclude Include="src\scenes\TutorialLevelScene.h" />
     <ClInclude Include="src\scenes\SplashScene.h" />
     <ClInclude Include="src\singletons\ControllerHandlerSingleton.h" />

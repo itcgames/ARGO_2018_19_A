@@ -429,6 +429,9 @@
     <ClCompile Include="src\parameters\CameraParameters.cpp">
       <Filter>Source Files\parameters</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenes\SceneType.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -730,6 +733,9 @@
     </ClInclude>
     <ClInclude Include="src\parameters\CameraParameters.h">
       <Filter>Header Files\parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\SceneType.h">
+      <Filter>Header Files\scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
