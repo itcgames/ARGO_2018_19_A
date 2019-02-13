@@ -19,6 +19,7 @@ app::sys::CollisionSystem::CollisionSystem()
 	//prepare these components
 	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Motion>();
 	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::AirMotion>();
+	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Dash>();
 	m_registry.prepare<comp::Collision, comp::Location, comp::Dimensions>();
 }
 
@@ -95,6 +96,35 @@ void app::sys::CollisionSystem::airCollisions()
 
 void app::sys::CollisionSystem::dashCollisions()
 {
+	//view player
+	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Dash>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Input & input, comp::Location & location, comp::Dimensions & dimensions, comp::Dash & dash)
+	{
+		//view everything with collisions
+		m_registry.view<comp::Collision, comp::Location, comp::Dimensions>(entt::persistent_t())
+			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Location & secLocation, comp::Dimensions & secDimensions)
+		{
+			//if we are not the player
+			if (entity != secEntity)
+			{
+				//if we collide
+				cute::c2Manifold const & manifold = app::vis::CollisionBoundsManiVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+				if (manifold.count)
+				{
+					if (dash.direction == -180)
+					{
+						float const & blockSize = (secLocation.position.x - secDimensions.origin.x) + secDimensions.size.x;
+						location.position.x = blockSize + dimensions.origin.x;
+					}
+					else if (dash.direction == 0)
+					{
+						float const & blockSize = (secLocation.position.x - secDimensions.origin.x);
+						location.position.x = (blockSize - dimensions.origin.x);
+					}
+				}
+			}
+		});
+	});
 }
 
 void app::sys::CollisionSystem::updateCollisionBoxes()
