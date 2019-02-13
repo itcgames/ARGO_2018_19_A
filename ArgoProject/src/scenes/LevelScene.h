@@ -21,6 +21,7 @@ namespace app::sce
 	public: // Public Member Functions
 		virtual void start() final override;
 		virtual void end() final override;
+		virtual void update(app::time::seconds const & dt) final override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -29,10 +30,12 @@ namespace app::sce
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
-		void reset(app::Registry & registry, app::Entity inputEntity);
+		void onInputDestroyed(app::Registry & registry, app::Entity inputEntity);
+		void reset();
 	private: // Private Static Variables
 	private: // Private Member Variables
 		std::vector<app::Entity> m_entities;
+		bool m_resetSignal;
 	};
 }
 

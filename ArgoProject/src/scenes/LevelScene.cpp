@@ -13,15 +13,16 @@ app::sce::LevelScene::LevelScene(SceneType & sceneManagerType)
 			UpdateSystem(std::in_place_type<app::sys::DashSystem>),
 			UpdateSystem(std::in_place_type<app::sys::StateMachineSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CameraSystem>),
-			UpdateSystem(std::in_place_type<app::sys::CollisionSystem>)
+			UpdateSystem(std::in_place_type<app::sys::CollisionSystem>),
+			UpdateSystem(std::in_place_type<app::sys::HealthSystem>)
 		})
 		, util::make_vector<DrawSystem>({
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
 			DrawSystem(std::in_place_type<app::sys::RenderSystem>)
 		}))
-	,  m_entities()
+	, m_entities()
+	, m_resetSignal(false)
 {
-	m_registry.destruction<comp::Input>().connect<LevelScene, &LevelScene::reset>(this);
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("LEVEL SCENE Constructed");
@@ -32,6 +33,7 @@ void app::sce::LevelScene::start()
 {
 	auto && entities = fact::sce::LevelSceneFactory().create();
 	m_entities.insert(m_entities.end(), std::make_move_iterator(entities.begin()), std::make_move_iterator(entities.end()));
+	m_registry.destruction<comp::Input>().connect<LevelScene, &LevelScene::onInputDestroyed>(this);
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("LEVEL SCENE: Creating entities");
@@ -52,10 +54,26 @@ void app::sce::LevelScene::end()
 			Console::writeLine({ "  Destroyed entity[", std::to_string(entity), "]" });
 		}
 	}
+	m_registry.destruction<comp::Input>().disconnect<LevelScene, &LevelScene::onInputDestroyed>(this);
 	m_registry.reset();
 }
 
-void app::sce::LevelScene::reset(app::Registry & registry, app::Entity inputEntity)
+void app::sce::LevelScene::update(app::time::seconds const & dt)
+{
+	if (m_resetSignal)
+	{
+		m_resetSignal = false;
+		this->reset();
+	}
+	app::sce::BaseScene::update(dt);
+}
+
+void app::sce::LevelScene::onInputDestroyed(app::Registry & registry, app::Entity inputEntity)
+{
+	m_resetSignal = true;
+}
+
+void app::sce::LevelScene::reset()
 {
 	for (auto const & e : m_entities)
 	{

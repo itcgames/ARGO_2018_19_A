@@ -409,7 +409,10 @@
       <Filter>Source Files\components</Filter>
     </ClCompile>
     <ClCompile Include="src\factories\HazardFactory.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\HealthSystem.cpp">
+      <Filter>Source Files\systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -698,8 +701,11 @@
     <ClInclude Include="src\components\Damage.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
+    <ClInclude Include="src\systems\HealthSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
     <ClInclude Include="src\factories\HazardFactory.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\factories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
