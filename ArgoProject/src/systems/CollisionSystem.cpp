@@ -8,6 +8,7 @@
 #include "components/Impenetrable.h"
 #include "components/Platform.h"
 #include "components/Player.h"
+#include "components/CurrentGround.h"
 #include "components/Input.h"
 #include "components/Motion.h"
 #include "components/AirMotion.h"
@@ -104,12 +105,13 @@ void app::sys::CollisionSystem::airCollisions()
 void app::sys::CollisionSystem::checkPlatformCollisions()
 {
 	//view player
-	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::AirMotion, comp::Player>(entt::persistent_t())
-		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Input & input, comp::Location & location, comp::Dimensions & dimensions, comp::AirMotion & airMotion, comp::Player player)
+	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Input & input, comp::Location & location, comp::Dimensions & dimensions,
+			comp::AirMotion & airMotion, comp::CurrentGround & ground)
 	{
 		//view everything with collisions
 		m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Platform>()
-			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Location secLocation, comp::Dimensions secDimensions, comp::Platform const & secPlatform)
+			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Location & secLocation, comp::Dimensions & secDimensions, comp::Platform const & secPlatform)
 		{
 			//if we are not the player
 			if (entity != secEntity)
@@ -127,7 +129,7 @@ void app::sys::CollisionSystem::checkPlatformCollisions()
 								auto const & penetration = manifold.depths[0];
 								location.position += direction * penetration;
 
-								player.currentPlatform = secEntity;
+								ground.currentGround = secEntity;
 								auto groundMotion = comp::Motion();
 								groundMotion.speed = airMotion.speed;
 								groundMotion.direction = airMotion.direction;

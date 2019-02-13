@@ -426,6 +426,12 @@
     <ClCompile Include="src\factories\HazardFactory.cpp">
       <Filter>Source Files\factories</Filter>
     </ClCompile>
+    <ClCompile Include="src\components\CurrentGround.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\CurrentGroundSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -730,6 +736,12 @@
     </ClInclude>
     <ClInclude Include="src\factories\PlatformFactory.h">
       <Filter>Header Files\factories</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\CurrentGround.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\CurrentGroundSystem.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

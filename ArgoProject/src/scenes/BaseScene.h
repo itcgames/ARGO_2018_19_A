@@ -12,6 +12,7 @@
 #include "systems/DashSystem.h"
 #include "systems/CollisionSystem.h"
 #include "systems/HealthSystem.h"
+#include "systems/CurrentGroundSystem.h"
 namespace app::sce
 {
 	enum class SceneType
@@ -40,7 +41,8 @@ namespace app::sce
 			, sys::CommandSystem
 			, sys::InputSystem
 			, sys::CollisionSystem
-			, sys::HealthSystem>;
+			, sys::HealthSystem
+			, sys::CurrentGroundSystem>;
 
 		using UpdateSystems = std::vector<UpdateSystem>;
 		using DrawSystem = std::variant<

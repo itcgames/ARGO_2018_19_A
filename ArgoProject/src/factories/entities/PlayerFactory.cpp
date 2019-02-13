@@ -12,6 +12,7 @@
 #include "components/Commandable.h"
 #include "components/Collision.h"
 #include "components/Player.h"
+#include "components/CurrentGround.h"
 
 #include "commands/MoveCommand.h"
 #include "commands/JumpCommand.h"
@@ -98,6 +99,9 @@ app::Entity const app::fact::PlayerFactory::create()
 
 	auto player = comp::Player();
 	m_registry.assign<decltype(player)>(entity, std::move(player));
+
+	auto ground = comp::CurrentGround();
+	m_registry.assign<decltype(ground)>(entity, std::move(ground));
 
 	return entity;
 }

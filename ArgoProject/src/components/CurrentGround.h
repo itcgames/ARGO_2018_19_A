@@ -1,27 +1,26 @@
-﻿#ifndef _PLAYER_H
-#define _PLAYER_H
-
-
+﻿#ifndef _COMPONENTS_CURRENTGROUND_H
+#define _COMPONENTS_CURRENTGROUND_H
 
 namespace app::comp
 {
-	class Player
+	struct CurrentGround
 	{
 	public: // Constructors/Destructor/Assignments
-		Player() = default;
-		~Player() = default;
+		CurrentGround() = default;
+		~CurrentGround() = default;
 
-		Player(Player const &) = default;
-		Player & operator=(Player const &) = default;
+		CurrentGround(CurrentGround const &) = default;
+		CurrentGround & operator=(CurrentGround const &) = default;
 
-		Player(Player &&) = default;
-		Player & operator=(Player &&) = default;
+		CurrentGround(CurrentGround &&) = default;
+		CurrentGround & operator=(CurrentGround &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		bool falling = false;
+		std::optional<app::Entity> currentGround;
+
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -33,4 +32,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_PLAYER_H
+#endif // !_COMPONENTS_CURRENTGROUND_H
