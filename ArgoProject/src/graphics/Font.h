@@ -42,11 +42,11 @@ namespace app::gra
 	private: // Private Member Functions
 	private: // Private Static Variables
 		static std::mutex s_sdlMutex;
-		constexpr static std::int32_t s_defaultCharSize = 128;
+		constexpr static std::int32_t s_DEFAULT_CHAR_SIZE = 128;
 	private: // Private Member Variables
 		del::UPtrFont m_font;
 		del::UPtrTexture m_texture;
-		std::int32_t m_charSize = s_defaultCharSize;
+		std::int32_t m_charSize = s_DEFAULT_CHAR_SIZE;
 	};
 }
 

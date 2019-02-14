@@ -6,7 +6,7 @@ std::mutex app::gra::Font::s_sdlMutex = std::mutex();
 
 app::gra::Font::Font(std::string const & file)
 	: m_font(nullptr)
-	, m_charSize(s_defaultCharSize)
+	, m_charSize(s_DEFAULT_CHAR_SIZE)
 {
 	this->load(file);
 }
