@@ -171,7 +171,7 @@ bool app::net::Client::processPacket(Packet _packetType)
 {
 	switch (_packetType)
 	{
-	case P_CLIENT_NAME:
+	case Packet::CLIENT_NAME:
 	{
 		std::string Message;
 		if (!getString(Message))

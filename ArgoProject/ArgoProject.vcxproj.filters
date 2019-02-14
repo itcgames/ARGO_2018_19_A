@@ -447,6 +447,9 @@
     <ClCompile Include="src\scenes\SceneType.cpp">
       <Filter>Source Files\scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\singletons\ClientSingleton.cpp">
+      <Filter>Source Files\singletons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -757,6 +760,9 @@
     </ClInclude>
     <ClInclude Include="src\scenes\SceneType.h">
       <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\singletons\ClientSingleton.h">
+      <Filter>Header Files\singletons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

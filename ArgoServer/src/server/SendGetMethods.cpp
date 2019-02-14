@@ -167,7 +167,7 @@ bool app::net::Server::processPacket(int ID, Packet _packetType)
 {
 	switch (_packetType)
 	{
-	case P_CLIENT_NAME:
+	case Packet::CLIENT_NAME:
 	{
 		std::string Message;
 		if (!getString(ID, Message))
@@ -178,6 +178,20 @@ bool app::net::Server::processPacket(int ID, Packet _packetType)
 		break;
 	}
 	break;
+	case Packet::LOBBY_CREATE:
+	{
+		//handle creation of a lobby
+		std::string playerName;
+		if (!getString(ID, playerName))
+		{
+			return false;
+		}
+		m_lobbies.push_back(Lobby());
+		m_lobbies.back().setLobbyName(playerName + "'s Lobby");
+		m_lobbies.back().addPlayer(ID, playerName);
+		app::Console::writeLine({ "Player with ID [", std::to_string(ID), "] created a lobby with name: ", m_lobbies.back().getLobbyName() });
+	}
+		break;
 	default:
 		break;
 	}

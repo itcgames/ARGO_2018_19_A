@@ -2,12 +2,14 @@
 #define _SERVER_H
 
 #include "stdafx.h"
+#include "Lobby.h"
 #include <windows.h>
 
 namespace app::net
 {
-	enum Packet {
-		P_CLIENT_NAME
+	enum class Packet {
+		CLIENT_NAME,
+		LOBBY_CREATE
 	};
 	class Server
 	{
@@ -59,6 +61,8 @@ namespace app::net
 		TCPsocket sockets[MAX_SOCKETS];
 
 		int totalConnections = 0;
+
+		std::vector<Lobby> m_lobbies;
 	};
 }
 

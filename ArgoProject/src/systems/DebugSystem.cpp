@@ -1,10 +1,11 @@
 ﻿#include "stdafx.h"
 #include "DebugSystem.h"
 #include "singletons/KeyHandlerSingleton.h"
+#include "singletons/ClientSingleton.h"
 
 app::sys::DebugSystem::DebugSystem(app::sce::SceneType& _targetScene)
 	: m_keyHandler(app::sin::KeyHandler::get())
-	, m_client()
+	, m_client(app::sin::Client::get())
 	, connected(false)
 	, m_targetScene(_targetScene)
 {
@@ -43,7 +44,7 @@ void app::sys::DebugSystem::serverTesting()
 		app::Console::writeLine("sending name to server");
 		std::string name = "Bob";
 		//define the type of packet we are about to send
-		app::net::Packet packetType = app::net::P_CLIENT_NAME;
+		app::net::Packet packetType = app::net::Packet::CLIENT_NAME;
 		//send the packet out
 		m_client.send(name, packetType);
 		m_targetScene = app::sce::SceneType::LobbySelect;
@@ -62,5 +63,12 @@ void app::sys::DebugSystem::serverTesting()
 				app::Console::writeLine("issue sending the packet");
 			}
 		}
+	}
+	if (m_keyHandler.isKeyPressed(SDLK_l))
+	{
+		//simulate logic for when create new lobby is clicked
+		std::string name = "Bob";
+		app::net::Packet packetType = app::net::Packet::LOBBY_CREATE;
+		m_client.send(name, packetType);
 	}
 }

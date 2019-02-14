@@ -60,6 +60,9 @@
     <ClInclude Include="src\server\Server.h">
       <Filter>Header Files\server</Filter>
     </ClInclude>
+    <ClInclude Include="src\server\Lobby.h">
+      <Filter>Header Files\server</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\stdafx.cpp">
@@ -93,6 +96,9 @@
       <Filter>Source Files\server</Filter>
     </ClCompile>
     <ClCompile Include="src\server\Server.cpp">
+      <Filter>Source Files\server</Filter>
+    </ClCompile>
+    <ClCompile Include="src\server\Lobby.cpp">
       <Filter>Source Files\server</Filter>
     </ClCompile>
   </ItemGroup>
