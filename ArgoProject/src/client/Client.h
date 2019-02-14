@@ -55,6 +55,7 @@ namespace app::net
 
 		TCPsocket socket;
 		SDLNet_SocketSet socket_set;
+
 	};
 }
 

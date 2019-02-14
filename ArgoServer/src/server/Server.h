@@ -48,6 +48,7 @@ namespace app::net
 		bool sendPacketType(int ID, Packet _packetType);
 		bool getPacketType(int ID, Packet& _packetType);
 		bool send(int ID, std::string& _string, Packet& _packetToProcessString);
+		bool send(Packet& packetType);
 		bool getString(int ID, std::string& _string);
 		bool processPacket(int ID, Packet _packetType);
 	private: // Private Static Variables

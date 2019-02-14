@@ -132,6 +132,11 @@ bool app::net::Server::send(int ID, std::string & _string, Packet & _packetType)
 	return true;
 }
 
+bool app::net::Server::send(Packet & packetType)
+{
+	return false;
+}
+
 /// <summary>
 /// expect string from other socket
 /// </summary>
@@ -190,6 +195,18 @@ bool app::net::Server::processPacket(int ID, Packet _packetType)
 		m_lobbies.back().setLobbyName(playerName + "'s Lobby");
 		m_lobbies.back().addPlayer(ID, playerName);
 		app::Console::writeLine({ "Player with ID [", std::to_string(ID), "] created a lobby with name: ", m_lobbies.back().getLobbyName() });
+
+		//send out lobby created message to everyone else
+		app::net::Packet packetType = app::net::Packet::LOBBY_CREATE;
+		for (int i = 0; i < totalConnections; i++)
+		{
+			if(i == ID)
+			{
+				continue;
+			}
+			send(packetType);
+		}
+
 	}
 		break;
 	default:
