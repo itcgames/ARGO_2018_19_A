@@ -1,30 +1,28 @@
-﻿#ifndef _COMPONENT_MOTION_H
-#define _COMPONENT_MOTION_H
+﻿#ifndef _SYSTEM_HEALTH_H
+#define _SYSTEM_HEALTH_H
 
-namespace app::comp
+#include "utilities/cute_c2.h"
+#include "BaseSystem.h"
+
+namespace app::sys
 {
-	struct Motion
+	class HealthSystem : public BaseSystem
 	{
 	public: // Constructors/Destructor/Assignments
-		Motion() = default;
-		~Motion() = default;
+		HealthSystem() = default;
+		~HealthSystem() = default;
 
-		Motion(Motion const &) = default;
-		Motion(Motion &&) = default;
+		HealthSystem(HealthSystem const &) = default;
+		HealthSystem & operator=(HealthSystem const &) = default;
 
-		Motion & operator=(Motion const &) = default;
-		Motion & operator=(Motion &&) = default;
+		HealthSystem(HealthSystem &&) = default;
+		HealthSystem & operator=(HealthSystem &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
+		virtual void update(app::time::seconds const & dt) override;
 	public: // Public Static Variables
-		constexpr static float DRAG = 0.95f;
-		constexpr static float DRAG_CUTOFF = 20.0f;
-		constexpr static float MAX_SPEED = 300.0f;
 	public: // Public Member Variables
-		float speed;
-		float angularSpeed;
-		float direction;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -36,4 +34,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENT_MOTION_H
+#endif // !_SYSTEM_HEALTH_H

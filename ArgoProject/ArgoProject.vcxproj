@@ -176,6 +176,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   <ItemGroup>
     <ClCompile Include="src\commands\BaseCommand.cpp" />
     <ClCompile Include="src\commands\DashCommand.cpp" />
+    <ClCompile Include="src\commands\DropCommand.cpp" />
     <ClCompile Include="src\commands\FaceLeftCommand.cpp" />
     <ClCompile Include="src\commands\FaceRightCommand.cpp" />
     <ClCompile Include="src\commands\JumpCommand.cpp" />
@@ -185,11 +186,17 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\Collision.cpp" />
     <ClCompile Include="src\components\Commandable.cpp" />
     <ClCompile Include="src\components\Camera.cpp" />
+    <ClCompile Include="src\components\CurrentGround.cpp" />
+    <ClCompile Include="src\components\Damage.cpp" />
     <ClCompile Include="src\components\Dash.cpp" />
     <ClCompile Include="src\components\Dimensions.cpp" />
+    <ClCompile Include="src\components\Health.cpp" />
+    <ClCompile Include="src\components\Impenetrable.cpp" />
     <ClCompile Include="src\components\Input.cpp" />
     <ClCompile Include="src\components\Location.cpp" />
     <ClCompile Include="src\components\Motion.cpp" />
+    <ClCompile Include="src\components\Platform.cpp" />
+    <ClCompile Include="src\components\PlatformDrop.cpp" />
     <ClCompile Include="src\components\Render.cpp" />
     <ClCompile Include="src\components\StateMachine.cpp" />
     <ClCompile Include="src\deleters\SdlDeleter.cpp" />
@@ -198,7 +205,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\entities\CameraFactory.cpp" />
     <ClCompile Include="src\factories\entities\PlayerFactory.cpp" />
     <ClCompile Include="src\factories\EntityFactory.cpp" />
+    <ClCompile Include="src\factories\HazardFactory.cpp" />
     <ClCompile Include="src\factories\LevelFactory.cpp" />
+    <ClCompile Include="src\factories\PlatformFactory.cpp" />
     <ClCompile Include="src\factories\scenes\MainMenuSceneFactory.cpp" />
     <ClCompile Include="src\factories\scenes\CreditsSceneFactory.cpp" />
     <ClCompile Include="src\factories\scenes\CharacterSelectSceneFactory.cpp" />
@@ -264,7 +273,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\BaseSystem.cpp" />
     <ClCompile Include="src\systems\CollisionSystem.cpp" />
     <ClCompile Include="src\systems\CommandSystem.cpp" />
+    <ClCompile Include="src\systems\CurrentGroundSystem.cpp" />
     <ClCompile Include="src\systems\DashSystem.cpp" />
+    <ClCompile Include="src\systems\HealthSystem.cpp" />
     <ClCompile Include="src\systems\InputSystem.cpp" />
     <ClCompile Include="src\systems\CameraSystem.cpp" />
     <ClCompile Include="src\systems\MotionSystem.cpp" />
@@ -285,6 +296,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   <ItemGroup>
     <ClInclude Include="src\commands\BaseCommand.h" />
     <ClInclude Include="src\commands\DashCommand.h" />
+    <ClInclude Include="src\commands\DropCommand.h" />
     <ClInclude Include="src\commands\FaceLeftCommand.h" />
     <ClInclude Include="src\commands\FaceRightCommand.h" />
     <ClInclude Include="src\commands\JumpCommand.h" />
@@ -294,11 +306,17 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\Collision.h" />
     <ClInclude Include="src\components\Commandable.h" />
     <ClInclude Include="src\components\Camera.h" />
+    <ClInclude Include="src\components\CurrentGround.h" />
+    <ClInclude Include="src\components\Damage.h" />
     <ClInclude Include="src\components\Dash.h" />
     <ClInclude Include="src\components\Dimensions.h" />
+    <ClInclude Include="src\components\Health.h" />
+    <ClInclude Include="src\components\Impenetrable.h" />
     <ClInclude Include="src\components\Input.h" />
     <ClInclude Include="src\components\Location.h" />
     <ClInclude Include="src\components\Motion.h" />
+    <ClInclude Include="src\components\Platform.h" />
+    <ClInclude Include="src\components\PlatformDrop.h" />
     <ClInclude Include="src\components\Render.h" />
     <ClInclude Include="src\components\StateMachine.h" />
     <ClInclude Include="src\deleters\SdlDeleter.h" />
@@ -307,7 +325,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\entities\CameraFactory.h" />
     <ClInclude Include="src\factories\entities\PlayerFactory.h" />
     <ClInclude Include="src\factories\EntityFactory.h" />
+    <ClInclude Include="src\factories\HazardFactory.h" />
     <ClInclude Include="src\factories\LevelFactory.h" />
+    <ClInclude Include="src\factories\PlatformFactory.h" />
     <ClInclude Include="src\factories\scenes\MainMenuSceneFactory.h" />
     <ClInclude Include="src\factories\scenes\CreditsSceneFactory.h" />
     <ClInclude Include="src\factories\scenes\CharacterSelectSceneFactory.h" />
@@ -367,7 +387,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\systems\BaseSystem.h" />
     <ClInclude Include="src\systems\CollisionSystem.h" />
     <ClInclude Include="src\systems\CommandSystem.h" />
+    <ClInclude Include="src\systems\CurrentGroundSystem.h" />
     <ClInclude Include="src\systems\DashSystem.h" />
+    <ClInclude Include="src\systems\HealthSystem.h" />
     <ClInclude Include="src\systems\InputSystem.h" />
     <ClInclude Include="src\systems\CameraSystem.h" />
     <ClInclude Include="src\systems\MotionSystem.h" />

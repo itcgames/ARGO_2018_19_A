@@ -1,30 +1,25 @@
-﻿#ifndef _COMPONENT_MOTION_H
-#define _COMPONENT_MOTION_H
+﻿#ifndef _DAMAGE_H
+#define _DAMAGE_H
 
 namespace app::comp
 {
-	struct Motion
+	struct Damage
 	{
 	public: // Constructors/Destructor/Assignments
-		Motion() = default;
-		~Motion() = default;
+		Damage() = default;
+		~Damage() = default;
 
-		Motion(Motion const &) = default;
-		Motion(Motion &&) = default;
+		Damage(Damage const &) = default;
+		Damage & operator=(Damage const &) = default;
 
-		Motion & operator=(Motion const &) = default;
-		Motion & operator=(Motion &&) = default;
+		Damage(Damage &&) = default;
+		Damage & operator=(Damage &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
-		constexpr static float DRAG = 0.95f;
-		constexpr static float DRAG_CUTOFF = 20.0f;
-		constexpr static float MAX_SPEED = 300.0f;
 	public: // Public Member Variables
-		float speed;
-		float angularSpeed;
-		float direction;
+		int damage;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -36,4 +31,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENT_MOTION_H
+#endif // !_DAMAGE_H

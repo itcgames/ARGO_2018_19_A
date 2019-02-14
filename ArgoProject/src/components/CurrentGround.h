@@ -1,30 +1,26 @@
-﻿#ifndef _COMPONENT_MOTION_H
-#define _COMPONENT_MOTION_H
+﻿#ifndef _COMPONENTS_CURRENTGROUND_H
+#define _COMPONENTS_CURRENTGROUND_H
 
 namespace app::comp
 {
-	struct Motion
+	struct CurrentGround
 	{
 	public: // Constructors/Destructor/Assignments
-		Motion() = default;
-		~Motion() = default;
+		CurrentGround() = default;
+		~CurrentGround() = default;
 
-		Motion(Motion const &) = default;
-		Motion(Motion &&) = default;
+		CurrentGround(CurrentGround const &) = default;
+		CurrentGround & operator=(CurrentGround const &) = default;
 
-		Motion & operator=(Motion const &) = default;
-		Motion & operator=(Motion &&) = default;
+		CurrentGround(CurrentGround &&) = default;
+		CurrentGround & operator=(CurrentGround &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
-		constexpr static float DRAG = 0.95f;
-		constexpr static float DRAG_CUTOFF = 20.0f;
-		constexpr static float MAX_SPEED = 300.0f;
 	public: // Public Member Variables
-		float speed;
-		float angularSpeed;
-		float direction;
+		std::optional<app::Entity> currentGround;
+
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -36,4 +32,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENT_MOTION_H
+#endif // !_COMPONENTS_CURRENTGROUND_H

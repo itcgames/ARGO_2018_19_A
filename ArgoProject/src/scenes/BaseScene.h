@@ -13,6 +13,8 @@
 #include "systems/StateMachineSystem.h"
 #include "systems/DashSystem.h"
 #include "systems/CollisionSystem.h"
+#include "systems/HealthSystem.h"
+#include "systems/CurrentGroundSystem.h"
 
 namespace app::sce
 {
@@ -27,7 +29,9 @@ namespace app::sce
 			, sys::CameraSystem
 			, sys::CommandSystem
 			, sys::InputSystem
-			, sys::CollisionSystem>;
+			, sys::CollisionSystem
+			, sys::HealthSystem
+			, sys::CurrentGroundSystem>;
 
 		using UpdateSystems = std::vector<UpdateSystem>;
 		using DrawSystem = std::variant<

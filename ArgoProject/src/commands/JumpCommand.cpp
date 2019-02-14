@@ -42,7 +42,6 @@ void app::cmnd::JumpCommand::execute()
 			airMotion.speed = motion.speed;
 			airMotion.direction = motion.direction;
 			airMotion.angularSpeed = motion.angularSpeed;
-			airMotion.maxSpeed = 500.0f;
 			m_registry.assign<comp::AirMotion>(m_entity, std::move(airMotion));
 			m_registry.remove<comp::Motion>(m_entity);
 		}
@@ -57,7 +56,6 @@ void app::cmnd::JumpCommand::execute()
 			auto airMotion = comp::AirMotion();
 			airMotion.speed = motion.speed;
 			airMotion.direction = motion.direction;
-			airMotion.maxSpeed = 500.0f;
 			m_registry.assign<comp::AirMotion>(m_entity, std::move(airMotion));
 			m_registry.remove<comp::Dash>(m_entity);
 			input.m_canDoubleJump = false;

@@ -1,30 +1,24 @@
-﻿#ifndef _COMPONENT_MOTION_H
-#define _COMPONENT_MOTION_H
+﻿#ifndef _COMPONENTS_IMPENETRABLE_H
+#define _COMPONENTS_IMPENETRABLE_H
 
 namespace app::comp
 {
-	struct Motion
+	struct Impenetrable
 	{
 	public: // Constructors/Destructor/Assignments
-		Motion() = default;
-		~Motion() = default;
+		Impenetrable() = default;
+		~Impenetrable() = default;
 
-		Motion(Motion const &) = default;
-		Motion(Motion &&) = default;
+		Impenetrable(Impenetrable const &) = default;
+		Impenetrable & operator=(Impenetrable const &) = default;
 
-		Motion & operator=(Motion const &) = default;
-		Motion & operator=(Motion &&) = default;
+		Impenetrable(Impenetrable &&) = default;
+		Impenetrable & operator=(Impenetrable &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
-		constexpr static float DRAG = 0.95f;
-		constexpr static float DRAG_CUTOFF = 20.0f;
-		constexpr static float MAX_SPEED = 300.0f;
 	public: // Public Member Variables
-		float speed;
-		float angularSpeed;
-		float direction;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -36,4 +30,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENT_MOTION_H
+#endif // !_COMPONENTS_IMPENETRABLE_H
