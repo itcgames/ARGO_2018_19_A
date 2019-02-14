@@ -1,30 +1,27 @@
-﻿#ifndef _COMPONENT_MOTION_H
-#define _COMPONENT_MOTION_H
+﻿#ifndef _DROP_COMMAND_H
+#define _DROP_COMMAND_H
 
-namespace app::comp
+#include "BaseCommand.h"
+
+namespace app::cmnd
 {
-	struct Motion
+	class DropCommand : public BaseCommand
 	{
 	public: // Constructors/Destructor/Assignments
-		Motion() = default;
-		~Motion() = default;
+		DropCommand(app::Entity const _entity);
+		~DropCommand() = default;
 
-		Motion(Motion const &) = default;
-		Motion(Motion &&) = default;
+		DropCommand(DropCommand const &) = default;
+		DropCommand & operator=(DropCommand const &) = default;
 
-		Motion & operator=(Motion const &) = default;
-		Motion & operator=(Motion &&) = default;
+		DropCommand(DropCommand &&) = default;
+		DropCommand & operator=(DropCommand &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
+		virtual void execute() override;
 	public: // Public Static Variables
-		constexpr static float DRAG = 0.95f;
-		constexpr static float DRAG_CUTOFF = 20.0f;
-		constexpr static float MAX_SPEED = 300.0f;
 	public: // Public Member Variables
-		float speed;
-		float angularSpeed;
-		float direction;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -33,7 +30,8 @@ namespace app::comp
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
+		app::Entity const m_entity;
 	};
 }
 
-#endif // !_COMPONENT_MOTION_H
+#endif // !_DROP_COMMAND_H
