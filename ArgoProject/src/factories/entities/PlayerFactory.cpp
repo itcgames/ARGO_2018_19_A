@@ -33,7 +33,7 @@ app::Entity const app::fact::PlayerFactory::create()
 	app::Entity const entity = EntityFactory::create();
 
 	auto location = comp::Location();
-	location.position = { 680.0f, 450.0f };
+	location.position = { 900.0f, 100.0f };
 	location.orientation = 0.0f;
 	m_registry.assign<decltype(location)>(entity, std::move(location));
 

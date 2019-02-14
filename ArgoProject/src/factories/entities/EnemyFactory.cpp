@@ -12,6 +12,7 @@
 #include "components/Collision.h"
 #include "components/CurrentGround.h"
 #include "components/Enemy.h"
+#include "components/Damage.h"
 
 app::fact::EnemyFactory::EnemyFactory(math::Vector2f const & position, math::Vector2f const & size)
 	: EntityFactory()
@@ -69,6 +70,10 @@ app::Entity const app::fact::EnemyFactory::create()
 
 	auto ground = comp::CurrentGround();
 	m_registry.assign<decltype(ground)>(entity, std::move(ground));
+
+	auto damage = comp::Damage();
+	damage.damage = 1;
+	m_registry.assign<decltype(damage)>(entity, std::move(damage));
 
 	auto enemy = comp::Enemy();
 	m_registry.assign<decltype(enemy)>(entity, std::move(enemy));
