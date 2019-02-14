@@ -1,28 +1,27 @@
-﻿#ifndef _FACTORY_WALL_H
-#define _FACTORY_WALL_H
+#ifndef _FACTORY_ENEMY_H
+#define _FACTORY_ENEMY_H
 
-
-#include "EntityFactory.h"
+#include "../EntityFactory.h"
 #include "deleters/SdlDeleter.h"
 #include "graphics/Texture.h"
 
 namespace app::fact
 {
-	class WallFactory : public EntityFactory
+	class EnemyFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		WallFactory(app::math::Vector2f const & pos, app::math::Vector2f const & size);
-		virtual ~WallFactory() = default;
+		EnemyFactory(math::Vector2f const & position, math::Vector2f const & size);
+		virtual ~EnemyFactory() = default;
 
-		WallFactory(WallFactory const &) = default;
-		WallFactory & operator=(WallFactory const &) = default;
+		EnemyFactory(EnemyFactory const &) = default;
+		EnemyFactory & operator=(EnemyFactory const &) = default;
 
-		WallFactory(WallFactory &&) = default;
-		WallFactory & operator=(WallFactory &&) = default;
+		EnemyFactory(EnemyFactory &&) = default;
+		EnemyFactory & operator=(EnemyFactory &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		virtual app::Entity const create() override;
+		virtual app::Entity const create() final override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -33,9 +32,9 @@ namespace app::fact
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
-		app::math::Vector2f const & m_position;
-		app::math::Vector2f const & m_size;
+		math::Vector2f const & m_position;
+		math::Vector2f const & m_size;
 	};
 }
 
-#endif // !_FACTORY_WALL_H
+#endif // !_FACTORY_ENEMY_H

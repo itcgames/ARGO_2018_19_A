@@ -7,11 +7,14 @@
 std::vector<app::Entity> app::fact::sce::LevelSceneFactory::create()
 {
 	auto entities = std::vector<app::Entity>();
+	entities.reserve(50);
 
 	auto player = fact::PlayerFactory().create();
 	entities.push_back(player);
+
 	auto level = fact::LevelFactory().create();	
 	entities.insert(entities.end(), level.begin(), level.end());
+
 	auto cameraParams = app::par::CameraParameters();
 	cameraParams.targetEntity = player;
 	cameraParams.clampRect = math::Rectf({ -800.0f, 300.0f }, { 2000.0f, 1000.0f });

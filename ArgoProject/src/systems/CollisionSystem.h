@@ -22,12 +22,16 @@ namespace app::sys
 		//general update
 		virtual void update(app::time::seconds const & dt) override;
 		//calls these which updates the collision boxes and checks collisions depending on the current motion the player has
+		void updateCollisionBoxes();	
 		void groundCollisions();
 		void airCollisions();
 		void dashCollisions();
-		void updateCollisionBoxes();
+		void enemyWallCollisions();
+		void enemyEnemyCollisions();
+		void enemyPlayerCollisions();
 		void playerHazardCollisions();
 		void checkPlatformCollisions();
+
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions

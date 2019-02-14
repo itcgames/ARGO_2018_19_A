@@ -28,9 +28,9 @@ namespace app::sce
 			, sys::AirMotionSystem
 			, sys::DashSystem
 			, sys::StateMachineSystem
-			, sys::CameraSystem
 			, sys::CommandSystem
 			, sys::InputSystem
+			, sys::CameraSystem
 			, sys::CollisionSystem
 			, sys::DebugSystem
 			, sys::HealthSystem

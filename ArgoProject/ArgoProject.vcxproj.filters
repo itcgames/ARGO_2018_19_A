@@ -435,6 +435,9 @@
     <ClCompile Include="src\parameters\CameraParameters.cpp">
       <Filter>Source Files\parameters</Filter>
     </ClCompile>
+    <ClCompile Include="src\factories\entities\EnemyFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
     <ClCompile Include="src\factories\entities\BackgroundImageFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
@@ -471,15 +474,6 @@
     <ClCompile Include="src\components\Impenetrable.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
-    <ClCompile Include="src\factories\LevelFactory.cpp">
-      <Filter>Source Files\factories</Filter>
-    </ClCompile>
-    <ClCompile Include="src\factories\PlatformFactory.cpp">
-      <Filter>Source Files\factories</Filter>
-    </ClCompile>
-    <ClCompile Include="src\factories\WallFactory.cpp">
-      <Filter>Source Files\factories</Filter>
-    </ClCompile>
     <ClCompile Include="src\components\CurrentGround.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
@@ -495,6 +489,9 @@
     <ClCompile Include="src\systems\CurrentGroundSystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
+    <ClCompile Include="src\components\Enemy.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
     <ClCompile Include="src\commands\DropCommand.cpp">
       <Filter>Source Files\commands</Filter>
     </ClCompile>
@@ -502,6 +499,15 @@
       <Filter>Source Files\components</Filter>
     </ClCompile>
     <ClCompile Include="src\factories\HazardFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\PlatformFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\WallFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\LevelFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
   </ItemGroup>
@@ -812,6 +818,9 @@
     <ClInclude Include="src\parameters\CameraParameters.h">
       <Filter>Header Files\parameters</Filter>
     </ClInclude>
+    <ClInclude Include="src\factories\entities\EnemyFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
     <ClInclude Include="src\factories\entities\BackgroundImageFactory.h">
       <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
@@ -842,23 +851,20 @@
     <ClInclude Include="src\systems\HealthSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
-    <ClInclude Include="src\factories\HazardFactory.h">
-      <Filter>Header Files\factories</Filter>
-    </ClInclude>
     <ClInclude Include="src\components\Impenetrable.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="src\components\Platform.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="src\factories\PlatformFactory.h">
-      <Filter>Header Files\factories</Filter>
-    </ClInclude>
     <ClInclude Include="src\components\CurrentGround.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="src\scenes\SceneType.h">
       <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Enemy.h">
+      <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="src\singletons\ClientSingleton.h">
       <Filter>Header Files\singletons</Filter>
@@ -874,6 +880,12 @@
     </ClInclude>
     <ClInclude Include="src\systems\CurrentGroundSystem.h">
       <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\HazardFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\PlatformFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
