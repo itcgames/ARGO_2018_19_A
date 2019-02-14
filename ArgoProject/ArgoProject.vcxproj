@@ -174,8 +174,11 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\client\Client.cpp" />
+    <ClCompile Include="src\client\Lobby.cpp" />
     <ClCompile Include="src\commands\BaseCommand.cpp" />
     <ClCompile Include="src\commands\DashCommand.cpp" />
+    <ClCompile Include="src\commands\DropCommand.cpp" />
     <ClCompile Include="src\commands\FaceLeftCommand.cpp" />
     <ClCompile Include="src\commands\FaceRightCommand.cpp" />
     <ClCompile Include="src\commands\JumpCommand.cpp" />
@@ -196,15 +199,19 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\Location.cpp" />
     <ClCompile Include="src\components\Motion.cpp" />
     <ClCompile Include="src\components\Platform.cpp" />
-    <ClCompile Include="src\components\Player.cpp" />
+    <ClCompile Include="src\components\PlatformDrop.cpp" />
     <ClCompile Include="src\components\Render.cpp" />
     <ClCompile Include="src\components\StateMachine.cpp" />
+    <ClCompile Include="src\components\Text.cpp" />
     <ClCompile Include="src\deleters\SdlDeleter.cpp" />
+    <ClCompile Include="src\deleters\SdlTtfDeleter.cpp" />
     <ClCompile Include="src\factories\BaseFactory.cpp" />
     <ClCompile Include="src\factories\EntitiesFactory.cpp" />
+    <ClCompile Include="src\factories\entities\BackgroundImageFactory.cpp" />
     <ClCompile Include="src\factories\entities\CameraFactory.cpp" />
     <ClCompile Include="src\factories\entities\EnemyFactory.cpp" />
     <ClCompile Include="src\factories\entities\PlayerFactory.cpp" />
+    <ClCompile Include="src\factories\entities\TextFactory.cpp" />
     <ClCompile Include="src\factories\EntityFactory.cpp" />
     <ClCompile Include="src\factories\HazardFactory.cpp" />
     <ClCompile Include="src\factories\LevelFactory.cpp" />
@@ -225,7 +232,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\fsm\states\AnimationState.cpp" />
     <ClCompile Include="src\fsm\states\EntityState.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\graphics\Font.cpp" />
     <ClCompile Include="src\graphics\RenderRect.cpp" />
+    <ClCompile Include="src\graphics\RenderText.cpp" />
     <ClCompile Include="src\graphics\Texture.cpp" />
     <ClCompile Include="src\graphics\View.cpp" />
     <ClCompile Include="src\graphics\Window.cpp" />
@@ -257,6 +266,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\scenes\SceneType.cpp" />
     <ClCompile Include="src\scenes\TutorialLevelScene.cpp" />
     <ClCompile Include="src\scenes\SplashScene.cpp" />
+    <ClCompile Include="src\singletons\ClientSingleton.cpp" />
     <ClCompile Include="src\singletons\ControllerHandlerSingleton.cpp" />
     <ClCompile Include="src\singletons\KeyHandlerSingleton.cpp" />
     <ClCompile Include="src\singletons\MouseHandlerSingleton.cpp" />
@@ -276,11 +286,13 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\CommandSystem.cpp" />
     <ClCompile Include="src\systems\CurrentGroundSystem.cpp" />
     <ClCompile Include="src\systems\DashSystem.cpp" />
+    <ClCompile Include="src\systems\DebugSystem.cpp" />
     <ClCompile Include="src\systems\HealthSystem.cpp" />
     <ClCompile Include="src\systems\InputSystem.cpp" />
     <ClCompile Include="src\systems\CameraSystem.cpp" />
     <ClCompile Include="src\systems\MotionSystem.cpp" />
     <ClCompile Include="src\systems\RenderSystem.cpp" />
+    <ClCompile Include="src\systems\RenderTextSystem.cpp" />
     <ClCompile Include="src\systems\StateMachineSystem.cpp" />
     <ClCompile Include="src\utilities\Console.cpp" />
     <ClCompile Include="src\utilities\cute_c2.cpp" />
@@ -295,8 +307,11 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\visitors\CollisionUpdateVisitor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\client\Client.h" />
+    <ClInclude Include="src\client\Lobby.h" />
     <ClInclude Include="src\commands\BaseCommand.h" />
     <ClInclude Include="src\commands\DashCommand.h" />
+    <ClInclude Include="src\commands\DropCommand.h" />
     <ClInclude Include="src\commands\FaceLeftCommand.h" />
     <ClInclude Include="src\commands\FaceRightCommand.h" />
     <ClInclude Include="src\commands\JumpCommand.h" />
@@ -317,15 +332,19 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\Location.h" />
     <ClInclude Include="src\components\Motion.h" />
     <ClInclude Include="src\components\Platform.h" />
-    <ClInclude Include="src\components\Player.h" />
+    <ClInclude Include="src\components\PlatformDrop.h" />
     <ClInclude Include="src\components\Render.h" />
     <ClInclude Include="src\components\StateMachine.h" />
+    <ClInclude Include="src\components\Text.h" />
     <ClInclude Include="src\deleters\SdlDeleter.h" />
+    <ClInclude Include="src\deleters\SdlTtfDeleter.h" />
     <ClInclude Include="src\factories\BaseFactory.h" />
     <ClInclude Include="src\factories\EntitiesFactory.h" />
+    <ClInclude Include="src\factories\entities\BackgroundImageFactory.h" />
     <ClInclude Include="src\factories\entities\CameraFactory.h" />
     <ClInclude Include="src\factories\entities\EnemyFactory.h" />
     <ClInclude Include="src\factories\entities\PlayerFactory.h" />
+    <ClInclude Include="src\factories\entities\TextFactory.h" />
     <ClInclude Include="src\factories\EntityFactory.h" />
     <ClInclude Include="src\factories\HazardFactory.h" />
     <ClInclude Include="src\factories\LevelFactory.h" />
@@ -346,7 +365,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\fsm\states\AnimationState.h" />
     <ClInclude Include="src\fsm\states\EntityState.h" />
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\graphics\Font.h" />
     <ClInclude Include="src\graphics\RenderRect.h" />
+    <ClInclude Include="src\graphics\RenderText.h" />
     <ClInclude Include="src\graphics\Texture.h" />
     <ClInclude Include="src\graphics\View.h" />
     <ClInclude Include="src\graphics\Window.h" />
@@ -377,6 +398,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\scenes\SceneType.h" />
     <ClInclude Include="src\scenes\TutorialLevelScene.h" />
     <ClInclude Include="src\scenes\SplashScene.h" />
+    <ClInclude Include="src\singletons\ClientSingleton.h" />
     <ClInclude Include="src\singletons\ControllerHandlerSingleton.h" />
     <ClInclude Include="src\singletons\KeyHandlerSingleton.h" />
     <ClInclude Include="src\singletons\MouseHandlerSingleton.h" />
@@ -391,11 +413,13 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\systems\CommandSystem.h" />
     <ClInclude Include="src\systems\CurrentGroundSystem.h" />
     <ClInclude Include="src\systems\DashSystem.h" />
+    <ClInclude Include="src\systems\DebugSystem.h" />
     <ClInclude Include="src\systems\HealthSystem.h" />
     <ClInclude Include="src\systems\InputSystem.h" />
     <ClInclude Include="src\systems\CameraSystem.h" />
     <ClInclude Include="src\systems\MotionSystem.h" />
     <ClInclude Include="src\systems\RenderSystem.h" />
+    <ClInclude Include="src\systems\RenderTextSystem.h" />
     <ClInclude Include="src\systems\StateMachineSystem.h" />
     <ClInclude Include="src\utilities\Console.h" />
     <ClInclude Include="src\utilities\cute_c2.h" />

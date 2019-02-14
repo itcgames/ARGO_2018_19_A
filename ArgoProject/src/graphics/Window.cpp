@@ -113,6 +113,30 @@ void app::gra::Window::render(app::gra::RenderRect const & rect) const
 	SDL_RenderCopyEx(m_renderer.get(), rect.getTexture(), source.has_value() ? &source.value() : nullptr, &destination, rect.getRotation(), &center, FLIP_FLAG);
 }
 
+void app::gra::Window::render(app::gra::RenderText const & rect) const
+{
+	constexpr auto FLIP_FLAG = SDL_RendererFlip::SDL_FLIP_NONE;
+	auto const & position = static_cast<math::Vector2i>(rect.getPosition());
+	auto const & origin = static_cast<math::Vector2i>(rect.getOrigin());
+	auto const & size = static_cast<math::Vector2i>(rect.getSize());
+	auto const & source = rect.getSourceRect();
+	auto const & screenSize = math::Vector2f{ static_cast<float>(m_width), static_cast<float>(m_height) };
+	auto const & scale = screenSize / static_cast<math::Vector2f>(m_view.size);
+	auto const & halfSize = m_view.size / 2;
+	auto const & destination = SDL_Rect{
+		position.x - origin.x - (m_view.position.x - halfSize.x),
+		position.y - origin.y - (m_view.position.y - halfSize.y),
+		static_cast<int32_t>(size.x * scale.x),
+		static_cast<int32_t>(size.y * scale.y)
+	};
+	auto const & center = SDL_Point{
+		static_cast<int32_t>(origin.x * scale.x),
+		static_cast<int32_t>(origin.y * scale.y)
+	};
+
+	SDL_RenderCopyEx(m_renderer.get(), rect.getTexture(), source.has_value() ? &source.value() : nullptr, &destination, rect.getRotation(), &center, FLIP_FLAG);
+}
+
 void app::gra::Window::render(std::unique_ptr<SDL_Texture> const & texture, SDL_Rect const & rect, std::optional<SDL_Rect> source) const
 {
 	SDL_RenderCopy(m_renderer.get(), texture.get(), source.has_value() ? &source.value() : nullptr, &rect);

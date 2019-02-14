@@ -11,7 +11,6 @@ void app::sys::HealthSystem::update(app::time::seconds const & dt)
 	{
 		if (health.health <= 0)
 		{
-			health.alive = false;
 			m_registry.remove<comp::Input>(entity);
 		}
 	});

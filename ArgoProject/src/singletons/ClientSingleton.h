@@ -1,27 +1,27 @@
-﻿#ifndef _PLAYER_H
-#define _PLAYER_H
+﻿#ifndef _CLIENT_SINGLETON_H
+#define _CLIENT_SINGLETON_H
 
+#include "client/Client.h"
 
-
-namespace app::comp
+namespace app::sin
 {
-	class Player
+	class Client
 	{
 	public: // Constructors/Destructor/Assignments
-		Player() = default;
-		~Player() = default;
+		Client() = default;
+		~Client() = default;
 
-		Player(Player const &) = default;
-		Player & operator=(Player const &) = default;
+		Client(Client const &) = default;
+		Client & operator=(Client const &) = default;
 
-		Player(Player &&) = default;
-		Player & operator=(Player &&) = default;
+		Client(Client &&) = default;
+		Client & operator=(Client &&) = default;
 
 	public: // Public Static Functions
+		static app::net::Client& get();
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		bool falling = false;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -29,8 +29,9 @@ namespace app::comp
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables
+		static std::unique_ptr<app::net::Client> s_client;
 	private: // Private Member Variables
 	};
 }
 
-#endif // !_PLAYER_H
+#endif // !_CLIENT_SINGLETON_H

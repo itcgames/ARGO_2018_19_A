@@ -7,7 +7,7 @@
 #include "components/Collision.h"
 #include "components/Impenetrable.h"
 #include "components/Platform.h"
-#include "components/Player.h"
+#include "components/PlatformDrop.h"
 #include "components/CurrentGround.h"
 #include "components/Input.h"
 #include "components/Motion.h"
@@ -26,6 +26,7 @@ app::sys::CollisionSystem::CollisionSystem()
 	: BaseSystem()
 {
 	//prepare these components
+	m_registry.prepare<comp::Input, comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>();
 	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Motion>();
 	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::AirMotion>();
 	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Dash>();
@@ -80,9 +81,10 @@ void app::sys::CollisionSystem::groundCollisions()
 
 void app::sys::CollisionSystem::airCollisions()
 {
+	auto inputView = m_registry.view<comp::Input, comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>(entt::persistent_t());
 	//view player
-	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>(entt::persistent_t())
-		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Input & input, comp::Location & location, comp::Dimensions & dimensions, comp::AirMotion & airMotion, comp::CurrentGround & ground)
+	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions, comp::AirMotion & airMotion, comp::CurrentGround & ground)
 	{
 		//view everything with collisions
 		m_registry.view<comp::Collision, comp::Impenetrable>()
@@ -107,11 +109,12 @@ void app::sys::CollisionSystem::airCollisions()
 						auto groundMotion = comp::Motion();
 						groundMotion.speed = airMotion.speed;
 						groundMotion.direction = airMotion.direction;
-						groundMotion.maxSpeed = 300.0f;
-						groundMotion.drag = 0.95f;
-						groundMotion.dragCutoff = 20.0f;
-						input.m_canDoubleJump = true;
-						input.m_canDash = true;
+						if (inputView.contains(entity))
+						{
+							auto & input = inputView.get<comp::Input>(entity);
+							input.m_canDoubleJump = true;
+							input.m_canDash = true;
+						}
 
 						auto const & velocity = ((math::toVector(groundMotion.direction) * groundMotion.speed) * math::Vector2f(1.0f, 0.0f));
 						groundMotion.direction = velocity.toAngle();
@@ -130,9 +133,9 @@ void app::sys::CollisionSystem::airCollisions()
 void app::sys::CollisionSystem::checkPlatformCollisions()
 {
 	//view player
-	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>(entt::persistent_t())
+	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround, comp::PlatformDrop>(entt::persistent_t())
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Input & input, comp::Location & location, comp::Dimensions & dimensions,
-			comp::AirMotion & airMotion, comp::CurrentGround & ground)
+			comp::AirMotion & airMotion, comp::CurrentGround & ground, comp::PlatformDrop & dropCheck)
 	{
 		//view everything with collisions
 		m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Platform>()
@@ -148,7 +151,7 @@ void app::sys::CollisionSystem::checkPlatformCollisions()
 						if (location.position.y + (dimensions.size.y / 2) < secLocation.position.y - (secDimensions.size.y / 2) + 10.0f)
 						{
 							// collision has occurred
-							if (manifold.n.y == -1 && math::toVector(airMotion.direction).y > 0)
+							if (manifold.n.y == -1 && math::toVector(airMotion.direction).y > 0 && !dropCheck.falling)
 							{
 								auto const & direction = math::Vector2f{ manifold.n.x, manifold.n.y };
 								auto const & penetration = manifold.depths[0];
@@ -158,9 +161,6 @@ void app::sys::CollisionSystem::checkPlatformCollisions()
 								auto groundMotion = comp::Motion();
 								groundMotion.speed = airMotion.speed;
 								groundMotion.direction = airMotion.direction;
-								groundMotion.maxSpeed = 300.0f;
-								groundMotion.drag = 0.95f;
-								groundMotion.dragCutoff = 20.0f;
 								input.m_canDoubleJump = true;
 								input.m_canDash = true;
 
@@ -174,6 +174,10 @@ void app::sys::CollisionSystem::checkPlatformCollisions()
 
 								std::visit(vis::CollisionUpdateVisitor{ location, dimensions }, collision.bounds);
 							}
+						}
+						else
+						{
+							dropCheck.falling = false;
 						}
 					}
 			}

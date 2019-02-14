@@ -7,7 +7,8 @@ app::sce::LobbySelectScene::LobbySelectScene(SceneType & sceneManagerType)
 		, util::make_vector<UpdateSystem>({
 			UpdateSystem(std::in_place_type<app::sys::InputSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
-			UpdateSystem(std::in_place_type<app::sys::CameraSystem>)
+			UpdateSystem(std::in_place_type<app::sys::CameraSystem>),
+			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType)
 			})
 		, util::make_vector<DrawSystem>({
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
@@ -16,7 +17,7 @@ app::sce::LobbySelectScene::LobbySelectScene(SceneType & sceneManagerType)
 {
 	if constexpr (DEBUG_MODE)
 	{
-		Console::writeLine("SPLASH SCENE Constructed");
+		Console::writeLine("LOBBY SELECT SCENE Constructed");
 	}
 }
 
@@ -25,7 +26,7 @@ void app::sce::LobbySelectScene::start()
 	auto const & entities = fact::sce::LobbySelectSceneFactory().create();
 	if constexpr (DEBUG_MODE)
 	{
-		Console::writeLine("SPLASH SCENE: Creating entities");
+		Console::writeLine("LOBBY SELECT SCENE: Creating entities");
 		for (auto const & entity : entities)
 		{
 			Console::writeLine({ "  Created entity[", std::to_string(entity), "]" });
@@ -37,7 +38,7 @@ void app::sce::LobbySelectScene::end()
 {
 	if constexpr (DEBUG_MODE)
 	{
-		Console::writeLine("SPLASH SCENE: Destroying entities");
+		Console::writeLine("LOBBY SELECT SCENE: Destroying entities");
 		m_registry.each([](app::Entity const entity)
 		{
 			Console::writeLine({ "  Destroyed entity[", std::to_string(entity), "]" });

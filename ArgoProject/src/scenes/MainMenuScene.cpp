@@ -7,11 +7,13 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 		, util::make_vector<UpdateSystem>({
 			UpdateSystem(std::in_place_type<app::sys::InputSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
-			UpdateSystem(std::in_place_type<app::sys::CameraSystem>)
+			UpdateSystem(std::in_place_type<app::sys::CameraSystem>),
+			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType)
 			})
 		, util::make_vector<DrawSystem>({
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
-			DrawSystem(std::in_place_type<app::sys::RenderSystem>)
+			DrawSystem(std::in_place_type<app::sys::RenderSystem>),
+			DrawSystem(std::in_place_type<app::sys::RenderTextSystem>)
 			}))
 {
 	if constexpr (DEBUG_MODE)

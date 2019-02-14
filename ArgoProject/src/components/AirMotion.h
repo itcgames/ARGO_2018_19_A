@@ -18,14 +18,13 @@ namespace app::comp
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
+		constexpr static float MAX_SPEED = 500.0f;
 	public: // Public Member Variables
 		math::Vector2f gravity = { 0.0f, 9.8f};
 		float speed;
 		float angularSpeed;
 		float direction;
-		float maxSpeed;
 		float lateralConstraint = 0.2f;
-		//bool canDoubleJump = true;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables

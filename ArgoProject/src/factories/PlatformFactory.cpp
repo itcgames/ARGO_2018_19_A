@@ -4,7 +4,6 @@
 
 #include "components/Location.h"
 #include "components/Dimensions.h"
-#include "components/Animator.h"
 #include "components/Render.h"
 #include "components/Collision.h"
 #include "components/Platform.h"

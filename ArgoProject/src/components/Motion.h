@@ -18,6 +18,9 @@ namespace app::comp
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
+		constexpr static float DRAG = 0.95f;
+		constexpr static float DRAG_CUTOFF = 20.0f;
+		constexpr static float MAX_SPEED = 300.0f;
 	public: // Public Member Variables
 		float speed;
 		float angularSpeed;

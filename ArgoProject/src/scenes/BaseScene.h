@@ -12,7 +12,9 @@
 #include "systems/RenderSystem.h"
 #include "systems/StateMachineSystem.h"
 #include "systems/DashSystem.h"
+#include "systems/DebugSystem.h"
 #include "systems/CollisionSystem.h"
+#include "systems/RenderTextSystem.h"
 #include "systems/HealthSystem.h"
 #include "systems/CurrentGroundSystem.h"
 
@@ -28,15 +30,17 @@ namespace app::sce
 			, sys::StateMachineSystem
 			, sys::CommandSystem
 			, sys::InputSystem
+			, sys::CameraSystem
+			, sys::CollisionSystem
+			, sys::DebugSystem
 			, sys::HealthSystem
 			, sys::CurrentGroundSystem
-			, sys::CollisionSystem
-			, sys::CameraSystem>;
-
+		>;
 		using UpdateSystems = std::vector<UpdateSystem>;
 		using DrawSystem = std::variant<
 			  sys::RenderSystem
 			, sys::AnimatorSystem
+			, sys::RenderTextSystem
 		>;
 		using DrawSystems = std::vector<DrawSystem>;
 		using ResourceManager = app::res::ResourceManager<true>;

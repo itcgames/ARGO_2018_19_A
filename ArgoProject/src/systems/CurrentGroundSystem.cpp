@@ -5,7 +5,7 @@
 #include "components/Location.h"
 #include "components/Motion.h"
 #include "components/AirMotion.h"
-#include "components/Player.h"
+#include "components/PlatformDrop.h"
 #include "components/Dimensions.h"
 #include "components/CurrentGround.h"
 
@@ -26,7 +26,6 @@ void app::sys::CurrentGroundSystem::update(app::time::seconds const & dt)
 				airMotion.speed = motion.speed;
 				airMotion.direction = motion.direction;
 				airMotion.angularSpeed = motion.angularSpeed;
-				airMotion.maxSpeed = 500.0f;
 				m_registry.assign<comp::AirMotion>(entity, std::move(airMotion));
 				m_registry.remove<comp::Motion>(entity);
 				ground.currentGround.reset();
