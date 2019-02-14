@@ -13,9 +13,9 @@ void app::sys::AirMotionSystem::update(app::time::seconds const & dt)
 	{
 		auto const & velocity = (math::toVector(motion.direction) * motion.speed) + motion.gravity;
  		auto velActual = velocity;
-		if (velActual.magnitude() > motion.maxSpeed)
+		if (velActual.magnitude() > motion.MAX_SPEED)
 		{
-			velActual = velActual.unit() * motion.maxSpeed;
+			velActual = velActual.unit() * motion.MAX_SPEED;
 		}
 		motion.speed = velActual.magnitude();
 		motion.direction = velActual.toAngle();

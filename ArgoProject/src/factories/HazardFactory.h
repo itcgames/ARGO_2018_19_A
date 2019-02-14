@@ -2,8 +2,6 @@
 #define _FACTORY_HAZARD_H
 
 #include"EntityFactory.h"
-#include "deleters/SdlDeleter.h"
-#include "graphics/Texture.h"
 
 namespace app::fact
 {

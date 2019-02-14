@@ -432,9 +432,6 @@
     <ClCompile Include="src\systems\HealthSystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
-    <ClCompile Include="src\components\Player.cpp">
-      <Filter>Source Files\components</Filter>
-    </ClCompile>
     <ClCompile Include="src\components\Platform.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
@@ -461,6 +458,12 @@
     </ClCompile>
     <ClCompile Include="src\systems\CurrentGroundSystem.cpp">
       <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\DropCommand.cpp">
+      <Filter>Source Files\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\PlatformDrop.cpp">
+      <Filter>Source Files\components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -776,9 +779,6 @@
     <ClInclude Include="src\factories\HazardFactory.h">
       <Filter>Header Files\factories</Filter>
     </ClInclude>
-    <ClInclude Include="src\components\Player.h">
-      <Filter>Header Files\components</Filter>
-    </ClInclude>
     <ClInclude Include="src\components\Impenetrable.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
@@ -796,6 +796,12 @@
     </ClInclude>
     <ClInclude Include="src\scenes\SceneType.h">
       <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\DropCommand.h">
+      <Filter>Header Files\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\PlatformDrop.h">
+      <Filter>Header Files\components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

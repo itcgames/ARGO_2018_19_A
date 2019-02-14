@@ -23,7 +23,6 @@ void app::sys::DashSystem::update(app::time::seconds const & dt)
 			dash.speed = 0;
 			m_registry.remove<comp::Dash>(entity);
 			auto airComp = comp::AirMotion();
-			airComp.maxSpeed = 500.0f;
 			m_registry.assign<decltype(airComp)>(entity, std::move(airComp));
 		}
 		location.position += velocity * dt.count();

@@ -20,7 +20,6 @@ namespace app::comp
 	public: // Public Static Variables
 	public: // Public Member Variables
 		int health;
-		bool alive = true;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables

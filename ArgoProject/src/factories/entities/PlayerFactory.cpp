@@ -11,7 +11,7 @@
 #include "components/Input.h"
 #include "components/Commandable.h"
 #include "components/Collision.h"
-#include "components/Player.h"
+#include "components/PlatformDrop.h"
 #include "components/CurrentGround.h"
 
 #include "commands/MoveCommand.h"
@@ -19,6 +19,7 @@
 #include "commands/DashCommand.h"
 #include "commands/FaceLeftCommand.h"
 #include "commands/FaceRightCommand.h"
+#include "commands/DropCommand.h"
 #include "components/StateMachine.h"
 #include "components/Health.h"
 
@@ -45,9 +46,6 @@ app::Entity const app::fact::PlayerFactory::create()
 	motion.speed = 0.0f;
 	motion.direction = 0.0f;
 	motion.angularSpeed = 0.0f;
-	motion.drag = 0.95f;
-	motion.dragCutoff = 20.0f;
-	motion.maxSpeed = 300.0f;
 	m_registry.assign<decltype(motion)>(entity, std::move(motion));
 
 	auto animator = comp::Animator();
@@ -78,6 +76,7 @@ app::Entity const app::fact::PlayerFactory::create()
 	input.keyPressedCommands.insert(std::pair(SDLK_z, std::make_shared<app::cmnd::DashCommand>(entity)));
 	input.keyPressedCommands.insert(std::pair(SDLK_RIGHT, std::make_shared<app::cmnd::FaceRightCommand>(entity)));
 	input.keyPressedCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::FaceLeftCommand>(entity)));
+	input.keyDownCommands.insert(std::pair(SDLK_DOWN, std::make_shared<app::cmnd::DropCommand>(entity)));
 	m_registry.assign<decltype(input)>(entity, std::move(input));
 
 	auto commandable = comp::Commandable();
@@ -95,7 +94,7 @@ app::Entity const app::fact::PlayerFactory::create()
 	health.health = 1;
 	m_registry.assign<decltype(health)>(entity, std::move(health));
 
-	auto player = comp::Player();
+	auto player = comp::PlatformDrop();
 	m_registry.assign<decltype(player)>(entity, std::move(player));
 
 	auto ground = comp::CurrentGround();

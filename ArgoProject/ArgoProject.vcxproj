@@ -176,6 +176,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   <ItemGroup>
     <ClCompile Include="src\commands\BaseCommand.cpp" />
     <ClCompile Include="src\commands\DashCommand.cpp" />
+    <ClCompile Include="src\commands\DropCommand.cpp" />
     <ClCompile Include="src\commands\FaceLeftCommand.cpp" />
     <ClCompile Include="src\commands\FaceRightCommand.cpp" />
     <ClCompile Include="src\commands\JumpCommand.cpp" />
@@ -195,7 +196,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\Location.cpp" />
     <ClCompile Include="src\components\Motion.cpp" />
     <ClCompile Include="src\components\Platform.cpp" />
-    <ClCompile Include="src\components\Player.cpp" />
+    <ClCompile Include="src\components\PlatformDrop.cpp" />
     <ClCompile Include="src\components\Render.cpp" />
     <ClCompile Include="src\components\StateMachine.cpp" />
     <ClCompile Include="src\deleters\SdlDeleter.cpp" />
@@ -295,6 +296,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   <ItemGroup>
     <ClInclude Include="src\commands\BaseCommand.h" />
     <ClInclude Include="src\commands\DashCommand.h" />
+    <ClInclude Include="src\commands\DropCommand.h" />
     <ClInclude Include="src\commands\FaceLeftCommand.h" />
     <ClInclude Include="src\commands\FaceRightCommand.h" />
     <ClInclude Include="src\commands\JumpCommand.h" />
@@ -314,7 +316,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\Location.h" />
     <ClInclude Include="src\components\Motion.h" />
     <ClInclude Include="src\components\Platform.h" />
-    <ClInclude Include="src\components\Player.h" />
+    <ClInclude Include="src\components\PlatformDrop.h" />
     <ClInclude Include="src\components\Render.h" />
     <ClInclude Include="src\components\StateMachine.h" />
     <ClInclude Include="src\deleters\SdlDeleter.h" />

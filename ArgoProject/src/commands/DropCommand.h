@@ -1,27 +1,27 @@
-﻿#ifndef _PLAYER_H
-#define _PLAYER_H
+﻿#ifndef _DROP_COMMAND_H
+#define _DROP_COMMAND_H
 
+#include "BaseCommand.h"
 
-
-namespace app::comp
+namespace app::cmnd
 {
-	class Player
+	class DropCommand : public BaseCommand
 	{
 	public: // Constructors/Destructor/Assignments
-		Player() = default;
-		~Player() = default;
+		DropCommand(app::Entity const _entity);
+		~DropCommand() = default;
 
-		Player(Player const &) = default;
-		Player & operator=(Player const &) = default;
+		DropCommand(DropCommand const &) = default;
+		DropCommand & operator=(DropCommand const &) = default;
 
-		Player(Player &&) = default;
-		Player & operator=(Player &&) = default;
+		DropCommand(DropCommand &&) = default;
+		DropCommand & operator=(DropCommand &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
+		virtual void execute() override;
 	public: // Public Static Variables
 	public: // Public Member Variables
-		bool falling = false;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -30,7 +30,8 @@ namespace app::comp
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
+		app::Entity const m_entity;
 	};
 }
 
-#endif // !_PLAYER_H
+#endif // !_DROP_COMMAND_H

@@ -14,7 +14,7 @@ std::vector<app::Entity> app::fact::sce::LevelSceneFactory::create()
 	entities.insert(entities.end(), level.begin(), level.end());
 	auto cameraParams = app::par::CameraParameters();
 	cameraParams.targetEntity = player;
-	cameraParams.clampRect = math::Rectf({ -800.0f, 500.0f }, { 2000.0f, 1000.0f });
+	cameraParams.clampRect = math::Rectf({ -800.0f, 300.0f }, { 2000.0f, 1000.0f });
 	cameraParams.internalClamp = math::Vector2f(20.0f, 60.0f);
 	entities.push_back(fact::CameraFactory(std::move(cameraParams)).create());
 
