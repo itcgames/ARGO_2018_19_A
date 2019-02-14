@@ -5,7 +5,7 @@
 // components
 #include "components/Location.h"
 #include "components/Dimensions.h"
-#include "components/Motion.h"
+#include "components/AirMotion.h"
 #include "components/Animator.h"
 #include "components/Render.h"
 #include "components/Input.h"
@@ -42,7 +42,7 @@ app::Entity const app::fact::PlayerFactory::create()
 	dimensions.origin = dimensions.size / 2.0f;
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
 
-	auto motion = comp::Motion();
+	auto motion = comp::AirMotion();
 	motion.speed = 0.0f;
 	motion.direction = 0.0f;
 	motion.angularSpeed = 0.0f;
