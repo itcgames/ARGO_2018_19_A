@@ -3,12 +3,15 @@
 #include "EnemyFactory.h"
 
 // components
+#include "components/Health.h"
 #include "components/Location.h"
 #include "components/Dimensions.h"
 #include "components/Motion.h"
 #include "components/Animator.h"
 #include "components/Render.h"
 #include "components/Collision.h"
+#include "components/CurrentGround.h"
+#include "components/Enemy.h"
 
 app::fact::EnemyFactory::EnemyFactory()
 	: EntityFactory()
@@ -18,6 +21,10 @@ app::fact::EnemyFactory::EnemyFactory()
 app::Entity const app::fact::EnemyFactory::create(math::Vector2f position, math::Vector2f size)
 {
 	app::Entity const entity = EntityFactory::create();
+
+	auto health = comp::Health();
+	health.health = 1;
+	m_registry.assign<decltype(health)>(entity, std::move(health));
 
 	auto location = comp::Location();
 	location.position = { position.x, position.y};
@@ -32,7 +39,7 @@ app::Entity const app::fact::EnemyFactory::create(math::Vector2f position, math:
 	auto motion = comp::Motion();
 	motion.isPlayer = false;
 	motion.speed = 50.0f;
-	motion.direction = 0.0f;
+	motion.direction = -180.0f;
 	motion.angularSpeed = 0.0f;
 	motion.drag = 0.95f;
 	motion.dragCutoff = 20.0f;
@@ -59,5 +66,12 @@ app::Entity const app::fact::EnemyFactory::create(math::Vector2f position, math:
 	auto collision = comp::Collision();
 	collision.bounds = cute::c2AABB();
 	m_registry.assign<decltype(collision)>(entity, std::move(collision));
+
+	auto ground = comp::CurrentGround();
+	m_registry.assign<decltype(ground)>(entity, std::move(ground));
+
+	auto enemy = comp::Enemy();
+	m_registry.assign<decltype(enemy)>(entity, std::move(enemy));
+
 	return entity;
 }

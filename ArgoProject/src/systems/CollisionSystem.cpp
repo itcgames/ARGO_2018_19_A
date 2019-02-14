@@ -15,6 +15,8 @@
 #include "components/Dash.h"
 #include "components/Damage.h"
 #include "components/Health.h"
+#include "components/Enemy.h"
+
 //visitors
 #include "visitors/CollisionUpdateVisitor.h"
 #include "visitors/CollisionBoundsManiVisitor.h"
@@ -38,6 +40,7 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 	checkPlatformCollisions();
 	dashCollisions();
 	enemyWallCollisions();
+	enemyEnemyCollisions();	
 	playerHazardCollisions();
 }
 
@@ -212,6 +215,89 @@ void app::sys::CollisionSystem::dashCollisions()
 }
 
 void app::sys::CollisionSystem::enemyWallCollisions()
+{
+	//view enemy
+	m_registry.view<comp::Collision, comp::Enemy, comp::Location, comp::Dimensions, comp::Motion, comp::CurrentGround>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Enemy & enemy, comp::Location & location, comp::Dimensions & dimensions,
+			comp::Motion & motion, comp::CurrentGround & ground)
+	{
+		//view everything with collisions
+		m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Impenetrable>()
+			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Location & secLocation, comp::Dimensions & secDimensions, comp::Impenetrable & impenetrable)
+		{
+			//if we are not the player
+			if (entity != secEntity)
+			{
+				//if we collide
+				auto const & manifold = app::vis::CollisionBoundsManiVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+				if (manifold.count)
+				{
+					if (manifold.n.y == -1)
+					{
+						ground.currentGround = secEntity;
+					}
+					auto & platform = m_registry.get<comp::CurrentGround>(entity);
+					if (platform.currentGround.has_value())
+					{
+						auto & platformPos = m_registry.get<comp::Location>(platform.currentGround.value());
+						auto & platformSize = m_registry.get<comp::Dimensions>(platform.currentGround.value());
+						float rightSide = platformPos.position.x + (platformSize.size.x / 2);
+						float leftSide = platformPos.position.x - (platformSize.size.x / 2);
+						if (location.position.x - (dimensions.size.x / 2) < leftSide || manifold.n.x == 1)
+						{
+							motion.direction = 0;
+						}
+						if (location.position.x + (dimensions.size.x / 2) >= rightSide || manifold.n.x == -1)
+						{
+							motion.direction = -180;
+						}
+					}
+				}
+			}
+		});
+	});
+}
+
+void app::sys::CollisionSystem::enemyEnemyCollisions()
+{
+	//view enemy
+	m_registry.view<comp::Collision, comp::Enemy, comp::Location, comp::Dimensions, comp::Motion>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Enemy & enemy, comp::Location & location, comp::Dimensions & dimensions,
+			comp::Motion & motion)
+	{
+		//view everything with collisions
+		m_registry.view<comp::Collision, comp::Enemy, comp::Location, comp::Dimensions, comp::Motion>(entt::persistent_t())
+			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Enemy & secEnemy, comp::Location & secLocation, comp::Dimensions & secDimensions,
+				comp::Motion & secMotion)
+		{
+			//if we are not the player
+			if (entity != secEntity)
+			{
+				//if we collide
+				auto const & manifold = app::vis::CollisionBoundsManiVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+				if (manifold.count)
+				{
+					if (manifold.n.x == -1)
+					{
+						if (motion.direction == 0)
+							motion.direction = -180;
+						if (secMotion.direction == -180)
+							secMotion.direction = 0;
+					}
+					if (manifold.n.x == 1)
+					{
+						if (motion.direction == -180)
+							motion.direction = 0;
+						if (secMotion.direction == 0)
+							secMotion.direction = -180;
+					}					
+				}
+			}
+		});
+	});
+}
+
+void app::sys::CollisionSystem::enemyPlayerCollisions()
 {
 }
 

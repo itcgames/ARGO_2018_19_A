@@ -4,6 +4,7 @@
 #include "factories/WallFactory.h"
 #include "factories/HazardFactory.h"
 #include "factories/PlatformFactory.h"
+#include "factories/entities/EnemyFactory.h"
 
 app::fact::LevelFactory::LevelFactory()
 {
@@ -13,6 +14,11 @@ app::fact::LevelFactory::LevelFactory()
 std::vector<app::Entity> app::fact::LevelFactory::create()
 {
 	auto entities = std::vector<app::Entity>();
+	//enemies
+
+	auto enemy = fact::EnemyFactory().create(math::Vector2f(800, 450), math::Vector2f(50, 50));
+	auto enemy2 = fact::EnemyFactory().create(math::Vector2f(1000, 450), math::Vector2f(50, 50));
+	auto enemy3 = fact::EnemyFactory().create(math::Vector2f(630,200), math::Vector2f(50, 50));
 	entities.push_back(fact::WallFactory(app::math::Vector2f(600, 350), app::math::Vector2f(50, 250)).create());
 	/*entities.push_back(fact::WallFactory(app::math::Vector2f(600, 400), app::math::Vector2f(50, 50)).create());
 	entities.push_back(fact::WallFactory(app::math::Vector2f(600, 450), app::math::Vector2f(50, 50)).create());*/

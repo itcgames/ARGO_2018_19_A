@@ -27,6 +27,8 @@ namespace app::sys
 		void airCollisions();
 		void dashCollisions();
 		void enemyWallCollisions();
+		void enemyEnemyCollisions();
+		void enemyPlayerCollisions();
 		void playerHazardCollisions();
 		void checkPlatformCollisions();
 

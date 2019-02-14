@@ -91,7 +91,7 @@ app::Entity const app::fact::PlayerFactory::create()
 	auto collision = comp::Collision();
 	collision.bounds = cute::c2AABB();
 	m_registry.assign<decltype(collision)>(entity, std::move(collision));
-
+	
 	auto health = comp::Health();
 	health.health = 1;
 	m_registry.assign<decltype(health)>(entity, std::move(health));
