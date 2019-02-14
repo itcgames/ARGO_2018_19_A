@@ -8,7 +8,11 @@ namespace app::fact
 	class BackgroundImageFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		BackgroundImageFactory() = default;
+		BackgroundImageFactory(
+			  math::Vector2f const & position
+			, math::Vector2f const & size
+			, math::Vector2f const & origin
+			, app::res::TextureKey const & textureKey);
 		virtual ~BackgroundImageFactory() = default;
 
 		BackgroundImageFactory(BackgroundImageFactory const &) = default;
@@ -30,6 +34,10 @@ namespace app::fact
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
+		math::Vector2f const & m_position;
+		math::Vector2f const & m_size;
+		math::Vector2f const & m_origin;
+		app::res::TextureKey const & m_textureKey;
 	};
 }
 
