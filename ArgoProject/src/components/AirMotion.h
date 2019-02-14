@@ -18,7 +18,7 @@ namespace app::comp
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
-		constexpr static float MAX_SPEED = 500.0f;
+		constexpr static float DEFAULT_MAX_SPEED = 500.0f;
 	public: // Public Member Variables
 		math::Vector2f gravity = { 0.0f, 9.8f};
 		float speed;

@@ -37,12 +37,10 @@ app::Entity const app::fact::EnemyFactory::create(math::Vector2f position, math:
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
 
 	auto motion = comp::Motion();
-	motion.isPlayer = false;
 	motion.speed = 50.0f;
 	motion.direction = -180.0f;
 	motion.angularSpeed = 0.0f;
-	motion.drag = 0.95f;
-	motion.dragCutoff = 20.0f;
+	motion.drag = 1.0f;
 	motion.maxSpeed = 300.0f;
 	m_registry.assign<decltype(motion)>(entity, std::move(motion));
 

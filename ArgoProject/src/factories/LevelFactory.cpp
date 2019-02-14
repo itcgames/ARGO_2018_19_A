@@ -15,7 +15,12 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 {
 	auto entities = std::vector<app::Entity>();
 	//enemies
-
+	
+	{
+		auto const & position = math::Vector2f(800, 450);
+		auto const & size = math::Vector2f(50, 50);
+		entities.push_back(fact::EnemyFactory().create(position, size));
+	}
 	auto enemy = fact::EnemyFactory().create(math::Vector2f(800, 450), math::Vector2f(50, 50));
 	auto enemy2 = fact::EnemyFactory().create(math::Vector2f(1000, 450), math::Vector2f(50, 50));
 	auto enemy3 = fact::EnemyFactory().create(math::Vector2f(630,200), math::Vector2f(50, 50));

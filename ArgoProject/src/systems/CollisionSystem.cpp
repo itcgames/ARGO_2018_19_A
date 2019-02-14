@@ -220,6 +220,7 @@ void app::sys::CollisionSystem::dashCollisions()
 
 void app::sys::CollisionSystem::enemyWallCollisions()
 {
+	auto groundView = m_registry.view<comp::Location, comp::Dimensions>();
 	//view enemy
 	m_registry.view<comp::Collision, comp::Enemy, comp::Location, comp::Dimensions, comp::Motion, comp::CurrentGround>(entt::persistent_t())
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Enemy & enemy, comp::Location & location, comp::Dimensions & dimensions,
@@ -240,13 +241,11 @@ void app::sys::CollisionSystem::enemyWallCollisions()
 					{
 						ground.currentGround = secEntity;
 					}
-					auto & platform = m_registry.get<comp::CurrentGround>(entity);
-					if (platform.currentGround.has_value())
+					if (ground.currentGround.has_value() && groundView.contains(ground.currentGround.value()))
 					{
-						auto & platformPos = m_registry.get<comp::Location>(platform.currentGround.value());
-						auto & platformSize = m_registry.get<comp::Dimensions>(platform.currentGround.value());
-						float rightSide = platformPos.position.x + (platformSize.size.x / 2);
-						float leftSide = platformPos.position.x - (platformSize.size.x / 2);
+						auto const &[platformLocation, platformDimensions] = groundView.get<comp::Location, comp::Dimensions>(ground.currentGround.value());
+						float const & rightSide = platformLocation.position.x + (platformDimensions.size.x / 2);
+						float const & leftSide = platformLocation.position.x - (platformDimensions.size.x / 2);
 						if (location.position.x - (dimensions.size.x / 2) < leftSide || manifold.n.x == 1)
 						{
 							motion.direction = 0;
