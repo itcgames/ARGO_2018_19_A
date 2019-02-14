@@ -10,7 +10,7 @@ namespace app::fact
 	class EnemyFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		EnemyFactory();
+		EnemyFactory(math::Vector2f const & position, math::Vector2f const & size);
 		virtual ~EnemyFactory() = default;
 
 		EnemyFactory(EnemyFactory const &) = default;
@@ -21,7 +21,7 @@ namespace app::fact
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		virtual app::Entity const create(math::Vector2f position, math::Vector2f size);
+		virtual app::Entity const create() final override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -32,6 +32,8 @@ namespace app::fact
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
+		math::Vector2f const & m_position;
+		math::Vector2f const & m_size;
 	};
 }
 

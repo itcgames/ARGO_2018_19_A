@@ -13,12 +13,14 @@
 #include "components/CurrentGround.h"
 #include "components/Enemy.h"
 
-app::fact::EnemyFactory::EnemyFactory()
+app::fact::EnemyFactory::EnemyFactory(math::Vector2f const & position, math::Vector2f const & size)
 	: EntityFactory()
+	, m_position(position)
+	, m_size(size)
 {
 }
 
-app::Entity const app::fact::EnemyFactory::create(math::Vector2f position, math::Vector2f size)
+app::Entity const app::fact::EnemyFactory::create()
 {
 	app::Entity const entity = EntityFactory::create();
 
@@ -27,12 +29,12 @@ app::Entity const app::fact::EnemyFactory::create(math::Vector2f position, math:
 	m_registry.assign<decltype(health)>(entity, std::move(health));
 
 	auto location = comp::Location();
-	location.position = { position.x, position.y};
+	location.position = m_position;
 	location.orientation = 0.0f;
 	m_registry.assign<decltype(location)>(entity, std::move(location));
 
 	auto dimensions = comp::Dimensions();
-	dimensions.size = {size.x, size.y };
+	dimensions.size = m_size;
 	dimensions.origin = dimensions.size / 2.0f;
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
 

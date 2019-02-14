@@ -9,7 +9,7 @@
 #include "components/Collision.h"
 #include "components/Damage.h"
 
-app::fact::HazardFactory::HazardFactory(app::math::Vector2f pos, app::math::Vector2f size)
+app::fact::HazardFactory::HazardFactory(app::math::Vector2f const & pos, app::math::Vector2f const & size)
 	: m_position(pos), m_size(size)
 {
 	

@@ -10,7 +10,7 @@ namespace app::fact
 	class LevelFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		LevelFactory();
+		LevelFactory() = default;
 		virtual ~LevelFactory() = default;
 
 		LevelFactory(LevelFactory const &) = default;
