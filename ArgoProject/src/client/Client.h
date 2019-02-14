@@ -1,5 +1,5 @@
-﻿#ifndef _CLIENT_H
-#define _CLIENT_H
+﻿#ifndef _NET_CLIENT_H
+#define _NET_CLIENT_H
 #include"stdafx.h"
 
 namespace app::net
@@ -23,24 +23,24 @@ namespace app::net
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		void CloseSocket();
-		bool InitNetwork(std::string const & pIP, int iPort);
-		bool CheckSocket();
+		void closeSocket();
+		bool initNetwork(std::string const & pIP, int iPort);
+		bool checkSocket();
 		bool processPacket(Packet _packetType);
 
 
 		//Part of SendGetMethods cpp
-		bool sendAll(char* data, int totalBytes);
-		bool recvAll(char * data, int totalBytes);
+		bool sendAll(std::byte * data, int totalBytes);
+		bool getAll(std::byte * data, int totalBytes);
 
-		bool send(std::string& _string, app::net::Packet& _packetToProcessString);
-		bool getString(std::string& _string);
+		bool send(const std::string& _string, const app::net::Packet& _packetToProcessString);
+		bool get(std::string& _string);
 
-		bool sendPacketType(Packet& _packetType);
-		bool getPacketType(Packet& _packetType);
+		bool send(const Packet& _packetType);
+		bool get(Packet& _packetType);
 
-		bool sendInt(int _int);
-		bool getInt(int& _int);		
+		bool send(const int& _int);
+		bool get(int& _int);		
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -51,12 +51,10 @@ namespace app::net
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
-
-
-		TCPsocket socket;
-		SDLNet_SocketSet socket_set;
+		TCPsocket m_socket;
+		SDLNet_SocketSet m_socketSet;
 
 	};
 }
 
-#endif // !_CLIENT_H
+#endif // !_NET_CLIENT_H

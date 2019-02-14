@@ -17,9 +17,9 @@ namespace app::net
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		void setName(std::string name);
-		std::string getName();
-		void addPlayer(int ID, std::string name);
+		void setName(const std::string& name);
+		const std::string& getName();
+		void addPlayer(int ID, const std::string& name);
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions

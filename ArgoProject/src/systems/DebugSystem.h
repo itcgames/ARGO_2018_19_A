@@ -34,11 +34,12 @@ namespace app::sys
 	private: // Private Member Functions
 		void serverTesting();
 	private: // Private Static Variables
+		constexpr static bool s_DEBUG_MODE = true;
 	private: // Private Member Variables
 		app::inp::KeyHandler & m_keyHandler;
 		app::net::Client& m_client;
-		bool updateVariable = false;
-		bool connected;
+		bool m_updateVariable = false;
+		bool m_connected;
 		app::sce::SceneType& m_targetScene;
 
 	};

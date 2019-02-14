@@ -396,9 +396,6 @@
     <ClCompile Include="src\systems\DebugSystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
-    <ClCompile Include="src\client\SendGetMethods.cpp">
-      <Filter>Source Files\client</Filter>
-    </ClCompile>
     <ClCompile Include="src\resources\ResourceLoader.cpp">
       <Filter>Source Files\resources</Filter>
     </ClCompile>
@@ -449,6 +446,9 @@
     </ClCompile>
     <ClCompile Include="src\singletons\ClientSingleton.cpp">
       <Filter>Source Files\singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\client\Lobby.cpp">
+      <Filter>Source Files\client</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -763,6 +763,9 @@
     </ClInclude>
     <ClInclude Include="src\singletons\ClientSingleton.h">
       <Filter>Header Files\singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\client\Lobby.h">
+      <Filter>Header Files\client</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

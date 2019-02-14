@@ -175,7 +175,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\client\Client.cpp" />
-    <ClCompile Include="src\client\SendGetMethods.cpp" />
+    <ClCompile Include="src\client\Lobby.cpp" />
     <ClCompile Include="src\commands\BaseCommand.cpp" />
     <ClCompile Include="src\commands\DashCommand.cpp" />
     <ClCompile Include="src\commands\FaceLeftCommand.cpp" />
@@ -288,6 +288,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\client\Client.h" />
+    <ClInclude Include="src\client\Lobby.h" />
     <ClInclude Include="src\commands\BaseCommand.h" />
     <ClInclude Include="src\commands\DashCommand.h" />
     <ClInclude Include="src\commands\FaceLeftCommand.h" />

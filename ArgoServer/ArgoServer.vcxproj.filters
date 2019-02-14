@@ -92,9 +92,6 @@
     <ClCompile Include="src\math\Vector2.cpp">
       <Filter>Source Files\math</Filter>
     </ClCompile>
-    <ClCompile Include="src\server\SendGetMethods.cpp">
-      <Filter>Source Files\server</Filter>
-    </ClCompile>
     <ClCompile Include="src\server\Server.cpp">
       <Filter>Source Files\server</Filter>
     </ClCompile>

@@ -15,7 +15,7 @@ namespace app::net
 	{
 	public: // Constructors/Destructor/Assignments
 		Server(int _port);
-		~Server() = default;
+		~Server();
 
 		Server(Server const &) = default;
 		Server & operator=(Server const &) = default;
@@ -33,39 +33,40 @@ namespace app::net
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
 	private: // Private Static Functions
-		static void clientHandlerThread(int ID);
 	private: // Private Member Functions
+		void clientHandlerThread(int ID, std::atomic<bool> & stopThread);
 		void initServer(int _port);
 		bool acceptSocket(int index);
 		void closeSocket(int index);
 		void sdlCleanup();
 
-		//part of sendgetmethods cpp
-		bool recvAll(int ID, char* data, int totalBytes);
-		bool sendAll(int ID, char* data, int totalBytes);
-		bool sendInt(int ID, int _int);
-		bool getInt(int ID, int& _int);
-		bool sendPacketType(int ID, Packet _packetType);
-		bool getPacketType(int ID, Packet& _packetType);
-		bool send(int ID, std::string& _string, Packet& _packetToProcessString);
-		bool send(Packet& packetType);
-		bool getString(int ID, std::string& _string);
-		bool processPacket(int ID, Packet _packetType);
-	private: // Private Static Variables
-		static const int MAX_SOCKETS = 16;
-	private: // Private Member Variables
-		//the servers socket
-		TCPsocket server_socket;
-		//the socket set
-		SDLNet_SocketSet socket_set;
-		//array of sockets connected to server
-		TCPsocket sockets[MAX_SOCKETS];
+		bool getAll(int ID, std::byte * data, int totalBytes);
+		bool sendAll(int ID, std::byte * data, int totalBytes);
+		bool get(int ID, int& _int);
+		bool get(int ID, std::string& _string);
+		bool get(int ID, Packet& _packetType);
 
-		int totalConnections = 0;
+		bool send(int ID, const int& _int);
+		bool send(int ID, const Packet& _packetType);
+		bool send(int ID, const std::string& _string, const Packet& _packetToProcessString);
+		bool processPacket(int ID, Packet _packetType);
+		void outputIP(IPaddress const & ip);
+	private: // Private Static Variables
+		constexpr static int s_MAX_SOCKETS = 16;
+		constexpr static bool s_DEBUG_MODE = true;
+	private: // Private Member Variables
+		// Contains thread instance
+		std::map<std::int32_t, std::pair<std::optional<std::thread>, std::atomic<bool>>> m_clientThreads;
+		//the servers socket
+		TCPsocket m_serverSocket;
+		//the socket set
+		SDLNet_SocketSet m_socketSet;
+		//array of sockets connected to server
+		std::array<TCPsocket, s_MAX_SOCKETS> m_sockets;
+
+		std::int32_t m_totalConnections = 0;
 
 		std::vector<Lobby> m_lobbies;
 	};
 }
-
-static app::net::Server * serverptr; //Serverptr is necessary so the static ClientHandler method can access the server instance/functions.
 #endif // !_SERVER_H

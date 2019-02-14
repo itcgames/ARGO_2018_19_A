@@ -6,40 +6,43 @@
 app::sys::DebugSystem::DebugSystem(app::sce::SceneType& _targetScene)
 	: m_keyHandler(app::sin::KeyHandler::get())
 	, m_client(app::sin::Client::get())
-	, connected(false)
+	, m_connected(false)
 	, m_targetScene(_targetScene)
 {
 }
 
 void app::sys::DebugSystem::update(app::time::seconds const & dt)
 {
-	serverTesting();
+	if constexpr (s_DEBUG_MODE)
+	{
+		serverTesting();
+	}
 }
 
 void app::sys::DebugSystem::serverTesting()
 {
 //this stuff will happen when the multiplayer button is pressed.
-	if (m_keyHandler.isKeyPressed(SDLK_p) && !connected)
+	if (m_keyHandler.isKeyPressed(SDLK_p) && !m_connected)
 	{
-		connected = true;
+		m_connected = true;
 
 		app::Console::writeLine("CONNECTING TO SERVER");
 		if (SDLNet_Init() != NULL)
 		{
-			std::cout << "Failed to intialise SDN_net: " << SDLNet_GetError() << "\n";
+			app::Console::writeLine({ "Failed to initialise SDL_net: ", SDLNet_GetError() });
 		}
 
 
-		if (!m_client.InitNetwork("localhost", 27000))
+		if (!m_client.initNetwork("localhost", 27000))
 		{
-			connected = false;
+			m_connected = false;
 			app::Console::writeLine("Could not connect to server, make sure server is running");
 		}
-		updateVariable = true;
+		m_updateVariable = true;
 	}
-	if (updateVariable && connected)
+	if (m_updateVariable && m_connected)
 	{
-		updateVariable = false;
+		m_updateVariable = false;
 
 		app::Console::writeLine("sending name to server");
 		std::string name = "Bob";
@@ -49,16 +52,16 @@ void app::sys::DebugSystem::serverTesting()
 		m_client.send(name, packetType);
 		m_targetScene = app::sce::SceneType::LobbySelect;
 	}
-	if (connected)
+	if (m_connected)
 	{
 		app::net::Packet packetType;
 		//get the player name here and send the name to the server.
-		if (m_client.CheckSocket()) {
-			if (!m_client.getPacketType(packetType))
+		if (m_client.checkSocket()) {
+			if (!m_client.get(packetType))
 			{
 				app::Console::writeLine("issue receiving the packet");
 			}
-			if (!m_client.sendPacketType(packetType))
+			if (!m_client.send(packetType))
 			{
 				app::Console::writeLine("issue sending the packet");
 			}

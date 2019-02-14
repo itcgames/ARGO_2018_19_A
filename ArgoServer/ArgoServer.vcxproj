@@ -191,7 +191,6 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\math\Rect.cpp" />
     <ClCompile Include="src\math\Vector2.cpp" />
     <ClCompile Include="src\server\Lobby.cpp" />
-    <ClCompile Include="src\server\SendGetMethods.cpp" />
     <ClCompile Include="src\server\Server.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
