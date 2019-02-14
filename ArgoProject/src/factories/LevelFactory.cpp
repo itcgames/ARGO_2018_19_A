@@ -33,6 +33,7 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 	entities.push_back(fact::WallFactory(app::math::Vector2f(1150, 400), app::math::Vector2f(50, 50)).create());*/
 	entities.push_back(fact::WallFactory(app::math::Vector2f(1150, 350), app::math::Vector2f(50, 250)).create());
 	entities.push_back(fact::HazardFactory(app::math::Vector2f(500, 500), app::math::Vector2f(50, 50)).create());
+	entities.push_back(fact::HazardFactory(app::math::Vector2f(0, 2000), app::math::Vector2f(40000000, 50)).create());
 	entities.push_back(fact::PlatformFactory(app::math::Vector2f(875, 300), app::math::Vector2f(200, 50)).create());
 	entities.push_back(fact::PlatformFactory(app::math::Vector2f(875, 100), app::math::Vector2f(200, 50)).create());
 

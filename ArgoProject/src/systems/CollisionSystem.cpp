@@ -24,6 +24,7 @@ app::sys::CollisionSystem::CollisionSystem()
 	: BaseSystem()
 {
 	//prepare these components
+	m_registry.prepare<comp::Input, comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>();
 	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Motion>();
 	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::AirMotion>();
 	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Dash>();
@@ -76,9 +77,10 @@ void app::sys::CollisionSystem::groundCollisions()
 
 void app::sys::CollisionSystem::airCollisions()
 {
+	auto inputView = m_registry.view<comp::Input, comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>(entt::persistent_t());
 	//view player
-	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>(entt::persistent_t())
-		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Input & input, comp::Location & location, comp::Dimensions & dimensions, comp::AirMotion & airMotion, comp::CurrentGround & ground)
+	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions, comp::AirMotion & airMotion, comp::CurrentGround & ground)
 	{
 		//view everything with collisions
 		m_registry.view<comp::Collision, comp::Impenetrable>()
@@ -103,8 +105,12 @@ void app::sys::CollisionSystem::airCollisions()
 						auto groundMotion = comp::Motion();
 						groundMotion.speed = airMotion.speed;
 						groundMotion.direction = airMotion.direction;
-						input.m_canDoubleJump = true;
-						input.m_canDash = true;
+						if (inputView.contains(entity))
+						{
+							auto & input = inputView.get<comp::Input>(entity);
+							input.m_canDoubleJump = true;
+							input.m_canDash = true;
+						}
 
 						auto const & velocity = ((math::toVector(groundMotion.direction) * groundMotion.speed) * math::Vector2f(1.0f, 0.0f));
 						groundMotion.direction = velocity.toAngle();
