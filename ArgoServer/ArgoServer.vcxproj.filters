@@ -25,6 +25,12 @@
     <Filter Include="Source Files\math">
       <UniqueIdentifier>{762ccfaf-8ea6-442a-9df0-06f3894539b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\server">
+      <UniqueIdentifier>{49625aac-5003-47ee-b905-1cb3880877e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\server">
+      <UniqueIdentifier>{8ef70764-6b28-495d-bffc-0b8e18bf2a79}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -50,6 +56,12 @@
     </ClInclude>
     <ClInclude Include="src\utilities\Time.h">
       <Filter>Header Files\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\server\Server.h">
+      <Filter>Header Files\server</Filter>
+    </ClInclude>
+    <ClInclude Include="src\server\Lobby.h">
+      <Filter>Header Files\server</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +91,12 @@
     </ClCompile>
     <ClCompile Include="src\math\Vector2.cpp">
       <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\server\Server.cpp">
+      <Filter>Source Files\server</Filter>
+    </ClCompile>
+    <ClCompile Include="src\server\Lobby.cpp">
+      <Filter>Source Files\server</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -22,6 +22,7 @@ app::Game::Game()
 		Console::writeLine({ "ERROR: SDL Failed to initialize [", SDL_GetError(), "]" });
 		m_running = false;
 	}
+
 }
 
 app::Game::~Game()

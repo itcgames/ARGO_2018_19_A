@@ -12,6 +12,7 @@
 #include "systems/RenderSystem.h"
 #include "systems/StateMachineSystem.h"
 #include "systems/DashSystem.h"
+#include "systems/DebugSystem.h"
 #include "systems/CollisionSystem.h"
 #include "systems/HealthSystem.h"
 #include "systems/CurrentGroundSystem.h"
@@ -30,6 +31,7 @@ namespace app::sce
 			, sys::CommandSystem
 			, sys::InputSystem
 			, sys::CollisionSystem
+			, sys::DebugSystem
 			, sys::HealthSystem
 			, sys::CurrentGroundSystem>;
 

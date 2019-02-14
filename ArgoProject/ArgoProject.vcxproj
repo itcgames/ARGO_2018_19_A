@@ -174,6 +174,8 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\client\Client.cpp" />
+    <ClCompile Include="src\client\Lobby.cpp" />
     <ClCompile Include="src\commands\BaseCommand.cpp" />
     <ClCompile Include="src\commands\DashCommand.cpp" />
     <ClCompile Include="src\commands\DropCommand.cpp" />
@@ -256,6 +258,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\scenes\SceneType.cpp" />
     <ClCompile Include="src\scenes\TutorialLevelScene.cpp" />
     <ClCompile Include="src\scenes\SplashScene.cpp" />
+    <ClCompile Include="src\singletons\ClientSingleton.cpp" />
     <ClCompile Include="src\singletons\ControllerHandlerSingleton.cpp" />
     <ClCompile Include="src\singletons\KeyHandlerSingleton.cpp" />
     <ClCompile Include="src\singletons\MouseHandlerSingleton.cpp" />
@@ -275,6 +278,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\CommandSystem.cpp" />
     <ClCompile Include="src\systems\CurrentGroundSystem.cpp" />
     <ClCompile Include="src\systems\DashSystem.cpp" />
+    <ClCompile Include="src\systems\DebugSystem.cpp" />
     <ClCompile Include="src\systems\HealthSystem.cpp" />
     <ClCompile Include="src\systems\InputSystem.cpp" />
     <ClCompile Include="src\systems\CameraSystem.cpp" />
@@ -294,6 +298,8 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\visitors\CollisionUpdateVisitor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\client\Client.h" />
+    <ClInclude Include="src\client\Lobby.h" />
     <ClInclude Include="src\commands\BaseCommand.h" />
     <ClInclude Include="src\commands\DashCommand.h" />
     <ClInclude Include="src\commands\DropCommand.h" />
@@ -375,6 +381,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\scenes\SceneType.h" />
     <ClInclude Include="src\scenes\TutorialLevelScene.h" />
     <ClInclude Include="src\scenes\SplashScene.h" />
+    <ClInclude Include="src\singletons\ClientSingleton.h" />
     <ClInclude Include="src\singletons\ControllerHandlerSingleton.h" />
     <ClInclude Include="src\singletons\KeyHandlerSingleton.h" />
     <ClInclude Include="src\singletons\MouseHandlerSingleton.h" />
@@ -389,6 +396,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\systems\CommandSystem.h" />
     <ClInclude Include="src\systems\CurrentGroundSystem.h" />
     <ClInclude Include="src\systems\DashSystem.h" />
+    <ClInclude Include="src\systems\DebugSystem.h" />
     <ClInclude Include="src\systems\HealthSystem.h" />
     <ClInclude Include="src\systems\InputSystem.h" />
     <ClInclude Include="src\systems\CameraSystem.h" />

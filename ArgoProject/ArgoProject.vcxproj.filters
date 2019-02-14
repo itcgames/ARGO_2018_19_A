@@ -106,6 +106,12 @@
     <Filter Include="Header Files\factories\entities">
       <UniqueIdentifier>{7ea2d7cc-3b18-41e1-82b6-a1394e7535af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\client">
+      <UniqueIdentifier>{c9bd1b13-15c7-4f3d-a1d3-ee017f24760b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\client">
+      <UniqueIdentifier>{5c5a3bcb-ec9a-4c27-a60a-5293b301ba98}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\resources">
       <UniqueIdentifier>{c685aa57-778d-491e-b616-951d99ebf5fd}</UniqueIdentifier>
     </Filter>
@@ -378,6 +384,12 @@
     <ClCompile Include="src\factories\scenes\TutorialLevelSceneFactory.cpp">
       <Filter>Source Files\factories\scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\client\Client.cpp">
+      <Filter>Source Files\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\DebugSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
     <ClCompile Include="src\resources\ResourceLoader.cpp">
       <Filter>Source Files\resources</Filter>
     </ClCompile>
@@ -455,6 +467,12 @@
     </ClCompile>
     <ClCompile Include="src\scenes\SceneType.cpp">
       <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\singletons\ClientSingleton.cpp">
+      <Filter>Source Files\singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\client\Lobby.cpp">
+      <Filter>Source Files\client</Filter>
     </ClCompile>
     <ClCompile Include="src\systems\CurrentGroundSystem.cpp">
       <Filter>Source Files\systems</Filter>
@@ -722,6 +740,12 @@
     <ClInclude Include="src\factories\scenes\LevelSelectSceneFactory.h">
       <Filter>Header Files\factories\scenes</Filter>
     </ClInclude>
+    <ClInclude Include="src\client\Client.h">
+      <Filter>Header Files\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\DebugSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
     <ClInclude Include="src\resources\ResourceLoader.h">
       <Filter>Header Files\resources</Filter>
     </ClInclude>
@@ -796,6 +820,12 @@
     </ClInclude>
     <ClInclude Include="src\scenes\SceneType.h">
       <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\singletons\ClientSingleton.h">
+      <Filter>Header Files\singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\client\Lobby.h">
+      <Filter>Header Files\client</Filter>
     </ClInclude>
     <ClInclude Include="src\commands\DropCommand.h">
       <Filter>Header Files\commands</Filter>
