@@ -86,4 +86,44 @@ private: // Private Static Variables
 private: // Private Member Variables
 };
 
+template<> class app::res::ResourceLoader<app::gra::Font>
+{
+private: // Private typedefs/enums/usings
+	using Resource = app::gra::Font;
+public: // Constructors/Destructor/Assignments
+	ResourceLoader() = default;
+	~ResourceLoader() = default;
+
+	ResourceLoader(ResourceLoader const &) = default;
+	ResourceLoader & operator=(ResourceLoader const &) = default;
+
+	ResourceLoader(ResourceLoader &&) = default;
+	ResourceLoader & operator=(ResourceLoader &&) = default;
+
+public: // Public Static Functions
+	static void load(std::shared_ptr<Resource> & resource, std::string const & file)
+	{
+		auto font = std::make_shared<Resource>();
+		if (font->load(file))
+		{
+			resource.swap(font);
+		}
+		else
+		{
+			throw std::exception((std::stringstream() << "Failed to load [" << file << "]").str().c_str());
+		}
+	}
+public: // Public Member Functions
+public: // Public Static Variables
+public: // Public Member Variables
+protected: // Protected Static Functions
+protected: // Protected Member Functions
+protected: // Protected Static Variables
+protected: // Protected Member Variables
+private: // Private Static Functions
+private: // Private Member Functions
+private: // Private Static Variables
+private: // Private Member Variables
+};
+
 #endif // !_RESOURCE_LOADER_H

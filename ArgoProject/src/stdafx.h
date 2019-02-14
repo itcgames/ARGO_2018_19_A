@@ -37,6 +37,7 @@
 #pragma comment(lib, "SDL2test.lib")
 #pragma comment(lib, "SDL2_image.lib")
 #pragma comment(lib, "SDL2_net.lib")
+#pragma comment(lib, "SDL2_ttf.lib")
 
 /*********************************/
 /**  END Independant Libraries  **/
@@ -105,6 +106,9 @@
 
 // SDL2_net Library
 #include <SDL/SDL_net.h>
+
+// SDL2_ttf Library
+#include <SDL/SDL_ttf.h>
 
 // Entt Library
 #include <Entt/entt.hpp>

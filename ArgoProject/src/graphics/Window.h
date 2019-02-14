@@ -6,6 +6,7 @@
 #include "deleters/SdlDeleter.h"
 #include "graphics/WindowParameters.h"
 #include "graphics/RenderRect.h"
+#include "graphics/RenderText.h"
 #include "graphics/View.h"
 
 namespace app::gra
@@ -23,6 +24,7 @@ namespace app::gra
 		void pollEvents();
 		void clear() const;
 		void render(app::gra::RenderRect const & rect) const;
+		void render(app::gra::RenderText const & rect) const;
 		void render(std::unique_ptr<SDL_Texture> const & texture, SDL_Rect const & rect, std::optional<SDL_Rect> source = std::nullopt) const;
 		void render(std::shared_ptr<SDL_Texture> texture, SDL_Rect const & rect, std::optional<SDL_Rect> source = std::nullopt) const;
 		void display() const;
