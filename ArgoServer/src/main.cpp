@@ -1,14 +1,13 @@
 ﻿#include "stdafx.h"
+#include "server/Server.h"
 
 int main(int argv, char** argc)
 {
-	if (SDL_Init(SDL_INIT_EVERYTHING) != NULL)
+	app::net::Server server(27000);
+	while (true)
 	{
-		app::Console::writeLine({ "ERROR: Initializing SDL [", SDL_GetError(), "]" });
+		server.listenForSockets();
 	}
-	if (SDLNet_Init() != NULL)
-	{
-		app::Console::writeLine({ "ERROR: Initializing SDLNet [", SDLNet_GetError(), "]" });
-	}
+
 	return EXIT_SUCCESS;
 }
