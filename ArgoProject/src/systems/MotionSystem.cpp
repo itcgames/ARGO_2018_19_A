@@ -13,11 +13,11 @@ void app::sys::MotionSystem::update(app::time::seconds const & dt)
 	m_registry.view<comp::Location, comp::Motion>()
 		.each([&, this](app::Entity const entity, comp::Location & location, comp::Motion & motion)
 	{
-		auto const & velocity = (math::toVector(motion.direction) * motion.speed).truncate(motion.MAX_SPEED);
-		if (motion.speed >= motion.DRAG_CUTOFF) 
+		auto const & velocity = (math::toVector(motion.direction) * motion.speed).truncate(comp::Motion::MAX_SPEED);
+		if (motion.speed >= comp::Motion::DRAG_CUTOFF) 
 		{
 			//simulate drag
-			motion.speed *= motion.DRAG;
+			motion.speed *= comp::Motion::DRAG;
 		}
 		else
 		{

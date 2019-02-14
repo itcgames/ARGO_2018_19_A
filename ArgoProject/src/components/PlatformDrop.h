@@ -1,5 +1,5 @@
-﻿#ifndef _PLATFORM_DROP_H
-#define _PLATFORM_DROP_H
+﻿#ifndef _COMPONENTS_PLATFORM_DROP_H
+#define _COMPONENTS_PLATFORM_DROP_H
 
 
 
@@ -33,4 +33,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_PLATFORM_DROP_H
+#endif // !_COMPONENTS_PLATFORM_DROP_H
