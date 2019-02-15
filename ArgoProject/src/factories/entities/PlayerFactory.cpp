@@ -33,7 +33,7 @@ app::Entity const app::fact::PlayerFactory::create()
 	app::Entity const entity = EntityFactory::create();
 
 	auto location = comp::Location();
-	location.position = { 680.0f, 380.0f };
+	location.position = { 900.0f, 100.0f };
 	location.orientation = 0.0f;
 	m_registry.assign<decltype(location)>(entity, std::move(location));
 
@@ -89,7 +89,7 @@ app::Entity const app::fact::PlayerFactory::create()
 	auto collision = comp::Collision();
 	collision.bounds = cute::c2AABB();
 	m_registry.assign<decltype(collision)>(entity, std::move(collision));
-
+	
 	auto health = comp::Health();
 	health.health = 1;
 	m_registry.assign<decltype(health)>(entity, std::move(health));

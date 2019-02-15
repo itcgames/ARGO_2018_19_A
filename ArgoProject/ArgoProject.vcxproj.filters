@@ -435,6 +435,30 @@
     <ClCompile Include="src\parameters\CameraParameters.cpp">
       <Filter>Source Files\parameters</Filter>
     </ClCompile>
+    <ClCompile Include="src\factories\entities\EnemyFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\entities\BackgroundImageFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\Font.cpp">
+      <Filter>Source Files\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deleters\SdlTtfDeleter.cpp">
+      <Filter>Source Files\deleters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\RenderText.cpp">
+      <Filter>Source Files\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\RenderTextSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Text.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\entities\TextFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
     <ClCompile Include="src\components\Health.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
@@ -450,18 +474,6 @@
     <ClCompile Include="src\components\Impenetrable.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
-    <ClCompile Include="src\factories\LevelFactory.cpp">
-      <Filter>Source Files\factories</Filter>
-    </ClCompile>
-    <ClCompile Include="src\factories\PlatformFactory.cpp">
-      <Filter>Source Files\factories</Filter>
-    </ClCompile>
-    <ClCompile Include="src\factories\WallFactory.cpp">
-      <Filter>Source Files\factories</Filter>
-    </ClCompile>
-    <ClCompile Include="src\factories\HazardFactory.cpp">
-      <Filter>Source Files\factories</Filter>
-    </ClCompile>
     <ClCompile Include="src\components\CurrentGround.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
@@ -476,6 +488,9 @@
     </ClCompile>
     <ClCompile Include="src\systems\CurrentGroundSystem.cpp">
       <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Enemy.cpp">
+      <Filter>Source Files\components</Filter>
     </ClCompile>
     <ClCompile Include="src\commands\DropCommand.cpp">
       <Filter>Source Files\commands</Filter>
@@ -494,6 +509,18 @@
     </ClCompile>
     <ClCompile Include="src\factories\AIFactory.cpp">
       <Filter>Source Files\factories</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\HazardFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\PlatformFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\WallFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\LevelFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -803,6 +830,30 @@
     <ClInclude Include="src\parameters\CameraParameters.h">
       <Filter>Header Files\parameters</Filter>
     </ClInclude>
+    <ClInclude Include="src\factories\entities\EnemyFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\entities\BackgroundImageFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\Font.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deleters\SdlTtfDeleter.h">
+      <Filter>Header Files\deleters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\RenderText.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\RenderTextSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Text.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\entities\TextFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
     <ClInclude Include="src\components\Health.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
@@ -812,26 +863,20 @@
     <ClInclude Include="src\systems\HealthSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
-    <ClInclude Include="src\factories\HazardFactory.h">
-      <Filter>Header Files\factories</Filter>
-    </ClInclude>
     <ClInclude Include="src\components\Impenetrable.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="src\components\Platform.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="src\factories\PlatformFactory.h">
-      <Filter>Header Files\factories</Filter>
-    </ClInclude>
     <ClInclude Include="src\components\CurrentGround.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="src\systems\CurrentGroundSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\scenes\SceneType.h">
       <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Enemy.h">
+      <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="src\singletons\ClientSingleton.h">
       <Filter>Header Files\singletons</Filter>
@@ -856,6 +901,15 @@
     </ClInclude>
     <ClInclude Include="src\factories\AIFactory.h">
       <Filter>Header Files\factories</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\CurrentGroundSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\HazardFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\PlatformFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

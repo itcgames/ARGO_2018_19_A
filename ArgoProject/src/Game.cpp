@@ -17,16 +17,11 @@ app::Game::Game()
 	, m_resourceManager(app::sin::ResourceManager::get())
 	, m_sceneManager()
 {
-	if (SDL_Init(SDL_INIT_EVERYTHING) != NULL)
-	{
-		Console::writeLine({ "ERROR: SDL Failed to initialize [", SDL_GetError(), "]" });
-		m_running = false;
-	}
-
 }
 
 app::Game::~Game()
 {
+	TTF_Quit();
 	SDL_Quit();
 }
 

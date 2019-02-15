@@ -8,7 +8,7 @@
 #include "components/Collision.h"
 #include "components/Platform.h"
 
-app::fact::PlatformFactory::PlatformFactory(app::math::Vector2f position, app::math::Vector2f size)
+app::fact::PlatformFactory::PlatformFactory(app::math::Vector2f const & position, app::math::Vector2f const & size)
 	: m_position(position), m_size(size)
 {
 	

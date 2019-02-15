@@ -5,10 +5,10 @@
 
 namespace app::fact
 {
-	struct HazardFactory : public EntityFactory
+	class HazardFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		HazardFactory(app::math::Vector2f pos, app::math::Vector2f size);
+		HazardFactory(app::math::Vector2f const & pos, app::math::Vector2f const & size);
 		~HazardFactory() = default;
 
 		HazardFactory(HazardFactory const &) = default;
@@ -31,8 +31,8 @@ namespace app::fact
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
-		app::math::Vector2f const m_position;
-		app::math::Vector2f const m_size;
+		app::math::Vector2f const & m_position;
+		app::math::Vector2f const & m_size;
 	};
 }
 
