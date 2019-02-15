@@ -15,6 +15,7 @@ void app::sys::DebugSystem::update(app::time::seconds const & dt)
 {
 	if constexpr (s_DEBUG_MODE)
 	{
+		this->sceneSwapping();
 		serverTesting();
 	}
 }
@@ -74,4 +75,19 @@ void app::sys::DebugSystem::serverTesting()
 		app::net::Packet packetType = app::net::Packet::LOBBY_CREATE;
 		m_client.send(name, packetType);
 	}
+}
+
+void app::sys::DebugSystem::sceneSwapping()
+{
+	using Scene = app::sce::SceneType;
+	if (m_keyHandler.isKeyPressed(SDLK_1)) { m_targetScene = Scene::Splash; }
+	if (m_keyHandler.isKeyPressed(SDLK_2)) { m_targetScene = Scene::MainMenu; }
+	if (m_keyHandler.isKeyPressed(SDLK_3)) { m_targetScene = Scene::Credits; }
+	if (m_keyHandler.isKeyPressed(SDLK_4)) { m_targetScene = Scene::CharacterSelect; }
+	if (m_keyHandler.isKeyPressed(SDLK_5)) { m_targetScene = Scene::TutorialLevel; }
+	if (m_keyHandler.isKeyPressed(SDLK_6)) { m_targetScene = Scene::LevelSelect; }
+	if (m_keyHandler.isKeyPressed(SDLK_7)) { m_targetScene = Scene::Level; }
+	if (m_keyHandler.isKeyPressed(SDLK_8)) { m_targetScene = Scene::LobbySelect; }
+	if (m_keyHandler.isKeyPressed(SDLK_9)) { m_targetScene = Scene::Lobby; }
+	if (m_keyHandler.isKeyPressed(SDLK_0)) { m_targetScene = Scene::MultiplayerLevel; }
 }
