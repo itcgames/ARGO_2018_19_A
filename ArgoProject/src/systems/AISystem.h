@@ -1,26 +1,27 @@
-﻿#ifndef _COMPONENT_AI_H
-#define _COMPONENT_AI_H
+﻿#ifndef _SYSTEM_AI_H
+#define _SYSTEM_AI_H
 
-namespace app::comp
+#include "BaseSystem.h"
+
+namespace app::sys
 {
-	struct AI
+	class AISystem : public BaseSystem
 	{
 	public: // Constructors/Destructor/Assignments
-		AI() = default;
-		~AI() = default;
+		AISystem() = default;
+		~AISystem() = default;
 
-		AI(AI const &) = default;
-		AI & operator=(AI const &) = default;
+		AISystem(AISystem const &) = default;
+		AISystem & operator=(AISystem const &) = default;
 
-		AI(AI &&) = default;
-		AI & operator=(AI &&) = default;
+		AISystem(AISystem &&) = default;
+		AISystem & operator=(AISystem &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
+		virtual void update(app::time::seconds const & dt) override;
 	public: // Public Static Variables
 	public: // Public Member Variables
-		app::Entity m_currentNode;
-		std::list<app::Entity> m_nodes;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -32,4 +33,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENT_AI_H
+#endif // !_SYSTEM_AI_H

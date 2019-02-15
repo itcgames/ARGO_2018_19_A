@@ -284,6 +284,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\systems\AirMotionSystem.cpp" />
+    <ClCompile Include="src\systems\AISystem.cpp" />
     <ClCompile Include="src\systems\AnimatorSystem.cpp" />
     <ClCompile Include="src\systems\BaseSystem.cpp" />
     <ClCompile Include="src\systems\CollisionSystem.cpp" />
@@ -415,6 +416,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\singletons\WindowSingleton.h" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\systems\AirMotionSystem.h" />
+    <ClInclude Include="src\systems\AISystem.h" />
     <ClInclude Include="src\systems\AnimatorSystem.h" />
     <ClInclude Include="src\systems\BaseSystem.h" />
     <ClInclude Include="src\systems\CollisionSystem.h" />

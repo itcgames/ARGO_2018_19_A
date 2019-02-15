@@ -4,6 +4,7 @@
 #include "factories/WallFactory.h"
 #include "factories/HazardFactory.h"
 #include "factories/PlatformFactory.h"
+#include "factories/AIFactory.h"
 #include "factories/entities/EnemyFactory.h"
 
 std::vector<app::Entity> app::fact::LevelFactory::create()
@@ -70,6 +71,15 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 		position = app::math::Vector2f(875, 100);
 		size = app::math::Vector2f(200, 50);
 		entities.push_back(platformFactory.create());
+	}
+
+	// ai
+	{
+
+		position = app::math::Vector2f(700, 250);
+		size = app::math::Vector2f(100, 100);
+		auto ai = fact::AIFactory(position, size);
+		entities.push_back(ai.create());
 	}
 
 	return entities;

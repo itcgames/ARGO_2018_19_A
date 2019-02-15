@@ -1,0 +1,24 @@
+﻿#include "stdafx.h"
+#include "AISystem.h"
+
+#include "components/Location.h"
+#include "components/Dimensions.h"
+#include "components/AI.h"
+#include "components/Node.h"
+#include "commands/MoveCommand.h"
+#include "commands/JumpCommand.h"
+
+void app::sys::AISystem::update(app::time::seconds const & dt)
+{
+	m_registry.view<comp::Location, comp::Dimensions, comp::AI>()
+		.each([&, this](app::Entity entity, comp::Location & location, comp::Dimensions & dimensions, comp::AI & ai)
+	{
+		auto nodeView = m_registry.view<comp::Node>();
+		auto const & currentNode = nodeView.get(ai.m_currentNode);
+		currentNode.m_loopCommands.front()->execute();
+		//if (currentNode.m_initialCommands.size() > 0)
+		//{
+		//	currentNode.m_initialCommands.front()->execute();
+		//}
+	});
+}
