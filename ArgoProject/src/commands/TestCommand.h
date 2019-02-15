@@ -1,29 +1,27 @@
-﻿#ifndef _COMP_TEXT_H
-#define _COMP_TEXT_H
+﻿#ifndef _TEST_COMMAND_H
+#define _TEST_COMMAND_H
 
-#include "graphics/Font.h"
+#include "BaseCommand.h"
 
-namespace app::comp
+namespace app::cmnd
 {
-	struct Text
+	class TestCommand : public BaseCommand
 	{
 	public: // Constructors/Destructor/Assignments
-		Text() = default;
-		~Text() = default;
+		TestCommand() = default;
+		virtual ~TestCommand() = default;
 
-		Text(Text const &) = default;
-		Text & operator=(Text const &) = default;
+		TestCommand(TestCommand const &) = default;
+		TestCommand & operator=(TestCommand const &) = default;
 
-		Text(Text &&) = default;
-		Text & operator=(Text &&) = default;
+		TestCommand(TestCommand &&) = default;
+		TestCommand & operator=(TestCommand &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
+		virtual void execute() final override;
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::shared_ptr<app::gra::Font> font;
-		std::string string;
-		math::Vector2f border;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -35,4 +33,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMP_TEXT_H
+#endif // !_TEST_COMMAND_H
