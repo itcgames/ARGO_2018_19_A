@@ -1,6 +1,8 @@
 ﻿#ifndef _COMPONENT_AI_H
 #define _COMPONENT_AI_H
 
+#include "commands/BaseCommand.h"
+
 namespace app::comp
 {
 	struct AI
@@ -21,6 +23,7 @@ namespace app::comp
 	public: // Public Member Variables
 		std::optional<app::Entity> m_currentNode;
 		std::list<app::Entity> m_nodes;
+		std::list<std::shared_ptr<app::cmnd::BaseCommand>> m_initialCommands;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables

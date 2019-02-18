@@ -210,6 +210,7 @@ void app::sys::CollisionSystem::checkAINodeCollisions()
 			if (collisionCheck)
 			{
 				ai.m_currentNode = secEntity;
+				ai.m_initialCommands = node.m_initialCommands;
 			}
 		});
 	});

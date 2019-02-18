@@ -19,10 +19,10 @@ void app::sys::AISystem::update(app::time::seconds const & dt)
 			auto & currentNode = nodeView.get(ai.m_currentNode.value());
 			currentNode.m_loopCommands.front()->execute();
 
-			if (currentNode.m_initialCommands.size() > 0)
+			if (ai.m_initialCommands.size() > 0)
 			{
-				currentNode.m_initialCommands.front()->execute();
-				currentNode.m_initialCommands.pop_front();
+				ai.m_initialCommands.front()->execute();
+				ai.m_initialCommands.pop_front();
 			}
 		}
 	});
