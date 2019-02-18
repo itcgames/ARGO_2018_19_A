@@ -144,10 +144,10 @@ public: // Constructors/Destructor/Assignments
 public: // Public Static Functions
 	static void load(std::shared_ptr<Resource> & resource, std::string const & file)
 	{
-		auto music = std::make_shared<Resource>();
-		if (music->load(file))
+		auto audio = std::make_shared<Resource>();
+		if (audio ->load(file))
 		{
-			resource.swap(music);
+			resource.swap(audio);
 		}
 		else
 		{

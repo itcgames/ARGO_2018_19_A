@@ -9,7 +9,7 @@ namespace app::gra
 	{
 	public: // Constructors/Destructor/Assignments
 		AudioBuffer() = default;
-		AudioBuffer(std::string const & file);
+		AudioBuffer(std::string const & file, bool isMusic);
 		~AudioBuffer() = default;
 
 		AudioBuffer(AudioBuffer const &) = delete;
@@ -29,11 +29,13 @@ namespace app::gra
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 		app::del::UPtrMusic loadMusic(std::string const & file);
+		app::del::UPtrChunk loadSFX(std::string const & file);
 	private: // Private Member Functions
 	private: // Private Static Variables
 		static std::mutex s_sdlMutex;
 	private: // Private Member Variables
 		del::UPtrMusic m_music;
+		del::UPtrChunk m_sfx;
 	};
 }
 

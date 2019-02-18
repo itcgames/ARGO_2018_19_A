@@ -24,7 +24,8 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 	using FontKey = app::res::FontKey;
 	m_resourceManager.loadFont(FontKey::Debug, "./res/Fonts/arial.ttf");
 	using AudioKey = app::res::AudioKey;
-	m_resourceManager.loadAudio(AudioKey::BackgroundMusic, "./res/Audio/PlayerJump.mp3");
+	m_resourceManager.loadAudio(AudioKey::BackgroundMusicTitle, "./res/Audio/Music/BackgroundMusicTitle.ogg");
+	m_resourceManager.loadAudio(AudioKey::PlayerJump, "./res/Audio/SFX/PlayerJump.wav");
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("SPLASH SCENE Constructed");

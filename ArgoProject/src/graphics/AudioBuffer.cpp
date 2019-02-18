@@ -3,8 +3,9 @@
 
 std::mutex app::gra::AudioBuffer::s_sdlMutex = std::mutex();
 
-app::gra::AudioBuffer::AudioBuffer(std::string const & file)
+app::gra::AudioBuffer::AudioBuffer(std::string const & file, bool isMusic)
 	: m_music(nullptr)
+	, m_sfx(nullptr)
 {
 	this->load(file);
 }
@@ -13,11 +14,22 @@ bool app::gra::AudioBuffer::load(std::string const & file)
 {
 	try
 	{
-		auto music = loadMusic(file);
-		if (music == nullptr) { throw std::exception(SDL_GetError()); }
-		m_music.swap(music);
+		if (m_isMusic == true)
+		{
+			auto music = loadMusic(file);
+			if (music == nullptr) { throw std::exception(SDL_GetError()); }
+			m_music.swap(music);
+			return true;
+		}
+		else
+		{
+			auto sfx = loadSFX(file);
+			if (sfx == nullptr) { throw std::exception(SDL_GetError()); }
+			m_sfx.swap(sfx);
+			return true;
+		}
 
-		return true;
+		
 	}
 	catch (std::exception const & e)
 	{
@@ -35,4 +47,15 @@ app::del::UPtrMusic app::gra::AudioBuffer::loadMusic(std::string const & file)
 	if (music == nullptr) { return nullptr; }
 
 	return app::del::UPtrMusic(music);
+}
+
+app::del::UPtrChunk app::gra::AudioBuffer::loadSFX(std::string const & file)
+{
+	// lock SDL access since it is not thread safe operation
+	auto lock = std::lock_guard<decltype(s_sdlMutex)>(s_sdlMutex);
+	Mix_Chunk * sfx = nullptr;
+	sfx = Mix_LoadWAV(file.c_str());
+	if (sfx == nullptr) { return nullptr; }
+
+	return app::del::UPtrChunk(sfx);
 }
