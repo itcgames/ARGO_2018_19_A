@@ -2,6 +2,7 @@
 #define _BUTTON_FACTORY_PARAMETERS_H
 
 #include "commands/BaseCommand.h"
+#include "components/Presseable.h"
 
 namespace app::par
 {
@@ -26,6 +27,7 @@ namespace app::par
 		math::Vector2f border;
 		std::string text;
 		std::shared_ptr<app::cmnd::BaseCommand> command;
+		app::comp::Presseable::State state;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables

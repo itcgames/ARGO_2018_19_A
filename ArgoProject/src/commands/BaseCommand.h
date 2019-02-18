@@ -23,6 +23,7 @@ namespace app::cmnd
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
+		constexpr static bool s_DEBUG_MODE = true;
 	protected: // Protected Member Variables
 		app::Registry & m_registry;
 	private: // Private Static Functions

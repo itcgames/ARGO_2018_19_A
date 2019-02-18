@@ -35,6 +35,7 @@ app::Entity const app::fact::ButtonFactory::create()
 	m_registry.assign<decltype(text)>(entity, std::move(text));
 
 	auto presseable = comp::Presseable();
+	presseable.state = m_params.state;
 	presseable.keyCommands = comp::Presseable::KeyCommands{
 		std::make_pair(SDLK_b, m_params.command)
 	};

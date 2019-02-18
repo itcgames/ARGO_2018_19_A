@@ -1,16 +1,12 @@
 ﻿#ifndef _SERVER_H
 #define _SERVER_H
 
-#include "stdafx.h"
-#include "Lobby.h"
 #include <windows.h>
+#include "shared/network/Lobby.h"
+#include "shared/network/PacketType.h"
 
 namespace app::net
 {
-	enum class Packet {
-		CLIENT_NAME,
-		LOBBY_CREATE
-	};
 	class Server
 	{
 	public: // Constructors/Destructor/Assignments
@@ -44,13 +40,13 @@ namespace app::net
 		bool sendAll(int ID, std::byte * data, int totalBytes);
 		bool get(int ID, int& _int);
 		bool get(int ID, std::string& _string);
-		bool get(int ID, Packet& _packetType);
+		bool get(int ID, PacketType& _packetType);
 
 		bool send(int ID, const int& _int);
-		bool send(int ID, const Packet& _packetType);
-		bool send(int ID, const std::string& _string, const Packet& _packetToProcessString);
-		bool send(int ID, Lobby const & _lobby, Packet const & _packetType);
-		bool processPacket(int ID, Packet _packetType);
+		bool send(int ID, const PacketType& _packetType);
+		bool send(int ID, const std::string& _string, const PacketType& _packetToProcessString);
+		bool send(int ID, Lobby const & _lobby, PacketType const & _packetType);
+		bool processPacket(int ID, PacketType _packetType);
 		void outputIP(IPaddress const & ip);
 	private: // Private Static Variables
 		constexpr static int s_MAX_SOCKETS = 16;

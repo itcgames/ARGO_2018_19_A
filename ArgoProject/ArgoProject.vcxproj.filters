@@ -106,12 +106,6 @@
     <Filter Include="Header Files\factories\entities">
       <UniqueIdentifier>{7ea2d7cc-3b18-41e1-82b6-a1394e7535af}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\client">
-      <UniqueIdentifier>{c9bd1b13-15c7-4f3d-a1d3-ee017f24760b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\client">
-      <UniqueIdentifier>{5c5a3bcb-ec9a-4c27-a60a-5293b301ba98}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\resources">
       <UniqueIdentifier>{c685aa57-778d-491e-b616-951d99ebf5fd}</UniqueIdentifier>
     </Filter>
@@ -129,6 +123,18 @@
     </Filter>
     <Filter Include="Source Files\parameters">
       <UniqueIdentifier>{25fdef00-7d3b-47d0-b5cd-69457666f098}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\network">
+      <UniqueIdentifier>{34760c53-e809-4233-9e91-9893618a9ccf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\network">
+      <UniqueIdentifier>{59a49709-f915-445e-b7e8-2b7f8c948c58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\commands\buttons">
+      <UniqueIdentifier>{f566a9b1-d7b9-4b38-a6bd-9e8aee0d153a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\commands\buttons">
+      <UniqueIdentifier>{c4b7f7c6-43ce-4673-bc81-678582ad2b41}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -157,9 +163,6 @@
       <Filter>Source Files\utilities</Filter>
     </ClCompile>
     <ClCompile Include="src\utilities\Time.cpp">
-      <Filter>Source Files\utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="src\utilities\Console.cpp">
       <Filter>Source Files\utilities</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\Window.cpp">
@@ -384,9 +387,6 @@
     <ClCompile Include="src\factories\scenes\TutorialLevelSceneFactory.cpp">
       <Filter>Source Files\factories\scenes</Filter>
     </ClCompile>
-    <ClCompile Include="src\client\Client.cpp">
-      <Filter>Source Files\client</Filter>
-    </ClCompile>
     <ClCompile Include="src\systems\DebugSystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
@@ -483,9 +483,6 @@
     <ClCompile Include="src\singletons\ClientSingleton.cpp">
       <Filter>Source Files\singletons</Filter>
     </ClCompile>
-    <ClCompile Include="src\client\Lobby.cpp">
-      <Filter>Source Files\client</Filter>
-    </ClCompile>
     <ClCompile Include="src\systems\CurrentGroundSystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
@@ -531,6 +528,24 @@
     <ClCompile Include="src\systems\ButtonSystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
+    <ClCompile Include="src\network\Client.cpp">
+      <Filter>Source Files\network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ArgoShared\src\shared\utilities\Console.cpp">
+      <Filter>Source Files\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ArgoShared\src\shared\network\Lobby.cpp">
+      <Filter>Source Files\network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ArgoShared\src\shared\network\PacketType.cpp">
+      <Filter>Source Files\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\buttons\ButtonMultiplayerCommand.cpp">
+      <Filter>Source Files\commands\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\buttons\ButtonMultiplayerConnectCommand.cpp">
+      <Filter>Source Files\commands\buttons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -555,9 +570,6 @@
       <Filter>Header Files\utilities</Filter>
     </ClInclude>
     <ClInclude Include="src\utilities\cute_c2.h">
-      <Filter>Header Files\utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\utilities\Console.h">
       <Filter>Header Files\utilities</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\Window.h">
@@ -788,9 +800,6 @@
     <ClInclude Include="src\factories\scenes\LevelSelectSceneFactory.h">
       <Filter>Header Files\factories\scenes</Filter>
     </ClInclude>
-    <ClInclude Include="src\client\Client.h">
-      <Filter>Header Files\client</Filter>
-    </ClInclude>
     <ClInclude Include="src\systems\DebugSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
@@ -890,9 +899,6 @@
     <ClInclude Include="src\singletons\ClientSingleton.h">
       <Filter>Header Files\singletons</Filter>
     </ClInclude>
-    <ClInclude Include="src\client\Lobby.h">
-      <Filter>Header Files\client</Filter>
-    </ClInclude>
     <ClInclude Include="src\commands\DropCommand.h">
       <Filter>Header Files\commands</Filter>
     </ClInclude>
@@ -928,6 +934,24 @@
     </ClInclude>
     <ClInclude Include="src\systems\ButtonSystem.h">
       <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\network\Client.h">
+      <Filter>Header Files\network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ArgoShared\src\shared\utilities\Console.h">
+      <Filter>Header Files\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ArgoShared\src\shared\network\Lobby.h">
+      <Filter>Header Files\network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ArgoShared\src\shared\network\PacketType.h">
+      <Filter>Header Files\network</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\buttons\ButtonMultiplayerCommand.h">
+      <Filter>Header Files\commands\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\buttons\ButtonMultiplayerConnectCommand.h">
+      <Filter>Header Files\commands\buttons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

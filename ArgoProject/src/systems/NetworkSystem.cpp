@@ -7,14 +7,13 @@ app::sys::NetworkSystem::NetworkSystem()
 	, m_client(app::sin::Client::get())
 	, m_packetType()
 {
-	m_client.initNetwork(s_SERVER_IP, s_SERVER_PORT);
 }
 
 void app::sys::NetworkSystem::update(app::time::seconds const & dt)
 {
-	if (m_client.checkSocket())
+	if (m_client.hasInit() && m_client.checkSocket())
 	{
-		m_packetType = app::net::Packet::UNKNOWN;
+		m_packetType = app::net::PacketType::UNKNOWN;
 		if (!m_client.get(m_packetType))
 		{
 			this->output("Failed to retrieve packet type");

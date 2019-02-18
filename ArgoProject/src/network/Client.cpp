@@ -24,21 +24,20 @@ bool app::net::Client::initNetwork(std::string const & pIP, int iPort)
 {
 	m_socketSet = SDLNet_AllocSocketSet(1);
 
+	auto ipAddress = IPaddress();
 
-
-	IPaddress ip;
-	if (SDLNet_ResolveHost(&ip, pIP.c_str(), iPort) != NULL);
+	if (SDLNet_ResolveHost(&ipAddress, pIP.c_str(), iPort) != NULL);
 	{
 		app::Console::writeLine({ "ERROR: SDLNet_ResolveHost: [", SDLNet_GetError(), "]" });
 	}
 	// Get our IP address in proper dot-quad format by breaking up the 32-bit unsigned host address and splitting it into an array of four 8-bit unsigned numbers...
-	Uint8 * dotQuad = (Uint8*)&ip.host;
+	Uint8 * dotQuad = (Uint8*)&ipAddress.host;
 	//... and then outputting them cast to integers. Then read the last 16 bits of the serverIP object to get the port number
 	std::cout << "Successfully resolved server host to IP: " << (unsigned short)dotQuad[0] << "." << (unsigned short)dotQuad[1] << "." << (unsigned short)dotQuad[2] << "." << (unsigned short)dotQuad[3];
-	std::cout << " port " << SDLNet_Read16(&ip.port) << std::endl << std::endl;
+	std::cout << " port " << SDLNet_Read16(&ipAddress.port) << std::endl << std::endl;
 	
 	//open the servers socket
-	m_socket = SDLNet_TCP_Open(&ip);
+	m_socket = SDLNet_TCP_Open(&ipAddress);
 	if (m_socket == NULL)
 	{
 		app::Console::writeLine({ "ERROR: SDLNer_TCP_Open: [", SDLNet_GetError(), "]" });
@@ -101,9 +100,9 @@ bool app::net::Client::sendAll(std::byte * data, int totalBytes)
 /// <param name="_string">string to send</param>
 /// <param name="_packetToProcessString">the packet type</param>
 /// <returns>true if success, false if sending fails</returns>
-bool app::net::Client::send(const std::string & _string, const app::net::Packet& _packetType)
+bool app::net::Client::send(const std::string & _string, const app::net::PacketType& _packetType)
 {
-	app::net::Packet type = _packetType;
+	app::net::PacketType type = _packetType;
 	if (!send(type))
 	{
 		return false;
@@ -150,9 +149,9 @@ bool app::net::Client::get(std::string & _string)
 /// </summary>
 /// <param name="_packetType">packet type to send</param>
 /// <returns>true if succeeds, false if sending fails</returns>
-bool app::net::Client::send(const Packet& _packetType)
+bool app::net::Client::send(const PacketType& _packetType)
 {
-	if (!sendAll((std::byte *)&_packetType, sizeof(Packet)))
+	if (!sendAll((std::byte *)&_packetType, sizeof(PacketType)))
 	{
 		return false;
 	}
@@ -195,14 +194,24 @@ bool app::net::Client::getAll(std::byte * data, int totalBytes)
 	return true;
 }
 
+bool app::net::Client::send(Lobby const & _lobby, app::net::PacketType const & _packet)
+{
+	return false;
+}
+
+bool app::net::Client::get(Lobby & _lobby)
+{
+	return false;
+}
+
 /// <summary>
 /// Will expect a packet type from server
 /// </summary>
 /// <param name="_packetType">a packet type to set the received packet to</param>
 /// <returns>true if success, false if receive fails</returns>
-bool app::net::Client::get(Packet & _packetType)
+bool app::net::Client::get(PacketType & _packetType)
 {
-	if (!getAll((std::byte *)&_packetType, sizeof(Packet)))
+	if (!getAll((std::byte *)&_packetType, sizeof(PacketType)))
 	{
 		return false;
 	}
@@ -228,11 +237,11 @@ bool app::net::Client::get(int & _int)
 /// </summary>
 /// <param name="_packetType">type of received packet</param>
 /// <returns>true if processes successfuly, false if fails processing</returns>
-bool app::net::Client::processPacket(Packet _packetType)
+bool app::net::Client::processPacket(PacketType _packetType)
 {
 	switch (_packetType)
 	{
-	case Packet::CLIENT_NAME:
+	case PacketType::CLIENT_NAME:
 	{
 		std::string Message;
 		if (!get(Message))
@@ -245,11 +254,13 @@ bool app::net::Client::processPacket(Packet _packetType)
 		}
 		break;
 	}
-	case Packet::LOBBY_CREATE:
+	case PacketType::LOBBY_CREATE:
 	{
 
 	} break;
+	case PacketType::UNKNOWN:
 	default:
+		app::Console::writeLine("Unknown Packet type!");
 		break;
 	}
 	return false;

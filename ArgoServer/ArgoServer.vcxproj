@@ -91,7 +91,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;$(SolutionDir)ArgoShared\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
@@ -110,7 +110,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;$(SolutionDir)ArgoShared\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
@@ -131,7 +131,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;$(SolutionDir)ArgoShared\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
@@ -156,7 +156,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;$(SolutionDir)ArgoShared\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
@@ -174,23 +174,15 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\math\Math.h" />
-    <ClInclude Include="src\math\Rect.h" />
-    <ClInclude Include="src\math\Vector2.h" />
-    <ClInclude Include="src\server\Lobby.h" />
+    <ClInclude Include="..\ArgoShared\src\shared\network\Lobby.h" />
+    <ClInclude Include="..\ArgoShared\src\shared\network\PacketType.h" />
     <ClInclude Include="src\server\Server.h" />
     <ClInclude Include="src\stdafx.h" />
-    <ClInclude Include="src\utilities\Console.h" />
-    <ClInclude Include="src\utilities\cute_c2.h" />
-    <ClInclude Include="src\utilities\makers.h" />
-    <ClInclude Include="src\utilities\Time.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\ArgoShared\src\shared\network\Lobby.cpp" />
+    <ClCompile Include="..\ArgoShared\src\shared\network\PacketType.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\math\Math.cpp" />
-    <ClCompile Include="src\math\Rect.cpp" />
-    <ClCompile Include="src\math\Vector2.cpp" />
-    <ClCompile Include="src\server\Lobby.cpp" />
     <ClCompile Include="src\server\Server.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -198,10 +190,6 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\utilities\Console.cpp" />
-    <ClCompile Include="src\utilities\cute_c2.cpp" />
-    <ClCompile Include="src\utilities\makers.cpp" />
-    <ClCompile Include="src\utilities\Time.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

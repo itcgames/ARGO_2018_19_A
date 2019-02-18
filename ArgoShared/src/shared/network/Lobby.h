@@ -1,5 +1,5 @@
-﻿#ifndef _LOBBY_H
-#define _LOBBY_H
+﻿#ifndef _NETWORK_LOBBY_H
+#define _NETWORK_LOBBY_H
 
 namespace app::net
 {
@@ -37,4 +37,4 @@ namespace app::net
 	};
 }
 
-#endif // !_LOBBY_H
+#endif // !_NETWORK_LOBBY_H

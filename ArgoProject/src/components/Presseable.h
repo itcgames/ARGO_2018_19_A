@@ -29,6 +29,7 @@ namespace app::comp
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
+		State state;
 		std::optional<KeyCommands> keyCommands;
 		std::optional<MouseCommands> mouseCommands;
 		std::optional<ButtonCommands> buttonCommands;

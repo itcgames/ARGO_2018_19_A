@@ -188,7 +188,7 @@ void app::net::Server::sdlCleanup()
 /// <param name="ID"></param>
 void app::net::Server::clientHandlerThread(int ID, std::atomic<bool> & stopThread)
 {
-	Packet packetType;
+	PacketType packetType;
 
 	while (!stopThread.load())
 	{
@@ -286,9 +286,9 @@ bool app::net::Server::get(int ID, int & _int)
 /// <param name="ID">ID of the socket to send to</param>
 /// <param name="_packetType">packet type to send</param>
 /// <returns>true if success, false if sendAll fails</returns>
-bool app::net::Server::send(int ID, const Packet& _packetType)
+bool app::net::Server::send(int ID, const PacketType& _packetType)
 {
-	if (!sendAll(ID, (std::byte *)&_packetType, sizeof(Packet)))
+	if (!sendAll(ID, (std::byte *)&_packetType, sizeof(PacketType)))
 	{
 		return false;
 	}
@@ -301,9 +301,9 @@ bool app::net::Server::send(int ID, const Packet& _packetType)
 /// <param name="ID">ID of the socket to expect a packet from</param>
 /// <param name="_packetType">packet variable to assign the received packet type to</param>
 /// <returns>true if success, false if recvAll fails</returns>
-bool app::net::Server::get(int ID, Packet & _packetType)
+bool app::net::Server::get(int ID, PacketType & _packetType)
 {
-	if (!getAll(ID, (std::byte *)&_packetType, sizeof(Packet)))
+	if (!getAll(ID, (std::byte *)&_packetType, sizeof(PacketType)))
 	{
 		return false;
 	}
@@ -318,7 +318,7 @@ bool app::net::Server::get(int ID, Packet & _packetType)
 /// <param name="_string">string to send</param>
 /// <param name="_packetType">type of packet the other socket is to expect (defines how it will be processed by the other socket)</param>
 /// <returns>true if success, false if any of the sends fail</returns>
-bool app::net::Server::send(int ID, const std::string & _string, const Packet & _packetType)
+bool app::net::Server::send(int ID, const std::string & _string, const PacketType & _packetType)
 {
 	if (!send(ID, _packetType))
 	{
@@ -336,7 +336,7 @@ bool app::net::Server::send(int ID, const std::string & _string, const Packet & 
 	return true;
 }
 
-bool app::net::Server::send(int ID, Lobby const & _lobby, Packet const & _packetType)
+bool app::net::Server::send(int ID, Lobby const & _lobby, PacketType const & _packetType)
 {
 	constexpr auto bufferSize = sizeof(Lobby);
 	return send(ID, _packetType) && send(ID, bufferSize) && sendAll(ID, (std::byte *)&_lobby, bufferSize);
@@ -374,11 +374,11 @@ bool app::net::Server::get(int ID, std::string & _string)
 /// <param name="ID">ID of the socket the packet is from</param>
 /// <param name="_packetType">type of packet received</param>
 /// <returns>true if successful processing of packet, false if the processing fails</returns>
-bool app::net::Server::processPacket(int ID, Packet _packetType)
+bool app::net::Server::processPacket(int ID, PacketType _packetType)
 {
 	switch (_packetType)
 	{
-	case Packet::CLIENT_NAME:
+	case PacketType::CLIENT_NAME:
 	{
 		std::string Message;
 		if (!get(ID, Message))
@@ -392,7 +392,7 @@ bool app::net::Server::processPacket(int ID, Packet _packetType)
 		break;
 	}
 	break;
-	case Packet::LOBBY_CREATE:
+	case PacketType::LOBBY_CREATE:
 	{
 		//handle creation of a lobby
 		auto playerName = std::string();
@@ -408,7 +408,7 @@ bool app::net::Server::processPacket(int ID, Packet _packetType)
 		app::Console::writeLine({ "Player with ID [", std::to_string(ID), "] created a lobby with name: ", lobby.getName() });
 
 		//send out lobby created message to everyone else
-		constexpr auto packetType = app::net::Packet::LOBBY_CREATE;
+		constexpr auto packetType = app::net::PacketType::LOBBY_CREATE;
 		for (int i = 0; i < m_totalConnections; i++)
 		{
 			if (i == ID) { continue; }

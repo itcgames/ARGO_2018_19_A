@@ -26,7 +26,7 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 
 void app::sce::MainMenuScene::start()
 {
-	auto const & entities = fact::sce::MainMenuSceneFactory().create();
+	auto const & entities = fact::sce::MainMenuSceneFactory(m_sceneManagerType).create();
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("MAIN MENU SCENE: Creating entities");

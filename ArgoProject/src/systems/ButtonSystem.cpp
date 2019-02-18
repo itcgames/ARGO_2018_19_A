@@ -21,30 +21,42 @@ void app::sys::ButtonSystem::update(app::time::seconds const & dt)
 	m_registry.view<comp::Presseable>()
 		.each([&, this](app::Entity const entity, comp::Presseable & presseable)
 	{
+		if (presseable.state != comp::Presseable::State::Highlighted) { return; }
 		if (presseable.keyCommands.has_value())
 		{
 			for (auto const &[key, command] : presseable.keyCommands.value())
 			{
-				if (m_keyHandler.isKeyPressed(key)) { command->execute(); }
+				if (m_keyHandler.isKeyPressed(key))
+				{
+					presseable.state = comp::Presseable::State::Pressed;
+					command->execute();
+				}
 			}
 		}
 		if (presseable.mouseCommands.has_value())
 		{
 			for (auto const &[key, command] : presseable.mouseCommands.value())
 			{
-				if (m_mouseHandler.isButtonPressed(key)) { command->execute(); }
+				if (m_mouseHandler.isButtonPressed(key))
+				{
+					presseable.state = comp::Presseable::State::Pressed;
+					command->execute();
+				}
 			}
 		}
 
 		if (presseable.buttonCommands.has_value())
 		{
-			using ControllerIndex = app::inp::ControllerIndex;
 			constexpr auto MAX_CONTROLLERS = 8;
-			for (ControllerIndex i = 0; i < MAX_CONTROLLERS; ++i)
+			for (app::inp::ControllerIndex i = 0; i < MAX_CONTROLLERS; ++i)
 			{
 				for (auto const &[key, command] : presseable.buttonCommands.value())
 				{
-					if (m_controllerHandler.isButtonPressed(i, key)) { command->execute(); }
+					if (m_controllerHandler.isButtonPressed(i, key))
+					{
+						presseable.state = comp::Presseable::State::Pressed;
+						command->execute();
+					}
 				}
 			}
 		}

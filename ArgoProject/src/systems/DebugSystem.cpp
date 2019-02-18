@@ -15,7 +15,6 @@ void app::sys::DebugSystem::update(app::time::seconds const & dt)
 {
 	if constexpr (s_DEBUG_MODE)
 	{
-		serverTesting();
 		this->sceneSwapping();
 	}
 }
@@ -48,14 +47,14 @@ void app::sys::DebugSystem::serverTesting()
 		app::Console::writeLine("sending name to server");
 		std::string name = "Bob";
 		//define the type of packet we are about to send
-		app::net::Packet packetType = app::net::Packet::CLIENT_NAME;
+		app::net::PacketType packetType = app::net::PacketType::CLIENT_NAME;
 		//send the packet out
 		m_client.send(name, packetType);
 		m_targetScene = app::sce::SceneType::LobbySelect;
 	}
 	if (m_connected)
 	{
-		app::net::Packet packetType;
+		app::net::PacketType packetType;
 		//get the player name here and send the name to the server.
 		if (m_client.checkSocket()) {
 			if (!m_client.get(packetType))
@@ -72,7 +71,7 @@ void app::sys::DebugSystem::serverTesting()
 	{
 		//simulate logic for when create new lobby is clicked
 		std::string name = "Bob";
-		app::net::Packet packetType = app::net::Packet::LOBBY_CREATE;
+		app::net::PacketType packetType = app::net::PacketType::LOBBY_CREATE;
 		m_client.send(name, packetType);
 	}
 }

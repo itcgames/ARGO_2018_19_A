@@ -5,7 +5,14 @@
 #include "factories/entities/ButtonFactory.h"
 #include "factories/entities/TextFactory.h"
 
-#include "commands/TestCommand.h"
+#include "commands/buttons/ButtonMultiplayerConnectCommand.h"
+#include "network/Client.h"
+
+app::fact::sce::MainMenuSceneFactory::MainMenuSceneFactory(app::sce::SceneType & targetScene)
+	: EntitiesFactory()
+	, m_targetScene(targetScene)
+{
+}
 
 std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 {
@@ -15,11 +22,12 @@ std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 		auto const & sizePerLetter = math::Vector2f{ 20.0f, 40.0f };
 		auto params = app::par::ButtonFactoryParameters();
 		params.position = math::Vector2f{ 0.0f, 0.0f };
-		params.text = std::string("This is a button");
+		params.state = app::comp::Presseable::State::Highlighted;
+		params.text = std::string("Multiplayer");
 		auto const & stepSize = math::Vector2f{ static_cast<float>(params.text.size()), 1.0f };
 		params.size = (sizePerLetter * stepSize);
 		params.border = math::Vector2f{ 20.0f, 4.0f };
-		params.command = std::make_unique<cmnd::TestCommand>();
+		params.command = std::make_unique<cmnd::ButtonMultiplayerConnectCommand>(app::net::Client::s_SERVER_IP, app::net::Client::s_SERVER_PORT, m_targetScene);
 		entities.push_back(fact::ButtonFactory(params).create());
 	}
 	{

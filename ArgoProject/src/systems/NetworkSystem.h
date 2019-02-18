@@ -2,7 +2,7 @@
 #define _NETWORK_SYSTEM_H
 
 #include "BaseSystem.h"
-#include "client/Client.h"
+#include "network/Client.h"
 
 namespace app::sys
 {
@@ -32,12 +32,10 @@ namespace app::sys
 		void output(std::string const & msg) const;
 		void output(std::initializer_list<std::string> const & msgs) const;
 	private: // Private Static Variables
-		constexpr static auto s_SERVER_PORT = 27000;
-		constexpr static auto s_SERVER_IP = "localhost";
 		constexpr static bool s_DEBUG_MODE = true;
 	private: // Private Member Variables
 		app::net::Client & m_client;
-		app::net::Packet m_packetType;
+		app::net::PacketType m_packetType;
 	};
 }
 
