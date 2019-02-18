@@ -18,6 +18,7 @@
 #include "systems/HealthSystem.h"
 #include "systems/CurrentGroundSystem.h"
 #include "systems/NetworkSystem.h"
+#include "systems/ButtonSystem.h"
 
 namespace app::sce
 {
@@ -37,6 +38,7 @@ namespace app::sce
 			, sys::HealthSystem
 			, sys::CurrentGroundSystem
 			, sys::NetworkSystem
+			, sys::ButtonSystem
 		>;
 		using UpdateSystems = std::vector<UpdateSystem>;
 		using DrawSystem = std::variant<

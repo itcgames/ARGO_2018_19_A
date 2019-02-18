@@ -28,8 +28,8 @@ void app::sys::RenderTextSystem::update(app::time::seconds const & dt)
 		{
 			m_renderText.setPosition(location.position);
 			m_renderText.setRotation(location.orientation);
-			m_renderText.setSize(dimensions.size);
-			m_renderText.setOrigin(dimensions.origin);
+			m_renderText.setSize(dimensions.size - (text.border * 2.0f));
+			m_renderText.setOrigin(dimensions.origin - text.border);
 			m_renderText.setFont(text.font);
 			m_renderText.setText(text.string);
 			m_window.render(m_renderText);
