@@ -16,6 +16,8 @@
 #include "components/Damage.h"
 #include "components/Health.h"
 #include "components/Enemy.h"
+#include "components/Dashable.h"
+#include "components/DoubleJump.h"
 
 //visitors
 #include "visitors/CollisionUpdateVisitor.h"
@@ -48,8 +50,8 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 void app::sys::CollisionSystem::groundCollisions()
 {
 	//view player
-	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Motion>(entt::persistent_t())
-		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Input & input, comp::Location & location, comp::Dimensions & dimensions, comp::Motion & motion)
+	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Motion>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions, comp::Motion & motion)
 	{
 		//view everything with collisions
 		m_registry.view<comp::Collision, comp::Impenetrable>()
@@ -81,7 +83,7 @@ void app::sys::CollisionSystem::groundCollisions()
 
 void app::sys::CollisionSystem::airCollisions()
 {
-	auto inputView = m_registry.view<comp::Input, comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>(entt::persistent_t());
+	auto dashJumpView = m_registry.view<comp::Dashable, comp::DoubleJump, comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>(entt::persistent_t());
 	//view player
 	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>(entt::persistent_t())
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions, comp::AirMotion & airMotion, comp::CurrentGround & ground)
@@ -109,11 +111,12 @@ void app::sys::CollisionSystem::airCollisions()
 						auto groundMotion = comp::Motion();
 						groundMotion.speed = airMotion.speed;
 						groundMotion.direction = airMotion.direction;
-						if (inputView.contains(entity))
+						if (dashJumpView.contains(entity))
 						{
-							auto & input = inputView.get<comp::Input>(entity);
-							input.m_canDoubleJump = true;
-							input.m_canDash = true;
+							auto & doubleJump = dashJumpView.get<comp::DoubleJump>(entity);
+							auto & dashable = dashJumpView.get<comp::Dashable>(entity);
+							doubleJump.canDoubleJump = true;
+							dashable.canDash = true;
 						}
 
 						auto const & velocity = ((math::toVector(groundMotion.direction) * groundMotion.speed) * math::Vector2f(1.0f, 0.0f));
@@ -132,9 +135,10 @@ void app::sys::CollisionSystem::airCollisions()
 
 void app::sys::CollisionSystem::checkPlatformCollisions()
 {
+	auto dashJumpView = m_registry.view<comp::Dashable, comp::DoubleJump, comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>(entt::persistent_t());
 	//view player
-	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround, comp::PlatformDrop>(entt::persistent_t())
-		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Input & input, comp::Location & location, comp::Dimensions & dimensions,
+	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround, comp::PlatformDrop>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions,
 			comp::AirMotion & airMotion, comp::CurrentGround & ground, comp::PlatformDrop & dropCheck)
 	{
 		//view everything with collisions
@@ -161,8 +165,13 @@ void app::sys::CollisionSystem::checkPlatformCollisions()
 								auto groundMotion = comp::Motion();
 								groundMotion.speed = airMotion.speed;
 								groundMotion.direction = airMotion.direction;
-								input.m_canDoubleJump = true;
-								input.m_canDash = true;
+								if (dashJumpView.contains(entity))
+								{
+									auto & doubleJump = dashJumpView.get<comp::DoubleJump>(entity);
+									auto & dashable = dashJumpView.get<comp::Dashable>(entity);
+									doubleJump.canDoubleJump = true;
+									dashable.canDash = true;
+								}
 
 								auto const & velocity = ((math::toVector(groundMotion.direction) * groundMotion.speed) * math::Vector2f(1.0f, 0.0f));
 								groundMotion.direction = velocity.toAngle();

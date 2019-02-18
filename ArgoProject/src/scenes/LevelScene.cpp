@@ -65,8 +65,8 @@ void app::sce::LevelScene::update(app::time::seconds const & dt)
 {
 	if (m_resetSignal)
 	{
-		m_resetSignal = false;
 		this->reset();
+		m_resetSignal = false;
 	}
 	app::sce::BaseScene::update(dt);
 }

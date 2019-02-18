@@ -76,7 +76,7 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 	// ai
 	{
 
-		position = app::math::Vector2f(700, 250);
+		position = app::math::Vector2f(750, 250);
 		size = app::math::Vector2f(100, 100);
 		auto ai = fact::AIFactory(position, size);
 		entities.push_back(ai.create());

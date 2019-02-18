@@ -192,7 +192,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\CurrentGround.cpp" />
     <ClCompile Include="src\components\Damage.cpp" />
     <ClCompile Include="src\components\Dash.cpp" />
+    <ClCompile Include="src\components\Dashable.cpp" />
     <ClCompile Include="src\components\Dimensions.cpp" />
+    <ClCompile Include="src\components\DoubleJump.cpp" />
     <ClCompile Include="src\components\Enemy.cpp" />
     <ClCompile Include="src\components\Health.cpp" />
     <ClCompile Include="src\components\Impenetrable.cpp" />
@@ -330,7 +332,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\CurrentGround.h" />
     <ClInclude Include="src\components\Damage.h" />
     <ClInclude Include="src\components\Dash.h" />
+    <ClInclude Include="src\components\Dashable.h" />
     <ClInclude Include="src\components\Dimensions.h" />
+    <ClInclude Include="src\components\DoubleJump.h" />
     <ClInclude Include="src\components\Enemy.h" />
     <ClInclude Include="src\components\Health.h" />
     <ClInclude Include="src\components\Impenetrable.h" />

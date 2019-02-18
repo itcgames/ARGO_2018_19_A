@@ -10,15 +10,16 @@
 
 void app::sys::AISystem::update(app::time::seconds const & dt)
 {
+	auto nodeView = m_registry.view<comp::Node>();
 	m_registry.view<comp::Location, comp::Dimensions, comp::AI>()
 		.each([&, this](app::Entity entity, comp::Location & location, comp::Dimensions & dimensions, comp::AI & ai)
 	{
-		auto nodeView = m_registry.view<comp::Node>();
-		auto const & currentNode = nodeView.get(ai.m_currentNode);
+		auto & currentNode = nodeView.get(ai.m_currentNode);
 		currentNode.m_loopCommands.front()->execute();
-		//if (currentNode.m_initialCommands.size() > 0)
-		//{
-		//	currentNode.m_initialCommands.front()->execute();
-		//}
+		if (currentNode.m_initialCommands.size() > 0)
+		{
+			currentNode.m_initialCommands.front()->execute();
+			currentNode.m_initialCommands.pop_front();
+		}
 	});
 }

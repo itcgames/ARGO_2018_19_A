@@ -15,6 +15,8 @@
 #include "components/PlatformDrop.h"
 #include "components/CurrentGround.h"
 #include "components/AI.h"
+#include "components/Dashable.h"
+#include "components/DoubleJump.h"
 
 #include "commands/MoveCommand.h"
 #include "commands/JumpCommand.h"
@@ -67,11 +69,17 @@ app::Entity const app::fact::AIFactory::create()
 	render.texture = m_resourceManager.getTexture(app::res::TextureKey::DebugAnimation);
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
-	//auto input = comp::Input();
-	//input.m_isRight = true;
-	//input.m_canDoubleJump = true;
-	//input.m_canDash = true;
-	//m_registry.assign<decltype(input)>(entity, std::move(input));
+	auto input = comp::Input();
+	input.m_isRight = true;
+	m_registry.assign<decltype(input)>(entity, std::move(input));
+
+	auto doubleJump = comp::DoubleJump();
+	doubleJump.canDoubleJump = true;
+	m_registry.assign<decltype(doubleJump)>(entity, std::move(doubleJump));
+
+	auto dashable = comp::Dashable();
+	dashable.canDash = true;
+	m_registry.assign<decltype(dashable)>(entity, std::move(dashable));
 
 	auto commandable = comp::Commandable();
 	m_registry.assign<decltype(commandable)>(entity, std::move(commandable));

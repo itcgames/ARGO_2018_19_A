@@ -5,6 +5,7 @@
 #include "components/Motion.h"
 #include "components/AirMotion.h"
 #include "components/Input.h"
+#include "components/Dashable.h"
 
 app::cmnd::DashCommand::DashCommand(app::Entity const _entity)
 	: m_entity(_entity)
@@ -15,7 +16,8 @@ app::cmnd::DashCommand::DashCommand(app::Entity const _entity)
 void app::cmnd::DashCommand::execute()
 {
 	auto& input = m_registry.get<comp::Input>(m_entity);
-	if (!m_registry.has<comp::Dash>(m_entity) && input.m_canDash)
+	auto& dashable = m_registry.get<comp::Dashable>(m_entity);
+	if (!m_registry.has<comp::Dash>(m_entity) && dashable.canDash)
 	{
 		if (m_registry.has<comp::Motion>(m_entity))
 		{
@@ -31,6 +33,6 @@ void app::cmnd::DashCommand::execute()
 		dash.dragCutoff = 10.0f;
 		dash.speed = 5000.0f;
 		m_registry.assign<decltype(dash)>(m_entity, std::move(dash));
-		input.m_canDash = false;
+		dashable.canDash = false;
 	}
 }

@@ -13,6 +13,8 @@
 #include "components/Collision.h"
 #include "components/PlatformDrop.h"
 #include "components/CurrentGround.h"
+#include "components/DoubleJump.h"
+#include "components/Dashable.h"
 
 #include "commands/MoveCommand.h"
 #include "commands/JumpCommand.h"
@@ -67,8 +69,6 @@ app::Entity const app::fact::PlayerFactory::create()
 
 	auto input = comp::Input();
 	input.m_isRight = true;
-	input.m_canDoubleJump = true;
-	input.m_canDash = true;
 	//Here is where commands get binded to keys
 	input.keyDownCommands.insert(std::pair(SDLK_RIGHT, std::make_shared<app::cmnd::MoveCommand>(entity, 0, 20)));
 	input.keyDownCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::MoveCommand>(entity, 180, 20)));
@@ -78,6 +78,14 @@ app::Entity const app::fact::PlayerFactory::create()
 	input.keyPressedCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::FaceLeftCommand>(entity)));
 	input.keyDownCommands.insert(std::pair(SDLK_DOWN, std::make_shared<app::cmnd::DropCommand>(entity)));
 	m_registry.assign<decltype(input)>(entity, std::move(input));
+
+	auto doubleJump = comp::DoubleJump();
+	doubleJump.canDoubleJump = true;
+	m_registry.assign<decltype(doubleJump)>(entity, std::move(doubleJump));
+
+	auto dashable = comp::Dashable();
+	dashable.canDash = true;
+	m_registry.assign<decltype(dashable)>(entity, std::move(dashable));
 
 	auto commandable = comp::Commandable();
 	m_registry.assign<decltype(commandable)>(entity, std::move(commandable));

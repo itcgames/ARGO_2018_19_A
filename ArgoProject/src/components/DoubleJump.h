@@ -1,29 +1,25 @@
-﻿#ifndef _INPUT_H
-#define _INPUT_H
-
-#include "commands/BaseCommand.h"
+﻿#ifndef _COMPONENTS_DOUBLE_JUMP_H
+#define _COMPONENTS_DOUBLE_JUMP_H
 
 namespace app::comp
 {
-	struct Input
+	struct DoubleJump
 	{
 	public: // Constructors/Destructor/Assignments
-		Input() = default;
-		~Input() = default;
+		DoubleJump() = default;
+		~DoubleJump() = default;
 
-		Input(Input const &) = default;
-		Input(Input &&) = default;
+		DoubleJump(DoubleJump const &) = default;
+		DoubleJump & operator=(DoubleJump const &) = default;
 
-		Input & operator=(Input const &) = default;
-		Input & operator=(Input &&) = default;
+		DoubleJump(DoubleJump &&) = default;
+		DoubleJump & operator=(DoubleJump &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyDownCommands;
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyPressedCommands;
-		bool m_isRight;
+		bool canDoubleJump;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -35,4 +31,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_INPUT_H
+#endif // !_COMPONENTS_DOUBLE_JUMP_H
