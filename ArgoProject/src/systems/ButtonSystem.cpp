@@ -30,6 +30,7 @@ void app::sys::ButtonSystem::update(app::time::seconds const & dt)
 				{
 					presseable.state = comp::Presseable::State::Pressed;
 					command->execute();
+					return;
 				}
 			}
 		}
@@ -41,6 +42,7 @@ void app::sys::ButtonSystem::update(app::time::seconds const & dt)
 				{
 					presseable.state = comp::Presseable::State::Pressed;
 					command->execute();
+					return;
 				}
 			}
 		}
@@ -56,6 +58,7 @@ void app::sys::ButtonSystem::update(app::time::seconds const & dt)
 					{
 						presseable.state = comp::Presseable::State::Pressed;
 						command->execute();
+						return;
 					}
 				}
 			}

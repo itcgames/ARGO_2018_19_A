@@ -136,6 +136,12 @@
     <Filter Include="Source Files\commands\buttons">
       <UniqueIdentifier>{c4b7f7c6-43ce-4673-bc81-678582ad2b41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\factories\entities\modals">
+      <UniqueIdentifier>{c9601d22-0d1f-49dc-b8f7-68354b669c4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\factories\entities\modals">
+      <UniqueIdentifier>{49672854-bcda-4d10-86c5-2965a5710f83}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -546,6 +552,12 @@
     <ClCompile Include="src\commands\buttons\ButtonMultiplayerConnectCommand.cpp">
       <Filter>Source Files\commands\buttons</Filter>
     </ClCompile>
+    <ClCompile Include="src\components\Modal.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\entities\modals\AskNameFactory.cpp">
+      <Filter>Source Files\factories\entities\modals</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -952,6 +964,12 @@
     </ClInclude>
     <ClInclude Include="src\commands\buttons\ButtonMultiplayerConnectCommand.h">
       <Filter>Header Files\commands\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Modal.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\entities\modals\AskNameFactory.h">
+      <Filter>Header Files\factories\entities\modals</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
