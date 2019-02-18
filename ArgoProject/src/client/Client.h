@@ -53,6 +53,7 @@ namespace app::net
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables
+		constexpr static bool s_DEBUG_MODE = true;
 	private: // Private Member Variables
 		TCPsocket m_socket;
 		SDLNet_SocketSet m_socketSet;

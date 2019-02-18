@@ -239,14 +239,16 @@ bool app::net::Client::processPacket(Packet _packetType)
 		{
 			return false;
 		}
-		std::cout << Message << std::endl;
+		if constexpr (s_DEBUG_MODE)
+		{
+			app::Console::writeLine(Message);
+		}
 		break;
 	}
 	case Packet::LOBBY_CREATE:
 	{
 
-	}
-	break;
+	} break;
 	default:
 		break;
 	}
