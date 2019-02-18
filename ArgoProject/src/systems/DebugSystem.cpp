@@ -15,8 +15,8 @@ void app::sys::DebugSystem::update(app::time::seconds const & dt)
 {
 	if constexpr (s_DEBUG_MODE)
 	{
-		this->sceneSwapping();
 		serverTesting();
+		this->sceneSwapping();
 	}
 }
 
@@ -34,11 +34,11 @@ void app::sys::DebugSystem::serverTesting()
 		}
 
 
-		if (!m_client.initNetwork("localhost", 27000))
-		{
-			m_connected = false;
-			app::Console::writeLine("Could not connect to server, make sure server is running");
-		}
+		//if (!m_client.initNetwork("localhost", 27000))
+		//{
+		//	m_connected = false;
+		//	app::Console::writeLine("Could not connect to server, make sure server is running");
+		//}
 		m_updateVariable = true;
 	}
 	if (m_updateVariable && m_connected)

@@ -8,6 +8,11 @@ int main(int argc, char** argv)
 		app::Console::writeLine({ "ERROR: SDL Failed to initialize [", SDL_GetError(), "]" });
 		return EXIT_FAILURE;
 	}
+	if (SDLNet_Init() != NULL)
+	{
+		app::Console::writeLine({ "ERROR: SDL_net Failed to initialize [", SDLNet_GetError(), "]" });
+		return EXIT_FAILURE;
+	}
 	if (TTF_Init() != NULL)
 	{
 		app::Console::writeLine({ "ERROR: SDL_ttf Failed to initialize [", TTF_GetError(), "]" });

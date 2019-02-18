@@ -112,15 +112,16 @@ void app::net::Server::initServer(int _port)
 /// <returns>true if accepted successfully, false if unsuccessful</returns>
 bool app::net::Server::acceptSocket(int index)
 {
-	if (m_sockets[index])
+	auto & socket = m_sockets.at(index);
+	if (socket)
 	{
 		app::Console::writeLine({ "Overriding a socket at index: ", std::to_string(index) });
 	}
 
-	m_sockets[index] = SDLNet_TCP_Accept(m_serverSocket);
-	if (m_sockets[index] == NULL) return false;
+	socket = SDLNet_TCP_Accept(m_serverSocket);
+	if (socket == NULL) return false;
 
-	if (SDLNet_TCP_AddSocket(m_socketSet, m_sockets[index]) == -1)
+	if (SDLNet_TCP_AddSocket(m_socketSet, socket) == -1)
 	{
 		app::Console::writeLine({ "ERROR: SDLNet_TCP_AddSocket [", SDLNet_GetError(), "]" });
 	}
@@ -133,17 +134,18 @@ bool app::net::Server::acceptSocket(int index)
 /// <param name="index">index at which socket we want to close in is</param>
 void app::net::Server::closeSocket(int index)
 {
-	if (m_sockets[index] == NULL)
+	auto & socket = m_sockets.at(index);
+	if (socket == NULL)
 	{
 		app::Console::writeLine({ "ERROR: Attempted to delete a NULL socket." });
 		return;
 	}
-	if (SDLNet_TCP_DelSocket(m_socketSet, m_sockets[index]) == -1)
+	if (SDLNet_TCP_DelSocket(m_socketSet, socket) == -1)
 	{
 		app::Console::writeLine({ "ERROR: SDLNet_TCP_DelSocket: [", SDLNet_GetError(), "]" });
 	}
-	SDLNet_TCP_Close(m_sockets[index]);
-	m_sockets[index] = NULL;
+	SDLNet_TCP_Close(socket);
+	socket = NULL;
 }
 
 /// <summary>
@@ -334,6 +336,12 @@ bool app::net::Server::send(int ID, const std::string & _string, const Packet & 
 	return true;
 }
 
+bool app::net::Server::send(int ID, Lobby const & _lobby, Packet const & _packetType)
+{
+	constexpr auto bufferSize = sizeof(Lobby);
+	return send(ID, _packetType) && send(ID, bufferSize) && sendAll(ID, (std::byte *)&_lobby, bufferSize);
+}
+
 
 /// <summary>
 /// expect string from other socket
@@ -348,15 +356,15 @@ bool app::net::Server::get(int ID, std::string & _string)
 	{
 		return false;
 	}
-	std::byte * buffer = new std::byte[bufferLength + 1];
-	buffer[bufferLength] = static_cast<std::byte>('\0');
-	if (!getAll(ID, buffer, bufferLength))
+	auto buffer = std::vector<std::byte>(bufferLength + 1);
+	buffer.at(bufferLength) = static_cast<std::byte>('\0');
+	if (!getAll(ID, buffer.data(), bufferLength))
 	{
-		delete[] buffer;
+		buffer.clear();
 		return false;
 	}
-	_string = reinterpret_cast<char *>(buffer);
-	delete[] buffer;
+	_string = reinterpret_cast<char *>(buffer.data());
+	buffer.clear();
 	return true;
 }
 
@@ -387,26 +395,35 @@ bool app::net::Server::processPacket(int ID, Packet _packetType)
 	case Packet::LOBBY_CREATE:
 	{
 		//handle creation of a lobby
-		std::string playerName;
+		auto playerName = std::string();
+		playerName.reserve(20);
 		if (!get(ID, playerName))
 		{
 			return false;
 		}
 		m_lobbies.push_back(Lobby());
-		m_lobbies.back().setName(playerName + "'s Lobby");
-		m_lobbies.back().addPlayer(ID, playerName);
-		app::Console::writeLine({ "Player with ID [", std::to_string(ID), "] created a lobby with name: ", m_lobbies.back().getName() });
+		auto & lobby = m_lobbies.back();
+		lobby.setName(playerName + "'s Lobby");
+		lobby.addPlayer(ID, playerName);
+		app::Console::writeLine({ "Player with ID [", std::to_string(ID), "] created a lobby with name: ", lobby.getName() });
 
 		//send out lobby created message to everyone else
-		app::net::Packet packetType = app::net::Packet::LOBBY_CREATE;
+		constexpr auto packetType = app::net::Packet::LOBBY_CREATE;
 		for (int i = 0; i < m_totalConnections; i++)
 		{
-			if (i == ID)
-			{
-				continue;
-			}
+			if (i == ID) { continue; }
 			//send the vector of servers to client whenever a new server is added or just send a single lobby that was added.
-
+			if (this->send(i, lobby, packetType))
+			{
+				if constexpr (s_DEBUG_MODE)
+				{
+					app::Console::writeLine({ "Send Lobby[", lobby.getName(), "] to player[", std::to_string(i), "]" });
+				}
+			}
+			else
+			{
+				break;
+			}
 		}
 
 	}

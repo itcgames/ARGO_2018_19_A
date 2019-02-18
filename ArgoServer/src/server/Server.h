@@ -49,6 +49,7 @@ namespace app::net
 		bool send(int ID, const int& _int);
 		bool send(int ID, const Packet& _packetType);
 		bool send(int ID, const std::string& _string, const Packet& _packetToProcessString);
+		bool send(int ID, Lobby const & _lobby, Packet const & _packetType);
 		bool processPacket(int ID, Packet _packetType);
 		void outputIP(IPaddress const & ip);
 	private: // Private Static Variables

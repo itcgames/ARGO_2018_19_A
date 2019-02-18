@@ -1,11 +1,13 @@
 ﻿#ifndef _NET_CLIENT_H
 #define _NET_CLIENT_H
-#include"stdafx.h"
+
+#include "client/Lobby.h"
 
 namespace app::net
 {
 
 	enum class Packet {
+		UNKNOWN,
 		CLIENT_NAME,
 		LOBBY_CREATE
 	};
@@ -28,10 +30,11 @@ namespace app::net
 		bool checkSocket();
 		bool processPacket(Packet _packetType);
 
-
-		//Part of SendGetMethods cpp
 		bool sendAll(std::byte * data, int totalBytes);
 		bool getAll(std::byte * data, int totalBytes);
+
+		bool send(Lobby const & _lobby, app::net::Packet const & _packet);
+		bool get(Lobby & _lobby);
 
 		bool send(const std::string& _string, const app::net::Packet& _packetToProcessString);
 		bool get(std::string& _string);
@@ -40,7 +43,7 @@ namespace app::net
 		bool get(Packet& _packetType);
 
 		bool send(const int& _int);
-		bool get(int& _int);		
+		bool get(int& _int);
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
