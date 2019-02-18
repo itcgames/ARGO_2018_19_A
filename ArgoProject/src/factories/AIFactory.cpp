@@ -27,14 +27,15 @@
 #include "components/StateMachine.h"
 #include "components/Health.h"
 
-app::fact::AIFactory::AIFactory(math::Vector2f pos, math::Vector2f size)
+app::fact::AIFactory::AIFactory(math::Vector2f const & pos, math::Vector2f const & size)
 	: m_position(pos), m_size(size)
 {
 }
 
-app::Entity const app::fact::AIFactory::create()
+std::vector<app::Entity> app::fact::AIFactory::create()
 {
-	app::Entity const entity = EntityFactory::create();
+	auto entities = std::vector<app::Entity>();
+	app::Entity const entity = m_entityFactory.create();
 
 	auto location = comp::Location();
 	location.position = m_position;
@@ -110,12 +111,24 @@ app::Entity const app::fact::AIFactory::create()
 	auto initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
 		std::make_shared<cmnd::JumpCommand>(entity, 400.0f)
 	};
-	auto startNode = app::fact::NodeFactory(math::Vector2f(875, 450), loopCmnds, initialCmnds).create();
-	m_nodes.push_back(startNode);
+	auto node = app::fact::NodeFactory(math::Vector2f(750, 200), loopCmnds, initialCmnds).create();
+	m_nodes.push_back(node);
+	entities.push_back(node);
 
-	ai.m_currentNode = startNode;
+	loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+		std::make_shared<cmnd::MoveCommand>(entity, 180, 20)
+	};
+	initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+		
+	};
+	node = app::fact::NodeFactory(math::Vector2f(950, 200), loopCmnds, initialCmnds).create();
+	m_nodes.push_back(node);
+	entities.push_back(node);
+
 	ai.m_nodes = m_nodes;
 	m_registry.assign<decltype(ai)>(entity, std::move(ai));
 
-	return entity;
+	entities.push_back(entity);
+
+	return entities;
 }

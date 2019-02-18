@@ -18,6 +18,8 @@
 #include "components/Enemy.h"
 #include "components/Dashable.h"
 #include "components/DoubleJump.h"
+#include "components/AI.h"
+#include "components/Node.h"
 
 //visitors
 #include "visitors/CollisionUpdateVisitor.h"
@@ -45,6 +47,8 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 	enemyWallCollisions();
 	enemyEnemyCollisions();	
 	playerHazardCollisions();
+	checkAINodeCollisions();
+	checkAINodeCollisions();
 }
 
 void app::sys::CollisionSystem::groundCollisions()
@@ -189,6 +193,23 @@ void app::sys::CollisionSystem::checkPlatformCollisions()
 							dropCheck.falling = false;
 						}
 					}
+			}
+		});
+	});
+}
+
+void app::sys::CollisionSystem::checkAINodeCollisions()
+{
+	m_registry.view<comp::Collision, comp::AI>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::AI & ai)
+	{
+		m_registry.view<comp::Collision, comp::Node>(entt::persistent_t())
+			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Node & node)
+		{
+			bool const & collisionCheck = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+			if (collisionCheck)
+			{
+				ai.m_currentNode = secEntity;
 			}
 		});
 	});

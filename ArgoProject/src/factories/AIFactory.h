@@ -1,14 +1,14 @@
 ﻿#ifndef _FACTORY_AI_H
 #define _FACTORY_AI_H
 
-#include "EntityFactory.h"
+#include "EntitiesFactory.h"
 
 namespace app::fact
 {
-	class AIFactory : public EntityFactory
+	class AIFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		AIFactory(math::Vector2f pos, math::Vector2f size);
+		AIFactory(math::Vector2f const & pos, math::Vector2f const & size);
 		~AIFactory() = default;
 
 		AIFactory(AIFactory const &) = default;
@@ -19,7 +19,7 @@ namespace app::fact
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		virtual app::Entity const create() override;
+		virtual std::vector<app::Entity> create() override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -30,8 +30,8 @@ namespace app::fact
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
-		math::Vector2f const m_position;
-		math::Vector2f const m_size;
+		math::Vector2f const & m_position;
+		math::Vector2f const & m_size;
 		std::list<app::Entity> m_nodes;
 	};
 }

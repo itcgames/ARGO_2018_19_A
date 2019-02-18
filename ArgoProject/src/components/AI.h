@@ -19,7 +19,7 @@ namespace app::comp
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		app::Entity m_currentNode;
+		std::optional<app::Entity> m_currentNode;
 		std::list<app::Entity> m_nodes;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions

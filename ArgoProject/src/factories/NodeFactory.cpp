@@ -5,6 +5,7 @@
 #include "components/Dimensions.h"
 #include "components/Render.h"
 #include "components/Node.h"
+#include "components/Collision.h"
 
 app::fact::NodeFactory::NodeFactory(math::Vector2f pos, std::list<std::shared_ptr<app::cmnd::BaseCommand>> lcmnds, std::list<std::shared_ptr<app::cmnd::BaseCommand>> icmnds)
 	: m_position(pos), m_loopCommands(lcmnds), m_initialCommands(icmnds)
@@ -24,6 +25,10 @@ app::Entity const app::fact::NodeFactory::create()
 	dimensions.size = math::Vector2f(RADIUS,RADIUS);
 	dimensions.origin = dimensions.size / 2.0f;
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
+
+	auto collision = comp::Collision();
+	collision.bounds = cute::c2AABB();
+	m_registry.assign<decltype(collision)>(entity, std::move(collision));
 
 	auto render = comp::Render();
 	render.texture = m_resourceManager.getTexture(app::res::TextureKey::Debug);
