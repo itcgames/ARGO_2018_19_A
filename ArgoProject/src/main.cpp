@@ -13,6 +13,11 @@ int main(int argc, char** argv)
 		app::Console::writeLine({ "ERROR: SDL_ttf Failed to initialize [", TTF_GetError(), "]" });
 		return EXIT_FAILURE;
 	}
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+	{
+		app::Console::writeLine({ "ERROR: SDL Failed to initialize [", Mix_GetError(), "]" });
+		return EXIT_FAILURE;
+	}
 
 	using clock = std::chrono::high_resolution_clock;
 	constexpr app::time::nanoseconds updateStep =

@@ -22,6 +22,8 @@ namespace app::del
 		void operator()(SDL_Surface * pSurface) const;
 		void operator()(SDL_GameController * pGameController) const;
 		void operator()(SDL_Haptic * pHaptic) const;
+		void operator()(Mix_Music * pMusic) const;
+		void operator()(Mix_Chunk * pChunk) const;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -41,6 +43,8 @@ namespace app::del
 	typedef std::unique_ptr<SDL_Surface, SdlDeleter> UPtrSurface;
 	typedef std::unique_ptr<SDL_GameController, SdlDeleter> UPtrGameController;
 	typedef std::unique_ptr<SDL_Haptic, SdlDeleter> UPtrHaptic;
+	typedef std::unique_ptr<Mix_Music, SdlDeleter> UPtrMusic;
+	typedef std::unique_ptr<Mix_Chunk, SdlDeleter> UPtrChunk;
 }
 
 #endif // !_SDL_DELETER_H

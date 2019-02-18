@@ -38,6 +38,7 @@
 #pragma comment(lib, "SDL2_image.lib")
 #pragma comment(lib, "SDL2_net.lib")
 #pragma comment(lib, "SDL2_ttf.lib")
+#pragma comment(lib, "SDL2_mixer.lib")
 
 /*********************************/
 /**  END Independant Libraries  **/
@@ -109,6 +110,9 @@
 
 // SDL2_ttf Library
 #include <SDL/SDL_ttf.h>
+
+// SDL2_mixer Library
+#include <SDL/SDL_mixer.h>
 
 // Entt Library
 #include <Entt/entt.hpp>

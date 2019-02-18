@@ -21,6 +21,7 @@ app::Game::Game()
 
 app::Game::~Game()
 {
+	Mix_Quit();
 	TTF_Quit();
 	SDL_Quit();
 }

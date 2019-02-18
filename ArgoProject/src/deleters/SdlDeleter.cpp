@@ -36,3 +36,15 @@ void app::del::SdlDeleter::operator()(SDL_Haptic * pHaptic) const
 	if (pHaptic == nullptr) { return; }
 	SDL_HapticClose(pHaptic);
 }
+
+void app::del::SdlDeleter::operator()(Mix_Music * pMusic) const
+{
+	if (pMusic == nullptr) { return; }
+	Mix_FreeMusic(pMusic);
+}
+
+void app::del::SdlDeleter::operator()(Mix_Chunk * pChunk) const
+{
+	if (pChunk == nullptr) { return; }
+	Mix_FreeChunk(pChunk);
+}

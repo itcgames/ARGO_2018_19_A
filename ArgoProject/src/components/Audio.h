@@ -1,27 +1,26 @@
-﻿#ifndef _COMPONENTS_PLATFORM_DROP_H
-#define _COMPONENTS_PLATFORM_DROP_H
+#ifndef _COMP_AUDIO_H
+#define _COMP_AUDIO_H
 
-
+#include <SDL/SDL_audio.h>
 
 namespace app::comp
 {
-	struct PlatformDrop
+	struct Audio
 	{
 	public: // Constructors/Destructor/Assignments
-		PlatformDrop() = default;
-		~PlatformDrop() = default;
+		Audio() = default;
+		~Audio() = default;
 
-		PlatformDrop(PlatformDrop const &) = default;
-		PlatformDrop & operator=(PlatformDrop const &) = default;
+		Audio(Audio const &) = default;
+		Audio & operator=(Audio const &) = default;
 
-		PlatformDrop(PlatformDrop &&) = default;
-		PlatformDrop & operator=(PlatformDrop &&) = default;
+		Audio(Audio &&) = default;
+		Audio & operator=(Audio &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		bool falling = false;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -33,4 +32,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENTS_PLATFORM_DROP_H
+#endif // !_COMP_AIR_MOTION_H
