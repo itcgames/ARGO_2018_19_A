@@ -537,6 +537,9 @@
     <ClCompile Include="src\factories\entities\GoalFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
+    <ClCompile Include="src\components\Destructible.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -941,10 +944,19 @@
     <ClInclude Include="src\factories\AIFactory.h">
       <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
+    <ClInclude Include="src\factories\entities\DestructibleBlockFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Destructible.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\.gitkeep">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="src\factories\entities\DestructibleBlockFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

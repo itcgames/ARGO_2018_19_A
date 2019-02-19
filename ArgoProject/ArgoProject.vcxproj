@@ -193,6 +193,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\Damage.cpp" />
     <ClCompile Include="src\components\Dash.cpp" />
     <ClCompile Include="src\components\Dashable.cpp" />
+    <ClCompile Include="src\components\Destructible.cpp" />
     <ClCompile Include="src\components\Dimensions.cpp" />
     <ClCompile Include="src\components\DoubleJump.cpp" />
     <ClCompile Include="src\components\Enemy.cpp" />
@@ -335,6 +336,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\Damage.h" />
     <ClInclude Include="src\components\Dash.h" />
     <ClInclude Include="src\components\Dashable.h" />
+    <ClInclude Include="src\components\Destructible.h" />
     <ClInclude Include="src\components\Dimensions.h" />
     <ClInclude Include="src\components\DoubleJump.h" />
     <ClInclude Include="src\components\Enemy.h" />
@@ -357,6 +359,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\EntitiesFactory.h" />
     <ClInclude Include="src\factories\entities\BackgroundImageFactory.h" />
     <ClInclude Include="src\factories\entities\CameraFactory.h" />
+    <ClInclude Include="src\factories\entities\DestructibleBlockFactory.h" />
     <ClInclude Include="src\factories\entities\EnemyFactory.h" />
     <ClInclude Include="src\factories\entities\GoalFactory.h" />
     <ClInclude Include="src\factories\entities\PlayerFactory.h" />
@@ -453,6 +456,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   </ItemGroup>
   <ItemGroup>
     <None Include="res\.gitkeep" />
+    <None Include="src\factories\entities\DestructibleBlockFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\Animations\test.png" />
