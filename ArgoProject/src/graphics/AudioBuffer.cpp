@@ -14,20 +14,20 @@ bool app::gra::AudioBuffer::load(std::string const & file)
 {
 	try
 	{
-		if (m_isMusic == true)
-		{
+		//if (m_isMusic == true)
+		//{
 			auto music = loadMusic(file);
 			if (music == nullptr) { throw std::exception(SDL_GetError()); }
 			m_music.swap(music);
 			return true;
-		}
-		else
-		{
+		//}
+		//else
+		//{
 			auto sfx = loadSFX(file);
 			if (sfx == nullptr) { throw std::exception(SDL_GetError()); }
 			m_sfx.swap(sfx);
 			return true;
-		}
+		//}
 
 		
 	}
