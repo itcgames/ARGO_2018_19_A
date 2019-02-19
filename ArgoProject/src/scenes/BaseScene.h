@@ -19,6 +19,8 @@
 #include "systems/CurrentGroundSystem.h"
 #include "systems/NetworkSystem.h"
 #include "systems/ButtonSystem.h"
+#include "systems/WidgetNavigationSystem.h"
+#include "systems/DestroySystem.h"
 
 namespace app::sce
 {
@@ -39,6 +41,8 @@ namespace app::sce
 			, sys::CurrentGroundSystem
 			, sys::NetworkSystem
 			, sys::ButtonSystem
+			, sys::WidgetNavigationSystem
+			, sys::DestroySystem
 		>;
 		using UpdateSystems = std::vector<UpdateSystem>;
 		using DrawSystem = std::variant<

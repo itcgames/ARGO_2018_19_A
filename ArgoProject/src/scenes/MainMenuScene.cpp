@@ -7,6 +7,7 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 		, util::make_vector<UpdateSystem>({
 			UpdateSystem(std::in_place_type<app::sys::InputSystem>),
 			UpdateSystem(std::in_place_type<app::sys::ButtonSystem>),
+			UpdateSystem(std::in_place_type<app::sys::WidgetNavigationSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CameraSystem>),
 			UpdateSystem(std::in_place_type<app::sys::NetworkSystem>),

@@ -2,7 +2,7 @@
 #define _BUTTON_FACTORY_PARAMETERS_H
 
 #include "commands/BaseCommand.h"
-#include "components/Presseable.h"
+#include "components/Widget.h"
 
 namespace app::par
 {
@@ -27,7 +27,9 @@ namespace app::par
 		math::Vector2f border;
 		std::string text;
 		std::shared_ptr<app::cmnd::BaseCommand> command;
-		app::comp::Presseable::State state;
+		app::comp::Widget::State state;
+		std::optional<app::Entity> entity;
+		std::optional<app::Entity> up, down, left, right;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables

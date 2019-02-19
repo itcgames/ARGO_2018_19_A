@@ -21,6 +21,7 @@ namespace app::net
 	public: // Public Static Functions
 	public: // Public Member Functions
 		bool initNetwork(std::string const & pIP, int iPort);
+		bool deinitNetwork();
 		constexpr bool hasInit() const { return m_socket != NULL; }
 		void closeSocket();
 		bool checkSocket();

@@ -7,6 +7,7 @@
 #include "components/Text.h"
 #include "components/Presseable.h"
 #include "components/Render.h"
+#include "components/Widget.h"
 
 app::fact::ButtonFactory::ButtonFactory(par::ButtonFactoryParameters const & params) noexcept
 	: EntityFactory()
@@ -16,7 +17,7 @@ app::fact::ButtonFactory::ButtonFactory(par::ButtonFactoryParameters const & par
 
 app::Entity const app::fact::ButtonFactory::create()
 {
-	app::Entity const entity = EntityFactory::create();
+	app::Entity const entity = m_params.entity.value_or(EntityFactory::create());
 
 	auto location = comp::Location();
 	location.position = m_params.position;
@@ -35,7 +36,6 @@ app::Entity const app::fact::ButtonFactory::create()
 	m_registry.assign<decltype(text)>(entity, std::move(text));
 
 	auto presseable = comp::Presseable();
-	presseable.state = m_params.state;
 	presseable.keyCommands = comp::Presseable::KeyCommands{
 		std::make_pair(SDLK_b, m_params.command)
 	};
@@ -46,6 +46,14 @@ app::Entity const app::fact::ButtonFactory::create()
 		std::make_pair(app::inp::ControllerButtonCode::SDL_CONTROLLER_BUTTON_A, m_params.command)
 	};
 	m_registry.assign<decltype(presseable)>(entity, std::move(presseable));
+
+	auto widget = comp::Widget();
+	widget.state = m_params.state;
+	widget.up = m_params.up;
+	widget.down = m_params.down;
+	widget.right = m_params.right;
+	widget.left = m_params.left;
+	m_registry.assign<decltype(widget)>(entity, std::move(widget));
 
 	auto render = comp::Render();
 	render.texture = m_resourceManager.getTexture(app::res::TextureKey::Debug);

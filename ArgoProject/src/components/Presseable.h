@@ -8,10 +8,6 @@ namespace app::comp
 	struct Presseable
 	{
 	public: // Public typedefs/usings/enums
-		enum class State
-		{
-			Deactive, Active, Highlighted, Pressed
-		};
 		using KeyCommands = std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>>;
 		using MouseCommands = std::map<app::inp::MouseButtonCode, std::shared_ptr<app::cmnd::BaseCommand>>;
 		using ButtonCommands = std::map<app::inp::ControllerButtonCode, std::shared_ptr<app::cmnd::BaseCommand>>;
@@ -29,7 +25,6 @@ namespace app::comp
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		State state;
 		std::optional<KeyCommands> keyCommands;
 		std::optional<MouseCommands> mouseCommands;
 		std::optional<ButtonCommands> buttonCommands;

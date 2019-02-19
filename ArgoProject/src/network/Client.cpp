@@ -53,6 +53,38 @@ bool app::net::Client::initNetwork(std::string const & pIP, int iPort)
 	return true;
 }
 
+bool app::net::Client::deinitNetwork()
+{
+	try
+	{
+		SDLNet_TCP_DelSocket(m_socketSet, m_socket);
+	}
+	catch (std::exception const &)
+	{
+		app::Console::writeLine({ "ERROR: SDLNet_TCP_DelSocket: [", SDLNet_GetError(), "]" });
+	}
+	try
+	{
+		SDLNet_TCP_Close(m_socket);
+	}
+	catch (std::exception const &)
+	{
+		app::Console::writeLine({ "ERROR: SDLNet_TCP_Close: [", SDLNet_GetError(), "]" });
+	}
+	m_socket = NULL;
+	try
+	{
+		SDLNet_FreeSocketSet(m_socketSet);
+	}
+	catch (std::exception const &)
+	{
+		app::Console::writeLine({ "ERROR: SDLNet_FreeSocketSet: [", SDLNet_GetError(), "]" });
+	}
+	m_socketSet = NULL;
+
+	return true;
+}
+
 /// <summary>
 /// Check if the socket is ready to send/receive data
 /// </summary>

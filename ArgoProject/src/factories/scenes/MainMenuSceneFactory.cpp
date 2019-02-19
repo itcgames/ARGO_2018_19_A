@@ -30,7 +30,7 @@ std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 		auto const & sizePerLetter = math::Vector2f{ 20.0f, 40.0f };
 		auto params = app::par::ButtonFactoryParameters();
 		params.position = math::Vector2f{ 0.0f, 0.0f };
-		params.state = app::comp::Presseable::State::Highlighted;
+		params.state = app::comp::Widget::State::Highlighted;
 		params.text = std::string("Multiplayer");
 		auto const & stepSize = math::Vector2f{ static_cast<float>(params.text.size()), 1.0f };
 		params.size = (sizePerLetter * stepSize);

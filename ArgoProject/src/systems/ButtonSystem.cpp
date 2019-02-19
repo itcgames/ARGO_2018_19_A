@@ -6,6 +6,7 @@
 #include "singletons/ControllerHandlerSingleton.h"
 
 // components
+#include "components/Widget.h"
 #include "components/Presseable.h"
 
 app::sys::ButtonSystem::ButtonSystem()
@@ -18,17 +19,16 @@ app::sys::ButtonSystem::ButtonSystem()
 
 void app::sys::ButtonSystem::update(app::time::seconds const & dt)
 {
-	m_registry.view<comp::Presseable>()
-		.each([&, this](app::Entity const entity, comp::Presseable & presseable)
+	m_registry.view<comp::Widget, comp::Presseable>()
+		.each([&, this](app::Entity const entity, comp::Widget const & widget, comp::Presseable & presseable)
 	{
-		if (presseable.state != comp::Presseable::State::Highlighted) { return; }
+		if (widget.state != comp::Widget::State::Highlighted) { return; }
 		if (presseable.keyCommands.has_value())
 		{
 			for (auto const &[key, command] : presseable.keyCommands.value())
 			{
 				if (m_keyHandler.isKeyPressed(key))
 				{
-					presseable.state = comp::Presseable::State::Pressed;
 					command->execute();
 					return;
 				}
@@ -40,7 +40,6 @@ void app::sys::ButtonSystem::update(app::time::seconds const & dt)
 			{
 				if (m_mouseHandler.isButtonPressed(key))
 				{
-					presseable.state = comp::Presseable::State::Pressed;
 					command->execute();
 					return;
 				}
@@ -56,7 +55,6 @@ void app::sys::ButtonSystem::update(app::time::seconds const & dt)
 				{
 					if (m_controllerHandler.isButtonPressed(i, key))
 					{
-						presseable.state = comp::Presseable::State::Pressed;
 						command->execute();
 						return;
 					}
