@@ -49,6 +49,7 @@ app::Entity const app::fact::ButtonFactory::create()
 
 	auto render = comp::Render();
 	render.texture = m_resourceManager.getTexture(app::res::TextureKey::Debug);
+	render.zIndex = 1.0;
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	return entity;

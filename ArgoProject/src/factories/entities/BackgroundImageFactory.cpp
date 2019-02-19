@@ -9,12 +9,14 @@ app::fact::BackgroundImageFactory::BackgroundImageFactory(
 	, math::Vector2f const & size
 	, math::Vector2f const & origin
 	, app::res::TextureKey const & textureKey
+	, double const & zIndex
 )
 	: EntityFactory()
 	, m_position(position)
 	, m_size(size)
 	, m_origin(origin)
 	, m_textureKey(textureKey)
+	, m_zIndex(zIndex)
 {
 }
 
@@ -34,6 +36,7 @@ app::Entity const app::fact::BackgroundImageFactory::create()
 
 	auto render = comp::Render();
 	render.texture = m_resourceManager.getTexture(m_textureKey);
+	render.zIndex = m_zIndex;
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	return entity;

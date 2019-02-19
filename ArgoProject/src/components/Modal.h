@@ -19,7 +19,6 @@ namespace app::comp
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::vector<app::Entity> contents;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables

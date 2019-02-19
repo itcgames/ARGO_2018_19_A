@@ -12,7 +12,8 @@ namespace app::fact
 			  math::Vector2f const & position
 			, math::Vector2f const & size
 			, math::Vector2f const & origin
-			, app::res::TextureKey const & textureKey);
+			, app::res::TextureKey const & textureKey
+			, double const & zIndex);
 		virtual ~BackgroundImageFactory() = default;
 
 		BackgroundImageFactory(BackgroundImageFactory const &) = default;
@@ -38,6 +39,7 @@ namespace app::fact
 		math::Vector2f const & m_size;
 		math::Vector2f const & m_origin;
 		app::res::TextureKey const & m_textureKey;
+		double const & m_zIndex;
 	};
 }
 

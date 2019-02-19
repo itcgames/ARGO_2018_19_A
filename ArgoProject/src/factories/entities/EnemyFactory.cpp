@@ -62,6 +62,7 @@ app::Entity const app::fact::EnemyFactory::create()
 
 	auto render = comp::Render();
 	render.texture = m_resourceManager.getTexture(app::res::TextureKey::DebugEnemyAnimation);
+	render.zIndex = -0.1;
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	auto collision = comp::Collision();

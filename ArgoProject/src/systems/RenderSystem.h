@@ -30,6 +30,7 @@ namespace app::sys
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
+		void onRenderConstruction(app::Registry & registry, app::Entity entity);
 	private: // Private Static Variables
 	private: // Private Member Variables
 		app::gra::Window & m_window;
