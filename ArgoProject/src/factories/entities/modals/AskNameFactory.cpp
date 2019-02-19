@@ -6,13 +6,19 @@
 #include "factories/entities/ButtonFactory.h"
 #include "factories/entities/BackgroundImageFactory.h"
 
+app::fact::mod::AskNameFactory::AskNameFactory(app::Entity const & callingEntity)
+	: EntitiesFactory()
+	, m_callingEntity(callingEntity)
+{
+}
+
 std::vector<app::Entity> app::fact::mod::AskNameFactory::create()
 {
 	auto entities = std::vector<app::Entity>();
 
 	// Set widget navigation.
 	auto params = app::par::ButtonFactoryParameters();
-	auto cancelCommand = std::make_shared<cmnd::ButtonMultiplayerCancelCommand>();
+	auto cancelCommand = std::make_shared<cmnd::ButtonMultiplayerCancelCommand>(m_callingEntity);
 
 	auto const & sizePerLetter = math::Vector2f{ 20.0f, 40.0f };
 	{

@@ -8,7 +8,7 @@ namespace app::fact::mod
 	class AskNameFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		AskNameFactory() = default;
+		AskNameFactory(app::Entity const & callingEntity);
 		virtual ~AskNameFactory() = default;
 
 		AskNameFactory(AskNameFactory const &) = default;
@@ -30,6 +30,7 @@ namespace app::fact::mod
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
+		app::Entity const m_callingEntity;
 	};
 }
 

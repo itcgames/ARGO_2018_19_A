@@ -11,7 +11,8 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 			UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CameraSystem>),
 			UpdateSystem(std::in_place_type<app::sys::NetworkSystem>),
-			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType)
+			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType),
+			UpdateSystem(std::in_place_type<app::sys::DestroySystem>)
 			})
 		, util::make_vector<DrawSystem>({
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),

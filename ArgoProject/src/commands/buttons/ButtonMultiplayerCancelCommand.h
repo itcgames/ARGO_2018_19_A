@@ -8,8 +8,7 @@ namespace app::cmnd
 	class ButtonMultiplayerCancelCommand : public ButtonMultiplayerCommand
 	{
 	public: // Constructors/Destructor/Assignments
-		ButtonMultiplayerCancelCommand() = default;
-		ButtonMultiplayerCancelCommand(std::vector<app::Entity> const & entities);
+		ButtonMultiplayerCancelCommand(app::Entity const & callingEntity);
 		virtual ~ButtonMultiplayerCancelCommand() = default;
 
 		ButtonMultiplayerCancelCommand(ButtonMultiplayerCancelCommand const &) = default;
@@ -34,6 +33,7 @@ namespace app::cmnd
 	private: // Private Static Variables
 	private: // Private Member Variables
 		std::vector<app::Entity> m_entities;
+		app::Entity const m_callingEntity;
 	};
 }
 

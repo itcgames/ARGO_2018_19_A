@@ -9,7 +9,7 @@ namespace app::cmnd
 	class ButtonMultiplayerConnectCommand : public ButtonMultiplayerCommand
 	{
 	public: // Constructors/Destructor/Assignments
-		ButtonMultiplayerConnectCommand(std::string && serverIp, std::int32_t serverPort, app::sce::SceneType & sceneManagerControl);
+		ButtonMultiplayerConnectCommand(std::string && serverIp, std::int32_t serverPort, app::Entity callingEntity, app::sce::SceneType & sceneManagerControl);
 		virtual ~ButtonMultiplayerConnectCommand() = default;
 
 		ButtonMultiplayerConnectCommand(ButtonMultiplayerConnectCommand const &) = default;
@@ -30,6 +30,7 @@ namespace app::cmnd
 		std::string const m_serverIp;
 		std::int32_t const m_serverPort;
 		app::sce::SceneType & m_sceneManagerControl;
+		app::Entity const m_callingEntity;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables

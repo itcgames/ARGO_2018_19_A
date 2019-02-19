@@ -1,10 +1,12 @@
 ﻿#include "stdafx.h"
 #include "ButtonMultiplayerCancelCommand.h"
 #include "components/Destroy.h"
+#include "components/Widget.h"
 
-app::cmnd::ButtonMultiplayerCancelCommand::ButtonMultiplayerCancelCommand(std::vector<app::Entity> const & entities)
+app::cmnd::ButtonMultiplayerCancelCommand::ButtonMultiplayerCancelCommand(app::Entity const & callingEntity)
 	: ButtonMultiplayerCommand()
-	, m_entities(entities.cbegin(), entities.cend())
+	, m_callingEntity(callingEntity)
+	, m_entities()
 {
 }
 
@@ -24,6 +26,12 @@ void app::cmnd::ButtonMultiplayerCancelCommand::execute()
 		{
 			assert(m_registry.valid(entity));
 			m_registry.assign<comp::Destroy>(entity);
+		}
+		auto widgetView = m_registry.view<comp::Widget>();
+		if (widgetView.contains(m_callingEntity))
+		{
+			auto & widget = widgetView.get(m_callingEntity);
+			widget.state = comp::Widget::State::Highlighted;
 		}
 	}
 	else

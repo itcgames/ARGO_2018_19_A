@@ -4,8 +4,8 @@
 
 void app::sys::DestroySystem::update(app::time::seconds const & dt)
 {
-	m_registry.view<comp::Destroy>().each([this](app::Entity const entity, comp::Destroy const & destroy)
+	for (app::Entity const entity : m_registry.view<comp::Destroy>())
 	{
 		m_registry.destroy(entity);
-	});
+	}
 }

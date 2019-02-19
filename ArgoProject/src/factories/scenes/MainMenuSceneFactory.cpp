@@ -35,7 +35,8 @@ std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 		auto const & stepSize = math::Vector2f{ static_cast<float>(params.text.size()), 1.0f };
 		params.size = (sizePerLetter * stepSize);
 		params.border = math::Vector2f{ 20.0f, 4.0f };
-		params.command = std::make_unique<cmnd::ButtonMultiplayerConnectCommand>(app::net::Client::s_SERVER_IP, app::net::Client::s_SERVER_PORT, m_targetScene);
+		params.entity = m_entityFactory.create();
+		params.command = std::make_unique<cmnd::ButtonMultiplayerConnectCommand>(app::net::Client::s_SERVER_IP, app::net::Client::s_SERVER_PORT, params.entity.value(), m_targetScene);
 		entities.push_back(fact::ButtonFactory(params).create());
 	}
 	{
