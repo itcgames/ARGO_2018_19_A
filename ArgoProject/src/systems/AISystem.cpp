@@ -14,15 +14,15 @@ void app::sys::AISystem::update(app::time::seconds const & dt)
 	m_registry.view<comp::Location, comp::Dimensions, comp::AI>()
 		.each([&, this](app::Entity entity, comp::Location & location, comp::Dimensions & dimensions, comp::AI & ai)
 	{
-		if (ai.m_currentNode.has_value())
+		if (ai.currentNode.has_value())
 		{
-			auto & currentNode = nodeView.get(ai.m_currentNode.value());
-			currentNode.m_loopCommands.front()->execute();
+			auto & currentNode = nodeView.get(ai.currentNode.value());
+			currentNode.loopCommands.front()->execute();
 
-			if (ai.m_initialCommands.size() > 0)
+			if (ai.initialCommands.size() > 0)
 			{
-				ai.m_initialCommands.front()->execute();
-				ai.m_initialCommands.pop_front();
+				ai.initialCommands.front()->execute();
+				ai.initialCommands.pop_front();
 			}
 		}
 	});

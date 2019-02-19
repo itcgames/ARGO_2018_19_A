@@ -22,7 +22,7 @@ namespace app::fact
 	public: // Public Member Functions
 		virtual app::Entity const create() override;
 	public: // Public Static Variables
-		constexpr static float RADIUS = 10.0f;
+		constexpr static float s_RADIUS = 10.0f;
 	public: // Public Member Variables
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions

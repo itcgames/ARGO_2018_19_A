@@ -1,28 +1,25 @@
-﻿#ifndef _COMPONENTS_NODE_H
-#define _COMPONENTS_NODE_H
-
-#include "commands/BaseCommand.h"
+﻿#ifndef _COMPONENTS_GOAL_H
+#define _COMPONENTS_GOAL_H
 
 namespace app::comp
 {
-	struct Node
+	struct Goal
 	{
 	public: // Constructors/Destructor/Assignments
-		Node() = default;
-		~Node() = default;
+		Goal() = default;
+		~Goal() = default;
 
-		Node(Node const &) = default;
-		Node & operator=(Node const &) = default;
+		Goal(Goal const &) = default;
+		Goal & operator=(Goal const &) = default;
 
-		Node(Node &&) = default;
-		Node & operator=(Node &&) = default;
+		Goal(Goal &&) = default;
+		Goal & operator=(Goal &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::list<std::shared_ptr<app::cmnd::BaseCommand>> loopCommands;
-		std::list<std::shared_ptr<app::cmnd::BaseCommand>> initialCommands;
+
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -34,4 +31,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENTS_NODE_H
+#endif // !_COMPONENTS_GOAL_H

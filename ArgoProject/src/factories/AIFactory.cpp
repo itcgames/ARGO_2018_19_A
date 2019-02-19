@@ -71,7 +71,7 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	auto input = comp::Input();
-	input.m_isRight = true;
+	input.isRight = true;
 	m_registry.assign<decltype(input)>(entity, std::move(input));
 
 	auto doubleJump = comp::DoubleJump();
@@ -125,7 +125,7 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	m_nodes.push_back(node);
 	entities.push_back(node);
 
-	ai.m_nodes = m_nodes;
+	ai.nodes = m_nodes;
 	m_registry.assign<decltype(ai)>(entity, std::move(ai));
 
 	entities.push_back(entity);

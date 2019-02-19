@@ -504,9 +504,6 @@
     <ClCompile Include="src\components\AI.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
-    <ClCompile Include="src\factories\NodeFactory.cpp">
-      <Filter>Source Files\factories</Filter>
-    </ClCompile>
     <ClCompile Include="src\factories\AIFactory.cpp">
       <Filter>Source Files\factories</Filter>
     </ClCompile>
@@ -530,6 +527,15 @@
     </ClCompile>
     <ClCompile Include="src\components\DoubleJump.cpp">
       <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\NodeFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Goal.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\entities\GoalFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -905,9 +911,6 @@
     <ClInclude Include="src\components\Node.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="src\factories\NodeFactory.h">
-      <Filter>Header Files\factories</Filter>
-    </ClInclude>
     <ClInclude Include="src\factories\AIFactory.h">
       <Filter>Header Files\factories</Filter>
     </ClInclude>
@@ -928,6 +931,15 @@
     </ClInclude>
     <ClInclude Include="src\components\DoubleJump.h">
       <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\NodeFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Goal.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\entities\GoalFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

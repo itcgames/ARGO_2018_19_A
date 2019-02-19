@@ -86,3 +86,8 @@ void app::sce::LevelScene::reset()
 	auto && entities = fact::sce::LevelSceneFactory().create();
 	m_entities.insert(m_entities.end(), std::make_move_iterator(entities.begin()), std::make_move_iterator(entities.end()));
 }
+
+void app::sce::LevelScene::levelComplete()
+{
+	m_sceneManagerType = (SceneType::MainMenu);
+}

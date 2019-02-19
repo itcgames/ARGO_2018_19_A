@@ -196,6 +196,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\Dimensions.cpp" />
     <ClCompile Include="src\components\DoubleJump.cpp" />
     <ClCompile Include="src\components\Enemy.cpp" />
+    <ClCompile Include="src\components\Goal.cpp" />
     <ClCompile Include="src\components\Health.cpp" />
     <ClCompile Include="src\components\Impenetrable.cpp" />
     <ClCompile Include="src\components\Input.cpp" />
@@ -215,6 +216,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\entities\BackgroundImageFactory.cpp" />
     <ClCompile Include="src\factories\entities\CameraFactory.cpp" />
     <ClCompile Include="src\factories\entities\EnemyFactory.cpp" />
+    <ClCompile Include="src\factories\entities\GoalFactory.cpp" />
     <ClCompile Include="src\factories\entities\PlayerFactory.cpp" />
     <ClCompile Include="src\factories\entities\TextFactory.cpp" />
     <ClCompile Include="src\factories\EntityFactory.cpp" />
@@ -336,6 +338,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\Dimensions.h" />
     <ClInclude Include="src\components\DoubleJump.h" />
     <ClInclude Include="src\components\Enemy.h" />
+    <ClInclude Include="src\components\Goal.h" />
     <ClInclude Include="src\components\Health.h" />
     <ClInclude Include="src\components\Impenetrable.h" />
     <ClInclude Include="src\components\Input.h" />
@@ -355,6 +358,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\entities\BackgroundImageFactory.h" />
     <ClInclude Include="src\factories\entities\CameraFactory.h" />
     <ClInclude Include="src\factories\entities\EnemyFactory.h" />
+    <ClInclude Include="src\factories\entities\GoalFactory.h" />
     <ClInclude Include="src\factories\entities\PlayerFactory.h" />
     <ClInclude Include="src\factories\entities\TextFactory.h" />
     <ClInclude Include="src\factories\EntityFactory.h" />
