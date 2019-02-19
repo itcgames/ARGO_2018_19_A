@@ -16,8 +16,7 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 			})
 		, util::make_vector<DrawSystem>({
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
-			DrawSystem(std::in_place_type<app::sys::RenderSystem>),
-			DrawSystem(std::in_place_type<app::sys::RenderTextSystem>)
+			DrawSystem(std::in_place_type<app::sys::RenderSystem>)
 			}))
 {
 	if constexpr (DEBUG_MODE)

@@ -7,6 +7,7 @@
 #include "components/Text.h"
 #include "components/Presseable.h"
 #include "components/Render.h"
+#include "components/Layer.h"
 #include "components/Widget.h"
 
 app::fact::ButtonFactory::ButtonFactory(par::ButtonFactoryParameters const & params) noexcept
@@ -28,6 +29,10 @@ app::Entity const app::fact::ButtonFactory::create()
 	dimensions.size = m_params.size;
 	dimensions.origin = dimensions.size / 2.0f;
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
+
+	auto layer = comp::Layer();
+	layer.zIndex = 80u;
+	m_registry.assign<decltype(layer)>(entity, std::move(layer));
 
 	auto text = comp::Text();
 	text.font = m_resourceManager.getFont(app::res::FontKey::Debug);
@@ -57,7 +62,6 @@ app::Entity const app::fact::ButtonFactory::create()
 
 	auto render = comp::Render();
 	render.texture = m_resourceManager.getTexture(app::res::TextureKey::Debug);
-	render.zIndex = 1.0;
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	return entity;

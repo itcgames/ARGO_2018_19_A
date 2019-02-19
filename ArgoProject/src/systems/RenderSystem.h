@@ -21,7 +21,7 @@ namespace app::sys
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		virtual void update(app::time::seconds const & dt) override;
+		virtual void update(app::time::seconds const & dt) final override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -30,11 +30,12 @@ namespace app::sys
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
-		void onRenderConstruction(app::Registry & registry, app::Entity entity);
+		void onLayerConstruction(app::Registry & registry, app::Entity const entity);
 	private: // Private Static Variables
 	private: // Private Member Variables
 		app::gra::Window & m_window;
 		app::gra::RenderRect m_renderRect;
+		app::gra::RenderText m_renderText;
 		app::gra::View m_view;
 	};
 }

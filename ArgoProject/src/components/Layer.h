@@ -1,28 +1,25 @@
-﻿#ifndef _COMPONENT_RENDER_H
-#define _COMPONENT_RENDER_H
-
-#include "graphics/Texture.h"
+﻿#ifndef _COMP_LAYER_H
+#define _COMP_LAYER_H
 
 namespace app::comp
 {
-	struct Render
+	struct Layer
 	{
 	public: // Constructors/Destructor/Assignments
-		Render() = default;
-		~Render() = default;
+		Layer() = default;
+		~Layer() = default;
 
-		Render(Render const &) = default;
-		Render(Render &&) = default;
+		Layer(Layer const &) = default;
+		Layer & operator=(Layer const &) = default;
 
-		Render & operator=(Render const &) = default;
-		Render & operator=(Render &&) = default;
+		Layer(Layer &&) = default;
+		Layer & operator=(Layer &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::shared_ptr<app::gra::Texture> texture;
-		std::optional<SDL_Rect> source;
+		std::uint32_t zIndex = 100u;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -34,4 +31,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENT_RENDER_H
+#endif // !_COMP_LAYER_H

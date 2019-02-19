@@ -13,6 +13,7 @@
 #include "components/Collision.h"
 #include "components/PlatformDrop.h"
 #include "components/CurrentGround.h"
+#include "components/Layer.h"
 
 #include "commands/MoveCommand.h"
 #include "commands/JumpCommand.h"
@@ -61,9 +62,12 @@ app::Entity const app::fact::PlayerFactory::create()
 	animator.perFrame = 90.0f / (std::max(animator.numOfFrames.x, 1) * std::max(animator.numOfFrames.y, 1));
 	m_registry.assign<decltype(animator)>(entity, std::move(animator));
 
+	auto layer = comp::Layer();
+	layer.zIndex = 90u;
+	m_registry.assign<decltype(layer)>(entity, std::move(layer));
+
 	auto render = comp::Render();
 	render.texture = m_resourceManager.getTexture(app::res::TextureKey::DebugAnimation);
-	render.zIndex = 0.0;
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	auto input = comp::Input();

@@ -2,6 +2,7 @@
 #include "BackgroundImageFactory.h"
 #include "components/Location.h"
 #include "components/Dimensions.h"
+#include "components/Layer.h"
 #include "components/Render.h"
 
 app::fact::BackgroundImageFactory::BackgroundImageFactory(
@@ -9,7 +10,7 @@ app::fact::BackgroundImageFactory::BackgroundImageFactory(
 	, math::Vector2f const & size
 	, math::Vector2f const & origin
 	, app::res::TextureKey const & textureKey
-	, double const & zIndex
+	, std::uint32_t const & zIndex
 )
 	: EntityFactory()
 	, m_position(position)
@@ -34,9 +35,12 @@ app::Entity const app::fact::BackgroundImageFactory::create()
 	dimensions.origin = m_origin;
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
 
+	auto layer = comp::Layer();
+	layer.zIndex = m_zIndex;
+	m_registry.assign<decltype(layer)>(entity, std::move(layer));
+
 	auto render = comp::Render();
 	render.texture = m_resourceManager.getTexture(m_textureKey);
-	render.zIndex = m_zIndex;
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	return entity;

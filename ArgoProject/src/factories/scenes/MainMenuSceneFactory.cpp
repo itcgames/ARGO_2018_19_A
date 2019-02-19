@@ -23,7 +23,7 @@ std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 		auto const & origin = size / 2.0f;
 		auto const & position = math::Vector2f{ 0.0f, 0.0f };
 		auto const & textureKey = app::res::TextureKey::Debug;
-		auto const & zIndex = -2.0;
+		auto const & zIndex = 50u;
 		entities.push_back(fact::BackgroundImageFactory(position, size, origin, textureKey, zIndex).create());
 	}
 	{
