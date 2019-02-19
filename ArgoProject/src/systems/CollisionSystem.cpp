@@ -20,6 +20,7 @@
 #include "components/DoubleJump.h"
 #include "components/AI.h"
 #include "components/Node.h"
+#include "components/Goal.h"
 
 //visitors
 #include "visitors/CollisionUpdateVisitor.h"
@@ -48,6 +49,7 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 	enemyEnemyCollisions();	
 	playerHazardCollisions();
 	checkAINodeCollisions();
+	playerGoalCollisions();
 }
 
 void app::sys::CollisionSystem::groundCollisions()
@@ -350,7 +352,7 @@ void app::sys::CollisionSystem::playerHazardCollisions()
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Input & input, comp::Location & location, comp::Dimensions & dimensions, comp::Health & health)
 	{
 		m_registry.view<comp::Collision, comp::Damage>()
-			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Damage damage)
+			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Damage & damage)
 		{
 			if (entity != secEntity)
 			{
@@ -358,6 +360,26 @@ void app::sys::CollisionSystem::playerHazardCollisions()
 				if (collisionCheck)
 				{
 					health.health -= damage.damage;
+				}
+			}
+		});
+	});
+}
+
+void app::sys::CollisionSystem::playerGoalCollisions()
+{
+	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Input & input, comp::Location & location, comp::Dimensions & dimensions)
+	{
+		m_registry.view<comp::Collision, comp::Goal>()
+			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Goal & goal)
+		{
+			if (entity != secEntity)
+			{
+				auto const & collisionCheck = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+				if (collisionCheck)
+				{
+					m_registry.remove<comp::Goal>(secEntity);
 				}
 			}
 		});

@@ -31,6 +31,7 @@ namespace app::sce
 	private: // Private Static Functions
 	private: // Private Member Functions
 		void onInputDestroyed(app::Registry & registry, app::Entity inputEntity);
+		void onGoalDestroyed(app::Registry & registry, app::Entity inputEntity);
 		void reset();
 		void levelComplete();
 	private: // Private Static Variables

@@ -6,6 +6,7 @@
 #include "factories/PlatformFactory.h"
 #include "factories/AIFactory.h"
 #include "factories/entities/EnemyFactory.h"
+#include "factories/entities/GoalFactory.h"
 
 std::vector<app::Entity> app::fact::LevelFactory::create()
 {
@@ -80,6 +81,14 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 		position = app::math::Vector2f(875, 100);
 		size = app::math::Vector2f(200, 50);
 		entities.push_back(platformFactory.create());
+	}
+	// goal
+	{
+		auto goal = fact::GoalFactory(position, size);
+
+		position = app::math::Vector2f(1300, 500);
+		size = app::math::Vector2f(50, 50);
+		entities.push_back(goal.create());
 	}
 
 	return entities;
