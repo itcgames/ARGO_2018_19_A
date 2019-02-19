@@ -1,29 +1,28 @@
-﻿#ifndef _INPUT_H
-#define _INPUT_H
+﻿#ifndef _COMPONENTS_NODE_H
+#define _COMPONENTS_NODE_H
 
 #include "commands/BaseCommand.h"
 
 namespace app::comp
 {
-	struct Input
+	struct Node
 	{
 	public: // Constructors/Destructor/Assignments
-		Input() = default;
-		~Input() = default;
+		Node() = default;
+		~Node() = default;
 
-		Input(Input const &) = default;
-		Input(Input &&) = default;
+		Node(Node const &) = default;
+		Node & operator=(Node const &) = default;
 
-		Input & operator=(Input const &) = default;
-		Input & operator=(Input &&) = default;
+		Node(Node &&) = default;
+		Node & operator=(Node &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyDownCommands;
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyPressedCommands;
-		bool isRight;
+		std::list<std::shared_ptr<app::cmnd::BaseCommand>> loopCommands;
+		std::list<std::shared_ptr<app::cmnd::BaseCommand>> initialCommands;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -35,4 +34,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_INPUT_H
+#endif // !_COMPONENTS_NODE_H

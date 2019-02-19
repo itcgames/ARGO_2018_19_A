@@ -1,29 +1,28 @@
-﻿#ifndef _INPUT_H
-#define _INPUT_H
+﻿#ifndef _COMPONENT_AI_H
+#define _COMPONENT_AI_H
 
 #include "commands/BaseCommand.h"
 
 namespace app::comp
 {
-	struct Input
+	struct AI
 	{
 	public: // Constructors/Destructor/Assignments
-		Input() = default;
-		~Input() = default;
+		AI() = default;
+		~AI() = default;
 
-		Input(Input const &) = default;
-		Input(Input &&) = default;
+		AI(AI const &) = default;
+		AI & operator=(AI const &) = default;
 
-		Input & operator=(Input const &) = default;
-		Input & operator=(Input &&) = default;
+		AI(AI &&) = default;
+		AI & operator=(AI &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyDownCommands;
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyPressedCommands;
-		bool isRight;
+		std::optional<app::Entity> currentNode;
+		std::list<std::shared_ptr<app::cmnd::BaseCommand>> initialCommands;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -35,4 +34,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_INPUT_H
+#endif // !_COMPONENT_AI_H
