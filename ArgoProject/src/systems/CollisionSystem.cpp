@@ -48,7 +48,6 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 	enemyEnemyCollisions();	
 	playerHazardCollisions();
 	checkAINodeCollisions();
-	checkAINodeCollisions();
 }
 
 void app::sys::CollisionSystem::groundCollisions()
@@ -209,8 +208,8 @@ void app::sys::CollisionSystem::checkAINodeCollisions()
 			bool const & collisionCheck = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
 			if (collisionCheck)
 			{
-				ai.m_currentNode = secEntity;
-				ai.m_initialCommands = node.m_initialCommands;
+				ai.currentNode = secEntity;
+				ai.initialCommands = node.initialCommands;
 			}
 		});
 	});

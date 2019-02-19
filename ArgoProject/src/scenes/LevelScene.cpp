@@ -68,6 +68,10 @@ void app::sce::LevelScene::update(app::time::seconds const & dt)
 		this->reset();
 		m_resetSignal = false;
 	}
+	if (m_completeSignal)
+	{
+		levelComplete();
+	}
 	app::sce::BaseScene::update(dt);
 }
 
@@ -85,4 +89,9 @@ void app::sce::LevelScene::reset()
 	m_entities.clear();
 	auto && entities = fact::sce::LevelSceneFactory().create();
 	m_entities.insert(m_entities.end(), std::make_move_iterator(entities.begin()), std::make_move_iterator(entities.end()));
+}
+
+void app::sce::LevelScene::levelComplete()
+{
+	m_sceneManagerType = (SceneType::MainMenu);
 }

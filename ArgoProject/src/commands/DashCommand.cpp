@@ -28,7 +28,7 @@ void app::cmnd::DashCommand::execute()
 			m_registry.remove<comp::AirMotion>(m_entity);
 		}
 		auto dash = comp::Dash();
-		input.m_isRight ? dash.direction = 0 : dash.direction = -180;
+		input.isRight ? dash.direction = 0 : dash.direction = -180;
 		dash.drag = 0.8f;
 		dash.dragCutoff = 10.0f;
 		dash.speed = 5000.0f;

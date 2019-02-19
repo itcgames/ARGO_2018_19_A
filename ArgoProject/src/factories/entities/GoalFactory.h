@@ -1,25 +1,25 @@
-﻿#ifndef _FACTORY_AI_H
-#define _FACTORY_AI_H
+﻿#ifndef _FACTORY_GOAL_H
+#define _FACTORY_GOAL_H
 
-#include "EntitiesFactory.h"
+#include "../EntityFactory.h"
 
 namespace app::fact
 {
-	class AIFactory : public EntitiesFactory
+	class GoalFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		AIFactory(math::Vector2f const & pos, math::Vector2f const & size);
-		~AIFactory() = default;
+		GoalFactory(math::Vector2f const & position, math::Vector2f const & size);
+		~GoalFactory() = default;
 
-		AIFactory(AIFactory const &) = default;
-		AIFactory & operator=(AIFactory const &) = default;
+		GoalFactory(GoalFactory const &) = default;
+		GoalFactory & operator=(GoalFactory const &) = default;
 
-		AIFactory(AIFactory &&) = default;
-		AIFactory & operator=(AIFactory &&) = default;
+		GoalFactory(GoalFactory &&) = default;
+		GoalFactory & operator=(GoalFactory &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		virtual std::vector<app::Entity> create() override;
+		virtual app::Entity const create() override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -35,4 +35,4 @@ namespace app::fact
 	};
 }
 
-#endif // !_FACTORY_AI_H
+#endif // !_FACTORY_GOAL_H

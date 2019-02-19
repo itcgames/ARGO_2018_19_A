@@ -68,7 +68,7 @@ app::Entity const app::fact::PlayerFactory::create()
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	auto input = comp::Input();
-	input.m_isRight = true;
+	input.isRight = true;
 	//Here is where commands get binded to keys
 	input.keyDownCommands.insert(std::pair(SDLK_RIGHT, std::make_shared<app::cmnd::MoveCommand>(entity, 0, 20)));
 	input.keyDownCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::MoveCommand>(entity, 180, 20)));

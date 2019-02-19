@@ -7,7 +7,7 @@
 #include "components/Node.h"
 #include "components/Collision.h"
 
-app::fact::NodeFactory::NodeFactory(math::Vector2f pos, std::list<std::shared_ptr<app::cmnd::BaseCommand>> lcmnds, std::list<std::shared_ptr<app::cmnd::BaseCommand>> icmnds)
+app::fact::NodeFactory::NodeFactory(math::Vector2f const & pos, std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & lcmnds, std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & icmnds)
 	: m_position(pos), m_loopCommands(lcmnds), m_initialCommands(icmnds)
 {
 }
@@ -22,12 +22,12 @@ app::Entity const app::fact::NodeFactory::create()
 	m_registry.assign<decltype(location)>(entity, std::move(location));
 
 	auto dimensions = comp::Dimensions();
-	dimensions.size = math::Vector2f(RADIUS,RADIUS);
+	dimensions.size = math::Vector2f(s_RADIUS,s_RADIUS);
 	dimensions.origin = dimensions.size / 2.0f;
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
 
 	auto collision = comp::Collision();
-	collision.bounds = cute::c2AABB();
+	collision.bounds = cute::c2Circle();
 	m_registry.assign<decltype(collision)>(entity, std::move(collision));
 
 	auto render = comp::Render();
@@ -35,8 +35,8 @@ app::Entity const app::fact::NodeFactory::create()
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	auto node = comp::Node();
-	node.m_loopCommands = m_loopCommands;
-	node.m_initialCommands = m_initialCommands;
+	node.loopCommands = m_loopCommands;
+	node.initialCommands = m_initialCommands;
 	m_registry.assign<decltype(node)>(entity, std::move(node));
 
 	return entity;

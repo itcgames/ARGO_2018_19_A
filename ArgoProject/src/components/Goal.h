@@ -32,4 +32,3 @@ namespace app::comp
 }
 
 #endif // !_COMPONENTS_GOAL_H
-

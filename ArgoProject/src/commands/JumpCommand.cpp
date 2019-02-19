@@ -15,7 +15,6 @@ app::cmnd::JumpCommand::JumpCommand(app::Entity const _entity, float _force)
 
 void app::cmnd::JumpCommand::execute()
 {
-	auto& input = m_registry.get<comp::Input>(m_entity);
 	auto& doubleJump = m_registry.get<comp::DoubleJump>(m_entity);
 	//If player tries jumping while in air
 	if (m_registry.has<comp::AirMotion>(m_entity))
