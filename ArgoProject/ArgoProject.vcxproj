@@ -233,7 +233,8 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\fsm\states\AnimationState.cpp" />
     <ClCompile Include="src\fsm\states\EntityState.cpp" />
     <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\graphics\AudioBuffer.cpp" />
+    <ClCompile Include="src\graphics\AudioBufferMusic.cpp" />
+    <ClCompile Include="src\graphics\AudioBufferSFX.cpp" />
     <ClCompile Include="src\graphics\AudioManager.cpp" />
     <ClCompile Include="src\graphics\Font.cpp" />
     <ClCompile Include="src\graphics\RenderRect.cpp" />
@@ -284,6 +285,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     </ClCompile>
     <ClCompile Include="src\systems\AirMotionSystem.cpp" />
     <ClCompile Include="src\systems\AnimatorSystem.cpp" />
+    <ClCompile Include="src\systems\AudioSystem.cpp" />
     <ClCompile Include="src\systems\BaseSystem.cpp" />
     <ClCompile Include="src\systems\CollisionSystem.cpp" />
     <ClCompile Include="src\systems\CommandSystem.cpp" />
@@ -369,7 +371,8 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\fsm\states\AnimationState.h" />
     <ClInclude Include="src\fsm\states\EntityState.h" />
     <ClInclude Include="src\Game.h" />
-    <ClInclude Include="src\graphics\AudioBuffer.h" />
+    <ClInclude Include="src\graphics\AudioBufferMusic.h" />
+    <ClInclude Include="src\graphics\AudioBufferSFX.h" />
     <ClInclude Include="src\graphics\AudioManager.h" />
     <ClInclude Include="src\graphics\Font.h" />
     <ClInclude Include="src\graphics\RenderRect.h" />
@@ -414,6 +417,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\systems\AirMotionSystem.h" />
     <ClInclude Include="src\systems\AnimatorSystem.h" />
+    <ClInclude Include="src\systems\AudioSystem.h" />
     <ClInclude Include="src\systems\BaseSystem.h" />
     <ClInclude Include="src\systems\CollisionSystem.h" />
     <ClInclude Include="src\systems\CommandSystem.h" />

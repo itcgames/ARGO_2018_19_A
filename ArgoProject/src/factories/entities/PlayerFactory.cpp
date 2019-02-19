@@ -13,6 +13,7 @@
 #include "components/Collision.h"
 #include "components/PlatformDrop.h"
 #include "components/CurrentGround.h"
+#include "components/Audio.h"
 
 #include "commands/MoveCommand.h"
 #include "commands/JumpCommand.h"
@@ -99,6 +100,10 @@ app::Entity const app::fact::PlayerFactory::create()
 
 	auto ground = comp::CurrentGround();
 	m_registry.assign<decltype(ground)>(entity, std::move(ground));
+
+	auto audio = comp::Audio();
+	audio.audio = m_resourceManager.getAudioM(app::res::AudioKey::BackgroundMusicTitle);
+	m_registry.assign<decltype(audio)>(entity, std::move(audio));
 
 	return entity;
 }

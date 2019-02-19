@@ -2,6 +2,8 @@
 #define _COMP_AUDIO_H
 
 #include <SDL/SDL_audio.h>
+#include "graphics/AudioBufferMusic.h"
+#include "graphics/AudioBufferMusic.h"
 
 namespace app::comp
 {
@@ -21,6 +23,7 @@ namespace app::comp
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
+		std::shared_ptr<app::gra::AudioBufferMusic> audio;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
