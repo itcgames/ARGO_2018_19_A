@@ -213,6 +213,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\AIFactory.cpp" />
     <ClCompile Include="src\deleters\SdlTtfDeleter.cpp" />
     <ClCompile Include="src\factories\BaseFactory.cpp" />
+    <ClCompile Include="src\factories\DestructibleBlockFactory.cpp" />
     <ClCompile Include="src\factories\EntitiesFactory.cpp" />
     <ClCompile Include="src\factories\entities\BackgroundImageFactory.cpp" />
     <ClCompile Include="src\factories\entities\CameraFactory.cpp" />
@@ -255,6 +256,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\math\Math.cpp" />
     <ClCompile Include="src\math\Rect.cpp" />
     <ClCompile Include="src\math\Vector2.cpp" />
+    <ClCompile Include="src\parameters\DestructibleParameters.cpp" />
     <ClCompile Include="src\resources\AudioKey.cpp" />
     <ClCompile Include="src\resources\FontKey.cpp" />
     <ClCompile Include="src\resources\ResourceLoader.cpp" />
@@ -356,10 +358,10 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\AIFactory.h" />
     <ClInclude Include="src\deleters\SdlTtfDeleter.h" />
     <ClInclude Include="src\factories\BaseFactory.h" />
+    <ClInclude Include="src\factories\DestructibleBlockFactory.h" />
     <ClInclude Include="src\factories\EntitiesFactory.h" />
     <ClInclude Include="src\factories\entities\BackgroundImageFactory.h" />
     <ClInclude Include="src\factories\entities\CameraFactory.h" />
-    <ClInclude Include="src\factories\entities\DestructibleBlockFactory.h" />
     <ClInclude Include="src\factories\entities\EnemyFactory.h" />
     <ClInclude Include="src\factories\entities\GoalFactory.h" />
     <ClInclude Include="src\factories\entities\PlayerFactory.h" />
@@ -398,6 +400,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\math\Math.h" />
     <ClInclude Include="src\math\Rect.h" />
     <ClInclude Include="src\math\Vector2.h" />
+    <ClInclude Include="src\parameters\DestructibleParameters.h" />
     <ClInclude Include="src\resources\AudioKey.h" />
     <ClInclude Include="src\resources\FontKey.h" />
     <ClInclude Include="src\resources\ResourceLoader.h" />
@@ -456,7 +459,6 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   </ItemGroup>
   <ItemGroup>
     <None Include="res\.gitkeep" />
-    <None Include="src\factories\entities\DestructibleBlockFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\Animations\test.png" />

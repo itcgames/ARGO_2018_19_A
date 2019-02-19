@@ -1,23 +1,26 @@
 ﻿#include "stdafx.h"
-#include "utilities/cute_c2.h"
 #include "DestructibleBlockFactory.h"
+#include "utilities/cute_c2.h"
 
 #include "components/Location.h"
 #include "components/Dimensions.h"
-#include "components/Health.h"
 #include "components/Render.h"
 #include "components/Collision.h"
+#include "components/Health.h"
 #include "components/Impenetrable.h"
 #include "components/Destructible.h"
 
-app::fact::DestructibleBlockFactory::DestructibleBlockFactory(app::math::Vector2f const & pos, app::math::Vector2f const & size)
-	: m_position(pos), m_size(size)
+app::fact::DestructibleBlockFactory::DestructibleBlockFactory(app::par::DestructibleParameters param)
+	: parameters(param)
 {
 }
 
 app::Entity const app::fact::DestructibleBlockFactory::create()
 {
 	app::Entity const entity = m_registry.create();
+
+	app::math::Vector2f m_position = parameters.position;
+	app::math::Vector2f m_size = parameters.size;
 
 	auto location = comp::Location();
 	location.position = m_position;
@@ -45,6 +48,10 @@ app::Entity const app::fact::DestructibleBlockFactory::create()
 	m_registry.assign<decltype(impenetrable)>(entity, std::move(impenetrable));
 
 	auto destructible = comp::Destructible();
+	if (parameters.attatchedArea.has_value())
+	{
+		destructible.attatchedArea = parameters.attatchedArea.value();
+	}
 	m_registry.assign<decltype(destructible)>(entity, std::move(destructible));
 
 	return entity;	

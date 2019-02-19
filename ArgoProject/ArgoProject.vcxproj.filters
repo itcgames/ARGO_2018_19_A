@@ -540,6 +540,12 @@
     <ClCompile Include="src\components\Destructible.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
+    <ClCompile Include="src\parameters\DestructibleParameters.cpp">
+      <Filter>Source Files\parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\DestructibleBlockFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -944,19 +950,19 @@
     <ClInclude Include="src\factories\AIFactory.h">
       <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
-    <ClInclude Include="src\factories\entities\DestructibleBlockFactory.h">
-      <Filter>Header Files\factories\entities</Filter>
-    </ClInclude>
     <ClInclude Include="src\components\Destructible.h">
       <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\parameters\DestructibleParameters.h">
+      <Filter>Header Files\parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\DestructibleBlockFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\.gitkeep">
       <Filter>Resource Files</Filter>
-    </None>
-    <None Include="src\factories\entities\DestructibleBlockFactory.cpp">
-      <Filter>Source Files\factories\entities</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

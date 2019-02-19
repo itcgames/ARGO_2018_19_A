@@ -348,8 +348,8 @@ void app::sys::CollisionSystem::updateCollisionBoxes()
 
 void app::sys::CollisionSystem::playerHazardCollisions()
 {
-	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Health>(entt::persistent_t())
-		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Input & input, comp::Location & location, comp::Dimensions & dimensions, comp::Health & health)
+	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Health>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions, comp::Health & health)
 	{
 		m_registry.view<comp::Collision, comp::Damage>()
 			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Damage & damage)

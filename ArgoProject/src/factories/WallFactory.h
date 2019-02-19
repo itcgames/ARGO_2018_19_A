@@ -1,7 +1,6 @@
 ﻿#ifndef _FACTORY_WALL_H
 #define _FACTORY_WALL_H
 
-
 #include "EntityFactory.h"
 #include "deleters/SdlDeleter.h"
 #include "graphics/Texture.h"

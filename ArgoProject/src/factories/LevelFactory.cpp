@@ -1,12 +1,15 @@
 ﻿#include "stdafx.h"
 #include "LevelFactory.h"
 
+#include "parameters/DestructibleParameters.h"
+
 #include "factories/WallFactory.h"
 #include "factories/HazardFactory.h"
 #include "factories/PlatformFactory.h"
 #include "factories/AIFactory.h"
 #include "factories/entities/EnemyFactory.h"
 #include "factories/entities/GoalFactory.h"
+#include "factories/DestructibleBlockFactory.h"
 
 std::vector<app::Entity> app::fact::LevelFactory::create()
 {
@@ -28,9 +31,9 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 		size = math::Vector2f(50, 50);
 		entities.push_back(enemyFactory.create());
 
-		position = math::Vector2f(630, 200);
-		size = math::Vector2f(50, 50);
-		entities.push_back(enemyFactory.create());
+		//position = math::Vector2f(630, 200);
+		//size = math::Vector2f(50, 50);
+		//entities.push_back(enemyFactory.create());
 	}
 
 	// walls
@@ -48,6 +51,15 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 		position = app::math::Vector2f(1150, 350);
 		size = app::math::Vector2f(50, 250);
 		entities.push_back(wallFactory.create());
+	}
+	// destructible blocks
+	{
+		auto destructibleParams = app::par::DestructibleParameters(position, size);
+		auto destructibleFactory = fact::DestructibleBlockFactory(destructibleParams);
+
+		position = app::math::Vector2f(1400, 500);
+		size = app::math::Vector2f(50, 50);
+		entities.push_back(destructibleFactory.create());
 	}
 	// hazards
 	{

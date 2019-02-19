@@ -1,15 +1,18 @@
 ﻿#ifndef _FACTORY_DESTRUCTIBLE_BLOCK_H
 #define _FACTORY_DESTRUCTIBLE_BLOCK_H
 
-#include "../EntityFactory.h"
+#include "EntityFactory.h"
+#include "parameters/DestructibleParameters.h"
+#include "deleters/SdlDeleter.h"
+#include "graphics/Texture.h"
 
 namespace app::fact
 {
 	class DestructibleBlockFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		DestructibleBlockFactory(app::math::Vector2f const & pos, app::math::Vector2f const & size);
-		~DestructibleBlockFactory() = default;
+		DestructibleBlockFactory(app::par::DestructibleParameters param);
+		virtual ~DestructibleBlockFactory() = default;
 
 		DestructibleBlockFactory(DestructibleBlockFactory const &) = default;
 		DestructibleBlockFactory & operator=(DestructibleBlockFactory const &) = default;
@@ -30,8 +33,7 @@ namespace app::fact
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
-		app::math::Vector2f const & m_position;
-		app::math::Vector2f const & m_size;
+		app::par::DestructibleParameters parameters;
 	};
 }
 

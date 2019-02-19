@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "utilities/cute_c2.h"
 #include "EnemyFactory.h"
+#include "utilities/cute_c2.h"
 
 // components
 #include "components/Health.h"
