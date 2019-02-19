@@ -73,6 +73,7 @@ void app::sce::LevelScene::update(app::time::seconds const & dt)
 	}
 	if (m_completeSignal)
 	{
+		end();
 		levelComplete();
 	}
 	app::sce::BaseScene::update(dt);
