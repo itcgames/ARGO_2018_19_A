@@ -103,6 +103,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.dll" "$(TargetDir
 C:\windows\system32\xcopy /Y "$(SolutionDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir)"
 C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir)"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>C:\windows\system32\xcopy /C /Y /E "$(GDRIVE_ASSETS)\*.png" "$(ProjectDir)res"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -122,6 +125,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.dll" "$(TargetDir
 C:\windows\system32\xcopy /Y "$(SolutionDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir)"
 C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir)"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>C:\windows\system32\xcopy /C /Y /E "$(GDRIVE_ASSETS)\*.png" "$(ProjectDir)res"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -147,6 +153,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.dll" "$(TargetDir
 C:\windows\system32\xcopy /Y "$(SolutionDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir)"
 C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir)"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>C:\windows\system32\xcopy /C /Y /E "$(GDRIVE_ASSETS)\*.png" "$(ProjectDir)res"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -172,6 +181,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.dll" "$(TargetDir
 C:\windows\system32\xcopy /Y "$(SolutionDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir)"
 C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir)"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>C:\windows\system32\xcopy /C /Y /E "$(GDRIVE_ASSETS)\*.png" "$(ProjectDir)res"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\client\Client.cpp" />
