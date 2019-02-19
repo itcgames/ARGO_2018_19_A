@@ -22,7 +22,6 @@ namespace app::comp
 	public: // Public Static Variables
 	public: // Public Member Variables
 		std::optional<app::Entity> currentNode;
-		std::list<app::Entity> nodes;
 		std::list<std::shared_ptr<app::cmnd::BaseCommand>> initialCommands;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions

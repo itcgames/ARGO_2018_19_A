@@ -32,7 +32,6 @@ namespace app::fact
 	private: // Private Member Variables
 		math::Vector2f const & m_position;
 		math::Vector2f const & m_size;
-		std::list<app::Entity> m_nodes;
 	};
 }
 

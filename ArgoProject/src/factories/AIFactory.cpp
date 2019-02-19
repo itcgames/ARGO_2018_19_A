@@ -112,7 +112,6 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 		std::make_shared<cmnd::JumpCommand>(entity, 400.0f)
 	};
 	auto node = app::fact::NodeFactory(math::Vector2f(750, 200), loopCmnds, initialCmnds).create();
-	m_nodes.push_back(node);
 	entities.push_back(node);
 
 	loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
@@ -122,10 +121,8 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 		
 	};
 	node = app::fact::NodeFactory(math::Vector2f(950, 200), loopCmnds, initialCmnds).create();
-	m_nodes.push_back(node);
 	entities.push_back(node);
 
-	ai.nodes = m_nodes;
 	m_registry.assign<decltype(ai)>(entity, std::move(ai));
 
 	entities.push_back(entity);

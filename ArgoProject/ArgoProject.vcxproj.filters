@@ -911,9 +911,6 @@
     <ClInclude Include="src\components\Node.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="src\factories\AIFactory.h">
-      <Filter>Header Files\factories</Filter>
-    </ClInclude>
     <ClInclude Include="src\systems\CurrentGroundSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
@@ -939,6 +936,9 @@
       <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="src\factories\entities\GoalFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\AIFactory.h">
       <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
   </ItemGroup>

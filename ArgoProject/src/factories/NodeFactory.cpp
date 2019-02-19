@@ -7,7 +7,7 @@
 #include "components/Node.h"
 #include "components/Collision.h"
 
-app::fact::NodeFactory::NodeFactory(math::Vector2f pos, std::list<std::shared_ptr<app::cmnd::BaseCommand>> lcmnds, std::list<std::shared_ptr<app::cmnd::BaseCommand>> icmnds)
+app::fact::NodeFactory::NodeFactory(math::Vector2f const & pos, std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & lcmnds, std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & icmnds)
 	: m_position(pos), m_loopCommands(lcmnds), m_initialCommands(icmnds)
 {
 }

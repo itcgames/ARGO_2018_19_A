@@ -9,7 +9,7 @@ namespace app::fact
 	class NodeFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		NodeFactory(math::Vector2f pos, std::list<std::shared_ptr<app::cmnd::BaseCommand>> lcmnds, std::list<std::shared_ptr<app::cmnd::BaseCommand>> icmnds);
+		NodeFactory(math::Vector2f const & pos, std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & lcmnds, std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & icmnds);
 		~NodeFactory() = default;
 
 		NodeFactory(NodeFactory const &) = default;
@@ -32,9 +32,9 @@ namespace app::fact
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
-		math::Vector2f m_position;
-		std::list<std::shared_ptr<app::cmnd::BaseCommand>> m_loopCommands;
-		std::list<std::shared_ptr<app::cmnd::BaseCommand>> m_initialCommands;
+		math::Vector2f const & m_position;
+		std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & m_loopCommands;
+		std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & m_initialCommands;
 	};
 }
 
