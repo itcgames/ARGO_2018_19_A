@@ -4,7 +4,7 @@
 #include "components/Widget.h"
 
 app::cmnd::ButtonMainMenuMultiplayerConnectCancelCommand::ButtonMainMenuMultiplayerConnectCancelCommand(app::Entity const & callingEntity)
-	: ButtonMainMenuMultiplayerCommand()
+	: BaseMultiplayerCommand()
 	, m_callingEntity(callingEntity)
 	, m_entities()
 {

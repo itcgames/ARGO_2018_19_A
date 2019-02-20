@@ -1,12 +1,12 @@
 ﻿#ifndef _BUTTON_MAINMENU_MULTIPLAYER_CONNECT_CONFIRM_COMMAND_H
 #define _BUTTON_MAINMENU_MULTIPLAYER_CONNECT_CONFIRM_COMMAND_H
 
-#include "ButtonMainMenuMultiplayerCommand.h"
+#include "BaseMultiplayerCommand.h"
 #include "scenes/SceneType.h"
 
 namespace app::cmnd
 {
-	class ButtonMainMenuMultiplayerConnectConfirmCommand : public ButtonMainMenuMultiplayerCommand
+	class ButtonMainMenuMultiplayerConnectConfirmCommand : public BaseMultiplayerCommand
 	{
 	public: // Constructors/Destructor/Assignments
 		ButtonMainMenuMultiplayerConnectConfirmCommand(app::Entity callingEntity, std::string const & userName, app::sce::SceneType & sceneManagerControl);
@@ -27,8 +27,8 @@ namespace app::cmnd
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
-		std::string const & m_userName;
 		app::Entity const m_callingEntity;
+		std::string const m_userName;
 		app::sce::SceneType & m_sceneManagerControl;
 	private: // Private Static Functions
 	private: // Private Member Functions

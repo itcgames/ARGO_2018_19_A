@@ -570,10 +570,13 @@
     <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCommand.cpp">
       <Filter>Source Files\commands\buttons</Filter>
     </ClCompile>
-    <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerCommand.cpp">
+    <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectConfirmCommand.cpp">
       <Filter>Source Files\commands\buttons</Filter>
     </ClCompile>
-    <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectConfirmCommand.cpp">
+    <ClCompile Include="src\commands\buttons\BaseMultiplayerCommand.cpp">
+      <Filter>Source Files\commands\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\buttons\ButtonLobbySelectRefreshCommand.cpp">
       <Filter>Source Files\commands\buttons</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1001,10 +1004,13 @@
     <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCommand.h">
       <Filter>Header Files\commands\buttons</Filter>
     </ClInclude>
-    <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerCommand.h">
+    <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectConfirmCommand.h">
       <Filter>Header Files\commands\buttons</Filter>
     </ClInclude>
-    <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectConfirmCommand.h">
+    <ClInclude Include="src\commands\buttons\BaseMultiplayerCommand.h">
+      <Filter>Header Files\commands\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\buttons\ButtonLobbySelectRefreshCommand.h">
       <Filter>Header Files\commands\buttons</Filter>
     </ClInclude>
   </ItemGroup>

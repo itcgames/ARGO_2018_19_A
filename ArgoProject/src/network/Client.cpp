@@ -93,7 +93,8 @@ bool app::net::Client::checkSocket()
 {
 	if (SDLNet_CheckSockets(m_socketSet, 0) == -1)
 	{
-		app::Console::writeLine({ "ERROR: SDLNet_CheckSockets [", SDLNet_GetError(), "]" });
+		this->output({ "ERROR: SDLNet_CheckSockets [", SDLNet_GetError(), "]" });
+		return false;
 	}
 	return SDLNet_SocketReady(m_socket);
 }
@@ -226,14 +227,46 @@ bool app::net::Client::getAll(std::byte * data, int totalBytes)
 	return true;
 }
 
-bool app::net::Client::send(Lobby const & _lobby, app::net::PacketType const & _packet)
-{
-	return false;
-}
-
 bool app::net::Client::get(Lobby & _lobby)
 {
-	return false;
+	int bufferLength;
+	if (!get(bufferLength))
+	{
+		return false;
+	}
+	auto buffer = std::vector<std::byte>();
+	buffer.resize(bufferLength, static_cast<std::byte>('\0'));
+	if (!getAll(buffer.data(), bufferLength))
+	{
+		buffer.clear();
+		return false;
+	}
+	_lobby = *(reinterpret_cast<Lobby *>(buffer.data()));
+	buffer.clear();
+	return true;
+}
+
+bool app::net::Client::get(std::list<Lobby>& _lobbies)
+{
+	int numberOfLobbies = 0;
+	if (!get(numberOfLobbies))
+	{
+		return false;
+	}
+	auto lobbies = std::vector<Lobby>();
+	lobbies.resize(numberOfLobbies);
+	for (auto & lobby : lobbies)
+	{
+		if (!this->get(lobby))
+		{
+			return false;
+		}
+	}
+	_lobbies.insert(_lobbies.end()
+					, std::make_move_iterator(lobbies.begin())
+					, std::make_move_iterator(lobbies.end()));
+
+	return true;
 }
 
 /// <summary>
@@ -257,11 +290,58 @@ bool app::net::Client::get(PacketType & _packetType)
 /// <returns>true if success, false if receive fails</returns>
 bool app::net::Client::get(int & _int)
 {
-	if (!getAll((std::byte *)_int, sizeof(int)))
+	if (!getAll((std::byte *)&_int, sizeof(int)))
 	{
 		return false;
 	}
 	return true;
+}
+
+void app::net::Client::output(std::string const & msg) const
+{
+	if constexpr (s_DEBUG_MODE)
+	{
+		app::Console::write("CLIENT: ");
+		app::Console::writeLine(msg);
+	}
+}
+
+void app::net::Client::output(std::initializer_list<std::string> const & msgs) const
+{
+	if constexpr (s_DEBUG_MODE)
+	{
+		app::Console::write("CLIENT: ");
+		app::Console::writeLine(msgs);
+	}
+}
+
+bool app::net::Client::processClientName()
+{
+	auto clientName = std::string();
+	if (!get(clientName))
+	{
+		return false;
+	}
+	this->output({ "Received client name[", clientName, "]" });
+	return true;
+}
+
+bool app::net::Client::processLobbyWasCreated()
+{
+	throw std::exception("Not implemented");
+	auto lobbies = std::list<Lobby>();
+	return send(PacketType::LOBBY_GET_ALL) && get(lobbies);
+}
+
+bool app::net::Client::processLobbyCreate()
+{
+	return true;
+}
+
+bool app::net::Client::processDefault()
+{
+	this->output("No proccessing done for this packet type");
+	return false;
 }
 
 /// <summary>
@@ -273,27 +353,15 @@ bool app::net::Client::processPacket(PacketType _packetType)
 {
 	switch (_packetType)
 	{
-	case PacketType::CLIENT_NAME:
-	{
-		std::string Message;
-		if (!get(Message))
-		{
-			return false;
-		}
-		if constexpr (s_DEBUG_MODE)
-		{
-			app::Console::writeLine(Message);
-		}
-		break;
-	}
-	case PacketType::LOBBY_CREATE:
-	{
-
-	} break;
-	case PacketType::UNKNOWN:
-	default:
-		app::Console::writeLine("Unknown Packet type!");
-		break;
+		case PacketType::CLIENT_NAME:
+			return this->processClientName();
+		case PacketType::LOBBY_WAS_CREATED:
+			return this->processLobbyWasCreated();
+		case PacketType::UNKNOWN:
+			this->output("Unknown Packet type!");
+		case PacketType::LOBBY_CREATE:
+		default:
+			return this->processDefault();
 	}
 	return false;
 }

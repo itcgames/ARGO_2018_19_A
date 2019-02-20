@@ -1,12 +1,12 @@
 ﻿#ifndef _BUTTON_MAINMENU_MULTIPLAYER_CONNECT_COMMAND_H
 #define _BUTTON_MAINMENU_MULTIPLAYER_CONNECT_COMMAND_H
 
-#include "ButtonMainMenuMultiplayerCommand.h"
+#include "BaseMultiplayerCommand.h"
 #include "scenes/SceneType.h"
 
 namespace app::cmnd
 {
-	class ButtonMainMenuMultiplayerConnectCommand : public ButtonMainMenuMultiplayerCommand
+	class ButtonMainMenuMultiplayerConnectCommand : public BaseMultiplayerCommand
 	{
 	public: // Constructors/Destructor/Assignments
 		ButtonMainMenuMultiplayerConnectCommand(std::string && serverIp, std::int32_t serverPort, app::Entity callingEntity, app::sce::SceneType & sceneManagerControl);

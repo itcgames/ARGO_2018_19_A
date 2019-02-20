@@ -8,6 +8,8 @@ namespace app::net
 		  UNKNOWN
 		, CLIENT_NAME
 		, LOBBY_CREATE
+		, LOBBY_WAS_CREATED
+		, LOBBY_GET_ALL
 	};
 }
 

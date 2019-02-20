@@ -30,8 +30,9 @@ namespace app::net
 		bool sendAll(std::byte * data, int totalBytes);
 		bool getAll(std::byte * data, int totalBytes);
 
-		bool send(Lobby const & _lobby, app::net::PacketType const & _packet);
 		bool get(Lobby & _lobby);
+		
+		bool get(std::list<Lobby> & _lobbies);
 
 		bool send(const std::string& _string, const app::net::PacketType& _packetToProcessString);
 		bool get(std::string& _string);
@@ -51,6 +52,13 @@ namespace app::net
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
+		void output(std::string const & msg) const;
+		void output(std::initializer_list<std::string> const & msgs) const;
+
+		bool processClientName();
+		bool processLobbyWasCreated();
+		bool processLobbyCreate();
+		bool processDefault();
 	private: // Private Static Variables
 		constexpr static bool s_DEBUG_MODE = true;
 	private: // Private Member Variables

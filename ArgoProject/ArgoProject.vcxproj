@@ -178,8 +178,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="..\ArgoShared\src\shared\network\PacketType.cpp" />
     <ClCompile Include="..\ArgoShared\src\shared\utilities\Console.cpp" />
     <ClCompile Include="src\commands\BaseCommand.cpp" />
+    <ClCompile Include="src\commands\buttons\ButtonLobbySelectRefreshCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCancelCommand.cpp" />
-    <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerCommand.cpp" />
+    <ClCompile Include="src\commands\buttons\BaseMultiplayerCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectConfirmCommand.cpp" />
     <ClCompile Include="src\commands\DashCommand.cpp" />
@@ -329,8 +330,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="..\ArgoShared\src\shared\network\PacketType.h" />
     <ClInclude Include="..\ArgoShared\src\shared\utilities\Console.h" />
     <ClInclude Include="src\commands\BaseCommand.h" />
+    <ClInclude Include="src\commands\buttons\ButtonLobbySelectRefreshCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCancelCommand.h" />
-    <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerCommand.h" />
+    <ClInclude Include="src\commands\buttons\BaseMultiplayerCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectConfirmCommand.h" />
     <ClInclude Include="src\commands\DashCommand.h" />

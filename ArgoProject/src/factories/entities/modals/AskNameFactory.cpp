@@ -7,20 +7,24 @@
 #include "factories/entities/ButtonFactory.h"
 #include "factories/entities/BackgroundImageFactory.h"
 
-app::fact::mod::AskNameFactory::AskNameFactory(app::Entity const & callingEntity)
+app::fact::mod::AskNameFactory::AskNameFactory(
+	  app::Entity const & callingEntity
+	, app::sce::SceneType & sceneManagerControl
+)
 	: EntitiesFactory()
 	, m_callingEntity(callingEntity)
+	, m_sceneManagerControl(sceneManagerControl)
 {
 }
 
 std::vector<app::Entity> app::fact::mod::AskNameFactory::create()
 {
+	constexpr auto DEFAULT_NAME = "Bob";
 	auto entities = std::vector<app::Entity>();
 
 	// Set widget navigation.
 	auto params = app::par::ButtonFactoryParameters();
 	auto cancelCommand = std::make_shared<cmnd::ButtonMainMenuMultiplayerConnectCancelCommand>(m_callingEntity);
-	auto confirmCommand = std::make_shared<cmnd::ButtonMainMenuMultiplayerConnectConfirmCommand>(m_callingEntity, "Bob", );
 
 	auto const & sizePerLetter = math::Vector2f{ 20.0f, 40.0f };
 	{
@@ -35,7 +39,7 @@ std::vector<app::Entity> app::fact::mod::AskNameFactory::create()
 		auto const & stepSize = math::Vector2f{ static_cast<float>(params.text.size()), 1.0f };
 		params.size = (sizePerLetter * stepSize);
 		params.border = math::Vector2f{ 20.0f, 4.0f };
-		params.command = std::make_unique<cmnd::TestCommand>();
+		params.command = std::make_unique<cmnd::ButtonMainMenuMultiplayerConnectConfirmCommand>(m_callingEntity, DEFAULT_NAME, m_sceneManagerControl);
 		params.zIndex = 220u;
 		entities.push_back(fact::ButtonFactory(params).create());
 	}

@@ -1,11 +1,11 @@
 ﻿#ifndef _BUTTON_MAINMENU_MULTIPLAYER_CONNECT_CANCEL_COMMAND_H
 #define _BUTTON_MAINMENU_MULTIPLAYER_CONNECT_CANCEL_COMMAND_H
 
-#include "ButtonMainMenuMultiplayerCommand.h"
+#include "BaseMultiplayerCommand.h"
 
 namespace app::cmnd
 {
-	class ButtonMainMenuMultiplayerConnectCancelCommand : public ButtonMainMenuMultiplayerCommand
+	class ButtonMainMenuMultiplayerConnectCancelCommand : public BaseMultiplayerCommand
 	{
 	public: // Constructors/Destructor/Assignments
 		ButtonMainMenuMultiplayerConnectCancelCommand(app::Entity const & callingEntity);

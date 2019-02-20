@@ -45,9 +45,19 @@ namespace app::net
 		bool send(int ID, const int& _int);
 		bool send(int ID, const PacketType& _packetType);
 		bool send(int ID, const std::string& _string, const PacketType& _packetToProcessString);
-		bool send(int ID, Lobby const & _lobby, PacketType const & _packetType);
+		bool send(int ID, Lobby const & _lobby);
 		bool processPacket(int ID, PacketType _packetType);
+
+		// packet process functions
+
+		bool processClientName(int id);
+		bool processLobbyCreate(int id);
+		bool processLobbyGetAll(int id);
+		bool processDefault(int id);
+
 		void outputIP(IPaddress const & ip);
+		void output(int ID, std::string const & msg) const;
+		void output(int ID, std::initializer_list<std::string> const & msgs) const;
 	private: // Private Static Variables
 		constexpr static int s_MAX_SOCKETS = 16;
 		constexpr static bool s_DEBUG_MODE = true;

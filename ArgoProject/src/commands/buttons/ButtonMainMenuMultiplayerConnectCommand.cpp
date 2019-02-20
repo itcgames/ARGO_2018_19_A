@@ -3,7 +3,7 @@
 #include "factories/entities/modals/AskNameFactory.h"
 
 app::cmnd::ButtonMainMenuMultiplayerConnectCommand::ButtonMainMenuMultiplayerConnectCommand(std::string && serverIp, std::int32_t serverPort, app::Entity callingEntity, app::sce::SceneType & sceneManagerControl)
-	: ButtonMainMenuMultiplayerCommand()
+	: BaseMultiplayerCommand()
 	, m_serverIp(serverIp)
 	, m_serverPort(serverPort)
 	, m_sceneManagerControl(sceneManagerControl)
@@ -20,7 +20,7 @@ void app::cmnd::ButtonMainMenuMultiplayerConnectCommand::execute()
 		{
 			app::Console::write({ "Connection to server[", m_serverIp, "]:[", std::to_string(m_serverPort), "]" });
 			app::Console::writeLine(" successfull !");
-			app::fact::mod::AskNameFactory(m_callingEntity).create();
+			app::fact::mod::AskNameFactory(m_callingEntity, m_sceneManagerControl).create();
 		}
 		else
 		{
@@ -32,7 +32,7 @@ void app::cmnd::ButtonMainMenuMultiplayerConnectCommand::execute()
 	{
 		if (m_client.initNetwork(m_serverIp, m_serverPort))
 		{
-			app::fact::mod::AskNameFactory(m_callingEntity).create();
+			app::fact::mod::AskNameFactory(m_callingEntity, m_sceneManagerControl).create();
 		}
 		else
 		{

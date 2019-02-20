@@ -6,10 +6,10 @@ app::cmnd::ButtonMainMenuMultiplayerConnectConfirmCommand::ButtonMainMenuMultipl
 	, std::string const & userName
 	, app::sce::SceneType & sceneManagerControl
 )
-	: ButtonMainMenuMultiplayerCommand()
+	: BaseMultiplayerCommand()
 	, m_callingEntity(callingEntity)
-	, m_sceneManagerControl(sceneManagerControl)
 	, m_userName(userName)
+	, m_sceneManagerControl(sceneManagerControl)
 {
 }
 
@@ -20,6 +20,7 @@ void app::cmnd::ButtonMainMenuMultiplayerConnectConfirmCommand::execute()
 	{
 		// Sending successfull
 		this->output({ "Sending username[", m_userName, "] successfull !" });
+		m_sceneManagerControl = app::sce::SceneType::LobbySelect;
 	}
 	else
 	{
