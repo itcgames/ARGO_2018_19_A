@@ -61,7 +61,7 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 
 		position = app::math::Vector2f(1400, 550);
 		size = app::math::Vector2f(200, 50);
-		destructibleParams.attatchedArea = facade.create();
+		destructibleParams.attachedArea = facade.create();
 
 		auto destructibleFactory = fact::DestructibleBlockFactory(destructibleParams);
 

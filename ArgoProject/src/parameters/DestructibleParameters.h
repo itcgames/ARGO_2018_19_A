@@ -19,7 +19,7 @@ namespace app::par
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::optional<app::Entity> attatchedArea = std::nullopt;
+		std::optional<app::Entity> attachedArea = std::nullopt;
 		math::Vector2f const & position;
 		math::Vector2f const & size;
 	protected: // Protected Static Functions

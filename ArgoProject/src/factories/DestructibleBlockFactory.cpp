@@ -48,9 +48,9 @@ app::Entity const app::fact::DestructibleBlockFactory::create()
 	m_registry.assign<decltype(impenetrable)>(entity, std::move(impenetrable));
 
 	auto destructible = comp::Destructible();
-	if (parameters.attatchedArea.has_value())
+	if (parameters.attachedArea.has_value())
 	{
-		destructible.attatchedArea = parameters.attatchedArea.value();
+		destructible.attatchedArea = parameters.attachedArea.value();
 	}
 	m_registry.assign<decltype(destructible)>(entity, std::move(destructible));
 
