@@ -1,26 +1,26 @@
-﻿#ifndef _BACKGROUND_IMAGE_FACTORY_H
-#define _BACKGROUND_IMAGE_FACTORY_H
+﻿#ifndef _IMAGE_FACTORY_H
+#define _IMAGE_FACTORY_H
 
 #include "../EntityFactory.h"
 
 namespace app::fact
 {
-	class BackgroundImageFactory : public EntityFactory
+	class ImageFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		BackgroundImageFactory(
+		ImageFactory(
 			  math::Vector2f const & position
 			, math::Vector2f const & size
 			, math::Vector2f const & origin
 			, app::res::TextureKey const & textureKey
 			, std::uint32_t const & zIndex);
-		virtual ~BackgroundImageFactory() = default;
+		virtual ~ImageFactory() = default;
 
-		BackgroundImageFactory(BackgroundImageFactory const &) = default;
-		BackgroundImageFactory & operator=(BackgroundImageFactory const &) = default;
+		ImageFactory(ImageFactory const &) = default;
+		ImageFactory & operator=(ImageFactory const &) = default;
 
-		BackgroundImageFactory(BackgroundImageFactory &&) = default;
-		BackgroundImageFactory & operator=(BackgroundImageFactory &&) = default;
+		ImageFactory(ImageFactory &&) = default;
+		ImageFactory & operator=(ImageFactory &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
@@ -43,4 +43,4 @@ namespace app::fact
 	};
 }
 
-#endif // !_BACKGROUND_IMAGE_FACTORY_H
+#endif // !_IMAGE_FACTORY_H

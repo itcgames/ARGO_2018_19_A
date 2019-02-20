@@ -1,11 +1,11 @@
 ﻿#include "stdafx.h"
-#include "BackgroundImageFactory.h"
+#include "ImageFactory.h"
 #include "components/Location.h"
 #include "components/Dimensions.h"
 #include "components/Layer.h"
 #include "components/Render.h"
 
-app::fact::BackgroundImageFactory::BackgroundImageFactory(
+app::fact::ImageFactory::ImageFactory(
 	  math::Vector2f const & position
 	, math::Vector2f const & size
 	, math::Vector2f const & origin
@@ -21,7 +21,7 @@ app::fact::BackgroundImageFactory::BackgroundImageFactory(
 {
 }
 
-app::Entity const app::fact::BackgroundImageFactory::create()
+app::Entity const app::fact::ImageFactory::create()
 {
 	app::Entity const entity = m_registry.create();
 

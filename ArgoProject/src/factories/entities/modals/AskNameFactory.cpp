@@ -5,7 +5,7 @@
 #include "commands/buttons/ButtonMainMenuMultiplayerConnectConfirmCommand.h"
 #include "parameters/ButtonFactoryParameters.h"
 #include "factories/entities/ButtonFactory.h"
-#include "factories/entities/BackgroundImageFactory.h"
+#include "factories/entities/ImageFactory.h"
 
 app::fact::mod::AskNameFactory::AskNameFactory(
 	  app::Entity const & callingEntity
@@ -65,7 +65,7 @@ std::vector<app::Entity> app::fact::mod::AskNameFactory::create()
 		auto const & position = math::Vector2f{ 0.0f, 0.0f };
 		auto const & textureKey = app::res::TextureKey::Debug;
 		auto const & zIndex = 200u;
-		entities.push_back(fact::BackgroundImageFactory(position, size, origin, textureKey, zIndex).create());
+		entities.push_back(fact::ImageFactory(position, size, origin, textureKey, zIndex).create());
 	}
 
 	cancelCommand->setEntites(entities);

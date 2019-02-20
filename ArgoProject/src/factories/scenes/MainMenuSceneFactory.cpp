@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 #include "MainMenuSceneFactory.h"
 #include "factories/entities/CameraFactory.h"
-#include "factories/entities/BackgroundImageFactory.h"
+#include "factories/entities/ImageFactory.h"
 #include "factories/entities/ButtonFactory.h"
 #include "factories/entities/TextFactory.h"
 
@@ -24,7 +24,7 @@ std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 		auto const & position = math::Vector2f{ 0.0f, 0.0f };
 		auto const & textureKey = app::res::TextureKey::Debug;
 		auto const & zIndex = 50u;
-		entities.push_back(fact::BackgroundImageFactory(position, size, origin, textureKey, zIndex).create());
+		entities.push_back(fact::ImageFactory(position, size, origin, textureKey, zIndex).create());
 	}
 	{
 		auto const & sizePerLetter = math::Vector2f{ 20.0f, 40.0f };

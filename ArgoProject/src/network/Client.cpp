@@ -49,6 +49,8 @@ bool app::net::Client::initNetwork(std::string const & pIP, int iPort)
 		app::Console::writeLine({ "ERROR: SDLNet_TCP_AddSocket: [", SDLNet_GetError(), "]" });
 		return false;
 	}
+	m_lobbies.clear();
+	m_lobbies.reserve(10);
 
 	return true;
 }
@@ -81,6 +83,8 @@ bool app::net::Client::deinitNetwork()
 		app::Console::writeLine({ "ERROR: SDLNet_FreeSocketSet: [", SDLNet_GetError(), "]" });
 	}
 	m_socketSet = NULL;
+	m_lobbies.clear();
+	m_lobbies.reserve(10);
 
 	return true;
 }
@@ -295,6 +299,13 @@ bool app::net::Client::get(int & _int)
 		return false;
 	}
 	return true;
+}
+
+void app::net::Client::setLobbies(std::list<Lobby>&& lobbies)
+{
+	m_lobbies.insert(m_lobbies.end()
+		, std::make_move_iterator(lobbies.begin())
+		, std::make_move_iterator(lobbies.end()));
 }
 
 void app::net::Client::output(std::string const & msg) const

@@ -42,6 +42,8 @@ namespace app::net
 
 		bool send(const int& _int);
 		bool get(int& _int);
+
+		void setLobbies(std::list<Lobby> && lobbies);
 	public: // Public Static Variables
 		constexpr static auto s_SERVER_IP = "localhost";
 		constexpr static auto s_SERVER_PORT = 27000;
@@ -64,7 +66,7 @@ namespace app::net
 	private: // Private Member Variables
 		TCPsocket m_socket;
 		SDLNet_SocketSet m_socketSet;
-
+		std::vector<Lobby> m_lobbies;
 	};
 }
 

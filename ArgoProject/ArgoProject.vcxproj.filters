@@ -444,9 +444,6 @@
     <ClCompile Include="src\factories\entities\EnemyFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
-    <ClCompile Include="src\factories\entities\BackgroundImageFactory.cpp">
-      <Filter>Source Files\factories\entities</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\Font.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
@@ -578,6 +575,12 @@
     </ClCompile>
     <ClCompile Include="src\commands\buttons\ButtonLobbySelectRefreshCommand.cpp">
       <Filter>Source Files\commands\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\entities\LobbyDisplayFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\entities\ImageFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -884,9 +887,6 @@
     <ClInclude Include="src\factories\entities\EnemyFactory.h">
       <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
-    <ClInclude Include="src\factories\entities\BackgroundImageFactory.h">
-      <Filter>Header Files\factories\entities</Filter>
-    </ClInclude>
     <ClInclude Include="src\graphics\Font.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
@@ -1012,6 +1012,12 @@
     </ClInclude>
     <ClInclude Include="src\commands\buttons\ButtonLobbySelectRefreshCommand.h">
       <Filter>Header Files\commands\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\entities\LobbyDisplayFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\entities\ImageFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

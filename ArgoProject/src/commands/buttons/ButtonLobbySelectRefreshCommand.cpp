@@ -20,5 +20,7 @@ void app::cmnd::ButtonLobbySelectRefreshCommand::execute()
 			return;
 		}
 		this->output({ "Receival of [", std::to_string(lobbies.size()), "]'Lobbies' successfull" });
+
+		//m_registry.view<comp
 	}
 }
