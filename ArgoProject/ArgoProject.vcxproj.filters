@@ -547,7 +547,7 @@
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
     <ClCompile Include="src\factories\FacadeFactory.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -963,7 +963,7 @@
       <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
     <ClInclude Include="src\factories\FacadeFactory.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
