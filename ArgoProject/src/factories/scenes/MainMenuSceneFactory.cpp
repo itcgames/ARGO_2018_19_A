@@ -5,7 +5,7 @@
 #include "factories/entities/ButtonFactory.h"
 #include "factories/entities/TextFactory.h"
 
-#include "commands/buttons/ButtonMultiplayerConnectCommand.h"
+#include "commands/buttons/ButtonMainMenuMultiplayerConnectCommand.h"
 #include "network/Client.h"
 
 app::fact::sce::MainMenuSceneFactory::MainMenuSceneFactory(app::sce::SceneType & targetScene)
@@ -36,7 +36,8 @@ std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 		params.size = (sizePerLetter * stepSize);
 		params.border = math::Vector2f{ 20.0f, 4.0f };
 		params.entity = m_entityFactory.create();
-		params.command = std::make_unique<cmnd::ButtonMultiplayerConnectCommand>(app::net::Client::s_SERVER_IP, app::net::Client::s_SERVER_PORT, params.entity.value(), m_targetScene);
+		params.command = std::make_unique<cmnd::ButtonMainMenuMultiplayerConnectCommand>(app::net::Client::s_SERVER_IP, app::net::Client::s_SERVER_PORT, params.entity.value(), m_targetScene);
+		params.zIndex = 80u;
 		entities.push_back(fact::ButtonFactory(params).create());
 	}
 	{

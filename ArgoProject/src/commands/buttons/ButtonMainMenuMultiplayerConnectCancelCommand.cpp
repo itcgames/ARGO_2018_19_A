@@ -1,22 +1,22 @@
 ﻿#include "stdafx.h"
-#include "ButtonMultiplayerCancelCommand.h"
+#include "ButtonMainMenuMultiplayerConnectCancelCommand.h"
 #include "components/Destroy.h"
 #include "components/Widget.h"
 
-app::cmnd::ButtonMultiplayerCancelCommand::ButtonMultiplayerCancelCommand(app::Entity const & callingEntity)
-	: ButtonMultiplayerCommand()
+app::cmnd::ButtonMainMenuMultiplayerConnectCancelCommand::ButtonMainMenuMultiplayerConnectCancelCommand(app::Entity const & callingEntity)
+	: ButtonMainMenuMultiplayerCommand()
 	, m_callingEntity(callingEntity)
 	, m_entities()
 {
 }
 
-void app::cmnd::ButtonMultiplayerCancelCommand::setEntites(std::vector<app::Entity> const & entities)
+void app::cmnd::ButtonMainMenuMultiplayerConnectCancelCommand::setEntites(std::vector<app::Entity> const & entities)
 {
 	m_entities.reserve(m_entities.size() + entities.size());
 	m_entities.insert(m_entities.end(), entities.cbegin(), entities.cend());
 }
 
-void app::cmnd::ButtonMultiplayerCancelCommand::execute()
+void app::cmnd::ButtonMainMenuMultiplayerConnectCancelCommand::execute()
 {
 	if (!m_client.hasInit()) { return; }
 	if (m_client.deinitNetwork())
@@ -31,19 +31,11 @@ void app::cmnd::ButtonMultiplayerCancelCommand::execute()
 		if (widgetView.contains(m_callingEntity))
 		{
 			auto & widget = widgetView.get(m_callingEntity);
-			widget.state = comp::Widget::State::Highlighted;
+			widget.state = comp::Widget::State::Pressed;
 		}
 	}
 	else
 	{
 		this->output("Disconnection from server failed !");
-	}
-}
-
-void app::cmnd::ButtonMultiplayerCancelCommand::output(std::string const & message) const
-{
-	if constexpr (s_DEBUG_MODE)
-	{
-		app::Console::writeLine(message);
 	}
 }

@@ -1,9 +1,9 @@
 ﻿#include "stdafx.h"
-#include "ButtonMultiplayerConnectCommand.h"
+#include "ButtonMainMenuMultiplayerConnectCommand.h"
 #include "factories/entities/modals/AskNameFactory.h"
 
-app::cmnd::ButtonMultiplayerConnectCommand::ButtonMultiplayerConnectCommand(std::string && serverIp, std::int32_t serverPort, app::Entity callingEntity, app::sce::SceneType & sceneManagerControl)
-	: ButtonMultiplayerCommand()
+app::cmnd::ButtonMainMenuMultiplayerConnectCommand::ButtonMainMenuMultiplayerConnectCommand(std::string && serverIp, std::int32_t serverPort, app::Entity callingEntity, app::sce::SceneType & sceneManagerControl)
+	: ButtonMainMenuMultiplayerCommand()
 	, m_serverIp(serverIp)
 	, m_serverPort(serverPort)
 	, m_sceneManagerControl(sceneManagerControl)
@@ -11,7 +11,7 @@ app::cmnd::ButtonMultiplayerConnectCommand::ButtonMultiplayerConnectCommand(std:
 {
 }
 
-void app::cmnd::ButtonMultiplayerConnectCommand::execute()
+void app::cmnd::ButtonMainMenuMultiplayerConnectCommand::execute()
 {
 	if (m_client.hasInit()) { return; }
 	if constexpr (s_DEBUG_MODE)

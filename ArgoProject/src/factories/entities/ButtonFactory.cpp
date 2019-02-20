@@ -31,7 +31,7 @@ app::Entity const app::fact::ButtonFactory::create()
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
 
 	auto layer = comp::Layer();
-	layer.zIndex = 80u;
+	layer.zIndex = m_params.zIndex;
 	m_registry.assign<decltype(layer)>(entity, std::move(layer));
 
 	auto text = comp::Text();
@@ -42,7 +42,7 @@ app::Entity const app::fact::ButtonFactory::create()
 
 	auto presseable = comp::Presseable();
 	presseable.keyCommands = comp::Presseable::KeyCommands{
-		std::make_pair(SDLK_b, m_params.command)
+		std::make_pair(SDLK_RETURN, m_params.command)
 	};
 	presseable.mouseCommands = comp::Presseable::MouseCommands{
 		std::make_pair(SDL_BUTTON_LEFT, m_params.command)

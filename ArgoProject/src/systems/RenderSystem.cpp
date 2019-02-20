@@ -54,6 +54,7 @@ void app::sys::RenderSystem::update(app::time::seconds const & dt)
 				m_renderText.setOrigin(dimensions.origin - text.border);
 				m_renderText.setFont(text.font);
 				m_renderText.setText(text.string);
+				m_renderText.setColor(text.color);
 				m_window.render(m_renderText);
 			}
 		});

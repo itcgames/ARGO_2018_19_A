@@ -19,17 +19,24 @@ app::sys::ButtonSystem::ButtonSystem()
 
 void app::sys::ButtonSystem::update(app::time::seconds const & dt)
 {
+	using WidgetState = comp::Widget::State;
 	m_registry.view<comp::Widget, comp::Presseable>()
-		.each([&, this](app::Entity const entity, comp::Widget const & widget, comp::Presseable & presseable)
+		.each([&, this](app::Entity const entity, comp::Widget & widget, comp::Presseable & presseable)
 	{
-		if (widget.state != comp::Widget::State::Highlighted) { return; }
+		if (widget.state != WidgetState::Highlighted && widget.state != WidgetState::Pressed) { return; }
 		if (presseable.keyCommands.has_value())
 		{
 			for (auto const &[key, command] : presseable.keyCommands.value())
 			{
-				if (m_keyHandler.isKeyPressed(key))
+				if (widget.state == WidgetState::Highlighted && m_keyHandler.isKeyPressed(key))
 				{
 					command->execute();
+					widget.state = WidgetState::Pressed;
+					return;
+				}
+				else if (widget.state == WidgetState::Pressed && m_keyHandler.isKeyUnpressed(key))
+				{
+					widget.state = WidgetState::Highlighted;
 					return;
 				}
 			}
@@ -38,9 +45,15 @@ void app::sys::ButtonSystem::update(app::time::seconds const & dt)
 		{
 			for (auto const &[key, command] : presseable.mouseCommands.value())
 			{
-				if (m_mouseHandler.isButtonPressed(key))
+				if (widget.state == WidgetState::Highlighted && m_mouseHandler.isButtonPressed(key))
 				{
 					command->execute();
+					widget.state = WidgetState::Pressed;
+					return;
+				}
+				else if (widget.state == WidgetState::Pressed && m_mouseHandler.isButtonUnpressed(key))
+				{
+					widget.state = WidgetState::Highlighted;
 					return;
 				}
 			}
@@ -53,9 +66,15 @@ void app::sys::ButtonSystem::update(app::time::seconds const & dt)
 			{
 				for (auto const &[key, command] : presseable.buttonCommands.value())
 				{
-					if (m_controllerHandler.isButtonPressed(i, key))
+					if (widget.state == WidgetState::Highlighted && m_controllerHandler.isButtonPressed(i, key))
 					{
 						command->execute();
+						widget.state = WidgetState::Pressed;
+						return;
+					}
+					else if (widget.state == WidgetState::Pressed && m_controllerHandler.isButtonUnpressed(i, key))
+					{
+						widget.state = WidgetState::Highlighted;
 						return;
 					}
 				}

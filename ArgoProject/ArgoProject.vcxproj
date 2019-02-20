@@ -178,9 +178,10 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="..\ArgoShared\src\shared\network\PacketType.cpp" />
     <ClCompile Include="..\ArgoShared\src\shared\utilities\Console.cpp" />
     <ClCompile Include="src\commands\BaseCommand.cpp" />
-    <ClCompile Include="src\commands\buttons\ButtonMultiplayerCancelCommand.cpp" />
-    <ClCompile Include="src\commands\buttons\ButtonMultiplayerCommand.cpp" />
-    <ClCompile Include="src\commands\buttons\ButtonMultiplayerConnectCommand.cpp" />
+    <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCancelCommand.cpp" />
+    <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerCommand.cpp" />
+    <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCommand.cpp" />
+    <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectConfirmCommand.cpp" />
     <ClCompile Include="src\commands\DashCommand.cpp" />
     <ClCompile Include="src\commands\DropCommand.cpp" />
     <ClCompile Include="src\commands\FaceLeftCommand.cpp" />
@@ -328,9 +329,10 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="..\ArgoShared\src\shared\network\PacketType.h" />
     <ClInclude Include="..\ArgoShared\src\shared\utilities\Console.h" />
     <ClInclude Include="src\commands\BaseCommand.h" />
-    <ClInclude Include="src\commands\buttons\ButtonMultiplayerCancelCommand.h" />
-    <ClInclude Include="src\commands\buttons\ButtonMultiplayerCommand.h" />
-    <ClInclude Include="src\commands\buttons\ButtonMultiplayerConnectCommand.h" />
+    <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCancelCommand.h" />
+    <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerCommand.h" />
+    <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCommand.h" />
+    <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectConfirmCommand.h" />
     <ClInclude Include="src\commands\DashCommand.h" />
     <ClInclude Include="src\commands\DropCommand.h" />
     <ClInclude Include="src\commands\FaceLeftCommand.h" />

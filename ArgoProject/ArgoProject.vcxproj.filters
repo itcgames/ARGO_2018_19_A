@@ -543,20 +543,11 @@
     <ClCompile Include="..\ArgoShared\src\shared\network\PacketType.cpp">
       <Filter>Source Files\network</Filter>
     </ClCompile>
-    <ClCompile Include="src\commands\buttons\ButtonMultiplayerCommand.cpp">
-      <Filter>Source Files\commands\buttons</Filter>
-    </ClCompile>
-    <ClCompile Include="src\commands\buttons\ButtonMultiplayerConnectCommand.cpp">
-      <Filter>Source Files\commands\buttons</Filter>
-    </ClCompile>
     <ClCompile Include="src\components\Modal.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
     <ClCompile Include="src\factories\entities\modals\AskNameFactory.cpp">
       <Filter>Source Files\factories\entities\modals</Filter>
-    </ClCompile>
-    <ClCompile Include="src\commands\buttons\ButtonMultiplayerCancelCommand.cpp">
-      <Filter>Source Files\commands\buttons</Filter>
     </ClCompile>
     <ClCompile Include="src\components\Destroy.cpp">
       <Filter>Source Files\components</Filter>
@@ -572,6 +563,18 @@
     </ClCompile>
     <ClCompile Include="src\components\Layer.cpp">
       <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCancelCommand.cpp">
+      <Filter>Source Files\commands\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCommand.cpp">
+      <Filter>Source Files\commands\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerCommand.cpp">
+      <Filter>Source Files\commands\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectConfirmCommand.cpp">
+      <Filter>Source Files\commands\buttons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -971,12 +974,6 @@
     <ClInclude Include="..\ArgoShared\src\shared\network\PacketType.h">
       <Filter>Header Files\network</Filter>
     </ClInclude>
-    <ClInclude Include="src\commands\buttons\ButtonMultiplayerCommand.h">
-      <Filter>Header Files\commands\buttons</Filter>
-    </ClInclude>
-    <ClInclude Include="src\commands\buttons\ButtonMultiplayerConnectCommand.h">
-      <Filter>Header Files\commands\buttons</Filter>
-    </ClInclude>
     <ClInclude Include="src\components\Modal.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
@@ -989,9 +986,6 @@
     <ClInclude Include="src\systems\WidgetNavigationSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
-    <ClInclude Include="src\commands\buttons\ButtonMultiplayerCancelCommand.h">
-      <Filter>Header Files\commands\buttons</Filter>
-    </ClInclude>
     <ClInclude Include="src\components\Destroy.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
@@ -1000,6 +994,18 @@
     </ClInclude>
     <ClInclude Include="src\components\Layer.h">
       <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCancelCommand.h">
+      <Filter>Header Files\commands\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCommand.h">
+      <Filter>Header Files\commands\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerCommand.h">
+      <Filter>Header Files\commands\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectConfirmCommand.h">
+      <Filter>Header Files\commands\buttons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
