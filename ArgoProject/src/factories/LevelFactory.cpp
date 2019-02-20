@@ -10,6 +10,8 @@
 #include "factories/entities/EnemyFactory.h"
 #include "factories/entities/GoalFactory.h"
 #include "factories/DestructibleBlockFactory.h"
+#include "factories/FacadeFactory.h"
+
 
 std::vector<app::Entity> app::fact::LevelFactory::create()
 {
@@ -55,6 +57,12 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 	// destructible blocks
 	{
 		auto destructibleParams = app::par::DestructibleParameters(position, size);
+		auto facade = fact::FacadeFactory(position, size);
+
+		position = app::math::Vector2f(1400, 550);
+		size = app::math::Vector2f(200, 50);
+		destructibleParams.attatchedArea = facade.create();
+
 		auto destructibleFactory = fact::DestructibleBlockFactory(destructibleParams);
 
 		position = app::math::Vector2f(1400, 500);

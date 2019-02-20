@@ -222,6 +222,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\entities\PlayerFactory.cpp" />
     <ClCompile Include="src\factories\entities\TextFactory.cpp" />
     <ClCompile Include="src\factories\EntityFactory.cpp" />
+    <ClCompile Include="src\factories\FacadeFactory.cpp" />
     <ClCompile Include="src\factories\HazardFactory.cpp" />
     <ClCompile Include="src\factories\LevelFactory.cpp" />
     <ClCompile Include="src\factories\NodeFactory.cpp" />
@@ -367,6 +368,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\entities\PlayerFactory.h" />
     <ClInclude Include="src\factories\entities\TextFactory.h" />
     <ClInclude Include="src\factories\EntityFactory.h" />
+    <ClInclude Include="src\factories\FacadeFactory.h" />
     <ClInclude Include="src\factories\HazardFactory.h" />
     <ClInclude Include="src\factories\LevelFactory.h" />
     <ClInclude Include="src\factories\NodeFactory.h" />
