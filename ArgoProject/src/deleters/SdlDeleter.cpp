@@ -40,7 +40,15 @@ void app::del::SdlDeleter::operator()(SDL_Haptic * pHaptic) const
 void app::del::SdlDeleter::operator()(Mix_Music * pMusic) const
 {
 	if (pMusic == nullptr) { return; }
-	Mix_FreeMusic(pMusic);
+	try
+	{
+		Mix_FreeMusic(pMusic);
+	}
+	catch(std::exception e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+
 }
 
 void app::del::SdlDeleter::operator()(Mix_Chunk * pChunk) const

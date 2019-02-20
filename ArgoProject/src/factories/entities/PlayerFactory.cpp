@@ -102,7 +102,7 @@ app::Entity const app::fact::PlayerFactory::create()
 	m_registry.assign<decltype(ground)>(entity, std::move(ground));
 
 	auto audio = comp::Audio();
-	audio.audio = m_resourceManager.getAudioM(app::res::AudioKey::BackgroundMusicTitle);
+	audio.addSFX("Jump", m_resourceManager.getAudioS(app::res::AudioKey::PlayerJump));
 	m_registry.assign<decltype(audio)>(entity, std::move(audio));
 
 	return entity;

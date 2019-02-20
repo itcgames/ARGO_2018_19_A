@@ -6,6 +6,9 @@
 #include "factories/PlatformFactory.h"
 #include "factories/entities/EnemyFactory.h"
 
+
+
+
 std::vector<app::Entity> app::fact::LevelFactory::create()
 {
 	auto entities = std::vector<app::Entity>();

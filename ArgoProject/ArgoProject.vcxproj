@@ -209,6 +209,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\BaseFactory.cpp" />
     <ClCompile Include="src\factories\EntitiesFactory.cpp" />
     <ClCompile Include="src\factories\entities\BackgroundImageFactory.cpp" />
+    <ClCompile Include="src\factories\entities\BackgroundMusicFactory.cpp" />
     <ClCompile Include="src\factories\entities\CameraFactory.cpp" />
     <ClCompile Include="src\factories\entities\EnemyFactory.cpp" />
     <ClCompile Include="src\factories\entities\PlayerFactory.cpp" />
@@ -235,7 +236,6 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\graphics\AudioBufferMusic.cpp" />
     <ClCompile Include="src\graphics\AudioBufferSFX.cpp" />
-    <ClCompile Include="src\graphics\AudioManager.cpp" />
     <ClCompile Include="src\graphics\Font.cpp" />
     <ClCompile Include="src\graphics\RenderRect.cpp" />
     <ClCompile Include="src\graphics\RenderText.cpp" />
@@ -285,7 +285,6 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     </ClCompile>
     <ClCompile Include="src\systems\AirMotionSystem.cpp" />
     <ClCompile Include="src\systems\AnimatorSystem.cpp" />
-    <ClCompile Include="src\systems\AudioSystem.cpp" />
     <ClCompile Include="src\systems\BaseSystem.cpp" />
     <ClCompile Include="src\systems\CollisionSystem.cpp" />
     <ClCompile Include="src\systems\CommandSystem.cpp" />
@@ -347,6 +346,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\BaseFactory.h" />
     <ClInclude Include="src\factories\EntitiesFactory.h" />
     <ClInclude Include="src\factories\entities\BackgroundImageFactory.h" />
+    <ClInclude Include="src\factories\entities\BackgroundMusicFactory.h" />
     <ClInclude Include="src\factories\entities\CameraFactory.h" />
     <ClInclude Include="src\factories\entities\EnemyFactory.h" />
     <ClInclude Include="src\factories\entities\PlayerFactory.h" />
@@ -373,7 +373,6 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\graphics\AudioBufferMusic.h" />
     <ClInclude Include="src\graphics\AudioBufferSFX.h" />
-    <ClInclude Include="src\graphics\AudioManager.h" />
     <ClInclude Include="src\graphics\Font.h" />
     <ClInclude Include="src\graphics\RenderRect.h" />
     <ClInclude Include="src\graphics\RenderText.h" />
@@ -417,7 +416,6 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\systems\AirMotionSystem.h" />
     <ClInclude Include="src\systems\AnimatorSystem.h" />
-    <ClInclude Include="src\systems\AudioSystem.h" />
     <ClInclude Include="src\systems\BaseSystem.h" />
     <ClInclude Include="src\systems\CollisionSystem.h" />
     <ClInclude Include="src\systems\CommandSystem.h" />

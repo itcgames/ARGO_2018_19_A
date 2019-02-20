@@ -16,8 +16,7 @@ app::sce::LevelScene::LevelScene(SceneType & sceneManagerType)
 			UpdateSystem(std::in_place_type<app::sys::HealthSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CurrentGroundSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CollisionSystem>),
-			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType),
-			UpdateSystem(std::in_place_type<app::sys::AudioSystem>)
+			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType)
 		})
 		, util::make_vector<DrawSystem>({
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
