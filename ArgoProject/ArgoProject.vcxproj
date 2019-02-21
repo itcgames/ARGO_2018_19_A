@@ -201,6 +201,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\commands\MoveCommand.cpp" />
     <ClCompile Include="src\components\AI.cpp" />
     <ClCompile Include="src\components\AirMotion.cpp" />
+    <ClCompile Include="src\components\AnimatedImage.cpp" />
     <ClCompile Include="src\components\Animator.cpp" />
     <ClCompile Include="src\components\Collision.cpp" />
     <ClCompile Include="src\components\Commandable.cpp" />
@@ -345,6 +346,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\commands\MoveCommand.h" />
     <ClInclude Include="src\components\AI.h" />
     <ClInclude Include="src\components\AirMotion.h" />
+    <ClInclude Include="src\components\AnimatedImage.h" />
     <ClInclude Include="src\components\Animator.h" />
     <ClInclude Include="src\components\Collision.h" />
     <ClInclude Include="src\components\Commandable.h" />
