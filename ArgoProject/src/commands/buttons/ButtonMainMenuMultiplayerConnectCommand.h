@@ -3,13 +3,14 @@
 
 #include "BaseMultiplayerCommand.h"
 #include "scenes/SceneType.h"
+#include "factories/entities/modals/AskNameFactory.h"
 
 namespace app::cmnd
 {
 	class ButtonMainMenuMultiplayerConnectCommand : public BaseMultiplayerCommand
 	{
 	public: // Constructors/Destructor/Assignments
-		ButtonMainMenuMultiplayerConnectCommand(std::string && serverIp, std::int32_t serverPort, app::Entity callingEntity, app::sce::SceneType & sceneManagerControl);
+		ButtonMainMenuMultiplayerConnectCommand(std::string && serverIp, std::int32_t serverPort, app::Entity const callingEntity, app::sce::SceneType & sceneManagerControl);
 		virtual ~ButtonMainMenuMultiplayerConnectCommand() = default;
 
 		ButtonMainMenuMultiplayerConnectCommand(ButtonMainMenuMultiplayerConnectCommand const &) = default;
@@ -29,8 +30,7 @@ namespace app::cmnd
 	protected: // Protected Member Variables
 		std::string const m_serverIp;
 		std::int32_t const m_serverPort;
-		app::sce::SceneType & m_sceneManagerControl;
-		app::Entity const m_callingEntity;
+		app::fact::mod::AskNameFactory m_askNameFactory;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables

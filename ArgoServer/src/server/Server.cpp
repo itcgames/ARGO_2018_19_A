@@ -29,7 +29,7 @@ app::net::Server::~Server()
 /// </summary>
 bool app::net::Server::listenForSockets()
 {
-	bool got_socket = acceptSocket(m_totalConnections);
+	bool got_socket = acceptSocket(m_totalConnections % m_sockets.max_size());
 	if (!got_socket)
 	{
 		//app::Console::writeLine({ "Failed to accept the clients connection" });
@@ -146,6 +146,7 @@ void app::net::Server::closeSocket(int index)
 	}
 	SDLNet_TCP_Close(socket);
 	socket = NULL;
+	--m_totalConnections;
 }
 
 /// <summary>

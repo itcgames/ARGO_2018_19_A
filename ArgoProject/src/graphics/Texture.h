@@ -23,6 +23,7 @@ namespace app::gra
 		bool load(app::del::UPtrRenderer const & renderer, std::string_view file);
 		SDL_Texture * get() const { return m_texture.get(); }
 	public: // Public Static Variables
+		static std::mutex s_sdlMutex;
 	public: // Public Member Variables
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
@@ -33,7 +34,6 @@ namespace app::gra
 		static del::UPtrSurface loadSurface(std::string_view file);
 	private: // Private Member Functions
 	private: // Private Static Variables
-		static std::mutex s_sdlMutex;
 	private: // Private Member Variables
 		app::del::UPtrTexture m_texture;
 	};

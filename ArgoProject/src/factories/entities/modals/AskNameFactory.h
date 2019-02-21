@@ -9,7 +9,7 @@ namespace app::fact::mod
 	class AskNameFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		AskNameFactory(app::Entity const & callingEntity, app::sce::SceneType & sceneManagerControl);
+		AskNameFactory(app::Entity const callingEntity, app::sce::SceneType & sceneManagerControl);
 		virtual ~AskNameFactory() = default;
 
 		AskNameFactory(AskNameFactory const &) = default;
@@ -32,7 +32,7 @@ namespace app::fact::mod
 	private: // Private Static Variables
 	private: // Private Member Variables
 		app::Entity const m_callingEntity;
-		sce::SceneType & m_sceneManagerControl;
+		app::sce::SceneType & m_sceneManagerControl;
 	};
 }
 

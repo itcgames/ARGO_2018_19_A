@@ -8,7 +8,7 @@ namespace app::fact
 	{
 	public: // Constructors/Destructor/Assignments
 		BaseFactory() = default;
-		~BaseFactory() = default;
+		virtual ~BaseFactory() = default;
 
 		BaseFactory(BaseFactory const &) = default;
 		BaseFactory & operator=(BaseFactory const &) = default;

@@ -26,7 +26,7 @@ bool app::net::Client::initNetwork(std::string const & pIP, int iPort)
 
 	auto ipAddress = IPaddress();
 
-	if (SDLNet_ResolveHost(&ipAddress, pIP.c_str(), iPort) != NULL);
+	if (SDLNet_ResolveHost(&ipAddress, pIP.c_str(), iPort) != NULL)
 	{
 		app::Console::writeLine({ "ERROR: SDLNet_ResolveHost: [", SDLNet_GetError(), "]" });
 	}

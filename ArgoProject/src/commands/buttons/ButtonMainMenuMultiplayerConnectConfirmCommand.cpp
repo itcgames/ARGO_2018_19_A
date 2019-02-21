@@ -2,7 +2,7 @@
 #include "ButtonMainMenuMultiplayerConnectConfirmCommand.h"
 
 app::cmnd::ButtonMainMenuMultiplayerConnectConfirmCommand::ButtonMainMenuMultiplayerConnectConfirmCommand(
-	  app::Entity callingEntity
+	  app::Entity const callingEntity
 	, std::string const & userName
 	, app::sce::SceneType & sceneManagerControl
 )

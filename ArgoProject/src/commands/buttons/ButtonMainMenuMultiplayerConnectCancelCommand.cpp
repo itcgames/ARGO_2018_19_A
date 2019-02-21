@@ -3,7 +3,7 @@
 #include "components/Destroy.h"
 #include "components/Widget.h"
 
-app::cmnd::ButtonMainMenuMultiplayerConnectCancelCommand::ButtonMainMenuMultiplayerConnectCancelCommand(app::Entity const & callingEntity)
+app::cmnd::ButtonMainMenuMultiplayerConnectCancelCommand::ButtonMainMenuMultiplayerConnectCancelCommand(app::Entity const callingEntity)
 	: BaseMultiplayerCommand()
 	, m_callingEntity(callingEntity)
 	, m_entities()

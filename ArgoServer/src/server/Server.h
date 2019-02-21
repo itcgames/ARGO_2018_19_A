@@ -1,7 +1,6 @@
 ﻿#ifndef _SERVER_H
 #define _SERVER_H
 
-#include <windows.h>
 #include "shared/network/Lobby.h"
 #include "shared/network/PacketType.h"
 
@@ -59,7 +58,7 @@ namespace app::net
 		void output(int ID, std::string const & msg) const;
 		void output(int ID, std::initializer_list<std::string> const & msgs) const;
 	private: // Private Static Variables
-		constexpr static int s_MAX_SOCKETS = 16;
+		constexpr static int s_MAX_SOCKETS = 255;
 		constexpr static bool s_DEBUG_MODE = true;
 	private: // Private Member Variables
 		// Contains thread instance
@@ -71,7 +70,7 @@ namespace app::net
 		//array of sockets connected to server
 		std::array<TCPsocket, s_MAX_SOCKETS> m_sockets;
 
-		std::int32_t m_totalConnections = 0;
+		std::uint8_t m_totalConnections = 0u;
 
 		std::vector<Lobby> m_lobbies;
 	};

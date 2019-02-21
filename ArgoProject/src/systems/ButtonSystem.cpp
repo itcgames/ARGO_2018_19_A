@@ -30,8 +30,8 @@ void app::sys::ButtonSystem::update(app::time::seconds const & dt)
 			{
 				if (widget.state == WidgetState::Highlighted && m_keyHandler.isKeyPressed(key))
 				{
-					command->execute();
 					widget.state = WidgetState::Pressed;
+					command->execute();
 					return;
 				}
 				else if (widget.state == WidgetState::Pressed && m_keyHandler.isKeyUnpressed(key))
@@ -47,8 +47,8 @@ void app::sys::ButtonSystem::update(app::time::seconds const & dt)
 			{
 				if (widget.state == WidgetState::Highlighted && m_mouseHandler.isButtonPressed(key))
 				{
-					command->execute();
 					widget.state = WidgetState::Pressed;
+					command->execute();
 					return;
 				}
 				else if (widget.state == WidgetState::Pressed && m_mouseHandler.isButtonUnpressed(key))
@@ -68,8 +68,8 @@ void app::sys::ButtonSystem::update(app::time::seconds const & dt)
 				{
 					if (widget.state == WidgetState::Highlighted && m_controllerHandler.isButtonPressed(i, key))
 					{
-						command->execute();
 						widget.state = WidgetState::Pressed;
+						command->execute();
 						return;
 					}
 					else if (widget.state == WidgetState::Pressed && m_controllerHandler.isButtonUnpressed(i, key))
