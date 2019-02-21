@@ -93,9 +93,10 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	collision.bounds = cute::c2AABB();
 	m_registry.assign<decltype(collision)>(entity, std::move(collision));
 
-	auto health = comp::Health();
-	health.health = 1;
-	m_registry.assign<decltype(health)>(entity, std::move(health));
+	//TODO: uncomment
+	//auto health = comp::Health();
+	//health.health = 1;
+	//m_registry.assign<decltype(health)>(entity, std::move(health));
 
 	auto player = comp::PlatformDrop();
 	m_registry.assign<decltype(player)>(entity, std::move(player));
