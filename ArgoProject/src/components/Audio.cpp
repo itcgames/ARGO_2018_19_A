@@ -46,7 +46,7 @@ void app::comp::Audio::playAudio(std::string s, int loops)
 		}
 		else
 		{
-			Mix_PlayChannel(-1,m_audioMap[s].m_audioSound->get(), 0);
+			Mix_PlayChannel(-1,m_audioMap[s].m_audioSound->get(), loops);
 		}
 	}
 } 

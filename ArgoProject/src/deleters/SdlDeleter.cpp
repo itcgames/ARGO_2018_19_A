@@ -42,7 +42,8 @@ void app::del::SdlDeleter::operator()(Mix_Music * pMusic) const
 	if (pMusic == nullptr) { return; }
 	try
 	{
-		Mix_FreeMusic(pMusic);
+		if (Mix_PlayingMusic()) { Mix_HaltMusic(); }
+		//Mix_FreeMusic(pMusic);
 	}
 	catch(std::exception e)
 	{

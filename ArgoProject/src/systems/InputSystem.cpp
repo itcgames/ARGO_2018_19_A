@@ -34,7 +34,7 @@ void app::sys::InputSystem::update(app::time::seconds const & dt)
 				commandable.list.push_front(command);
 				if (key == 32)
 				{
-					audio.playAudio("Jump", -1);
+					audio.playAudio("Jump", 0);
 				}
 			}
 		}
