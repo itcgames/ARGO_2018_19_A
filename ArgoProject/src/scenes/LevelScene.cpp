@@ -14,6 +14,7 @@ app::sce::LevelScene::LevelScene(SceneType & sceneManagerType)
 			UpdateSystem(std::in_place_type<app::sys::StateMachineSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CameraSystem>),
 			UpdateSystem(std::in_place_type<app::sys::HealthSystem>),
+			UpdateSystem(std::in_place_type<app::sys::AISystem>),
 			UpdateSystem(std::in_place_type<app::sys::CurrentGroundSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CollisionSystem>),
 			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType),
@@ -65,8 +66,8 @@ void app::sce::LevelScene::update(app::time::seconds const & dt)
 {
 	if (m_resetSignal)
 	{
-		m_resetSignal = false;
 		this->reset();
+		m_resetSignal = false;
 	}
 	app::sce::BaseScene::update(dt);
 }
@@ -85,4 +86,9 @@ void app::sce::LevelScene::reset()
 	m_entities.clear();
 	auto && entities = fact::sce::LevelSceneFactory().create();
 	m_entities.insert(m_entities.end(), std::make_move_iterator(entities.begin()), std::make_move_iterator(entities.end()));
+}
+
+void app::sce::LevelScene::levelComplete()
+{
+	m_sceneManagerType = (SceneType::MainMenu);
 }

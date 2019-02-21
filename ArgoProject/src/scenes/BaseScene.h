@@ -20,6 +20,7 @@
 #include "systems/ButtonSystem.h"
 #include "systems/WidgetNavigationSystem.h"
 #include "systems/DestroySystem.h"
+#include "systems/AISystem.h"
 
 namespace app::sce
 {
@@ -37,6 +38,7 @@ namespace app::sce
 			, sys::CollisionSystem
 			, sys::DebugSystem
 			, sys::HealthSystem
+			, sys::AISystem
 			, sys::CurrentGroundSystem
 			, sys::NetworkSystem
 			, sys::ButtonSystem

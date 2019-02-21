@@ -4,6 +4,8 @@
 #include "components/AirMotion.h"
 #include "components/Input.h"
 #include "components/Dash.h"
+#include "components/DoubleJump.h"
+#include "components/Dash.h"
 
 app::cmnd::JumpCommand::JumpCommand(app::Entity const _entity, float _force)
 	: m_entity(_entity)
@@ -13,18 +15,18 @@ app::cmnd::JumpCommand::JumpCommand(app::Entity const _entity, float _force)
 
 void app::cmnd::JumpCommand::execute()
 {
-	auto& input = m_registry.get<comp::Input>(m_entity);
+	auto& doubleJump = m_registry.get<comp::DoubleJump>(m_entity);
 	//If player tries jumping while in air
 	if (m_registry.has<comp::AirMotion>(m_entity))
 	{
 		auto & airMotion = m_registry.get<comp::AirMotion>(m_entity);
-		if (input.m_canDoubleJump)
+		if (doubleJump.canDoubleJump)
 		{
 			auto const & impulse = math::Vector2f(0.0f, -1.0f) * m_force;
 			auto const & velocity = ((math::toVector(airMotion.direction) * airMotion.speed) * math::Vector2f(1.0f, 0.0f)) + impulse;
 			airMotion.direction = velocity.toAngle();
 			airMotion.speed = velocity.magnitude();
-			input.m_canDoubleJump = false;
+			doubleJump.canDoubleJump = false;
 		}
 	}
 	else //if player tries jumping from ground
@@ -58,7 +60,7 @@ void app::cmnd::JumpCommand::execute()
 			airMotion.direction = motion.direction;
 			m_registry.assign<comp::AirMotion>(m_entity, std::move(airMotion));
 			m_registry.remove<comp::Dash>(m_entity);
-			input.m_canDoubleJump = false;
+			doubleJump.canDoubleJump = false;
 		}
 
 	}

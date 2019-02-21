@@ -1,29 +1,25 @@
-﻿#ifndef _INPUT_H
-#define _INPUT_H
-
-#include "commands/BaseCommand.h"
+﻿#ifndef _COMPONENTS_GOAL_H
+#define _COMPONENTS_GOAL_H
 
 namespace app::comp
 {
-	struct Input
+	struct Goal
 	{
 	public: // Constructors/Destructor/Assignments
-		Input() = default;
-		~Input() = default;
+		Goal() = default;
+		~Goal() = default;
 
-		Input(Input const &) = default;
-		Input(Input &&) = default;
+		Goal(Goal const &) = default;
+		Goal & operator=(Goal const &) = default;
 
-		Input & operator=(Input const &) = default;
-		Input & operator=(Input &&) = default;
+		Goal(Goal &&) = default;
+		Goal & operator=(Goal &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyDownCommands;
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyPressedCommands;
-		bool isRight;
+
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -35,4 +31,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_INPUT_H
+#endif // !_COMPONENTS_GOAL_H
