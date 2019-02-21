@@ -1,29 +1,27 @@
-﻿#ifndef _INPUT_H
-#define _INPUT_H
+﻿#ifndef _SYSTEM_AI_H
+#define _SYSTEM_AI_H
 
-#include "commands/BaseCommand.h"
+#include "BaseSystem.h"
 
-namespace app::comp
+namespace app::sys
 {
-	struct Input
+	class AISystem : public BaseSystem
 	{
 	public: // Constructors/Destructor/Assignments
-		Input() = default;
-		~Input() = default;
+		AISystem() = default;
+		~AISystem() = default;
 
-		Input(Input const &) = default;
-		Input(Input &&) = default;
+		AISystem(AISystem const &) = default;
+		AISystem & operator=(AISystem const &) = default;
 
-		Input & operator=(Input const &) = default;
-		Input & operator=(Input &&) = default;
+		AISystem(AISystem &&) = default;
+		AISystem & operator=(AISystem &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
+		virtual void update(app::time::seconds const & dt) override;
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyDownCommands;
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyPressedCommands;
-		bool isRight;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -35,4 +33,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_INPUT_H
+#endif // !_SYSTEM_AI_H

@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
-#include "utilities/cute_c2.h"
-#include "PlayerFactory.h"
+#include "AIFactory.h"
+
+#include "factories/NodeFactory.h"
 
 // components
 #include "components/Location.h"
@@ -13,9 +14,9 @@
 #include "components/Collision.h"
 #include "components/PlatformDrop.h"
 #include "components/CurrentGround.h"
-#include "components/Audio.h"
-#include "components/DoubleJump.h"
+#include "components/AI.h"
 #include "components/Dashable.h"
+#include "components/DoubleJump.h"
 
 #include "commands/MoveCommand.h"
 #include "commands/JumpCommand.h"
@@ -26,22 +27,23 @@
 #include "components/StateMachine.h"
 #include "components/Health.h"
 
-app::fact::PlayerFactory::PlayerFactory()
-	: EntityFactory()
+app::fact::AIFactory::AIFactory(math::Vector2f const & pos, math::Vector2f const & size)
+	: m_position(pos), m_size(size)
 {
 }
 
-app::Entity const app::fact::PlayerFactory::create()
+std::vector<app::Entity> app::fact::AIFactory::create()
 {
-	app::Entity const entity = EntityFactory::create();
+	auto entities = std::vector<app::Entity>();
+	app::Entity const entity = m_entityFactory.create();
 
 	auto location = comp::Location();
-	location.position = { 900.0f, 100.0f };
+	location.position = m_position;
 	location.orientation = 0.0f;
 	m_registry.assign<decltype(location)>(entity, std::move(location));
 
 	auto dimensions = comp::Dimensions();
-	dimensions.size = { 100.0f, 100.0f };
+	dimensions.size = m_size;
 	dimensions.origin = dimensions.size / 2.0f;
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
 
@@ -70,14 +72,6 @@ app::Entity const app::fact::PlayerFactory::create()
 
 	auto input = comp::Input();
 	input.isRight = true;
-	//Here is where commands get binded to keys
-	input.keyDownCommands.insert(std::pair(SDLK_RIGHT, std::make_shared<app::cmnd::MoveCommand>(entity, 0, 20)));
-	input.keyDownCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::MoveCommand>(entity, 180, 20)));
-	input.keyPressedCommands.insert(std::pair(SDLK_SPACE, std::make_shared<app::cmnd::JumpCommand>(entity, 400.0f)));
-	input.keyPressedCommands.insert(std::pair(SDLK_z, std::make_shared<app::cmnd::DashCommand>(entity)));
-	input.keyPressedCommands.insert(std::pair(SDLK_RIGHT, std::make_shared<app::cmnd::FaceRightCommand>(entity)));
-	input.keyPressedCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::FaceLeftCommand>(entity)));
-	input.keyDownCommands.insert(std::pair(SDLK_DOWN, std::make_shared<app::cmnd::DropCommand>(entity)));
 	m_registry.assign<decltype(input)>(entity, std::move(input));
 
 	auto doubleJump = comp::DoubleJump();
@@ -98,7 +92,7 @@ app::Entity const app::fact::PlayerFactory::create()
 	auto collision = comp::Collision();
 	collision.bounds = cute::c2AABB();
 	m_registry.assign<decltype(collision)>(entity, std::move(collision));
-	
+
 	auto health = comp::Health();
 	health.health = 1;
 	m_registry.assign<decltype(health)>(entity, std::move(health));
@@ -109,9 +103,29 @@ app::Entity const app::fact::PlayerFactory::create()
 	auto ground = comp::CurrentGround();
 	m_registry.assign<decltype(ground)>(entity, std::move(ground));
 
-	auto audio = comp::Audio();
-	audio.addSFX("Jump", m_resourceManager.getAudioS(app::res::AudioKey::PlayerJump));
-	m_registry.assign<decltype(audio)>(entity, std::move(audio));
+	auto ai = comp::AI();
 
-	return entity;
+	auto loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+		std::make_shared<cmnd::MoveCommand>(entity, 0, 20)
+	};
+	auto initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+		std::make_shared<cmnd::JumpCommand>(entity, 400.0f)
+	};
+	auto node = app::fact::NodeFactory(math::Vector2f(750, 200), loopCmnds, initialCmnds).create();
+	entities.push_back(node);
+
+	loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+		std::make_shared<cmnd::MoveCommand>(entity, 180, 20)
+	};
+	initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+		
+	};
+	node = app::fact::NodeFactory(math::Vector2f(950, 200), loopCmnds, initialCmnds).create();
+	entities.push_back(node);
+
+	m_registry.assign<decltype(ai)>(entity, std::move(ai));
+
+	entities.push_back(entity);
+
+	return entities;
 }

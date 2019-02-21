@@ -29,7 +29,7 @@ namespace app::fact
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
 		app::Registry & m_registry;
-		app::del::UPtrRenderer const & m_renderer;
+		app::res::ResourceManager<true> & m_resourceManager;
 		app::fact::EntityFactory m_entityFactory;
 	private: // Private Static Functions
 	private: // Private Member Functions
