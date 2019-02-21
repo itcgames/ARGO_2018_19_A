@@ -34,7 +34,7 @@ namespace app::net
 		
 		bool get(std::list<Lobby> & _lobbies);
 
-		bool send(const std::string& _string, const app::net::PacketType& _packetToProcessString);
+		bool send(const std::string& _string);
 		bool get(std::string& _string);
 
 		bool send(const PacketType& _packetType);

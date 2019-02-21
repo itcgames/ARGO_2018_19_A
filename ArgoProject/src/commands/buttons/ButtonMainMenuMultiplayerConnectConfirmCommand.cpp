@@ -16,7 +16,7 @@ app::cmnd::ButtonMainMenuMultiplayerConnectConfirmCommand::ButtonMainMenuMultipl
 void app::cmnd::ButtonMainMenuMultiplayerConnectConfirmCommand::execute()
 {
 	constexpr auto PACKET_TYPE = app::net::PacketType::CLIENT_NAME;
-	if (m_client.send(m_userName, PACKET_TYPE))
+	if (m_client.send(PACKET_TYPE) && m_client.send(m_userName))
 	{
 		// Sending successfull
 		this->output({ "Sending username[", m_userName, "] successfull !" });

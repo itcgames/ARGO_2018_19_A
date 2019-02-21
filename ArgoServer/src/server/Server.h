@@ -9,7 +9,7 @@ namespace app::net
 	class Server
 	{
 	public: // Constructors/Destructor/Assignments
-		Server(int _port);
+		explicit Server(int port);
 		~Server();
 
 		Server(Server const &) = default;
@@ -29,23 +29,24 @@ namespace app::net
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
-		void clientHandlerThread(int ID, std::atomic<bool> & stopThread);
-		void initServer(int _port);
+		void clientHandlerThread(int id, std::atomic<bool> & stopThread);
+		void initServer(int port);
 		bool acceptSocket(int index);
 		void closeSocket(int index);
 		void sdlCleanup();
+		std::uint8_t getFreeSocket(std::uint8_t startIndex) const;
 
-		bool getAll(int ID, std::byte * data, int totalBytes);
-		bool sendAll(int ID, std::byte * data, int totalBytes);
-		bool get(int ID, int& _int);
-		bool get(int ID, std::string& _string);
-		bool get(int ID, PacketType& _packetType);
+		bool getAll(int id, std::byte * data, int totalBytes);
+		bool sendAll(int id, std::byte * data, int totalBytes);
+		bool get(int id, int& _int);
+		bool get(int id, std::string& string);
+		bool get(int id, PacketType& packetType);
 
-		bool send(int ID, const int& _int);
-		bool send(int ID, const PacketType& _packetType);
-		bool send(int ID, const std::string& _string, const PacketType& _packetToProcessString);
-		bool send(int ID, Lobby const & _lobby);
-		bool processPacket(int ID, PacketType _packetType);
+		bool send(int id, const int& num);
+		bool send(int id, const PacketType& packetType);
+		bool send(int id, const std::string& string, const PacketType& packetToProcessString);
+		bool send(int id, Lobby const & lobby);
+		bool processPacket(int id, PacketType packetType);
 
 		// packet process functions
 
@@ -55,10 +56,10 @@ namespace app::net
 		bool processDefault(int id);
 
 		void outputIP(IPaddress const & ip);
-		void output(int ID, std::string const & msg) const;
-		void output(int ID, std::initializer_list<std::string> const & msgs) const;
+		void output(int id, std::string const & msg) const;
+		void output(int id, std::initializer_list<std::string> const & msgs) const;
 	private: // Private Static Variables
-		constexpr static int s_MAX_SOCKETS = 255;
+		constexpr static auto s_MAX_SOCKETS = std::numeric_limits<std::uint8_t>::max();
 		constexpr static bool s_DEBUG_MODE = true;
 	private: // Private Member Variables
 		// Contains thread instance
@@ -71,6 +72,7 @@ namespace app::net
 		std::array<TCPsocket, s_MAX_SOCKETS> m_sockets;
 
 		std::uint8_t m_totalConnections = 0u;
+		std::uint8_t m_freeSocket = 0u;
 
 		std::vector<Lobby> m_lobbies;
 	};

@@ -7,6 +7,7 @@ namespace app::net
 	{
 		  UNKNOWN
 		, CLIENT_NAME
+		, CLIENT_LEFT
 		, LOBBY_CREATE
 		, LOBBY_WAS_CREATED
 		, LOBBY_GET_ALL

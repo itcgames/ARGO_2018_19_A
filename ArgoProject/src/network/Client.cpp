@@ -135,15 +135,9 @@ bool app::net::Client::sendAll(std::byte * data, int totalBytes)
 /// Send a string to the server. 
 /// </summary>
 /// <param name="_string">string to send</param>
-/// <param name="_packetToProcessString">the packet type</param>
 /// <returns>true if success, false if sending fails</returns>
-bool app::net::Client::send(const std::string & _string, const app::net::PacketType& _packetType)
+bool app::net::Client::send(const std::string & _string)
 {
-	app::net::PacketType type = _packetType;
-	if (!send(type))
-	{
-		return false;
-	}
 	int bufferLen = _string.size();
 	if (!send(bufferLen))
 	{

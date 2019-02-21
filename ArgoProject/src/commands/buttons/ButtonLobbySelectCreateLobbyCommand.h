@@ -8,7 +8,7 @@ namespace app::cmnd
 	class ButtonLobbySelectCreateLobbyCommand : public BaseMultiplayerCommand
 	{
 	public: // Constructors/Destructor/Assignments
-		ButtonLobbySelectCreateLobbyCommand() = default;
+		ButtonLobbySelectCreateLobbyCommand(std::string const & userName);
 		virtual ~ButtonLobbySelectCreateLobbyCommand() = default;
 
 		ButtonLobbySelectCreateLobbyCommand(ButtonLobbySelectCreateLobbyCommand const &) = default;
@@ -30,6 +30,7 @@ namespace app::cmnd
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
+		std::string const m_userName;
 	};
 }
 
