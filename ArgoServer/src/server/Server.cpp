@@ -112,15 +112,16 @@ void app::net::Server::initServer(int _port)
 /// <returns>true if accepted successfully, false if unsuccessful</returns>
 bool app::net::Server::acceptSocket(int index)
 {
-	if (m_sockets[index])
+	auto & socket = m_sockets.at(index);
+	if (socket)
 	{
 		app::Console::writeLine({ "Overriding a socket at index: ", std::to_string(index) });
 	}
 
-	m_sockets[index] = SDLNet_TCP_Accept(m_serverSocket);
-	if (m_sockets[index] == NULL) return false;
+	socket = SDLNet_TCP_Accept(m_serverSocket);
+	if (socket == NULL) return false;
 
-	if (SDLNet_TCP_AddSocket(m_socketSet, m_sockets[index]) == -1)
+	if (SDLNet_TCP_AddSocket(m_socketSet, socket) == -1)
 	{
 		app::Console::writeLine({ "ERROR: SDLNet_TCP_AddSocket [", SDLNet_GetError(), "]" });
 	}
@@ -133,17 +134,18 @@ bool app::net::Server::acceptSocket(int index)
 /// <param name="index">index at which socket we want to close in is</param>
 void app::net::Server::closeSocket(int index)
 {
-	if (m_sockets[index] == NULL)
+	auto & socket = m_sockets.at(index);
+	if (socket == NULL)
 	{
 		app::Console::writeLine({ "ERROR: Attempted to delete a NULL socket." });
 		return;
 	}
-	if (SDLNet_TCP_DelSocket(m_socketSet, m_sockets[index]) == -1)
+	if (SDLNet_TCP_DelSocket(m_socketSet, socket) == -1)
 	{
 		app::Console::writeLine({ "ERROR: SDLNet_TCP_DelSocket: [", SDLNet_GetError(), "]" });
 	}
-	SDLNet_TCP_Close(m_sockets[index]);
-	m_sockets[index] = NULL;
+	SDLNet_TCP_Close(socket);
+	socket = NULL;
 }
 
 /// <summary>
@@ -186,7 +188,7 @@ void app::net::Server::sdlCleanup()
 /// <param name="ID"></param>
 void app::net::Server::clientHandlerThread(int ID, std::atomic<bool> & stopThread)
 {
-	Packet packetType;
+	PacketType packetType;
 
 	while (!stopThread.load())
 	{
@@ -284,9 +286,9 @@ bool app::net::Server::get(int ID, int & _int)
 /// <param name="ID">ID of the socket to send to</param>
 /// <param name="_packetType">packet type to send</param>
 /// <returns>true if success, false if sendAll fails</returns>
-bool app::net::Server::send(int ID, const Packet& _packetType)
+bool app::net::Server::send(int ID, const PacketType& _packetType)
 {
-	if (!sendAll(ID, (std::byte *)&_packetType, sizeof(Packet)))
+	if (!sendAll(ID, (std::byte *)&_packetType, sizeof(PacketType)))
 	{
 		return false;
 	}
@@ -299,9 +301,9 @@ bool app::net::Server::send(int ID, const Packet& _packetType)
 /// <param name="ID">ID of the socket to expect a packet from</param>
 /// <param name="_packetType">packet variable to assign the received packet type to</param>
 /// <returns>true if success, false if recvAll fails</returns>
-bool app::net::Server::get(int ID, Packet & _packetType)
+bool app::net::Server::get(int ID, PacketType & _packetType)
 {
-	if (!getAll(ID, (std::byte *)&_packetType, sizeof(Packet)))
+	if (!getAll(ID, (std::byte *)&_packetType, sizeof(PacketType)))
 	{
 		return false;
 	}
@@ -316,7 +318,7 @@ bool app::net::Server::get(int ID, Packet & _packetType)
 /// <param name="_string">string to send</param>
 /// <param name="_packetType">type of packet the other socket is to expect (defines how it will be processed by the other socket)</param>
 /// <returns>true if success, false if any of the sends fail</returns>
-bool app::net::Server::send(int ID, const std::string & _string, const Packet & _packetType)
+bool app::net::Server::send(int ID, const std::string & _string, const PacketType & _packetType)
 {
 	if (!send(ID, _packetType))
 	{
@@ -334,6 +336,12 @@ bool app::net::Server::send(int ID, const std::string & _string, const Packet & 
 	return true;
 }
 
+bool app::net::Server::send(int ID, Lobby const & _lobby)
+{
+	constexpr auto BUFFER_SIZE = sizeof(Lobby);
+	return send(ID, BUFFER_SIZE) && sendAll(ID, (std::byte *)&_lobby, BUFFER_SIZE);
+}
+
 
 /// <summary>
 /// expect string from other socket
@@ -348,73 +356,107 @@ bool app::net::Server::get(int ID, std::string & _string)
 	{
 		return false;
 	}
-	std::byte * buffer = new std::byte[bufferLength + 1];
-	buffer[bufferLength] = static_cast<std::byte>('\0');
-	if (!getAll(ID, buffer, bufferLength))
+	auto buffer = std::vector<std::byte>();
+	buffer.resize(bufferLength, static_cast<std::byte>('\0'));
+	if (!getAll(ID, buffer.data(), bufferLength))
 	{
-		delete[] buffer;
+		buffer.clear();
 		return false;
 	}
-	_string = reinterpret_cast<char *>(buffer);
-	delete[] buffer;
+	_string.reserve(buffer.size());
+	_string.insert(_string.begin()
+				   , std::make_move_iterator(buffer.begin())
+				   , std::make_move_iterator(buffer.end()));
+	buffer.clear();
 	return true;
 }
 
 /// <summary>
 /// Process the packets that were received
 /// </summary>
-/// <param name="ID">ID of the socket the packet is from</param>
+/// <param name="id">ID of the socket the packet is from</param>
 /// <param name="_packetType">type of packet received</param>
 /// <returns>true if successful processing of packet, false if the processing fails</returns>
-bool app::net::Server::processPacket(int ID, Packet _packetType)
+bool app::net::Server::processPacket(int id, PacketType _packetType)
 {
 	switch (_packetType)
 	{
-	case Packet::CLIENT_NAME:
-	{
-		std::string Message;
-		if (!get(ID, Message))
-		{
-			return false;
-		}
-		if constexpr (s_DEBUG_MODE)
-		{
-			app::Console::writeLine(Message);
-		}
-		break;
+		case PacketType::CLIENT_NAME:
+			return this->processClientName(id);
+		case PacketType::LOBBY_CREATE:
+			return this->processLobbyCreate(id);
+		case PacketType::LOBBY_GET_ALL:
+			return this->processLobbyGetAll(id);
+		default:
+			return this->processDefault(id);
 	}
-	break;
-	case Packet::LOBBY_CREATE:
+}
+
+bool app::net::Server::processClientName(int id)
+{
+	auto clientName = std::string();
+	if (!get(id, clientName))
 	{
-		//handle creation of a lobby
-		std::string playerName;
-		if (!get(ID, playerName))
-		{
-			return false;
-		}
-		m_lobbies.push_back(Lobby());
-		m_lobbies.back().setName(playerName + "'s Lobby");
-		m_lobbies.back().addPlayer(ID, playerName);
-		app::Console::writeLine({ "Player with ID [", std::to_string(ID), "] created a lobby with name: ", m_lobbies.back().getName() });
-
-		//send out lobby created message to everyone else
-		app::net::Packet packetType = app::net::Packet::LOBBY_CREATE;
-		for (int i = 0; i < m_totalConnections; i++)
-		{
-			if (i == ID)
-			{
-				continue;
-			}
-			//send the vector of servers to client whenever a new server is added or just send a single lobby that was added.
-
-		}
-
+		return false;
 	}
-	break;
-	default:
-		break;
+	this->output(id, { "Received name '", clientName, "'" });
+	return true;
+}
+
+bool app::net::Server::processLobbyCreate(int id)
+{
+	//handle creation of a lobby
+	auto playerName = std::string();
+	playerName.reserve(20);
+	if (!get(id, playerName))
+	{
+		return false;
+	}
+	m_lobbies.push_back(Lobby());
+	auto & lobby = m_lobbies.back();
+	lobby.setName(playerName + "'s Lobby");
+	lobby.addPlayer(id, playerName);
+	this->output(id, { "Created a lobby with name: \"", lobby.getName(), "\"" });
+
+	//send out lobby created message to everyone else
+	constexpr auto PACKET_TYPE = app::net::PacketType::LOBBY_WAS_CREATED;
+	for (int i = 0; i < m_totalConnections; i++)
+	{
+		if (i == id) { continue; }
+		//send the vector of servers to client whenever a new server is added or just send a single lobby that was added.
+		if (!this->send(i, PACKET_TYPE) || !this->send(i, lobby))
+		{
+			this->output(id, { "Send Lobby[", lobby.getName(), "] to player[", std::to_string(i), "]" });
+		}
+		else
+		{
+			break;
+		}
 	}
 	return true;
+}
+
+bool app::net::Server::processLobbyGetAll(int id)
+{
+	// Request to get all the lobbies has been sent
+	if (!send(id, m_lobbies.size()))
+	{
+		return false;
+	}
+	for (auto const & lobby : m_lobbies)
+	{
+		if (!send(id, lobby))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool app::net::Server::processDefault(int id)
+{
+	this->output(id, "No processing done for this packet type");
+	return false;
 }
 
 void app::net::Server::outputIP(IPaddress const & ip)
@@ -428,6 +470,23 @@ void app::net::Server::outputIP(IPaddress const & ip)
 	app::Console::write({ "Successfully resolved server host to IP: ", toString(dotQuad[0]), ".", toString(dotQuad[1]), ".", toString(dotQuad[2]), ".", toString(dotQuad[3]) });
 	app::Console::writeLine({ " port ", std::to_string(SDLNet_Read16(&ip.port)) });
 	app::Console::writeLine();
+}
+
+void app::net::Server::output(int ID, std::string const & msg) const
+{
+	if constexpr (s_DEBUG_MODE)
+	{
+		app::Console::writeLine({ "ID[", std::to_string(ID), "]: ", msg });
+	}
+}
+
+void app::net::Server::output(int ID, std::initializer_list<std::string> const & msgs) const
+{
+	if constexpr (s_DEBUG_MODE)
+	{
+		app::Console::write({ "ID[", std::to_string(ID), "]: " });
+		app::Console::writeLine(msgs);
+	}
 }
 
 

@@ -2,6 +2,7 @@
 #define _MAIN_MENU_SCENE_H
 
 #include "BaseScene.h"
+#include "network/Client.h"
 
 namespace app::sce
 {

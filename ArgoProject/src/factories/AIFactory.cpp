@@ -8,6 +8,7 @@
 #include "components/Dimensions.h"
 #include "components/AirMotion.h"
 #include "components/Animator.h"
+#include "components/Layer.h"
 #include "components/Render.h"
 #include "components/Input.h"
 #include "components/Commandable.h"
@@ -66,6 +67,10 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	animator.perFrame = 90.0f / (std::max(animator.numOfFrames.x, 1) * std::max(animator.numOfFrames.y, 1));
 	m_registry.assign<decltype(animator)>(entity, std::move(animator));
 
+	auto layer = comp::Layer();
+	layer.zIndex = 90u;
+	m_registry.assign<decltype(layer)>(entity, std::move(layer));
+
 	auto render = comp::Render();
 	render.texture = m_resourceManager.getTexture(app::res::TextureKey::DebugAnimation);
 	m_registry.assign<decltype(render)>(entity, std::move(render));
@@ -93,9 +98,10 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	collision.bounds = cute::c2AABB();
 	m_registry.assign<decltype(collision)>(entity, std::move(collision));
 
-	auto health = comp::Health();
-	health.health = 1;
-	m_registry.assign<decltype(health)>(entity, std::move(health));
+	//TODO: uncomment
+	//auto health = comp::Health();
+	//health.health = 1;
+	//m_registry.assign<decltype(health)>(entity, std::move(health));
 
 	auto player = comp::PlatformDrop();
 	m_registry.assign<decltype(player)>(entity, std::move(player));
