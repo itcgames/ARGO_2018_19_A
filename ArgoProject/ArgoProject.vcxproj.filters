@@ -168,9 +168,6 @@
     <ClCompile Include="src\deleters\SdlDeleter.cpp">
       <Filter>Source Files\deleters</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\WindowParameters.cpp">
-      <Filter>Source Files\graphics</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\Texture.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
@@ -548,6 +545,15 @@
     </ClCompile>
     <ClCompile Include="src\factories\FacadeFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\WindowParameters.cpp">
+      <Filter>Source Files\parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Countdown.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\CountdownSystem.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -964,6 +970,12 @@
     </ClInclude>
     <ClInclude Include="src\factories\FacadeFactory.h">
       <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Countdown.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\CountdownSystem.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

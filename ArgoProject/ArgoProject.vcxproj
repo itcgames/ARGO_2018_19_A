@@ -189,6 +189,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\Collision.cpp" />
     <ClCompile Include="src\components\Commandable.cpp" />
     <ClCompile Include="src\components\Camera.cpp" />
+    <ClCompile Include="src\components\Countdown.cpp" />
     <ClCompile Include="src\components\CurrentGround.cpp" />
     <ClCompile Include="src\components\Damage.cpp" />
     <ClCompile Include="src\components\Dash.cpp" />
@@ -297,6 +298,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\BaseSystem.cpp" />
     <ClCompile Include="src\systems\CollisionSystem.cpp" />
     <ClCompile Include="src\systems\CommandSystem.cpp" />
+    <ClCompile Include="src\systems\CountdownSystem.cpp" />
     <ClCompile Include="src\systems\CurrentGroundSystem.cpp" />
     <ClCompile Include="src\systems\DashSystem.cpp" />
     <ClCompile Include="src\systems\DebugSystem.cpp" />
@@ -335,6 +337,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\Collision.h" />
     <ClInclude Include="src\components\Commandable.h" />
     <ClInclude Include="src\components\Camera.h" />
+    <ClInclude Include="src\components\Countdown.h" />
     <ClInclude Include="src\components\CurrentGround.h" />
     <ClInclude Include="src\components\Damage.h" />
     <ClInclude Include="src\components\Dash.h" />
@@ -437,6 +440,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\systems\BaseSystem.h" />
     <ClInclude Include="src\systems\CollisionSystem.h" />
     <ClInclude Include="src\systems\CommandSystem.h" />
+    <ClInclude Include="src\systems\CountdownSystem.h" />
     <ClInclude Include="src\systems\CurrentGroundSystem.h" />
     <ClInclude Include="src\systems\DashSystem.h" />
     <ClInclude Include="src\systems\DebugSystem.h" />

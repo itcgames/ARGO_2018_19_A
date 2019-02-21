@@ -81,15 +81,6 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 		size = app::math::Vector2f(40000000, 50);
 		entities.push_back(hazardFactory.create());
 	}
-	// ai
-	{
-		auto ai = fact::AIFactory(position, size);
-
-		position = app::math::Vector2f(750, 200);
-		size = app::math::Vector2f(100, 100);
-		auto aiEntities = ai.create();
-		entities.insert(entities.end(), aiEntities.begin(), aiEntities.end());
-	} 
 	// platforms
 	{
 		auto platformFactory = fact::PlatformFactory(position, size);
