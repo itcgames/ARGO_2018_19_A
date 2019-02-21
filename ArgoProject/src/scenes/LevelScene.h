@@ -32,10 +32,12 @@ namespace app::sce
 	private: // Private Member Functions
 		void onInputDestroyed(app::Registry & registry, app::Entity inputEntity);
 		void reset();
+		void levelComplete();
 	private: // Private Static Variables
 	private: // Private Member Variables
 		std::vector<app::Entity> m_entities;
 		bool m_resetSignal;
+		bool m_completeSignal;
 	};
 }
 
