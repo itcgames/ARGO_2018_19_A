@@ -104,7 +104,8 @@ C:\windows\system32\xcopy /Y "$(SolutionDir)deps\bin\$(IntDir)*.pdg" "$(TargetDi
 C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir)"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>C:\windows\system32\xcopy /C /Y /E "$(GDRIVE_ASSETS)\*.png" "$(ProjectDir)res"</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -126,7 +127,8 @@ C:\windows\system32\xcopy /Y "$(SolutionDir)deps\bin\$(IntDir)*.pdg" "$(TargetDi
 C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir)"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>C:\windows\system32\xcopy /C /Y /E "$(GDRIVE_ASSETS)\*.png" "$(ProjectDir)res"</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -154,7 +156,8 @@ C:\windows\system32\xcopy /Y "$(SolutionDir)deps\bin\$(IntDir)*.pdg" "$(TargetDi
 C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir)"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>C:\windows\system32\xcopy /C /Y /E "$(GDRIVE_ASSETS)\*.png" "$(ProjectDir)res"</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -182,7 +185,8 @@ C:\windows\system32\xcopy /Y "$(SolutionDir)deps\bin\$(IntDir)*.pdg" "$(TargetDi
 C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir)"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>C:\windows\system32\xcopy /C /Y /E "$(GDRIVE_ASSETS)\*.png" "$(ProjectDir)res"</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
