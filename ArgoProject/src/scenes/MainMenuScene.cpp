@@ -6,14 +6,17 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 	: BaseScene(sceneManagerType
 		, util::make_vector<UpdateSystem>({
 			UpdateSystem(std::in_place_type<app::sys::InputSystem>),
+			UpdateSystem(std::in_place_type<app::sys::ButtonSystem>),
+			UpdateSystem(std::in_place_type<app::sys::WidgetNavigationSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CameraSystem>),
-			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType)
+			UpdateSystem(std::in_place_type<app::sys::NetworkSystem>),
+			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType),
+			UpdateSystem(std::in_place_type<app::sys::DestroySystem>)
 			})
 		, util::make_vector<DrawSystem>({
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
-			DrawSystem(std::in_place_type<app::sys::RenderSystem>),
-			DrawSystem(std::in_place_type<app::sys::RenderTextSystem>)
+			DrawSystem(std::in_place_type<app::sys::RenderSystem>)
 			}))
 {
 	if constexpr (DEBUG_MODE)
@@ -24,7 +27,7 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 
 void app::sce::MainMenuScene::start()
 {
-	auto const & entities = fact::sce::MainMenuSceneFactory().create();
+	auto const & entities = fact::sce::MainMenuSceneFactory(m_sceneManagerType).create();
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("MAIN MENU SCENE: Creating entities");

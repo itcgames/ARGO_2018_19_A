@@ -14,9 +14,12 @@
 #include "systems/DashSystem.h"
 #include "systems/DebugSystem.h"
 #include "systems/CollisionSystem.h"
-#include "systems/RenderTextSystem.h"
 #include "systems/HealthSystem.h"
 #include "systems/CurrentGroundSystem.h"
+#include "systems/NetworkSystem.h"
+#include "systems/ButtonSystem.h"
+#include "systems/WidgetNavigationSystem.h"
+#include "systems/DestroySystem.h"
 #include "systems/AISystem.h"
 
 namespace app::sce
@@ -37,12 +40,15 @@ namespace app::sce
 			, sys::HealthSystem
 			, sys::AISystem
 			, sys::CurrentGroundSystem
+			, sys::NetworkSystem
+			, sys::ButtonSystem
+			, sys::WidgetNavigationSystem
+			, sys::DestroySystem
 		>;
 		using UpdateSystems = std::vector<UpdateSystem>;
 		using DrawSystem = std::variant<
 			  sys::RenderSystem
 			, sys::AnimatorSystem
-			, sys::RenderTextSystem
 		>;
 		using DrawSystems = std::vector<DrawSystem>;
 		using ResourceManager = app::res::ResourceManager<true>;

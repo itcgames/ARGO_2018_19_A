@@ -8,6 +8,7 @@
 #include "components/Render.h"
 #include "components/Collision.h"
 #include "components/Impenetrable.h"
+#include "components/Layer.h"
 
 app::fact::WallFactory::WallFactory(app::math::Vector2f const & pos, app::math::Vector2f const & size)
 	: m_position(pos), m_size(size)
@@ -27,6 +28,10 @@ app::Entity const app::fact::WallFactory::create()
 	dimensions.size = m_size;
 	dimensions.origin = dimensions.size / 2.0f;
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
+
+	auto layer = comp::Layer();
+	layer.zIndex = 130u;
+	m_registry.assign<decltype(layer)>(entity, std::move(layer));
 
 	auto render = comp::Render();
 	render.texture = m_resourceManager.getTexture(app::res::TextureKey::Debug);
