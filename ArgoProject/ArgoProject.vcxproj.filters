@@ -630,6 +630,9 @@
     <ClCompile Include="src\commands\AttackCommand.cpp">
       <Filter>Source Files\commands</Filter>
     </ClCompile>
+    <ClCompile Include="src\factories\entities\LevelDemoFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -1114,6 +1117,9 @@
     </ClInclude>
     <ClInclude Include="src\commands\AttackCommand.h">
       <Filter>Header Files\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\entities\LevelDemoFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

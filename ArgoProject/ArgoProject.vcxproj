@@ -250,6 +250,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\entities\ButtonFactory.cpp" />
     <ClCompile Include="src\factories\entities\CameraFactory.cpp" />
     <ClCompile Include="src\factories\entities\EnemyFactory.cpp" />
+    <ClCompile Include="src\factories\entities\LevelDemoFactory.cpp" />
     <ClCompile Include="src\factories\entities\LobbyDisplayFactory.cpp" />
     <ClCompile Include="src\factories\entities\modals\AskNameFactory.cpp" />
     <ClCompile Include="src\factories\entities\GoalFactory.cpp" />
@@ -419,6 +420,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\entities\ButtonFactory.h" />
     <ClInclude Include="src\factories\entities\CameraFactory.h" />
     <ClInclude Include="src\factories\entities\EnemyFactory.h" />
+    <ClInclude Include="src\factories\entities\LevelDemoFactory.h" />
     <ClInclude Include="src\factories\entities\LobbyDisplayFactory.h" />
     <ClInclude Include="src\factories\entities\modals\AskNameFactory.h" />
     <ClInclude Include="src\factories\entities\GoalFactory.h" />

@@ -22,6 +22,7 @@ namespace app::sce
 	public: // Public Member Functions
 		virtual void start() final override;
 		virtual void end() final override;
+		void startDemo(app::Registry & registry, app::Entity inputEntity);
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
