@@ -3,6 +3,7 @@
 
 #include "components/Location.h"
 #include "components/Dimensions.h"
+#include "components/Layer.h"
 #include "components/Render.h"
 #include "components/Node.h"
 #include "components/Collision.h"
@@ -29,6 +30,10 @@ app::Entity const app::fact::NodeFactory::create()
 	auto collision = comp::Collision();
 	collision.bounds = cute::c2Circle();
 	m_registry.assign<decltype(collision)>(entity, std::move(collision));
+
+	auto layer = comp::Layer();
+	layer.zIndex = 50u;
+	m_registry.assign<decltype(layer)>(entity, std::move(layer));
 
 	auto render = comp::Render();
 	render.texture = m_resourceManager.getTexture(app::res::TextureKey::Debug);

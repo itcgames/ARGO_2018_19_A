@@ -8,6 +8,7 @@
 #include "components/Dimensions.h"
 #include "components/AirMotion.h"
 #include "components/Animator.h"
+#include "components/Layer.h"
 #include "components/Render.h"
 #include "components/Input.h"
 #include "components/Commandable.h"
@@ -65,6 +66,10 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	// while dealing with edge case of any of the frames being zero
 	animator.perFrame = 90.0f / (std::max(animator.numOfFrames.x, 1) * std::max(animator.numOfFrames.y, 1));
 	m_registry.assign<decltype(animator)>(entity, std::move(animator));
+
+	auto layer = comp::Layer();
+	layer.zIndex = 90u;
+	m_registry.assign<decltype(layer)>(entity, std::move(layer));
 
 	auto render = comp::Render();
 	render.texture = m_resourceManager.getTexture(app::res::TextureKey::DebugAnimation);
