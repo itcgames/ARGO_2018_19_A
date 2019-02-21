@@ -229,6 +229,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\deleters\SdlTtfDeleter.cpp" />
     <ClCompile Include="src\factories\BaseFactory.cpp" />
     <ClCompile Include="src\factories\EntitiesFactory.cpp" />
+    <ClCompile Include="src\factories\entities\AnimatedImageFactory.cpp" />
     <ClCompile Include="src\factories\entities\BackgroundImageFactory.cpp" />
     <ClCompile Include="src\factories\entities\CameraFactory.cpp" />
     <ClCompile Include="src\factories\entities\EnemyFactory.cpp" />
@@ -315,6 +316,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\HealthSystem.cpp" />
     <ClCompile Include="src\systems\InputSystem.cpp" />
     <ClCompile Include="src\systems\CameraSystem.cpp" />
+    <ClCompile Include="src\systems\LoadingSystem.cpp" />
     <ClCompile Include="src\systems\MotionSystem.cpp" />
     <ClCompile Include="src\systems\RenderSystem.cpp" />
     <ClCompile Include="src\systems\RenderTextSystem.cpp" />
@@ -371,6 +373,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\deleters\SdlTtfDeleter.h" />
     <ClInclude Include="src\factories\BaseFactory.h" />
     <ClInclude Include="src\factories\EntitiesFactory.h" />
+    <ClInclude Include="src\factories\entities\AnimatedImageFactory.h" />
     <ClInclude Include="src\factories\entities\BackgroundImageFactory.h" />
     <ClInclude Include="src\factories\entities\CameraFactory.h" />
     <ClInclude Include="src\factories\entities\EnemyFactory.h" />
@@ -451,6 +454,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\systems\HealthSystem.h" />
     <ClInclude Include="src\systems\InputSystem.h" />
     <ClInclude Include="src\systems\CameraSystem.h" />
+    <ClInclude Include="src\systems\LoadingSystem.h" />
     <ClInclude Include="src\systems\MotionSystem.h" />
     <ClInclude Include="src\systems\RenderSystem.h" />
     <ClInclude Include="src\systems\RenderTextSystem.h" />

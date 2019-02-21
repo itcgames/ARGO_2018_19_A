@@ -21,6 +21,7 @@ namespace app::sce
 	public: // Public Member Functions
 		virtual void start() final override;
 		virtual void end() final override;
+		virtual void update(app::time::seconds const & dt) final override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -31,6 +32,7 @@ namespace app::sce
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
+		bool m_splashFinished = false;
 	};
 }
 

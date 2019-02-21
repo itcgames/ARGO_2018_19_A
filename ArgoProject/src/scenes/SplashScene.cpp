@@ -8,7 +8,8 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 			UpdateSystem(std::in_place_type<app::sys::InputSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CameraSystem>),
-			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType)
+			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType),
+			UpdateSystem(std::in_place_type<app::sys::LoadingSystem>)
 		})
 
 		, util::make_vector<DrawSystem>({
@@ -17,6 +18,8 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 			}))
 {
 	using TextureKey = app::res::TextureKey;
+	m_resourceManager.loadTexture(TextureKey::Splash, "./res/Animations/splash.png");
+	m_resourceManager.loadTexture(TextureKey::Loading, "./res/Animations/loading.png");
 	m_resourceManager.loadTexture(TextureKey::Debug, "./res/image.png");
 	m_resourceManager.loadTexture(TextureKey::DebugBig, "./res/BigImage.png");
 	m_resourceManager.loadTexture(TextureKey::DebugAnimation, "./res/Animations/test.png");
@@ -26,10 +29,6 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("SPLASH SCENE Constructed");
-		while (!m_resourceManager.isLoaded())
-		{
-			Console::writeLine("SPLASH SCENE: Waiting for resources to load");
-		}
 	}
 }
 
@@ -57,5 +56,14 @@ void app::sce::SplashScene::end()
 		});
 	}
 	m_registry.reset();
+}
+
+void app::sce::SplashScene::update(app::time::seconds const & dt)
+{
+	if (m_resourceManager.isLoaded() && m_splashFinished)
+		m_sceneManagerType = (SceneType::MainMenu);
+	else if (m_splashFinished)
+	{
+	}
 }
 

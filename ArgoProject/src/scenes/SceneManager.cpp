@@ -15,7 +15,7 @@ app::sce::SceneManager::SceneManager()
 		, std::make_pair(SceneType::TutorialLevel, Scene(std::in_place_type<sce::TutorialLevelScene>, m_targetScene))
 	}))
 	, m_currentScene(SceneType::Count)
-	, m_targetScene(SceneType::Level)
+	, m_targetScene(SceneType::Splash)
 {
 }
 
