@@ -43,6 +43,7 @@ namespace app::net
 		bool send(const int& _int);
 		bool get(int& _int);
 
+		constexpr std::vector<Lobby> const & getLobbies() const { return m_lobbies; }
 		void setLobbies(std::list<Lobby> && lobbies);
 	public: // Public Static Variables
 		constexpr static auto s_SERVER_IP = "localhost";

@@ -582,6 +582,9 @@
     <ClCompile Include="src\factories\entities\ImageFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
+    <ClCompile Include="src\commands\buttons\ButtonLobbySelectCreateLobbyCommand.cpp">
+      <Filter>Source Files\commands\buttons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -1018,6 +1021,9 @@
     </ClInclude>
     <ClInclude Include="src\factories\entities\ImageFactory.h">
       <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\buttons\ButtonLobbySelectCreateLobbyCommand.h">
+      <Filter>Header Files\commands\buttons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

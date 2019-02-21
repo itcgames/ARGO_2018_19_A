@@ -25,6 +25,7 @@ std::vector<app::Entity> app::fact::mod::AskNameFactory::create()
 	// Set widget navigation.
 	auto params = app::par::ButtonFactoryParameters();
 	auto cancelCommand = std::make_shared<cmnd::ButtonMainMenuMultiplayerConnectCancelCommand>(m_callingEntity);
+	auto confirmCommand = std::make_shared<cmnd::ButtonMainMenuMultiplayerConnectConfirmCommand>(m_callingEntity, DEFAULT_NAME, m_sceneManagerControl);
 
 	auto const & sizePerLetter = math::Vector2f{ 20.0f, 40.0f };
 	{
@@ -39,7 +40,7 @@ std::vector<app::Entity> app::fact::mod::AskNameFactory::create()
 		auto const & stepSize = math::Vector2f{ static_cast<float>(params.text.size()), 1.0f };
 		params.size = (sizePerLetter * stepSize);
 		params.border = math::Vector2f{ 20.0f, 4.0f };
-		params.command = std::make_unique<cmnd::ButtonMainMenuMultiplayerConnectConfirmCommand>(m_callingEntity, DEFAULT_NAME, m_sceneManagerControl);
+		params.command = confirmCommand;
 		params.zIndex = 220u;
 		entities.push_back(fact::ButtonFactory(params).create());
 	}
