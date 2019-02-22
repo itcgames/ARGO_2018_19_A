@@ -1,25 +1,25 @@
-#ifndef _FACTORY_ENEMY_H
-#define _FACTORY_ENEMY_H
+﻿#ifndef _AXE_ATTACK_FACTORY_H
+#define _AXE_ATTACK_FACTORY_H
 
 #include "../EntityFactory.h"
 
 namespace app::fact
 {
-	class EnemyFactory : public EntityFactory
+	class AxeAttackFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		EnemyFactory(math::Vector2f const & position, math::Vector2f const & size);
-		virtual ~EnemyFactory() = default;
+		AxeAttackFactory(app::Entity const _entity);
+		~AxeAttackFactory() = default;
 
-		EnemyFactory(EnemyFactory const &) = default;
-		EnemyFactory & operator=(EnemyFactory const &) = default;
+		AxeAttackFactory(AxeAttackFactory const &) = default;
+		AxeAttackFactory & operator=(AxeAttackFactory const &) = default;
 
-		EnemyFactory(EnemyFactory &&) = default;
-		EnemyFactory & operator=(EnemyFactory &&) = default;
+		AxeAttackFactory(AxeAttackFactory &&) = default;
+		AxeAttackFactory & operator=(AxeAttackFactory &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		virtual app::Entity const create() final override;
+		virtual app::Entity const create() override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -30,9 +30,8 @@ namespace app::fact
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
-		math::Vector2f const & m_position;
-		math::Vector2f const & m_size;
+		app::Entity const m_entity;
 	};
 }
 
-#endif // !_FACTORY_ENEMY_H
+#endif // !_AXE_ATTACK_FACTORY_H

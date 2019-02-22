@@ -20,6 +20,7 @@
 #include "components/DoubleJump.h"
 #include "components/AI.h"
 #include "components/Node.h"
+#include "components/Attack.h"
 
 //visitors
 #include "visitors/CollisionUpdateVisitor.h"
@@ -48,6 +49,7 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 	enemyEnemyCollisions();	
 	playerHazardCollisions();
 	checkAINodeCollisions();
+	attackEnemyCollisions();
 }
 
 void app::sys::CollisionSystem::groundCollisions()
@@ -215,6 +217,26 @@ void app::sys::CollisionSystem::checkAINodeCollisions()
 	});
 }
 
+void app::sys::CollisionSystem::attackEnemyCollisions()
+{
+	//look through all attacks
+	m_registry.view<comp::Collision, comp::Attack, comp::Location, comp::Dimensions, comp::Damage>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Attack & attack, comp::Location & location, comp::Dimensions & dimensions, comp::Damage & damage)
+	{
+		//look through all enemies
+		m_registry.view<comp::Collision, comp::Enemy, comp::Health>(entt::persistent_t())
+			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Enemy & enemy, comp::Health & health)
+		{
+			bool const & collided = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+			if (collided)
+			{
+				health.health -= damage.damage;
+			}
+
+		});
+	});
+}
+
 void app::sys::CollisionSystem::dashCollisions()
 {
 	//view player
@@ -363,3 +385,4 @@ void app::sys::CollisionSystem::playerHazardCollisions()
 		});
 	});
 }
+

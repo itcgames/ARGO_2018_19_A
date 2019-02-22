@@ -1,27 +1,26 @@
-﻿#ifndef _FACTORY_PLAYER_H
-#define _FACTORY_PLAYER_H
+﻿#ifndef _COMP_FOLLOW_ENTITY_H
+#define _COMP_FOLLOW_ENTITY_H
 
-#include "../EntityFactory.h"
-
-namespace app::fact
+namespace app::comp
 {
-	class PlayerFactory : public EntityFactory
+	struct FollowEntity
 	{
 	public: // Constructors/Destructor/Assignments
-		PlayerFactory();
-		virtual ~PlayerFactory() = default;
+		FollowEntity() = default;
+		FollowEntity(FollowEntity const &) = default;
+		FollowEntity(FollowEntity &&) = default;
 
-		PlayerFactory(PlayerFactory const &) = default;
-		PlayerFactory & operator=(PlayerFactory const &) = default;
+		~FollowEntity() = default;
 
-		PlayerFactory(PlayerFactory &&) = default;
-		PlayerFactory & operator=(PlayerFactory &&) = default;
+		FollowEntity & operator=(FollowEntity const &) = default;
+		FollowEntity & operator=(FollowEntity &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		virtual app::Entity const create() override;
 	public: // Public Static Variables
 	public: // Public Member Variables
+		app::Entity entity;
+		math::Vector2f offset = { 0.0f, 0.0f };
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -33,4 +32,4 @@ namespace app::fact
 	};
 }
 
-#endif // !_FACTORY_PLAYER_H
+#endif // !_COMP_FOLLOW_ENTITY_H

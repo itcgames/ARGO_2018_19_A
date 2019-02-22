@@ -22,6 +22,7 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 	m_resourceManager.loadTexture(TextureKey::DebugBig, "./res/BigImage.png");
 	m_resourceManager.loadTexture(TextureKey::DebugAnimation, "./res/Animations/test.png");
 	m_resourceManager.loadTexture(TextureKey::DebugEnemyAnimation, "./res/Animations/testEnemy.png");
+	m_resourceManager.loadTexture(TextureKey::DebugColBox, "./res/Debug/colBox.png");
 	using FontKey = app::res::FontKey;
 	m_resourceManager.loadFont(FontKey::Debug, "./res/Fonts/arial.ttf");
 	if constexpr (DEBUG_MODE)

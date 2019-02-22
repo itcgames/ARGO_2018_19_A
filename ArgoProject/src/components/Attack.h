@@ -1,27 +1,25 @@
-﻿#ifndef _FACTORY_PLAYER_H
-#define _FACTORY_PLAYER_H
+﻿#ifndef _COMP_ATTACK_H
+#define _COMP_ATTACK_H
 
-#include "../EntityFactory.h"
-
-namespace app::fact
+namespace app::comp
 {
-	class PlayerFactory : public EntityFactory
+	struct Attack
 	{
 	public: // Constructors/Destructor/Assignments
-		PlayerFactory();
-		virtual ~PlayerFactory() = default;
+		Attack() = default;
+		Attack(Attack const &) = default;
+		Attack(Attack &&) = default;
 
-		PlayerFactory(PlayerFactory const &) = default;
-		PlayerFactory & operator=(PlayerFactory const &) = default;
+		~Attack() = default;
 
-		PlayerFactory(PlayerFactory &&) = default;
-		PlayerFactory & operator=(PlayerFactory &&) = default;
+		Attack & operator=(Attack const &) = default;
+		Attack & operator=(Attack &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		virtual app::Entity const create() override;
 	public: // Public Static Variables
 	public: // Public Member Variables
+
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -33,4 +31,4 @@ namespace app::fact
 	};
 }
 
-#endif // !_FACTORY_PLAYER_H
+#endif // !_COMP_ATTACK_H

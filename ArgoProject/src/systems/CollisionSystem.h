@@ -32,6 +32,7 @@ namespace app::sys
 		void playerHazardCollisions();
 		void checkPlatformCollisions();
 		void checkAINodeCollisions();
+		void attackEnemyCollisions();
 
 	public: // Public Static Variables
 	public: // Public Member Variables

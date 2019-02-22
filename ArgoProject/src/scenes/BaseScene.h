@@ -21,6 +21,7 @@
 #include "systems/WidgetNavigationSystem.h"
 #include "systems/DestroySystem.h"
 #include "systems/AISystem.h"
+#include "systems/FollowEntitySystem.h"
 
 namespace app::sce
 {
@@ -44,6 +45,7 @@ namespace app::sce
 			, sys::ButtonSystem
 			, sys::WidgetNavigationSystem
 			, sys::DestroySystem
+			, sys::FollowEntitySystem
 		>;
 		using UpdateSystems = std::vector<UpdateSystem>;
 		using DrawSystem = std::variant<

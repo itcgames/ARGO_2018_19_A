@@ -23,8 +23,10 @@
 #include "commands/FaceLeftCommand.h"
 #include "commands/FaceRightCommand.h"
 #include "commands/DropCommand.h"
+#include "commands/AttackCommand.h"
 #include "components/StateMachine.h"
 #include "components/Health.h"
+#include "components/CharacterType.h"
 
 app::fact::PlayerFactory::PlayerFactory()
 	: EntityFactory()
@@ -79,6 +81,7 @@ app::Entity const app::fact::PlayerFactory::create()
 	input.keyDownCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::MoveCommand>(entity, 180, 20)));
 	input.keyPressedCommands.insert(std::pair(SDLK_SPACE, std::make_shared<app::cmnd::JumpCommand>(entity, 400.0f)));
 	input.keyPressedCommands.insert(std::pair(SDLK_z, std::make_shared<app::cmnd::DashCommand>(entity)));
+	input.keyPressedCommands.insert(std::pair(SDLK_x, std::make_shared<app::cmnd::AttackCommand>(entity)));
 	input.keyPressedCommands.insert(std::pair(SDLK_RIGHT, std::make_shared<app::cmnd::FaceRightCommand>(entity)));
 	input.keyPressedCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::FaceLeftCommand>(entity)));
 	input.keyDownCommands.insert(std::pair(SDLK_DOWN, std::make_shared<app::cmnd::DropCommand>(entity)));
@@ -112,6 +115,11 @@ app::Entity const app::fact::PlayerFactory::create()
 
 	auto ground = comp::CurrentGround();
 	m_registry.assign<decltype(ground)>(entity, std::move(ground));
+
+	//NOTE: Type should be set on character select screen
+	auto charType = comp::CharacterType();
+	charType.type = comp::CharacterType::Type::AXE;
+	m_registry.assign<decltype(charType)>(entity, std::move(charType));
 
 	return entity;
 }

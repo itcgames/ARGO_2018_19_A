@@ -1,11 +1,10 @@
 ﻿#include "stdafx.h"
 #include "AttackCommand.h"
-#include "utilities/cute_c2.h"
-#include "components/CharacterType.h"
-#include "components/Destroy.h"
-#include "components/Collision.h"
 #include "components/Location.h"
 #include "components/Dimensions.h"
+#include "components/CharacterType.h"
+#include "factories/entities/AxeAttackFactory.h"
+
 
 app::cmnd::AttackCommand::AttackCommand(app::Entity const _entity)
 	: m_entity(_entity)
@@ -29,22 +28,9 @@ void app::cmnd::AttackCommand::execute()
 			//motion.angularSpeed = 0.0f;
 			//m_registry.assign<decltype(motion)>(entity, std::move(motion));
 
-			auto destroy = comp::Destroy();
-			destroy.timeToLive = 0.5f;
-			m_registry.assign<decltype(destroy)>(m_entity, std::move(destroy));
+			auto axeAttackFactory = fact::AxeAttackFactory(m_entity);
+			axeAttackFactory.create();
 
-			//location
-			auto location = comp::Location();
-			m_registry.assign<decltype(location)>(m_entity, std::move(location));
-
-			//dimensions
-			auto dimensions = comp::Dimensions();
-			m_registry.assign<decltype(dimensions)>(m_entity, std::move(dimensions));
-
-
-			auto collision = comp::Collision();
-			collision.bounds = cute::c2AABB();
-			m_registry.assign<decltype(collision)>(m_entity, std::move(collision));
 
 		}
 			break;
