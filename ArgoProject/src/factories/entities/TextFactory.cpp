@@ -2,6 +2,7 @@
 #include "TextFactory.h"
 #include "components/Location.h"
 #include "components/Dimensions.h"
+#include "components/Layer.h"
 #include "components/Text.h"
 
 app::fact::TextFactory::TextFactory(math::Vector2f const & position, math::Vector2f const & size, std::string const & text)
@@ -24,6 +25,10 @@ app::Entity const app::fact::TextFactory::create()
 	dimensions.size = m_size;
 	dimensions.origin = dimensions.size / 2.0f;
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
+
+	auto layer = comp::Layer();
+	layer.zIndex = 110u;
+	m_registry.assign<decltype(layer)>(entity, std::move(layer));
 
 	auto text = comp::Text();
 	text.font = m_resourceManager.getFont(app::res::FontKey::Debug);

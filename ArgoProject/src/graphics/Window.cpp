@@ -110,7 +110,6 @@ void app::gra::Window::render(app::gra::RenderRect const & rect) const
 		static_cast<int32_t>(origin.x * scale.x),
 		static_cast<int32_t>(origin.y * scale.y)
 	};
-
 	SDL_RenderCopyEx(m_renderer.get(), rect.getTexture(), source.has_value() ? &source.value() : nullptr, &destination, rect.getRotation(), &center, FLIP_FLAG);
 }
 

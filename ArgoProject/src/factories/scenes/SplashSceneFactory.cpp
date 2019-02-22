@@ -1,28 +1,24 @@
 ﻿#include "stdafx.h"
 #include "SplashSceneFactory.h"
 #include "factories/entities/CameraFactory.h"
-#include "factories/entities/BackgroundImageFactory.h"
 #include "factories/entities/AnimatedImageFactory.h"
+#include "parameters/AnimatedImageFactoryParameters.h"
 
 std::vector<app::Entity> app::fact::sce::SplashSceneFactory::create()
 {
 	auto entities = std::vector<app::Entity>();
 	entities.push_back(fact::CameraFactory().create());
-
+	auto params = app::par::AnimatedImageFactoryParameters(); 
 	{
-		auto const & size = math::Vector2f{ 1366.0f, 768.0f };
-		auto const & origin = size / 2.0f;
-		auto const & position = math::Vector2f{ 0.0f, 0.0f };
-		auto const & textureKey = app::res::TextureKey::Splash;
-		entities.push_back(fact::AnimatedImageFactory(position, size, origin, textureKey, math::Vector2f(200,150), math::Vector2f(3,0)).create());
-	}
-
-	{
-		auto const & size = math::Vector2f{ 1366.0f, 768.0f };
-		auto const & origin = size / 2.0f;
-		auto const & position = math::Vector2f{ 0.0f, 0.0f };
-		auto const & textureKey = app::res::TextureKey::Loading;
-		entities.push_back(fact::AnimatedImageFactory(position, size, origin, textureKey, math::Vector2f(200, 150), math::Vector2f(3, 0)).create());
+		params.size = math::Vector2f{ 1366.0f, 768.0f };
+		params.origin = params.size / 2.0f;
+		params.position = math::Vector2f{ 0.0f, 0.0f };
+		params.textureKey = app::res::TextureKey::Splash;
+		params.zIndex = 50u;
+		params.frameSize = math::Vector2f(200, 150);
+		params.frameNumber = math::Vector2f(4, 0);
+		params.animationLoop = false;
+		entities.push_back(fact::AnimatedImageFactory(params).create());
 	}
 
 	return entities;

@@ -9,7 +9,7 @@ namespace app::fact
 	{
 	public: // Constructors/Destructor/Assignments
 		AIFactory(math::Vector2f const & pos, math::Vector2f const & size);
-		~AIFactory() = default;
+		virtual ~AIFactory() = default;
 
 		AIFactory(AIFactory const &) = default;
 		AIFactory & operator=(AIFactory const &) = default;

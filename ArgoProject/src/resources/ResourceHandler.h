@@ -86,7 +86,7 @@ namespace app::res
 		if (m_resourceMap.find(key) != m_resourceMap.end()) { return; }
 		if constexpr (_Async)
 		{
-			m_resourceMap.insert(std::make_pair(key, ManagedResource()));
+			m_resourceMap.insert(std::make_pair(key, std::move(ManagedResource())));
 			auto & managedResource = m_resourceMap.at(key);
 			managedResource.thread = std::thread(&_Loader::load, std::ref(managedResource.resource), file);
 		}

@@ -29,6 +29,8 @@ namespace app::sys
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
+		void checkPlayerHealth();
+		void checkDestructibleHealth();
 	private: // Private Static Variables
 	private: // Private Member Variables
 	};

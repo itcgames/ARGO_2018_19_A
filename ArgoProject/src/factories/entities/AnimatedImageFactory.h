@@ -2,6 +2,7 @@
 #define _ANIMATED_IMAGE_FACTORY_H
 
 #include "../EntityFactory.h"
+#include "parameters/AnimatedImageFactoryParameters.h"
 
 namespace app::fact
 {
@@ -9,12 +10,7 @@ namespace app::fact
 	{
 	public: // Constructors/Destructor/Assignments
 		AnimatedImageFactory(
-			math::Vector2f const & position
-			, math::Vector2f const & size
-			, math::Vector2f const & origin
-			, app::res::TextureKey const & textureKey
-			, math::Vector2f const & frameSize
-			, math::Vector2f const & noFrames);
+			app::par::AnimatedImageFactoryParameters const & params);
 		virtual ~AnimatedImageFactory() = default;
 			
 		AnimatedImageFactory(AnimatedImageFactory const &) = default;
@@ -42,6 +38,8 @@ namespace app::fact
 		app::res::TextureKey const & m_textureKey;
 		math::Vector2f const & m_frameSize;
 		math::Vector2f const & m_noFrames;
+		bool const & m_animationLoop;
+		std::uint32_t const & m_zIndex;
 	};
 }
 

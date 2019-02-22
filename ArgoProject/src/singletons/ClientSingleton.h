@@ -1,7 +1,7 @@
 ﻿#ifndef _CLIENT_SINGLETON_H
 #define _CLIENT_SINGLETON_H
 
-#include "client/Client.h"
+#include "network/Client.h"
 
 namespace app::sin
 {

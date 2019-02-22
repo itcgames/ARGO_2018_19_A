@@ -38,6 +38,8 @@ namespace app::inp
 		bool isButtonUp(std::initializer_list<ButtonType> const & buttons) const;
 		bool isButtonPressed(ButtonType const & button) const;
 		bool isButtonPressed(std::initializer_list<ButtonType> const & buttons) const;
+		bool isButtonUnpressed(ButtonType const & button) const;
+		bool isButtonUnpressed(std::initializer_list<ButtonType> const & buttons) const;
 		constexpr math::Vector2i const getPosition() const { return m_mouse; }
 	public: // Public Static Variables
 	public: // Public Member Variables
@@ -132,6 +134,29 @@ namespace app::inp
 				return mapValue && !prevValue;
 			}
 			return mapValue;
+		}
+		return false;
+	}
+
+	template<typename ButtonType>
+	bool Mousehandler<ButtonType>::isButtonUnpressed(ButtonType const & button) const
+	{
+		return app::inp::Mousehandler<ButtonType>::isButtonDown(m_keyPrevMap, button)
+			&& app::inp::Mousehandler<ButtonType>::isButtonUp(m_keyNowMap, button);
+	}
+
+	template<typename ButtonType>
+	bool Mousehandler<ButtonType>::isButtonUnpressed(std::initializer_list<ButtonType> const & buttons) const
+	{
+		for (auto const &[mapKey, mapValue] : m_keyNowMap)
+		{
+			if (std::find_if(buttons.begin(), buttons.end(), [&mapKey](ButtonType const & button) { return mapKey == button; }) == buttons.end()) { continue; }
+			if (auto const & prevItt = m_keyPrevMap.find(mapKey); prevItt != m_keyPrevMap.end())
+			{
+				auto const &[prevKey, prevValue] = *prevItt;
+				return !mapValue && prevValue;
+			}
+			return !mapValue;
 		}
 		return false;
 	}

@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "SplashScene.h"
 #include "factories/scenes/SplashSceneFactory.h"
+#include "components/AnimatedImage.h"
 
 app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 	: BaseScene(sceneManagerType
@@ -9,7 +10,8 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 			UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CameraSystem>),
 			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType),
-			UpdateSystem(std::in_place_type<app::sys::LoadingSystem>)
+			UpdateSystem(std::in_place_type<app::sys::LoadingSystem>),
+			UpdateSystem(std::in_place_type<app::sys::DestroySystem>)
 		})
 
 		, util::make_vector<DrawSystem>({
@@ -34,6 +36,7 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 
 void app::sce::SplashScene::start()
 {
+	m_registry.destruction<comp::AnimatedImage>().connect<app::sce::SplashScene, &app::sce::SplashScene::onAnimatedImageDestroy>(this);
 	auto const & entities = fact::sce::SplashSceneFactory().create();
 	if constexpr (DEBUG_MODE)
 	{
@@ -47,6 +50,7 @@ void app::sce::SplashScene::start()
 
 void app::sce::SplashScene::end()
 {
+	m_registry.destruction<comp::AnimatedImage>().disconnect<app::sce::SplashScene, &app::sce::SplashScene::onAnimatedImageDestroy>(this);
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("SPLASH SCENE: Destroying entities");
@@ -60,15 +64,15 @@ void app::sce::SplashScene::end()
 
 void app::sce::SplashScene::update(app::time::seconds const & dt)
 {
+	BaseScene::update(dt);
 	if (m_resourceManager.isLoaded() && m_splashFinished)
-		m_sceneManagerType = (SceneType::MainMenu);
+		m_sceneManagerType = SceneType::MainMenu;
 	else if (m_splashFinished)
-	{
+		m_sceneManagerType = SceneType::Loading;
+}
 
-	}
-	else
-	{
-		BaseScene::update(dt);
-	}
+void app::sce::SplashScene::onAnimatedImageDestroy(app::Registry & registry, app::Entity const entity)
+{
+	m_splashFinished = true;
 }
 

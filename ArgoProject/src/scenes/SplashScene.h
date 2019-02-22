@@ -30,6 +30,7 @@ namespace app::sce
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
+		void onAnimatedImageDestroy(app::Registry & registry, app::Entity const entity);
 	private: // Private Static Variables
 	private: // Private Member Variables
 		bool m_splashFinished = false;
