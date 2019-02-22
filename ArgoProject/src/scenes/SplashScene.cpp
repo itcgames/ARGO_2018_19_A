@@ -64,6 +64,7 @@ void app::sce::SplashScene::update(app::time::seconds const & dt)
 		m_sceneManagerType = (SceneType::MainMenu);
 	else if (m_splashFinished)
 	{
+
 	}
 }
 
