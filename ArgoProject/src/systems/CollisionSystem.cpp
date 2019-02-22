@@ -31,11 +31,11 @@ app::sys::CollisionSystem::CollisionSystem()
 	: BaseSystem()
 {
 	//prepare these components
-	m_registry.prepare<comp::Input, comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>();
-	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Motion>();
-	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::AirMotion>();
-	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Dash>();
-	m_registry.prepare<comp::Collision, comp::Impenetrable, comp::Location, comp::Dimensions>();
+	//m_registry.prepare<comp::Input, comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>();
+	//m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Motion>();
+	//m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::AirMotion>();
+	//m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Dash>();
+	//m_registry.prepare<comp::Collision, comp::Impenetrable, comp::Location, comp::Dimensions>();
 }
 
 void app::sys::CollisionSystem::update(app::time::seconds const & dt)
@@ -55,7 +55,7 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 void app::sys::CollisionSystem::groundCollisions()
 {
 	//view player
-	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Motion>(entt::persistent_t())
+	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Motion>()
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions, comp::Motion & motion)
 	{
 		//view everything with collisions
@@ -88,9 +88,9 @@ void app::sys::CollisionSystem::groundCollisions()
 
 void app::sys::CollisionSystem::airCollisions()
 {
-	auto dashJumpView = m_registry.view<comp::Dashable, comp::DoubleJump, comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>(entt::persistent_t());
+	auto dashJumpView = m_registry.view<comp::Dashable, comp::DoubleJump, comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>();
 	//view player
-	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>(entt::persistent_t())
+	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>()
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions, comp::AirMotion & airMotion, comp::CurrentGround & ground)
 	{
 		//view everything with collisions
@@ -140,9 +140,9 @@ void app::sys::CollisionSystem::airCollisions()
 
 void app::sys::CollisionSystem::checkPlatformCollisions()
 {
-	auto dashJumpView = m_registry.view<comp::Dashable, comp::DoubleJump, comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>(entt::persistent_t());
+	auto dashJumpView = m_registry.view<comp::Dashable, comp::DoubleJump, comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>();
 	//view player
-	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround, comp::PlatformDrop>(entt::persistent_t())
+	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround, comp::PlatformDrop>()
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions,
 			comp::AirMotion & airMotion, comp::CurrentGround & ground, comp::PlatformDrop & dropCheck)
 	{
@@ -201,10 +201,10 @@ void app::sys::CollisionSystem::checkPlatformCollisions()
 
 void app::sys::CollisionSystem::checkAINodeCollisions()
 {
-	m_registry.view<comp::Collision, comp::AI>(entt::persistent_t())
+	m_registry.view<comp::Collision, comp::AI>()
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::AI & ai)
 	{
-		m_registry.view<comp::Collision, comp::Node>(entt::persistent_t())
+		m_registry.view<comp::Collision, comp::Node>()
 			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Node & node)
 		{
 			bool const & collisionCheck = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
@@ -220,11 +220,11 @@ void app::sys::CollisionSystem::checkAINodeCollisions()
 void app::sys::CollisionSystem::dashCollisions()
 {
 	//view player
-	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Dash>(entt::persistent_t())
+	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Dash>()
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Input & input, comp::Location & location, comp::Dimensions & dimensions, comp::Dash & dash)
 	{
 		//view everything with collisions
-		m_registry.view<comp::Collision, comp::Impenetrable, comp::Location, comp::Dimensions>(entt::persistent_t())
+		m_registry.view<comp::Collision, comp::Impenetrable, comp::Location, comp::Dimensions>()
 			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Impenetrable const & secImpenetrable, comp::Location & secLocation, comp::Dimensions & secDimensions)
 		{
 			//if we are not the player
@@ -254,7 +254,7 @@ void app::sys::CollisionSystem::enemyWallCollisions()
 {
 	auto groundView = m_registry.view<comp::Location, comp::Dimensions>();
 	//view enemy
-	m_registry.view<comp::Collision, comp::Enemy, comp::Location, comp::Dimensions, comp::Motion, comp::CurrentGround>(entt::persistent_t())
+	m_registry.view<comp::Collision, comp::Enemy, comp::Location, comp::Dimensions, comp::Motion, comp::CurrentGround>()
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Enemy & enemy, comp::Location & location, comp::Dimensions & dimensions,
 			comp::Motion & motion, comp::CurrentGround & ground)
 	{
@@ -296,12 +296,12 @@ void app::sys::CollisionSystem::enemyWallCollisions()
 void app::sys::CollisionSystem::enemyEnemyCollisions()
 {
 	//view enemy
-	m_registry.view<comp::Collision, comp::Enemy, comp::Location, comp::Dimensions, comp::Motion>(entt::persistent_t())
+	m_registry.view<comp::Collision, comp::Enemy, comp::Location, comp::Dimensions, comp::Motion>()
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Enemy & enemy, comp::Location & location, comp::Dimensions & dimensions,
 			comp::Motion & motion)
 	{
 		//view everything with collisions
-		m_registry.view<comp::Collision, comp::Enemy, comp::Location, comp::Dimensions, comp::Motion>(entt::persistent_t())
+		m_registry.view<comp::Collision, comp::Enemy, comp::Location, comp::Dimensions, comp::Motion>()
 			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Enemy & secEnemy, comp::Location & secLocation, comp::Dimensions & secDimensions,
 				comp::Motion & secMotion)
 		{
@@ -338,7 +338,7 @@ void app::sys::CollisionSystem::enemyPlayerCollisions()
 
 void app::sys::CollisionSystem::updateCollisionBoxes()
 {
-	m_registry.view<comp::Collision, comp::Location, comp::Dimensions>(entt::persistent_t())
+	m_registry.view<comp::Collision, comp::Location, comp::Dimensions>()
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions)
 	{
 		std::visit(vis::CollisionUpdateVisitor{ location, dimensions }, collision.bounds);

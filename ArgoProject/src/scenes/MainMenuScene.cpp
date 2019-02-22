@@ -6,6 +6,8 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 	: BaseScene(sceneManagerType
 		, util::make_vector<UpdateSystem>({
 			UpdateSystem(std::in_place_type<app::sys::InputSystem>),
+			UpdateSystem(std::in_place_type<app::sys::ButtonSystem>),
+			UpdateSystem(std::in_place_type<app::sys::WidgetNavigationSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
 			UpdateSystem(std::in_place_type<app::sys::MotionSystem>),
 			UpdateSystem(std::in_place_type<app::sys::AirMotionSystem>),
@@ -16,12 +18,13 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 			UpdateSystem(std::in_place_type<app::sys::AISystem>),
 			UpdateSystem(std::in_place_type<app::sys::CurrentGroundSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CollisionSystem>),
-			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType)
+			UpdateSystem(std::in_place_type<app::sys::NetworkSystem>),
+			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType),
+			UpdateSystem(std::in_place_type<app::sys::DestroySystem>)
 			})
 		, util::make_vector<DrawSystem>({
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
-			DrawSystem(std::in_place_type<app::sys::RenderSystem>),
-			DrawSystem(std::in_place_type<app::sys::RenderTextSystem>)
+			DrawSystem(std::in_place_type<app::sys::RenderSystem>)
 			}))
 {
 	if constexpr (DEBUG_MODE)
@@ -32,7 +35,7 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 
 void app::sce::MainMenuScene::start()
 {
-	auto const & entities = fact::sce::MainMenuSceneFactory().create();
+	auto const & entities = fact::sce::MainMenuSceneFactory(m_sceneManagerType).create();
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("MAIN MENU SCENE: Creating entities");
@@ -48,10 +51,11 @@ void app::sce::MainMenuScene::end()
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("MAIN MENU SCENE: Destroying entities");
-		m_registry.each([](app::Entity const entity)
+		m_registry.each([this](app::Entity const entity)
 		{
 			Console::writeLine({ "  Destroyed entity[", std::to_string(entity), "]" });
+			m_registry.destroy(entity);
 		});
 	}
-	m_registry.reset();
+	//m_registry.reset();
 }

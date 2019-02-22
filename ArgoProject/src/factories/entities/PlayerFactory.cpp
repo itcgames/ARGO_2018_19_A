@@ -13,6 +13,7 @@
 #include "components/Collision.h"
 #include "components/PlatformDrop.h"
 #include "components/CurrentGround.h"
+#include "components/Layer.h"
 #include "components/DoubleJump.h"
 #include "components/Dashable.h"
 
@@ -63,6 +64,10 @@ app::Entity const app::fact::PlayerFactory::create()
 	animator.perFrame = 90.0f / (std::max(animator.numOfFrames.x, 1) * std::max(animator.numOfFrames.y, 1));
 	m_registry.assign<decltype(animator)>(entity, std::move(animator));
 
+	auto layer = comp::Layer();
+	layer.zIndex = 90u;
+	m_registry.assign<decltype(layer)>(entity, std::move(layer));
+
 	auto render = comp::Render();
 	render.texture = m_resourceManager.getTexture(app::res::TextureKey::DebugAnimation);
 	m_registry.assign<decltype(render)>(entity, std::move(render));
@@ -70,8 +75,8 @@ app::Entity const app::fact::PlayerFactory::create()
 	auto input = comp::Input();
 	input.isRight = true;
 	//Here is where commands get binded to keys
-	input.keyDownCommands.insert(std::pair(SDLK_RIGHT, std::make_shared<app::cmnd::MoveCommand>(entity, 0, 20)));
-	input.keyDownCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::MoveCommand>(entity, 180, 20)));
+	input.keyDownCommands.insert(std::pair(SDLK_RIGHT, std::make_shared<app::cmnd::MoveCommand>(entity, 0.0f, 20.0f)));
+	input.keyDownCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::MoveCommand>(entity, 180.0f, 20.0f)));
 	input.keyPressedCommands.insert(std::pair(SDLK_SPACE, std::make_shared<app::cmnd::JumpCommand>(entity, 400.0f)));
 	input.keyPressedCommands.insert(std::pair(SDLK_z, std::make_shared<app::cmnd::DashCommand>(entity)));
 	input.keyPressedCommands.insert(std::pair(SDLK_RIGHT, std::make_shared<app::cmnd::FaceRightCommand>(entity)));

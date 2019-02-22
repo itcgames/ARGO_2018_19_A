@@ -30,9 +30,9 @@ void app::sys::HealthSystem::checkDestructibleHealth()
 	{
 		if (health.health <= 0)
 		{
-			if (destructible.attatchedArea.has_value())
+			if (destructible.attachedArea.has_value())
 			{
-				auto target = destructible.attatchedArea.value();
+				auto target = destructible.attachedArea.value();
 				if (m_registry.valid(target)) { m_registry.destroy(target); }
 			}
 			if (m_registry.valid(entity)) {

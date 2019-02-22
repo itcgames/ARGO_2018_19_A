@@ -29,8 +29,10 @@ namespace app::gra
 		void render(std::shared_ptr<SDL_Texture> texture, SDL_Rect const & rect, std::optional<SDL_Rect> source = std::nullopt) const;
 		void display() const;
 
-		inline constexpr bool const & isOpen() { return m_open; }
-		inline constexpr app::del::UPtrRenderer const & getRenderer() { return m_renderer; }
+		inline constexpr auto const & isOpen() { return m_open; }
+		inline constexpr auto const & getRenderer() { return m_renderer; }
+		inline constexpr auto const & getWidth() { return m_width; }
+		inline constexpr auto const & getHeight() { return m_height; }
 	public: // Public Member Variables
 	protected: // Protected Member Functions
 	protected: // Protected Member Variables

@@ -5,6 +5,7 @@
 #include "components/Location.h"
 #include "components/Dimensions.h"
 #include "components/Animator.h"
+#include "components/Layer.h"
 #include "components/Render.h"
 #include "components/Collision.h"
 #include "components/Damage.h"
@@ -28,6 +29,10 @@ app::Entity const app::fact::HazardFactory::create()
 	dimensions.size = m_size;
 	dimensions.origin = dimensions.size / 2.0f;
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
+
+	auto layer = comp::Layer();
+	layer.zIndex = 120u;
+	m_registry.assign<decltype(layer)>(entity, std::move(layer));
 
 	auto render = comp::Render();
 	render.texture = m_resourceManager.getTexture(app::res::TextureKey::Debug);
