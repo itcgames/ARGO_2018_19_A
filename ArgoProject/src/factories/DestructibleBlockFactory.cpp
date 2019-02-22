@@ -10,6 +10,7 @@
 #include "components/Impenetrable.h"
 #include "components/Destructible.h"
 
+
 app::fact::DestructibleBlockFactory::DestructibleBlockFactory(app::par::DestructibleParameters param)
 	: parameters(param)
 {
@@ -32,6 +33,8 @@ app::Entity const app::fact::DestructibleBlockFactory::create()
 	dimensions.origin = dimensions.size / 2.0f;
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
 
+
+
 	auto render = comp::Render();
 	render.texture = m_resourceManager.getTexture(app::res::TextureKey::Debug);
 	m_registry.assign<decltype(render)>(entity, std::move(render));
@@ -50,7 +53,7 @@ app::Entity const app::fact::DestructibleBlockFactory::create()
 	auto destructible = comp::Destructible();
 	if (parameters.attachedArea.has_value())
 	{
-		destructible.attatchedArea = parameters.attachedArea.value();
+		destructible.attachedArea = parameters.attachedArea.value();
 	}
 	m_registry.assign<decltype(destructible)>(entity, std::move(destructible));
 
