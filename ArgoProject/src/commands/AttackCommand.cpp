@@ -22,16 +22,8 @@ void app::cmnd::AttackCommand::execute()
 		{
 		case comp::CharacterType::Type::AXE:
 		{
-			//auto motion = comp::AirMotion();
-			//motion.speed = 0.0f;
-			//motion.direction = 0.0f;
-			//motion.angularSpeed = 0.0f;
-			//m_registry.assign<decltype(motion)>(entity, std::move(motion));
-
 			auto axeAttackFactory = fact::AxeAttackFactory(m_entity);
 			axeAttackFactory.create();
-
-
 		}
 			break;
 		case comp::CharacterType::Type::BOMB:
