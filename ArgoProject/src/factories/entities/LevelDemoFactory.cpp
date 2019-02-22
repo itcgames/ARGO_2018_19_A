@@ -9,6 +9,12 @@
 
 #include "components/Camera.h"
 
+
+app::fact::LevelDemoFactory::LevelDemoFactory(app::Entity camera)
+	: cameraEntity(camera)
+{
+}
+
 std::vector<app::Entity> app::fact::LevelDemoFactory::create()
 {
 	auto entities = std::vector<app::Entity>();
@@ -24,13 +30,14 @@ std::vector<app::Entity> app::fact::LevelDemoFactory::create()
 
 	auto level = fact::LevelFactory().create();
 	entities.insert(entities.end(), level.begin(), level.end());
-
-	m_registry.view<comp::Camera>()
-		.each([&, this](app::Entity const entity, comp::Camera & camera)
+	auto cameraView = m_registry.view<comp::Camera>();
+	if (cameraView.contains(cameraEntity))
 	{
+		auto & camera = cameraView.get(cameraEntity);
 		camera.target = aiEntities.back();
 		camera.clampRect = math::Rectf({ -800.0f, 300.0f }, { 2000.0f, 1000.0f });
 		camera.internalClamp = math::Vector2f(20.0f, 60.0f);
-	});
+	}
+
 	return entities;
 }

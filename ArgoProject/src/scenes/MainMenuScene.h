@@ -4,6 +4,8 @@
 #include "BaseScene.h"
 #include "network/Client.h"
 
+#include "factories/entities/LevelDemoFactory.h"
+
 namespace app::sce
 {
 	class MainMenuScene : public BaseScene
@@ -33,6 +35,7 @@ namespace app::sce
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
+		std::optional<fact::LevelDemoFactory> m_demoFactory;
 	};
 }
 

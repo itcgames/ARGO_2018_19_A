@@ -8,7 +8,7 @@ namespace app::fact
 	class LevelDemoFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		LevelDemoFactory() = default;
+		LevelDemoFactory(app::Entity camera);
 		~LevelDemoFactory() = default;
 
 		LevelDemoFactory(LevelDemoFactory const &) = default;
@@ -30,6 +30,7 @@ namespace app::fact
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
+		app::Entity cameraEntity;
 	};
 }
 

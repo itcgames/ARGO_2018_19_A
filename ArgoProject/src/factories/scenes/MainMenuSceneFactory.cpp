@@ -13,9 +13,10 @@
 #include "commands/buttons/ButtonMainMenuMultiplayerConnectCommand.h"
 #include "network/Client.h"
 
-app::fact::sce::MainMenuSceneFactory::MainMenuSceneFactory(app::sce::SceneType & targetScene)
+app::fact::sce::MainMenuSceneFactory::MainMenuSceneFactory(app::sce::SceneType & targetScene, std::optional<app::fact::LevelDemoFactory> & levelFactory)
 	: EntitiesFactory()
 	, m_targetScene(targetScene)
+	, m_levelFactory(levelFactory)
 {
 }
 
@@ -38,7 +39,9 @@ std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 
 		auto cameraParams = app::par::CameraParameters();
 		cameraParams.targetEntity = background;
-		entities.push_back(fact::CameraFactory(std::move(cameraParams)).create());
+		auto cameraEntity = fact::CameraFactory(std::move(cameraParams)).create();
+		entities.push_back(cameraEntity);
+		m_levelFactory.emplace(cameraEntity);
 	}
 	{
 		auto const & sizePerLetter = math::Vector2f{ 20.0f, 40.0f };

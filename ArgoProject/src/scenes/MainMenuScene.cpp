@@ -37,7 +37,7 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 
 void app::sce::MainMenuScene::start()
 {
-	auto const & entities = fact::sce::MainMenuSceneFactory(m_sceneManagerType).create();
+	auto const & entities = fact::sce::MainMenuSceneFactory(m_sceneManagerType, m_demoFactory).create();
 	m_registry.destruction<comp::Destroy>().connect<MainMenuScene, &MainMenuScene::startDemo>(this);
 	if constexpr (DEBUG_MODE)
 	{
@@ -61,12 +61,12 @@ void app::sce::MainMenuScene::end()
 			m_registry.destroy(entity);
 		});
 	}
-	//m_registry.reset();
 }
 
 void app::sce::MainMenuScene::startDemo(app::Registry & registry, app::Entity inputEntity)
 {
-	auto entities = fact::LevelDemoFactory().create();
+	if (!m_demoFactory.has_value()) { throw std::exception("Demo factory must be initialized"); }
+	auto entities = m_demoFactory->create();
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("MAIN MENU SCENE: Creating entities");
