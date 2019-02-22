@@ -32,7 +32,7 @@ app::Entity const app::fact::FacadeFactory::create()
 	m_registry.assign<decltype(layer)>(entity, std::move(layer));
 
 	auto render = comp::Render();
-	render.texture = m_resourceManager.getTexture(app::res::TextureKey::Debug);
+	render.texture = m_resourceManager.getTexture(app::res::TextureKey::LevelWall);
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	return entity;

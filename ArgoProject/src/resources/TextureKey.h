@@ -10,6 +10,9 @@ namespace app::res
 		DebugHuge,
 		DebugAnimation,
 		DebugEnemyAnimation,
+		AxeRun,
+		HazardSpikes,
+		LevelWall,
 		Count // Keep this one at the bottom of the enum list
 	};
 }

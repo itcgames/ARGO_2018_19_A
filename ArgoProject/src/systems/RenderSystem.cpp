@@ -43,10 +43,10 @@ void app::sys::RenderSystem::update(app::time::seconds const & dt)
 			if (renderView.contains(entity))
 			{
 				auto [location, dimensions, render] = renderView.get<comp::Location, comp::Dimensions, comp::Render>(entity);
-				m_renderRect.setPosition(location.position);
+				m_renderRect.setPosition(location.position + render.offset);
 				m_renderRect.setRotation(location.orientation);
-				m_renderRect.setSize(dimensions.size);
-				m_renderRect.setOrigin(dimensions.origin);
+				m_renderRect.setSize(dimensions.size + (render.border * 2.0f));
+				m_renderRect.setOrigin(dimensions.origin + render.border);
 				m_renderRect.setTexture(render.texture);
 				m_renderRect.setSourceRect(render.source);
 				m_window.render(m_renderRect);
