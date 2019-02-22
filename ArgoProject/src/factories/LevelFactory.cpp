@@ -32,10 +32,6 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 		position = math::Vector2f(1000, 450);
 		size = math::Vector2f(50, 50);
 		entities.push_back(enemyFactory.create());
-
-		//position = math::Vector2f(630, 200);
-		//size = math::Vector2f(50, 50);
-		//entities.push_back(enemyFactory.create());
 	}
 
 	// walls
@@ -97,7 +93,7 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 	{
 		auto goal = fact::GoalFactory(position, size);
 
-		position = app::math::Vector2f(1300, 500);
+		position = app::math::Vector2f(1500, 500);
 		size = app::math::Vector2f(50, 50);
 		entities.push_back(goal.create());
 	}

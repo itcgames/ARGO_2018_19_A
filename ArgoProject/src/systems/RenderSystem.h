@@ -32,6 +32,7 @@ namespace app::sys
 	private: // Private Member Functions
 		void onLayerConstruction(app::Registry & registry, app::Entity const entity);
 	private: // Private Static Variables
+		static bool s_dependencyConnected;
 	private: // Private Member Variables
 		app::gra::Window & m_window;
 		app::gra::RenderRect m_renderRect;

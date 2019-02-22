@@ -19,7 +19,7 @@ namespace app::comp
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::optional<app::Entity> attatchedArea = std::nullopt;
+		std::optional<app::Entity> attachedArea = std::nullopt;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables

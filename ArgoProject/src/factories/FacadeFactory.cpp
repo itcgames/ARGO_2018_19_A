@@ -6,6 +6,7 @@
 #include "components/Dimensions.h"
 #include "components/Layer.h"
 #include "components/Render.h"
+#include "components/Layer.h"
 
 app::fact::FacadeFactory::FacadeFactory(app::math::Vector2f const & pos, app::math::Vector2f const & size)
 	: m_position(pos), m_size(size)

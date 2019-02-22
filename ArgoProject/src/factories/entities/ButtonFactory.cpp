@@ -18,7 +18,9 @@ app::fact::ButtonFactory::ButtonFactory(par::ButtonFactoryParameters const & par
 
 app::Entity const app::fact::ButtonFactory::create()
 {
-	app::Entity const entity = m_params.entity.value_or(EntityFactory::create());
+	app::Entity const entity = m_params.entity.has_value()
+		? m_params.entity.value()
+		: EntityFactory::create();
 
 	auto location = comp::Location();
 	location.position = m_params.position;

@@ -55,12 +55,13 @@ void app::sce::MainMenuScene::end()
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("MAIN MENU SCENE: Destroying entities");
-		m_registry.each([](app::Entity const entity)
+		m_registry.each([this](app::Entity const entity)
 		{
 			Console::writeLine({ "  Destroyed entity[", std::to_string(entity), "]" });
+			m_registry.destroy(entity);
 		});
 	}
-	m_registry.reset();
+	//m_registry.reset();
 }
 
 void app::sce::MainMenuScene::startDemo(app::Registry & registry, app::Entity inputEntity)

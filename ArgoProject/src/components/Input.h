@@ -12,7 +12,7 @@ namespace app::comp
 		~Input() = default;
 
 		Input(Input const &) = default;
-		Input(Input &&) = default;
+		Input(Input &&) noexcept = default;
 
 		Input & operator=(Input const &) = default;
 		Input & operator=(Input &&) = default;
@@ -23,7 +23,7 @@ namespace app::comp
 	public: // Public Member Variables
 		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyDownCommands;
 		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyPressedCommands;
-		bool isRight;
+		bool isRight = true;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables

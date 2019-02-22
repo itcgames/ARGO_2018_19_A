@@ -14,7 +14,7 @@ namespace app::comp
 		AI(AI const &) = default;
 		AI & operator=(AI const &) = default;
 
-		AI(AI &&) = default;
+		AI(AI &&) noexcept = default;
 		AI & operator=(AI &&) = default;
 
 	public: // Public Static Functions

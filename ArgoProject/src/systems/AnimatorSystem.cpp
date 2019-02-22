@@ -19,9 +19,10 @@ void app::sys::AnimatorSystem::update(app::time::seconds const & dt)
 			else if (animator.loop) { animator.currentFrame = zero; animator.time = 0.0f; }
 			else { animator.time = 0.0f; }
 		}
-		m_rect.x = animator.position.x + (animator.frameSize.x * animator.currentFrame.x);
-		m_rect.y = animator.position.y + (animator.frameSize.y * animator.currentFrame.y);
-		m_rect.w = animator.frameSize.x; m_rect.h = animator.frameSize.y;
+		m_rect.x = animator.position.x + static_cast<std::int32_t>(animator.frameSize.x * animator.currentFrame.x);
+		m_rect.y = animator.position.y + static_cast<std::int32_t>(animator.frameSize.y * animator.currentFrame.y);
+		m_rect.w = static_cast<std::int32_t>(animator.frameSize.x);
+		m_rect.h = static_cast<std::int32_t>(animator.frameSize.y);
 		render.source = m_rect;
 	});
 }

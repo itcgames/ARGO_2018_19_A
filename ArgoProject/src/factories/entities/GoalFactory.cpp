@@ -1,6 +1,6 @@
 ﻿#include "stdafx.h"
-#include "utilities/cute_c2.h"
 #include "GoalFactory.h"
+#include "utilities/cute_c2.h"
 
 #include "components/Location.h"
 #include "components/Dimensions.h"
@@ -8,6 +8,7 @@
 #include "components/Render.h"
 #include "components/Collision.h"
 #include "components/Goal.h"
+#include "components/Layer.h"
 
 app::fact::GoalFactory::GoalFactory(math::Vector2f const & position, math::Vector2f const & size)
 	: m_position(position), m_size(size)

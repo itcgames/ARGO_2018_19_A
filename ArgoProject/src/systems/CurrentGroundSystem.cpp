@@ -12,6 +12,7 @@
 
 void app::sys::CurrentGroundSystem::update(app::time::seconds const & dt)
 {
+	auto inputView = m_registry.view<comp::Input>();
 	auto groundView = m_registry.view<comp::Location, comp::Dimensions>();
 	m_registry.view<comp::Location, comp::Dimensions, comp::Motion, comp::CurrentGround>()
 		.each([&, this](app::Entity const entity, comp::Location & location, comp::Dimensions size, comp::Motion & motion, comp::CurrentGround & ground)
@@ -34,7 +35,7 @@ void app::sys::CurrentGroundSystem::update(app::time::seconds const & dt)
 		}
 		else 
 		{
-			if (m_registry.has<comp::Input>(entity))
+			if (inputView.contains(entity))
 			{
 				auto airMotion = comp::AirMotion();
 				airMotion.speed = motion.speed;

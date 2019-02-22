@@ -55,11 +55,11 @@ std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 		entities.push_back(fact::ButtonFactory(params).create());
 	}
 	{
-		//auto const & position = app::math::Vector2f(750, 200);
-		//auto const & sizePerLetter = math::Vector2f{ 20.0f, 40.0f };
-		//auto const & text = std::string("Are you not entertained!");
-		//auto const & stepSize = math::Vector2f{ static_cast<float>(text.size()), 1.0f };
-		//entities.push_back(fact::TextFactory(position, sizePerLetter * stepSize, text).create());
+		auto const & position = app::math::Vector2f(750, 100);
+		auto const & sizePerLetter = math::Vector2f{ 20.0f, 40.0f };
+		auto const & text = std::string("Are you not entertained!");
+		auto const & stepSize = math::Vector2f{ static_cast<float>(text.size()), 1.0f };
+		entities.push_back(fact::TextFactory(position, sizePerLetter * stepSize, text).create());
 	}
 	return entities;
 }

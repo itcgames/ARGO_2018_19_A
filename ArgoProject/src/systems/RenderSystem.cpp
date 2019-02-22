@@ -10,15 +10,21 @@
 #include "components/Layer.h"
 #include "components/Camera.h"
 
+bool app::sys::RenderSystem::s_dependencyConnected = false;
+
 app::sys::RenderSystem::RenderSystem()
 	: BaseSystem()
 	, m_window(app::sin::Window::get())
 {
-	entt::connect<comp::Layer>(m_registry.construction<comp::Render>());
-	entt::connect<comp::Layer>(m_registry.construction<comp::Text>());
-	m_registry.construction<comp::Layer>().connect<app::sys::RenderSystem, &app::sys::RenderSystem::onLayerConstruction>(this);
-	m_registry.prepare<comp::Location, comp::Dimensions, comp::Layer, comp::Render>();
-	m_registry.prepare<comp::Location, comp::Dimensions, comp::Layer, comp::Text>();
+	if (!s_dependencyConnected)
+	{
+		s_dependencyConnected = true;
+		//entt::connect<comp::Layer>(m_registry.construction<comp::Render>());
+		//entt::connect<comp::Layer>(m_registry.construction<comp::Text>());
+		m_registry.construction<comp::Layer>().connect<app::sys::RenderSystem, &app::sys::RenderSystem::onLayerConstruction>(this);
+		//m_registry.prepare<comp::Location, comp::Dimensions, comp::Layer, comp::Render>();
+		//m_registry.prepare<comp::Location, comp::Dimensions, comp::Layer, comp::Text>();
+	}
 }
 
 void app::sys::RenderSystem::update(app::time::seconds const & dt)
@@ -29,8 +35,8 @@ void app::sys::RenderSystem::update(app::time::seconds const & dt)
 		m_view.position = camera.center;
 		m_view.size = camera.size;
 		m_window.setView(m_view);
-		auto renderView = m_registry.view<comp::Layer, comp::Location, comp::Dimensions, comp::Render>(entt::persistent_t());
-		auto textView = m_registry.view<comp::Layer, comp::Location, comp::Dimensions, comp::Text>(entt::persistent_t());
+		auto renderView = m_registry.view<comp::Layer, comp::Location, comp::Dimensions, comp::Render>();
+		auto textView = m_registry.view<comp::Layer, comp::Location, comp::Dimensions, comp::Text>();
 		m_registry.view<comp::Layer>()
 			.each([&, this](app::Entity const entity, comp::Layer & layer)
 		{

@@ -24,8 +24,11 @@ namespace app::comp
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		State state;
-		std::optional<app::Entity> up, down, left, right;
+		State state = State::Deactive;
+		std::optional<app::Entity> up = std::nullopt
+			, down = std::nullopt
+			, left = std::nullopt
+			, right = std::nullopt;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables

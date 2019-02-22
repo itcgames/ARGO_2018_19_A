@@ -10,6 +10,8 @@
 #include "components/Health.h"
 #include "components/Impenetrable.h"
 #include "components/Destructible.h"
+#include "components/Layer.h"
+
 
 app::fact::DestructibleBlockFactory::DestructibleBlockFactory(app::par::DestructibleParameters param)
 	: parameters(param)
@@ -55,7 +57,7 @@ app::Entity const app::fact::DestructibleBlockFactory::create()
 	auto destructible = comp::Destructible();
 	if (parameters.attachedArea.has_value())
 	{
-		destructible.attatchedArea = parameters.attachedArea.value();
+		destructible.attachedArea = parameters.attachedArea.value();
 	}
 	m_registry.assign<decltype(destructible)>(entity, std::move(destructible));
 
