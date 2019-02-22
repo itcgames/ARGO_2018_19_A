@@ -13,9 +13,14 @@ int main(int argc, char** argv)
 		app::Console::writeLine({ "ERROR: SDL_ttf Failed to initialize [", TTF_GetError(), "]" });
 		return EXIT_FAILURE;
 	}
-	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+	if (Mix_Init(MIX_INIT_OGG | MIX_INIT_MP3) != NULL)
 	{
-		app::Console::writeLine({ "ERROR: SDL Failed to initialize [", Mix_GetError(), "]" });
+		app::Console::writeLine({ "ERROR: SDL_mixer Failed to initialize [", Mix_GetError(), "]" });
+		return EXIT_FAILURE;
+	}
+	if(Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 2048) != NULL)
+	{
+		app::Console::writeLine({ "ERROR: SDL_mixer Failed to open audio channels [", Mix_GetError(), "]" });
 		return EXIT_FAILURE;
 	}
 

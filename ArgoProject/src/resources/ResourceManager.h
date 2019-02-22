@@ -13,8 +13,8 @@ namespace app::res
 	{
 	private: // Private typedefs/enums/usings
 		using TextureHandler = app::res::ResourceHandler<TextureKey, app::gra::Texture, _Async>;
-		using FontHandler = app::res::ResourceHandler<FontKey, app::gra::Font, _Async>; // change `int` when font loading is created
-		using AudioHandlerMusic = app::res::ResourceHandler<AudioKey, app::gra::AudioBufferMusic, _Async>; // change `int` when audio loading is created
+		using FontHandler = app::res::ResourceHandler<FontKey, app::gra::Font, _Async>;
+		using AudioHandlerMusic = app::res::ResourceHandler<AudioKey, app::gra::AudioBufferMusic, _Async>;
 		using AudioHandlerSFX = app::res::ResourceHandler<AudioKey, app::gra::AudioBufferSFX, _Async>;
 	public: // Constructors/Destructor/Assignments
 		ResourceManager() = default;

@@ -47,7 +47,7 @@ void app::del::SdlDeleter::operator()(Mix_Music * pMusic) const
 	}
 	catch(std::exception e)
 	{
-		std::cout << e.what() << std::endl;
+		app::Console::writeLine({ "ERROR: Exception in 'app::del::SdlDeleter::operator()' [", e.what(), "]" });
 	}
 
 }
