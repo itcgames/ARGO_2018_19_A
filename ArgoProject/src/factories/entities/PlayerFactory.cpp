@@ -77,8 +77,8 @@ app::Entity const app::fact::PlayerFactory::create()
 	auto input = comp::Input();
 	input.isRight = true;
 	//Here is where commands get binded to keys
-	input.keyDownCommands.insert(std::pair(SDLK_RIGHT, std::make_shared<app::cmnd::MoveCommand>(entity, 0, 20)));
-	input.keyDownCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::MoveCommand>(entity, 180, 20)));
+	input.keyDownCommands.insert(std::pair(SDLK_RIGHT, std::make_shared<app::cmnd::MoveCommand>(entity, 0.0f, 20.0f)));
+	input.keyDownCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::MoveCommand>(entity, 180.0f, 20.0f)));
 	input.keyPressedCommands.insert(std::pair(SDLK_SPACE, std::make_shared<app::cmnd::JumpCommand>(entity, 400.0f)));
 	input.keyPressedCommands.insert(std::pair(SDLK_z, std::make_shared<app::cmnd::DashCommand>(entity)));
 	input.keyPressedCommands.insert(std::pair(SDLK_x, std::make_shared<app::cmnd::AttackCommand>(entity)));

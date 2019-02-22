@@ -49,7 +49,7 @@ void app::sys::DebugSystem::serverTesting()
 		//define the type of packet we are about to send
 		app::net::PacketType packetType = app::net::PacketType::CLIENT_NAME;
 		//send the packet out
-		m_client.send(name, packetType);
+		//m_client.send(name, packetType);
 		m_targetScene = app::sce::SceneType::LobbySelect;
 	}
 	if (m_connected)
@@ -72,7 +72,7 @@ void app::sys::DebugSystem::serverTesting()
 		//simulate logic for when create new lobby is clicked
 		std::string name = "Bob";
 		app::net::PacketType packetType = app::net::PacketType::LOBBY_CREATE;
-		m_client.send(name, packetType);
+		//m_client.send(name, packetType);
 	}
 }
 

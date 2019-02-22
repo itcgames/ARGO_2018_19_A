@@ -177,9 +177,6 @@
     <ClCompile Include="src\deleters\SdlDeleter.cpp">
       <Filter>Source Files\deleters</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\WindowParameters.cpp">
-      <Filter>Source Files\graphics</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\Texture.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
@@ -629,6 +626,21 @@
     </ClCompile>
     <ClCompile Include="src\components\Attack.cpp">
       <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Destructible.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parameters\DestructibleParameters.cpp">
+      <Filter>Source Files\parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\DestructibleBlockFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\FacadeFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\WindowParameters.cpp">
+      <Filter>Source Files\parameters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1114,6 +1126,18 @@
     </ClInclude>
     <ClInclude Include="src\components\Attack.h">
       <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Destructible.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\parameters\DestructibleParameters.h">
+      <Filter>Header Files\parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\DestructibleBlockFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\FacadeFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,7 @@ namespace app::net
 		Lobby(Lobby const &) = default;
 		Lobby & operator=(Lobby const &) = default;
 
-		Lobby(Lobby &&) = default;
+		Lobby(Lobby &&) noexcept = default;
 		Lobby & operator=(Lobby &&) = default;
 
 	public: // Public Static Functions

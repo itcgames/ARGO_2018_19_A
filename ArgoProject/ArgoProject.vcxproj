@@ -221,6 +221,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\Dash.cpp" />
     <ClCompile Include="src\components\Destroy.cpp" />
     <ClCompile Include="src\components\Dashable.cpp" />
+    <ClCompile Include="src\components\Destructible.cpp" />
     <ClCompile Include="src\components\Dimensions.cpp" />
     <ClCompile Include="src\components\DoubleJump.cpp" />
     <ClCompile Include="src\components\Enemy.cpp" />
@@ -245,6 +246,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\AIFactory.cpp" />
     <ClCompile Include="src\deleters\SdlTtfDeleter.cpp" />
     <ClCompile Include="src\factories\BaseFactory.cpp" />
+    <ClCompile Include="src\factories\DestructibleBlockFactory.cpp" />
     <ClCompile Include="src\factories\EntitiesFactory.cpp" />
     <ClCompile Include="src\factories\entities\AxeAttackFactory.cpp" />
     <ClCompile Include="src\factories\entities\ImageFactory.cpp" />
@@ -257,6 +259,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\entities\PlayerFactory.cpp" />
     <ClCompile Include="src\factories\entities\TextFactory.cpp" />
     <ClCompile Include="src\factories\EntityFactory.cpp" />
+    <ClCompile Include="src\factories\FacadeFactory.cpp" />
     <ClCompile Include="src\factories\HazardFactory.cpp" />
     <ClCompile Include="src\factories\LevelFactory.cpp" />
     <ClCompile Include="src\factories\NodeFactory.cpp" />
@@ -291,6 +294,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\math\Math.cpp" />
     <ClCompile Include="src\math\Rect.cpp" />
     <ClCompile Include="src\math\Vector2.cpp" />
+    <ClCompile Include="src\parameters\DestructibleParameters.cpp" />
     <ClCompile Include="src\network\Client.cpp" />
     <ClCompile Include="src\parameters\ButtonFactoryParameters.cpp" />
     <ClCompile Include="src\resources\AudioKey.cpp" />
@@ -390,6 +394,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\Dash.h" />
     <ClInclude Include="src\components\Destroy.h" />
     <ClInclude Include="src\components\Dashable.h" />
+    <ClInclude Include="src\components\Destructible.h" />
     <ClInclude Include="src\components\Dimensions.h" />
     <ClInclude Include="src\components\DoubleJump.h" />
     <ClInclude Include="src\components\Enemy.h" />
@@ -414,6 +419,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\AIFactory.h" />
     <ClInclude Include="src\deleters\SdlTtfDeleter.h" />
     <ClInclude Include="src\factories\BaseFactory.h" />
+    <ClInclude Include="src\factories\DestructibleBlockFactory.h" />
     <ClInclude Include="src\factories\EntitiesFactory.h" />
     <ClInclude Include="src\factories\entities\AxeAttackFactory.h" />
     <ClInclude Include="src\factories\entities\ImageFactory.h" />
@@ -426,6 +432,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\entities\PlayerFactory.h" />
     <ClInclude Include="src\factories\entities\TextFactory.h" />
     <ClInclude Include="src\factories\EntityFactory.h" />
+    <ClInclude Include="src\factories\FacadeFactory.h" />
     <ClInclude Include="src\factories\HazardFactory.h" />
     <ClInclude Include="src\factories\LevelFactory.h" />
     <ClInclude Include="src\factories\NodeFactory.h" />
@@ -459,6 +466,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\math\Math.h" />
     <ClInclude Include="src\math\Rect.h" />
     <ClInclude Include="src\math\Vector2.h" />
+    <ClInclude Include="src\parameters\DestructibleParameters.h" />
     <ClInclude Include="src\network\Client.h" />
     <ClInclude Include="src\parameters\ButtonFactoryParameters.h" />
     <ClInclude Include="src\resources\AudioKey.h" />

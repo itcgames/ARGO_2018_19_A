@@ -1,28 +1,25 @@
-﻿#ifndef _COMPONENT_AI_H
-#define _COMPONENT_AI_H
-
-#include "commands/BaseCommand.h"
+﻿#ifndef _COMPONENTS_DESTRUCTIBLE_H
+#define _COMPONENTS_DESTRUCTIBLE_H
 
 namespace app::comp
 {
-	struct AI
+	struct Destructible
 	{
 	public: // Constructors/Destructor/Assignments
-		AI() = default;
-		~AI() = default;
+		Destructible() = default;
+		~Destructible() = default;
 
-		AI(AI const &) = default;
-		AI & operator=(AI const &) = default;
+		Destructible(Destructible const &) = default;
+		Destructible & operator=(Destructible const &) = default;
 
-		AI(AI &&) noexcept = default;
-		AI & operator=(AI &&) = default;
+		Destructible(Destructible &&) = default;
+		Destructible & operator=(Destructible &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::optional<app::Entity> currentNode;
-		std::list<std::shared_ptr<app::cmnd::BaseCommand>> initialCommands;
+		std::optional<app::Entity> attachedArea = std::nullopt;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -34,4 +31,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENT_AI_H
+#endif // !_COMPONENTS_DESTRUCTIBLE_H

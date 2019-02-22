@@ -1,22 +1,28 @@
 ﻿#include "stdafx.h"
-#include "GoalFactory.h"
+#include "DestructibleBlockFactory.h"
 #include "utilities/cute_c2.h"
 
 #include "components/Location.h"
 #include "components/Dimensions.h"
 #include "components/Render.h"
 #include "components/Collision.h"
-#include "components/Goal.h"
+#include "components/Health.h"
+#include "components/Impenetrable.h"
+#include "components/Destructible.h"
 #include "components/Layer.h"
 
-app::fact::GoalFactory::GoalFactory(math::Vector2f const & position, math::Vector2f const & size)
-	: m_position(position), m_size(size)
+
+app::fact::DestructibleBlockFactory::DestructibleBlockFactory(app::par::DestructibleParameters param)
+	: parameters(param)
 {
 }
 
-app::Entity const app::fact::GoalFactory::create()
+app::Entity const app::fact::DestructibleBlockFactory::create()
 {
 	app::Entity const entity = m_registry.create();
+
+	app::math::Vector2f m_position = parameters.position;
+	app::math::Vector2f m_size = parameters.size;
 
 	auto location = comp::Location();
 	location.position = m_position;
@@ -29,7 +35,7 @@ app::Entity const app::fact::GoalFactory::create()
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
 
 	auto layer = comp::Layer();
-	layer.zIndex = 120u;
+	layer.zIndex = 130u;
 	m_registry.assign<decltype(layer)>(entity, std::move(layer));
 
 	auto render = comp::Render();
@@ -40,8 +46,19 @@ app::Entity const app::fact::GoalFactory::create()
 	collision.bounds = cute::c2AABB();
 	m_registry.assign<decltype(collision)>(entity, std::move(collision));
 
-	auto goal = comp::Goal();
-	m_registry.assign<decltype(goal)>(entity, std::move(goal));
+	auto health = comp::Health();
+	health.health = 1;
+	m_registry.assign<decltype(health)>(entity, std::move(health));
 
-	return entity;
+	auto impenetrable = comp::Impenetrable();
+	m_registry.assign<decltype(impenetrable)>(entity, std::move(impenetrable));
+
+	auto destructible = comp::Destructible();
+	if (parameters.attachedArea.has_value())
+	{
+		destructible.attachedArea = parameters.attachedArea.value();
+	}
+	m_registry.assign<decltype(destructible)>(entity, std::move(destructible));
+
+	return entity;	
 }

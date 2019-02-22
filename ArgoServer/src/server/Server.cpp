@@ -29,7 +29,7 @@ app::net::Server::~Server()
 /// </summary>
 bool app::net::Server::listenForSockets()
 {
-	bool got_socket = acceptSocket(m_totalConnections);
+	bool got_socket = acceptSocket(m_freeSocket);
 	if (!got_socket)
 	{
 		//app::Console::writeLine({ "Failed to accept the clients connection" });
@@ -37,18 +37,27 @@ bool app::net::Server::listenForSockets()
 	}
 	else
 	{
-		app::Console::writeLine({ "Client connected! ID: ", std::to_string(m_totalConnections) });
-		if (auto const & foundClient = m_clientThreads.find(m_totalConnections); foundClient != m_clientThreads.end())
+		app::Console::writeLine({ "Client connected! ID: ", std::to_string(m_freeSocket) });
+		if (auto const & foundClient = m_clientThreads.find(m_freeSocket); foundClient != m_clientThreads.end())
 		{
 			// Client is already in the map
+			auto &[thread, stopThread] = foundClient->second;
+			if (thread.has_value())
+			{
+				if (thread->joinable()) { stopThread.store(true); thread->join(); }
+				stopThread.store(false);
+				thread.reset();
+			}
+			thread = std::thread(&app::net::Server::clientHandlerThread, this, m_freeSocket, std::ref(stopThread));
 		}
 		else
 		{
 			// Client is not in the map
-			m_clientThreads.insert(std::make_pair(m_totalConnections, std::make_pair(std::nullopt, false)));
-			auto &[thread, stopThread] = m_clientThreads.at(m_totalConnections);
-			thread = std::thread(&app::net::Server::clientHandlerThread, this, m_totalConnections, std::ref(stopThread));
+			m_clientThreads.insert(std::make_pair(m_freeSocket, std::make_pair(std::nullopt, false)));
+			auto &[thread, stopThread] = m_clientThreads.at(m_freeSocket);
+			thread = std::thread(&app::net::Server::clientHandlerThread, this, m_freeSocket, std::ref(stopThread));
 		}
+		m_freeSocket = this->getFreeSocket(m_freeSocket);
 		++m_totalConnections;
 		return true;
 	}
@@ -146,6 +155,8 @@ void app::net::Server::closeSocket(int index)
 	}
 	SDLNet_TCP_Close(socket);
 	socket = NULL;
+	m_freeSocket = this->getFreeSocket(static_cast<std::uint8_t>(index));
+	--m_totalConnections;
 }
 
 /// <summary>
@@ -173,7 +184,7 @@ void app::net::Server::sdlCleanup()
 
 	for (int i = 0; i < s_MAX_SOCKETS; ++i)
 	{
-		if (m_sockets[i] == NULL) continue;
+		if (m_sockets.at(i) == NULL) continue;
 		closeSocket(i);
 	}
 
@@ -182,43 +193,57 @@ void app::net::Server::sdlCleanup()
 	SDL_Quit();
 }
 
+std::uint8_t app::net::Server::getFreeSocket(std::uint8_t startIndex) const
+{
+	constexpr auto size = static_cast<std::uint8_t>(s_MAX_SOCKETS);
+	if (startIndex >= size) { startIndex = 0; }
+	const std::uint8_t startingLocation = startIndex;
+	while (m_sockets.at(startIndex) != NULL)
+	{
+		if (startIndex < size) { ++startIndex; }
+		else { startIndex = 0; }
+		if (startingLocation == startIndex) { break; }
+	}
+	return startIndex;
+}
+
 /// <summary>
 /// Spin up a thread that will handle receiving and sending of packets.
 /// </summary>
 /// <param name="ID"></param>
-void app::net::Server::clientHandlerThread(int ID, std::atomic<bool> & stopThread)
+void app::net::Server::clientHandlerThread(int id, std::atomic<bool> & stopThread)
 {
-	PacketType packetType;
+	PacketType packetType = PacketType::UNKNOWN;
 
 	while (!stopThread.load())
 	{
-		if (!this->get(ID, packetType))
+		if (!this->get(id, packetType))
 		{
 			break;
 		}
-		if (!this->processPacket(ID, packetType))
+		if (!this->processPacket(id, packetType))
 		{
 			break;
 		}
 	}
-	app::Console::writeLine({ "Lost connection to client ID: ", std::to_string(ID) });
-	this->closeSocket(ID);
+	this->output(id, "Stopped connection");
+	this->closeSocket(id);
 }
 
 /// <summary>
 /// This method is used to receive all data,
 /// it will keep calling receive until it gets the bytes it expects
 /// </summary>
-/// <param name="ID">ID of the socket to reveive from</param>
+/// <param name="id">id of the socket to reveive from</param>
 /// <param name="data">the data received from the other socket</param>
 /// <param name="totalBytes">total bytes expected to receive from socket</param>
 /// <returns>true if succeeds false if SDLNet_TCP_Recv returns error</returns>
-bool app::net::Server::getAll(int ID, std::byte * data, int totalBytes)
+bool app::net::Server::getAll(int id, std::byte * data, int totalBytes)
 {
 	int bytesReceived = 0;
 	while (bytesReceived < totalBytes)
 	{
-		int retnCheck = SDLNet_TCP_Recv(m_sockets[ID], data, totalBytes - bytesReceived);
+		int retnCheck = SDLNet_TCP_Recv(m_sockets[id], data, totalBytes - bytesReceived);
 		if (retnCheck <= 0)
 		{
 			return false;
@@ -231,16 +256,16 @@ bool app::net::Server::getAll(int ID, std::byte * data, int totalBytes)
 /// <summary>
 /// Send any type of data, it will call the send while there are still bytes to be sent.
 /// </summary>
-/// <param name="ID">ID of the socket to send to</param>
+/// <param name="id">id of the socket to send to</param>
 /// <param name="data">data to send to the socket</param>
 /// <param name="totalBytes">total bytes we will send</param>
 /// <returns>true if success, false if SDLNet_TCP_Send returns error</returns>
-bool app::net::Server::sendAll(int ID, std::byte * data, int totalBytes)
+bool app::net::Server::sendAll(int id, std::byte * data, int totalBytes)
 {
 	int bytesSent = 0;
 	while (bytesSent < totalBytes)
 	{
-		int retnCheck = SDLNet_TCP_Send(m_sockets[ID], data + bytesSent, totalBytes - bytesSent);
+		int retnCheck = SDLNet_TCP_Send(m_sockets[id], data + bytesSent, totalBytes - bytesSent);
 		if (retnCheck < bytesSent)
 		{
 			return false;
@@ -253,12 +278,12 @@ bool app::net::Server::sendAll(int ID, std::byte * data, int totalBytes)
 /// <summary>
 /// Send an integer to another socket
 /// </summary>
-/// <param name="ID">ID of the socket to send to</param>
+/// <param name="id">id of the socket to send to</param>
 /// <param name="_int">integer to send</param>
 /// <returns>true if success false if sendAll fails</returns>
-bool app::net::Server::send(int ID, const int& _int)
+bool app::net::Server::send(int id, const int& _int)
 {
-	if (!sendAll(ID, (std::byte *)&_int, sizeof(int)))
+	if (!sendAll(id, (std::byte *)&_int, sizeof(int)))
 	{
 		return false;
 	}
@@ -268,12 +293,12 @@ bool app::net::Server::send(int ID, const int& _int)
 /// <summary>
 /// Await receiving of an integer from another socket.
 /// </summary>
-/// <param name="ID">ID of the socket to expect and int from</param>
+/// <param name="id">id of the socket to expect and int from</param>
 /// <param name="_int">the int to assign received int to</param>
 /// <returns>true if success, false if recvAll fails</returns>
-bool app::net::Server::get(int ID, int & _int)
+bool app::net::Server::get(int id, int & _int)
 {
-	if (!getAll(ID, (std::byte *)&_int, sizeof(int)))
+	if (!getAll(id, (std::byte *)&_int, sizeof(int)))
 	{
 		return false;
 	}
@@ -283,12 +308,12 @@ bool app::net::Server::get(int ID, int & _int)
 /// <summary>
 /// Send a packet type to another socket
 /// </summary>
-/// <param name="ID">ID of the socket to send to</param>
+/// <param name="id">id of the socket to send to</param>
 /// <param name="_packetType">packet type to send</param>
 /// <returns>true if success, false if sendAll fails</returns>
-bool app::net::Server::send(int ID, const PacketType& _packetType)
+bool app::net::Server::send(int id, const PacketType& _packetType)
 {
-	if (!sendAll(ID, (std::byte *)&_packetType, sizeof(PacketType)))
+	if (!sendAll(id, (std::byte *)&_packetType, sizeof(PacketType)))
 	{
 		return false;
 	}
@@ -298,12 +323,12 @@ bool app::net::Server::send(int ID, const PacketType& _packetType)
 /// <summary>
 /// Expect a packet type from another socket
 /// </summary>
-/// <param name="ID">ID of the socket to expect a packet from</param>
+/// <param name="id">id of the socket to expect a packet from</param>
 /// <param name="_packetType">packet variable to assign the received packet type to</param>
 /// <returns>true if success, false if recvAll fails</returns>
-bool app::net::Server::get(int ID, PacketType & _packetType)
+bool app::net::Server::get(int id, PacketType & _packetType)
 {
-	if (!getAll(ID, (std::byte *)&_packetType, sizeof(PacketType)))
+	if (!getAll(id, (std::byte *)&_packetType, sizeof(PacketType)))
 	{
 		return false;
 	}
@@ -314,51 +339,51 @@ bool app::net::Server::get(int ID, PacketType & _packetType)
 /// Send a string to a socket.
 /// Note the packet passed into this function should be a packet that processes a string ONLY
 /// </summary>
-/// <param name="ID">ID of the socket to send the string to</param>
+/// <param name="id">id of the socket to send the string to</param>
 /// <param name="_string">string to send</param>
 /// <param name="_packetType">type of packet the other socket is to expect (defines how it will be processed by the other socket)</param>
 /// <returns>true if success, false if any of the sends fail</returns>
-bool app::net::Server::send(int ID, const std::string & _string, const PacketType & _packetType)
+bool app::net::Server::send(int id, const std::string & _string, const PacketType & _packetType)
 {
-	if (!send(ID, _packetType))
+	if (!send(id, _packetType))
 	{
 		return false;
 	}
 	int bufferLen = _string.size();
-	if (!send(ID, bufferLen))
+	if (!send(id, bufferLen))
 	{
 		return false;
 	}
-	if (!sendAll(ID, (std::byte *)&_string, sizeof(_string)))
+	if (!sendAll(id, (std::byte *)&_string, sizeof(_string)))
 	{
 		return false;
 	}
 	return true;
 }
 
-bool app::net::Server::send(int ID, Lobby const & _lobby)
+bool app::net::Server::send(int id, Lobby const & _lobby)
 {
 	constexpr auto BUFFER_SIZE = sizeof(Lobby);
-	return send(ID, BUFFER_SIZE) && sendAll(ID, (std::byte *)&_lobby, BUFFER_SIZE);
+	return send(id, BUFFER_SIZE) && sendAll(id, (std::byte *)&_lobby, BUFFER_SIZE);
 }
 
 
 /// <summary>
 /// expect string from other socket
 /// </summary>
-/// <param name="ID">ID of the socket to get string from</param>
+/// <param name="id">id of the socket to get string from</param>
 /// <param name="_string">string to assign the received string to</param>
 /// <returns>true if success, false if any receives fail</returns>
-bool app::net::Server::get(int ID, std::string & _string)
+bool app::net::Server::get(int id, std::string & _string)
 {
 	int bufferLength;
-	if (!get(ID, bufferLength))
+	if (!get(id, bufferLength))
 	{
 		return false;
 	}
 	auto buffer = std::vector<std::byte>();
 	buffer.resize(bufferLength, static_cast<std::byte>('\0'));
-	if (!getAll(ID, buffer.data(), bufferLength))
+	if (!getAll(id, buffer.data(), bufferLength))
 	{
 		buffer.clear();
 		return false;
@@ -374,7 +399,7 @@ bool app::net::Server::get(int ID, std::string & _string)
 /// <summary>
 /// Process the packets that were received
 /// </summary>
-/// <param name="id">ID of the socket the packet is from</param>
+/// <param name="id">id of the socket the packet is from</param>
 /// <param name="_packetType">type of packet received</param>
 /// <returns>true if successful processing of packet, false if the processing fails</returns>
 bool app::net::Server::processPacket(int id, PacketType _packetType)
@@ -387,6 +412,7 @@ bool app::net::Server::processPacket(int id, PacketType _packetType)
 			return this->processLobbyCreate(id);
 		case PacketType::LOBBY_GET_ALL:
 			return this->processLobbyGetAll(id);
+		case PacketType::UNKNOWN:
 		default:
 			return this->processDefault(id);
 	}
@@ -472,19 +498,19 @@ void app::net::Server::outputIP(IPaddress const & ip)
 	app::Console::writeLine();
 }
 
-void app::net::Server::output(int ID, std::string const & msg) const
+void app::net::Server::output(int id, std::string const & msg) const
 {
 	if constexpr (s_DEBUG_MODE)
 	{
-		app::Console::writeLine({ "ID[", std::to_string(ID), "]: ", msg });
+		app::Console::writeLine({ "ID[", std::to_string(id), "]: ", msg });
 	}
 }
 
-void app::net::Server::output(int ID, std::initializer_list<std::string> const & msgs) const
+void app::net::Server::output(int id, std::initializer_list<std::string> const & msgs) const
 {
 	if constexpr (s_DEBUG_MODE)
 	{
-		app::Console::write({ "ID[", std::to_string(ID), "]: " });
+		app::Console::write({ "ID[", std::to_string(id), "]: " });
 		app::Console::writeLine(msgs);
 	}
 }

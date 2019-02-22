@@ -9,7 +9,15 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 			UpdateSystem(std::in_place_type<app::sys::ButtonSystem>),
 			UpdateSystem(std::in_place_type<app::sys::WidgetNavigationSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
+			UpdateSystem(std::in_place_type<app::sys::MotionSystem>),
+			UpdateSystem(std::in_place_type<app::sys::AirMotionSystem>),
+			UpdateSystem(std::in_place_type<app::sys::DashSystem>),
+			UpdateSystem(std::in_place_type<app::sys::StateMachineSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CameraSystem>),
+			UpdateSystem(std::in_place_type<app::sys::HealthSystem>),
+			UpdateSystem(std::in_place_type<app::sys::AISystem>),
+			UpdateSystem(std::in_place_type<app::sys::CurrentGroundSystem>),
+			UpdateSystem(std::in_place_type<app::sys::CollisionSystem>),
 			UpdateSystem(std::in_place_type<app::sys::NetworkSystem>),
 			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType),
 			UpdateSystem(std::in_place_type<app::sys::DestroySystem>)
@@ -43,11 +51,11 @@ void app::sce::MainMenuScene::end()
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("MAIN MENU SCENE: Destroying entities");
-		m_registry.each([](app::Entity const entity)
+		m_registry.each([this](app::Entity const entity)
 		{
 			Console::writeLine({ "  Destroyed entity[", std::to_string(entity), "]" });
+			m_registry.destroy(entity);
 		});
 	}
-	m_registry.reset();
+	//m_registry.reset();
 }
-

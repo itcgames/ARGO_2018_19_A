@@ -9,7 +9,7 @@ namespace app::cmnd
 	class ButtonMainMenuMultiplayerConnectConfirmCommand : public BaseMultiplayerCommand
 	{
 	public: // Constructors/Destructor/Assignments
-		ButtonMainMenuMultiplayerConnectConfirmCommand(app::Entity callingEntity, std::string const & userName, app::sce::SceneType & sceneManagerControl);
+		ButtonMainMenuMultiplayerConnectConfirmCommand(app::Entity const callingEntity, std::string const & userName, app::sce::SceneType & sceneManagerControl);
 		virtual ~ButtonMainMenuMultiplayerConnectConfirmCommand() = default;
 
 		ButtonMainMenuMultiplayerConnectConfirmCommand(ButtonMainMenuMultiplayerConnectConfirmCommand const &) = default;

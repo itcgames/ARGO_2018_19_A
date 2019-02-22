@@ -17,7 +17,7 @@ void app::cmnd::DropCommand::execute()
 	if (m_registry.has<comp::Motion>(m_entity))
 	{
 		auto & ground = m_registry.get<comp::CurrentGround>(m_entity);
-		if (m_registry.has<comp::Platform>(ground.currentGround.value()));
+		if (m_registry.has<comp::Platform>(ground.currentGround.value()))
 		{
 			auto & motion = m_registry.get<comp::Motion>(m_entity);
 			auto airMotion = comp::AirMotion();

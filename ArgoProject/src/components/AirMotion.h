@@ -21,9 +21,9 @@ namespace app::comp
 		constexpr static float DEFAULT_MAX_SPEED = 500.0f;
 	public: // Public Member Variables
 		math::Vector2f gravity = { 0.0f, 9.8f};
-		float speed;
-		float angularSpeed;
-		float direction;
+		float speed = 0.0f;
+		float angularSpeed = 0.0f;
+		float direction = 0.0f;
 		float lateralConstraint = 0.2f;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions

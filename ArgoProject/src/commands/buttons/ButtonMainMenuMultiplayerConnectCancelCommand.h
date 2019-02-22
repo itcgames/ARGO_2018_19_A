@@ -8,7 +8,7 @@ namespace app::cmnd
 	class ButtonMainMenuMultiplayerConnectCancelCommand : public BaseMultiplayerCommand
 	{
 	public: // Constructors/Destructor/Assignments
-		ButtonMainMenuMultiplayerConnectCancelCommand(app::Entity const & callingEntity);
+		ButtonMainMenuMultiplayerConnectCancelCommand(app::Entity const callingEntity);
 		virtual ~ButtonMainMenuMultiplayerConnectCancelCommand() = default;
 
 		ButtonMainMenuMultiplayerConnectCancelCommand(ButtonMainMenuMultiplayerConnectCancelCommand const &) = default;

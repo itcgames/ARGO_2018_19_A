@@ -1,21 +1,21 @@
-﻿#ifndef _FACTORY_GOAL_H
-#define _FACTORY_GOAL_H
+﻿#ifndef _FACTORY_FACADE_H
+#define _FACTORY_FACADE_H
 
-#include "../EntityFactory.h"
+#include "EntityFactory.h"
 
 namespace app::fact
 {
-	class GoalFactory : public EntityFactory
+	class FacadeFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		GoalFactory(math::Vector2f const & position, math::Vector2f const & size);
-		virtual ~GoalFactory() = default;
+		FacadeFactory(app::math::Vector2f const & pos, app::math::Vector2f const & size);
+		~FacadeFactory() = default;
 
-		GoalFactory(GoalFactory const &) = default;
-		GoalFactory & operator=(GoalFactory const &) = default;
+		FacadeFactory(FacadeFactory const &) = default;
+		FacadeFactory & operator=(FacadeFactory const &) = default;
 
-		GoalFactory(GoalFactory &&) = default;
-		GoalFactory & operator=(GoalFactory &&) = default;
+		FacadeFactory(FacadeFactory &&) = default;
+		FacadeFactory & operator=(FacadeFactory &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
@@ -30,9 +30,9 @@ namespace app::fact
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
-		math::Vector2f const & m_position;
-		math::Vector2f const & m_size;
+		app::math::Vector2f const & m_position;
+		app::math::Vector2f const & m_size;
 	};
 }
 
-#endif // !_FACTORY_GOAL_H
+#endif // !_FACTORY_FACADE_H

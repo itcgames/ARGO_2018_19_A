@@ -28,10 +28,6 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("SPLASH SCENE Constructed");
-		while (!m_resourceManager.isLoaded())
-		{
-			Console::writeLine("SPLASH SCENE: Waiting for resources to load");
-		}
 	}
 }
 

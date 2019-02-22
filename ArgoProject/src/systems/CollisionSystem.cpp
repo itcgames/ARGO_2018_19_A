@@ -21,6 +21,7 @@
 #include "components/AI.h"
 #include "components/Node.h"
 #include "components/Attack.h"
+#include "components/Goal.h"
 
 //visitors
 #include "visitors/CollisionUpdateVisitor.h"
@@ -31,25 +32,33 @@ app::sys::CollisionSystem::CollisionSystem()
 	: BaseSystem()
 {
 	//prepare these components
-	m_registry.prepare<comp::Input, comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>();
-	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Motion>();
-	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::AirMotion>();
+	m_registry.prepare<comp::Collision, comp::Location, comp::Dimensions, comp::Motion>();
+	m_registry.prepare<comp::Dashable, comp::DoubleJump, comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>();
+	m_registry.prepare<comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>();
+	m_registry.prepare<comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround, comp::PlatformDrop>();
+	m_registry.prepare<comp::Collision, comp::Location, comp::Dimensions, comp::Platform>();
 	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Dash>();
 	m_registry.prepare<comp::Collision, comp::Impenetrable, comp::Location, comp::Dimensions>();
+	m_registry.prepare<comp::Collision, comp::Enemy, comp::Location, comp::Dimensions, comp::Motion, comp::CurrentGround>();
+	m_registry.prepare<comp::Collision, comp::Enemy, comp::Location, comp::Dimensions, comp::Motion>();
+	m_registry.prepare<comp::Collision, comp::Location, comp::Dimensions, comp::Health>();
+	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions>();
 }
 
 void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 {
-	updateCollisionBoxes();
-	groundCollisions();
-	airCollisions();
-	checkPlatformCollisions();
-	dashCollisions();
-	enemyWallCollisions();
-	enemyEnemyCollisions();	
-	playerHazardCollisions();
-	checkAINodeCollisions();
-	attackEnemyCollisions();
+	this->updateCollisionBoxes();
+	this->groundCollisions();
+	this->airCollisions();
+	this->checkPlatformCollisions();
+	this->dashCollisions();
+	this->enemyWallCollisions();
+	this->enemyEnemyCollisions();	
+	this->playerHazardCollisions();
+	this->checkAINodeCollisions();
+	this->playerGoalCollisions();
+	this->attackEnemyCollisions();
+
 }
 
 void app::sys::CollisionSystem::groundCollisions()
@@ -147,7 +156,7 @@ void app::sys::CollisionSystem::checkPlatformCollisions()
 			comp::AirMotion & airMotion, comp::CurrentGround & ground, comp::PlatformDrop & dropCheck)
 	{
 		//view everything with collisions
-		m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Platform>()
+		m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Platform>(entt::persistent_t())
 			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Location & secLocation, comp::Dimensions & secDimensions, comp::Platform const & secPlatform)
 		{
 			//if we are not the player
@@ -201,10 +210,10 @@ void app::sys::CollisionSystem::checkPlatformCollisions()
 
 void app::sys::CollisionSystem::checkAINodeCollisions()
 {
-	m_registry.view<comp::Collision, comp::AI>(entt::persistent_t())
+	m_registry.view<comp::Collision, comp::AI>()
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::AI & ai)
 	{
-		m_registry.view<comp::Collision, comp::Node>(entt::persistent_t())
+		m_registry.view<comp::Collision, comp::Node>()
 			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Node & node)
 		{
 			bool const & collisionCheck = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
@@ -279,8 +288,8 @@ void app::sys::CollisionSystem::enemyWallCollisions()
 			comp::Motion & motion, comp::CurrentGround & ground)
 	{
 		//view everything with collisions
-		m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Impenetrable>()
-			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Location & secLocation, comp::Dimensions & secDimensions, comp::Impenetrable & impenetrable)
+		m_registry.view<comp::Collision, comp::Impenetrable, comp::Location, comp::Dimensions>(entt::persistent_t())
+			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Impenetrable & impenetrable, comp::Location & secLocation, comp::Dimensions & secDimensions)
 		{
 			//if we are not the player
 			if (entity != secEntity)
@@ -352,32 +361,26 @@ void app::sys::CollisionSystem::enemyEnemyCollisions()
 	});
 }
 
-void app::sys::CollisionSystem::enemyPlayerCollisions()
-{
-}
-
 void app::sys::CollisionSystem::updateCollisionBoxes()
 {
-	m_registry.view<comp::Collision, comp::Location, comp::Dimensions>(entt::persistent_t())
+	m_registry.view<comp::Collision, comp::Location, comp::Dimensions>()
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions)
 	{
 		std::visit(vis::CollisionUpdateVisitor{ location, dimensions }, collision.bounds);
 	});
 }
 
-
 void app::sys::CollisionSystem::playerHazardCollisions()
 {
-	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Health>(entt::persistent_t())
-		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Input & input, comp::Location & location, comp::Dimensions & dimensions, comp::Health & health)
+	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Health>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions, comp::Health & health)
 	{
 		m_registry.view<comp::Collision, comp::Damage>()
-			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Damage damage)
+			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Damage & damage)
 		{
 			if (entity != secEntity)
 			{
-				auto const & collisionCheck = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
-				if (collisionCheck)
+				if (app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds))
 				{
 					health.health -= damage.damage;
 				}
@@ -386,3 +389,21 @@ void app::sys::CollisionSystem::playerHazardCollisions()
 	});
 }
 
+void app::sys::CollisionSystem::playerGoalCollisions()
+{
+	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Input & input, comp::Location & location, comp::Dimensions & dimensions)
+	{
+		m_registry.view<comp::Collision, comp::Goal>()
+			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Goal & goal)
+		{
+			if (entity != secEntity)
+			{
+				if (app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds))
+				{
+					m_registry.remove<comp::Goal>(secEntity);
+				}
+			}
+		});
+	});
+}
