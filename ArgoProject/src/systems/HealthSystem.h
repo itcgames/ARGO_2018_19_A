@@ -21,8 +21,6 @@ namespace app::sys
 	public: // Public Static Functions
 	public: // Public Member Functions
 		virtual void update(app::time::seconds const & dt) override;
-		void checkPlayerHealth();
-		void checkDestructibleHealth();
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -31,6 +29,8 @@ namespace app::sys
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
+		void checkPlayerHealth();
+		void checkDestructibleHealth();
 	private: // Private Static Variables
 	private: // Private Member Variables
 	};
