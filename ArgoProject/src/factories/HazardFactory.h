@@ -9,7 +9,7 @@ namespace app::fact
 	{
 	public: // Constructors/Destructor/Assignments
 		HazardFactory(app::math::Vector2f const & pos, app::math::Vector2f const & size);
-		~HazardFactory() = default;
+		virtual ~HazardFactory() = default;
 
 		HazardFactory(HazardFactory const &) = default;
 		HazardFactory& operator=(HazardFactory const &) = default;

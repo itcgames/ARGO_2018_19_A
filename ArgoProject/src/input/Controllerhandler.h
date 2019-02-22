@@ -42,6 +42,8 @@ namespace app::inp
 		bool isButtonUp(Index const & index, std::initializer_list<Button> const & buttons) const;
 		bool isButtonPressed(Index const & index, Button const & button) const;
 		bool isButtonPressed(Index const & index, std::initializer_list<Button> const & buttons) const;
+		bool isButtonUnpressed(Index const & index, Button const & button) const;
+		bool isButtonUnpressed(Index const & index, std::initializer_list<Button> const & buttons) const;
 		double getAxis(Index const & index, Axis const & axis) const;
 		std::size_t getNumControllers() const;
 
@@ -64,6 +66,8 @@ namespace app::inp
 		static bool isButtonUp(ButtonMap const & map, std::initializer_list<Button> const & buttons);
 		static bool isButtonPressed(ButtonMap const & map, ButtonMap const & prevMap, Button const & button);
 		static bool isButtonPressed(ButtonMap const & map, ButtonMap const & prevMap, std::initializer_list<Button> const & buttons);
+		static bool isButtonUnpressed(ButtonMap const & map, ButtonMap const & prevMap, Button const & button);
+		static bool isButtonUnpressed(ButtonMap const & map, ButtonMap const & prevMap, std::initializer_list<Button> const & buttons);
 		static double getAxis(AxisMap const & map, Axis const & axis);
 	private: // Private Member Functions
 	private: // Private Static Variables
@@ -175,6 +179,28 @@ namespace app::inp
 		{
 			auto const & controller = std::get<Controller>(*controllerItt);
 			return Controllerhandler<Index, Axis, AxisValue, Button>::isButtonPressed(controller.buttonNowMap, controller.buttonPrevMap, buttons);
+		}
+		return false;
+	}
+
+	template<typename Index, typename Axis, typename AxisValue, typename Button>
+	bool Controllerhandler<Index, Axis, AxisValue, Button>::isButtonUnpressed(Index const & index, Button const & button) const
+	{
+		if (auto const & controllerItt = m_controllers.find(index); controllerItt != m_controllers.end())
+		{
+			auto const & controller = std::get<Controller>(*controllerItt);
+			return Controllerhandler<Index, Axis, AxisValue, Button>::isButtonUnpressed(controller.buttonNowMap, controller.buttonPrevMap, button);
+		}
+		return false;
+	}
+
+	template<typename Index, typename Axis, typename AxisValue, typename Button>
+	bool Controllerhandler<Index, Axis, AxisValue, Button>::isButtonUnpressed(Index const & index, std::initializer_list<Button> const & buttons) const
+	{
+		if (auto const & controllerItt = m_controllers.find(index); controllerItt != m_controllers.end())
+		{
+			auto const & controller = std::get<Controller>(*controllerItt);
+			return Controllerhandler<Index, Axis, AxisValue, Button>::isButtonUnpressed(controller.buttonNowMap, controller.buttonPrevMap, buttons);
 		}
 		return false;
 	}
@@ -333,6 +359,33 @@ namespace app::inp
 			if (auto const & result = prevMap.find(mapKey); result != prevMap.end())
 				return mapValue && !result->second;
 			return mapValue;
+		}
+		return false;
+	}
+
+	template<typename Index, typename Axis, typename AxisValue, typename Button>
+	inline bool Controllerhandler<Index, Axis, AxisValue, Button>::isButtonUnpressed(ButtonMap const & map, ButtonMap const & prevMap, Button const & button)
+	{
+		if (auto const & itt = map.find(button); itt != map.end())
+		{
+			if (auto const & prevItt = prevMap.find(itt->first); prevItt != prevMap.end())
+				return !itt->second && prevItt->second;
+			else
+				return !itt->second;
+		}
+		return false;
+	}
+
+	template<typename Index, typename Axis, typename AxisValue, typename Button>
+	inline bool Controllerhandler<Index, Axis, AxisValue, Button>::isButtonUnpressed(ButtonMap const & map, ButtonMap const & prevMap, std::initializer_list<Button> const & buttons)
+	{
+		for (auto const &[mapKey, mapValue] : map)
+		{
+			if (std::find(buttons.begin(), buttons.end(), mapKey) == buttons.end())
+				continue;
+			if (auto const & result = prevMap.find(mapKey); result != prevMap.end())
+				return !mapValue && result->second;
+			return !mapValue;
 		}
 		return false;
 	}

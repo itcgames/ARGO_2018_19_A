@@ -23,6 +23,7 @@ app::Game::~Game()
 {
 	Mix_Quit();
 	TTF_Quit();
+	SDLNet_Quit();
 	SDL_Quit();
 }
 

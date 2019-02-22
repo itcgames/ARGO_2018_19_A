@@ -20,8 +20,8 @@ namespace app::comp
 	public: // Public Static Variables
 	public: // Public Member Variables
 		math::Vector2i currentFrame;
-		float time, perFrame;
-		bool loop;
+		float time = 0.0f, perFrame = 0.0f;
+		bool loop = false;
 		math::Vector2i position;
 		math::Vector2i numOfFrames;
 		math::Vector2f frameSize;

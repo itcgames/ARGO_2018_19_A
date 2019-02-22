@@ -10,7 +10,7 @@ namespace app::fact
 	{
 	public: // Constructors/Destructor/Assignments
 		NodeFactory(math::Vector2f const & pos, std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & lcmnds, std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & icmnds);
-		~NodeFactory() = default;
+		virtual ~NodeFactory() = default;
 
 		NodeFactory(NodeFactory const &) = default;
 		NodeFactory & operator=(NodeFactory const &) = default;

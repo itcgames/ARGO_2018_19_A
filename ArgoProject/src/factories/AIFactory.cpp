@@ -8,6 +8,7 @@
 #include "components/Dimensions.h"
 #include "components/AirMotion.h"
 #include "components/Animator.h"
+#include "components/Layer.h"
 #include "components/Render.h"
 #include "components/Input.h"
 #include "components/Commandable.h"
@@ -66,6 +67,10 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	animator.perFrame = 90.0f / (std::max(animator.numOfFrames.x, 1) * std::max(animator.numOfFrames.y, 1));
 	m_registry.assign<decltype(animator)>(entity, std::move(animator));
 
+	auto layer = comp::Layer();
+	layer.zIndex = 90u;
+	m_registry.assign<decltype(layer)>(entity, std::move(layer));
+
 	auto render = comp::Render();
 	render.texture = m_resourceManager.getTexture(app::res::TextureKey::DebugAnimation);
 	m_registry.assign<decltype(render)>(entity, std::move(render));
@@ -106,21 +111,21 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	auto ai = comp::AI();
 
 	auto loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
-		std::make_shared<cmnd::MoveCommand>(entity, 0, 20)
+		std::make_shared<cmnd::MoveCommand>(entity, 0.0f, 20.0f)
 	};
 	auto initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
 		std::make_shared<cmnd::JumpCommand>(entity, 400.0f)
 	};
-	auto node = app::fact::NodeFactory(math::Vector2f(750, 200), loopCmnds, initialCmnds).create();
+	auto node = app::fact::NodeFactory(math::Vector2f(750.0f, 200.0f), loopCmnds, initialCmnds).create();
 	entities.push_back(node);
 
 	loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
-		std::make_shared<cmnd::MoveCommand>(entity, 180, 20)
+		std::make_shared<cmnd::MoveCommand>(entity, 180.0f, 20.0f)
 	};
 	initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
 		
 	};
-	node = app::fact::NodeFactory(math::Vector2f(950, 200), loopCmnds, initialCmnds).create();
+	node = app::fact::NodeFactory(math::Vector2f(950.0f, 200.0f), loopCmnds, initialCmnds).create();
 	entities.push_back(node);
 
 	m_registry.assign<decltype(ai)>(entity, std::move(ai));

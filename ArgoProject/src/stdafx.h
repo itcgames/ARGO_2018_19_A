@@ -130,7 +130,7 @@
 #include "math/Rect.h"
 
 #include "utilities/Time.h"
-#include "utilities/Console.h"
+#include "shared/utilities/Console.h"
 #include "utilities/makers.h"
 
 namespace app

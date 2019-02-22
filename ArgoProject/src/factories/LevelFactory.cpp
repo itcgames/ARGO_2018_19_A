@@ -1,11 +1,17 @@
 ﻿#include "stdafx.h"
 #include "LevelFactory.h"
 
+#include "parameters/DestructibleParameters.h"
+
 #include "factories/WallFactory.h"
 #include "factories/HazardFactory.h"
 #include "factories/PlatformFactory.h"
 #include "factories/AIFactory.h"
 #include "factories/entities/EnemyFactory.h"
+#include "factories/entities/GoalFactory.h"
+#include "factories/DestructibleBlockFactory.h"
+#include "factories/FacadeFactory.h"
+
 
 std::vector<app::Entity> app::fact::LevelFactory::create()
 {
@@ -26,10 +32,6 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 		position = math::Vector2f(1000, 450);
 		size = math::Vector2f(50, 50);
 		entities.push_back(enemyFactory.create());
-
-		position = math::Vector2f(630, 200);
-		size = math::Vector2f(50, 50);
-		entities.push_back(enemyFactory.create());
 	}
 
 	// walls
@@ -48,6 +50,21 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 		size = app::math::Vector2f(50, 250);
 		entities.push_back(wallFactory.create());
 	}
+	// destructible blocks
+	{
+		auto destructibleParams = app::par::DestructibleParameters(position, size);
+		auto facade = fact::FacadeFactory(position, size);
+
+		position = app::math::Vector2f(1400, 550);
+		size = app::math::Vector2f(200, 50);
+		destructibleParams.attachedArea = facade.create();
+
+		auto destructibleFactory = fact::DestructibleBlockFactory(destructibleParams);
+
+		position = app::math::Vector2f(1400, 500);
+		size = app::math::Vector2f(50, 50);
+		entities.push_back(destructibleFactory.create());
+	}
 	// hazards
 	{
 		auto hazardFactory = fact::HazardFactory(position, size);
@@ -60,15 +77,6 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 		size = app::math::Vector2f(40000000, 50);
 		entities.push_back(hazardFactory.create());
 	}
-	// ai
-	{
-		auto ai = fact::AIFactory(position, size);
-
-		position = app::math::Vector2f(750, 200);
-		size = app::math::Vector2f(100, 100);
-		auto aiEntities = ai.create();
-		entities.insert(entities.end(), aiEntities.begin(), aiEntities.end());
-	} 
 	// platforms
 	{
 		auto platformFactory = fact::PlatformFactory(position, size);
@@ -80,6 +88,14 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 		position = app::math::Vector2f(875, 100);
 		size = app::math::Vector2f(200, 50);
 		entities.push_back(platformFactory.create());
+	}
+	// goal
+	{
+		auto goal = fact::GoalFactory(position, size);
+
+		position = app::math::Vector2f(1300, 500);
+		size = app::math::Vector2f(50, 50);
+		entities.push_back(goal.create());
 	}
 
 	return entities;

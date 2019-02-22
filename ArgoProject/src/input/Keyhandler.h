@@ -32,6 +32,9 @@ namespace app::inp
 		bool isKeyUp(KeyType const & key) const;
 		bool isKeyUp(std::initializer_list<KeyType> const & key) const;
 		bool isKeyPressed(KeyType const & key) const;
+		bool isKeyPressed(std::initializer_list<KeyType> const & keys) const;
+		bool isKeyUnpressed(KeyType const & key) const;
+		bool isKeyUnpressed(std::initializer_list<KeyType> const & keys) const;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -125,6 +128,43 @@ namespace app::inp
 				return value && !prevValue;
 			}
 			return value;
+		}
+		return false;
+	}
+
+	template<typename KeyType>
+	bool app::inp::Keyhandler<KeyType>::isKeyPressed(std::initializer_list<KeyType> const & keys) const
+	{
+		for (auto const & key : keys)
+		{
+			if (this->isKeyPressed(key)) { return true; }
+		}
+		return false;
+	}
+
+	template<typename KeyType>
+	bool Keyhandler<KeyType>::isKeyUnpressed(KeyType const & key) const
+	{
+		if (auto const & itt = m_keyNowMap.find(key); itt != m_keyNowMap.end())
+		{
+			auto const &[key, value] = *itt;
+
+			if (auto const & prevItt = m_keyPrevMap.find(key); prevItt != m_keyPrevMap.end())
+			{
+				auto const &[prevKey, prevValue] = *prevItt;
+				return !value && prevValue;
+			}
+			return !value;
+		}
+		return false;
+	}
+
+	template<typename KeyType>
+	bool Keyhandler<KeyType>::isKeyUnpressed(std::initializer_list<KeyType> const & keys) const
+	{
+		for (auto const & key : keys)
+		{
+			if (this->isKeyUnpressed(key)) { return true; }
 		}
 		return false;
 	}
