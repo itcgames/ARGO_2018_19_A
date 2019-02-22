@@ -1,11 +1,11 @@
 ﻿#ifndef _FACTORY_LOBBY_SCENE_H
 #define _FACTORY_LOBBY_SCENE_H
 
-#include "../EntitiesFactory.h"
+#include "../SceneFactory.h"
 
 namespace app::fact::sce
 {
-	class LobbySceneFactory : public EntitiesFactory
+	class LobbySceneFactory : public SceneFactory
 	{
 	public: // Constructors/Destructor/Assignments
 		LobbySceneFactory() = default;

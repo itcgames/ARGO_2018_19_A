@@ -13,7 +13,6 @@
 #include "components/Collision.h"
 #include "components/PlatformDrop.h"
 #include "components/CurrentGround.h"
-#include "components/Audio.h"
 #include "components/DoubleJump.h"
 #include "components/Dashable.h"
 
@@ -108,10 +107,6 @@ app::Entity const app::fact::PlayerFactory::create()
 
 	auto ground = comp::CurrentGround();
 	m_registry.assign<decltype(ground)>(entity, std::move(ground));
-
-	auto audio = comp::Audio();
-	audio.addSFX("Jump", m_resourceManager.getAudioS(app::res::AudioKey::PlayerJump));
-	m_registry.assign<decltype(audio)>(entity, std::move(audio));
 
 	return entity;
 }

@@ -1,11 +1,11 @@
 ﻿#ifndef _FACTORY_CREDITS_SCENE_H
 #define _FACTORY_CREDITS_SCENE_H
 
-#include "../EntitiesFactory.h"
+#include "../SceneFactory.h"
 
 namespace app::fact::sce
 {
-	class CreditsSceneFactory : public EntitiesFactory
+	class CreditsSceneFactory : public SceneFactory
 	{
 	public: // Constructors/Destructor/Assignments
 		CreditsSceneFactory() = default;
