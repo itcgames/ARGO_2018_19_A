@@ -66,5 +66,9 @@ void app::sce::SplashScene::update(app::time::seconds const & dt)
 	{
 
 	}
+	else
+	{
+		BaseScene::update(dt);
+	}
 }
 
