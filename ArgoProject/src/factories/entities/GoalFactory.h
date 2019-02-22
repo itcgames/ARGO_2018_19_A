@@ -9,7 +9,7 @@ namespace app::fact
 	{
 	public: // Constructors/Destructor/Assignments
 		GoalFactory(math::Vector2f const & position, math::Vector2f const & size);
-		~GoalFactory() = default;
+		virtual ~GoalFactory() = default;
 
 		GoalFactory(GoalFactory const &) = default;
 		GoalFactory & operator=(GoalFactory const &) = default;

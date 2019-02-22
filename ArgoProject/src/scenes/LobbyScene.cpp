@@ -12,7 +12,8 @@ app::sce::LobbyScene::LobbyScene(SceneType & sceneManagerType)
 			UpdateSystem(std::in_place_type<app::sys::DashSystem>),
 			UpdateSystem(std::in_place_type<app::sys::StateMachineSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CameraSystem>),
-			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType)
+			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType),
+			UpdateSystem(std::in_place_type<app::sys::DestroySystem>)
 		})
 		, util::make_vector<DrawSystem>({
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),

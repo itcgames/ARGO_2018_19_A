@@ -2,7 +2,7 @@
 #define _DEBUG_SYSTEM_H
 
 #include "BaseSystem.h"
-#include "client/Client.h"
+#include "network/Client.h"
 #include "scenes/SceneType.h"
 
 

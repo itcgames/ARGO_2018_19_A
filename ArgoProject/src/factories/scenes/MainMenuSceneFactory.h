@@ -2,13 +2,14 @@
 #define _FACTORY_MAIN_MENU_SCENE_H
 
 #include "../EntitiesFactory.h"
+#include "scenes/SceneType.h"
 
 namespace app::fact::sce
 {
 	class MainMenuSceneFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		MainMenuSceneFactory() = default;
+		MainMenuSceneFactory(app::sce::SceneType & targetScene);
 		virtual ~MainMenuSceneFactory() = default;
 
 		MainMenuSceneFactory(MainMenuSceneFactory const &) = default;
@@ -26,6 +27,7 @@ namespace app::fact::sce
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
+		app::sce::SceneType & m_targetScene;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables

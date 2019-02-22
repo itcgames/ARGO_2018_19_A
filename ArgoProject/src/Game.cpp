@@ -22,6 +22,7 @@ app::Game::Game()
 app::Game::~Game()
 {
 	TTF_Quit();
+	SDLNet_Quit();
 	SDL_Quit();
 }
 
