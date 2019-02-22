@@ -37,14 +37,14 @@ namespace app::net
 		std::uint8_t getFreeSocket(std::uint8_t startIndex) const;
 
 		bool getAll(int id, std::byte * data, int totalBytes);
-		bool sendAll(int id, std::byte * data, int totalBytes);
+		bool sendAll(int id, std::byte const * data, int totalBytes);
 		bool get(int id, int& _int);
 		bool get(int id, std::string& string);
 		bool get(int id, PacketType& packetType);
 
 		bool send(int id, const int& num);
 		bool send(int id, const PacketType& packetType);
-		bool send(int id, const std::string& string, const PacketType& packetToProcessString);
+		bool send(int id, const std::string& string);
 		bool send(int id, Lobby const & lobby);
 		bool processPacket(int id, PacketType packetType);
 

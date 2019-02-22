@@ -612,6 +612,9 @@
     <ClCompile Include="src\factories\entities\GoalFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
+    <ClCompile Include="..\ArgoShared\src\shared\utilities\ByteConverter.cpp">
+      <Filter>Source Files\utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -1078,6 +1081,9 @@
     </ClInclude>
     <ClInclude Include="src\factories\AIFactory.h">
       <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ArgoShared\src\shared\utilities\ByteConverter.h">
+      <Filter>Header Files\utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

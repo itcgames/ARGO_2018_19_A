@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "Server.h"
+#include "shared/utilities/ByteConverter.h"
 
 /// <summary>
 /// Constructor for server,
@@ -260,7 +261,7 @@ bool app::net::Server::getAll(int id, std::byte * data, int totalBytes)
 /// <param name="data">data to send to the socket</param>
 /// <param name="totalBytes">total bytes we will send</param>
 /// <returns>true if success, false if SDLNet_TCP_Send returns error</returns>
-bool app::net::Server::sendAll(int id, std::byte * data, int totalBytes)
+bool app::net::Server::sendAll(int id, std::byte const * data, int totalBytes)
 {
 	int bytesSent = 0;
 	while (bytesSent < totalBytes)
@@ -283,7 +284,7 @@ bool app::net::Server::sendAll(int id, std::byte * data, int totalBytes)
 /// <returns>true if success false if sendAll fails</returns>
 bool app::net::Server::send(int id, const int& _int)
 {
-	if (!sendAll(id, (std::byte *)&_int, sizeof(int)))
+	if (!sendAll(id, reinterpret_cast<std::byte const *>(&_int), sizeof(int)))
 	{
 		return false;
 	}
@@ -298,7 +299,7 @@ bool app::net::Server::send(int id, const int& _int)
 /// <returns>true if success, false if recvAll fails</returns>
 bool app::net::Server::get(int id, int & _int)
 {
-	if (!getAll(id, (std::byte *)&_int, sizeof(int)))
+	if (!getAll(id, reinterpret_cast<std::byte *>(&_int), sizeof(int)))
 	{
 		return false;
 	}
@@ -313,7 +314,7 @@ bool app::net::Server::get(int id, int & _int)
 /// <returns>true if success, false if sendAll fails</returns>
 bool app::net::Server::send(int id, const PacketType& _packetType)
 {
-	if (!sendAll(id, (std::byte *)&_packetType, sizeof(PacketType)))
+	if (!sendAll(id, reinterpret_cast<std::byte const *>(&_packetType), sizeof(PacketType)))
 	{
 		return false;
 	}
@@ -328,7 +329,7 @@ bool app::net::Server::send(int id, const PacketType& _packetType)
 /// <returns>true if success, false if recvAll fails</returns>
 bool app::net::Server::get(int id, PacketType & _packetType)
 {
-	if (!getAll(id, (std::byte *)&_packetType, sizeof(PacketType)))
+	if (!getAll(id, reinterpret_cast<std::byte *>(&_packetType), sizeof(PacketType)))
 	{
 		return false;
 	}
@@ -341,30 +342,76 @@ bool app::net::Server::get(int id, PacketType & _packetType)
 /// </summary>
 /// <param name="id">id of the socket to send the string to</param>
 /// <param name="_string">string to send</param>
-/// <param name="_packetType">type of packet the other socket is to expect (defines how it will be processed by the other socket)</param>
 /// <returns>true if success, false if any of the sends fail</returns>
-bool app::net::Server::send(int id, const std::string & _string, const PacketType & _packetType)
+bool app::net::Server::send(int id, const std::string & _string)
 {
-	if (!send(id, _packetType))
-	{
-		return false;
-	}
-	int bufferLen = _string.size();
+	const int bufferLen = static_cast<int>(_string.size());
 	if (!send(id, bufferLen))
 	{
 		return false;
 	}
-	if (!sendAll(id, (std::byte *)&_string, sizeof(_string)))
+	if (!sendAll(id, reinterpret_cast<std::byte const *>(&_string), sizeof(_string)))
 	{
 		return false;
 	}
 	return true;
 }
 
+std::vector<std::byte> convertToBytes(std::int32_t const & number)
+{
+	constexpr auto ZERO_BYTE = static_cast<std::byte>(0u);
+	auto bytes = std::vector<std::byte>();
+	bytes.resize(sizeof(std::int32_t), ZERO_BYTE);
+	auto const * pByte = reinterpret_cast<std::byte const *>(&number);
+	for (std::size_t i = 0; i < bytes.size(); ++i) { bytes.at(i) = pByte[i]; }
+	return std::move(bytes);
+}
+
+std::vector<std::byte> convertToBytes(std::string const & _string)
+{
+	constexpr auto ZERO_BYTE = static_cast<std::byte>(0u);
+	auto bytes = std::vector<std::byte>();
+	bytes.resize(_string.size());
+	auto const * pByte = (std::byte const *)(_string.data());
+	std::copy(pByte, pByte + _string.size(), bytes.begin());
+	//for (std::size_t i = 0; i < bytes.size(); ++i) { bytes.at(i) = pByte[i]; }
+	return std::move(bytes);
+}
+
+std::vector<std::byte> && convertToBytes(app::net::Lobby const & lobby)
+{
+	auto bytes = std::vector<std::byte>();
+	bytes.reserve(sizeof(app::net::Lobby) + lobby.getPlayers().size());
+	auto lobbyNameSizeBytes = convertToBytes(lobby.getName().size());
+	bytes.insert(bytes.end()
+		, std::make_move_iterator(lobbyNameSizeBytes.begin())
+		, std::make_move_iterator(lobbyNameSizeBytes.end()));
+	auto lobbyNameBytes = convertToBytes(lobby.getName());
+	bytes.insert(bytes.end()
+		, std::make_move_iterator(lobbyNameBytes.begin())
+		, std::make_move_iterator(lobbyNameBytes.end()));
+	auto lobbyNumberPlayersBytes = convertToBytes(lobby.getPlayers().size());
+	bytes.insert(bytes.end()
+		, std::make_move_iterator(lobbyNumberPlayersBytes.begin())
+		, std::make_move_iterator(lobbyNumberPlayersBytes.end()));
+	for (auto const &[id, playerName] : lobby.getPlayers())
+	{
+		auto idBytes = convertToBytes(id);
+		bytes.insert(bytes.end()
+			, std::make_move_iterator(idBytes.begin())
+			, std::make_move_iterator(idBytes.end()));
+		auto playerNameBytes = convertToBytes(playerName);
+		bytes.insert(bytes.end()
+			, std::make_move_iterator(playerNameBytes.begin())
+			, std::make_move_iterator(playerNameBytes.end()));
+	}
+	return std::move(bytes);
+}
+
 bool app::net::Server::send(int id, Lobby const & _lobby)
 {
-	constexpr auto BUFFER_SIZE = sizeof(Lobby);
-	return send(id, BUFFER_SIZE) && sendAll(id, (std::byte *)&_lobby, BUFFER_SIZE);
+	auto lobbyBytes = app::util::ByteConverter::convertTo(_lobby);;
+	return send(id, lobbyBytes.size()) && sendAll(id, reinterpret_cast<std::byte const *>(lobbyBytes.data()), lobbyBytes.size());
 }
 
 
@@ -376,13 +423,14 @@ bool app::net::Server::send(int id, Lobby const & _lobby)
 /// <returns>true if success, false if any receives fail</returns>
 bool app::net::Server::get(int id, std::string & _string)
 {
+	constexpr auto ZERO_BYTE = static_cast<std::byte>(0u);
 	int bufferLength;
 	if (!get(id, bufferLength))
 	{
 		return false;
 	}
 	auto buffer = std::vector<std::byte>();
-	buffer.resize(bufferLength, static_cast<std::byte>('\0'));
+	buffer.resize(bufferLength, ZERO_BYTE);
 	if (!getAll(id, buffer.data(), bufferLength))
 	{
 		buffer.clear();

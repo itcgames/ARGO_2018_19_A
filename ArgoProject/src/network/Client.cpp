@@ -103,195 +103,27 @@ bool app::net::Client::checkSocket()
 	return SDLNet_SocketReady(m_socket);
 }
 
-/// <summary>
-/// Send all type of data.
-/// </summary>
-/// <param name="data">data to send</param>
-/// <param name="totalBytes">amount of bytes to send</param>
-/// <returns>true if succeeds, false if the sending fails</returns>
-bool app::net::Client::sendAll(std::byte * data, int totalBytes)
+bool app::net::Client::sendAll(std::vector<std::byte> const & data)
 {
-
-	//Holds the total bytes sent
-	int bytesSent = 0;
-	//while we still have more bytes to send
-	while (bytesSent < totalBytes)
+	int amountSent = 0;
+	for (auto itt = data.cbegin(), end = data.cend(); itt != end; itt += amountSent)
 	{
-		//try to send remaining bytes
-		int RetnCheck = SDLNet_TCP_Send(m_socket, data + bytesSent, totalBytes - bytesSent);
-		//if theres an error return false.
-		if (RetnCheck < bytesSent)
-		{
-			return false;
-		}
-		//add to total bytes sent
-		bytesSent += RetnCheck;
-	}
-	//success!
-	return true;
-}
-
-/// <summary>
-/// Send a string to the server. 
-/// </summary>
-/// <param name="_string">string to send</param>
-/// <returns>true if success, false if sending fails</returns>
-bool app::net::Client::send(const std::string & _string)
-{
-	int bufferLen = _string.size();
-	if (!send(bufferLen))
-	{
-		return false;
-	}
-	if (!sendAll((std::byte *)_string.c_str(), bufferLen))
-	{
-		return false;
+		amountSent = SDLNet_TCP_Send(m_socket, &(*itt), end - itt);
+		if (amountSent < 0) { return false; }
+		itt += amountSent;
 	}
 	return true;
 }
 
-/// <summary>
-/// Expect a string from server.
-/// </summary>
-/// <param name="_string">string that will get assigned the value of received string</param>
-/// <returns>true if success, false if receiving of data fails</returns>
-bool app::net::Client::get(std::string & _string)
+bool app::net::Client::getAll(std::vector<std::byte>& data)
 {
-	int bufferLength;
-	if (!get(bufferLength))
+	int amountReceived = 0;
+	for (auto itt = data.begin(), end = data.end(); itt != end; itt += amountReceived)
 	{
-		return false;
-	}
-	std::byte * buffer = new std::byte[bufferLength + 1];
-	buffer[bufferLength] = static_cast<std::byte>('\0');
-	if (!getAll(buffer, bufferLength))
-	{
-		delete[] buffer;
-		return false;
-	}
-	_string = reinterpret_cast<char *>(buffer);
-	delete[] buffer;
-	return true;
-}
-
-
-/// <summary>
-/// Send the packet type to server
-/// </summary>
-/// <param name="_packetType">packet type to send</param>
-/// <returns>true if succeeds, false if sending fails</returns>
-bool app::net::Client::send(const PacketType& _packetType)
-{
-	if (!sendAll((std::byte *)&_packetType, sizeof(PacketType)))
-	{
-		return false;
-	}
-	return true;
-}
-
-/// <summary>
-/// Send an integer to the server
-/// </summary>
-/// <param name="_int">integer value to send</param>
-/// <returns>true if succeeds, false if sending fails</returns>
-bool app::net::Client::send(const int& _int)
-{
-	if (!sendAll((std::byte *)&_int, sizeof(int)))
-	{
-		return false;
-	}
-	return true;
-}
-
-/// <summary>
-/// receive all types of data
-/// </summary>
-/// <param name="data">data that got received</param>
-/// <param name="totalBytes">size of data</param>
-/// <returns>true if success, false if fail to receive the data</returns>
-bool app::net::Client::getAll(std::byte * data, int totalBytes)
-{
-	int bytesReceived = 0;
-	while (bytesReceived < totalBytes)
-	{
-		int retnCheck = SDLNet_TCP_Recv(m_socket, data + bytesReceived, totalBytes - bytesReceived);
-		if (retnCheck <= 0)
-		{
-			return false;
-		}
-		bytesReceived += retnCheck;
+		amountReceived = SDLNet_TCP_Recv(m_socket, &(*itt), end - itt);
+		if (amountReceived < 0) { return false; }
 	}
 
-	return true;
-}
-
-bool app::net::Client::get(Lobby & _lobby)
-{
-	int bufferLength;
-	if (!get(bufferLength))
-	{
-		return false;
-	}
-	auto buffer = std::vector<std::byte>();
-	buffer.resize(bufferLength, static_cast<std::byte>('\0'));
-	if (!getAll(buffer.data(), bufferLength))
-	{
-		buffer.clear();
-		return false;
-	}
-	_lobby = *(reinterpret_cast<Lobby *>(buffer.data()));
-	buffer.clear();
-	return true;
-}
-
-bool app::net::Client::get(std::list<Lobby>& _lobbies)
-{
-	int numberOfLobbies = 0;
-	if (!get(numberOfLobbies))
-	{
-		return false;
-	}
-	auto lobbies = std::vector<Lobby>();
-	lobbies.resize(numberOfLobbies);
-	for (auto & lobby : lobbies)
-	{
-		if (!this->get(lobby))
-		{
-			return false;
-		}
-	}
-	_lobbies.insert(_lobbies.end()
-					, std::make_move_iterator(lobbies.begin())
-					, std::make_move_iterator(lobbies.end()));
-
-	return true;
-}
-
-/// <summary>
-/// Will expect a packet type from server
-/// </summary>
-/// <param name="_packetType">a packet type to set the received packet to</param>
-/// <returns>true if success, false if receive fails</returns>
-bool app::net::Client::get(PacketType & _packetType)
-{
-	if (!getAll((std::byte *)&_packetType, sizeof(PacketType)))
-	{
-		return false;
-	}
-	return true;
-}
-
-/// <summary>
-/// Get an integer from the server
-/// </summary>
-/// <param name="_int">integer variable to assign</param>
-/// <returns>true if success, false if receive fails</returns>
-bool app::net::Client::get(int & _int)
-{
-	if (!getAll((std::byte *)&_int, sizeof(int)))
-	{
-		return false;
-	}
 	return true;
 }
 
@@ -300,6 +132,20 @@ void app::net::Client::setLobbies(std::list<Lobby>&& lobbies)
 	m_lobbies.insert(m_lobbies.end()
 		, std::make_move_iterator(lobbies.begin())
 		, std::make_move_iterator(lobbies.end()));
+}
+
+std::optional<std::vector<std::byte>> app::net::Client::getNextPacket(std::optional<std::size_t> packetSize)
+{
+	if (!packetSize.has_value())
+	{
+		packetSize = 0u;
+		if (!get(packetSize.value())) { return std::nullopt; }
+	}
+
+	auto bytes = std::vector<std::byte>();
+	bytes.resize(packetSize.value());
+	if (!getAll(bytes)) { return std::nullopt; }
+	return bytes;
 }
 
 void app::net::Client::output(std::string const & msg) const
