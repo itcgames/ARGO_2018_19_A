@@ -615,6 +615,9 @@
     <ClCompile Include="..\ArgoShared\src\shared\utilities\ByteConverter.cpp">
       <Filter>Source Files\utilities</Filter>
     </ClCompile>
+    <ClCompile Include="..\ArgoShared\src\shared\network\PacketParser.cpp">
+      <Filter>Source Files\network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -1084,6 +1087,9 @@
     </ClInclude>
     <ClInclude Include="..\ArgoShared\src\shared\utilities\ByteConverter.h">
       <Filter>Header Files\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ArgoShared\src\shared\network\PacketParser.h">
+      <Filter>Header Files\network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

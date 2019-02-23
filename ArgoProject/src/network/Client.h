@@ -3,16 +3,15 @@
 
 #include "shared/network/Lobby.h"
 #include "shared/network/PacketType.h"
-#include "shared/utilities/ByteConverter.h"
+#include "shared/network/PacketParser.h"
 
 namespace app::net
 {
-	class Client
+	class Client : public app::net::PacketParser
 	{
 	private: // Usings/typedefs/enums
-		using ByteConverter = app::util::ByteConverter;
 	public: // Constructors/Destructor/Assignments
-		Client() = default;
+		Client();
 		~Client() = default;
 
 		Client(Client const &) = default;
@@ -30,16 +29,12 @@ namespace app::net
 		bool checkSocket();
 		bool processPacket(PacketType _packetType);
 
-		bool sendAll(std::vector<std::byte> const & data);
-		bool getAll(std::vector<std::byte> & data);
-
-		template<typename T>
-		bool send(T const & t);
-		template<typename T>
-		bool get(T & t);
+		template<typename T> bool send(T const & t) const { return PacketParser::send(m_socket, t); }
+		template<typename T> bool get(T & t) const { return PacketParser::get(m_socket, t); }
 
 		constexpr std::vector<Lobby> const & getLobbies() const { return m_lobbies; }
 		void setLobbies(std::list<Lobby> && lobbies);
+
 	public: // Public Static Variables
 		constexpr static auto s_SERVER_IP = "localhost";
 		constexpr static auto s_SERVER_PORT = 27000;
@@ -50,15 +45,14 @@ namespace app::net
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
-		std::optional<std::vector<std::byte>> getNextPacket(std::optional<std::size_t> packetSize = std::nullopt);
-
-		void output(std::string const & msg) const;
-		void output(std::initializer_list<std::string> const & msgs) const;
-
 		bool processClientName();
 		bool processLobbyWasCreated();
 		bool processLobbyCreate();
+		bool processLobbyGetAll();
 		bool processDefault();
+
+		void output(std::string const & msg) const;
+		void output(std::initializer_list<std::string> const & msgs) const;
 	private: // Private Static Variables
 		constexpr static bool s_DEBUG_MODE = true;
 	private: // Private Member Variables
@@ -66,64 +60,6 @@ namespace app::net
 		SDLNet_SocketSet m_socketSet;
 		std::vector<Lobby> m_lobbies;
 	};
-
-	template<typename T>
-	bool Client::send(T const & t)
-	{
-		return sendAll(ByteConverter::convertTo(t));
-	}
-
-	template<>
-	bool Client::get<Lobby>(Lobby & lobby)
-	{
-		auto packet = this->getNextPacket();
-		if (!packet.has_value()) { return false; }
-
-		lobby = ByteConverter::convertFrom<Lobby>(packet->cbegin(), packet->cend());
-		return true;
-	}
-
-	template<>
-	bool Client::get<std::list<Lobby>>(std::list<Lobby> & lobbies)
-	{
-		int numberOfLobbies = 0;
-		if (!get(numberOfLobbies)) { return false; }
-
-		auto tempLobbies = std::vector<Lobby>();
-		lobbies.resize(numberOfLobbies);
-		for (auto & lobby : tempLobbies)
-		{
-			if (!get(lobby)) { return false; }
-		}
-
-		lobbies.insert(lobbies.end()
-			, std::make_move_iterator(tempLobbies.begin())
-			, std::make_move_iterator(tempLobbies.end()));
-		return true;
-	}
-
-	template<>
-	bool Client::get<std::string>(std::string & str)
-	{
-		int bufferSize = 0;
-		if (!get(bufferSize)) { return false; }
-
-		auto packet = this->getNextPacket(bufferSize);
-		if (!packet.has_value()) { return false; }
-
-		str = ByteConverter::convertFrom<std::string>(packet->cbegin(), packet->cend());
-		return true;
-	}
-
-	template<typename T>
-	bool Client::get(T & t)
-	{
-		auto packet = this->getNextPacket(sizeof(T));
-		if (!packet.has_value()) { return false; }
-
-		t = ByteConverter::convertFrom<T>(packet->cbegin(), packet->cend());
-		return true;
-	}
 }
 
 #endif // !_NET_CLIENT_H

@@ -191,6 +191,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\ArgoShared\src\shared\network\Lobby.cpp" />
+    <ClCompile Include="..\ArgoShared\src\shared\network\PacketParser.cpp" />
     <ClCompile Include="..\ArgoShared\src\shared\network\PacketType.cpp" />
     <ClCompile Include="..\ArgoShared\src\shared\utilities\ByteConverter.cpp" />
     <ClCompile Include="..\ArgoShared\src\shared\utilities\Console.cpp" />
@@ -355,6 +356,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ArgoShared\src\shared\network\Lobby.h" />
+    <ClInclude Include="..\ArgoShared\src\shared\network\PacketParser.h" />
     <ClInclude Include="..\ArgoShared\src\shared\network\PacketType.h" />
     <ClInclude Include="..\ArgoShared\src\shared\utilities\ByteConverter.h" />
     <ClInclude Include="..\ArgoShared\src\shared\utilities\Console.h" />

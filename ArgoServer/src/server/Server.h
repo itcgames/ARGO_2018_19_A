@@ -1,13 +1,15 @@
 ﻿#ifndef _SERVER_H
 #define _SERVER_H
 
-#include "shared/network/Lobby.h"
 #include "shared/network/PacketType.h"
+#include "shared/network/PacketParser.h"
 
 namespace app::net
 {
-	class Server
+	class Server : public PacketParser
 	{
+	private: // Usings/typedefs/enums
+		using ByteConverter = app::util::ByteConverter;
 	public: // Constructors/Destructor/Assignments
 		explicit Server(int port);
 		~Server();
@@ -36,16 +38,9 @@ namespace app::net
 		void sdlCleanup();
 		std::uint8_t getFreeSocket(std::uint8_t startIndex) const;
 
-		bool getAll(int id, std::byte * data, int totalBytes);
-		bool sendAll(int id, std::byte const * data, int totalBytes);
-		bool get(int id, int& _int);
-		bool get(int id, std::string& string);
-		bool get(int id, PacketType& packetType);
+		template<typename T> bool get(int id, T & t) const { return PacketParser::get(m_sockets.at(id), t); }
+		template<typename T> bool send(int id, T const & t) const { return PacketParser::send(m_sockets.at(id), t); }
 
-		bool send(int id, const int& num);
-		bool send(int id, const PacketType& packetType);
-		bool send(int id, const std::string& string);
-		bool send(int id, Lobby const & lobby);
 		bool processPacket(int id, PacketType packetType);
 
 		// packet process functions
