@@ -4,6 +4,7 @@
 #include "components/Dimensions.h"
 #include "components/CharacterType.h"
 #include "factories/entities/AxeAttackFactory.h"
+#include "factories/DiscFactory.h"
 
 
 app::cmnd::AttackCommand::AttackCommand(app::Entity const _entity)
@@ -29,6 +30,10 @@ void app::cmnd::AttackCommand::execute()
 		case comp::CharacterType::Type::BOMB:
 			break;
 		case comp::CharacterType::Type::DISC:
+		{
+			auto discFactory = fact::DiscFactory(m_entity);
+			discFactory.create();
+		}
 			break;
 		case comp::CharacterType::Type::SWORD_LEGS:
 			break;

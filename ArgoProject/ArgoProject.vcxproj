@@ -223,6 +223,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\Dashable.cpp" />
     <ClCompile Include="src\components\Destructible.cpp" />
     <ClCompile Include="src\components\Dimensions.cpp" />
+    <ClCompile Include="src\components\Disc.cpp" />
     <ClCompile Include="src\components\DoubleJump.cpp" />
     <ClCompile Include="src\components\Enemy.cpp" />
     <ClCompile Include="src\components\FollowEntity.cpp" />
@@ -247,6 +248,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\deleters\SdlTtfDeleter.cpp" />
     <ClCompile Include="src\factories\BaseFactory.cpp" />
     <ClCompile Include="src\factories\DestructibleBlockFactory.cpp" />
+    <ClCompile Include="src\factories\DiscFactory.cpp" />
     <ClCompile Include="src\factories\EntitiesFactory.cpp" />
     <ClCompile Include="src\factories\entities\AxeAttackFactory.cpp" />
     <ClCompile Include="src\factories\entities\ImageFactory.cpp" />
@@ -396,6 +398,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\Dashable.h" />
     <ClInclude Include="src\components\Destructible.h" />
     <ClInclude Include="src\components\Dimensions.h" />
+    <ClInclude Include="src\components\Disc.h" />
     <ClInclude Include="src\components\DoubleJump.h" />
     <ClInclude Include="src\components\Enemy.h" />
     <ClInclude Include="src\components\FollowEntity.h" />
@@ -420,6 +423,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\deleters\SdlTtfDeleter.h" />
     <ClInclude Include="src\factories\BaseFactory.h" />
     <ClInclude Include="src\factories\DestructibleBlockFactory.h" />
+    <ClInclude Include="src\factories\DiscFactory.h" />
     <ClInclude Include="src\factories\EntitiesFactory.h" />
     <ClInclude Include="src\factories\entities\AxeAttackFactory.h" />
     <ClInclude Include="src\factories\entities\ImageFactory.h" />
