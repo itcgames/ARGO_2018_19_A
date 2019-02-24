@@ -9,6 +9,7 @@
 #include "components/Render.h"
 #include "components/Layer.h"
 #include "components/Disc.h"
+#include "components/Attack.h"
 
 app::fact::DiscFactory::DiscFactory(app::Entity const _entity)
 	: m_entity(_entity)
@@ -30,7 +31,7 @@ app::Entity const app::fact::DiscFactory::create()
 
 	//dimensions
 	auto dimensionsComp = comp::Dimensions();
-	dimensionsComp.size = { dimensions.size.x / 2, 100.0f };
+	dimensionsComp.size = { dimensions.size.x / 2, dimensions.size.y / 2 };
 	dimensionsComp.origin = { dimensionsComp.size.x / 2, dimensionsComp.size.y / 2 };
 	m_registry.assign<decltype(dimensionsComp)>(entity, std::move(dimensionsComp));
 
@@ -41,27 +42,41 @@ app::Entity const app::fact::DiscFactory::create()
 
 	//disc component
 	auto discCmp = comp::Disc();
-	discCmp.discImpulse = 1000.0f;
+	discCmp.discImpulse = 900.0f;
 	discCmp.offset = { dimensions.size.x / 2 + dimensionsComp.size.x / 2 + 0.5f, 0.0f };
+	discCmp.entity = m_entity;
 	m_registry.assign<decltype(discCmp)>(entity, std::move(discCmp));
 
+	//Motion
+	auto motionCmp = comp::Motion();
+	motionCmp.speed = discCmp.discImpulse;
+	motionCmp.drag = 0.96f;
+	motionCmp.dragCutoff = 0.1f;
+	motionCmp.maxSpeed = 1000.0f;
 
 	//location
 	auto locationComp = comp::Location();
 	if (input.isRight)
 	{
 		locationComp.position = location.position + discCmp.offset;
+		motionCmp.direction = 0;
 	}
 	else
 	{
 		locationComp.position = location.position - discCmp.offset;
+		motionCmp.direction = 180;
 	}
 	locationComp.orientation = location.orientation;
 	m_registry.assign<decltype(locationComp)>(entity, std::move(locationComp));
+	m_registry.assign<decltype(motionCmp)>(entity, std::move(motionCmp));
+
 
 	auto damage = comp::Damage();
 	damage.damage = 1;
 	m_registry.assign<decltype(damage)>(entity, std::move(damage));
+
+	auto attack = comp::Attack();
+	m_registry.assign<decltype(attack)>(entity, std::move(attack));
 
 
 	//TODO: remove after debug done or add debug tag
@@ -73,13 +88,7 @@ app::Entity const app::fact::DiscFactory::create()
 	render.texture = m_resourceManager.getTexture(app::res::TextureKey::DebugColBox);
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
-	auto motionCmp = comp::Motion();
-	motionCmp.speed = discCmp.discImpulse;
-	motionCmp.direction = 0;
-	motionCmp.drag = 1.0f;
-	motionCmp.dragCutoff = 0.1f;
-	motionCmp.maxSpeed = 1000.0f;
-	m_registry.assign<decltype(motionCmp)>(entity, std::move(motionCmp));
+
 
 
 	return entity;

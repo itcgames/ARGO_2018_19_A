@@ -1,30 +1,24 @@
-﻿#ifndef _COMP_DISC_H
-#define _COMP_DISC_H
+﻿#ifndef _COMP_SEEK_ENTITY_H
+#define _COMP_SEEK_ENTITY_H
 
 namespace app::comp
 {
-	struct Disc
+	struct SeekEntity
 	{
 	public: // Constructors/Destructor/Assignments
-		Disc() = default;
-		Disc(Disc const &) = default;
-		Disc(Disc &&) = default;
+		SeekEntity() = default;
+		SeekEntity(SeekEntity const &) = default;
+		SeekEntity(SeekEntity &&) = default;
 
-		~Disc() = default;
+		~SeekEntity() = default;
 
-		Disc & operator=(Disc const &) = default;
-		Disc & operator=(Disc &&) = default;
+		SeekEntity & operator=(SeekEntity const &) = default;
+		SeekEntity & operator=(SeekEntity &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
-		constexpr static float DRAG_WHEN_HIT_WALL = 1.02f;
-		constexpr static float DRAG_WHEN_SLOWED_DOWN = 1.05f;
-		constexpr static float SPEED_WHEN_SLOWED_DOWN = 10.0f;
 	public: // Public Member Variables
-		float discImpulse;
-		math::Vector2f offset;
-		bool backToPlayer = false;
 		app::Entity entity;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
@@ -37,4 +31,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMP_DISC_H
+#endif // !_COMP_SEEK_ENTITY_H

@@ -18,6 +18,8 @@ app::sce::LevelScene::LevelScene(SceneType & sceneManagerType)
 			UpdateSystem(std::in_place_type<app::sys::AISystem>),
 			UpdateSystem(std::in_place_type<app::sys::CurrentGroundSystem>),
 			UpdateSystem(std::in_place_type<app::sys::FollowEntitySystem>),
+			UpdateSystem(std::in_place_type<app::sys::SeekEntitySystem>),
+			UpdateSystem(std::in_place_type<app::sys::DiscReturnSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CollisionSystem>),
 			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType),
 			UpdateSystem(std::in_place_type<app::sys::DestroySystem>)

@@ -22,6 +22,9 @@
 #include "components/Node.h"
 #include "components/Attack.h"
 #include "components/Goal.h"
+#include "components/Disc.h"
+#include "components/Destroy.h"
+#include "components/SeekEntity.h"
 
 //visitors
 #include "visitors/CollisionUpdateVisitor.h"
@@ -58,6 +61,7 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 	this->checkAINodeCollisions();
 	this->playerGoalCollisions();
 	this->attackEnemyCollisions();
+	this->checkDiscCollisions();
 
 }
 
@@ -82,7 +86,10 @@ void app::sys::CollisionSystem::groundCollisions()
 					auto const & direction = math::Vector2f{ manifold.n.x, manifold.n.y };
 					auto const & penetration = manifold.depths[0];
 					auto const & pushback = (direction*penetration);
-					location.position += pushback;
+					if (!collision.passable)
+					{
+						location.position += pushback;
+					}
 					std::visit(vis::CollisionUpdateVisitor{ location, dimensions}, collision.bounds);
 
 					if constexpr (DEBUG_MODE)
@@ -246,6 +253,68 @@ void app::sys::CollisionSystem::attackEnemyCollisions()
 	});
 }
 
+void app::sys::CollisionSystem::checkDiscCollisions()
+{
+	//go through all disc entities
+	m_registry.view<comp::Disc, comp::Collision, comp::Motion>(entt::persistent_t())
+		.each([&, this](app::Entity const discEnt, comp::Disc & discCmp, comp::Collision & collision, comp::Motion& motion)
+	{
+		if (m_registry.valid(discCmp.entity))
+		{
+			//against walls
+			m_registry.view<comp::Collision, comp::Impenetrable>(entt::persistent_t())
+				.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Impenetrable const & impenetrable)
+			{
+				bool const & collided = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+				if (collided)
+				{
+					if (!discCmp.backToPlayer)
+					{
+						auto seek = comp::SeekEntity();
+						seek.entity = discCmp.entity;
+						m_registry.assign<comp::SeekEntity>(discEnt);
+						motion.drag = discCmp.DRAG_WHEN_HIT_WALL;
+						discCmp.backToPlayer = true;
+						collision.passable = true;
+					}
+				}
+			});
+			//against enemies
+			m_registry.view<comp::Collision, comp::Enemy>(entt::persistent_t())
+				.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Enemy & enemy)
+			{
+				bool const & collided = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+				if (collided)
+				{
+					if (!discCmp.backToPlayer)
+					{
+						auto seek = comp::SeekEntity();
+						seek.entity = discCmp.entity;
+						m_registry.assign<comp::SeekEntity>(discEnt);
+						motion.drag = discCmp.DRAG_WHEN_HIT_WALL;
+						discCmp.backToPlayer = true;
+						collision.passable = true;
+					}
+				}
+			});
+			//against player
+			if (discCmp.backToPlayer)
+			{
+				auto secCollision = m_registry.get<comp::Collision>(discCmp.entity);
+				bool const & collided = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+				if (collided)
+				{
+					m_registry.assign<comp::Destroy>(discEnt);
+				}
+			}
+		}
+		else
+		{
+			m_registry.assign<comp::Destroy>(discEnt);
+		}
+	});
+}
+
 void app::sys::CollisionSystem::dashCollisions()
 {
 	//view player
@@ -378,6 +447,11 @@ void app::sys::CollisionSystem::playerHazardCollisions()
 		m_registry.view<comp::Collision, comp::Damage>()
 			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Damage & damage)
 		{
+			//need the if statement since disc has a collision and damage comp but should not hurt the player
+			if (m_registry.has<comp::Disc>(entity) || m_registry.has<comp::Disc>(secEntity))
+			{
+				return;
+			}
 			if (entity != secEntity)
 			{
 				if (app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds))
