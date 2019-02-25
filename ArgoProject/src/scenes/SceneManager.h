@@ -7,6 +7,7 @@
 #include "LevelSelectScene.h"
 #include "LobbyScene.h"
 #include "LobbySelectScene.h"
+#include "LoadingScene.h"
 #include "MainMenuScene.h"
 #include "MultiplayerLevelScene.h"
 #include "SplashScene.h"
@@ -28,6 +29,7 @@ namespace app::sce
 			, sce::MultiplayerLevelScene
 			, sce::SplashScene
 			, sce::TutorialLevelScene
+			, sce::LoadingScene
 		>;
 	public: // Constructors/Destructor/Assignments
 		SceneManager();
