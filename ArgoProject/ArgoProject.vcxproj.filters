@@ -613,7 +613,7 @@
       <Filter>Source Files\systems</Filter>
     </ClCompile>
     <ClCompile Include="src\components\AnimatedImage.cpp">
-          <Filter>Source Files\components</Filter>
+      <Filter>Source Files\components</Filter>
     </ClCompile>
     <ClCompile Include="src\components\CharacterType.cpp">
       <Filter>Source Files\components</Filter>
@@ -668,6 +668,9 @@
     </ClCompile>
     <ClCompile Include="src\parameters\AnimatedImageFactoryParameters.cpp">
       <Filter>Source Files\parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Hazard.cpp">
+      <Filter>Source Files\components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1191,6 +1194,9 @@
     </ClInclude>
     <ClInclude Include="src\parameters\AnimatedImageFactoryParameters.h">
       <Filter>Header Files\parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Hazard.h">
+      <Filter>Header Files\components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
