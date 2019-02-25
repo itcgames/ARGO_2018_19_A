@@ -210,6 +210,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\commands\TestCommand.cpp" />
     <ClCompile Include="src\components\AI.cpp" />
     <ClCompile Include="src\components\AirMotion.cpp" />
+    <ClCompile Include="src\components\AnimatedImage.cpp" />
     <ClCompile Include="src\components\Animator.cpp" />
     <ClCompile Include="src\components\Attack.cpp" />
     <ClCompile Include="src\components\CharacterType.cpp" />
@@ -228,6 +229,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\Enemy.cpp" />
     <ClCompile Include="src\components\FollowEntity.cpp" />
     <ClCompile Include="src\components\Goal.cpp" />
+    <ClCompile Include="src\components\Hazard.cpp" />
     <ClCompile Include="src\components\Health.cpp" />
     <ClCompile Include="src\components\Impenetrable.cpp" />
     <ClCompile Include="src\components\Input.cpp" />
@@ -251,11 +253,13 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\DestructibleBlockFactory.cpp" />
     <ClCompile Include="src\factories\DiscFactory.cpp" />
     <ClCompile Include="src\factories\EntitiesFactory.cpp" />
+    <ClCompile Include="src\factories\entities\AnimatedImageFactory.cpp" />
     <ClCompile Include="src\factories\entities\AxeAttackFactory.cpp" />
     <ClCompile Include="src\factories\entities\ImageFactory.cpp" />
     <ClCompile Include="src\factories\entities\ButtonFactory.cpp" />
     <ClCompile Include="src\factories\entities\CameraFactory.cpp" />
     <ClCompile Include="src\factories\entities\EnemyFactory.cpp" />
+    <ClCompile Include="src\factories\entities\LevelDemoFactory.cpp" />
     <ClCompile Include="src\factories\entities\LobbyDisplayFactory.cpp" />
     <ClCompile Include="src\factories\entities\modals\AskNameFactory.cpp" />
     <ClCompile Include="src\factories\entities\GoalFactory.cpp" />
@@ -267,6 +271,8 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\LevelFactory.cpp" />
     <ClCompile Include="src\factories\NodeFactory.cpp" />
     <ClCompile Include="src\factories\PlatformFactory.cpp" />
+    <ClCompile Include="src\factories\SceneFactory.cpp" />
+    <ClCompile Include="src\factories\scenes\LoadingSceneFactory.cpp" />
     <ClCompile Include="src\factories\scenes\MainMenuSceneFactory.cpp" />
     <ClCompile Include="src\factories\scenes\CreditsSceneFactory.cpp" />
     <ClCompile Include="src\factories\scenes\CharacterSelectSceneFactory.cpp" />
@@ -283,6 +289,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\fsm\states\AnimationState.cpp" />
     <ClCompile Include="src\fsm\states\EntityState.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\graphics\AudioBufferMusic.cpp" />
+    <ClCompile Include="src\graphics\AudioBufferSFX.cpp" />
+    <ClCompile Include="src\graphics\AudioPlayer.cpp" />
     <ClCompile Include="src\graphics\Font.cpp" />
     <ClCompile Include="src\graphics\RenderRect.cpp" />
     <ClCompile Include="src\graphics\RenderText.cpp" />
@@ -297,6 +306,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\math\Math.cpp" />
     <ClCompile Include="src\math\Rect.cpp" />
     <ClCompile Include="src\math\Vector2.cpp" />
+    <ClCompile Include="src\parameters\AnimatedImageFactoryParameters.cpp" />
     <ClCompile Include="src\parameters\DestructibleParameters.cpp" />
     <ClCompile Include="src\network\Client.cpp" />
     <ClCompile Include="src\parameters\ButtonFactoryParameters.cpp" />
@@ -308,6 +318,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\resources\TextureKey.cpp" />
     <ClCompile Include="src\parameters\CameraParameters.cpp" />
     <ClCompile Include="src\scenes\BaseScene.cpp" />
+    <ClCompile Include="src\scenes\LoadingScene.cpp" />
     <ClCompile Include="src\scenes\SceneManager.cpp" />
     <ClCompile Include="src\scenes\MainMenuScene.cpp" />
     <ClCompile Include="src\scenes\CreditsScene.cpp" />
@@ -320,6 +331,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\scenes\SceneType.cpp" />
     <ClCompile Include="src\scenes\TutorialLevelScene.cpp" />
     <ClCompile Include="src\scenes\SplashScene.cpp" />
+    <ClCompile Include="src\singletons\AudioPlayerSingleton.cpp" />
     <ClCompile Include="src\singletons\ClientSingleton.cpp" />
     <ClCompile Include="src\singletons\ControllerHandlerSingleton.cpp" />
     <ClCompile Include="src\singletons\KeyHandlerSingleton.cpp" />
@@ -349,6 +361,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\HealthSystem.cpp" />
     <ClCompile Include="src\systems\InputSystem.cpp" />
     <ClCompile Include="src\systems\CameraSystem.cpp" />
+    <ClCompile Include="src\systems\LoadingSystem.cpp" />
     <ClCompile Include="src\systems\MotionSystem.cpp" />
     <ClCompile Include="src\systems\NetworkSystem.cpp" />
     <ClCompile Include="src\systems\RenderSystem.cpp" />
@@ -388,6 +401,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\commands\TestCommand.h" />
     <ClInclude Include="src\components\AI.h" />
     <ClInclude Include="src\components\AirMotion.h" />
+    <ClInclude Include="src\components\AnimatedImage.h" />
     <ClInclude Include="src\components\Animator.h" />
     <ClInclude Include="src\components\Attack.h" />
     <ClInclude Include="src\components\CharacterType.h" />
@@ -406,6 +420,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\Enemy.h" />
     <ClInclude Include="src\components\FollowEntity.h" />
     <ClInclude Include="src\components\Goal.h" />
+    <ClInclude Include="src\components\Hazard.h" />
     <ClInclude Include="src\components\Health.h" />
     <ClInclude Include="src\components\Impenetrable.h" />
     <ClInclude Include="src\components\Input.h" />
@@ -429,11 +444,13 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\DestructibleBlockFactory.h" />
     <ClInclude Include="src\factories\DiscFactory.h" />
     <ClInclude Include="src\factories\EntitiesFactory.h" />
+    <ClInclude Include="src\factories\entities\AnimatedImageFactory.h" />
     <ClInclude Include="src\factories\entities\AxeAttackFactory.h" />
     <ClInclude Include="src\factories\entities\ImageFactory.h" />
     <ClInclude Include="src\factories\entities\ButtonFactory.h" />
     <ClInclude Include="src\factories\entities\CameraFactory.h" />
     <ClInclude Include="src\factories\entities\EnemyFactory.h" />
+    <ClInclude Include="src\factories\entities\LevelDemoFactory.h" />
     <ClInclude Include="src\factories\entities\LobbyDisplayFactory.h" />
     <ClInclude Include="src\factories\entities\modals\AskNameFactory.h" />
     <ClInclude Include="src\factories\entities\GoalFactory.h" />
@@ -445,6 +462,8 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\LevelFactory.h" />
     <ClInclude Include="src\factories\NodeFactory.h" />
     <ClInclude Include="src\factories\PlatformFactory.h" />
+    <ClInclude Include="src\factories\SceneFactory.h" />
+    <ClInclude Include="src\factories\scenes\LoadingSceneFactory.h" />
     <ClInclude Include="src\factories\scenes\MainMenuSceneFactory.h" />
     <ClInclude Include="src\factories\scenes\CreditsSceneFactory.h" />
     <ClInclude Include="src\factories\scenes\CharacterSelectSceneFactory.h" />
@@ -461,6 +480,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\fsm\states\AnimationState.h" />
     <ClInclude Include="src\fsm\states\EntityState.h" />
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\graphics\AudioBufferMusic.h" />
+    <ClInclude Include="src\graphics\AudioBufferSFX.h" />
+    <ClInclude Include="src\graphics\AudioPlayer.h" />
     <ClInclude Include="src\graphics\Font.h" />
     <ClInclude Include="src\graphics\RenderRect.h" />
     <ClInclude Include="src\graphics\RenderText.h" />
@@ -474,6 +496,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\math\Math.h" />
     <ClInclude Include="src\math\Rect.h" />
     <ClInclude Include="src\math\Vector2.h" />
+    <ClInclude Include="src\parameters\AnimatedImageFactoryParameters.h" />
     <ClInclude Include="src\parameters\DestructibleParameters.h" />
     <ClInclude Include="src\network\Client.h" />
     <ClInclude Include="src\parameters\ButtonFactoryParameters.h" />
@@ -485,6 +508,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\resources\TextureKey.h" />
     <ClInclude Include="src\parameters\CameraParameters.h" />
     <ClInclude Include="src\scenes\BaseScene.h" />
+    <ClInclude Include="src\scenes\LoadingScene.h" />
     <ClInclude Include="src\scenes\SceneManager.h" />
     <ClInclude Include="src\scenes\MainMenuScene.h" />
     <ClInclude Include="src\scenes\CreditsScene.h" />
@@ -497,6 +521,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\scenes\SceneType.h" />
     <ClInclude Include="src\scenes\TutorialLevelScene.h" />
     <ClInclude Include="src\scenes\SplashScene.h" />
+    <ClInclude Include="src\singletons\AudioPlayerSingleton.h" />
     <ClInclude Include="src\singletons\ClientSingleton.h" />
     <ClInclude Include="src\singletons\ControllerHandlerSingleton.h" />
     <ClInclude Include="src\singletons\KeyHandlerSingleton.h" />
@@ -521,6 +546,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\systems\HealthSystem.h" />
     <ClInclude Include="src\systems\InputSystem.h" />
     <ClInclude Include="src\systems\CameraSystem.h" />
+    <ClInclude Include="src\systems\LoadingSystem.h" />
     <ClInclude Include="src\systems\MotionSystem.h" />
     <ClInclude Include="src\systems\NetworkSystem.h" />
     <ClInclude Include="src\systems\RenderSystem.h" />

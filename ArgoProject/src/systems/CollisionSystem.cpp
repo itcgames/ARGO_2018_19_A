@@ -25,6 +25,7 @@
 #include "components/Disc.h"
 #include "components/Destroy.h"
 #include "components/SeekEntity.h"
+#include "components/Hazard.h"
 
 //visitors
 #include "visitors/CollisionUpdateVisitor.h"
@@ -48,6 +49,7 @@ app::sys::CollisionSystem::CollisionSystem()
 	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions>();
 	m_registry.prepare<comp::Collision, comp::Enemy, comp::Health>();
 	m_registry.prepare<comp::Collision, comp::Attack, comp::Location, comp::Dimensions, comp::Damage>();
+	m_registry.prepare<comp::Hazard, comp::Collision, comp::Damage>();
 }
 
 void app::sys::CollisionSystem::update(app::time::seconds const & dt)
@@ -447,12 +449,10 @@ void app::sys::CollisionSystem::playerHazardCollisions()
 	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Health>(entt::persistent_t())
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions, comp::Health & health)
 	{
-		m_registry.view<comp::Collision, comp::Damage>()
-			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Damage & damage)
+		m_registry.view<comp::Hazard, comp::Collision, comp::Damage>(entt::persistent_t())
+			.each([&, this](app::Entity const secEntity, comp::Hazard & hazard, comp::Collision & secCollision, comp::Damage & damage)
 		{
-			auto attackView = m_registry.view<comp::Attack>();
-
-			if (entity != secEntity && (!attackView.contains(entity) && !attackView.contains(secEntity)))
+			if (entity != secEntity)
 			{
 				if (app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds))
 				{

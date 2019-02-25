@@ -1,12 +1,12 @@
 ﻿#ifndef _FACTORY_LEVEL_SCENE_H
 #define _FACTORY_LEVEL_SCENE_H
 
-#include "../EntitiesFactory.h"
+#include "../SceneFactory.h"
 #include "deleters/SdlDeleter.h"
 
 namespace app::fact::sce
 {
-	class LevelSceneFactory : public EntitiesFactory
+	class LevelSceneFactory : public SceneFactory
 	{
 	public: // Constructors/Destructor/Assignments
 		LevelSceneFactory() = default;
