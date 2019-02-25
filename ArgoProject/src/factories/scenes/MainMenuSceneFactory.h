@@ -1,12 +1,12 @@
 ﻿#ifndef _FACTORY_MAIN_MENU_SCENE_H
 #define _FACTORY_MAIN_MENU_SCENE_H
 
-#include "../EntitiesFactory.h"
+#include "../SceneFactory.h"
 #include "scenes/SceneType.h"
 
 namespace app::fact::sce
 {
-	class MainMenuSceneFactory : public EntitiesFactory
+	class MainMenuSceneFactory : public SceneFactory
 	{
 	public: // Constructors/Destructor/Assignments
 		MainMenuSceneFactory(app::sce::SceneType & targetScene);

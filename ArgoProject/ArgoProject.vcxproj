@@ -266,6 +266,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\LevelFactory.cpp" />
     <ClCompile Include="src\factories\NodeFactory.cpp" />
     <ClCompile Include="src\factories\PlatformFactory.cpp" />
+    <ClCompile Include="src\factories\SceneFactory.cpp" />
     <ClCompile Include="src\factories\scenes\LoadingSceneFactory.cpp" />
     <ClCompile Include="src\factories\scenes\MainMenuSceneFactory.cpp" />
     <ClCompile Include="src\factories\scenes\CreditsSceneFactory.cpp" />
@@ -283,6 +284,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\fsm\states\AnimationState.cpp" />
     <ClCompile Include="src\fsm\states\EntityState.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\graphics\AudioBufferMusic.cpp" />
+    <ClCompile Include="src\graphics\AudioBufferSFX.cpp" />
+    <ClCompile Include="src\graphics\AudioPlayer.cpp" />
     <ClCompile Include="src\graphics\Font.cpp" />
     <ClCompile Include="src\graphics\RenderRect.cpp" />
     <ClCompile Include="src\graphics\RenderText.cpp" />
@@ -322,6 +326,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\scenes\SceneType.cpp" />
     <ClCompile Include="src\scenes\TutorialLevelScene.cpp" />
     <ClCompile Include="src\scenes\SplashScene.cpp" />
+    <ClCompile Include="src\singletons\AudioPlayerSingleton.cpp" />
     <ClCompile Include="src\singletons\ClientSingleton.cpp" />
     <ClCompile Include="src\singletons\ControllerHandlerSingleton.cpp" />
     <ClCompile Include="src\singletons\KeyHandlerSingleton.cpp" />
@@ -445,6 +450,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\LevelFactory.h" />
     <ClInclude Include="src\factories\NodeFactory.h" />
     <ClInclude Include="src\factories\PlatformFactory.h" />
+    <ClInclude Include="src\factories\SceneFactory.h" />
     <ClInclude Include="src\factories\scenes\LoadingSceneFactory.h" />
     <ClInclude Include="src\factories\scenes\MainMenuSceneFactory.h" />
     <ClInclude Include="src\factories\scenes\CreditsSceneFactory.h" />
@@ -462,6 +468,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\fsm\states\AnimationState.h" />
     <ClInclude Include="src\fsm\states\EntityState.h" />
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\graphics\AudioBufferMusic.h" />
+    <ClInclude Include="src\graphics\AudioBufferSFX.h" />
+    <ClInclude Include="src\graphics\AudioPlayer.h" />
     <ClInclude Include="src\graphics\Font.h" />
     <ClInclude Include="src\graphics\RenderRect.h" />
     <ClInclude Include="src\graphics\RenderText.h" />
@@ -500,6 +509,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\scenes\SceneType.h" />
     <ClInclude Include="src\scenes\TutorialLevelScene.h" />
     <ClInclude Include="src\scenes\SplashScene.h" />
+    <ClInclude Include="src\singletons\AudioPlayerSingleton.h" />
     <ClInclude Include="src\singletons\ClientSingleton.h" />
     <ClInclude Include="src\singletons\ControllerHandlerSingleton.h" />
     <ClInclude Include="src\singletons\KeyHandlerSingleton.h" />

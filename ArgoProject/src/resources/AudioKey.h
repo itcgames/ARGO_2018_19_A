@@ -5,6 +5,8 @@ namespace app::res
 {
 	enum class AudioKey
 	{
+		BackgroundMusicTitle,
+		PlayerJump,
 		Count // Keep this at the end of the enum
 	};
 }

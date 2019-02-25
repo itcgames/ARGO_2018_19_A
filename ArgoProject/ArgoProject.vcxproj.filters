@@ -510,6 +510,12 @@
     <ClCompile Include="src\factories\LevelFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\AudioBufferMusic.cpp">
+      <Filter>Source Files\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\AudioBufferSFX.cpp">
+      <Filter>Source Files\graphics</Filter>
+    </ClCompile>
     <ClCompile Include="src\systems\NetworkSystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
@@ -606,6 +612,15 @@
     <ClCompile Include="src\factories\entities\GoalFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\AudioPlayer.cpp">
+      <Filter>Source Files\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\singletons\AudioPlayerSingleton.cpp">
+      <Filter>Source Files\singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\SceneFactory.cpp">
+      <Filter>Source Files\factories</Filter>
+    </ClInclude>
     <ClCompile Include="src\factories\entities\AnimatedImageFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
@@ -1025,6 +1040,12 @@
     <ClInclude Include="src\factories\PlatformFactory.h">
       <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
+    <ClInclude Include="src\graphics\AudioBufferMusic.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\AudioBufferSFX.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
     <ClInclude Include="src\systems\NetworkSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
@@ -1123,6 +1144,15 @@
     </ClInclude>
     <ClInclude Include="src\factories\AIFactory.h">
       <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\AudioPlayer.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\singletons\AudioPlayerSingleton.h">
+      <Filter>Header Files\singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\SceneFactory.h">
+      <Filter>Header Files\factories</Filter>
     </ClInclude>
     <ClInclude Include="src\factories\entities\AnimatedImageFactory.h">
       <Filter>Header Files\factories\entities</Filter>

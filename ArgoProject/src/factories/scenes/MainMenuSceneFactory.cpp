@@ -12,17 +12,14 @@
 #include "network/Client.h"
 
 app::fact::sce::MainMenuSceneFactory::MainMenuSceneFactory(app::sce::SceneType & targetScene)
-	: EntitiesFactory()
-	, m_targetScene(targetScene)
+	: m_targetScene(targetScene)
 {
 }
 
 std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 {
+	m_audioPlayer.playAudioMusic(app::res::AudioKey::BackgroundMusicTitle, app::gra::AudioPlayer::s_LOOP_FOREVER);
 	auto entities = std::vector<app::Entity>();
-
-
-
 	auto position = math::Vector2f(0, 0);
 	auto size = math::Vector2f(0, 0);
 
@@ -41,7 +38,6 @@ std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 	cameraParams.clampRect = math::Rectf({ -800.0f, 300.0f }, { 2000.0f, 1000.0f });
 	cameraParams.internalClamp = math::Vector2f(20.0f, 60.0f);
 	entities.push_back(fact::CameraFactory(std::move(cameraParams)).create());
-
 
 	{
 		auto const & size = math::Vector2f{ 1366.0f, 768.0f };

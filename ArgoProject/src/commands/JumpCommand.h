@@ -2,6 +2,7 @@
 #define _JUMP_COMMAND_H
 
 #include "BaseCommand.h"
+#include "graphics/AudioPlayer.h"
 
 namespace app::cmnd
 {
@@ -31,6 +32,7 @@ namespace app::cmnd
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
+		app::gra::AudioPlayer & m_audioPlayer;
 		app::Entity const m_entity;
 		float m_force;
 	};
