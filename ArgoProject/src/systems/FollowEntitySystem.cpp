@@ -6,20 +6,22 @@
 
 void app::sys::FollowEntitySystem::update(app::time::seconds const & dt)
 {
+
 	m_registry.view<comp::FollowEntity, comp::Location>()
-		.each([&, this](app::Entity const entity, comp::FollowEntity & _followEntity, comp::Location & _location)
+		.each([&, this](app::Entity const entity, comp::FollowEntity & followEntity, comp::Location & location)
 	{
-		if (m_registry.valid(_followEntity.entity) && m_registry.has<comp::Input>(_followEntity.entity))
+		auto inputView = m_registry.view<comp::Input>();
+		if (m_registry.valid(followEntity.entity) && inputView.contains(followEntity.entity))
 		{
-			auto& entityToFollowLocation = m_registry.get<comp::Location>(_followEntity.entity);
-			auto& entityToFollowInput = m_registry.get<comp::Input>(_followEntity.entity);
+			auto& entityToFollowLocation = m_registry.get<comp::Location>(followEntity.entity);
+			auto& entityToFollowInput = m_registry.get<comp::Input>(followEntity.entity);
 			if (entityToFollowInput.isRight)
 			{
-				_location.position = entityToFollowLocation.position + _followEntity.offset;
+				location.position = entityToFollowLocation.position + followEntity.offset;
 			}
 			else
 			{
-				_location.position = entityToFollowLocation.position - _followEntity.offset;
+				location.position = entityToFollowLocation.position - followEntity.offset;
 			}
 		}
 	});

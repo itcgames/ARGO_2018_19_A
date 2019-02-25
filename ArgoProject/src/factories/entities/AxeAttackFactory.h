@@ -25,6 +25,7 @@ namespace app::fact
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
+		constexpr static bool DEBUG_MODE = true;
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
