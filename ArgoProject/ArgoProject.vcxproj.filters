@@ -606,6 +606,15 @@
     <ClCompile Include="src\factories\entities\GoalFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
+    <ClCompile Include="src\factories\entities\AnimatedImageFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\LoadingSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\AnimatedImage.cpp">
+          <Filter>Source Files\components</Filter>
+    </ClCompile>
     <ClCompile Include="src\components\CharacterType.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
@@ -642,6 +651,15 @@
     <ClCompile Include="src\graphics\WindowParameters.cpp">
       <Filter>Source Files\parameters</Filter>
     </ClCompile>
+    <ClCompile Include="src\factories\scenes\LoadingSceneFactory.cpp">
+      <Filter>Source Files\factories\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\LoadingScene.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parameters\AnimatedImageFactoryParameters.cpp">
+      <Filter>Source Files\parameters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -673,9 +691,6 @@
     </ClInclude>
     <ClInclude Include="src\deleters\SdlDeleter.h">
       <Filter>Header Files\deleters</Filter>
-    </ClInclude>
-    <ClInclude Include="src\graphics\WindowParameters.h">
-      <Filter>Header Files\graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\Texture.h">
       <Filter>Header Files\graphics</Filter>
@@ -1109,6 +1124,14 @@
     <ClInclude Include="src\factories\AIFactory.h">
       <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
+    <ClInclude Include="src\factories\entities\AnimatedImageFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\LoadingSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\AnimatedImage.h">
+    </ClInclude>
     <ClInclude Include="src\components\CharacterType.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
@@ -1138,6 +1161,18 @@
     </ClInclude>
     <ClInclude Include="src\factories\FacadeFactory.h">
       <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\WindowParameters.h">
+      <Filter>Header Files\parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\scenes\LoadingSceneFactory.h">
+      <Filter>Header Files\factories\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\LoadingScene.h">
+      <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\parameters\AnimatedImageFactoryParameters.h">
+      <Filter>Header Files\parameters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

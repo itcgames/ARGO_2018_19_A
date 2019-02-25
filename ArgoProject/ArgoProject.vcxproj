@@ -210,6 +210,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\commands\TestCommand.cpp" />
     <ClCompile Include="src\components\AI.cpp" />
     <ClCompile Include="src\components\AirMotion.cpp" />
+    <ClCompile Include="src\components\AnimatedImage.cpp" />
     <ClCompile Include="src\components\Animator.cpp" />
     <ClCompile Include="src\components\Attack.cpp" />
     <ClCompile Include="src\components\CharacterType.cpp" />
@@ -248,6 +249,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\BaseFactory.cpp" />
     <ClCompile Include="src\factories\DestructibleBlockFactory.cpp" />
     <ClCompile Include="src\factories\EntitiesFactory.cpp" />
+    <ClCompile Include="src\factories\entities\AnimatedImageFactory.cpp" />
     <ClCompile Include="src\factories\entities\AxeAttackFactory.cpp" />
     <ClCompile Include="src\factories\entities\ImageFactory.cpp" />
     <ClCompile Include="src\factories\entities\ButtonFactory.cpp" />
@@ -264,6 +266,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\LevelFactory.cpp" />
     <ClCompile Include="src\factories\NodeFactory.cpp" />
     <ClCompile Include="src\factories\PlatformFactory.cpp" />
+    <ClCompile Include="src\factories\scenes\LoadingSceneFactory.cpp" />
     <ClCompile Include="src\factories\scenes\MainMenuSceneFactory.cpp" />
     <ClCompile Include="src\factories\scenes\CreditsSceneFactory.cpp" />
     <ClCompile Include="src\factories\scenes\CharacterSelectSceneFactory.cpp" />
@@ -294,6 +297,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\math\Math.cpp" />
     <ClCompile Include="src\math\Rect.cpp" />
     <ClCompile Include="src\math\Vector2.cpp" />
+    <ClCompile Include="src\parameters\AnimatedImageFactoryParameters.cpp" />
     <ClCompile Include="src\parameters\DestructibleParameters.cpp" />
     <ClCompile Include="src\network\Client.cpp" />
     <ClCompile Include="src\parameters\ButtonFactoryParameters.cpp" />
@@ -305,6 +309,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\resources\TextureKey.cpp" />
     <ClCompile Include="src\parameters\CameraParameters.cpp" />
     <ClCompile Include="src\scenes\BaseScene.cpp" />
+    <ClCompile Include="src\scenes\LoadingScene.cpp" />
     <ClCompile Include="src\scenes\SceneManager.cpp" />
     <ClCompile Include="src\scenes\MainMenuScene.cpp" />
     <ClCompile Include="src\scenes\CreditsScene.cpp" />
@@ -345,6 +350,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\HealthSystem.cpp" />
     <ClCompile Include="src\systems\InputSystem.cpp" />
     <ClCompile Include="src\systems\CameraSystem.cpp" />
+    <ClCompile Include="src\systems\LoadingSystem.cpp" />
     <ClCompile Include="src\systems\MotionSystem.cpp" />
     <ClCompile Include="src\systems\NetworkSystem.cpp" />
     <ClCompile Include="src\systems\RenderSystem.cpp" />
@@ -383,6 +389,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\commands\TestCommand.h" />
     <ClInclude Include="src\components\AI.h" />
     <ClInclude Include="src\components\AirMotion.h" />
+    <ClInclude Include="src\components\AnimatedImage.h" />
     <ClInclude Include="src\components\Animator.h" />
     <ClInclude Include="src\components\Attack.h" />
     <ClInclude Include="src\components\CharacterType.h" />
@@ -421,6 +428,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\BaseFactory.h" />
     <ClInclude Include="src\factories\DestructibleBlockFactory.h" />
     <ClInclude Include="src\factories\EntitiesFactory.h" />
+    <ClInclude Include="src\factories\entities\AnimatedImageFactory.h" />
     <ClInclude Include="src\factories\entities\AxeAttackFactory.h" />
     <ClInclude Include="src\factories\entities\ImageFactory.h" />
     <ClInclude Include="src\factories\entities\ButtonFactory.h" />
@@ -437,6 +445,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\LevelFactory.h" />
     <ClInclude Include="src\factories\NodeFactory.h" />
     <ClInclude Include="src\factories\PlatformFactory.h" />
+    <ClInclude Include="src\factories\scenes\LoadingSceneFactory.h" />
     <ClInclude Include="src\factories\scenes\MainMenuSceneFactory.h" />
     <ClInclude Include="src\factories\scenes\CreditsSceneFactory.h" />
     <ClInclude Include="src\factories\scenes\CharacterSelectSceneFactory.h" />
@@ -466,6 +475,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\math\Math.h" />
     <ClInclude Include="src\math\Rect.h" />
     <ClInclude Include="src\math\Vector2.h" />
+    <ClInclude Include="src\parameters\AnimatedImageFactoryParameters.h" />
     <ClInclude Include="src\parameters\DestructibleParameters.h" />
     <ClInclude Include="src\network\Client.h" />
     <ClInclude Include="src\parameters\ButtonFactoryParameters.h" />
@@ -477,6 +487,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\resources\TextureKey.h" />
     <ClInclude Include="src\parameters\CameraParameters.h" />
     <ClInclude Include="src\scenes\BaseScene.h" />
+    <ClInclude Include="src\scenes\LoadingScene.h" />
     <ClInclude Include="src\scenes\SceneManager.h" />
     <ClInclude Include="src\scenes\MainMenuScene.h" />
     <ClInclude Include="src\scenes\CreditsScene.h" />
@@ -512,6 +523,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\systems\HealthSystem.h" />
     <ClInclude Include="src\systems\InputSystem.h" />
     <ClInclude Include="src\systems\CameraSystem.h" />
+    <ClInclude Include="src\systems\LoadingSystem.h" />
     <ClInclude Include="src\systems\MotionSystem.h" />
     <ClInclude Include="src\systems\NetworkSystem.h" />
     <ClInclude Include="src\systems\RenderSystem.h" />
