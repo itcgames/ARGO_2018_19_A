@@ -1,9 +1,10 @@
 ﻿#include "stdafx.h"
 #include "AttackCommand.h"
-#include "utilities/cute_c2.h"
+#include "components/Location.h"
+#include "components/Dimensions.h"
 #include "components/CharacterType.h"
-#include "components/Destroy.h"
-#include "components/Collision.h"
+#include "factories/entities/AxeAttackFactory.h"
+
 
 app::cmnd::AttackCommand::AttackCommand(app::Entity const _entity)
 	: m_entity(_entity)
@@ -12,33 +13,17 @@ app::cmnd::AttackCommand::AttackCommand(app::Entity const _entity)
 
 void app::cmnd::AttackCommand::execute()
 {
-	if (m_registry.has<comp::CharacterType>(m_entity))
+	auto characterTypeView = m_registry.view<comp::Location, comp::Dimensions, comp::CharacterType>(entt::persistent_t());
+	if (characterTypeView.contains(m_entity))
 	{
-		auto& typeComp = m_registry.get<comp::CharacterType>(m_entity);
-		const comp::CharacterType::Type & typeEnum = typeComp.m_type;
+		auto const &[location, dimensions, characterType] = characterTypeView.get<comp::Location, comp::Dimensions, comp::CharacterType>(m_entity);
 
-		switch (typeEnum)
+		switch (characterType.type)
 		{
 		case comp::CharacterType::Type::AXE:
 		{
-			//auto motion = comp::AirMotion();
-			//motion.speed = 0.0f;
-			//motion.direction = 0.0f;
-			//motion.angularSpeed = 0.0f;
-			//m_registry.assign<decltype(motion)>(entity, std::move(motion));
-
-			auto destroy = comp::Destroy();
-			destroy.timeToLive = 0.5f;
-			m_registry.assign<decltype(destroy)>(m_entity, std::move(destroy));
-
-			//location
-			//dimensions
-
-
-			auto collision = comp::Collision();
-			collision.bounds = cute::c2AABB();
-			m_registry.assign<decltype(collision)>(m_entity, std::move(collision));
-
+			auto axeAttackFactory = fact::AxeAttackFactory(m_entity);
+			axeAttackFactory.create();
 		}
 			break;
 		case comp::CharacterType::Type::BOMB:

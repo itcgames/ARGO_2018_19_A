@@ -9,6 +9,7 @@
 #include "components/Render.h"
 #include "components/Collision.h"
 #include "components/Damage.h"
+#include "components/Hazard.h"
 
 app::fact::HazardFactory::HazardFactory(app::math::Vector2f const & pos, app::math::Vector2f const & size)
 	: m_position(pos), m_size(size)
@@ -45,6 +46,9 @@ app::Entity const app::fact::HazardFactory::create()
 	auto damage = comp::Damage();
 	damage.damage = 1;
 	m_registry.assign<decltype(damage)>(entity, std::move(damage));
+
+	auto hazard = comp::Hazard();
+	m_registry.assign<decltype(hazard)>(entity, std::move(hazard));
 
 	return entity;
 }

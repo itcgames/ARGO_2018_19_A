@@ -329,6 +329,9 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 
+# Custom Inclusions
+*.ini
+
 # Custom Exclusions
 !**/deps/**/[Dd]ebug
 !**/deps/**/[Rr]elease
@@ -336,3 +339,4 @@ ASALocalRun/
 !**/deps/lib/x64
 !**/deps/bin
 !**/deps/bin/x64
+!**/res/Debug

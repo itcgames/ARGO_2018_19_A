@@ -38,6 +38,8 @@ namespace app::sys
 		void playerGoalCollisions();
 		void checkPlatformCollisions();
 		void checkAINodeCollisions();
+		void attackEnemyCollisions();
+		void attackDestructibleCollisions();
 	private: // Private Static Variables
 		constexpr static bool DEBUG_MODE = true;
 	private: // Private Member Variables

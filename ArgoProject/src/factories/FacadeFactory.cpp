@@ -8,6 +8,8 @@
 #include "components/Layer.h"
 #include "components/Render.h"
 #include "components/Layer.h"
+#include "components/Facade.h"
+#include "components/Tiled.h"
 
 app::fact::FacadeFactory::FacadeFactory(app::math::Vector2f const & pos, app::math::Vector2f const & size, app::math::Vector2i const & numberOfTiles)
 	: m_position(pos), m_sizeOfTile(size), m_numberOfTiles(numberOfTiles)
@@ -48,13 +50,20 @@ app::Entity const app::fact::FacadeFactory::create()
 	dimensions.origin = dimensions.size / 2.0f;
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
 
-	auto layer = comp::Layer();
-	layer.zIndex = 140u;
-	m_registry.assign<decltype(layer)>(entity, std::move(layer));
+	//auto layer = comp::Layer();
+	//layer.zIndex = 140u;
+	//m_registry.assign<decltype(layer)>(entity, std::move(layer));
 
-	auto render = comp::Render();
-	render.texture = m_resourceManager.getTexture(app::res::TextureKey::LevelWall);
-	m_registry.assign<decltype(render)>(entity, std::move(render));
+	//auto render = comp::Render();
+	//render.texture = m_resourceManager.getTexture(app::res::TextureKey::LevelWall);
+	//m_registry.assign<decltype(render)>(entity, std::move(render));
+
+	auto facade = comp::Facade();
+	m_registry.assign<decltype(facade)>(entity, std::move(facade));
+
+	auto tiled = comp::Tiled();
+	tiled.tiles = entities;
+	m_registry.assign<decltype(tiled)>(entity, std::move(tiled));
 
 	return entity;
 }

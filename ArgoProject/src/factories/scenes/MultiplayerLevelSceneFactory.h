@@ -1,11 +1,11 @@
 ﻿#ifndef _FACTORY_MULTIPLAYER_LEVEL_SCENE_H
 #define _FACTORY_MULTIPLAYER_LEVEL_SCENE_H
 
-#include "../EntitiesFactory.h"
+#include "../SceneFactory.h"
 
 namespace app::fact::sce
 {
-	class MultiplayerLevelSceneFactory : public EntitiesFactory
+	class MultiplayerLevelSceneFactory : public SceneFactory
 	{
 	public: // Constructors/Destructor/Assignments
 		MultiplayerLevelSceneFactory() = default;

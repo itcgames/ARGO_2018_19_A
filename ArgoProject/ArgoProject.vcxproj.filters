@@ -498,9 +498,6 @@
     <ClCompile Include="src\components\AI.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
-    <ClCompile Include="src\factories\AIFactory.cpp">
-      <Filter>Source Files\factories</Filter>
-    </ClCompile>
     <ClCompile Include="src\factories\HazardFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
@@ -512,6 +509,12 @@
     </ClCompile>
     <ClCompile Include="src\factories\LevelFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\AudioBufferMusic.cpp">
+      <Filter>Source Files\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\AudioBufferSFX.cpp">
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\systems\NetworkSystem.cpp">
       <Filter>Source Files\systems</Filter>
@@ -609,6 +612,45 @@
     <ClCompile Include="src\factories\entities\GoalFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\AudioPlayer.cpp">
+      <Filter>Source Files\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\singletons\AudioPlayerSingleton.cpp">
+      <Filter>Source Files\singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\SceneFactory.cpp">
+      <Filter>Source Files\factories</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\entities\AnimatedImageFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\LoadingSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\AnimatedImage.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\CharacterType.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\AttackCommand.cpp">
+      <Filter>Source Files\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\FollowEntity.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\FollowEntitySystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\entities\AxeAttackFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\AIFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Attack.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
     <ClCompile Include="src\components\Destructible.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
@@ -638,6 +680,24 @@
     </ClCompile>
     <ClCompile Include="src\fsm\states\AiWalkingAnimationState.cpp">
       <Filter>Source Files\fsm\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\scenes\LoadingSceneFactory.cpp">
+      <Filter>Source Files\factories\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\LoadingScene.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parameters\AnimatedImageFactoryParameters.cpp">
+      <Filter>Source Files\parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Hazard.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Facade.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Tiled.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -670,9 +730,6 @@
     </ClInclude>
     <ClInclude Include="src\deleters\SdlDeleter.h">
       <Filter>Header Files\deleters</Filter>
-    </ClInclude>
-    <ClInclude Include="src\graphics\WindowParameters.h">
-      <Filter>Header Files\graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\Texture.h">
       <Filter>Header Files\graphics</Filter>
@@ -1007,6 +1064,12 @@
     <ClInclude Include="src\factories\PlatformFactory.h">
       <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
+    <ClInclude Include="src\graphics\AudioBufferMusic.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\AudioBufferSFX.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
     <ClInclude Include="src\systems\NetworkSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
@@ -1106,6 +1169,41 @@
     <ClInclude Include="src\factories\AIFactory.h">
       <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
+    <ClInclude Include="src\graphics\AudioPlayer.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\singletons\AudioPlayerSingleton.h">
+      <Filter>Header Files\singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\SceneFactory.h">
+      <Filter>Header Files\factories</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\entities\AnimatedImageFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\LoadingSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\AnimatedImage.h">
+    </ClInclude>
+    <ClInclude Include="src\components\CharacterType.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\AttackCommand.h">
+      <Filter>Header Files\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\FollowEntity.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\FollowEntitySystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\entities\AxeAttackFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Attack.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
     <ClInclude Include="src\components\Destructible.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
@@ -1132,6 +1230,27 @@
     </ClInclude>
     <ClInclude Include="src\fsm\states\AiWalkingAnimationState.h">
       <Filter>Header Files\fsm\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\WindowParameters.h">
+      <Filter>Header Files\parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\scenes\LoadingSceneFactory.h">
+      <Filter>Header Files\factories\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\LoadingScene.h">
+      <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\parameters\AnimatedImageFactoryParameters.h">
+      <Filter>Header Files\parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Hazard.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Facade.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Tiled.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

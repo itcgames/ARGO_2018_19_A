@@ -12,6 +12,7 @@
 #include "components/Impenetrable.h"
 #include "components/Destructible.h"
 #include "components/Layer.h"
+#include "components/Tiled.h"
 
 
 app::fact::DestructibleBlockFactory::DestructibleBlockFactory(app::par::DestructibleParameters param)
@@ -83,6 +84,10 @@ app::Entity const app::fact::DestructibleBlockFactory::create()
 		destructible.attachedArea = parameters.attachedArea.value();
 	}
 	m_registry.assign<decltype(destructible)>(entity, std::move(destructible));
+
+	auto tiled = comp::Tiled();
+	tiled.tiles = entities;
+	m_registry.assign<decltype(tiled)>(entity, std::move(tiled));
 
 	return entity;	
 }
