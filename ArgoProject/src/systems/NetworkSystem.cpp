@@ -2,13 +2,16 @@
 #include "NetworkSystem.h"
 #include "singletons/ClientSingleton.h"
 #include "commands/buttons/ButtonLobbySelectRefreshCommand.h"
+#include "commands/buttons/ButtonLobbySelectCommand.h"
 
 #include "components/Widget.h"
+#include "tags/LobbyTag.h"
 
-app::sys::NetworkSystem::NetworkSystem()
+app::sys::NetworkSystem::NetworkSystem(app::sce::SceneType & sceneControl)
 	: BaseSystem()
 	, m_client(app::sin::Client::get())
 	, m_packetType()
+	, m_sceneControl(sceneControl)
 {
 }
 
@@ -30,7 +33,9 @@ void app::sys::NetworkSystem::update(app::time::seconds const & dt)
 				auto buttonView = m_registry.view<comp::Widget>();
 				auto entities = std::forward_list<app::Entity>();
 				for (auto const & entity : buttonView) { entities.push_front(entity); }
-				std::make_unique<cmnd::ButtonLobbySelectRefreshCommand>(entities)->execute();
+				std::make_unique<cmnd::ButtonLobbySelectRefreshCommand>(entities, m_sceneControl)->execute();
+				auto const & lobby = m_client.getLobbies().back();
+				std::make_unique<cmnd::ButtonLobbySelectCommand>(lobby, m_sceneControl)->execute();
 			}
 		}
 		else

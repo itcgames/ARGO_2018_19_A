@@ -2,13 +2,14 @@
 #define _FACTORY_LOBBY_SELECT_SCENE_H
 
 #include "../EntitiesFactory.h"
+#include "scenes/SceneType.h"
 
 namespace app::fact::sce
 {
 	class LobbySelectSceneFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		LobbySelectSceneFactory() = default;
+		LobbySelectSceneFactory(app::sce::SceneType & sceneControl);
 		virtual ~LobbySelectSceneFactory() = default;
 
 		LobbySelectSceneFactory(LobbySelectSceneFactory const &) = default;
@@ -30,7 +31,7 @@ namespace app::fact::sce
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
-
+		app::sce::SceneType & m_sceneControl;
 	};
 }
 

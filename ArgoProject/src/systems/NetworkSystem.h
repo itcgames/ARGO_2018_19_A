@@ -3,13 +3,14 @@
 
 #include "BaseSystem.h"
 #include "network/Client.h"
+#include "scenes/SceneType.h"
 
 namespace app::sys
 {
 	class NetworkSystem : public BaseSystem
 	{
 	public: // Constructors/Destructor/Assignments
-		NetworkSystem();
+		NetworkSystem(app::sce::SceneType & sceneControl);
 		virtual ~NetworkSystem() = default;
 
 		NetworkSystem(NetworkSystem const &) = default;
@@ -36,6 +37,7 @@ namespace app::sys
 	private: // Private Member Variables
 		app::net::Client & m_client;
 		app::net::PacketType m_packetType;
+		app::sce::SceneType & m_sceneControl;
 	};
 }
 

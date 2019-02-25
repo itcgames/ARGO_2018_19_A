@@ -10,9 +10,10 @@
 
 #include "commands/buttons/ButtonLobbySelectCommand.h"
 
-app::fact::LobbyDisplayFactory::LobbyDisplayFactory(app::par::LobbyDisplayFactoryParameters const & params)
+app::fact::LobbyDisplayFactory::LobbyDisplayFactory(app::par::LobbyDisplayFactoryParameters const & params, app::sce::SceneType & sceneControl)
 	: EntitiesFactory()
 	, m_params(params)
+	, m_sceneControl(sceneControl)
 {
 }
 
@@ -58,7 +59,7 @@ std::vector<app::Entity> app::fact::LobbyDisplayFactory::create()
 				size = math::Vector2f{ 50.0f, 50.0f };
 			params.state = app::comp::Widget::State::Active;
 			params.zIndex = 140u;
-			params.command = std::make_unique<cmnd::ButtonLobbySelectCommand>(lobby);
+			params.command = std::make_unique<cmnd::ButtonLobbySelectCommand>(lobby, m_sceneControl);
 			params.text = " ";
 
 			entities.push_back(fact::ButtonFactory(params).create());
@@ -85,7 +86,7 @@ std::vector<app::Entity> app::fact::LobbyDisplayFactory::create()
 			position += ((size + offsetFromPrevious) * IGNORE_Y) + math::Vector2f{ 10.0f, 0.0f };
 			size = math::Vector2f{ 50.0f, 50.0f };
 			auto const & origin = size / 2.0f;
-			auto const & textureKey = app::res::TextureKey::Debug;
+			auto const & textureKey = app::res::TextureKey::DebugAnimation;
 			auto const & zIndex = 110u;
 			entities.push_back(fact::ImageFactory(position, size, origin, textureKey, zIndex).create());
 			offsetFromPrevious = size / 2.0f;

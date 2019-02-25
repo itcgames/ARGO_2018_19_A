@@ -345,6 +345,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\RenderSystem.cpp" />
     <ClCompile Include="src\systems\StateMachineSystem.cpp" />
     <ClCompile Include="src\systems\WidgetNavigationSystem.cpp" />
+    <ClCompile Include="src\tags\LobbyTag.cpp" />
     <ClCompile Include="src\utilities\cute_c2.cpp" />
     <ClCompile Include="src\utilities\Time.cpp" />
     <ClCompile Include="src\utilities\makers.cpp" />
@@ -506,6 +507,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\systems\RenderSystem.h" />
     <ClInclude Include="src\systems\StateMachineSystem.h" />
     <ClInclude Include="src\systems\WidgetNavigationSystem.h" />
+    <ClInclude Include="src\tags\LobbyTag.h" />
     <ClInclude Include="src\utilities\cute_c2.h" />
     <ClInclude Include="src\utilities\Time.h" />
     <ClInclude Include="src\utilities\makers.h" />

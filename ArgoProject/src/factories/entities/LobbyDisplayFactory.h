@@ -3,13 +3,14 @@
 
 #include "../EntitiesFactory.h"
 #include "parameters/LobbyDisplayFactoryParameters.h"
+#include "scenes/SceneType.h"
 
 namespace app::fact
 {
 	class LobbyDisplayFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		LobbyDisplayFactory(app::par::LobbyDisplayFactoryParameters const & params);
+		LobbyDisplayFactory(app::par::LobbyDisplayFactoryParameters const & params, app::sce::SceneType & sceneControl);
 		virtual ~LobbyDisplayFactory() = default;
 
 		LobbyDisplayFactory(LobbyDisplayFactory const &) = default;
@@ -32,6 +33,7 @@ namespace app::fact
 	private: // Private Static Variables
 	private: // Private Member Variables
 		app::par::LobbyDisplayFactoryParameters const & m_params;
+		app::sce::SceneType & m_sceneControl;
 	};
 }
 

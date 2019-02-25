@@ -8,6 +8,12 @@
 #include "commands/buttons/ButtonLobbySelectCreateLobbyCommand.h"
 #include "commands/TestCommand.h"
 
+app::fact::sce::LobbySelectSceneFactory::LobbySelectSceneFactory(app::sce::SceneType & sceneControl)
+	: EntitiesFactory()
+	, m_sceneControl(sceneControl)
+{
+}
+
 std::vector<app::Entity> app::fact::sce::LobbySelectSceneFactory::create()
 {
 	auto const & sizePerLetter = math::Vector2f{ 20.0f, 40.0f };
@@ -36,7 +42,7 @@ std::vector<app::Entity> app::fact::sce::LobbySelectSceneFactory::create()
 		params.border = math::Vector2f{ 20.0f, 4.0f };
 		auto refreshCommandEntities = std::forward_list<app::Entity>();
 		refreshCommandEntities.push_front(params.entity.value());
-		params.command = std::make_unique<cmnd::ButtonLobbySelectRefreshCommand>(refreshCommandEntities);
+		params.command = std::make_unique<cmnd::ButtonLobbySelectRefreshCommand>(refreshCommandEntities, m_sceneControl);
 		params.zIndex = 80u;
 		entities.push_back(fact::ButtonFactory(params).create());
 	}
