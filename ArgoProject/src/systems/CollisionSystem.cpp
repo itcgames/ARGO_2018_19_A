@@ -302,9 +302,11 @@ void app::sys::CollisionSystem::checkDiscCollisions()
 			if (discCmp.backToPlayer)
 			{
 				auto secCollision = m_registry.get<comp::Collision>(discCmp.entity);
+				auto& playerInput = m_registry.get<comp::Input>(discCmp.entity);
 				bool const & collided = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
 				if (collided)
 				{
+					playerInput.canAttack = true;
 					m_registry.assign<comp::Destroy>(discEnt);
 				}
 			}

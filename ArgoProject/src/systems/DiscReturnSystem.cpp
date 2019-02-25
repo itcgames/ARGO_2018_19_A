@@ -6,10 +6,12 @@
 
 void app::sys::DiscReturnSystem::update(app::time::seconds const & dt)
 {
+	auto seekEntityView = m_registry.view<comp::SeekEntity>();
+
 	m_registry.view<comp::Disc, comp::Motion>()
 		.each([&, this](app::Entity const entity, comp::Disc & disc, comp::Motion & motion)
 	{
-		if (motion.speed < SPEED_CUTOFF && !m_registry.has<comp::SeekEntity>(entity))
+		if (motion.speed < SPEED_CUTOFF && !seekEntityView.contains(entity))
 		{
 			auto seek = comp::SeekEntity();
 			seek.entity = disc.entity;

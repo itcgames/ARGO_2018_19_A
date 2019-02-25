@@ -24,6 +24,7 @@ namespace app::comp
 		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyDownCommands;
 		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyPressedCommands;
 		bool isRight = true;
+		bool canAttack = true;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
