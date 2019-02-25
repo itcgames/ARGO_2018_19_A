@@ -272,7 +272,7 @@ void app::sys::CollisionSystem::checkDiscCollisions()
 					{
 						auto seek = comp::SeekEntity();
 						seek.entity = discCmp.entity;
-						m_registry.assign<comp::SeekEntity>(discEnt);
+						m_registry.assign<comp::SeekEntity>(discEnt, std::move(seek));
 						motion.drag = discCmp.DRAG_WHEN_HIT_WALL;
 						discCmp.backToPlayer = true;
 						collision.passable = true;
@@ -290,7 +290,7 @@ void app::sys::CollisionSystem::checkDiscCollisions()
 					{
 						auto seek = comp::SeekEntity();
 						seek.entity = discCmp.entity;
-						m_registry.assign<comp::SeekEntity>(discEnt);
+						m_registry.assign<comp::SeekEntity>(discEnt, std::move(seek));
 						motion.drag = discCmp.DRAG_WHEN_HIT_WALL;
 						discCmp.backToPlayer = true;
 						collision.passable = true;
