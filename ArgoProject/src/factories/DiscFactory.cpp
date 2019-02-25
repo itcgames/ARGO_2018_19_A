@@ -85,7 +85,7 @@ app::Entity const app::fact::DiscFactory::create()
 	m_registry.assign<decltype(layer)>(entity, std::move(layer));
 
 	auto render = comp::Render();
-	render.texture = m_resourceManager.getTexture(app::res::TextureKey::DebugColBox);
+	render.texture = m_resourceManager.getTexture(app::res::TextureKey::DebugCollisionBox);
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 
