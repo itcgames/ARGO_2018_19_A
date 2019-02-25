@@ -14,7 +14,7 @@
 #include "network/Client.h"
 
 app::fact::sce::MainMenuSceneFactory::MainMenuSceneFactory(app::sce::SceneType & targetScene, std::optional<app::fact::LevelDemoFactory> & levelFactory)
-	: EntitiesFactory()
+	: SceneFactory()
 	, m_targetScene(targetScene)
 	, m_levelFactory(levelFactory)
 {
