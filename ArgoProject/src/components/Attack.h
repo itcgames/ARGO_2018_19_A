@@ -1,26 +1,25 @@
-﻿#ifndef _COMP_DESTROY_H
-#define _COMP_DESTROY_H
+﻿#ifndef _COMP_ATTACK_H
+#define _COMP_ATTACK_H
 
 namespace app::comp
 {
-	struct Destroy
+	struct Attack
 	{
 	public: // Constructors/Destructor/Assignments
-		Destroy() = default;
-		~Destroy() = default;
+		Attack() = default;
+		Attack(Attack const &) = default;
+		Attack(Attack &&) = default;
 
-		Destroy(Destroy const &) = default;
-		Destroy & operator=(Destroy const &) = default;
+		~Attack() = default;
 
-		Destroy(Destroy &&) = default;
-		Destroy & operator=(Destroy &&) = default;
+		Attack & operator=(Attack const &) = default;
+		Attack & operator=(Attack &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		float timeToLive = 0;
-		float timer;
+
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -32,4 +31,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMP_DESTROY_H
+#endif // !_COMP_ATTACK_H

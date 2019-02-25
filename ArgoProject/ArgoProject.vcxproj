@@ -190,6 +190,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\commands\AttackCommand.cpp" />
     <ClCompile Include="..\ArgoShared\src\shared\network\Lobby.cpp" />
     <ClCompile Include="..\ArgoShared\src\shared\network\PacketType.cpp" />
     <ClCompile Include="..\ArgoShared\src\shared\utilities\Console.cpp" />
@@ -210,6 +211,8 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\AI.cpp" />
     <ClCompile Include="src\components\AirMotion.cpp" />
     <ClCompile Include="src\components\Animator.cpp" />
+    <ClCompile Include="src\components\Attack.cpp" />
+    <ClCompile Include="src\components\CharacterType.cpp" />
     <ClCompile Include="src\components\Collision.cpp" />
     <ClCompile Include="src\components\Commandable.cpp" />
     <ClCompile Include="src\components\Camera.cpp" />
@@ -222,6 +225,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\Dimensions.cpp" />
     <ClCompile Include="src\components\DoubleJump.cpp" />
     <ClCompile Include="src\components\Enemy.cpp" />
+    <ClCompile Include="src\components\FollowEntity.cpp" />
     <ClCompile Include="src\components\Goal.cpp" />
     <ClCompile Include="src\components\Health.cpp" />
     <ClCompile Include="src\components\Impenetrable.cpp" />
@@ -244,6 +248,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\BaseFactory.cpp" />
     <ClCompile Include="src\factories\DestructibleBlockFactory.cpp" />
     <ClCompile Include="src\factories\EntitiesFactory.cpp" />
+    <ClCompile Include="src\factories\entities\AxeAttackFactory.cpp" />
     <ClCompile Include="src\factories\entities\ImageFactory.cpp" />
     <ClCompile Include="src\factories\entities\ButtonFactory.cpp" />
     <ClCompile Include="src\factories\entities\CameraFactory.cpp" />
@@ -336,6 +341,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\DashSystem.cpp" />
     <ClCompile Include="src\systems\DebugSystem.cpp" />
     <ClCompile Include="src\systems\DestroySystem.cpp" />
+    <ClCompile Include="src\systems\FollowEntitySystem.cpp" />
     <ClCompile Include="src\systems\HealthSystem.cpp" />
     <ClCompile Include="src\systems\InputSystem.cpp" />
     <ClCompile Include="src\systems\CameraSystem.cpp" />
@@ -357,6 +363,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\visitors\CollisionUpdateVisitor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\commands\AttackCommand.h" />
     <ClInclude Include="..\ArgoShared\src\shared\network\Lobby.h" />
     <ClInclude Include="..\ArgoShared\src\shared\network\PacketType.h" />
     <ClInclude Include="..\ArgoShared\src\shared\utilities\Console.h" />
@@ -377,6 +384,8 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\AI.h" />
     <ClInclude Include="src\components\AirMotion.h" />
     <ClInclude Include="src\components\Animator.h" />
+    <ClInclude Include="src\components\Attack.h" />
+    <ClInclude Include="src\components\CharacterType.h" />
     <ClInclude Include="src\components\Collision.h" />
     <ClInclude Include="src\components\Commandable.h" />
     <ClInclude Include="src\components\Camera.h" />
@@ -389,6 +398,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\Dimensions.h" />
     <ClInclude Include="src\components\DoubleJump.h" />
     <ClInclude Include="src\components\Enemy.h" />
+    <ClInclude Include="src\components\FollowEntity.h" />
     <ClInclude Include="src\components\Goal.h" />
     <ClInclude Include="src\components\Health.h" />
     <ClInclude Include="src\components\Impenetrable.h" />
@@ -411,6 +421,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\BaseFactory.h" />
     <ClInclude Include="src\factories\DestructibleBlockFactory.h" />
     <ClInclude Include="src\factories\EntitiesFactory.h" />
+    <ClInclude Include="src\factories\entities\AxeAttackFactory.h" />
     <ClInclude Include="src\factories\entities\ImageFactory.h" />
     <ClInclude Include="src\factories\entities\ButtonFactory.h" />
     <ClInclude Include="src\factories\entities\CameraFactory.h" />
@@ -497,6 +508,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\systems\DashSystem.h" />
     <ClInclude Include="src\systems\DebugSystem.h" />
     <ClInclude Include="src\systems\DestroySystem.h" />
+    <ClInclude Include="src\systems\FollowEntitySystem.h" />
     <ClInclude Include="src\systems\HealthSystem.h" />
     <ClInclude Include="src\systems\InputSystem.h" />
     <ClInclude Include="src\systems\CameraSystem.h" />

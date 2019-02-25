@@ -1,21 +1,21 @@
-﻿#ifndef _FACTORY_PLAYER_H
-#define _FACTORY_PLAYER_H
+﻿#ifndef _AXE_ATTACK_FACTORY_H
+#define _AXE_ATTACK_FACTORY_H
 
 #include "../EntityFactory.h"
 
 namespace app::fact
 {
-	class PlayerFactory : public EntityFactory
+	class AxeAttackFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		PlayerFactory();
-		virtual ~PlayerFactory() = default;
+		AxeAttackFactory(app::Entity const _entity);
+		~AxeAttackFactory() = default;
 
-		PlayerFactory(PlayerFactory const &) = default;
-		PlayerFactory & operator=(PlayerFactory const &) = default;
+		AxeAttackFactory(AxeAttackFactory const &) = default;
+		AxeAttackFactory & operator=(AxeAttackFactory const &) = default;
 
-		PlayerFactory(PlayerFactory &&) = default;
-		PlayerFactory & operator=(PlayerFactory &&) = default;
+		AxeAttackFactory(AxeAttackFactory &&) = default;
+		AxeAttackFactory & operator=(AxeAttackFactory &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
@@ -25,12 +25,14 @@ namespace app::fact
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
+		constexpr static bool DEBUG_MODE = true;
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
+		app::Entity const m_entity;
 	};
 }
 
-#endif // !_FACTORY_PLAYER_H
+#endif // !_AXE_ATTACK_FACTORY_H
