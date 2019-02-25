@@ -1,32 +1,26 @@
-﻿#ifndef _COMP_CHARACTER_TYPE
-#define _COMP_CHARACTER_TYPE
+﻿#ifndef _COMP_FOLLOW_ENTITY_H
+#define _COMP_FOLLOW_ENTITY_H
 
 namespace app::comp
 {
-	struct CharacterType
+	struct FollowEntity
 	{
-		enum class Type
-		{
-			AXE,
-			DISC,
-			BOMB,
-			SWORD_LEGS
-		};
 	public: // Constructors/Destructor/Assignments
-		CharacterType() = default;
-		~CharacterType() = default;
+		FollowEntity() = default;
+		FollowEntity(FollowEntity const &) = default;
+		FollowEntity(FollowEntity &&) = default;
 
-		CharacterType(CharacterType const &) = default;
-		CharacterType & operator=(CharacterType const &) = default;
+		~FollowEntity() = default;
 
-		CharacterType(CharacterType &&) = default;
-		CharacterType & operator=(CharacterType &&) = default;
+		FollowEntity & operator=(FollowEntity const &) = default;
+		FollowEntity & operator=(FollowEntity &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		Type type;
+		app::Entity entity;
+		math::Vector2f offset = { 0.0f, 0.0f };
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -38,4 +32,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMP_CHARACTER_TYPE
+#endif // !_COMP_FOLLOW_ENTITY_H

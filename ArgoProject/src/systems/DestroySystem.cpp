@@ -5,10 +5,10 @@
 void app::sys::DestroySystem::update(app::time::seconds const & dt)
 {
 	m_registry.view<comp::Destroy>()
-		.each([&, this](app::Entity const entity, comp::Destroy & _destroy)
+		.each([&, this](app::Entity const entity, comp::Destroy & destroy)
 	{
-		_destroy.timer += dt.count();
-		if (_destroy.timer > _destroy.timeToLive)
+		destroy.timer += dt.count();
+		if (destroy.timer > destroy.timeToLive)
 		{
 			m_registry.destroy(entity);
 		}

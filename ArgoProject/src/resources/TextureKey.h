@@ -10,6 +10,7 @@ namespace app::res
 		DebugHuge,
 		DebugAnimation,
 		DebugEnemyAnimation,
+		DebugCollisionBox,
 		Count // Keep this one at the bottom of the enum list
 	};
 }
