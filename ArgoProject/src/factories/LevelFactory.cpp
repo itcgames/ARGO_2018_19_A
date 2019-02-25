@@ -78,13 +78,17 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 	}
 	// destructible blocks
 	{
-		auto destructibleParams = app::par::DestructibleParameters(position, size);
-		auto facade = fact::FacadeFactory(position, size);
+		math::Vector2f tileSize = math::Vector2f(50, 50);
+		math::Vector2i noTiles = math::Vector2i(1, 4);
+		auto destructibleParams = app::par::DestructibleParameters(position, size, tileSize, noTiles);
+		auto facade = fact::FacadeFactory(position, tileSize, noTiles);
 
 		position = app::math::Vector2f(2525, 250);
 		size = app::math::Vector2f(200, 600);
+		noTiles = math::Vector2f(4, 12);
 		destructibleParams.attachedArea = facade.create();
 
+		noTiles = math::Vector2i(1, 4);
 		auto destructibleFactory = fact::DestructibleBlockFactory(destructibleParams);
 
 		position = app::math::Vector2f(2400, 175);

@@ -8,7 +8,7 @@ namespace app::fact
 	class FacadeFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		FacadeFactory(app::math::Vector2f const & pos, app::math::Vector2f const & size);
+		FacadeFactory(app::math::Vector2f const & pos, app::math::Vector2f const & size, app::math::Vector2i const & numberOfTiles);
 		~FacadeFactory() = default;
 
 		FacadeFactory(FacadeFactory const &) = default;
@@ -31,7 +31,8 @@ namespace app::fact
 	private: // Private Static Variables
 	private: // Private Member Variables
 		app::math::Vector2f const & m_position;
-		app::math::Vector2f const & m_size;
+		app::math::Vector2f const & m_sizeOfTile;
+		app::math::Vector2i const & m_numberOfTiles;
 	};
 }
 
