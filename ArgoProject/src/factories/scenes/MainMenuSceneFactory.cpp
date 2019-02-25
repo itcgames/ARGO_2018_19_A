@@ -22,8 +22,8 @@ app::fact::sce::MainMenuSceneFactory::MainMenuSceneFactory(app::sce::SceneType &
 
 std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 {
+	m_audioPlayer.playAudioMusic(app::res::AudioKey::BackgroundMusicTitle, app::gra::AudioPlayer::s_LOOP_FOREVER);
 	auto entities = std::vector<app::Entity>();
-
 
 	{
 		auto const & size = math::Vector2f{ 1366.0f, 768.0f };

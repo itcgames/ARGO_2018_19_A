@@ -1,11 +1,11 @@
 ﻿#ifndef _FACTORY_CHARACTER_SELECT_SCENE_H
 #define _FACTORY_CHARACTER_SELECT_SCENE_H
 
-#include "../EntitiesFactory.h"
+#include "../SceneFactory.h"
 
 namespace app::fact::sce
 {
-	class CharacterSelectSceneFactory : public EntitiesFactory
+	class CharacterSelectSceneFactory : public SceneFactory
 	{
 	public: // Constructors/Destructor/Assignments
 		CharacterSelectSceneFactory() = default;

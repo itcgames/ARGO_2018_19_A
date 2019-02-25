@@ -1,11 +1,11 @@
 ﻿#ifndef _FACTORY_SPLASH_SCENE_H
 #define _FACTORY_SPLASH_SCENE_H
 
-#include "../EntitiesFactory.h"
+#include "../SceneFactory.h"
 
 namespace app::fact::sce
 {
-	class SplashSceneFactory : public EntitiesFactory
+	class SplashSceneFactory : public SceneFactory
 	{
 	public: // Constructors/Destructor/Assignments
 		SplashSceneFactory() = default;
