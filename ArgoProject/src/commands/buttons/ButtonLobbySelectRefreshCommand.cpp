@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "ButtonLobbySelectRefreshCommand.h"
 #include "shared/network/Lobby.h"
+#include "factories/entities/LobbyDisplayFactory.h"
 
 void app::cmnd::ButtonLobbySelectRefreshCommand::execute()
 {
@@ -19,6 +20,13 @@ void app::cmnd::ButtonLobbySelectRefreshCommand::execute()
 		{
 			this->output("Receival of 'Lobbies' failed");
 			return;
+		}
+		else
+		{
+			auto params = par::LobbyDisplayFactoryParameters();
+			params.position = math::Vector2f{ -450.0f, -300.0f };
+			params.lobbies = lobbies;
+			fact::LobbyDisplayFactory(params).create();
 		}
 		this->output({ "Receival of [", std::to_string(lobbies.size()), "]'Lobbies' successfull" });
 	}

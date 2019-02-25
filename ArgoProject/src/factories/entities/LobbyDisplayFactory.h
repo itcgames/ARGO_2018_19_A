@@ -2,13 +2,14 @@
 #define _LOBBY_DISPLAY_FACTORY_H
 
 #include "../EntitiesFactory.h"
+#include "parameters/LobbyDisplayFactoryParameters.h"
 
 namespace app::fact
 {
 	class LobbyDisplayFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		LobbyDisplayFactory(math::Vector2f const & position, std::string const & lobbyName);
+		LobbyDisplayFactory(app::par::LobbyDisplayFactoryParameters const & params);
 		virtual ~LobbyDisplayFactory() = default;
 
 		LobbyDisplayFactory(LobbyDisplayFactory const &) = default;
@@ -30,8 +31,7 @@ namespace app::fact
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
-		math::Vector2f const & m_position;
-		std::string const & m_lobbyName;
+		app::par::LobbyDisplayFactoryParameters const & m_params;
 	};
 }
 

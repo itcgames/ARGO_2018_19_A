@@ -49,6 +49,24 @@ namespace app::math
 		Vector2 & operator/=(Vector2 const & v);
 		Vector2 & operator/=(T const & t);
 
+		constexpr bool operator==(Vector2 const & v) const;
+		constexpr bool operator==(T const & t) const;
+
+		constexpr bool operator!=(Vector2 const & v) const;
+		constexpr bool operator!=(T const & t) const;
+
+		constexpr bool operator<(Vector2 const & v) const;
+		constexpr bool operator<(T const & t) const;
+
+		constexpr bool operator>(Vector2 const & v) const;
+		constexpr bool operator>(T const & t) const;
+
+		constexpr bool operator<=(Vector2 const & v) const;
+		constexpr bool operator<=(T const & t) const;
+
+		constexpr bool operator>=(Vector2 const & v) const;
+		constexpr bool operator>=(T const & t) const;
+
 		T magnitudeSqr() const;
 		T magnitude() const;
 		Vector2<T> & truncate(T max);

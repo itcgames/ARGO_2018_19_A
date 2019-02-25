@@ -142,6 +142,12 @@
     <Filter Include="Resource Files\Animations">
       <UniqueIdentifier>{062b658f-59f1-44ad-8665-8f2a693ac7ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\tags">
+      <UniqueIdentifier>{ae466dab-f153-4ace-a110-d74301977d23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tags">
+      <UniqueIdentifier>{2bbe24e5-97bf-4d91-b73a-a430e2c7a2be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -618,6 +624,12 @@
     <ClCompile Include="..\ArgoShared\src\shared\network\PacketParser.cpp">
       <Filter>Source Files\network</Filter>
     </ClCompile>
+    <ClCompile Include="src\parameters\LobbyDisplayFactoryParameters.cpp">
+      <Filter>Source Files\parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\LobbyDisplay.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -1091,10 +1103,16 @@
     <ClInclude Include="..\ArgoShared\src\shared\network\PacketParser.h">
       <Filter>Header Files\network</Filter>
     </ClInclude>
+    <ClInclude Include="src\components\LobbyDisplay.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\.gitkeep">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="src\parameters\LobbyDisplayFactoryParameters.h">
+      <Filter>Header Files\parameters</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
