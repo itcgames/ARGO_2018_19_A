@@ -12,6 +12,7 @@ namespace app::res
 		DebugEnemyAnimation,
 		Loading,
 		Splash,
+		DebugCollisionBox,
 		Count // Keep this one at the bottom of the enum list
 	};
 }

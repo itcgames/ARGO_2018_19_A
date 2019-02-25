@@ -498,9 +498,6 @@
     <ClCompile Include="src\components\AI.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
-    <ClCompile Include="src\factories\AIFactory.cpp">
-      <Filter>Source Files\factories</Filter>
-    </ClCompile>
     <ClCompile Include="src\factories\HazardFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
@@ -616,6 +613,27 @@
       <Filter>Source Files\systems</Filter>
     </ClCompile>
     <ClCompile Include="src\components\AnimatedImage.cpp">
+          <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\CharacterType.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\AttackCommand.cpp">
+      <Filter>Source Files\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\FollowEntity.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\FollowEntitySystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\entities\AxeAttackFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\AIFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Attack.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
     <ClCompile Include="src\components\Destructible.cpp">
@@ -1113,6 +1131,23 @@
       <Filter>Header Files\systems</Filter>
     </ClInclude>
     <ClInclude Include="src\components\AnimatedImage.h">
+    </ClInclude>
+    <ClInclude Include="src\components\CharacterType.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\AttackCommand.h">
+      <Filter>Header Files\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\FollowEntity.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\FollowEntitySystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\entities\AxeAttackFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Attack.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="src\components\Destructible.h">
