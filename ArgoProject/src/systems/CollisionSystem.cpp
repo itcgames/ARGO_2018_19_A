@@ -46,6 +46,8 @@ app::sys::CollisionSystem::CollisionSystem()
 	m_registry.prepare<comp::Collision, comp::Enemy, comp::Location, comp::Dimensions, comp::Motion>();
 	m_registry.prepare<comp::Collision, comp::Location, comp::Dimensions, comp::Health>();
 	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions>();
+	m_registry.prepare<comp::Collision, comp::Enemy, comp::Health>();
+	m_registry.prepare<comp::Collision, comp::Attack, comp::Location, comp::Dimensions, comp::Damage>();
 }
 
 void app::sys::CollisionSystem::update(app::time::seconds const & dt)
@@ -62,7 +64,6 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 	this->playerGoalCollisions();
 	this->attackEnemyCollisions();
 	this->checkDiscCollisions();
-
 }
 
 void app::sys::CollisionSystem::groundCollisions()
@@ -447,12 +448,9 @@ void app::sys::CollisionSystem::playerHazardCollisions()
 		m_registry.view<comp::Collision, comp::Damage>()
 			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Damage & damage)
 		{
-			//need the if statement since disc has a collision and damage comp but should not hurt the player
-			if (m_registry.has<comp::Disc>(entity) || m_registry.has<comp::Disc>(secEntity))
-			{
-				return;
-			}
-			if (entity != secEntity)
+			auto attackView = m_registry.view<comp::Attack>();
+
+			if (entity != secEntity && (!attackView.contains(entity) && !attackView.contains(secEntity)))
 			{
 				if (app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds))
 				{

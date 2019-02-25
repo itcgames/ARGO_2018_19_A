@@ -14,10 +14,10 @@ app::cmnd::AttackCommand::AttackCommand(app::Entity const _entity)
 
 void app::cmnd::AttackCommand::execute()
 {
-	if (m_registry.has<comp::CharacterType>(m_entity))
+	auto characterTypeView = m_registry.view<comp::Location, comp::Dimensions, comp::CharacterType>(entt::persistent_t());
+	if (characterTypeView.contains(m_entity))
 	{
-		auto view = m_registry.view<comp::Location, comp::Dimensions, comp::CharacterType>();
-		auto const &[location, dimensions, characterType] = view.get<comp::Location, comp::Dimensions, comp::CharacterType>(m_entity);
+		auto const &[location, dimensions, characterType] = characterTypeView.get<comp::Location, comp::Dimensions, comp::CharacterType>(m_entity);
 
 		switch (characterType.type)
 		{
