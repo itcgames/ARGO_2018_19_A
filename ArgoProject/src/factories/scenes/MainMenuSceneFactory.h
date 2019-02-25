@@ -3,13 +3,14 @@
 
 #include "../SceneFactory.h"
 #include "scenes/SceneType.h"
+#include "factories/entities/LevelDemoFactory.h"
 
 namespace app::fact::sce
 {
 	class MainMenuSceneFactory : public SceneFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		MainMenuSceneFactory(app::sce::SceneType & targetScene);
+		MainMenuSceneFactory(app::sce::SceneType & targetScene, std::optional<app::fact::LevelDemoFactory> & levelFactory);
 		virtual ~MainMenuSceneFactory() = default;
 
 		MainMenuSceneFactory(MainMenuSceneFactory const &) = default;
@@ -28,6 +29,7 @@ namespace app::fact::sce
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
 		app::sce::SceneType & m_targetScene;
+		std::optional<app::fact::LevelDemoFactory> & m_levelFactory;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables
