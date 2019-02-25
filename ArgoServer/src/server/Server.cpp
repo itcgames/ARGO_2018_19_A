@@ -280,7 +280,7 @@ bool app::net::Server::processLobbyCreate(int id)
 	constexpr auto PACKET_TYPE = app::net::PacketType::LOBBY_WAS_CREATED;
 	for (int i = 0; i < m_totalConnections; i++)
 	{
-		if (i == id || m_sockets.at(i) == NULL) { continue; }
+		if (m_sockets.at(i) == NULL) { continue; }
 		//send the vector of servers to client whenever a new server is added or just send a single lobby that was added.
 		if (!this->send(i, PACKET_TYPE) || !this->send(i, lobby))
 		{

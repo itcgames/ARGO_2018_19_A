@@ -630,6 +630,9 @@
     <ClCompile Include="src\components\LobbyDisplay.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
+    <ClCompile Include="src\commands\buttons\ButtonLobbySelectCommand.cpp">
+      <Filter>Source Files\commands\buttons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -1105,6 +1108,9 @@
     </ClInclude>
     <ClInclude Include="src\components\LobbyDisplay.h">
       <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\buttons\ButtonLobbySelectCommand.h">
+      <Filter>Header Files\commands\buttons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,7 @@ namespace app::cmnd
 	class ButtonLobbySelectRefreshCommand : public BaseMultiplayerCommand
 	{
 	public: // Constructors/Destructor/Assignments
-		ButtonLobbySelectRefreshCommand() = default;
+		ButtonLobbySelectRefreshCommand(std::forward_list<app::Entity> entities);
 		virtual ~ButtonLobbySelectRefreshCommand() = default;
 
 		ButtonLobbySelectRefreshCommand(ButtonLobbySelectRefreshCommand const &) = default;
@@ -26,6 +26,7 @@ namespace app::cmnd
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
+		std::forward_list<app::Entity> m_entities;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables

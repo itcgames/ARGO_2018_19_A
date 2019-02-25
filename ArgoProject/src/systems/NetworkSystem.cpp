@@ -1,6 +1,9 @@
 ﻿#include "stdafx.h"
 #include "NetworkSystem.h"
 #include "singletons/ClientSingleton.h"
+#include "commands/buttons/ButtonLobbySelectRefreshCommand.h"
+
+#include "components/Widget.h"
 
 app::sys::NetworkSystem::NetworkSystem()
 	: BaseSystem()
@@ -18,13 +21,21 @@ void app::sys::NetworkSystem::update(app::time::seconds const & dt)
 		{
 			this->output("Failed to retrieve packet type");
 		}
-		if (!m_client.processPacket(m_packetType))
+		if (m_client.processPacket(m_packetType))
 		{
-			this->output("Failed to process packet");
+			this->output("Processed packet successfully");
+			if (m_packetType == app::net::PacketType::LOBBY_WAS_CREATED)
+			{
+				this->output("Lobby was created");
+				auto buttonView = m_registry.view<comp::Widget>();
+				auto entities = std::forward_list<app::Entity>();
+				for (auto const & entity : buttonView) { entities.push_front(entity); }
+				std::make_unique<cmnd::ButtonLobbySelectRefreshCommand>(entities)->execute();
+			}
 		}
 		else
 		{
-			this->output("Processed packet successfully");
+			this->output("Failed to process packet");
 		}
 	}
 }

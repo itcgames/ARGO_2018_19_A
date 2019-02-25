@@ -3,6 +3,12 @@
 #include "shared/network/Lobby.h"
 #include "factories/entities/LobbyDisplayFactory.h"
 
+app::cmnd::ButtonLobbySelectRefreshCommand::ButtonLobbySelectRefreshCommand(std::forward_list<app::Entity> entities)
+	: BaseMultiplayerCommand()
+	, m_entities(entities)
+{
+}
+
 void app::cmnd::ButtonLobbySelectRefreshCommand::execute()
 {
 	if (m_client.hasInit())
@@ -26,6 +32,7 @@ void app::cmnd::ButtonLobbySelectRefreshCommand::execute()
 			auto params = par::LobbyDisplayFactoryParameters();
 			params.position = math::Vector2f{ -450.0f, -300.0f };
 			params.lobbies = lobbies;
+			params.entities.insert(params.entities.end(), m_entities.begin(), m_entities.end());
 			fact::LobbyDisplayFactory(params).create();
 		}
 		this->output({ "Receival of [", std::to_string(lobbies.size()), "]'Lobbies' successfull" });

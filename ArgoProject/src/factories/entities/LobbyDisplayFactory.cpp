@@ -1,9 +1,14 @@
 ﻿#include "stdafx.h"
 #include "LobbyDisplayFactory.h"
+
 #include "factories/entities/ImageFactory.h"
 #include "factories/entities/TextFactory.h"
+#include "factories/entities/ButtonFactory.h"
+
 #include "components/LobbyDisplay.h"
 #include "components/Destroy.h"
+
+#include "commands/buttons/ButtonLobbySelectCommand.h"
 
 app::fact::LobbyDisplayFactory::LobbyDisplayFactory(app::par::LobbyDisplayFactoryParameters const & params)
 	: EntitiesFactory()
@@ -22,6 +27,8 @@ std::vector<app::Entity> app::fact::LobbyDisplayFactory::create()
 	auto position = math::Vector2f{};
 	auto size = math::Vector2f{};
 	auto offsetFromPrevious = math::Vector2f{};
+	auto params = par::ButtonFactoryParameters();
+	bool firstButton = true;
 
 	// get rid of previous lobby displays
 	{
@@ -38,9 +45,44 @@ std::vector<app::Entity> app::fact::LobbyDisplayFactory::create()
 		auto const & players = lobby.getPlayers();
 		auto const PREVIOUS_POSITION = position;
 
+		// Button
+		{
+			params.up = params.entity;
+			params.entity = params.down;
+			params.down = m_entityFactory.create();
+			params.left.reset();
+			params.right = m_params.entities.back();
+			params.position = 
+				position = PREVIOUS_POSITION + math::Vector2f{ -70.0f, 0.0f };
+			params.size = 
+				size = math::Vector2f{ 50.0f, 50.0f };
+			params.state = app::comp::Widget::State::Active;
+			params.zIndex = 140u;
+			params.command = std::make_unique<cmnd::ButtonLobbySelectCommand>(lobby);
+			params.text = " ";
+
+			entities.push_back(fact::ButtonFactory(params).create());
+
+			// need to set the refresh button navigation
+			if (firstButton)
+			{
+				firstButton = false;
+				auto widgetView = m_registry.view<comp::Widget>();
+				for (auto const & entity : m_params.entities)
+				{
+					if (widgetView.contains(entity) && (entity != entities.back()))
+					{
+						auto & widget = widgetView.get(entity);
+						widget.left = entities.back();
+					}
+				}
+			}
+
+			offsetFromPrevious = size / 2.0f;
+		}
 		// Reserved for later being a icon
 		{
-			position = PREVIOUS_POSITION + math::Vector2f{ -50.0f, 0.0f };
+			position += ((size + offsetFromPrevious) * IGNORE_Y) + math::Vector2f{ 10.0f, 0.0f };
 			size = math::Vector2f{ 50.0f, 50.0f };
 			auto const & origin = size / 2.0f;
 			auto const & textureKey = app::res::TextureKey::Debug;
@@ -69,7 +111,7 @@ std::vector<app::Entity> app::fact::LobbyDisplayFactory::create()
 		position = PREVIOUS_POSITION + DOWNWARD_OFFSET;
 	}
 
-	// Add lobby component to all entities that belong to the lobby display.
+	// Add lobby display component to all entities that belong to the lobby display.
 	for (auto const & entity : entities) { m_registry.assign<comp::LobbyDisplay>(entity); }
 
 	return entities;

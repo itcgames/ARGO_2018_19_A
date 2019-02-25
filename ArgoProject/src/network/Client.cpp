@@ -129,8 +129,10 @@ bool app::net::Client::processClientName()
 
 bool app::net::Client::processLobbyWasCreated()
 {
-	auto lobbies = std::list<Lobby>();
-	return this->send(PacketType::LOBBY_GET_ALL) && this->get(lobbies);
+	auto lobby = Lobby();
+	if (!this->get(lobby)) { return false; }
+	m_lobbies.insert(m_lobbies.end(), lobby);
+	return true;
 }
 
 bool app::net::Client::processLobbyCreate()
