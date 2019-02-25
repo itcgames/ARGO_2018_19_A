@@ -16,7 +16,7 @@ app::sce::SceneManager::SceneManager()
 		, std::make_pair(SceneType::Loading, Scene(std::in_place_type<sce::LoadingScene>, m_targetScene))
 	}))
 	, m_currentScene(SceneType::Count)
-	, m_targetScene(SceneType::Splash)
+	, m_targetScene(SceneType::Level)
 {
 }
 

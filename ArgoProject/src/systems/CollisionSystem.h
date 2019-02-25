@@ -36,6 +36,7 @@ namespace app::sys
 		void enemyEnemyCollisions();
 		void playerHazardCollisions();
 		void playerGoalCollisions();
+		void playerEnemyCollisions();
 		void checkPlatformCollisions();
 		void checkAINodeCollisions();
 		void attackEnemyCollisions();

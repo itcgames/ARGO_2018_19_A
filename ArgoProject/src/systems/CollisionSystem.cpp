@@ -48,6 +48,7 @@ app::sys::CollisionSystem::CollisionSystem()
 	m_registry.prepare<comp::Collision, comp::Enemy, comp::Health>();
 	m_registry.prepare<comp::Collision, comp::Attack, comp::Location, comp::Dimensions, comp::Damage>();
 	m_registry.prepare<comp::Hazard, comp::Collision, comp::Damage>();
+	m_registry.prepare<comp::Collision, comp::Location, comp::Dimensions, comp::Health, comp::Input>();
 }
 
 void app::sys::CollisionSystem::update(app::time::seconds const & dt)
@@ -64,6 +65,7 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 	this->playerGoalCollisions();
 	this->attackEnemyCollisions();
 	this->attackDestructibleCollisions();
+	this->playerEnemyCollisions();
 }
 
 void app::sys::CollisionSystem::groundCollisions()
@@ -430,6 +432,25 @@ void app::sys::CollisionSystem::playerGoalCollisions()
 				if (app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds))
 				{
 					m_registry.remove<comp::Goal>(secEntity);
+				}
+			}
+		});
+	});
+}
+
+void app::sys::CollisionSystem::playerEnemyCollisions()
+{
+	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Health, comp::Input>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions, comp::Health & health, comp::Input & input)
+	{
+		m_registry.view<comp::Enemy, comp::Collision, comp::Damage>(entt::persistent_t())
+			.each([&, this](app::Entity const secEntity, comp::Enemy & enemy, comp::Collision & secCollision, comp::Damage & damage)
+		{
+			if (entity != secEntity)
+			{
+				if (app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds))
+				{
+					health.health -= damage.damage;
 				}
 			}
 		});
