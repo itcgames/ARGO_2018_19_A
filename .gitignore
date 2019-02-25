@@ -336,3 +336,4 @@ ASALocalRun/
 !**/deps/lib/x64
 !**/deps/bin
 !**/deps/bin/x64
+!**/res/Debug
