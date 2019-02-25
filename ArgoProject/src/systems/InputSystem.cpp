@@ -13,7 +13,6 @@ app::sys::InputSystem::InputSystem()
 
 void app::sys::InputSystem::update(app::time::seconds const & dt)
 {
-
 	m_registry.view<comp::Input, comp::Commandable>()
 		.each([&, this](app::Entity const entity, comp::Input & input, comp::Commandable& commandable) 
 	{

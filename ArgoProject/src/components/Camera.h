@@ -5,7 +5,7 @@
 
 namespace app::comp
 {
-	class Camera
+	struct Camera
 	{
 	public: // Constructors/Destructor/Assignments
 		Camera() = default;

@@ -36,3 +36,24 @@ void app::del::SdlDeleter::operator()(SDL_Haptic * pHaptic) const
 	if (pHaptic == nullptr) { return; }
 	SDL_HapticClose(pHaptic);
 }
+
+void app::del::SdlDeleter::operator()(Mix_Music * pMusic) const
+{
+	if (pMusic == nullptr) { return; }
+	try
+	{
+		if (Mix_PlayingMusic()) { Mix_HaltMusic(); }
+		//Mix_FreeMusic(pMusic);
+	}
+	catch(std::exception e)
+	{
+		app::Console::writeLine({ "ERROR: Exception in 'app::del::SdlDeleter::operator()' [", e.what(), "]" });
+	}
+
+}
+
+void app::del::SdlDeleter::operator()(Mix_Chunk * pChunk) const
+{
+	if (pChunk == nullptr) { return; }
+	Mix_FreeChunk(pChunk);
+}

@@ -29,6 +29,9 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 	m_resourceManager.loadTexture(TextureKey::DebugCollisionBox, "./res/Debug/colBox.png");
 	using FontKey = app::res::FontKey;
 	m_resourceManager.loadFont(FontKey::Debug, "./res/Fonts/arial.ttf");
+	using AudioKey = app::res::AudioKey;
+	m_resourceManager.loadAudioMusic(AudioKey::BackgroundMusicTitle, "./res/Audio/Music/BackgroundMusicTitle.ogg");
+	m_resourceManager.loadAudioSFX(AudioKey::PlayerJump, "./res/Audio/SFX/PlayerJump.wav");
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("SPLASH SCENE Constructed");
