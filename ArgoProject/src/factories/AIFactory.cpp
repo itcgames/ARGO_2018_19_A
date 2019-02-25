@@ -18,7 +18,6 @@
 #include "components/AI.h"
 #include "components/Dashable.h"
 #include "components/DoubleJump.h"
-
 #include "commands/MoveCommand.h"
 #include "commands/JumpCommand.h"
 #include "commands/DashCommand.h"
@@ -27,6 +26,9 @@
 #include "commands/DropCommand.h"
 #include "components/StateMachine.h"
 #include "components/Health.h"
+
+#include "fsm/AnimationStateMachine.h"
+#include "fsm/states/AiWalkingAnimationState.h"
 
 app::fact::AIFactory::AIFactory(math::Vector2f const & pos, math::Vector2f const & size)
 	: m_position(pos), m_size(size)
@@ -55,17 +57,6 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	m_registry.assign<decltype(motion)>(entity, std::move(motion));
 
 	auto animator = comp::Animator();
-	animator.loop = true; // tell animator to loop animation when it reaches the end.
-	animator.time = 0.0f; // Separate time tracking for the animation, leave it at zero
-	animator.currentFrame = math::Vector2i{ 0, 0 }; // Starting frame
-	animator.position = { 0, 0 }; // Starting position
-	animator.frameSize = math::Vector2i{ 500, 500 }; // width,height of each frame
-	animator.numOfFrames = math::Vector2i{ 7, 12 }; // number of frames in the X axis and Y axis
-	animator.maxFrames = 82;
-	// time it takes to switch from one frame to another.
-	// calculating it by taking full_duration / (number of total frames)
-	// while dealing with edge case of any of the frames being zero
-	animator.perFrame = 13.0f / (std::max(animator.numOfFrames.x, 1) * std::max(animator.numOfFrames.y, 1));
 	m_registry.assign<decltype(animator)>(entity, std::move(animator));
 
 	auto layer = comp::Layer();
@@ -73,9 +64,6 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	m_registry.assign<decltype(layer)>(entity, std::move(layer));
 
 	auto render = comp::Render();
-	render.texture = m_resourceManager.getTexture(app::res::TextureKey::AxeRun);
-	render.border = math::Vector2f{ 30.0f, 4.0f };
-	render.offset = math::Vector2f{ 15.0f, 2.0f };
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	auto input = comp::Input();
@@ -93,8 +81,10 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	auto commandable = comp::Commandable();
 	m_registry.assign<decltype(commandable)>(entity, std::move(commandable));
 
+	// Make sure render and animator components are already assigned before assigning a finite state machine.
 	auto stateMachine = comp::StateMachine();
-	stateMachine.instance = nullptr;
+	stateMachine.instance = std::make_unique<fsm::AnimationStateMachine>();
+	stateMachine.instance->setState(std::make_shared<fsm::sta::AiWalkingAnimationState>(entity));
 	m_registry.assign<decltype(stateMachine)>(entity, std::move(stateMachine));
 
 	auto collision = comp::Collision();

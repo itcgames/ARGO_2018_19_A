@@ -633,6 +633,12 @@
     <ClCompile Include="src\factories\entities\LevelDemoFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
+    <ClCompile Include="src\fsm\AnimationStateMachine.cpp">
+      <Filter>Source Files\fsm</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fsm\states\AiWalkingAnimationState.cpp">
+      <Filter>Source Files\fsm\states</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -1120,6 +1126,12 @@
     </ClInclude>
     <ClInclude Include="src\factories\entities\LevelDemoFactory.h">
       <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\fsm\AnimationStateMachine.h">
+      <Filter>Header Files\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="src\fsm\states\AiWalkingAnimationState.h">
+      <Filter>Header Files\fsm\states</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
