@@ -20,6 +20,7 @@
 #include "components/DoubleJump.h"
 #include "components/AI.h"
 #include "components/Node.h"
+#include "components/Attack.h"
 #include "components/Goal.h"
 
 //visitors
@@ -42,6 +43,8 @@ app::sys::CollisionSystem::CollisionSystem()
 	m_registry.prepare<comp::Collision, comp::Enemy, comp::Location, comp::Dimensions, comp::Motion>();
 	m_registry.prepare<comp::Collision, comp::Location, comp::Dimensions, comp::Health>();
 	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions>();
+	m_registry.prepare<comp::Collision, comp::Enemy, comp::Health>();
+	m_registry.prepare<comp::Collision, comp::Attack, comp::Location, comp::Dimensions, comp::Damage>();
 }
 
 void app::sys::CollisionSystem::update(app::time::seconds const & dt)
@@ -56,6 +59,7 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 	this->playerHazardCollisions();
 	this->checkAINodeCollisions();
 	this->playerGoalCollisions();
+	this->attackEnemyCollisions();
 }
 
 void app::sys::CollisionSystem::groundCollisions()
@@ -223,6 +227,26 @@ void app::sys::CollisionSystem::checkAINodeCollisions()
 	});
 }
 
+void app::sys::CollisionSystem::attackEnemyCollisions()
+{
+	//look through all attacks
+	m_registry.view<comp::Collision, comp::Attack, comp::Location, comp::Dimensions, comp::Damage>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Attack & attack, comp::Location & location, comp::Dimensions & dimensions, comp::Damage & damage)
+	{
+		//look through all enemies
+		m_registry.view<comp::Collision, comp::Enemy, comp::Health>(entt::persistent_t())
+			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Enemy & enemy, comp::Health & health)
+		{
+			bool const & collided = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+			if (collided)
+			{
+				health.health -= damage.damage;
+			}
+
+		});
+	});
+}
+
 void app::sys::CollisionSystem::dashCollisions()
 {
 	//view player
@@ -355,7 +379,9 @@ void app::sys::CollisionSystem::playerHazardCollisions()
 		m_registry.view<comp::Collision, comp::Damage>()
 			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Damage & damage)
 		{
-			if (entity != secEntity)
+			auto attackView = m_registry.view<comp::Attack>();
+
+			if (entity != secEntity && (!attackView.contains(entity) && !attackView.contains(secEntity)))
 			{
 				if (app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds))
 				{

@@ -1,21 +1,21 @@
-﻿#ifndef _SPLASH_SCENE_H
-#define _SPLASH_SCENE_H
+﻿#ifndef _LOADING_SCENE_H
+#define _LOADING_SCENE_H
 
 #include "BaseScene.h"
 
 namespace app::sce
 {
-	class SplashScene : public BaseScene
+	class LoadingScene : public BaseScene
 	{
 	public: // Constructors/Destructor/Assignments
-		SplashScene(SceneType & sceneManagerType);
-		virtual ~SplashScene() = default;
+		LoadingScene(SceneType & sceneManagerType);
+		virtual ~LoadingScene() = default;
 
-		SplashScene(SplashScene const &) = default;
-		SplashScene & operator=(SplashScene const &) = default;
+		LoadingScene(LoadingScene const &) = default;
+		LoadingScene & operator=(LoadingScene const &) = default;
 
-		SplashScene(SplashScene &&) = default;
-		SplashScene & operator=(SplashScene &&) = default;
+		LoadingScene(LoadingScene &&) = default;
+		LoadingScene & operator=(LoadingScene &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
@@ -30,11 +30,9 @@ namespace app::sce
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
-		void onAnimatedImageDestroy(app::Registry & registry, app::Entity const entity);
 	private: // Private Static Variables
-	private: // Private Member Variables
-		bool m_splashFinished = false;
+	private: // Private Member Variables	
 	};
 }
 
-#endif // !_SPLASH_SCENE_H
+#endif // !_LOADING_SCENE_H

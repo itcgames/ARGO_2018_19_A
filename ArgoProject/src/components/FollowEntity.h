@@ -1,26 +1,26 @@
-﻿#ifndef _COMP_DESTROY_H
-#define _COMP_DESTROY_H
+﻿#ifndef _COMP_FOLLOW_ENTITY_H
+#define _COMP_FOLLOW_ENTITY_H
 
 namespace app::comp
 {
-	struct Destroy
+	struct FollowEntity
 	{
 	public: // Constructors/Destructor/Assignments
-		Destroy() = default;
-		~Destroy() = default;
+		FollowEntity() = default;
+		FollowEntity(FollowEntity const &) = default;
+		FollowEntity(FollowEntity &&) = default;
 
-		Destroy(Destroy const &) = default;
-		Destroy & operator=(Destroy const &) = default;
+		~FollowEntity() = default;
 
-		Destroy(Destroy &&) = default;
-		Destroy & operator=(Destroy &&) = default;
+		FollowEntity & operator=(FollowEntity const &) = default;
+		FollowEntity & operator=(FollowEntity &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		float timeToLive = 0;
-		float timer;
+		app::Entity entity;
+		math::Vector2f offset = { 0.0f, 0.0f };
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -32,4 +32,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMP_DESTROY_H
+#endif // !_COMP_FOLLOW_ENTITY_H

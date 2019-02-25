@@ -1,26 +1,28 @@
-﻿#ifndef _COMP_DESTROY_H
-#define _COMP_DESTROY_H
+#ifndef _LOADING_SYSTEM_H
+#define _LOADING_SYSTEM_H
 
-namespace app::comp
+#include "BaseSystem.h"
+
+namespace app::sys
 {
-	struct Destroy
+	class LoadingSystem : public BaseSystem
 	{
 	public: // Constructors/Destructor/Assignments
-		Destroy() = default;
-		~Destroy() = default;
+		LoadingSystem() = default;
+		virtual ~LoadingSystem() = default;
 
-		Destroy(Destroy const &) = default;
-		Destroy & operator=(Destroy const &) = default;
+		LoadingSystem(LoadingSystem const &) = default;
+		LoadingSystem & operator=(LoadingSystem const &) = default;
 
-		Destroy(Destroy &&) = default;
-		Destroy & operator=(Destroy &&) = default;
+		LoadingSystem(LoadingSystem &&) = default;
+		LoadingSystem & operator=(LoadingSystem &&) = default;
+
 
 	public: // Public Static Functions
 	public: // Public Member Functions
+		virtual void update(app::time::seconds const & dt) override;
 	public: // Public Static Variables
 	public: // Public Member Variables
-		float timeToLive = 0;
-		float timer;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -32,4 +34,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMP_DESTROY_H
+#endif // !_LOADING_SYSTEM_H
