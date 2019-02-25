@@ -30,7 +30,7 @@ namespace app::fact
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
-		app::Entity cameraEntity;
+		app::Entity m_cameraEntity;
 	};
 }
 

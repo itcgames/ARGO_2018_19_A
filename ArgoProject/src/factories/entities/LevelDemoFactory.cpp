@@ -11,7 +11,7 @@
 
 
 app::fact::LevelDemoFactory::LevelDemoFactory(app::Entity camera)
-	: cameraEntity(camera)
+	: m_cameraEntity(camera)
 {
 }
 
@@ -31,9 +31,9 @@ std::vector<app::Entity> app::fact::LevelDemoFactory::create()
 	auto level = fact::LevelFactory().create();
 	entities.insert(entities.end(), level.begin(), level.end());
 	auto cameraView = m_registry.view<comp::Camera>();
-	if (cameraView.contains(cameraEntity))
+	if (cameraView.contains(m_cameraEntity))
 	{
-		auto & camera = cameraView.get(cameraEntity);
+		auto & camera = cameraView.get(m_cameraEntity);
 		camera.target = aiEntities.back();
 		camera.clampRect = math::Rectf({ -800.0f, 300.0f }, { 2000.0f, 1000.0f });
 		camera.internalClamp = math::Vector2f(20.0f, 60.0f);
