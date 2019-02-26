@@ -16,8 +16,8 @@ void app::sys::DiscReturnSystem::update(app::time::seconds const & dt)
 			auto seek = comp::SeekEntity();
 			seek.entity = disc.entity;
 			m_registry.assign<decltype(seek)>(entity, std::move(seek));
-			motion.drag = disc.DRAG_WHEN_SLOWED_DOWN;
-			motion.speed = disc.SPEED_WHEN_SLOWED_DOWN;
+			motion.drag = disc.s_DRAG_WHEN_SLOWED_DOWN;
+			motion.speed = disc.s_SPEED_WHEN_SLOWED_DOWN;
 			disc.backToPlayer = true;
 		}
 	});

@@ -18,9 +18,9 @@ namespace app::comp
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
-		constexpr static float DRAG_WHEN_HIT_WALL = 1.02f;
-		constexpr static float DRAG_WHEN_SLOWED_DOWN = 1.05f;
-		constexpr static float SPEED_WHEN_SLOWED_DOWN = 10.0f;
+		constexpr static float s_DRAG_WHEN_HIT_WALL = 1.02f;
+		constexpr static float s_DRAG_WHEN_SLOWED_DOWN = 1.05f;
+		constexpr static float s_SPEED_WHEN_SLOWED_DOWN = 10.0f;
 	public: // Public Member Variables
 		float discImpulse;
 		math::Vector2f offset;
