@@ -35,7 +35,7 @@ std::vector<app::Entity> app::fact::LevelDemoFactory::create()
 	{
 		auto & camera = cameraView.get(m_cameraEntity);
 		camera.target = aiEntities.back();
-		camera.clampRect = math::Rectf({ 400.0f, 300.0f }, { 2000.0f, 1000.0f });
+		camera.clampRect = math::Rectf({ 1000.0f, -500.0f }, { 3000.0f, 1500.0f });
 		camera.internalClamp = math::Vector2f(20.0f, 60.0f);
 	}
 

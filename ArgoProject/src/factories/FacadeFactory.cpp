@@ -16,7 +16,7 @@ app::fact::FacadeFactory::FacadeFactory(app::math::Vector2f const & pos, app::ma
 {
 }
 
-app::Entity const app::fact::FacadeFactory::create()
+std::vector<app::Entity> app::fact::FacadeFactory::create()
 {
 	auto entities = std::vector<app::Entity>();
 
@@ -65,5 +65,7 @@ app::Entity const app::fact::FacadeFactory::create()
 	tiled.tiles = entities;
 	m_registry.assign<decltype(tiled)>(entity, std::move(tiled));
 
-	return entity;
+	entities.push_back(entity);
+
+	return entities;
 }

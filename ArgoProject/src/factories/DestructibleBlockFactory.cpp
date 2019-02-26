@@ -20,7 +20,7 @@ app::fact::DestructibleBlockFactory::DestructibleBlockFactory(app::par::Destruct
 {
 }
 
-app::Entity const app::fact::DestructibleBlockFactory::create()
+std::vector<app::Entity> app::fact::DestructibleBlockFactory::create()
 {
 	app::math::Vector2f m_position = parameters.position;
 	app::math::Vector2f m_size = parameters.size;
@@ -89,5 +89,7 @@ app::Entity const app::fact::DestructibleBlockFactory::create()
 	tiled.tiles = entities;
 	m_registry.assign<decltype(tiled)>(entity, std::move(tiled));
 
-	return entity;	
+	entities.push_back(entity);
+
+	return entities;	
 }
