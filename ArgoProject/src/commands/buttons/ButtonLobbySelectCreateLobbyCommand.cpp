@@ -11,7 +11,6 @@ app::cmnd::ButtonLobbySelectCreateLobbyCommand::ButtonLobbySelectCreateLobbyComm
 
 void app::cmnd::ButtonLobbySelectCreateLobbyCommand::execute()
 {
-	return;
 	if (m_client.hasInit())
 	{
 		constexpr auto PACKET_TYPE = app::net::PacketType::LOBBY_CREATE;

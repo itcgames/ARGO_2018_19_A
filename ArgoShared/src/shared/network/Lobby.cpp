@@ -14,7 +14,7 @@ void app::net::Lobby::setName(const std::string& name)
 /// Getter got the name of the lobby.
 /// </summary>
 /// <returns>string representing name of the lobby</returns>
-const std::string& app::net::Lobby::getName()
+const std::string& app::net::Lobby::getName() const
 {
 	return m_lobbyName;
 }
@@ -24,7 +24,7 @@ const std::string& app::net::Lobby::getName()
 /// </summary>
 /// <param name="socket">socket of the client</param>
 /// <param name="name">name of the client</param>
-void app::net::Lobby::addPlayer(int ID, const std::string& name)
+void app::net::Lobby::addPlayer(int id, const std::string& name)
 {
-	m_players.insert(std::pair<int, std::string>(ID, name));
+	m_players.insert(std::pair<int, std::string>(id, name));
 }
