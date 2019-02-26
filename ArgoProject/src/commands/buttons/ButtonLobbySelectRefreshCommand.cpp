@@ -34,7 +34,7 @@ void app::cmnd::ButtonLobbySelectRefreshCommand::execute()
 			params.position = math::Vector2f{ -450.0f, -300.0f };
 			params.lobbies = lobbies;
 			params.entities.insert(params.entities.end(), m_entities.begin(), m_entities.end());
-			fact::LobbyDisplayFactory(params, m_sceneControl).create();
+			auto entities = fact::LobbyDisplayFactory(params, m_sceneControl).create();
 		}
 		this->output({ "Receival of [", std::to_string(lobbies.size()), "]'Lobbies' successfull" });
 	}

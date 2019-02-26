@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "LobbySelectScene.h"
 #include "factories/scenes/LobbySelectSceneFactory.h"
+#include "singletons/ClientSingleton.h"
 
 app::sce::LobbySelectScene::LobbySelectScene(SceneType & sceneManagerType)
 	: BaseScene(sceneManagerType
@@ -18,6 +19,7 @@ app::sce::LobbySelectScene::LobbySelectScene(SceneType & sceneManagerType)
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
 			DrawSystem(std::in_place_type<app::sys::RenderSystem>)
 			}))
+	, m_client(app::sin::Client::get())
 {
 	if constexpr (DEBUG_MODE)
 	{
@@ -44,5 +46,6 @@ void app::sce::LobbySelectScene::end()
 	{
 		Console::writeLine("LOBBY SELECT SCENE: Destroyed entities");
 	}
+	if (m_client.hasInit() && m_sceneManagerType != SceneType::Lobby) { m_client.deinitNetwork(); }
 }
 

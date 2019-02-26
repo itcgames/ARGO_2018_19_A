@@ -195,6 +195,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="..\ArgoShared\src\shared\network\PacketType.cpp" />
     <ClCompile Include="..\ArgoShared\src\shared\utilities\ByteConverter.cpp" />
     <ClCompile Include="..\ArgoShared\src\shared\utilities\Console.cpp" />
+    <ClCompile Include="..\ArgoShared\src\shared\utilities\variant.cpp" />
     <ClCompile Include="src\commands\BaseCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonLobbySelectCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonLobbySelectCreateLobbyCommand.cpp" />
@@ -349,7 +350,6 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\utilities\cute_c2.cpp" />
     <ClCompile Include="src\utilities\Time.cpp" />
     <ClCompile Include="src\utilities\makers.cpp" />
-    <ClCompile Include="src\utilities\variant.cpp" />
     <ClCompile Include="src\visitors\CollisionAabbBoolVisitor.cpp" />
     <ClCompile Include="src\visitors\CollisionAabbManiVisitor.cpp" />
     <ClCompile Include="src\visitors\CollisionBoundsBoolVisitor.cpp" />
@@ -364,6 +364,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="..\ArgoShared\src\shared\network\PacketType.h" />
     <ClInclude Include="..\ArgoShared\src\shared\utilities\ByteConverter.h" />
     <ClInclude Include="..\ArgoShared\src\shared\utilities\Console.h" />
+    <ClInclude Include="..\ArgoShared\src\shared\utilities\variant.h" />
     <ClInclude Include="src\commands\BaseCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonLobbySelectCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonLobbySelectCreateLobbyCommand.h" />
@@ -511,7 +512,6 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\utilities\cute_c2.h" />
     <ClInclude Include="src\utilities\Time.h" />
     <ClInclude Include="src\utilities\makers.h" />
-    <ClInclude Include="src\utilities\variant.h" />
     <ClInclude Include="src\visitors\CollisionAabbBoolVisitor.h" />
     <ClInclude Include="src\visitors\CollisionAabbManiVisitor.h" />
     <ClInclude Include="src\visitors\CollisionBoundsBoolVisitor.h" />

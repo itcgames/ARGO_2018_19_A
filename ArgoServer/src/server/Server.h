@@ -48,11 +48,12 @@ namespace app::net
 		bool processClientName(int id);
 		bool processLobbyCreate(int id);
 		bool processLobbyGetAll(int id);
+		bool processLobbyJoined(int id);
 		bool processDefault(int id);
 
 		void outputIP(IPaddress const & ip);
 		void output(int id, std::string const & msg) const;
-		void output(int id, std::initializer_list<std::string> const & msgs) const;
+		void output(int id, std::initializer_list<app::Console::Variant> const & msgs) const;
 	private: // Private Static Variables
 		constexpr static auto s_MAX_SOCKETS = std::numeric_limits<std::uint8_t>::max();
 		constexpr static bool s_DEBUG_MODE = true;
@@ -70,6 +71,7 @@ namespace app::net
 		std::uint8_t m_freeSocket = 0u;
 
 		std::vector<Lobby> m_lobbies;
+		std::uint8_t m_idGenerator = 0u;
 	};
 }
 #endif // !_SERVER_H

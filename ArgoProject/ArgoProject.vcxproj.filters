@@ -531,9 +531,6 @@
     <ClCompile Include="src\factories\entities\ButtonFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
-    <ClCompile Include="src\utilities\variant.cpp">
-      <Filter>Source Files\utilities</Filter>
-    </ClCompile>
     <ClCompile Include="src\parameters\ButtonFactoryParameters.cpp">
       <Filter>Source Files\parameters</Filter>
     </ClCompile>
@@ -635,6 +632,9 @@
     </ClCompile>
     <ClCompile Include="src\tags\LobbyTag.cpp">
       <Filter>Source Files\tags</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ArgoShared\src\shared\utilities\variant.cpp">
+      <Filter>Source Files\utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1013,9 +1013,6 @@
     <ClInclude Include="src\factories\entities\ButtonFactory.h">
       <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
-    <ClInclude Include="src\utilities\variant.h">
-      <Filter>Header Files\utilities</Filter>
-    </ClInclude>
     <ClInclude Include="src\parameters\ButtonFactoryParameters.h">
       <Filter>Header Files\parameters</Filter>
     </ClInclude>
@@ -1117,6 +1114,9 @@
     </ClInclude>
     <ClInclude Include="src\tags\LobbyTag.h">
       <Filter>Header Files\tags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ArgoShared\src\shared\utilities\variant.h">
+      <Filter>Header Files\utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

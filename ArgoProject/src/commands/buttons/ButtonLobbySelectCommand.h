@@ -10,7 +10,7 @@ namespace app::cmnd
 	class ButtonLobbySelectCommand : public BaseMultiplayerCommand
 	{
 	public: // Constructors/Destructor/Assignments
-		ButtonLobbySelectCommand(app::net::Lobby const lobby, app::sce::SceneType & sceneControl);
+		ButtonLobbySelectCommand(app::net::Lobby const lobby, bool isHost, app::sce::SceneType & sceneControl);
 		virtual ~ButtonLobbySelectCommand() = default;
 
 		ButtonLobbySelectCommand(ButtonLobbySelectCommand const &) = default;
@@ -30,10 +30,11 @@ namespace app::cmnd
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
-		std::string const & getPlayerName(std::int32_t const & index) const;
+		app::net::Lobby::Player const & getPlayerName(std::int32_t const & index) const;
 	private: // Private Static Variables
 	private: // Private Member Variables
 		app::net::Lobby const m_lobby;
+		bool const m_isHost;
 		app::sce::SceneType & m_sceneControl;
 	};
 }

@@ -183,7 +183,7 @@ void app::net::Client::output(std::string const & msg) const
 	}
 }
 
-void app::net::Client::output(std::initializer_list<std::string> const & msgs) const
+void app::net::Client::output(std::initializer_list<app::Console::Variant> const & msgs) const
 {
 	if constexpr (s_DEBUG_MODE)
 	{

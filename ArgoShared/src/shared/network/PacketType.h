@@ -11,6 +11,7 @@ namespace app::net
 		, LOBBY_CREATE
 		, LOBBY_WAS_CREATED
 		, LOBBY_GET_ALL
+		, LOBBY_JOINED
 	};
 }
 

@@ -30,6 +30,7 @@ namespace app::fact
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
+		std::size_t getNumberOfPlayersIn(app::net::Lobby const & lobby) const;
 	private: // Private Static Variables
 	private: // Private Member Variables
 		app::par::LobbyDisplayFactoryParameters const & m_params;

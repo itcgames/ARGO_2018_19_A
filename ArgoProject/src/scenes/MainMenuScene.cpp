@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "MainMenuScene.h"
 #include "factories/scenes/MainMenuSceneFactory.h"
+#include "singletons/ClientSingleton.h"
 
 app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 	: BaseScene(sceneManagerType
@@ -18,6 +19,7 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
 			DrawSystem(std::in_place_type<app::sys::RenderSystem>)
 			}))
+	, m_client(app::sin::Client::get())
 {
 	if constexpr (DEBUG_MODE)
 	{
@@ -46,9 +48,9 @@ void app::sce::MainMenuScene::end()
 		m_registry.each([this](app::Entity const entity)
 		{
 			Console::writeLine({ "  Destroyed entity[", std::to_string(entity), "]" });
-			m_registry.destroy(entity);
 		});
 	}
-	//m_registry.reset();
+	if (m_client.hasInit() && m_sceneManagerType != SceneType::LobbySelect) { m_client.deinitNetwork(); }
+	m_registry.reset();
 }
 

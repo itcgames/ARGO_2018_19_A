@@ -1,6 +1,8 @@
 ﻿#ifndef _LOBBY_TAG_H
 #define _LOBBY_TAG_H
 
+#include "shared/network/Lobby.h"
+
 namespace app::tag
 {
 	struct Lobby
@@ -19,9 +21,11 @@ namespace app::tag
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
+		std::uint8_t id;
 		std::string name;
 		bool isHost = false;
-		std::array<std::optional<std::string>, 4> players;
+		app::net::Lobby::Players players;
+		std::size_t playerIndex;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
