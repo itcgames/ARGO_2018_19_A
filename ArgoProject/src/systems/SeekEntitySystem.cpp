@@ -19,9 +19,6 @@ void app::sys::SeekEntitySystem::update(app::time::seconds const & dt)
 			math::Vector2f vecBetweenPoints = followLocation.position - location.position;
 
 			motion.direction = vecBetweenPoints.toAngle();
-
-			collision.passable = true;
-
 		}
 		else
 		{

@@ -26,6 +26,8 @@ namespace app::comp
 		math::Vector2f offset;
 		bool backToPlayer = false;
 		app::Entity entity;
+		//if this is true entities should pass through everything
+		bool passable = false;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables

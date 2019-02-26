@@ -19,6 +19,7 @@ void app::sys::DiscReturnSystem::update(app::time::seconds const & dt)
 			motion.drag = disc.s_DRAG_WHEN_SLOWED_DOWN;
 			motion.speed = disc.s_SPEED_WHEN_SLOWED_DOWN;
 			disc.backToPlayer = true;
+			disc.passable = true;
 		}
 	});
 }

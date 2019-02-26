@@ -50,6 +50,7 @@ app::sys::CollisionSystem::CollisionSystem()
 	m_registry.prepare<comp::Collision, comp::Enemy, comp::Health>();
 	m_registry.prepare<comp::Collision, comp::Attack, comp::Location, comp::Dimensions, comp::Damage>();
 	m_registry.prepare<comp::Hazard, comp::Collision, comp::Damage>();
+	m_registry.prepare<comp::Collision, comp::Location, comp::Dimensions, comp::Motion, comp::Disc>();
 }
 
 void app::sys::CollisionSystem::update(app::time::seconds const & dt)
@@ -70,10 +71,12 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 
 void app::sys::CollisionSystem::groundCollisions()
 {
+	auto discView = m_registry.view< comp::Collision, comp::Location, comp::Dimensions, comp::Motion, comp::Disc>(entt::persistent_t());
 	//view player
 	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Motion>(entt::persistent_t())
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions, comp::Motion & motion)
 	{
+		if (discView.contains(entity) && discView.get<comp::Disc>(entity).passable) { return; }
 		//view everything with collisions
 		m_registry.view<comp::Collision, comp::Impenetrable>()
 			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Impenetrable const & secImpenetrable)
@@ -89,10 +92,7 @@ void app::sys::CollisionSystem::groundCollisions()
 					auto const & direction = math::Vector2f{ manifold.n.x, manifold.n.y };
 					auto const & penetration = manifold.depths[0];
 					auto const & pushback = (direction*penetration);
-					if (!collision.passable)
-					{
-						location.position += pushback;
-					}
+					location.position += pushback;
 					std::visit(vis::CollisionUpdateVisitor{ location, dimensions}, collision.bounds);
 
 					if constexpr (DEBUG_MODE)
@@ -278,7 +278,7 @@ void app::sys::CollisionSystem::checkDiscCollisions()
 						m_registry.assign<comp::SeekEntity>(discEnt, std::move(seek));
 						motion.drag = discCmp.s_DRAG_WHEN_HIT_WALL;
 						discCmp.backToPlayer = true;
-						collision.passable = true;
+						discCmp.passable = true;
 					}
 				}
 			});
@@ -296,7 +296,7 @@ void app::sys::CollisionSystem::checkDiscCollisions()
 						m_registry.assign<comp::SeekEntity>(discEnt, std::move(seek));
 						motion.drag = discCmp.s_DRAG_WHEN_HIT_WALL;
 						discCmp.backToPlayer = true;
-						collision.passable = true;
+						discCmp.passable = true;
 					}
 				}
 			});

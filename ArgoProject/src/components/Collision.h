@@ -23,8 +23,6 @@ namespace app::comp
 	public: // Public Static Variables
 	public: // Public Member Variables
 		std::variant<cute::c2AABB, cute::c2Circle> bounds;
-		//if this is true entities should pass through everything
-		bool passable = false;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
