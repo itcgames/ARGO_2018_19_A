@@ -666,6 +666,21 @@
     <ClCompile Include="src\graphics\WindowParameters.cpp">
       <Filter>Source Files\parameters</Filter>
     </ClCompile>
+    <ClCompile Include="src\factories\DiscFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Disc.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\SeekEntitySystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\SeekEntity.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\DiscReturnSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
     <ClCompile Include="src\components\CharacterType.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
@@ -1215,6 +1230,21 @@
     </ClInclude>
     <ClInclude Include="src\factories\FacadeFactory.h">
       <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\DiscFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Disc.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\SeekEntitySystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\SeekEntity.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\DiscReturnSystem.h">
+      <Filter>Header Files\systems</Filter>
     </ClInclude>
     <ClInclude Include="src\components\CharacterType.h">
       <Filter>Header Files\components</Filter>
