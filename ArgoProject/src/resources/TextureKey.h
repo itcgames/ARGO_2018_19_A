@@ -10,8 +10,14 @@ namespace app::res
 		DebugHuge,
 		DebugAnimation,
 		DebugEnemyAnimation,
+		AxeRun,
+		HazardSpikes,
+		LevelWall,
 		Loading,
 		Splash,
+		PlatformLeft,
+		PlatformMiddle,
+		PlatformRight,
 		DebugCollisionBox,
 		Count // Keep this one at the bottom of the enum list
 	};

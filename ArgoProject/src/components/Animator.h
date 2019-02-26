@@ -20,6 +20,8 @@ namespace app::comp
 	public: // Public Static Variables
 	public: // Public Member Variables
 		math::Vector2i currentFrame;
+		std::uint32_t frameCount = 0;
+		std::uint32_t maxFrames;
 		float time = 0.0f, perFrame = 0.0f;
 		bool loop = false;
 		math::Vector2i position;

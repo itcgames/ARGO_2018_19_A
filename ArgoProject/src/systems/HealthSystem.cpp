@@ -28,6 +28,7 @@ void app::sys::HealthSystem::update(app::time::seconds const & dt)
 			}
 		}
 	});
+	checkDestructibleHealth();
 }
 
 void app::sys::HealthSystem::checkDestructibleHealth()
@@ -37,14 +38,15 @@ void app::sys::HealthSystem::checkDestructibleHealth()
 	{
 		if (health.health <= 0)
 		{
+			auto destroy = comp::Destroy();
 			if (destructible.attachedArea.has_value())
 			{
 				auto target = destructible.attachedArea.value();
-				if (m_registry.valid(target)) { m_registry.destroy(target); }
+				if (m_registry.valid(target)) { m_registry.assign<decltype(destroy)>(target, std::move(destroy)); }
 			}
 			if (m_registry.valid(entity)) 
 			{
-				m_registry.destroy(entity);
+				m_registry.assign<decltype(destroy)>(entity, std::move(destroy));
 			}
 		}
 	});

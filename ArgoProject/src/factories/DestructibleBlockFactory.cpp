@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "DestructibleBlockFactory.h"
 #include "utilities/cute_c2.h"
+#include "factories/entities/ImageFactory.h"
 
 #include "components/Location.h"
 #include "components/Dimensions.h"
@@ -11,6 +12,7 @@
 #include "components/Impenetrable.h"
 #include "components/Destructible.h"
 #include "components/Layer.h"
+#include "components/Tiled.h"
 
 
 app::fact::DestructibleBlockFactory::DestructibleBlockFactory(app::par::DestructibleParameters param)
@@ -20,10 +22,32 @@ app::fact::DestructibleBlockFactory::DestructibleBlockFactory(app::par::Destruct
 
 app::Entity const app::fact::DestructibleBlockFactory::create()
 {
-	app::Entity const entity = m_registry.create();
-
 	app::math::Vector2f m_position = parameters.position;
 	app::math::Vector2f m_size = parameters.size;
+	app::math::Vector2f m_sizeOfTile = parameters.tileSize;
+	app::math::Vector2i m_numberOfTiles = parameters.numberOfTiles;
+	auto entities = std::vector<app::Entity>();
+
+	auto const size = m_sizeOfTile * static_cast<math::Vector2f>(m_numberOfTiles);
+	auto const origin = size / 2.0f;
+
+	auto const sizeOfTile = m_sizeOfTile;
+	auto const originOfTile = sizeOfTile / 2.0f;
+	auto const zIndex = 130u;
+	auto const textureKey = app::res::TextureKey::LevelWall;
+	auto const startPosition = m_position - origin + originOfTile;
+	auto position = startPosition;
+	auto tileFactory = fact::ImageFactory(position, sizeOfTile, originOfTile, textureKey, zIndex);
+	for (std::int32_t x = 0; x < m_numberOfTiles.x; ++x)
+	{
+		for (std::int32_t y = 0; y < m_numberOfTiles.y; ++y)
+		{
+			position = startPosition + (sizeOfTile * math::Vector2f{ x, y });
+			entities.push_back(tileFactory.create());
+		}
+	}
+	app::Entity const entity = m_registry.create();
+
 
 	auto location = comp::Location();
 	location.position = m_position;
@@ -35,13 +59,13 @@ app::Entity const app::fact::DestructibleBlockFactory::create()
 	dimensions.origin = dimensions.size / 2.0f;
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
 
-	auto layer = comp::Layer();
-	layer.zIndex = 130u;
-	m_registry.assign<decltype(layer)>(entity, std::move(layer));
+	//auto layer = comp::Layer();
+	//layer.zIndex = 130u;
+	//m_registry.assign<decltype(layer)>(entity, std::move(layer));
 
-	auto render = comp::Render();
-	render.texture = m_resourceManager.getTexture(app::res::TextureKey::Debug);
-	m_registry.assign<decltype(render)>(entity, std::move(render));
+	//auto render = comp::Render();
+	//render.texture = m_resourceManager.getTexture(app::res::TextureKey::LevelWall);
+	//m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	auto collision = comp::Collision();
 	collision.bounds = cute::c2AABB();
@@ -60,6 +84,10 @@ app::Entity const app::fact::DestructibleBlockFactory::create()
 		destructible.attachedArea = parameters.attachedArea.value();
 	}
 	m_registry.assign<decltype(destructible)>(entity, std::move(destructible));
+
+	auto tiled = comp::Tiled();
+	tiled.tiles = entities;
+	m_registry.assign<decltype(tiled)>(entity, std::move(tiled));
 
 	return entity;	
 }

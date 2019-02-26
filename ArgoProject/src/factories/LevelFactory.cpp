@@ -20,6 +20,8 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 
 	auto position = math::Vector2f(0, 0);
 	auto size = math::Vector2f(0, 0);
+	auto numberOfTiles = math::Vector2i{ };
+	std::uint32_t platformWidth;
 	
 	//enemies
 	{
@@ -36,33 +38,83 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 
 	// walls
 	{
-		auto wallFactory = fact::WallFactory(position, size);
+		auto wallFactory = fact::WallFactory(position, size, numberOfTiles);
+		auto wallEntities = std::vector<app::Entity>();
+		size = math::Vector2f(50, 50);
 
 		position = math::Vector2f(600, 350);
-		size = math::Vector2f(50, 250);
-		entities.push_back(wallFactory.create());
+		numberOfTiles = math::Vector2i(1, 5);
+		wallEntities = wallFactory.create();
+		entities.insert(entities.end()
+			, wallEntities.begin()
+			, wallEntities.end());
 
 		position = app::math::Vector2f(875, 500);
-		size = app::math::Vector2f(600, 50);
-		entities.push_back(wallFactory.create());
+		numberOfTiles = math::Vector2i(12, 1);
+		wallEntities = wallFactory.create();
+		entities.insert(entities.end()
+			, wallEntities.begin()
+			, wallEntities.end());
+
+		position = app::math::Vector2f(1775, 550);
+		numberOfTiles = math::Vector2i(16, 1);
+		wallEntities = wallFactory.create();
+		entities.insert(entities.end()
+			, wallEntities.begin()
+			, wallEntities.end());
 		
-		position = app::math::Vector2f(1150, 350);
-		size = app::math::Vector2f(50, 250);
-		entities.push_back(wallFactory.create());
+		position = app::math::Vector2f(2150, 400);
+		numberOfTiles = math::Vector2i(1, 5);
+		wallEntities = wallFactory.create();
+		entities.insert(entities.end()
+			, wallEntities.begin()
+			, wallEntities.end());
+
+		position = app::math::Vector2f(2400, 300);
+		numberOfTiles = math::Vector2i(9, 1);
+		wallEntities = wallFactory.create();
+		entities.insert(entities.end()
+			, wallEntities.begin()
+			, wallEntities.end());
+
+		position = app::math::Vector2f(2475, 100);
+		numberOfTiles = math::Vector2i(6, 1);
+		wallEntities = wallFactory.create();
+		entities.insert(entities.end()
+			, wallEntities.begin()
+			, wallEntities.end());
+
+		position = app::math::Vector2f(2625, 150);
+		numberOfTiles = math::Vector2i(1, 7);
+		wallEntities = wallFactory.create();
+		entities.insert(entities.end()
+			, wallEntities.begin()
+			, wallEntities.end());
+
+		position = app::math::Vector2f(2750, 0);
+		numberOfTiles = math::Vector2i(4, 1);
+		wallEntities = wallFactory.create();
+		entities.insert(entities.end()
+			, wallEntities.begin()
+			, wallEntities.end());
 	}
 	// destructible blocks
 	{
-		auto destructibleParams = app::par::DestructibleParameters(position, size);
-		auto facade = fact::FacadeFactory(position, size);
+		math::Vector2f tileSize = math::Vector2f(50, 50);
+		math::Vector2i noTiles = math::Vector2i(1, 4);
+		auto destructibleParams = app::par::DestructibleParameters(position, size, tileSize, noTiles);
+		auto facade = fact::FacadeFactory(position, tileSize, noTiles);
 
-		position = app::math::Vector2f(1400, 550);
-		size = app::math::Vector2f(200, 50);
+		position = app::math::Vector2f(2525, 225);
+		size = app::math::Vector2f(200, 500);
+		noTiles = math::Vector2f(4, 4);
 		destructibleParams.attachedArea = facade.create();
 
+		noTiles = math::Vector2i(1, 4);
 		auto destructibleFactory = fact::DestructibleBlockFactory(destructibleParams);
 
-		position = app::math::Vector2f(1400, 500);
-		size = app::math::Vector2f(50, 50);
+		position = app::math::Vector2f(2400, 175);
+		size = app::math::Vector2f(50, 200);
 		entities.push_back(destructibleFactory.create());
 	}
 	// hazards
@@ -73,27 +125,34 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 		size = app::math::Vector2f(50, 50);
 		entities.push_back(hazardFactory.create());
 
-		position = app::math::Vector2f(0, 2000);
+		position = app::math::Vector2f(0, 1000);
 		size = app::math::Vector2f(40000000, 50);
 		entities.push_back(hazardFactory.create());
 	}
 	// platforms
 	{
-		auto platformFactory = fact::PlatformFactory(position, size);
+		auto platformFactory = fact::PlatformFactory(position, size, platformWidth);
 
 		position = app::math::Vector2f(875, 300);
-		size = app::math::Vector2f(200, 50);
+		size = app::math::Vector2f(50, 50);
+		platformWidth = 5;
 		entities.push_back(platformFactory.create());
 
 		position = app::math::Vector2f(875, 100);
-		size = app::math::Vector2f(200, 50);
+		size = app::math::Vector2f(50, 50);
+		platformWidth = 3;
+		entities.push_back(platformFactory.create());
+
+		position = app::math::Vector2f(1800, 350);
+		size = app::math::Vector2f(50, 50);
+		platformWidth = 6;
 		entities.push_back(platformFactory.create());
 	}
 	// goal
 	{
 		auto goal = fact::GoalFactory(position, size);
 
-		position = app::math::Vector2f(1500, 500);
+		position = app::math::Vector2f(2500, 550);
 		size = app::math::Vector2f(50, 50);
 		entities.push_back(goal.create());
 	}

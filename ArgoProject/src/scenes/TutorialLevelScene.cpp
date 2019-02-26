@@ -3,6 +3,7 @@
 #include "factories/scenes/TutorialLevelSceneFactory.h"
 #include "components/Input.h"
 #include "components/Goal.h"
+#include "components/Layer.h"
 
 app::sce::TutorialLevelScene::TutorialLevelScene(SceneType & sceneManagerType)
 	: BaseScene(sceneManagerType
@@ -37,13 +38,16 @@ app::sce::TutorialLevelScene::TutorialLevelScene(SceneType & sceneManagerType)
 
 void app::sce::TutorialLevelScene::start()
 {
+	m_registry.construction<comp::Layer>().disconnect<&app::sys::RenderSystem::onLayerConstruction>();
 	auto && entities = fact::sce::TutorialLevelSceneFactory().create();
 	m_entities.insert(m_entities.end(), std::make_move_iterator(entities.begin()), std::make_move_iterator(entities.end()));
+	app::sys::RenderSystem::onLayerConstruction(m_registry, 0);
+	m_registry.construction<comp::Layer>().connect<&app::sys::RenderSystem::onLayerConstruction>();
 	m_registry.destruction<comp::Input>().connect<TutorialLevelScene, &TutorialLevelScene::onInputDestroyed>(this);
 	m_registry.destruction<comp::Goal>().connect<TutorialLevelScene, &TutorialLevelScene::onGoalDestroyed>(this);
 	m_completeSignal = false;
 	m_resetSignal = false;
-	if constexpr (DEBUG_MODE)
+	if constexpr (false)
 	{
 		Console::writeLine("LEVEL SCENE: Creating entities");
 		for (auto const & entity : m_entities)
@@ -55,7 +59,7 @@ void app::sce::TutorialLevelScene::start()
 
 void app::sce::TutorialLevelScene::end()
 {
-	if constexpr (DEBUG_MODE)
+	if constexpr (false)
 	{
 		Console::writeLine("LEVEL SCENE: Destroying entities");
 		for (auto const & entity : m_entities)
@@ -95,6 +99,8 @@ void app::sce::TutorialLevelScene::onGoalDestroyed(app::Registry & registry, app
 
 void app::sce::TutorialLevelScene::reset()
 {
+	m_registry.construction<comp::Layer>().disconnect<&app::sys::RenderSystem::onLayerConstruction>();
+
 	for (auto const & e : m_entities)
 	{
 		if (m_registry.valid(e)) { m_registry.destroy(e); }
@@ -103,6 +109,9 @@ void app::sce::TutorialLevelScene::reset()
 	m_entities.clear();
 	auto && entities = fact::sce::TutorialLevelSceneFactory().create();
 	m_entities.insert(m_entities.end(), std::make_move_iterator(entities.begin()), std::make_move_iterator(entities.end()));
+
+	app::sys::RenderSystem::onLayerConstruction(m_registry, 0);
+	m_registry.construction<comp::Layer>().connect<&app::sys::RenderSystem::onLayerConstruction>();
 }
 
 void app::sce::TutorialLevelScene::levelComplete()

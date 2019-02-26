@@ -226,6 +226,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\Dimensions.cpp" />
     <ClCompile Include="src\components\DoubleJump.cpp" />
     <ClCompile Include="src\components\Enemy.cpp" />
+    <ClCompile Include="src\components\Facade.cpp" />
     <ClCompile Include="src\components\FollowEntity.cpp" />
     <ClCompile Include="src\components\Goal.cpp" />
     <ClCompile Include="src\components\Hazard.cpp" />
@@ -243,6 +244,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\Render.cpp" />
     <ClCompile Include="src\components\StateMachine.cpp" />
     <ClCompile Include="src\components\Text.cpp" />
+    <ClCompile Include="src\components\Tiled.cpp" />
     <ClCompile Include="src\components\Widget.cpp" />
     <ClCompile Include="src\deleters\SdlDeleter.cpp" />
     <ClCompile Include="src\factories\AIFactory.cpp" />
@@ -282,8 +284,10 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\TutorialLevelFactory.cpp" />
     <ClCompile Include="src\factories\WallFactory.cpp" />
     <ClCompile Include="src\factories\scenes\SplashSceneFactory.cpp" />
+    <ClCompile Include="src\fsm\AnimationStateMachine.cpp" />
     <ClCompile Include="src\fsm\BaseState.cpp" />
     <ClCompile Include="src\fsm\BaseStateMachine.cpp" />
+    <ClCompile Include="src\fsm\states\AiWalkingAnimationState.cpp" />
     <ClCompile Include="src\fsm\states\AnimationState.cpp" />
     <ClCompile Include="src\fsm\states\EntityState.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -413,6 +417,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\Dimensions.h" />
     <ClInclude Include="src\components\DoubleJump.h" />
     <ClInclude Include="src\components\Enemy.h" />
+    <ClInclude Include="src\components\Facade.h" />
     <ClInclude Include="src\components\FollowEntity.h" />
     <ClInclude Include="src\components\Goal.h" />
     <ClInclude Include="src\components\Hazard.h" />
@@ -430,6 +435,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\Render.h" />
     <ClInclude Include="src\components\StateMachine.h" />
     <ClInclude Include="src\components\Text.h" />
+    <ClInclude Include="src\components\Tiled.h" />
     <ClInclude Include="src\components\Widget.h" />
     <ClInclude Include="src\deleters\SdlDeleter.h" />
     <ClInclude Include="src\factories\AIFactory.h" />
@@ -469,8 +475,10 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\TutorialLevelFactory.h" />
     <ClInclude Include="src\factories\WallFactory.h" />
     <ClInclude Include="src\factories\scenes\SplashSceneFactory.h" />
+    <ClInclude Include="src\fsm\AnimationStateMachine.h" />
     <ClInclude Include="src\fsm\BaseState.h" />
     <ClInclude Include="src\fsm\BaseStateMachine.h" />
+    <ClInclude Include="src\fsm\states\AiWalkingAnimationState.h" />
     <ClInclude Include="src\fsm\states\AnimationState.h" />
     <ClInclude Include="src\fsm\states\EntityState.h" />
     <ClInclude Include="src\Game.h" />

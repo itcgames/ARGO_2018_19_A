@@ -23,6 +23,8 @@ namespace app::comp
 	public: // Public Member Variables
 		std::shared_ptr<app::gra::Texture> texture;
 		std::optional<SDL_Rect> source;
+		math::Vector2f border;
+		math::Vector2f offset;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
