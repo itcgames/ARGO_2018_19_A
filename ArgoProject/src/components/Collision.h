@@ -1,7 +1,7 @@
 #ifndef _COLLISION_H
 #define _COLLISION_H
 
-#include "math/Vector2.h"
+#include "Shared/math/Vector2.h"
 #include "utilities/cute_c2.h"
 
 namespace app::comp

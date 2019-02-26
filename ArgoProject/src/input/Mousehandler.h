@@ -1,7 +1,7 @@
 ﻿#ifndef _APP_INPUT_MOUSEHANDLER_H
 #define _APP_INPUT_MOUSEHANDLER_H
 
-#include "math/Vector2.h"
+#include "shared/math/Vector2.h"
 
 namespace app::inp
 {

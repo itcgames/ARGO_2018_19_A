@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CollisionUpdateVisitor.h"
-#include "math/Math.h"
+#include "Shared/math/Math.h"
 
 app::vis::CollisionUpdateVisitor::CollisionUpdateVisitor(comp::Location const & location, comp::Dimensions const & dimensions)
 	: m_location(location)
@@ -17,15 +17,15 @@ void app::vis::CollisionUpdateVisitor::operator()(cute::c2AABB & aabb) const
 		aabb.max.x = aabb.min.x + m_dimensions.size.x;
 		aabb.max.y = aabb.min.y + m_dimensions.size.y;
 	}
-	else if constexpr (false)
-	{
-		const auto rotatedOrigin = math::rotate(m_dimensions.origin, m_location.orientation);
-		const auto rotatedSize = math::rotate(m_dimensions.size, m_location.orientation);
-		aabb.min.x = m_location.position.x - rotatedOrigin.x;
-		aabb.min.y = m_location.position.y - rotatedOrigin.y;
-		aabb.max.x = aabb.min.x + rotatedSize.x;
-		aabb.max.y = aabb.min.y + rotatedSize.y;
-	}
+	//else if constexpr (false)
+	//{
+	//	const auto rotatedOrigin = math::rotate(m_dimensions.origin, m_location.orientation);
+	//	const auto rotatedSize = math::rotate(m_dimensions.size, m_location.orientation);
+	//	aabb.min.x = m_location.position.x - rotatedOrigin.x;
+	//	aabb.min.y = m_location.position.y - rotatedOrigin.y;
+	//	aabb.max.x = aabb.min.x + rotatedSize.x;
+	//	aabb.max.y = aabb.min.y + rotatedSize.y;
+	//}
 }
 
 void app::vis::CollisionUpdateVisitor::operator()(cute::c2Circle & circle) const

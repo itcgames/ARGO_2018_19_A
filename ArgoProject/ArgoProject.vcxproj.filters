@@ -165,12 +165,6 @@
     <ClCompile Include="src\input\Keyhandler.cpp">
       <Filter>Source Files\input</Filter>
     </ClCompile>
-    <ClCompile Include="src\math\Math.cpp">
-      <Filter>Source Files\math</Filter>
-    </ClCompile>
-    <ClCompile Include="src\math\Vector2.cpp">
-      <Filter>Source Files\math</Filter>
-    </ClCompile>
     <ClCompile Include="src\utilities\cute_c2.cpp">
       <Filter>Source Files\utilities</Filter>
     </ClCompile>
@@ -215,9 +209,6 @@
     </ClCompile>
     <ClCompile Include="src\factories\EntityFactory.cpp">
       <Filter>Source Files\factories</Filter>
-    </ClCompile>
-    <ClCompile Include="src\math\Rect.cpp">
-      <Filter>Source Files\math</Filter>
     </ClCompile>
     <ClCompile Include="src\systems\AnimatorSystem.cpp">
       <Filter>Source Files\systems</Filter>
@@ -687,7 +678,7 @@
     <ClCompile Include="src\parameters\AnimatedImageFactoryParameters.cpp">
       <Filter>Source Files\parameters</Filter>
     </ClCompile>
-    <ClCompile Include="src\components\Hazard.cpp"> 
+    <ClCompile Include="src\components\Hazard.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
     <ClCompile Include="..\ArgoShared\src\shared\utilities\ByteConverter.cpp">
@@ -711,6 +702,24 @@
     <ClCompile Include="..\ArgoShared\src\shared\utilities\variant.cpp">
       <Filter>Source Files\utilities</Filter>
     </ClCompile>
+    <ClCompile Include="..\ArgoShared\src\shared\math\Math.cpp">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ArgoShared\src\shared\math\Rect.cpp">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ArgoShared\src\shared\math\Vector2.cpp">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Ghost.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\GhostPlayerFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parameters\GhostPlayerFactoryParameters.cpp">
+      <Filter>Source Files\parameters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -724,12 +733,6 @@
     </ClInclude>
     <ClInclude Include="src\input\Mousehandler.h">
       <Filter>Header Files\input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\Vector2.h">
-      <Filter>Header Files\math</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\Math.h">
-      <Filter>Header Files\math</Filter>
     </ClInclude>
     <ClInclude Include="src\utilities\Time.h">
       <Filter>Header Files\utilities</Filter>
@@ -775,9 +778,6 @@
     </ClInclude>
     <ClInclude Include="src\factories\EntityFactory.h">
       <Filter>Header Files\factories</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\Rect.h">
-      <Filter>Header Files\math</Filter>
     </ClInclude>
     <ClInclude Include="src\components\Animator.h">
       <Filter>Header Files\components</Filter>
@@ -1267,6 +1267,21 @@
     <ClInclude Include="..\ArgoShared\src\shared\utilities\variant.h">
       <Filter>Header Files\utilities</Filter>
     </ClInclude>
+    <ClInclude Include="..\ArgoShared\src\shared\math\Math.h">
+      <Filter>Header Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ArgoShared\src\shared\math\Rect.h">
+      <Filter>Header Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ArgoShared\src\shared\math\Vector2.h">
+      <Filter>Header Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Ghost.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\parameters\GhostPlayerFactoryParameters.h">
+      <Filter>Header Files\parameters</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\.gitkeep">
@@ -1274,6 +1289,9 @@
     </None>
     <None Include="src\parameters\LobbyDisplayFactoryParameters.h">
       <Filter>Header Files\parameters</Filter>
+    </None>
+    <None Include="src\factories\GhostPlayerFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

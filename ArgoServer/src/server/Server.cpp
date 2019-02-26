@@ -246,6 +246,8 @@ bool app::net::Server::processPacket(int id, PacketType _packetType)
 			return this->processLobbyGetAll(id);
 		case PacketType::LOBBY_JOINED:
 			return this->processLobbyJoined(id);
+		case PacketType::LEVEL_NEW_PLAYER_INFO:
+			return this->processLevelNewPlayerInfo(id);
 		case PacketType::UNKNOWN:
 		default:
 			return this->processDefault(id);
@@ -330,6 +332,51 @@ bool app::net::Server::processLobbyJoined(int id)
 	{
 		this->output(id, { "Failed to find lobby with id[", lobbyId, "]" });
 	}
+	return true;
+}
+
+bool app::net::Server::processLevelNewPlayerInfo(int id)
+{
+	//get lobby id
+	auto lobbyId = std::uint8_t();
+	if (!this->get(id, lobbyId)) { return false; }
+	//get lobby index
+	auto lobbyIndex = std::size_t();
+	for (std::size_t i = 0; i < m_lobbies.size(); ++i)
+	{
+		if (m_lobbies.at(i).getId() == lobbyId) { lobbyIndex = i; break; }
+	}
+	//get current lobby
+	auto const & lobby = m_lobbies.at(lobbyIndex);
+	//get current player id
+	auto currentPlayerId = std::int32_t();
+	if (!this->get(id, currentPlayerId)) { return false; }
+	//get current player position
+	auto playerPosition = int();
+	if (!this->get(id, playerPosition)) { return false; }
+	//get all players
+	auto const & players = lobby.getPlayers();
+	//for each player
+	for (auto const & player : players)
+	{
+		//if its not empty
+		if (player.has_value())
+		{
+			//std::pair<std::int32_t, std::string> const & pair = player.value();
+			//std::int32_t const & id = pair.first;
+			//std::string const & name = pair.second;
+			//// Same as below
+
+			auto const &[playerId, name] = player.value();
+			// Not the current player
+			if (playerId == currentPlayerId) { continue; }
+			//send packet to say information is coming
+			if (!this->send(playerId, PacketType::LEVEL_NEW_PLAYER_INFO)) { return false; }
+			//send player position 
+			if (!this->send(playerId, playerPosition)) { return false; }
+		}
+	}
+
 	return true;
 }
 

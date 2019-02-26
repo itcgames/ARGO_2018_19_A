@@ -1,5 +1,5 @@
-﻿#ifndef _MATH_H
-#define _MATH_H
+﻿#ifndef _APP_MATH_H
+#define _APP_MATH_H
 
 namespace app::math
 {
@@ -31,4 +31,4 @@ namespace app::math
 	template<typename T> constexpr math::Vector2<T> toVector(T const & deg) { return toVectorRad(toRadians(deg)); }
 }
 
-#endif // !_MATH_H
+#endif // !_APP_MATH_H

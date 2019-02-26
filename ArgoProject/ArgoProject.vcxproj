@@ -190,6 +190,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\ArgoShared\src\shared\math\Math.cpp" />
+    <ClCompile Include="..\ArgoShared\src\shared\math\Rect.cpp" />
+    <ClCompile Include="..\ArgoShared\src\shared\math\Vector2.cpp" />
     <ClCompile Include="src\commands\AttackCommand.cpp" />
     <ClCompile Include="..\ArgoShared\src\shared\network\Lobby.cpp" />
     <ClCompile Include="..\ArgoShared\src\shared\network\PacketParser.cpp" />
@@ -231,6 +234,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\DoubleJump.cpp" />
     <ClCompile Include="src\components\Enemy.cpp" />
     <ClCompile Include="src\components\FollowEntity.cpp" />
+    <ClCompile Include="src\components\Ghost.cpp" />
     <ClCompile Include="src\components\Goal.cpp" />
     <ClCompile Include="src\components\Hazard.cpp" />
     <ClCompile Include="src\components\Health.cpp" />
@@ -269,6 +273,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\entities\TextFactory.cpp" />
     <ClCompile Include="src\factories\EntityFactory.cpp" />
     <ClCompile Include="src\factories\FacadeFactory.cpp" />
+    <ClCompile Include="src\factories\GhostPlayerFactory.cpp" />
     <ClCompile Include="src\factories\HazardFactory.cpp" />
     <ClCompile Include="src\factories\LevelFactory.cpp" />
     <ClCompile Include="src\factories\NodeFactory.cpp" />
@@ -305,13 +310,11 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\input\Keyhandler.cpp" />
     <ClCompile Include="src\input\Mousehandler.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\math\Math.cpp" />
-    <ClCompile Include="src\math\Rect.cpp" />
-    <ClCompile Include="src\math\Vector2.cpp" />
     <ClCompile Include="src\parameters\AnimatedImageFactoryParameters.cpp" />
     <ClCompile Include="src\parameters\DestructibleParameters.cpp" />
     <ClCompile Include="src\network\Client.cpp" />
     <ClCompile Include="src\parameters\ButtonFactoryParameters.cpp" />
+    <ClCompile Include="src\parameters\GhostPlayerFactoryParameters.cpp" />
     <ClCompile Include="src\parameters\LobbyDisplayFactoryParameters.cpp" />
     <ClCompile Include="src\resources\AudioKey.cpp" />
     <ClCompile Include="src\resources\FontKey.cpp" />
@@ -382,6 +385,9 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\visitors\CollisionUpdateVisitor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\ArgoShared\src\shared\math\Math.h" />
+    <ClInclude Include="..\ArgoShared\src\shared\math\Rect.h" />
+    <ClInclude Include="..\ArgoShared\src\shared\math\Vector2.h" />
     <ClInclude Include="src\commands\AttackCommand.h" />
     <ClInclude Include="..\ArgoShared\src\shared\network\Lobby.h" />
     <ClInclude Include="..\ArgoShared\src\shared\network\PacketParser.h" />
@@ -423,6 +429,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\DoubleJump.h" />
     <ClInclude Include="src\components\Enemy.h" />
     <ClInclude Include="src\components\FollowEntity.h" />
+    <ClInclude Include="src\components\Ghost.h" />
     <ClInclude Include="src\components\Goal.h" />
     <ClInclude Include="src\components\Hazard.h" />
     <ClInclude Include="src\components\Health.h" />
@@ -496,13 +503,11 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\input\Controllerhandler.h" />
     <ClInclude Include="src\input\Keyhandler.h" />
     <ClInclude Include="src\input\Mousehandler.h" />
-    <ClInclude Include="src\math\Math.h" />
-    <ClInclude Include="src\math\Rect.h" />
-    <ClInclude Include="src\math\Vector2.h" />
     <ClInclude Include="src\parameters\AnimatedImageFactoryParameters.h" />
     <ClInclude Include="src\parameters\DestructibleParameters.h" />
     <ClInclude Include="src\network\Client.h" />
     <ClInclude Include="src\parameters\ButtonFactoryParameters.h" />
+    <ClInclude Include="src\parameters\GhostPlayerFactoryParameters.h" />
     <ClInclude Include="src\resources\AudioKey.h" />
     <ClInclude Include="src\resources\FontKey.h" />
     <ClInclude Include="src\resources\ResourceLoader.h" />
@@ -568,6 +573,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   </ItemGroup>
   <ItemGroup>
     <None Include="res\.gitkeep" />
+    <None Include="src\factories\GhostPlayerFactory.h" />
     <None Include="src\parameters\LobbyDisplayFactoryParameters.h" />
   </ItemGroup>
   <ItemGroup>

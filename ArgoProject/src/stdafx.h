@@ -125,9 +125,9 @@
 #include "input/Keyhandler.h"
 #include "input/MouseHandler.h"
 
-#include "math/Math.h"
-#include "math/Vector2.h"
-#include "math/Rect.h"
+#include "shared/math/Math.h"
+#include "shared/math/Vector2.h"
+#include "shared/math/Rect.h"
 
 #include "utilities/Time.h"
 #include "shared/utilities/Console.h"

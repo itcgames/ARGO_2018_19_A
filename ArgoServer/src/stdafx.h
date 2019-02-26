@@ -45,6 +45,7 @@
 // STL Common C libraries
 #include <cstddef>
 #include <cstdint>
+#include <cassert>
 
 // STL Containers
 #include <iterator>
@@ -111,6 +112,9 @@
 //
 
 #include "shared/utilities/Console.h"
+#include "shared/math/Vector2.h"
+#include "shared/math/Math.h"
+#include "shared/math/Rect.h"
 
 namespace app
 {

@@ -25,6 +25,12 @@
     <Filter Include="Source Files\network">
       <UniqueIdentifier>{539452a3-52da-45c9-a992-f5dd19b2ea11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\math">
+      <UniqueIdentifier>{e6005a9e-688f-4526-9c39-5cc0daea0237}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\math">
+      <UniqueIdentifier>{4962a068-d7e3-4ba6-a790-9a0d381be481}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -38,6 +44,15 @@
     </ClInclude>
     <ClInclude Include="..\ArgoShared\src\shared\network\PacketType.h">
       <Filter>Header Files\network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ArgoShared\src\shared\math\Math.h">
+      <Filter>Header Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ArgoShared\src\shared\math\Rect.h">
+      <Filter>Header Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ArgoShared\src\shared\math\Vector2.h">
+      <Filter>Header Files\math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +70,15 @@
     </ClCompile>
     <ClCompile Include="..\ArgoShared\src\shared\network\Lobby.cpp">
       <Filter>Source Files\network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ArgoShared\src\shared\math\Vector2.cpp">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ArgoShared\src\shared\math\Rect.cpp">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ArgoShared\src\shared\math\Math.cpp">
+      <Filter>Source Files\math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
