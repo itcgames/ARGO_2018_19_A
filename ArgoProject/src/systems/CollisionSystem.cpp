@@ -22,6 +22,9 @@
 #include "components/Node.h"
 #include "components/Attack.h"
 #include "components/Goal.h"
+#include "components/Disc.h"
+#include "components/Destroy.h"
+#include "components/SeekEntity.h"
 #include "components/Hazard.h"
 #include "components/Destructible.h"
 
@@ -49,6 +52,7 @@ app::sys::CollisionSystem::CollisionSystem()
 	m_registry.prepare<comp::Collision, comp::Attack, comp::Location, comp::Dimensions, comp::Damage>();
 	m_registry.prepare<comp::Hazard, comp::Collision, comp::Damage>();
 	m_registry.prepare<comp::Collision, comp::Location, comp::Dimensions, comp::Health, comp::Input>();
+	m_registry.prepare<comp::Collision, comp::Location, comp::Dimensions, comp::Motion, comp::Disc>();
 }
 
 void app::sys::CollisionSystem::update(app::time::seconds const & dt)
@@ -66,14 +70,17 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 	this->attackEnemyCollisions();
 	this->attackDestructibleCollisions();
 	this->playerEnemyCollisions();
+	this->checkDiscCollisions();
 }
 
 void app::sys::CollisionSystem::groundCollisions()
 {
+	auto discView = m_registry.view< comp::Collision, comp::Location, comp::Dimensions, comp::Motion, comp::Disc>(entt::persistent_t());
 	//view player
 	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Motion>(entt::persistent_t())
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions, comp::Motion & motion)
 	{
+		if (discView.contains(entity) && discView.get<comp::Disc>(entity).passable) { return; }
 		//view everything with collisions
 		m_registry.view<comp::Collision, comp::Impenetrable>()
 			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Impenetrable const & secImpenetrable)
@@ -286,6 +293,70 @@ void app::sys::CollisionSystem::attackDestructibleCollisions()
 			}
 
 		});
+	});
+}
+
+void app::sys::CollisionSystem::checkDiscCollisions()
+{
+	//go through all disc entities
+	m_registry.view<comp::Disc, comp::Collision, comp::Motion>(entt::persistent_t())
+		.each([&, this](app::Entity const discEnt, comp::Disc & discCmp, comp::Collision & collision, comp::Motion& motion)
+	{
+		if (m_registry.valid(discCmp.entity))
+		{
+			//against walls
+			m_registry.view<comp::Collision, comp::Impenetrable>(entt::persistent_t())
+				.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Impenetrable const & impenetrable)
+			{
+				bool const & collided = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+				if (collided)
+				{
+					if (!discCmp.backToPlayer)
+					{
+						auto seek = comp::SeekEntity();
+						seek.entity = discCmp.entity;
+						m_registry.assign<comp::SeekEntity>(discEnt, std::move(seek));
+						motion.drag = discCmp.s_DRAG_WHEN_HIT_WALL;
+						discCmp.backToPlayer = true;
+						discCmp.passable = true;
+					}
+				}
+			});
+			//against enemies
+			m_registry.view<comp::Collision, comp::Enemy>(entt::persistent_t())
+				.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Enemy & enemy)
+			{
+				bool const & collided = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+				if (collided)
+				{
+					if (!discCmp.backToPlayer)
+					{
+						auto seek = comp::SeekEntity();
+						seek.entity = discCmp.entity;
+						m_registry.assign<comp::SeekEntity>(discEnt, std::move(seek));
+						motion.drag = discCmp.s_DRAG_WHEN_HIT_WALL;
+						discCmp.backToPlayer = true;
+						discCmp.passable = true;
+					}
+				}
+			});
+			//against player
+			if (discCmp.backToPlayer)
+			{
+				auto secCollision = m_registry.get<comp::Collision>(discCmp.entity);
+				auto& playerInput = m_registry.get<comp::Input>(discCmp.entity);
+				bool const & collided = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+				if (collided)
+				{
+					playerInput.canAttack = true;
+					m_registry.assign<comp::Destroy>(discEnt);
+				}
+			}
+		}
+		else
+		{
+			m_registry.assign<comp::Destroy>(discEnt);
+		}
 	});
 }
 

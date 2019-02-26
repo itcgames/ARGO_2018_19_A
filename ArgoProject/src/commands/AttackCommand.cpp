@@ -4,6 +4,8 @@
 #include "components/Dimensions.h"
 #include "components/CharacterType.h"
 #include "factories/entities/AxeAttackFactory.h"
+#include "factories/DiscFactory.h"
+#include "components/Input.h"
 
 
 app::cmnd::AttackCommand::AttackCommand(app::Entity const _entity)
@@ -13,10 +15,10 @@ app::cmnd::AttackCommand::AttackCommand(app::Entity const _entity)
 
 void app::cmnd::AttackCommand::execute()
 {
-	auto characterTypeView = m_registry.view<comp::Location, comp::Dimensions, comp::CharacterType>(entt::persistent_t());
+	auto characterTypeView = m_registry.view<comp::Location, comp::Dimensions, comp::CharacterType, comp::Input>(entt::persistent_t());
 	if (characterTypeView.contains(m_entity))
 	{
-		auto const &[location, dimensions, characterType] = characterTypeView.get<comp::Location, comp::Dimensions, comp::CharacterType>(m_entity);
+		auto const &[location, dimensions, characterType, input] = characterTypeView.get<comp::Location, comp::Dimensions, comp::CharacterType, comp::Input>(m_entity);
 
 		switch (characterType.type)
 		{
@@ -29,6 +31,14 @@ void app::cmnd::AttackCommand::execute()
 		case comp::CharacterType::Type::BOMB:
 			break;
 		case comp::CharacterType::Type::DISC:
+		{
+			if (input.canAttack)
+			{
+				auto discFactory = fact::DiscFactory(m_entity);
+				discFactory.create();
+				input.canAttack = false;
+			}
+		}
 			break;
 		case comp::CharacterType::Type::SWORD_LEGS:
 			break;

@@ -32,7 +32,6 @@ std::vector<app::Entity> app::fact::TutorialLevelFactory::create()
 
 		//1
 		position = math::Vector2f(400, -100);
-		//size = math::Vector2f(800, 4000);
 		tiles = math::Vector2i(16, 80);
 		wallEntities = wallFactory.create();
 		entities.insert(entities.end()
@@ -222,11 +221,6 @@ std::vector<app::Entity> app::fact::TutorialLevelFactory::create()
 		size = app::math::Vector2f(50, 30);
 		platformWidth = 5;
 		entities.push_back(platformFactory.create());
-
-
-		//position = app::math::Vector2f(875, 300);
-		//size = app::math::Vector2f(200, 50);
-		//entities.push_back(platformFactory.create());
 
 	}
 	// goal

@@ -224,6 +224,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\Dashable.cpp" />
     <ClCompile Include="src\components\Destructible.cpp" />
     <ClCompile Include="src\components\Dimensions.cpp" />
+    <ClCompile Include="src\components\Disc.cpp" />
     <ClCompile Include="src\components\DoubleJump.cpp" />
     <ClCompile Include="src\components\Enemy.cpp" />
     <ClCompile Include="src\components\Facade.cpp" />
@@ -242,6 +243,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\PlatformDrop.cpp" />
     <ClCompile Include="src\components\Presseable.cpp" />
     <ClCompile Include="src\components\Render.cpp" />
+    <ClCompile Include="src\components\SeekEntity.cpp" />
     <ClCompile Include="src\components\StateMachine.cpp" />
     <ClCompile Include="src\components\Text.cpp" />
     <ClCompile Include="src\components\Tiled.cpp" />
@@ -251,6 +253,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\deleters\SdlTtfDeleter.cpp" />
     <ClCompile Include="src\factories\BaseFactory.cpp" />
     <ClCompile Include="src\factories\DestructibleBlockFactory.cpp" />
+    <ClCompile Include="src\factories\DiscFactory.cpp" />
     <ClCompile Include="src\factories\EntitiesFactory.cpp" />
     <ClCompile Include="src\factories\entities\AnimatedImageFactory.cpp" />
     <ClCompile Include="src\factories\entities\AxeAttackFactory.cpp" />
@@ -358,6 +361,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\DashSystem.cpp" />
     <ClCompile Include="src\systems\DebugSystem.cpp" />
     <ClCompile Include="src\systems\DestroySystem.cpp" />
+    <ClCompile Include="src\systems\DiscReturnSystem.cpp" />
     <ClCompile Include="src\systems\FollowEntitySystem.cpp" />
     <ClCompile Include="src\systems\HealthSystem.cpp" />
     <ClCompile Include="src\systems\InputSystem.cpp" />
@@ -366,6 +370,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\MotionSystem.cpp" />
     <ClCompile Include="src\systems\NetworkSystem.cpp" />
     <ClCompile Include="src\systems\RenderSystem.cpp" />
+    <ClCompile Include="src\systems\SeekEntitySystem.cpp" />
     <ClCompile Include="src\systems\StateMachineSystem.cpp" />
     <ClCompile Include="src\systems\WidgetNavigationSystem.cpp" />
     <ClCompile Include="src\utilities\cute_c2.cpp" />
@@ -415,6 +420,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\Dashable.h" />
     <ClInclude Include="src\components\Destructible.h" />
     <ClInclude Include="src\components\Dimensions.h" />
+    <ClInclude Include="src\components\Disc.h" />
     <ClInclude Include="src\components\DoubleJump.h" />
     <ClInclude Include="src\components\Enemy.h" />
     <ClInclude Include="src\components\Facade.h" />
@@ -433,6 +439,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\PlatformDrop.h" />
     <ClInclude Include="src\components\Presseable.h" />
     <ClInclude Include="src\components\Render.h" />
+    <ClInclude Include="src\components\SeekEntity.h" />
     <ClInclude Include="src\components\StateMachine.h" />
     <ClInclude Include="src\components\Text.h" />
     <ClInclude Include="src\components\Tiled.h" />
@@ -442,6 +449,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\deleters\SdlTtfDeleter.h" />
     <ClInclude Include="src\factories\BaseFactory.h" />
     <ClInclude Include="src\factories\DestructibleBlockFactory.h" />
+    <ClInclude Include="src\factories\DiscFactory.h" />
     <ClInclude Include="src\factories\EntitiesFactory.h" />
     <ClInclude Include="src\factories\entities\AnimatedImageFactory.h" />
     <ClInclude Include="src\factories\entities\AxeAttackFactory.h" />
@@ -543,6 +551,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\systems\DashSystem.h" />
     <ClInclude Include="src\systems\DebugSystem.h" />
     <ClInclude Include="src\systems\DestroySystem.h" />
+    <ClInclude Include="src\systems\DiscReturnSystem.h" />
     <ClInclude Include="src\systems\FollowEntitySystem.h" />
     <ClInclude Include="src\systems\HealthSystem.h" />
     <ClInclude Include="src\systems\InputSystem.h" />
@@ -551,6 +560,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\systems\MotionSystem.h" />
     <ClInclude Include="src\systems\NetworkSystem.h" />
     <ClInclude Include="src\systems\RenderSystem.h" />
+    <ClInclude Include="src\systems\SeekEntitySystem.h" />
     <ClInclude Include="src\systems\StateMachineSystem.h" />
     <ClInclude Include="src\systems\WidgetNavigationSystem.h" />
     <ClInclude Include="src\utilities\cute_c2.h" />

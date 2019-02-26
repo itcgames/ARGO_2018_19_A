@@ -23,6 +23,8 @@
 #include "systems/AISystem.h"
 #include "systems/LoadingSystem.h"
 #include "systems/FollowEntitySystem.h"
+#include "systems/SeekEntitySystem.h"
+#include "systems/DiscReturnSystem.h"
 
 namespace app::sce
 {
@@ -48,6 +50,8 @@ namespace app::sce
 			, sys::WidgetNavigationSystem
 			, sys::DestroySystem
 			, sys::FollowEntitySystem
+			, sys::SeekEntitySystem
+			, sys::DiscReturnSystem
 		>;
 		using UpdateSystems = std::vector<UpdateSystem>;
 		using DrawSystem = std::variant<
