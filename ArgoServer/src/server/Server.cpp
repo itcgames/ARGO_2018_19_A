@@ -135,6 +135,10 @@ bool app::net::Server::acceptSocket(int index)
 	{
 		app::Console::writeLine({ "ERROR: SDLNet_TCP_AddSocket [", SDLNet_GetError(), "]" });
 	}
+	if (!this->send(index, index))
+	{
+		app::Console::writeLine({ "ERROR: Failed to send the new clients id[", index, "]" });
+	}
 	return true;
 }
 
@@ -150,8 +154,24 @@ void app::net::Server::closeSocket(int index)
 		app::Console::writeLine({ "ERROR: Attempted to delete a NULL socket." });
 		return;
 	}
-	for (auto & lobby : m_lobbies)
+	auto const innerPredicate =
+		[&](Lobby::Player const & player) { return player.has_value() && player->first == index; };
+	auto const outerPredicate = [&](Lobby const & lobby)
 	{
+		auto const & players = lobby.getPlayers();
+		if (auto const & result = std::find_if(players.begin(), players.end(), innerPredicate); result != players.end())
+		{
+			
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	};
+	if (auto const & outResult = std::find_if(m_lobbies.begin(), m_lobbies.end(), outerPredicate); outResult != m_lobbies.end())
+	{
+
 	}
 	if (SDLNet_TCP_DelSocket(m_socketSet, socket) == -1)
 	{
@@ -275,15 +295,30 @@ bool app::net::Server::processLobbyCreate(int id)
 	lobby.setId(m_idGenerator++);
 	this->output(id, { "Created a lobby with name: \"", lobby.getName(), "\"" });
 
-	//send out lobby created message to everyone else
+	//send out lobby created message to everyone
 	constexpr auto PACKET_TYPE = app::net::PacketType::LOBBY_WAS_CREATED;
-	for (int i = 0; i < m_totalConnections; i++)
+	for (std::size_t i = 0; i < m_sockets.size(); i++)
 	{
 		if (m_sockets.at(i) == NULL) { continue; }
-		//send the vector of servers to client whenever a new server is added or just send a single lobby that was added.
-		if (!this->send(i, PACKET_TYPE) || !this->send(i, lobby))
+		// send the lobby that was added and its creator.
+
+		if (this->send(static_cast<int>(i), PACKET_TYPE) && this->send(static_cast<int>(i), lobby))
 		{
-			this->output(id, { "Send Lobby[", lobby.getName(), "] to player[", i, "]" });
+			if (i == id)
+			{
+				if (this->send(static_cast<int>(i), id))
+				{
+					this->output(id, { "Send Lobby[", lobby.getName(), "] to the creator player[", i, "]" });
+				}
+				else
+				{
+					this->output(id, { "Failed to send Lobby[", lobby.getName(), "] to the creator player[", i, "]" });
+				}
+			}
+			else
+			{
+				this->output(id, { "Send Lobby[", lobby.getName(), "] to player[", i, "]" });
+			}
 		}
 		else
 		{
@@ -320,6 +355,29 @@ bool app::net::Server::processLobbyJoined(int id)
 		{
 			if (!this->send(id, addResult.value())) { return false; }
 			this->output(id, { "Player joined lobby[", lobby.getId(), "] in slot[", addResult.value(), "]" });
+
+			auto lobbyPlayers = std::vector<app::net::Lobby::Player::value_type>();
+			for (auto const & player : lobby.getPlayers())
+			{
+				if (player.has_value()) { lobbyPlayers.push_back(player.value()); }
+			}
+			for (auto const &[playerId, name] : lobbyPlayers)
+			{
+				if (playerId == id)
+				{
+					constexpr auto PACKET_TYPE = PacketType::LOBBY_JOINED_MY;
+					if (!this->send(id, PACKET_TYPE)) { return false; }
+					if (!this->send(playerId, lobby)) { return false; }
+				}
+			}
+			for (std::size_t i = 0; i < m_sockets.size(); ++i)
+			{
+				if (m_sockets.at(i) == NULL || i == id) { continue; }
+
+				constexpr auto PACKET_TYPE = PacketType::LOBBY_JOINED;
+				if (!this->send(i, PACKET_TYPE)) { return false; }
+				if (!this->send(i, lobby)) { return false; }
+			}
 		}
 		else
 		{

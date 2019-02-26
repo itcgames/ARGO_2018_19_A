@@ -2,11 +2,13 @@
 #include "BaseScene.h"
 #include "singletons/RegistrySingleton.h"
 #include "singletons/ResourceManagerSingleton.h"
+#include "singletons/ClientSingleton.h"
 
 app::sce::BaseScene::BaseScene(app::sce::SceneType & sceneManagerType, UpdateSystems && updateSystems, DrawSystems && drawSystems)
 	: m_registry(app::sin::Registry::get())
 	, m_sceneManagerType(sceneManagerType)
 	, m_resourceManager(app::sin::ResourceManager::get())
+	, m_client(app::sin::Client::get())
 	, m_updateSystems(std::make_move_iterator(updateSystems.begin()), std::make_move_iterator(updateSystems.end()))
 	, m_drawSystems(std::make_move_iterator(drawSystems.begin()), std::make_move_iterator(drawSystems.end()))
 {

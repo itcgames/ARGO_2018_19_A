@@ -12,6 +12,7 @@ app::sce::LobbyScene::LobbyScene(SceneType & sceneManagerType)
 			UpdateSystem(std::in_place_type<app::sys::DashSystem>),
 			UpdateSystem(std::in_place_type<app::sys::StateMachineSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CameraSystem>),
+			UpdateSystem(std::in_place_type<app::sys::NetworkSystem>, sceneManagerType),
 			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType),
 			UpdateSystem(std::in_place_type<app::sys::DestroySystem>)
 		})
@@ -49,6 +50,7 @@ void app::sce::LobbyScene::end()
 			Console::writeLine({ "  Destroyed entity[", std::to_string(entity), "]" });
 		});
 	}
+	if (m_client.hasInit() && m_sceneManagerType != SceneType::LobbySelect && m_sceneManagerType != SceneType::MultiplayerLevel) { m_client.deinitNetwork(); }
 	m_registry.reset();
 }
 

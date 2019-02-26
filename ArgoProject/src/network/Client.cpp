@@ -60,6 +60,8 @@ bool app::net::Client::initNetwork(std::string const & pIP, int iPort)
 	m_lobbies.clear();
 	m_lobbies.reserve(10);
 
+	if (!this->get(m_id)) { this->output({ "ERROR: Failed to retrieve client id" }); }
+
 	return true;
 }
 
@@ -119,6 +121,19 @@ void app::net::Client::setLobbies(std::list<Lobby>&& lobbies)
 		, std::make_move_iterator(lobbies.end()));
 }
 
+void app::net::Client::merge(std::vector<Lobby>& lobbies, Lobby const & lobby)
+{
+	auto const predicate = [&](Lobby const & l) -> bool { return l.getId() == lobby.getId(); };
+	if (auto const & result = std::find_if(lobbies.begin(), lobbies.end(), predicate); result != lobbies.end())
+	{
+		(*result) = lobby;
+	}
+	else
+	{
+		lobbies.insert(lobbies.end(), std::move(lobby));
+	}
+}
+
 bool app::net::Client::processClientName()
 {
 	auto clientName = std::string();
@@ -149,6 +164,24 @@ bool app::net::Client::processLobbyGetAll()
 	return true;
 }
 
+bool app::net::Client::processLobbyJoined()
+{
+	auto lobby = Lobby();
+	if (!this->get(lobby)) { return false; }
+
+	Client::merge(m_lobbies, lobby);
+	return true;
+}
+
+bool app::net::Client::processLobbyJoinedMy()
+{
+	auto lobby = Lobby();
+	if (!this->get(lobby)) { return false; }
+
+	Client::merge(m_lobbies, lobby);
+	return true;
+}
+
 bool app::net::Client::processDefault()
 {
 	this->output("No proccessing done for this packet type");
@@ -165,6 +198,10 @@ bool app::net::Client::processPacket(PacketType _packetType)
 			return this->processLobbyWasCreated();
 		case PacketType::LOBBY_GET_ALL:
 			return this->processLobbyGetAll();
+		case PacketType::LOBBY_JOINED:
+			return this->processLobbyJoined();
+		case PacketType::LOBBY_JOINED_MY:
+			return this->processLobbyJoinedMy();
 		case PacketType::UNKNOWN:
 			this->output("Unknown Packet type!");
 		case PacketType::LOBBY_CREATE:

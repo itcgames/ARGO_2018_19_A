@@ -1,9 +1,10 @@
 ﻿#include "stdafx.h"
 #include "NetworkSystem.h"
 #include "singletons/ClientSingleton.h"
-#include "commands/buttons/ButtonLobbySelectRefreshCommand.h"
 #include "commands/buttons/ButtonLobbySelectCommand.h"
+#include "factories/entities/LobbyDisplayFactory.h"
 
+#include "components/LobbyDisplay.h"
 #include "components/Widget.h"
 #include "tags/LobbyTag.h"
 
@@ -27,12 +28,13 @@ void app::sys::NetworkSystem::update(app::time::seconds const & dt)
 		if (m_client.processPacket(m_packetType))
 		{
 			this->output("Processed packet successfully");
-			if (m_packetType == app::net::PacketType::LOBBY_WAS_CREATED && m_sceneControl == app::sce::SceneType::LobbySelect)
+			switch (m_sceneControl)
 			{
-				auto buttonView = m_registry.view<comp::Widget>();
-				auto entities = std::forward_list<app::Entity>();
-				for (auto const & entity : buttonView) { entities.push_front(entity); }
-				std::make_unique<cmnd::ButtonLobbySelectRefreshCommand>(entities, m_sceneControl)->execute();
+				case app::sce::SceneType::LobbySelect:
+					this->handlePacketLobbyWasCreated();
+					this->handlePacketLobbyWasJoined();
+				default:
+					break;
 			}
 		}
 		else
@@ -56,4 +58,44 @@ void app::sys::NetworkSystem::output(std::initializer_list<app::Console::Variant
 	{
 		app::Console::writeLine(msgs);
 	}
+}
+
+void app::sys::NetworkSystem::handlePacketLobbyWasCreated()
+{
+	if (m_packetType != app::net::PacketType::LOBBY_WAS_CREATED) { return; }
+
+	auto buttonView = m_registry.view<comp::Widget>();
+	auto lobbyDisplayView = m_registry.view<comp::Widget, comp::LobbyDisplay>();
+	auto entities = std::vector<app::Entity>();
+	for (auto const & entity : buttonView)
+	{
+		if (!lobbyDisplayView.contains(entity)) { entities.push_back(entity); }
+	}
+
+	auto const & lobbies = m_client.getLobbies();
+	auto params = par::LobbyDisplayFactoryParameters();
+	params.position = math::Vector2f{ -450.0f, -300.0f };
+	params.lobbies = lobbies;
+	params.entities.insert(params.entities.end(), entities.begin(), entities.end());
+	entities = fact::LobbyDisplayFactory(params, m_sceneControl).create();
+}
+
+void app::sys::NetworkSystem::handlePacketLobbyWasJoined()
+{
+	if (m_packetType != app::net::PacketType::LOBBY_JOINED) { return; }
+
+	auto buttonView = m_registry.view<comp::Widget>();
+	auto lobbyDisplayView = m_registry.view<comp::Widget, comp::LobbyDisplay>();
+	auto entities = std::vector<app::Entity>();
+	for (auto const & entity : buttonView)
+	{
+		if (!lobbyDisplayView.contains(entity)) { entities.push_back(entity); }
+	}
+
+	auto const & lobbies = m_client.getLobbies();
+	auto params = par::LobbyDisplayFactoryParameters();
+	params.position = math::Vector2f{ -450.0f, -300.0f };
+	params.lobbies = lobbies;
+	params.entities.insert(params.entities.end(), entities.begin(), entities.end());
+	entities = fact::LobbyDisplayFactory(params, m_sceneControl).create();
 }

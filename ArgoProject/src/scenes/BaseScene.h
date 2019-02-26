@@ -78,6 +78,7 @@ namespace app::sce
 		app::Registry & m_registry;
 		SceneType & m_sceneManagerType;
 		ResourceManager & m_resourceManager;
+		app::net::Client & m_client;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables

@@ -31,9 +31,15 @@ void app::cmnd::ButtonLobbySelectCreateLobbyCommand::execute()
 		{
 			this->output("Failed to process next packet");
 		}
+		assert(packetType == app::net::PacketType::LOBBY_WAS_CREATED);
 		if (!m_client.processPacket(packetType))
 		{
 			this->output({ "Failed to receive lobby" });
+		}
+		auto playerId = std::int32_t();
+		if (!m_client.get(playerId))
+		{
+
 		}
 		constexpr auto IS_HOST = true;
 		std::make_unique<cmnd::ButtonLobbySelectCommand>(m_client.getLobbies().back(), IS_HOST, m_sceneControl)->execute();

@@ -1,7 +1,6 @@
 ﻿#include "stdafx.h"
 #include "MainMenuScene.h"
 #include "factories/scenes/MainMenuSceneFactory.h"
-#include "singletons/ClientSingleton.h"
 
 app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 	: BaseScene(sceneManagerType
@@ -19,7 +18,6 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
 			DrawSystem(std::in_place_type<app::sys::RenderSystem>)
 			}))
-	, m_client(app::sin::Client::get())
 {
 	if constexpr (DEBUG_MODE)
 	{

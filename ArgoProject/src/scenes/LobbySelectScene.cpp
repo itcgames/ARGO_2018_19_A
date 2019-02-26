@@ -19,7 +19,6 @@ app::sce::LobbySelectScene::LobbySelectScene(SceneType & sceneManagerType)
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
 			DrawSystem(std::in_place_type<app::sys::RenderSystem>)
 			}))
-	, m_client(app::sin::Client::get())
 {
 	if constexpr (DEBUG_MODE)
 	{
