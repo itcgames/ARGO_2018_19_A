@@ -279,6 +279,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\scenes\LobbySceneFactory.cpp" />
     <ClCompile Include="src\factories\scenes\MultiplayerLevelSceneFactory.cpp" />
     <ClCompile Include="src\factories\scenes\TutorialLevelSceneFactory.cpp" />
+    <ClCompile Include="src\factories\TutorialLevelFactory.cpp" />
     <ClCompile Include="src\factories\WallFactory.cpp" />
     <ClCompile Include="src\factories\scenes\SplashSceneFactory.cpp" />
     <ClCompile Include="src\fsm\BaseState.cpp" />
@@ -465,6 +466,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\scenes\LobbySceneFactory.h" />
     <ClInclude Include="src\factories\scenes\MultiplayerLevelSceneFactory.h" />
     <ClInclude Include="src\factories\scenes\TutorialLevelSceneFactory.h" />
+    <ClInclude Include="src\factories\TutorialLevelFactory.h" />
     <ClInclude Include="src\factories\WallFactory.h" />
     <ClInclude Include="src\factories\scenes\SplashSceneFactory.h" />
     <ClInclude Include="src\fsm\BaseState.h" />
