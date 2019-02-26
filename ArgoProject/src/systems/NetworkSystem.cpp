@@ -1,11 +1,17 @@
 ﻿#include "stdafx.h"
 #include "NetworkSystem.h"
 #include "singletons/ClientSingleton.h"
+#include "commands/buttons/ButtonLobbySelectRefreshCommand.h"
+#include "commands/buttons/ButtonLobbySelectCommand.h"
 
-app::sys::NetworkSystem::NetworkSystem()
+#include "components/Widget.h"
+#include "tags/LobbyTag.h"
+
+app::sys::NetworkSystem::NetworkSystem(app::sce::SceneType & sceneControl)
 	: BaseSystem()
 	, m_client(app::sin::Client::get())
 	, m_packetType()
+	, m_sceneControl(sceneControl)
 {
 }
 
@@ -18,13 +24,20 @@ void app::sys::NetworkSystem::update(app::time::seconds const & dt)
 		{
 			this->output("Failed to retrieve packet type");
 		}
-		if (!m_client.processPacket(m_packetType))
+		if (m_client.processPacket(m_packetType))
 		{
-			this->output("Failed to process packet");
+			this->output("Processed packet successfully");
+			if (m_packetType == app::net::PacketType::LOBBY_WAS_CREATED && m_sceneControl == app::sce::SceneType::LobbySelect)
+			{
+				auto buttonView = m_registry.view<comp::Widget>();
+				auto entities = std::forward_list<app::Entity>();
+				for (auto const & entity : buttonView) { entities.push_front(entity); }
+				std::make_unique<cmnd::ButtonLobbySelectRefreshCommand>(entities, m_sceneControl)->execute();
+			}
 		}
 		else
 		{
-			this->output("Processed packet successfully");
+			this->output("Failed to process packet");
 		}
 	}
 }
@@ -37,7 +50,7 @@ void app::sys::NetworkSystem::output(std::string const & msg) const
 	}
 }
 
-void app::sys::NetworkSystem::output(std::initializer_list<std::string> const & msgs) const
+void app::sys::NetworkSystem::output(std::initializer_list<app::Console::Variant> const & msgs) const
 {
 	if constexpr (s_DEBUG_MODE)
 	{

@@ -150,6 +150,9 @@ void app::net::Server::closeSocket(int index)
 		app::Console::writeLine({ "ERROR: Attempted to delete a NULL socket." });
 		return;
 	}
+	for (auto & lobby : m_lobbies)
+	{
+	}
 	if (SDLNet_TCP_DelSocket(m_socketSet, socket) == -1)
 	{
 		app::Console::writeLine({ "ERROR: SDLNet_TCP_DelSocket: [", SDLNet_GetError(), "]" });
@@ -218,14 +221,8 @@ void app::net::Server::clientHandlerThread(int id, std::atomic<bool> & stopThrea
 
 	while (!stopThread.load())
 	{
-		if (!this->get(id, packetType))
-		{
-			break;
-		}
-		if (!this->processPacket(id, packetType))
-		{
-			break;
-		}
+		if (!this->get(id, packetType)) { break; }
+		if (!this->processPacket(id, packetType)) { break; }
 	}
 	this->output(id, "Stopped connection");
 	this->closeSocket(id);
@@ -247,6 +244,8 @@ bool app::net::Server::processPacket(int id, PacketType _packetType)
 			return this->processLobbyCreate(id);
 		case PacketType::LOBBY_GET_ALL:
 			return this->processLobbyGetAll(id);
+		case PacketType::LOBBY_JOINED:
+			return this->processLobbyJoined(id);
 		case PacketType::UNKNOWN:
 		default:
 			return this->processDefault(id);
@@ -273,18 +272,18 @@ bool app::net::Server::processLobbyCreate(int id)
 	m_lobbies.push_back(Lobby());
 	auto & lobby = m_lobbies.back();
 	lobby.setName(playerName + "'s Lobby");
-	lobby.addPlayer(id, playerName);
+	lobby.setId(m_idGenerator++);
 	this->output(id, { "Created a lobby with name: \"", lobby.getName(), "\"" });
 
 	//send out lobby created message to everyone else
 	constexpr auto PACKET_TYPE = app::net::PacketType::LOBBY_WAS_CREATED;
 	for (int i = 0; i < m_totalConnections; i++)
 	{
-		if (i == id || m_sockets.at(i) == NULL) { continue; }
+		if (m_sockets.at(i) == NULL) { continue; }
 		//send the vector of servers to client whenever a new server is added or just send a single lobby that was added.
 		if (!this->send(i, PACKET_TYPE) || !this->send(i, lobby))
 		{
-			this->output(id, { "Send Lobby[", lobby.getName(), "] to player[", std::to_string(i), "]" });
+			this->output(id, { "Send Lobby[", lobby.getName(), "] to player[", i, "]" });
 		}
 		else
 		{
@@ -302,6 +301,34 @@ bool app::net::Server::processLobbyGetAll(int id)
 	for (auto const & lobby : m_lobbies)
 	{
 		if (!this->send(id, lobby)) { return false; }
+	}
+	return true;
+}
+
+bool app::net::Server::processLobbyJoined(int id)
+{
+	auto lobbyId = std::uint8_t();
+	if (!this->get(id, lobbyId)) { return false; }
+
+	auto const & predicate = [&lobbyId](app::net::Lobby const & lobby) { return lobby.getId() == lobbyId; };
+	if (auto const & lobbyResult = std::find_if(m_lobbies.begin(), m_lobbies.end(), predicate); lobbyResult != m_lobbies.end())
+	{
+		auto & lobby = *lobbyResult;
+		auto playerName = std::string();
+		if (!this->get(id, playerName)) { return false; }
+		if (auto const & addResult = lobby.addPlayer(id, playerName); addResult.has_value())
+		{
+			if (!this->send(id, addResult.value())) { return false; }
+			this->output(id, { "Player joined lobby[", lobby.getId(), "] in slot[", addResult.value(), "]" });
+		}
+		else
+		{
+			this->output(id, { "Player failed to join lobby[", lobby.getId(), "]" });
+		}
+	}
+	else
+	{
+		this->output(id, { "Failed to find lobby with id[", lobbyId, "]" });
 	}
 	return true;
 }
@@ -344,7 +371,7 @@ void app::net::Server::output(int id, std::string const & msg) const
 	}
 }
 
-void app::net::Server::output(int id, std::initializer_list<std::string> const & msgs) const
+void app::net::Server::output(int id, std::initializer_list<app::Console::Variant> const & msgs) const
 {
 	if constexpr (s_DEBUG_MODE)
 	{

@@ -2,6 +2,7 @@
 #define _LOBBY_SELECT_SCENE_H
 
 #include "BaseScene.h"
+#include "network/Client.h"
 
 namespace app::sce
 {
@@ -31,6 +32,7 @@ namespace app::sce
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
+		app::net::Client & m_client;
 	};
 }
 

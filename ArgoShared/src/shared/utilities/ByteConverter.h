@@ -34,6 +34,30 @@ namespace app::util
 
 		#pragma region convertTo template specializations
 
+		template <> static std::vector<std::byte> convertTo<app::net::Lobby::Player>(app::net::Lobby::Player const & player)
+		{
+			auto bytes = std::vector<std::byte>();
+
+			bytes.reserve(sizeof(bool));
+			auto hasValueBytes = ByteConverter::convertTo(player.has_value());
+			bytes.insert(bytes.end()
+				, std::make_move_iterator(hasValueBytes.begin())
+				, std::make_move_iterator(hasValueBytes.end()));
+			if (player.has_value())
+			{
+				auto const &[id, name] = player.value();
+				auto idBytes = convertTo(id);
+				bytes.insert(bytes.end()
+					, std::make_move_iterator(idBytes.begin())
+					, std::make_move_iterator(idBytes.end()));
+				auto nameBytes = convertTo(name);
+				bytes.insert(bytes.end()
+					, std::make_move_iterator(nameBytes.begin())
+					, std::make_move_iterator(nameBytes.end()));
+			}
+			return std::move(bytes);
+		}
+
 		template <> static std::vector<std::byte> convertTo<std::string>(std::string const & str)
 		{
 			auto bytes = std::vector<std::byte>();
@@ -58,16 +82,16 @@ namespace app::util
 			bytes.insert(bytes.end()
 				, std::make_move_iterator(lobbyNameBytes.begin())
 				, std::make_move_iterator(lobbyNameBytes.end()));
+			auto lobbyIdBytes = ByteConverter::convertTo(lobby.getId());
+			bytes.insert(bytes.end()
+				, std::make_move_iterator(lobbyIdBytes.begin())
+				, std::make_move_iterator(lobbyIdBytes.end()));
 			auto lobbyNumberPlayersBytes = ByteConverter::convertTo(lobby.getPlayers().size());
 			bytes.insert(bytes.end()
 				, std::make_move_iterator(lobbyNumberPlayersBytes.begin())
 				, std::make_move_iterator(lobbyNumberPlayersBytes.end()));
-			for (auto const &[id, playerName] : lobby.getPlayers())
+			for (auto const & playerName : lobby.getPlayers())
 			{
-				auto idBytes = ByteConverter::convertTo(id);
-				bytes.insert(bytes.end()
-					, std::make_move_iterator(idBytes.begin())
-					, std::make_move_iterator(idBytes.end()));
 				auto playerNameBytes = ByteConverter::convertTo(playerName);
 				bytes.insert(bytes.end()
 					, std::make_move_iterator(playerNameBytes.begin())
@@ -109,6 +133,22 @@ namespace app::util
 			return std::move(str);
 		}
 
+		template <> static std::optional<std::string> convertFrom<std::optional<std::string>>(ByteConverter::ByteConstIterator begin, ByteConverter::ByteConstIterator end)
+		{
+			auto optionalText = std::optional<std::string>();
+
+			auto hasValue = ByteConverter::convertFrom<bool>(begin, begin + sizeof(bool));
+
+			if (hasValue)
+			{
+				begin += sizeof(bool);
+				auto text = ByteConverter::convertFrom<std::string>(begin, end);
+				optionalText.emplace(std::move(text));
+			}
+
+			return optionalText;
+		}
+
 		template <> static app::net::Lobby convertFrom<app::net::Lobby>(ByteConverter::ByteConstIterator begin, ByteConverter::ByteConstIterator end)
 		{
 			auto lobby = app::net::Lobby();
@@ -124,6 +164,12 @@ namespace app::util
 			auto lobbyName = ByteConverter::convertFrom<std::string>(begin, end);
 			lobby.setName(lobbyName);
 
+			begin = end;
+			end += sizeof(std::uint8_t);
+			// convert lobby id from the bytes
+			auto lobbyId = ByteConverter::convertFrom<std::uint8_t>(begin, end);
+			lobby.setId(lobbyId);
+
 			begin = end;							// set the begin iterator to where the name ends in the byte vector
 			end += sizeof(std::size_t);				// move the end iterator by the expected size of size_t
 			// Get the number of players in the lobby (expect a int32)
@@ -131,19 +177,27 @@ namespace app::util
 
 			for (std::int32_t i = 0; i < NUMBER_OF_PLAYERS_IN_LOBBY; ++i)
 			{
-				begin = end;						// set the begin iterator to where the previous data ended
-				end += sizeof(std::int32_t);		// move the end iterator by the expected size of a 32-bit signed integer
-				auto const PLAYER_ID = ByteConverter::convertFrom<std::int32_t>(begin, end);
+				begin = end;
+				end += sizeof(bool);
+				auto const HAS_PLAYER = ByteConverter::convertFrom<bool>(begin, end);
 
-				begin = end;						// set the begin iterator to where the previous data ended
-				end += sizeof(std::size_t);			// move the end iterator by the expected size of size_t
-				auto const PLAYER_NAME_SIZE = ByteConverter::convertFrom<std::size_t>(begin, end);
+				if (HAS_PLAYER)
+				{
+					begin = end;
+					end += sizeof(std::int32_t);
+					auto const PLAYER_ID = ByteConverter::convertFrom<std::int32_t>(begin, end);
 
-				begin = end;						// set the begin iterator to where the previous data ended
-				end += PLAYER_NAME_SIZE;			// move the end iterator by the size of the player name
-				auto playerName = ByteConverter::convertFrom<std::string>(begin, end);
+					begin = end;						// set the begin iterator to where the previous data ended
+					end += sizeof(std::size_t);			// move the end iterator by the expected size of size_t
+					auto const PLAYER_NAME_SIZE = ByteConverter::convertFrom<std::size_t>(begin, end);
 
-				lobby.addPlayer(PLAYER_ID, playerName);
+					begin = end;						// set the begin iterator to where the previous data ended
+					end += PLAYER_NAME_SIZE;			// move the end iterator by the size of the player name
+					auto playerName = ByteConverter::convertFrom<std::string>(begin, end);
+
+					lobby.addPlayer(PLAYER_ID, playerName);
+				}
+
 			}
 
 			return std::move(lobby);

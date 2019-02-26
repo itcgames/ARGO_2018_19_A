@@ -21,6 +21,7 @@ namespace app::par
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
+		std::vector<app::Entity> entities;
 		math::Vector2f position;
 		std::vector<app::net::Lobby> lobbies;
 	protected: // Protected Static Functions

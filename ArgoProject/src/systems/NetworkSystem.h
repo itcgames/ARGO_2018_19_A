@@ -3,13 +3,14 @@
 
 #include "BaseSystem.h"
 #include "network/Client.h"
+#include "scenes/SceneType.h"
 
 namespace app::sys
 {
 	class NetworkSystem : public BaseSystem
 	{
 	public: // Constructors/Destructor/Assignments
-		NetworkSystem();
+		NetworkSystem(app::sce::SceneType & sceneControl);
 		virtual ~NetworkSystem() = default;
 
 		NetworkSystem(NetworkSystem const &) = default;
@@ -30,12 +31,13 @@ namespace app::sys
 	private: // Private Static Functions
 	private: // Private Member Functions
 		void output(std::string const & msg) const;
-		void output(std::initializer_list<std::string> const & msgs) const;
+		void output(std::initializer_list<app::Console::Variant> const & msgs) const;
 	private: // Private Static Variables
 		constexpr static bool s_DEBUG_MODE = true;
 	private: // Private Member Variables
 		app::net::Client & m_client;
 		app::net::PacketType m_packetType;
+		app::sce::SceneType & m_sceneControl;
 	};
 }
 

@@ -5,8 +5,9 @@ namespace app::net
 {
 	class Lobby
 	{
-	private: // Usings/typedefs/enums
-		using PlayerMap = std::map<std::int32_t, std::string>;
+	public: // Usings/typedefs/enums
+		using Player = std::optional<std::pair<std::int32_t, std::string>>;
+		using Players = std::array<Player, 4>;
 	public: // Constructors/Destructor/Assignments
 		Lobby() = default;
 		~Lobby() = default;
@@ -19,10 +20,14 @@ namespace app::net
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		void setName(const std::string& name);
 		const std::string& getName() const;
-		void addPlayer(int id, const std::string& name);
-		PlayerMap const & getPlayers() const { return m_players; }
+		void setName(const std::string& name);
+
+		Players const & getPlayers() const { return m_players; }
+		std::optional<std::size_t> addPlayer(std::int32_t const & id, const std::string& name);
+
+		std::uint8_t const & getId() const { return m_id; }
+		void setId(std::uint8_t const & id) { m_id = id; }
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -33,9 +38,10 @@ namespace app::net
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
-		PlayerMap m_players;
+		Players m_players;
 		//name of the lobby
 		std::string m_lobbyName;
+		std::uint8_t m_id;
 	};
 
 

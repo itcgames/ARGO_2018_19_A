@@ -1,6 +1,5 @@
 ﻿#include "stdafx.h"
 #include "ButtonFactory.h"
-#include "utilities/variant.h"
 #include "components/Location.h"
 #include "components/Dimensions.h"
 #include "components/Motion.h"

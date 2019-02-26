@@ -36,6 +36,7 @@ namespace app::sce
 	private: // Private Static Variables
 	private: // Private Member Variables
 		std::optional<fact::LevelDemoFactory> m_demoFactory;
+		app::net::Client & m_client;
 	};
 }
 

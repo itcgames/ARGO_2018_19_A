@@ -8,6 +8,12 @@
 #include "commands/buttons/ButtonLobbySelectCreateLobbyCommand.h"
 #include "commands/TestCommand.h"
 
+app::fact::sce::LobbySelectSceneFactory::LobbySelectSceneFactory(app::sce::SceneType & sceneControl)
+	: EntitiesFactory()
+	, m_sceneControl(sceneControl)
+{
+}
+
 std::vector<app::Entity> app::fact::sce::LobbySelectSceneFactory::create()
 {
 	auto const & sizePerLetter = math::Vector2f{ 20.0f, 40.0f };
@@ -34,7 +40,9 @@ std::vector<app::Entity> app::fact::sce::LobbySelectSceneFactory::create()
 		auto const & stepSize = math::Vector2f{ static_cast<float>(params.text.size()), 1.0f };
 		params.size = (sizePerLetter * stepSize);
 		params.border = math::Vector2f{ 20.0f, 4.0f };
-		params.command = std::make_unique<cmnd::ButtonLobbySelectRefreshCommand>();
+		auto refreshCommandEntities = std::forward_list<app::Entity>();
+		refreshCommandEntities.push_front(params.entity.value());
+		params.command = std::make_unique<cmnd::ButtonLobbySelectRefreshCommand>(refreshCommandEntities, m_sceneControl);
 		params.zIndex = 80u;
 		entities.push_back(fact::ButtonFactory(params).create());
 	}
@@ -50,7 +58,7 @@ std::vector<app::Entity> app::fact::sce::LobbySelectSceneFactory::create()
 		auto const & stepSize = math::Vector2f{ static_cast<float>(params.text.size()), 1.0f };
 		params.size = (sizePerLetter * stepSize);
 		params.border = math::Vector2f{ 20.0f, 4.0f };
-		params.command = std::make_unique<cmnd::ButtonLobbySelectCreateLobbyCommand>("Bob");
+		params.command = std::make_unique<cmnd::ButtonLobbySelectCreateLobbyCommand>("Bob", m_sceneControl);
 		params.zIndex = 80u;
 		entities.push_back(fact::ButtonFactory(params).create());
 	}

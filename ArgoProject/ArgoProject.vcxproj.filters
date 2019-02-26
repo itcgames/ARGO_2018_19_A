@@ -142,11 +142,11 @@
     <Filter Include="Resource Files\Animations">
       <UniqueIdentifier>{062b658f-59f1-44ad-8665-8f2a693ac7ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\tags">
-      <UniqueIdentifier>{ae466dab-f153-4ace-a110-d74301977d23}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\tags">
-      <UniqueIdentifier>{2bbe24e5-97bf-4d91-b73a-a430e2c7a2be}</UniqueIdentifier>
+      <UniqueIdentifier>{2af6615c-9ba7-4a8b-a265-08be9bb77902}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\tags">
+      <UniqueIdentifier>{fa2ee7f7-050b-4b7e-a5da-e52bb9abe376}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -531,9 +531,6 @@
     <ClCompile Include="src\factories\entities\ButtonFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
-    <ClCompile Include="src\utilities\variant.cpp">
-      <Filter>Source Files\utilities</Filter>
-    </ClCompile>
     <ClCompile Include="src\parameters\ButtonFactoryParameters.cpp">
       <Filter>Source Files\parameters</Filter>
     </ClCompile>
@@ -704,6 +701,15 @@
     </ClCompile>
     <ClCompile Include="src\components\LobbyDisplay.cpp">
       <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\buttons\ButtonLobbySelectCommand.cpp">
+      <Filter>Source Files\commands\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tags\LobbyTag.cpp">
+      <Filter>Source Files\tags</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ArgoShared\src\shared\utilities\variant.cpp">
+      <Filter>Source Files\utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1085,9 +1091,6 @@
     <ClInclude Include="src\factories\entities\ButtonFactory.h">
       <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
-    <ClInclude Include="src\utilities\variant.h">
-      <Filter>Header Files\utilities</Filter>
-    </ClInclude>
     <ClInclude Include="src\parameters\ButtonFactoryParameters.h">
       <Filter>Header Files\parameters</Filter>
     </ClInclude>
@@ -1254,6 +1257,15 @@
     </ClInclude>
     <ClInclude Include="src\components\LobbyDisplay.h">
       <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\buttons\ButtonLobbySelectCommand.h">
+      <Filter>Header Files\commands\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tags\LobbyTag.h">
+      <Filter>Header Files\tags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ArgoShared\src\shared\utilities\variant.h">
+      <Filter>Header Files\utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

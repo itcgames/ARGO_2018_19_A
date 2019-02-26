@@ -1,6 +1,5 @@
 ﻿#include "stdafx.h"
 #include "ButtonSystem.h"
-#include "utilities/variant.h"
 #include "singletons/KeyHandlerSingleton.h"
 #include "singletons/MouseHandlerSingleton.h"
 #include "singletons/ControllerHandlerSingleton.h"

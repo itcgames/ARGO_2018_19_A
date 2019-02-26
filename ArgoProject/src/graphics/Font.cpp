@@ -45,7 +45,7 @@ bool app::gra::Font::prepare(app::gra::Font::Quality const & quality, std::strin
 	}
 	catch (std::exception const & e)
 	{
-		Console::writeLine({ "ERROR: Failed to preparte font [", e.what(), "]" });
+		Console::writeLine({ "ERROR: Failed to prepare font [", e.what(), "]" });
 		return false;
 	}
 }
