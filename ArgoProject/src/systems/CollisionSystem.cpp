@@ -71,6 +71,7 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 	this->attackDestructibleCollisions();
 	this->playerEnemyCollisions();
 	this->checkDiscCollisions();
+	this->AIHazardCollisions();
 }
 
 void app::sys::CollisionSystem::groundCollisions()
@@ -238,6 +239,25 @@ void app::sys::CollisionSystem::checkAINodeCollisions()
 			{
 				ai.currentNode = secEntity;
 				ai.initialCommands = node.initialCommands;
+			}
+		});
+	});
+}
+
+void app::sys::CollisionSystem::AIHazardCollisions()
+{
+	m_registry.view<comp::Collision, comp::AI, comp::Location, comp::Dimensions, comp::Health>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::AI & ai, comp::Location & location, comp::Dimensions & dimensions, comp::Health & health)
+	{
+		m_registry.view<comp::Hazard, comp::Collision, comp::Damage>(entt::persistent_t())
+			.each([&, this](app::Entity const secEntity, comp::Hazard & hazard, comp::Collision & secCollision, comp::Damage & damage)
+		{
+			if (entity != secEntity)
+			{
+				if (app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds))
+				{
+					health.health -= damage.damage;
+				}
 			}
 		});
 	});

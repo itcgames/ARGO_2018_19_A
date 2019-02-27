@@ -714,6 +714,9 @@
     <ClCompile Include="src\fsm\states\AxeRunAnimationState.cpp">
       <Filter>Source Files\fsm\states</Filter>
     </ClCompile>
+    <ClCompile Include="src\components\Background.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -1281,6 +1284,9 @@
     </ClInclude>
     <ClInclude Include="src\fsm\states\AxeRunAnimationState.h">
       <Filter>Header Files\fsm\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Background.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

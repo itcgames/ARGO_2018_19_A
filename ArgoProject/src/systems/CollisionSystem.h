@@ -39,6 +39,7 @@ namespace app::sys
 		void playerEnemyCollisions();
 		void checkPlatformCollisions();
 		void checkAINodeCollisions();
+		void AIHazardCollisions();
 		void attackEnemyCollisions();
 		void attackDestructibleCollisions();
 		void checkDiscCollisions();
