@@ -28,6 +28,7 @@
 #include "components/Hazard.h"
 #include "components/Destructible.h"
 #include "components/Bomb.h"
+#include "components/CharacterType.h"
 
 //visitors
 #include "visitors/CollisionUpdateVisitor.h"
@@ -59,18 +60,18 @@ app::sys::CollisionSystem::CollisionSystem()
 void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 {
 	this->updateCollisionBoxes();
+	this->attackEnemyCollisions();
 	this->groundCollisions();
 	this->airCollisions();
 	this->checkPlatformCollisions();
 	this->dashCollisions();
 	this->enemyWallCollisions();
 	this->enemyEnemyCollisions();	
-	this->playerHazardCollisions();
 	this->checkAINodeCollisions();
 	this->playerGoalCollisions();
-	this->attackEnemyCollisions();
 	this->attackDestructibleCollisions();
 	this->playerEnemyCollisions();
+	this->playerHazardCollisions();
 	this->checkDiscCollisions();
 	this->checkBombCollisions();
 }

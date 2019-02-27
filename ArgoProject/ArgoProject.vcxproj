@@ -221,6 +221,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\CurrentGround.cpp" />
     <ClCompile Include="src\components\Damage.cpp" />
     <ClCompile Include="src\components\Dash.cpp" />
+    <ClCompile Include="src\components\DashAttack.cpp" />
     <ClCompile Include="src\components\Destroy.cpp" />
     <ClCompile Include="src\components\Dashable.cpp" />
     <ClCompile Include="src\components\Destructible.cpp" />
@@ -286,6 +287,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\scenes\LobbySceneFactory.cpp" />
     <ClCompile Include="src\factories\scenes\MultiplayerLevelSceneFactory.cpp" />
     <ClCompile Include="src\factories\scenes\TutorialLevelSceneFactory.cpp" />
+    <ClCompile Include="src\factories\SwordLegsDashAttackFactory.cpp" />
     <ClCompile Include="src\factories\TutorialLevelFactory.cpp" />
     <ClCompile Include="src\factories\WallFactory.cpp" />
     <ClCompile Include="src\factories\scenes\SplashSceneFactory.cpp" />
@@ -420,6 +422,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\CurrentGround.h" />
     <ClInclude Include="src\components\Damage.h" />
     <ClInclude Include="src\components\Dash.h" />
+    <ClInclude Include="src\components\DashAttack.h" />
     <ClInclude Include="src\components\Destroy.h" />
     <ClInclude Include="src\components\Dashable.h" />
     <ClInclude Include="src\components\Destructible.h" />
@@ -485,6 +488,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\scenes\LobbySceneFactory.h" />
     <ClInclude Include="src\factories\scenes\MultiplayerLevelSceneFactory.h" />
     <ClInclude Include="src\factories\scenes\TutorialLevelSceneFactory.h" />
+    <ClInclude Include="src\factories\SwordLegsDashAttackFactory.h" />
     <ClInclude Include="src\factories\TutorialLevelFactory.h" />
     <ClInclude Include="src\factories\WallFactory.h" />
     <ClInclude Include="src\factories\scenes\SplashSceneFactory.h" />
