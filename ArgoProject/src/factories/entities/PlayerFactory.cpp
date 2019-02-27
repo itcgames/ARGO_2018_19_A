@@ -75,7 +75,7 @@ app::Entity const app::fact::PlayerFactory::create()
 	// time it takes to switch from one frame to another.
 	// calculating it by taking full_duration / (number of total frames)
 	// while dealing with edge case of any of the frames being zero
-	animator.perFrame = 4.5f / (std::max(animator.numOfFrames.x, 1) * std::max(animator.numOfFrames.y, 1));
+	animator.perFrame = 0.02f;
 	m_registry.assign<decltype(animator)>(entity, std::move(animator));
 
 

@@ -11,6 +11,7 @@ namespace app::res
 		DebugAnimation,
 		DebugEnemyAnimation,
 		AxeRun,
+		EnemyWalk,
 		HazardSpikes,
 		LevelWall,
 		Loading,

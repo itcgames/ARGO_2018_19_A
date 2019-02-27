@@ -1,25 +1,31 @@
-﻿#ifndef _COMPONENTS_TILED_H
-#define _COMPONENTS_TILED_H
+﻿#ifndef _LOBBY_TAG_H
+#define _LOBBY_TAG_H
 
-namespace app::comp
+#include "shared/network/Lobby.h"
+
+namespace app::tag
 {
-	struct Tiled
+	struct Lobby
 	{
 	public: // Constructors/Destructor/Assignments
-		Tiled() = default;
-		~Tiled() = default;
+		Lobby() = default;
+		~Lobby() = default;
 
-		Tiled(Tiled const &) = default;
-		Tiled & operator=(Tiled const &) = default;
+		Lobby(Lobby const &) = default;
+		Lobby & operator=(Lobby const &) = default;
 
-		Tiled(Tiled &&) = default;
-		Tiled & operator=(Tiled &&) = default;
+		Lobby(Lobby &&) = default;
+		Lobby & operator=(Lobby &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::vector<app::Entity> tiles;
+		std::uint8_t id;
+		std::string name;
+		bool isHost = false;
+		app::net::Lobby::Players players;
+		std::size_t playerIndex;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -31,4 +37,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENTS_TILED_H
+#endif // !_LOBBY_TAG_H

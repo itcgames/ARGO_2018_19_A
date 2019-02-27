@@ -3,13 +3,15 @@
 
 #include "shared/network/Lobby.h"
 #include "shared/network/PacketType.h"
+#include "shared/network/PacketParser.h"
 
 namespace app::net
 {
-	class Client
+	class Client : public app::net::PacketParser
 	{
+	private: // Usings/typedefs/enums
 	public: // Constructors/Destructor/Assignments
-		Client() = default;
+		Client();
 		~Client() = default;
 
 		Client(Client const &) = default;
@@ -27,24 +29,12 @@ namespace app::net
 		bool checkSocket();
 		bool processPacket(PacketType _packetType);
 
-		bool sendAll(std::byte * data, int totalBytes);
-		bool getAll(std::byte * data, int totalBytes);
-
-		bool get(Lobby & _lobby);
-		
-		bool get(std::list<Lobby> & _lobbies);
-
-		bool send(const std::string& _string);
-		bool get(std::string& _string);
-
-		bool send(const PacketType& _packetType);
-		bool get(PacketType& _packetType);
-
-		bool send(const int& _int);
-		bool get(int& _int);
+		template<typename T> bool send(T const & t) const { return PacketParser::send(m_socket, t); }
+		template<typename T> bool get(T & t) const { return PacketParser::get(m_socket, t); }
 
 		constexpr std::vector<Lobby> const & getLobbies() const { return m_lobbies; }
 		void setLobbies(std::list<Lobby> && lobbies);
+
 	public: // Public Static Variables
 		constexpr static auto s_SERVER_IP = "localhost";
 		constexpr static auto s_SERVER_PORT = 27000;
@@ -54,20 +44,26 @@ namespace app::net
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
 	private: // Private Static Functions
+		static void merge(std::vector<Lobby> & lobbies, Lobby const & lobby);
 	private: // Private Member Functions
-		void output(std::string const & msg) const;
-		void output(std::initializer_list<std::string> const & msgs) const;
-
 		bool processClientName();
 		bool processLobbyWasCreated();
 		bool processLobbyCreate();
+		bool processLobbyGetAll();
+		bool processLobbyJoined();
+		bool processLobbyJoinedMy();
 		bool processDefault();
+
+
+		void output(std::string const & msg) const;
+		void output(std::initializer_list<app::Console::Variant> const & msgs) const;
 	private: // Private Static Variables
 		constexpr static bool s_DEBUG_MODE = true;
 	private: // Private Member Variables
 		TCPsocket m_socket;
 		SDLNet_SocketSet m_socketSet;
 		std::vector<Lobby> m_lobbies;
+		std::int32_t m_id;
 	};
 }
 

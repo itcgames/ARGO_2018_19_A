@@ -192,9 +192,13 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   <ItemGroup>
     <ClCompile Include="src\commands\AttackCommand.cpp" />
     <ClCompile Include="..\ArgoShared\src\shared\network\Lobby.cpp" />
+    <ClCompile Include="..\ArgoShared\src\shared\network\PacketParser.cpp" />
     <ClCompile Include="..\ArgoShared\src\shared\network\PacketType.cpp" />
+    <ClCompile Include="..\ArgoShared\src\shared\utilities\ByteConverter.cpp" />
     <ClCompile Include="..\ArgoShared\src\shared\utilities\Console.cpp" />
+    <ClCompile Include="..\ArgoShared\src\shared\utilities\variant.cpp" />
     <ClCompile Include="src\commands\BaseCommand.cpp" />
+    <ClCompile Include="src\commands\buttons\ButtonLobbySelectCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonLobbySelectCreateLobbyCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonLobbySelectRefreshCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCancelCommand.cpp" />
@@ -236,6 +240,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\Impenetrable.cpp" />
     <ClCompile Include="src\components\Input.cpp" />
     <ClCompile Include="src\components\Layer.cpp" />
+    <ClCompile Include="src\components\LobbyDisplay.cpp" />
     <ClCompile Include="src\components\Location.cpp" />
     <ClCompile Include="src\components\Modal.cpp" />
     <ClCompile Include="src\components\Motion.cpp" />
@@ -292,7 +297,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\fsm\AnimationStateMachine.cpp" />
     <ClCompile Include="src\fsm\BaseState.cpp" />
     <ClCompile Include="src\fsm\BaseStateMachine.cpp" />
-    <ClCompile Include="src\fsm\states\AiWalkingAnimationState.cpp" />
+    <ClCompile Include="src\fsm\states\AxeRunAnimationState.cpp" />
     <ClCompile Include="src\fsm\states\AnimationState.cpp" />
     <ClCompile Include="src\fsm\states\EntityState.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -317,6 +322,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\parameters\DestructibleParameters.cpp" />
     <ClCompile Include="src\network\Client.cpp" />
     <ClCompile Include="src\parameters\ButtonFactoryParameters.cpp" />
+    <ClCompile Include="src\parameters\LobbyDisplayFactoryParameters.cpp" />
     <ClCompile Include="src\resources\AudioKey.cpp" />
     <ClCompile Include="src\resources\FontKey.cpp" />
     <ClCompile Include="src\resources\ResourceLoader.cpp" />
@@ -376,10 +382,10 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\SeekEntitySystem.cpp" />
     <ClCompile Include="src\systems\StateMachineSystem.cpp" />
     <ClCompile Include="src\systems\WidgetNavigationSystem.cpp" />
+    <ClCompile Include="src\tags\LobbyTag.cpp" />
     <ClCompile Include="src\utilities\cute_c2.cpp" />
     <ClCompile Include="src\utilities\Time.cpp" />
     <ClCompile Include="src\utilities\makers.cpp" />
-    <ClCompile Include="src\utilities\variant.cpp" />
     <ClCompile Include="src\visitors\CollisionAabbBoolVisitor.cpp" />
     <ClCompile Include="src\visitors\CollisionAabbManiVisitor.cpp" />
     <ClCompile Include="src\visitors\CollisionBoundsBoolVisitor.cpp" />
@@ -391,9 +397,13 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   <ItemGroup>
     <ClInclude Include="src\commands\AttackCommand.h" />
     <ClInclude Include="..\ArgoShared\src\shared\network\Lobby.h" />
+    <ClInclude Include="..\ArgoShared\src\shared\network\PacketParser.h" />
     <ClInclude Include="..\ArgoShared\src\shared\network\PacketType.h" />
+    <ClInclude Include="..\ArgoShared\src\shared\utilities\ByteConverter.h" />
     <ClInclude Include="..\ArgoShared\src\shared\utilities\Console.h" />
+    <ClInclude Include="..\ArgoShared\src\shared\utilities\variant.h" />
     <ClInclude Include="src\commands\BaseCommand.h" />
+    <ClInclude Include="src\commands\buttons\ButtonLobbySelectCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonLobbySelectCreateLobbyCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonLobbySelectRefreshCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCancelCommand.h" />
@@ -435,6 +445,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\Impenetrable.h" />
     <ClInclude Include="src\components\Input.h" />
     <ClInclude Include="src\components\Layer.h" />
+    <ClInclude Include="src\components\LobbyDisplay.h" />
     <ClInclude Include="src\components\Location.h" />
     <ClInclude Include="src\components\Modal.h" />
     <ClInclude Include="src\components\Motion.h" />
@@ -491,7 +502,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\fsm\AnimationStateMachine.h" />
     <ClInclude Include="src\fsm\BaseState.h" />
     <ClInclude Include="src\fsm\BaseStateMachine.h" />
-    <ClInclude Include="src\fsm\states\AiWalkingAnimationState.h" />
+    <ClInclude Include="src\fsm\states\AxeRunAnimationState.h" />
     <ClInclude Include="src\fsm\states\AnimationState.h" />
     <ClInclude Include="src\fsm\states\EntityState.h" />
     <ClInclude Include="src\Game.h" />
@@ -569,10 +580,10 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\systems\SeekEntitySystem.h" />
     <ClInclude Include="src\systems\StateMachineSystem.h" />
     <ClInclude Include="src\systems\WidgetNavigationSystem.h" />
+    <ClInclude Include="src\tags\LobbyTag.h" />
     <ClInclude Include="src\utilities\cute_c2.h" />
     <ClInclude Include="src\utilities\Time.h" />
     <ClInclude Include="src\utilities\makers.h" />
-    <ClInclude Include="src\utilities\variant.h" />
     <ClInclude Include="src\visitors\CollisionAabbBoolVisitor.h" />
     <ClInclude Include="src\visitors\CollisionAabbManiVisitor.h" />
     <ClInclude Include="src\visitors\CollisionBoundsBoolVisitor.h" />
@@ -583,6 +594,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
   </ItemGroup>
   <ItemGroup>
     <None Include="res\.gitkeep" />
+    <None Include="src\parameters\LobbyDisplayFactoryParameters.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\Animations\test.png" />

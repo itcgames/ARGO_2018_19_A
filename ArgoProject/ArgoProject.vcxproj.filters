@@ -142,6 +142,12 @@
     <Filter Include="Resource Files\Animations">
       <UniqueIdentifier>{062b658f-59f1-44ad-8665-8f2a693ac7ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\tags">
+      <UniqueIdentifier>{2af6615c-9ba7-4a8b-a265-08be9bb77902}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\tags">
+      <UniqueIdentifier>{fa2ee7f7-050b-4b7e-a5da-e52bb9abe376}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -525,9 +531,6 @@
     <ClCompile Include="src\factories\entities\ButtonFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
-    <ClCompile Include="src\utilities\variant.cpp">
-      <Filter>Source Files\utilities</Filter>
-    </ClCompile>
     <ClCompile Include="src\parameters\ButtonFactoryParameters.cpp">
       <Filter>Source Files\parameters</Filter>
     </ClCompile>
@@ -612,6 +615,27 @@
     <ClCompile Include="src\factories\entities\GoalFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
+    <ClCompile Include="..\ArgoShared\src\shared\utilities\ByteConverter.cpp">
+      <Filter>Source Files\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ArgoShared\src\shared\network\PacketParser.cpp">
+      <Filter>Source Files\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parameters\LobbyDisplayFactoryParameters.cpp">
+      <Filter>Source Files\parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\LobbyDisplay.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\buttons\ButtonLobbySelectCommand.cpp">
+      <Filter>Source Files\commands\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tags\LobbyTag.cpp">
+      <Filter>Source Files\tags</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ArgoShared\src\shared\utilities\variant.cpp">
+      <Filter>Source Files\utilities</Filter>
+    </ClCompile>
     <ClCompile Include="src\graphics\AudioPlayer.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
@@ -693,9 +717,6 @@
     <ClCompile Include="src\fsm\AnimationStateMachine.cpp">
       <Filter>Source Files\fsm</Filter>
     </ClCompile>
-    <ClCompile Include="src\fsm\states\AiWalkingAnimationState.cpp">
-      <Filter>Source Files\fsm\states</Filter>
-    </ClCompile>
     <ClCompile Include="src\factories\scenes\LoadingSceneFactory.cpp">
       <Filter>Source Files\factories\scenes</Filter>
     </ClCompile>
@@ -715,7 +736,10 @@
       <Filter>Source Files\components</Filter>
     </ClCompile>
     <ClCompile Include="src\components\Tiled.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fsm\states\AxeRunAnimationState.cpp">
+      <Filter>Source Files\fsm\states</Filter>
     </ClCompile>
     <ClCompile Include="src\factories\BombAttackFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
@@ -1106,9 +1130,6 @@
     <ClInclude Include="src\factories\entities\ButtonFactory.h">
       <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
-    <ClInclude Include="src\utilities\variant.h">
-      <Filter>Header Files\utilities</Filter>
-    </ClInclude>
     <ClInclude Include="src\parameters\ButtonFactoryParameters.h">
       <Filter>Header Files\parameters</Filter>
     </ClInclude>
@@ -1196,6 +1217,24 @@
     <ClInclude Include="src\factories\AIFactory.h">
       <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
+    <ClInclude Include="..\ArgoShared\src\shared\utilities\ByteConverter.h">
+      <Filter>Header Files\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ArgoShared\src\shared\network\PacketParser.h">
+      <Filter>Header Files\network</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\LobbyDisplay.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\buttons\ButtonLobbySelectCommand.h">
+      <Filter>Header Files\commands\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tags\LobbyTag.h">
+      <Filter>Header Files\tags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ArgoShared\src\shared\utilities\variant.h">
+      <Filter>Header Files\utilities</Filter>
+    </ClInclude>
     <ClInclude Include="src\graphics\AudioPlayer.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
@@ -1210,8 +1249,6 @@
     </ClInclude>
     <ClInclude Include="src\systems\LoadingSystem.h">
       <Filter>Header Files\systems</Filter>
-    </ClInclude>
-    <ClInclude Include="src\components\AnimatedImage.h">
     </ClInclude>
     <ClInclude Include="src\components\CharacterType.h">
       <Filter>Header Files\components</Filter>
@@ -1270,9 +1307,6 @@
     <ClInclude Include="src\fsm\AnimationStateMachine.h">
       <Filter>Header Files\fsm</Filter>
     </ClInclude>
-    <ClInclude Include="src\fsm\states\AiWalkingAnimationState.h">
-      <Filter>Header Files\fsm\states</Filter>
-    </ClInclude>
     <ClInclude Include="src\graphics\WindowParameters.h">
       <Filter>Header Files\parameters</Filter>
     </ClInclude>
@@ -1295,7 +1329,13 @@
       <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="src\components\Tiled.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\AnimatedImage.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\fsm\states\AxeRunAnimationState.h">
+      <Filter>Header Files\fsm\states</Filter>
     </ClInclude>
     <ClInclude Include="src\factories\BombAttackFactory.h">
       <Filter>Header Files\factories\entities</Filter>
@@ -1310,6 +1350,9 @@
   <ItemGroup>
     <None Include="res\.gitkeep">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="src\parameters\LobbyDisplayFactoryParameters.h">
+      <Filter>Header Files\parameters</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

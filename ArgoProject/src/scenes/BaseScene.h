@@ -26,6 +26,7 @@
 #include "systems/SeekEntitySystem.h"
 #include "systems/DiscReturnSystem.h"
 #include "systems/BombExplosionSystem.h"
+#include "factories/SceneFactory.h"
 
 namespace app::sce
 {
@@ -82,12 +83,14 @@ namespace app::sce
 	public: // Public Member Variables
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
+		std::vector<app::Entity>createEntities(fact::sce::SceneFactory& scenesFactory);
 	protected: // Protected Static Variables
 		constexpr static bool DEBUG_MODE = true;
 	protected: // Protected Member Variables
 		app::Registry & m_registry;
 		SceneType & m_sceneManagerType;
 		ResourceManager & m_resourceManager;
+		app::net::Client & m_client;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables

@@ -20,7 +20,7 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 			UpdateSystem(std::in_place_type<app::sys::AISystem>),
 			UpdateSystem(std::in_place_type<app::sys::CurrentGroundSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CollisionSystem>),
-			UpdateSystem(std::in_place_type<app::sys::NetworkSystem>),
+			UpdateSystem(std::in_place_type<app::sys::NetworkSystem>, sceneManagerType),
 			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType),
 			UpdateSystem(std::in_place_type<app::sys::DestroySystem>)
 			})
@@ -37,7 +37,9 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 
 void app::sce::MainMenuScene::start()
 {
-	auto const & entities = fact::sce::MainMenuSceneFactory(m_sceneManagerType, m_demoFactory).create();
+	auto sceneFactory = fact::sce::MainMenuSceneFactory(m_sceneManagerType, m_demoFactory);
+	auto entities = BaseScene::createEntities(sceneFactory);
+
 	m_registry.destruction<comp::Destroy>().connect<MainMenuScene, &MainMenuScene::startDemo>(this);
 	if constexpr (DEBUG_MODE)
 	{
@@ -58,9 +60,10 @@ void app::sce::MainMenuScene::end()
 		m_registry.each([this](app::Entity const entity)
 		{
 			Console::writeLine({ "  Destroyed entity[", std::to_string(entity), "]" });
-			m_registry.destroy(entity);
 		});
 	}
+	if (m_client.hasInit() && m_sceneManagerType != SceneType::LobbySelect) { m_client.deinitNetwork(); }
+	m_registry.reset();
 }
 
 void app::sce::MainMenuScene::startDemo(app::Registry & registry, app::Entity inputEntity)

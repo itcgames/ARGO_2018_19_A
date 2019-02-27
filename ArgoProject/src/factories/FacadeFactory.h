@@ -1,11 +1,11 @@
 ﻿#ifndef _FACTORY_FACADE_H
 #define _FACTORY_FACADE_H
 
-#include "EntityFactory.h"
+#include "EntitiesFactory.h"
 
 namespace app::fact
 {
-	class FacadeFactory : public EntityFactory
+	class FacadeFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
 		FacadeFactory(app::math::Vector2f const & pos, app::math::Vector2f const & size, app::math::Vector2i const & numberOfTiles);
@@ -19,7 +19,7 @@ namespace app::fact
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		virtual app::Entity const create() override;
+		virtual std::vector<app::Entity> create() override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions

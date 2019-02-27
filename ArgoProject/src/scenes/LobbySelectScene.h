@@ -2,6 +2,7 @@
 #define _LOBBY_SELECT_SCENE_H
 
 #include "BaseScene.h"
+#include "network/Client.h"
 
 namespace app::sce
 {

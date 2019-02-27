@@ -2,13 +2,14 @@
 #define _BUTTON_LOBBY_SELECT_CREATE_LOBBY_COMMAND_H
 
 #include "BaseMultiplayerCommand.h"
+#include "scenes/SceneType.h"
 
 namespace app::cmnd
 {
 	class ButtonLobbySelectCreateLobbyCommand : public BaseMultiplayerCommand
 	{
 	public: // Constructors/Destructor/Assignments
-		ButtonLobbySelectCreateLobbyCommand(std::string const & userName);
+		ButtonLobbySelectCreateLobbyCommand(std::string const & userName, app::sce::SceneType & sceneControl);
 		virtual ~ButtonLobbySelectCreateLobbyCommand() = default;
 
 		ButtonLobbySelectCreateLobbyCommand(ButtonLobbySelectCreateLobbyCommand const &) = default;
@@ -31,6 +32,7 @@ namespace app::cmnd
 	private: // Private Static Variables
 	private: // Private Member Variables
 		std::string const m_userName;
+		app::sce::SceneType & m_sceneControl;
 	};
 }
 

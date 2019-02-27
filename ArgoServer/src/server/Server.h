@@ -1,13 +1,15 @@
 ﻿#ifndef _SERVER_H
 #define _SERVER_H
 
-#include "shared/network/Lobby.h"
 #include "shared/network/PacketType.h"
+#include "shared/network/PacketParser.h"
 
 namespace app::net
 {
-	class Server
+	class Server : public PacketParser
 	{
+	private: // Usings/typedefs/enums
+		using ByteConverter = app::util::ByteConverter;
 	public: // Constructors/Destructor/Assignments
 		explicit Server(int port);
 		~Server();
@@ -36,16 +38,9 @@ namespace app::net
 		void sdlCleanup();
 		std::uint8_t getFreeSocket(std::uint8_t startIndex) const;
 
-		bool getAll(int id, std::byte * data, int totalBytes);
-		bool sendAll(int id, std::byte * data, int totalBytes);
-		bool get(int id, int& _int);
-		bool get(int id, std::string& string);
-		bool get(int id, PacketType& packetType);
+		template<typename T> bool get(int id, T & t) const { return PacketParser::get(m_sockets.at(id), t); }
+		template<typename T> bool send(int id, T const & t) const { return PacketParser::send(m_sockets.at(id), t); }
 
-		bool send(int id, const int& num);
-		bool send(int id, const PacketType& packetType);
-		bool send(int id, const std::string& string, const PacketType& packetToProcessString);
-		bool send(int id, Lobby const & lobby);
 		bool processPacket(int id, PacketType packetType);
 
 		// packet process functions
@@ -53,11 +48,12 @@ namespace app::net
 		bool processClientName(int id);
 		bool processLobbyCreate(int id);
 		bool processLobbyGetAll(int id);
+		bool processLobbyJoined(int id);
 		bool processDefault(int id);
 
 		void outputIP(IPaddress const & ip);
 		void output(int id, std::string const & msg) const;
-		void output(int id, std::initializer_list<std::string> const & msgs) const;
+		void output(int id, std::initializer_list<app::Console::Variant> const & msgs) const;
 	private: // Private Static Variables
 		constexpr static auto s_MAX_SOCKETS = std::numeric_limits<std::uint8_t>::max();
 		constexpr static bool s_DEBUG_MODE = true;
@@ -75,6 +71,7 @@ namespace app::net
 		std::uint8_t m_freeSocket = 0u;
 
 		std::vector<Lobby> m_lobbies;
+		std::uint8_t m_idGenerator = 0u;
 	};
 }
 #endif // !_SERVER_H

@@ -1,11 +1,11 @@
 ﻿#ifndef _FACTORY_LOADING_SCENE_H
 #define _FACTORY_LOADING_SCENE_H
 
-#include "../EntitiesFactory.h"
+#include "../SceneFactory.h"
 
 namespace app::fact::sce
 {
-	class LoadingSceneFactory : public EntitiesFactory	
+	class LoadingSceneFactory : public SceneFactory	
 	{
 	public: // Constructors/Destructor/Assignments
 		LoadingSceneFactory() = default;
