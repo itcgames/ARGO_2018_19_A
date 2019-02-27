@@ -85,7 +85,7 @@ void app::gra::Window::pollEvents()
 
 void app::gra::Window::clear() const
 {
-	auto lock = std::lock_guard<decltype(Texture::s_sdlMutex)>(Texture::s_sdlMutex);
+	auto lock = std::lock_guard<decltype(app::gra::Texture::s_sdlMutex)>(app::gra::Texture::s_sdlMutex);
 	SDL_SetRenderDrawColor(m_renderer.get(), s_BG_COLOR.r, s_BG_COLOR.g, s_BG_COLOR.b, s_BG_COLOR.a);
 	SDL_RenderClear(m_renderer.get());
 }
@@ -110,7 +110,6 @@ void app::gra::Window::render(app::gra::RenderRect const & rect) const
 		static_cast<int32_t>(origin.x * scale.x),
 		static_cast<int32_t>(origin.y * scale.y)
 	};
-
 	SDL_RenderCopyEx(m_renderer.get(), rect.getTexture(), source.has_value() ? &source.value() : nullptr, &destination, rect.getRotation(), &center, FLIP_FLAG);
 }
 
@@ -150,7 +149,7 @@ void app::gra::Window::render(std::shared_ptr<SDL_Texture> texture, SDL_Rect con
 
 void app::gra::Window::display() const
 {
-	auto lock = std::lock_guard<decltype(Texture::s_sdlMutex)>(Texture::s_sdlMutex);
+	auto lock = std::lock_guard<decltype(app::gra::Texture::s_sdlMutex)>(app::gra::Texture::s_sdlMutex);
 	SDL_RenderPresent(m_renderer.get());
 }
 

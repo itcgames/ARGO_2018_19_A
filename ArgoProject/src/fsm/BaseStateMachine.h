@@ -8,6 +8,7 @@ namespace app::fsm
 	class BaseStateMachine
 	{
 	public: // Constructors/Destructor/Assignments
+		BaseStateMachine() = default;
 		BaseStateMachine(std::shared_ptr<BaseState> state);
 		virtual ~BaseStateMachine() = default;
 

@@ -4,32 +4,49 @@
 #include "factories/entities/ImageFactory.h"
 #include "factories/entities/ButtonFactory.h"
 #include "factories/entities/TextFactory.h"
+#include "factories/entities/PlayerFactory.h"
+#include "factories/AIFactory.h"
+#include "factories/LevelFactory.h"
+
+#include "components/Destroy.h"
 
 #include "commands/buttons/ButtonMainMenuMultiplayerConnectCommand.h"
 #include "network/Client.h"
 
-app::fact::sce::MainMenuSceneFactory::MainMenuSceneFactory(app::sce::SceneType & targetScene)
-	: EntitiesFactory()
+app::fact::sce::MainMenuSceneFactory::MainMenuSceneFactory(app::sce::SceneType & targetScene, std::optional<app::fact::LevelDemoFactory> & levelFactory)
+	: SceneFactory()
 	, m_targetScene(targetScene)
+	, m_levelFactory(levelFactory)
 {
 }
 
 std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 {
+	m_audioPlayer.playAudioMusic(app::res::AudioKey::BackgroundMusicTitle, app::gra::AudioPlayer::s_LOOP_FOREVER);
 	auto entities = std::vector<app::Entity>();
 
 	{
 		auto const & size = math::Vector2f{ 1366.0f, 768.0f };
 		auto const & origin = size / 2.0f;
-		auto const & position = math::Vector2f{ 0.0f, 0.0f };
+		auto const & position = app::math::Vector2f(750, 200);
 		auto const & textureKey = app::res::TextureKey::Debug;
 		auto const & zIndex = 50u;
-		entities.push_back(fact::ImageFactory(position, size, origin, textureKey, zIndex).create());
+		auto background = fact::ImageFactory(position, size, origin, textureKey, zIndex).create();
+		auto destroy = comp::Destroy();
+		destroy.timeToLive = 5.0f;
+		m_registry.assign<decltype(destroy)>(background, std::move(destroy));
+		entities.push_back(background);
+
+		auto cameraParams = app::par::CameraParameters();
+		cameraParams.targetEntity = background;
+		auto cameraEntity = fact::CameraFactory(std::move(cameraParams)).create();
+		entities.push_back(cameraEntity);
+		m_levelFactory.emplace(cameraEntity);
 	}
 	{
 		auto const & sizePerLetter = math::Vector2f{ 20.0f, 40.0f };
 		auto params = app::par::ButtonFactoryParameters();
-		params.position = math::Vector2f{ 0.0f, 0.0f };
+		params.position = math::Vector2f{ 750.0f, 200.0f };
 		params.state = app::comp::Widget::State::Highlighted;
 		params.text = std::string("Multiplayer");
 		auto const & stepSize = math::Vector2f{ static_cast<float>(params.text.size()), 1.0f };
@@ -41,13 +58,11 @@ std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 		entities.push_back(fact::ButtonFactory(params).create());
 	}
 	{
-		auto const & position = math::Vector2f{ 0.0f, 200.0f };
+		auto const & position = app::math::Vector2f(750, 100);
 		auto const & sizePerLetter = math::Vector2f{ 20.0f, 40.0f };
 		auto const & text = std::string("Are you not entertained!");
 		auto const & stepSize = math::Vector2f{ static_cast<float>(text.size()), 1.0f };
 		entities.push_back(fact::TextFactory(position, sizePerLetter * stepSize, text).create());
 	}
-	entities.push_back(fact::CameraFactory().create());
-
 	return entities;
 }

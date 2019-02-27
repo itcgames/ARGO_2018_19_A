@@ -5,7 +5,7 @@
 
 namespace app::comp
 {
-	class PlatformDrop
+	struct PlatformDrop
 	{
 	public: // Constructors/Destructor/Assignments
 		PlatformDrop() = default;

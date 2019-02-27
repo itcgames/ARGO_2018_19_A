@@ -28,7 +28,8 @@ app::sce::LobbySelectScene::LobbySelectScene(SceneType & sceneManagerType)
 
 void app::sce::LobbySelectScene::start()
 {
-	auto const & entities = fact::sce::LobbySelectSceneFactory(m_sceneManagerType).create();
+	auto sceneFactory = fact::sce::LobbySelectSceneFactory(m_sceneManagerType);
+	auto entities = BaseScene::createEntities(sceneFactory);
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("LOBBY SELECT SCENE: Creating entities");

@@ -1,12 +1,12 @@
 ﻿#ifndef _FACTORY_LOBBY_SELECT_SCENE_H
 #define _FACTORY_LOBBY_SELECT_SCENE_H
 
-#include "../EntitiesFactory.h"
+#include "../SceneFactory.h"
 #include "scenes/SceneType.h"
 
 namespace app::fact::sce
 {
-	class LobbySelectSceneFactory : public EntitiesFactory
+	class LobbySelectSceneFactory : public SceneFactory
 	{
 	public: // Constructors/Destructor/Assignments
 		LobbySelectSceneFactory(app::sce::SceneType & sceneControl);

@@ -24,7 +24,8 @@ app::sce::MultiplayerLevelScene::MultiplayerLevelScene(SceneType & sceneManagerT
 
 void app::sce::MultiplayerLevelScene::start()
 {
-	auto const & entities = fact::sce::MultiplayerLevelSceneFactory().create();
+	auto sceneFactory = fact::sce::MultiplayerLevelSceneFactory();
+	auto entities = BaseScene::createEntities(sceneFactory);
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("MULTIPLAYER LEVEL SCENE: Creating entities");

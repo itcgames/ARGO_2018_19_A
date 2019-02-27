@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
-#include "utilities/cute_c2.h"
 #include "WallFactory.h"
+#include "utilities/cute_c2.h"
+#include "factories/entities/ImageFactory.h"
 
 #include "components/Location.h"
 #include "components/Dimensions.h"
@@ -10,39 +11,64 @@
 #include "components/Impenetrable.h"
 #include "components/Layer.h"
 
-app::fact::WallFactory::WallFactory(app::math::Vector2f const & pos, app::math::Vector2f const & size)
-	: m_position(pos), m_size(size)
+app::fact::WallFactory::WallFactory(app::math::Vector2f const & pos, app::math::Vector2f const & size, app::math::Vector2i const & numberOfTiles)
+	: m_position(pos), m_sizeOfTile(size), m_numberOfTiles(numberOfTiles)
 {
 }
 
-app::Entity const app::fact::WallFactory::create()
+std::vector<app::Entity> app::fact::WallFactory::create()
 {
-	app::Entity const entity = m_registry.create();
+	auto entities = std::vector<app::Entity>();
 
-	auto location = comp::Location();
-	location.position = m_position;
-	location.orientation = 0.0f;
-	m_registry.assign<decltype(location)>(entity, std::move(location));
+	auto const size = m_sizeOfTile * static_cast<math::Vector2f>(m_numberOfTiles);
+	auto const origin = size / 2.0f;
 
-	auto dimensions = comp::Dimensions();
-	dimensions.size = m_size;
-	dimensions.origin = dimensions.size / 2.0f;
-	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
+	auto const sizeOfTile = m_sizeOfTile;
+	auto const originOfTile = sizeOfTile / 2.0f;
+	auto const zIndex = 130u;
+	auto const textureKey = app::res::TextureKey::LevelWall;
+	auto const startPosition = m_position - origin + originOfTile;
+	auto position = startPosition;
+	auto tileFactory = fact::ImageFactory(position, sizeOfTile, originOfTile, textureKey, zIndex);
+	for (std::int32_t x = 0; x < m_numberOfTiles.x; ++x)
+	{
+		for (std::int32_t y = 0; y < m_numberOfTiles.y; ++y)
+		{
+			position = startPosition + (sizeOfTile * math::Vector2f{ x, y });
+			entities.push_back(tileFactory.create());
+		}
+	}
 
-	auto layer = comp::Layer();
-	layer.zIndex = 130u;
-	m_registry.assign<decltype(layer)>(entity, std::move(layer));
+	{
+		app::Entity const wallEntity = m_registry.create();
 
-	auto render = comp::Render();
-	render.texture = m_resourceManager.getTexture(app::res::TextureKey::Debug);
-	m_registry.assign<decltype(render)>(entity, std::move(render));
+		auto location = comp::Location();
+		location.position = m_position;
+		location.orientation = 0.0f;
+		m_registry.assign<decltype(location)>(wallEntity, std::move(location));
 
-	auto collision = comp::Collision();
-	collision.bounds = cute::c2AABB();
-	m_registry.assign<decltype(collision)>(entity, std::move(collision));
+		auto dimensions = comp::Dimensions();
+		dimensions.size = size;
+		dimensions.origin = origin;
+		m_registry.assign<decltype(dimensions)>(wallEntity, std::move(dimensions));
 
-	auto impenetrable = comp::Impenetrable();
-	m_registry.assign<decltype(impenetrable)>(entity, std::move(impenetrable));
+		//auto layer = comp::Layer();
+		//layer.zIndex = 130u;
+		//m_registry.assign<decltype(layer)>(wallEntity, std::move(layer));
 
-	return entity;
+		//auto render = comp::Render();
+		//render.texture = m_resourceManager.getTexture(app::res::TextureKey::LevelWall);
+		//m_registry.assign<decltype(render)>(wallEntity, std::move(render));
+
+		auto collision = comp::Collision();
+		collision.bounds = cute::c2AABB();
+		m_registry.assign<decltype(collision)>(wallEntity, std::move(collision));
+
+		auto impenetrable = comp::Impenetrable();
+		m_registry.assign<decltype(impenetrable)>(wallEntity, std::move(impenetrable));
+
+		entities.push_back(wallEntity);
+	}
+
+	return entities;
 }

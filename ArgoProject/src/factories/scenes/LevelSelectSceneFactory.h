@@ -1,11 +1,11 @@
 ﻿#ifndef _FACTORY_LEVEL_SELECT_SCENE_H
 #define _FACTORY_LEVEL_SELECT_SCENE_H
 
-#include "../EntitiesFactory.h"
+#include "../SceneFactory.h"
 
 namespace app::fact::sce
 {
-	class LevelSelectSceneFactory : public EntitiesFactory
+	class LevelSelectSceneFactory : public SceneFactory
 	{
 	public: // Constructors/Destructor/Assignments
 		LevelSelectSceneFactory() = default;

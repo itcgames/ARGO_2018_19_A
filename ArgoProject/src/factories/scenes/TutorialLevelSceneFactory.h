@@ -1,11 +1,11 @@
 ﻿#ifndef _FACTORY_TUTORIAL_LEVEL_SCENE_H
 #define _FACTORY_TUTORIAL_LEVEL_SCENE_H
 
-#include "../EntitiesFactory.h"
+#include "../SceneFactory.h"
 
 namespace app::fact::sce
 {
-	class TutorialLevelSceneFactory : public EntitiesFactory
+	class TutorialLevelSceneFactory : public SceneFactory
 	{
 	public: // Constructors/Destructor/Assignments
 		TutorialLevelSceneFactory() = default;

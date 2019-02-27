@@ -24,7 +24,8 @@ app::sce::LevelSelectScene::LevelSelectScene(SceneType & sceneManagerType)
 
 void app::sce::LevelSelectScene::start()
 {
-	auto const & entities = fact::sce::LevelSelectSceneFactory().create();
+	auto sceneFactory = fact::sce::LevelSelectSceneFactory();
+	auto entities = BaseScene::createEntities(sceneFactory);
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("LEVEL SELECT SCENE: Creating entities");

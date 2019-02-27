@@ -19,20 +19,7 @@ namespace app::sys
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		//general update
-		virtual void update(app::time::seconds const & dt) override;
-		//calls these which updates the collision boxes and checks collisions depending on the current motion the player has
-		void updateCollisionBoxes();	
-		void groundCollisions();
-		void airCollisions();
-		void dashCollisions();
-		void enemyWallCollisions();
-		void enemyEnemyCollisions();
-		void enemyPlayerCollisions();
-		void playerHazardCollisions();
-		void checkPlatformCollisions();
-		void checkAINodeCollisions();
-
+		virtual void update(app::time::seconds const & dt) final override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -41,8 +28,22 @@ namespace app::sys
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
+		void updateCollisionBoxes();
+		void groundCollisions();
+		void airCollisions();
+		void dashCollisions();
+		void enemyWallCollisions();
+		void enemyEnemyCollisions();
+		void playerHazardCollisions();
+		void playerGoalCollisions();
+		void playerEnemyCollisions();
+		void checkPlatformCollisions();
+		void checkAINodeCollisions();
+		void attackEnemyCollisions();
+		void attackDestructibleCollisions();
+		void checkDiscCollisions();
 	private: // Private Static Variables
-		constexpr static bool DEBUG_MODE = true;
+		constexpr static bool DEBUG_MODE = false;
 	private: // Private Member Variables
 	};
 }

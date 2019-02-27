@@ -15,6 +15,7 @@ namespace app::sce
 		MultiplayerLevel,
 		TutorialLevel,
 		Splash,
+		Loading,
 		Count
 	};
 }
