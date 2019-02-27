@@ -217,6 +217,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\AnimatedImage.cpp" />
     <ClCompile Include="src\components\Animator.cpp" />
     <ClCompile Include="src\components\Attack.cpp" />
+    <ClCompile Include="src\components\Background.cpp" />
     <ClCompile Include="src\components\CharacterType.cpp" />
     <ClCompile Include="src\components\Collision.cpp" />
     <ClCompile Include="src\components\Commandable.cpp" />
@@ -419,6 +420,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\AnimatedImage.h" />
     <ClInclude Include="src\components\Animator.h" />
     <ClInclude Include="src\components\Attack.h" />
+    <ClInclude Include="src\components\Background.h" />
     <ClInclude Include="src\components\CharacterType.h" />
     <ClInclude Include="src\components\Collision.h" />
     <ClInclude Include="src\components\Commandable.h" />
