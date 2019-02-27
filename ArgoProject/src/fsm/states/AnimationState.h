@@ -2,14 +2,16 @@
 #define _FINITE_STATE_MACHINES_ANIMATION_STATE_H
 
 #include "EntityState.h"
+#include "resources/ResourceManager.h"
 #include "components/Render.h"
+#include "components/Animator.h"
 
 namespace app::fsm::sta
 {
 	class AnimationState : public EntityState
 	{
 	public: // Constructors/Destructor/Assignments
-		AnimationState(app::Entity const entity, comp::Render render);
+		AnimationState(app::Entity const entity);
 		virtual ~AnimationState() = default;
 
 		AnimationState(AnimationState const &) = default;
@@ -30,7 +32,9 @@ namespace app::fsm::sta
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
-		comp::Render const m_render;
+		comp::Render m_render;
+		comp::Animator m_animator;
+		app::res::ResourceManager<true> & m_resourceManager;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables

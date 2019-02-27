@@ -8,5 +8,7 @@ app::fsm::BaseStateMachine::BaseStateMachine(std::shared_ptr<BaseState> state)
 
 void app::fsm::BaseStateMachine::setState(std::shared_ptr<BaseState> newState)
 {
+	if (m_state) { m_state->end(); }
 	m_state = newState;
+	if (m_state) { m_state->start(); }
 }

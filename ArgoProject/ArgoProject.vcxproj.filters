@@ -690,6 +690,9 @@
     <ClCompile Include="src\factories\entities\LevelDemoFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
+    <ClCompile Include="src\fsm\AnimationStateMachine.cpp">
+      <Filter>Source Files\fsm</Filter>
+    </ClCompile>
     <ClCompile Include="src\factories\scenes\LoadingSceneFactory.cpp">
       <Filter>Source Files\factories\scenes</Filter>
     </ClCompile>
@@ -701,6 +704,15 @@
     </ClCompile>
     <ClCompile Include="src\components\Hazard.cpp">
       <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Facade.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Tiled.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fsm\states\AxeRunAnimationState.cpp">
+      <Filter>Source Files\fsm\states</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1243,6 +1255,9 @@
     <ClInclude Include="src\factories\entities\LevelDemoFactory.h">
       <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
+    <ClInclude Include="src\fsm\AnimationStateMachine.h">
+      <Filter>Header Files\fsm</Filter>
+    </ClInclude>
     <ClInclude Include="src\graphics\WindowParameters.h">
       <Filter>Header Files\parameters</Filter>
     </ClInclude>
@@ -1257,6 +1272,15 @@
     </ClInclude>
     <ClInclude Include="src\components\Hazard.h">
       <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Facade.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Tiled.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\fsm\states\AxeRunAnimationState.h">
+      <Filter>Header Files\fsm\states</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

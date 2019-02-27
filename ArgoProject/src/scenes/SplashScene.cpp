@@ -26,6 +26,13 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 	m_resourceManager.loadTexture(TextureKey::DebugBig, "./res/BigImage.png");
 	m_resourceManager.loadTexture(TextureKey::DebugAnimation, "./res/Animations/test.png");
 	m_resourceManager.loadTexture(TextureKey::DebugEnemyAnimation, "./res/Animations/testEnemy.png");
+	m_resourceManager.loadTexture(TextureKey::AxeRun, "./res/Character/Axe/axe_guy_run.png");
+	m_resourceManager.loadTexture(TextureKey::EnemyWalk, "./res/Level/Enemies/level1_enemy_walk.png");
+	m_resourceManager.loadTexture(TextureKey::HazardSpikes, "./res/Level/Hazards/hazard_spikes.png");
+	m_resourceManager.loadTexture(TextureKey::LevelWall, "./res/Level/Wall/level1_wall_tile.png");
+	m_resourceManager.loadTexture(TextureKey::PlatformLeft, "./res/Level/Platform/platform1_left.png");
+	m_resourceManager.loadTexture(TextureKey::PlatformMiddle, "./res/Level/Platform/platform1_middle.png");
+	m_resourceManager.loadTexture(TextureKey::PlatformRight, "./res/Level/Platform/platform1_right.png");
 	m_resourceManager.loadTexture(TextureKey::DebugCollisionBox, "./res/Debug/colBox.png");
 	using FontKey = app::res::FontKey;
 	m_resourceManager.loadFont(FontKey::Debug, "./res/Fonts/arial.ttf");
