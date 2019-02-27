@@ -1,6 +1,8 @@
 ﻿#ifndef _APP_CONSOLE_H
 #define _APP_CONSOLE_H
 
+#include "variant.h"
+
 namespace app
 {
 	/// 
@@ -12,6 +14,20 @@ namespace app
 	/// 
 	class Console
 	{
+	public: // Usings/Typedefs/enums
+		using Variant = std::variant<
+			  std::string
+			, std::uint8_t
+			, std::uint16_t
+			, std::uint32_t
+			, std::uint64_t
+			, std::int8_t
+			, std::int16_t
+			, std::int32_t
+			, std::int64_t
+			, std::float_t
+			, std::double_t
+		>;
 	public: // Constructors/Destructor/Assignments
 	public: // Public Static Functions
 		#ifdef _DEBUG
@@ -22,7 +38,13 @@ namespace app
 		/// This function does nothing when _DEBUG is not defined.
 		/// </summary>
 		/// <param name="text">read-only reference to the text that will be output'd to console.</param>
-		static inline void write(std::string const & text) { std::cout << text; }
+		static inline void write(Variant const & text)
+		{
+			std::visit(app::util::overload{
+				  [](std::string const & txt) { std::cout << txt; }
+				, [](auto const & num) { std::cout << std::to_string(num); }
+			}, text);
+		}
 
 		/// <summary>
 		/// Output to the console the collection of text passed.
@@ -30,7 +52,7 @@ namespace app
 		/// This function does nothing when _DEBUG is not defined.
 		/// </summary>
 		/// <param name="texts">read-only reference to the collection of text that will be output'd to console.</param>
-		static inline void write(std::initializer_list<std::string> const & texts) { for (auto const & text : texts) { std::cout << text; } }
+		static inline void write(std::initializer_list<Variant> const & texts) { for (auto const & text : texts) { write(text); } }
 
 		/// <summary>
 		/// Output to the console a empty new line.
@@ -45,7 +67,7 @@ namespace app
 		/// This function does nothing when _DEBUG is not defined.
 		/// </summary>
 		/// <param name="text">read-only refernece to the text that will be output'd to console.</param>
-		static inline void writeLine(std::string const & text) { std::cout << text << std::endl; }
+		static inline void writeLine(Variant const & text) { write(text); std::cout << std::endl; }
 
 		/// <summary>
 		/// Output to the console the collection of text, after which adds a new line.
@@ -53,7 +75,7 @@ namespace app
 		/// This function does nothing when _DEBUG is not defined.
 		/// </summary>
 		/// <param name="texts">read-only reference to the collection of text that will be output'd to console.</param>
-		static inline void writeLine(std::initializer_list<std::string> const & texts) { for (auto const & text : texts) { std::cout << text; } std::cout << std::endl; }
+		static inline void writeLine(std::initializer_list<Variant> const & texts) { for (auto const & text : texts) { write(text); } std::cout << std::endl; }
 
 		#else
 
@@ -63,7 +85,7 @@ namespace app
 		/// This function does nothing when _DEBUG is not defined.
 		/// </summary>
 		/// <param name="text">read-only reference to the text that will be output'd to console.</param>
-		static inline void write(std::string const & text) {}
+		static inline void write(Variant const & text) {}
 
 		/// <summary>
 		/// Output to the console the collection of text passed.
@@ -71,7 +93,7 @@ namespace app
 		/// This function does nothing when _DEBUG is not defined.
 		/// </summary>
 		/// <param name="texts">read-only reference to the collection of text that will be output'd to console.</param>
-		static inline void write(std::initializer_list<std::string> const & texts) {}
+		static inline void write(std::initializer_list<Variant> const & texts) {}
 
 		/// <summary>
 		/// Output to the console a empty new line.
@@ -86,7 +108,7 @@ namespace app
 		/// This function does nothing when _DEBUG is not defined.
 		/// </summary>
 		/// <param name="text">read-only refernece to the text that will be output'd to console.</param>
-		static inline void writeLine(std::string const & text) {}
+		static inline void writeLine(Variant const & text) {}
 
 		/// <summary>
 		/// Output to the console the collection of text, after which adds a new line.
@@ -94,7 +116,7 @@ namespace app
 		/// This function does nothing when _DEBUG is not defined.
 		/// </summary>
 		/// <param name="texts">read-only reference to the collection of text that will be output'd to console.</param>
-		static inline void writeLine(std::initializer_list<std::string> const & texts) {}
+		static inline void writeLine(std::initializer_list<Variant> const & texts) {}
 
 		#endif
 	public: // Public Member Functions

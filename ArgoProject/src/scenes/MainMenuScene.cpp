@@ -20,7 +20,7 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 			UpdateSystem(std::in_place_type<app::sys::AISystem>),
 			UpdateSystem(std::in_place_type<app::sys::CurrentGroundSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CollisionSystem>),
-			UpdateSystem(std::in_place_type<app::sys::NetworkSystem>),
+			UpdateSystem(std::in_place_type<app::sys::NetworkSystem>, sceneManagerType),
 			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType),
 			UpdateSystem(std::in_place_type<app::sys::DestroySystem>)
 			})
@@ -60,9 +60,10 @@ void app::sce::MainMenuScene::end()
 		m_registry.each([this](app::Entity const entity)
 		{
 			Console::writeLine({ "  Destroyed entity[", std::to_string(entity), "]" });
-			m_registry.destroy(entity);
 		});
 	}
+	if (m_client.hasInit() && m_sceneManagerType != SceneType::LobbySelect) { m_client.deinitNetwork(); }
+	m_registry.reset();
 }
 
 void app::sce::MainMenuScene::startDemo(app::Registry & registry, app::Entity inputEntity)

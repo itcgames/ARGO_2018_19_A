@@ -16,7 +16,7 @@ app::cmnd::ButtonMainMenuMultiplayerConnectCommand::ButtonMainMenuMultiplayerCon
 
 void app::cmnd::ButtonMainMenuMultiplayerConnectCommand::execute()
 {
-	if (m_client.hasInit()) { m_client.deinitNetwork(); }
+	if (m_client.hasInit()) { return; }
 	if constexpr (s_DEBUG_MODE)
 	{
 		if (m_client.initNetwork(m_serverIp, m_serverPort))
