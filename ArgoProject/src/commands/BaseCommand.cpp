@@ -15,7 +15,7 @@ void app::cmnd::BaseCommand::output(std::string const & message) const
 	}
 }
 
-void app::cmnd::BaseCommand::output(std::initializer_list<std::string> const & messages) const
+void app::cmnd::BaseCommand::output(std::initializer_list<app::Console::Variant> const & messages) const
 {
 	if constexpr (s_DEBUG_MODE)
 	{

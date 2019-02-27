@@ -2,13 +2,14 @@
 #define _BUTTON_LOBBY_SELECT_REFRESH_COMMAND_H
 
 #include "BaseMultiplayerCommand.h"
+#include "scenes/SceneType.h"
 
 namespace app::cmnd
 {
 	class ButtonLobbySelectRefreshCommand : public BaseMultiplayerCommand
 	{
 	public: // Constructors/Destructor/Assignments
-		ButtonLobbySelectRefreshCommand() = default;
+		ButtonLobbySelectRefreshCommand(std::forward_list<app::Entity> entities, app::sce::SceneType & sceneControl);
 		virtual ~ButtonLobbySelectRefreshCommand() = default;
 
 		ButtonLobbySelectRefreshCommand(ButtonLobbySelectRefreshCommand const &) = default;
@@ -26,6 +27,8 @@ namespace app::cmnd
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
+		std::forward_list<app::Entity> m_entities;
+		app::sce::SceneType & m_sceneControl;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables

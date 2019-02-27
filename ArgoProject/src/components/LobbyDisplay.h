@@ -1,25 +1,24 @@
-﻿#ifndef _COMPONENTS_TILED_H
-#define _COMPONENTS_TILED_H
+﻿#ifndef _COMP_LOBBY_H
+#define _COMP_LOBBY_H
 
 namespace app::comp
 {
-	struct Tiled
+	struct LobbyDisplay
 	{
 	public: // Constructors/Destructor/Assignments
-		Tiled() = default;
-		~Tiled() = default;
+		LobbyDisplay() = default;
+		~LobbyDisplay() = default;
 
-		Tiled(Tiled const &) = default;
-		Tiled & operator=(Tiled const &) = default;
+		LobbyDisplay(LobbyDisplay const &) = default;
+		LobbyDisplay & operator=(LobbyDisplay const &) = default;
 
-		Tiled(Tiled &&) = default;
-		Tiled & operator=(Tiled &&) = default;
+		LobbyDisplay(LobbyDisplay &&) = default;
+		LobbyDisplay & operator=(LobbyDisplay &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::vector<app::Entity> tiles;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -31,4 +30,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENTS_TILED_H
+#endif // !_COMP_LOBBY_H

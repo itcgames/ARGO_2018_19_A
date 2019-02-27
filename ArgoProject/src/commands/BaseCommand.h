@@ -23,7 +23,7 @@ namespace app::cmnd
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 		void output(std::string const & message) const;
-		void output(std::initializer_list<std::string> const & messages) const;
+		void output(std::initializer_list<app::Console::Variant> const & messages) const;
 	protected: // Protected Static Variables
 		constexpr static bool s_DEBUG_MODE = true;
 	protected: // Protected Member Variables

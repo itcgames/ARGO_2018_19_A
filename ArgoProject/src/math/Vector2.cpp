@@ -120,6 +120,78 @@ app::math::Vector2<T> & app::math::Vector2<T>::operator/=(T const & t)
 }
 
 template<typename T>
+constexpr bool app::math::Vector2<T>::operator==(Vector2 const & v) const
+{
+	return this->x == v.x && this->y == v.y;
+}
+
+template<typename T>
+constexpr bool app::math::Vector2<T>::operator==(T const & t) const
+{
+	return this->x == t && this->y == t;
+}
+
+template<typename T>
+constexpr bool app::math::Vector2<T>::operator!=(Vector2 const & v) const
+{
+	return !((*this) == v);
+}
+
+template<typename T>
+constexpr bool app::math::Vector2<T>::operator!=(T const & t) const
+{
+	return !((*this) == t);
+}
+
+template<typename T>
+constexpr bool app::math::Vector2<T>::operator<(Vector2 const & v) const
+{
+	return this->x < v.x && this->y < v.y;
+}
+
+template<typename T>
+constexpr bool app::math::Vector2<T>::operator<(T const & t) const
+{
+	return this->x < t && this->y < t;
+}
+
+template<typename T>
+constexpr bool app::math::Vector2<T>::operator>(Vector2 const & v) const
+{
+	return this->x > v.x && this->y > v.y;
+}
+
+template<typename T>
+constexpr bool app::math::Vector2<T>::operator>(T const & t) const
+{
+	return this->x > t && this->y > t;
+}
+
+template<typename T>
+constexpr bool app::math::Vector2<T>::operator<=(Vector2 const & v) const
+{
+	return this->x <= v.x && this->y <= v.y;
+}
+
+template<typename T>
+constexpr bool app::math::Vector2<T>::operator<=(T const & t) const
+{
+	return this->x <= t && this->y <= t;
+}
+
+template<typename T>
+constexpr bool app::math::Vector2<T>::operator>=(Vector2 const & v) const
+{
+	return this->x >= v.x && this->y >= v.y;
+}
+
+template<typename T>
+constexpr bool app::math::Vector2<T>::operator>=(T const & t) const
+{
+	return this->x >= t && this->y >= t;
+}
+
+template<typename T>
 T app::math::Vector2<T>::magnitudeSqr() const
 {
 	return (this->x * this->x) + (this->y * this->y);

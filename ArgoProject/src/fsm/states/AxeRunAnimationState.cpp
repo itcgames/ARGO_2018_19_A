@@ -1,14 +1,14 @@
 ﻿#include "stdafx.h"
-#include "AiWalkingAnimationState.h"
+#include "AxeRunAnimationState.h"
 
-app::fsm::sta::AiWalkingAnimationState::AiWalkingAnimationState(app::Entity const entity)
+app::fsm::sta::AxeRunAnimationState::AxeRunAnimationState(app::Entity const entity)
 	: AnimationState(entity)
 {
 	m_render = std::move(this->generateAnimationRender());
 	m_animator = std::move(this->generateAnimator());
 }
 
-app::comp::Render app::fsm::sta::AiWalkingAnimationState::generateAnimationRender() const
+app::comp::Render app::fsm::sta::AxeRunAnimationState::generateAnimationRender() const
 {
 	auto render = comp::Render();
 
@@ -19,7 +19,7 @@ app::comp::Render app::fsm::sta::AiWalkingAnimationState::generateAnimationRende
 	return std::move(render);
 }
 
-app::comp::Animator app::fsm::sta::AiWalkingAnimationState::generateAnimator() const
+app::comp::Animator app::fsm::sta::AxeRunAnimationState::generateAnimator() const
 {
 	auto animator = comp::Animator();
 

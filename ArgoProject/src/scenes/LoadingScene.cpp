@@ -27,7 +27,8 @@ app::sce::LoadingScene::LoadingScene(SceneType & sceneManagerType)
 
 void app::sce::LoadingScene::start()
 {
-	auto const & entities = fact::sce::LoadingSceneFactory().create();
+	auto sceneFactory = fact::sce::LoadingSceneFactory();
+	auto entities = BaseScene::createEntities(sceneFactory);
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("SPLASH SCENE: Creating entities");

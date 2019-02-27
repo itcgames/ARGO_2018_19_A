@@ -1,14 +1,14 @@
 ﻿#ifndef _FACTORY_DESTRUCTIBLE_BLOCK_H
 #define _FACTORY_DESTRUCTIBLE_BLOCK_H
 
-#include "EntityFactory.h"
+#include "EntitiesFactory.h"
 #include "parameters/DestructibleParameters.h"
 #include "deleters/SdlDeleter.h"
 #include "graphics/Texture.h"
 
 namespace app::fact
 {
-	class DestructibleBlockFactory : public EntityFactory
+	class DestructibleBlockFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
 		DestructibleBlockFactory(app::par::DestructibleParameters param);
@@ -22,7 +22,7 @@ namespace app::fact
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		virtual app::Entity const create() override;
+		virtual std::vector<app::Entity> create() override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions

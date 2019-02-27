@@ -1,25 +1,25 @@
-﻿#ifndef _COMPONENTS_TILED_H
-#define _COMPONENTS_TILED_H
+﻿#ifndef _COMPONENTS_BACKGROUND_H
+#define _COMPONENTS_BACKGROUND_H
 
 namespace app::comp
 {
-	struct Tiled
+	struct Background
 	{
 	public: // Constructors/Destructor/Assignments
-		Tiled() = default;
-		~Tiled() = default;
+		Background() = default;
+		~Background() = default;
 
-		Tiled(Tiled const &) = default;
-		Tiled & operator=(Tiled const &) = default;
+		Background(Background const &) = default;
+		Background & operator=(Background const &) = default;
 
-		Tiled(Tiled &&) = default;
-		Tiled & operator=(Tiled &&) = default;
+		Background(Background &&) = default;
+		Background & operator=(Background &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::vector<app::Entity> tiles;
+
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -31,4 +31,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMPONENTS_TILED_H
+#endif // !_COMPONENTS_BACKGROUND_H

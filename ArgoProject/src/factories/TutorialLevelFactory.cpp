@@ -142,26 +142,29 @@ std::vector<app::Entity> app::fact::TutorialLevelFactory::create()
 		position = app::math::Vector2f(3850, -175);
 		size = app::math::Vector2f(400, 450);
 		noTiles = math::Vector2i(8, 9);
-		destructibleParams.attachedArea = facade.create();
+		destructibleParams.attachedArea = facade.create().back();
 
 		noTiles = math::Vector2i(1, 9);
 		auto destructibleFactory = fact::DestructibleBlockFactory(destructibleParams);
 
 		position = app::math::Vector2f(3625, -175);
 		size = app::math::Vector2f(50, 450);
-		entities.push_back(destructibleFactory.create());
+		auto destructibleEntities = destructibleFactory.create();
+		entities.insert(entities.end()
+			, std::make_move_iterator(destructibleEntities.begin())
+			, std::make_move_iterator(destructibleEntities.end()));
 	}
 	// hazards
 	{
-		auto hazardFactory = fact::HazardFactory(position, size);
-
-		position = app::math::Vector2f(500, 500);
-		size = app::math::Vector2f(50, 50);
-		entities.push_back(hazardFactory.create());
+		auto const NUMBER_OF_SPIKES = 1u;
+		auto hazardFactory = fact::HazardFactory(position, size, NUMBER_OF_SPIKES);
 
 		position = app::math::Vector2f(0, 2000);
 		size = app::math::Vector2f(40000000, 50);
-		entities.push_back(hazardFactory.create());
+		auto hazardEntities = hazardFactory.create();
+		entities.insert(entities.end()
+			, std::make_move_iterator(hazardEntities.begin())
+			, std::make_move_iterator(hazardEntities.end()));
 	}
 	// platforms
 	{
