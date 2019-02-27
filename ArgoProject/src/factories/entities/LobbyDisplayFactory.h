@@ -33,7 +33,7 @@ namespace app::fact
 		std::size_t getNumberOfPlayersIn(app::net::Lobby const & lobby) const;
 	private: // Private Static Variables
 	private: // Private Member Variables
-		app::par::LobbyDisplayFactoryParameters const & m_params;
+		app::par::LobbyDisplayFactoryParameters const m_params;
 		app::sce::SceneType & m_sceneControl;
 	};
 }

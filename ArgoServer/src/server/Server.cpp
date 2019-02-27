@@ -154,24 +154,15 @@ void app::net::Server::closeSocket(int index)
 		app::Console::writeLine({ "ERROR: Attempted to delete a NULL socket." });
 		return;
 	}
-	auto const innerPredicate =
-		[&](Lobby::Player const & player) { return player.has_value() && player->first == index; };
-	auto const outerPredicate = [&](Lobby const & lobby)
+	auto const predicate = [&](Lobby::Player const & player) { return player.has_value() && player->first == index; };
+	for (auto & lobby : m_lobbies)
 	{
-		auto const & players = lobby.getPlayers();
-		if (auto const & result = std::find_if(players.begin(), players.end(), innerPredicate); result != players.end())
+		auto & players = lobby.getPlayers();
+		if (auto const & result = std::find_if(players.begin(), players.end(), predicate); result != players.end())
 		{
-			
-			return true;
+			this->output(index, { "Removed from lobby[", lobby.getId(), "] \"", lobby.getName(), "\"" });
+			result->reset();
 		}
-		else
-		{
-			return false;
-		}
-	};
-	if (auto const & outResult = std::find_if(m_lobbies.begin(), m_lobbies.end(), outerPredicate); outResult != m_lobbies.end())
-	{
-
 	}
 	if (SDLNet_TCP_DelSocket(m_socketSet, socket) == -1)
 	{

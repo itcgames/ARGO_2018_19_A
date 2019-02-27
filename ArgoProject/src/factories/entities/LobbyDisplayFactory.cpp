@@ -71,9 +71,10 @@ std::vector<app::Entity> app::fact::LobbyDisplayFactory::create()
 			{
 				firstButton = false;
 				auto widgetView = m_registry.view<comp::Widget>();
+				auto destroyView = m_registry.view<comp::Widget, comp::Destroy>();
 				for (auto const & entity : m_params.entities)
 				{
-					if (widgetView.contains(entity) && (entity != entities.back()))
+					if (widgetView.contains(entity) && !destroyView.contains(entity) && (entity != entities.back()))
 					{
 						auto & widget = widgetView.get(entity);
 						widget.left = entities.back();
@@ -97,7 +98,8 @@ std::vector<app::Entity> app::fact::LobbyDisplayFactory::create()
 		{
 			auto const & text = lobbyName;
 			auto const & stepSize = math::Vector2f{ static_cast<float>(text.size()), 1.0f };
-			size = std::min(SIZE_PER_LETTER * stepSize, MAX_LOBBY_NAME_SIZE);
+			size = std::min(SIZE_PER_LETTER * stepSize, MAX_LOBBY_NAME_SIZE,
+				[](math::Vector2f const & lhs, math::Vector2f const & rhs) { return lhs.magnitudeSqr() < rhs.magnitudeSqr(); });
 			position += ((size + offsetFromPrevious) * IGNORE_Y) + math::Vector2f{ 20.0f, 0.0f };
 			entities.push_back(fact::TextFactory(position, size, text).create());
 			offsetFromPrevious = size / 2.0f;

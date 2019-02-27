@@ -36,6 +36,6 @@ void app::cmnd::ButtonLobbySelectRefreshCommand::execute()
 			params.entities.insert(params.entities.end(), m_entities.begin(), m_entities.end());
 			auto entities = fact::LobbyDisplayFactory(params, m_sceneControl).create();
 		}
-		this->output({ "Receival of [", std::to_string(lobbies.size()), "]'Lobbies' successfull" });
+		this->output({ "Receival of [", lobbies.size(), "]'Lobbies' successfull" });
 	}
 }
