@@ -23,6 +23,7 @@ namespace app::sys
 	public: // Public Member Functions
 		virtual void update(app::time::seconds const & dt) final override;
 	public: // Public Static Variables
+		static void onLayerConstruction(app::Registry & registry, app::Entity const entity);
 	public: // Public Member Variables
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
@@ -30,7 +31,6 @@ namespace app::sys
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
-		void onLayerConstruction(app::Registry & registry, app::Entity const entity);
 	private: // Private Static Variables
 		static bool s_dependencyConnected;
 	private: // Private Member Variables

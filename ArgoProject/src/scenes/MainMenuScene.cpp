@@ -37,7 +37,9 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 
 void app::sce::MainMenuScene::start()
 {
-	auto const & entities = fact::sce::MainMenuSceneFactory(m_sceneManagerType, m_demoFactory).create();
+	auto sceneFactory = fact::sce::MainMenuSceneFactory(m_sceneManagerType, m_demoFactory);
+	auto entities = BaseScene::createEntities(sceneFactory);
+
 	m_registry.destruction<comp::Destroy>().connect<MainMenuScene, &MainMenuScene::startDemo>(this);
 	if constexpr (DEBUG_MODE)
 	{

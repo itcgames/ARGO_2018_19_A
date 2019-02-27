@@ -34,7 +34,7 @@ app::Entity const app::fact::PlatformFactory::create()
 
 	auto entities = std::vector<app::Entity>();
 
-	auto const size = m_sizeOfTile * static_cast<math::Vector2f>(math::Vector2f(m_platformWidth, 1));
+	auto const size = m_sizeOfTile * math::Vector2f(m_platformWidth, 1);
 	auto const origin = size / 2.0f;
 
 	auto const sizeOfTile = m_sizeOfTile;

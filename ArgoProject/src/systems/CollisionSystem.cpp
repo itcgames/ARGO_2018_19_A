@@ -112,6 +112,8 @@ void app::sys::CollisionSystem::groundCollisions()
 void app::sys::CollisionSystem::airCollisions()
 {
 	auto dashJumpView = m_registry.view<comp::Dashable, comp::DoubleJump, comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>(entt::persistent_t());
+	auto airCompView = m_registry.view<comp::AirMotion>();
+	auto motionCompView = m_registry.view<comp::Motion>();
 	auto airMotionView = m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>(entt::persistent_t());
 	//view player
 	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::AirMotion, comp::CurrentGround>(entt::persistent_t())
@@ -148,6 +150,18 @@ void app::sys::CollisionSystem::airCollisions()
 							dashable.canDash = true;
 						}
 
+						auto const & velocity = ((math::toVector(groundMotion.direction) * groundMotion.speed) * math::Vector2f(1.0f, 0.0f));
+						groundMotion.direction = velocity.toAngle();
+						groundMotion.speed = velocity.magnitude();
+
+						if (!motionCompView.contains(entity))
+						{
+							m_registry.assign<comp::Motion>(entity, std::move(groundMotion));
+						}
+						if (airCompView.contains(entity))
+						{
+							m_registry.remove<comp::AirMotion>(entity);
+						}
 						if (airMotionView.contains(entity))
 						{
 							auto const & velocity = ((math::toVector(groundMotion.direction) * groundMotion.speed) * math::Vector2f(1.0f, 0.0f));
@@ -155,7 +169,6 @@ void app::sys::CollisionSystem::airCollisions()
 							groundMotion.speed = velocity.magnitude();
 
 							m_registry.assign<comp::Motion>(entity, std::move(groundMotion));
-							m_registry.remove<comp::AirMotion>(entity);
 						}
 					}
 				}

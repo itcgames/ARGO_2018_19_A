@@ -24,7 +24,8 @@ app::sce::CreditsScene::CreditsScene(SceneType & sceneManagerType)
 
 void app::sce::CreditsScene::start()
 {
-	auto const & entities = fact::sce::CreditsSceneFactory().create();
+	auto sceneFactory = fact::sce::CreditsSceneFactory();
+	auto entities = BaseScene::createEntities(sceneFactory);
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("CREDITS SCENE: Creating entities");

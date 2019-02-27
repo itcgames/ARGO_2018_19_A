@@ -21,7 +21,7 @@ app::sys::RenderSystem::RenderSystem()
 		s_dependencyConnected = true;
 		//entt::connect<comp::Layer>(m_registry.construction<comp::Render>());
 		//entt::connect<comp::Layer>(m_registry.construction<comp::Text>());
-		m_registry.construction<comp::Layer>().connect<app::sys::RenderSystem, &app::sys::RenderSystem::onLayerConstruction>(this);
+		m_registry.construction<comp::Layer>().connect<&app::sys::RenderSystem::onLayerConstruction>();
 		//m_registry.prepare<comp::Location, comp::Dimensions, comp::Layer, comp::Render>();
 		//m_registry.prepare<comp::Location, comp::Dimensions, comp::Layer, comp::Text>();
 	}

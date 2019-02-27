@@ -25,6 +25,7 @@
 #include "systems/FollowEntitySystem.h"
 #include "systems/SeekEntitySystem.h"
 #include "systems/DiscReturnSystem.h"
+#include "factories/SceneFactory.h"
 
 namespace app::sce
 {
@@ -80,6 +81,7 @@ namespace app::sce
 	public: // Public Member Variables
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
+		std::vector<app::Entity>createEntities(fact::sce::SceneFactory& scenesFactory);
 	protected: // Protected Static Variables
 		constexpr static bool DEBUG_MODE = true;
 	protected: // Protected Member Variables

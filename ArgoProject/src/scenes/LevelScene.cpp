@@ -39,7 +39,8 @@ app::sce::LevelScene::LevelScene(SceneType & sceneManagerType)
 
 void app::sce::LevelScene::start()
 {
-	auto && entities = fact::sce::LevelSceneFactory().create();
+	auto sceneFactory = fact::sce::LevelSceneFactory();
+	auto entities = BaseScene::createEntities(sceneFactory);
 	m_entities.insert(m_entities.end(), std::make_move_iterator(entities.begin()), std::make_move_iterator(entities.end()));
 	m_registry.destruction<comp::Input>().connect<LevelScene, &LevelScene::onInputDestroyed>(this);
 	m_registry.destruction<comp::Goal>().connect<LevelScene, &LevelScene::onGoalDestroyed>(this);

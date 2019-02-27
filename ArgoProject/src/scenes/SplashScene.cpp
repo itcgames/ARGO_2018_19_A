@@ -48,7 +48,8 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 void app::sce::SplashScene::start()
 {
 	m_registry.destruction<comp::AnimatedImage>().connect<app::sce::SplashScene, &app::sce::SplashScene::onAnimatedImageDestroy>(this);
-	auto const & entities = fact::sce::SplashSceneFactory().create();
+	auto sceneFactory = fact::sce::SplashSceneFactory();
+	auto entities = BaseScene::createEntities(sceneFactory);
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("SPLASH SCENE: Creating entities");
