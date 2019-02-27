@@ -255,6 +255,12 @@ void app::sys::CollisionSystem::checkAINodeCollisions()
 			{
 				ai.currentNode = secEntity;
 				ai.initialCommands = node.initialCommands;
+				node.active = false;
+			}
+			else
+			{
+				//TODO: make sure one node activates once (while colliding set back to active when not colliding
+				node.active = true;
 			}
 		});
 	});

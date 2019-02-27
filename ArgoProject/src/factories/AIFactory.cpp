@@ -103,23 +103,35 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 
 	auto ai = comp::AI();
 
+	//1
 	auto loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
 		std::make_shared<cmnd::MoveCommand>(entity, 0.0f, 20.0f)
 	};
 	auto initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
-		std::make_shared<cmnd::JumpCommand>(entity, 400.0f)
 	};
 	auto node = app::fact::NodeFactory(math::Vector2f(750.0f, 200.0f), loopCmnds, initialCmnds).create();
 	entities.push_back(node);
 
+	//2
 	loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
-		std::make_shared<cmnd::MoveCommand>(entity, 180.0f, 20.0f)
+		std::make_shared<cmnd::MoveCommand>(entity, 0.0f, 20.0f)
 	};
 	initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
-		
+			std::make_shared<cmnd::JumpCommand>(entity, 400.0f)
 	};
 	node = app::fact::NodeFactory(math::Vector2f(950.0f, 200.0f), loopCmnds, initialCmnds).create();
 	entities.push_back(node);
+
+	//3
+	/*loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+	std::make_shared<cmnd::MoveCommand>(entity, 0.0f, 20.0f)
+	};
+	initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+			std::make_shared<cmnd::JumpCommand>(entity, 400.0f)
+	};*/
+	/*node = app::fact::NodeFactory(math::Vector2f(1420.0f, 200.0f), loopCmnds, initialCmnds).create();
+	entities.push_back(node);*/
+
 
 	m_registry.assign<decltype(ai)>(entity, std::move(ai));
 

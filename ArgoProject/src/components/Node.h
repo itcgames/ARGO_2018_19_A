@@ -23,6 +23,7 @@ namespace app::comp
 	public: // Public Member Variables
 		std::list<std::shared_ptr<app::cmnd::BaseCommand>> loopCommands;
 		std::list<std::shared_ptr<app::cmnd::BaseCommand>> initialCommands;
+		bool active;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
