@@ -17,6 +17,8 @@ app::sce::LevelScene::LevelScene(SceneType & sceneManagerType)
 			UpdateSystem(std::in_place_type<app::sys::AISystem>),
 			UpdateSystem(std::in_place_type<app::sys::CurrentGroundSystem>),
 			UpdateSystem(std::in_place_type<app::sys::FollowEntitySystem>),
+			UpdateSystem(std::in_place_type<app::sys::SeekEntitySystem>),
+			UpdateSystem(std::in_place_type<app::sys::DiscReturnSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CollisionSystem>),
 			UpdateSystem(std::in_place_type<app::sys::HealthSystem>),
 			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType),
@@ -37,7 +39,8 @@ app::sce::LevelScene::LevelScene(SceneType & sceneManagerType)
 
 void app::sce::LevelScene::start()
 {
-	auto && entities = fact::sce::LevelSceneFactory().create();
+	auto sceneFactory = fact::sce::LevelSceneFactory();
+	auto entities = BaseScene::createEntities(sceneFactory);
 	m_entities.insert(m_entities.end(), std::make_move_iterator(entities.begin()), std::make_move_iterator(entities.end()));
 	m_registry.destruction<comp::Input>().connect<LevelScene, &LevelScene::onInputDestroyed>(this);
 	m_registry.destruction<comp::Goal>().connect<LevelScene, &LevelScene::onGoalDestroyed>(this);

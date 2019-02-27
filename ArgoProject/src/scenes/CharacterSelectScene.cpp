@@ -24,7 +24,8 @@ app::sce::CharacterSelectScene::CharacterSelectScene(SceneType & sceneManagerTyp
 
 void app::sce::CharacterSelectScene::start()
 {
-	auto const & entities = fact::sce::CharacterSelectSceneFactory().create();
+	auto sceneFactory = fact::sce::CharacterSelectSceneFactory();
+	auto entities = BaseScene::createEntities(sceneFactory);
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("CHARACTER SELECT SCENE: Creating entities");

@@ -8,7 +8,7 @@ namespace app::fact
 	class PlatformFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		PlatformFactory(app::math::Vector2f const & position, app::math::Vector2f const & size);
+		PlatformFactory(app::math::Vector2f const & position, app::math::Vector2f const & size, std::uint32_t const & platformWidth);
 		virtual ~PlatformFactory() = default;
 
 		PlatformFactory(PlatformFactory const &) = default;
@@ -32,7 +32,8 @@ namespace app::fact
 	private: // Private Static Variables
 	private: // Private Member Variables
 		app::math::Vector2f const & m_position;
-		app::math::Vector2f const & m_size;
+		app::math::Vector2f const & m_sizeOfTile;
+		std::uint32_t const & m_platformWidth;
 	};
 }
 

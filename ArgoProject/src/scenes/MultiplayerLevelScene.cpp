@@ -38,7 +38,8 @@ app::sce::MultiplayerLevelScene::MultiplayerLevelScene(SceneType & sceneManagerT
 
 void app::sce::MultiplayerLevelScene::start()
 {
-	auto && entities = fact::sce::MultiplayerLevelSceneFactory().create();
+	auto sceneFactory = fact::sce::MultiplayerLevelSceneFactory();
+	auto entities = BaseScene::createEntities(sceneFactory);
 	m_entities.insert(m_entities.end(), std::make_move_iterator(entities.begin()), std::make_move_iterator(entities.end()));
 	m_registry.destruction<comp::Input>().connect<MultiplayerLevelScene, &MultiplayerLevelScene::onInputDestroyed>(this);
 	m_registry.destruction<comp::Goal>().connect<MultiplayerLevelScene, &MultiplayerLevelScene::onGoalDestroyed>(this);
@@ -48,7 +49,7 @@ void app::sce::MultiplayerLevelScene::start()
 	{
 		Console::writeLine("MULTIPLAYER LEVEL SCENE: Creating entities");
 		for (auto const & entity : m_entities)
-		{
+		{	 
 			Console::writeLine({ "  Created entity[", std::to_string(entity), "]" });
 		}
 	}

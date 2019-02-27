@@ -32,6 +32,13 @@ namespace app::sys
 	private: // Private Member Functions
 		void output(std::string const & msg) const;
 		void output(std::initializer_list<app::Console::Variant> const & msgs) const;
+		void handlePacketLobbyWasCreated();
+		void handlePacketLobbyWasJoined();
+		void handlePacketLobbyIJoined();
+		void handlePacketLevelNewPlayerInfo();
+		void handlePacketLobbyReady();
+
+		void updateLobbyTag();
 	private: // Private Static Variables
 		constexpr static bool s_DEBUG_MODE = true;
 	private: // Private Member Variables

@@ -46,6 +46,7 @@ namespace app::net
 		// packet process functions
 
 		bool processClientName(int id);
+		bool processLobbyReady(int id);
 		bool processLobbyCreate(int id);
 		bool processLobbyGetAll(int id);
 		bool processLobbyJoined(int id);

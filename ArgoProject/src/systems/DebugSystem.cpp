@@ -2,6 +2,7 @@
 #include "DebugSystem.h"
 #include "singletons/KeyHandlerSingleton.h"
 #include "singletons/ClientSingleton.h"
+#include "tags/LobbyTag.h"
 
 app::sys::DebugSystem::DebugSystem(app::sce::SceneType& _targetScene)
 	: m_keyHandler(app::sin::KeyHandler::get())
@@ -16,6 +17,7 @@ void app::sys::DebugSystem::update(app::time::seconds const & dt)
 	if constexpr (s_DEBUG_MODE)
 	{
 		this->sceneSwapping();
+		this->playersInLobbyReady();
 	}
 }
 
@@ -89,4 +91,14 @@ void app::sys::DebugSystem::sceneSwapping()
 	if (m_keyHandler.isKeyPressed(SDLK_8)) { m_targetScene = Scene::LobbySelect; }
 	if (m_keyHandler.isKeyPressed(SDLK_9)) { m_targetScene = Scene::Lobby; }
 	if (m_keyHandler.isKeyPressed(SDLK_0)) { m_targetScene = Scene::MultiplayerLevel; }
+}
+
+void app::sys::DebugSystem::playersInLobbyReady()
+{
+	if (m_keyHandler.isKeyPressed(SDLK_k))
+	{
+		m_client.send(app::net::PacketType::LOBBY_READY);
+		auto const & lobbyTag = m_registry.get<tag::Lobby>();
+		m_client.send(lobbyTag.id);
+	}
 }

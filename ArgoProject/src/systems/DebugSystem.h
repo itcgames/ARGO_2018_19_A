@@ -34,6 +34,7 @@ namespace app::sys
 	private: // Private Member Functions
 		void serverTesting();
 		void sceneSwapping();
+		void playersInLobbyReady();
 	private: // Private Static Variables
 		constexpr static bool s_DEBUG_MODE = true;
 	private: // Private Member Variables

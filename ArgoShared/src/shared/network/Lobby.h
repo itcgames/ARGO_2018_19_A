@@ -23,6 +23,7 @@ namespace app::net
 		const std::string& getName() const;
 		void setName(const std::string& name);
 
+		Players & getPlayers() { return m_players; }
 		Players const & getPlayers() const { return m_players; }
 		std::optional<std::size_t> addPlayer(std::int32_t const & id, const std::string& name);
 

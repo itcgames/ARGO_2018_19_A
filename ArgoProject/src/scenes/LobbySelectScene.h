@@ -32,7 +32,6 @@ namespace app::sce
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
-		app::net::Client & m_client;
 	};
 }
 

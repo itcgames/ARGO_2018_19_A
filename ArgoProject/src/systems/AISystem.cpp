@@ -14,7 +14,7 @@ void app::sys::AISystem::update(app::time::seconds const & dt)
 	m_registry.view<comp::Location, comp::Dimensions, comp::AI>()
 		.each([&, this](app::Entity entity, comp::Location & location, comp::Dimensions & dimensions, comp::AI & ai)
 	{
-		if (ai.currentNode.has_value())
+		if (ai.currentNode.has_value() && nodeView.contains(ai.currentNode.value()))
 		{
 			auto & currentNode = nodeView.get(ai.currentNode.value());
 			currentNode.loopCommands.front()->execute();

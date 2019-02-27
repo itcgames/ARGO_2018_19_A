@@ -606,6 +606,27 @@
     <ClCompile Include="src\factories\entities\GoalFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
+    <ClCompile Include="..\ArgoShared\src\shared\utilities\ByteConverter.cpp">
+      <Filter>Source Files\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ArgoShared\src\shared\network\PacketParser.cpp">
+      <Filter>Source Files\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parameters\LobbyDisplayFactoryParameters.cpp">
+      <Filter>Source Files\parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\LobbyDisplay.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\buttons\ButtonLobbySelectCommand.cpp">
+      <Filter>Source Files\commands\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tags\LobbyTag.cpp">
+      <Filter>Source Files\tags</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ArgoShared\src\shared\utilities\variant.cpp">
+      <Filter>Source Files\utilities</Filter>
+    </ClCompile>
     <ClCompile Include="src\graphics\AudioPlayer.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
@@ -660,6 +681,21 @@
     <ClCompile Include="src\graphics\WindowParameters.cpp">
       <Filter>Source Files\parameters</Filter>
     </ClCompile>
+    <ClCompile Include="src\factories\DiscFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Disc.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\SeekEntitySystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\SeekEntity.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\systems\DiscReturnSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
     <ClCompile Include="src\components\CharacterType.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
@@ -668,6 +704,9 @@
     </ClCompile>
     <ClCompile Include="src\factories\entities\LevelDemoFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fsm\AnimationStateMachine.cpp">
+      <Filter>Source Files\fsm</Filter>
     </ClCompile>
     <ClCompile Include="src\factories\scenes\LoadingSceneFactory.cpp">
       <Filter>Source Files\factories\scenes</Filter>
@@ -687,17 +726,17 @@
     <ClCompile Include="..\ArgoShared\src\shared\network\PacketParser.cpp">
       <Filter>Source Files\network</Filter>
     </ClCompile>
-    <ClCompile Include="src\parameters\LobbyDisplayFactoryParameters.cpp">
-      <Filter>Source Files\parameters</Filter>
+    <ClCompile Include="src\factories\TutorialLevelFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
-    <ClCompile Include="src\components\LobbyDisplay.cpp">
+    <ClCompile Include="src\components\Facade.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
-    <ClCompile Include="src\commands\buttons\ButtonLobbySelectCommand.cpp">
-      <Filter>Source Files\commands\buttons</Filter>
+    <ClCompile Include="src\components\Tiled.cpp">
+      <Filter>Source Files\components</Filter>
     </ClCompile>
-    <ClCompile Include="src\tags\LobbyTag.cpp">
-      <Filter>Source Files\tags</Filter>
+    <ClCompile Include="src\fsm\states\AxeRunAnimationState.cpp">
+      <Filter>Source Files\fsm\states</Filter>
     </ClCompile>
     <ClCompile Include="..\ArgoShared\src\shared\utilities\variant.cpp">
       <Filter>Source Files\utilities</Filter>
@@ -722,6 +761,9 @@
     </ClCompile>
     <ClCompile Include="src\systems\SendPlayerDataSystem.cpp">
       <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Background.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1181,6 +1223,24 @@
     <ClInclude Include="src\factories\AIFactory.h">
       <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
+    <ClInclude Include="..\ArgoShared\src\shared\utilities\ByteConverter.h">
+      <Filter>Header Files\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ArgoShared\src\shared\network\PacketParser.h">
+      <Filter>Header Files\network</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\LobbyDisplay.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\buttons\ButtonLobbySelectCommand.h">
+      <Filter>Header Files\commands\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tags\LobbyTag.h">
+      <Filter>Header Files\tags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ArgoShared\src\shared\utilities\variant.h">
+      <Filter>Header Files\utilities</Filter>
+    </ClInclude>
     <ClInclude Include="src\graphics\AudioPlayer.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
@@ -1195,8 +1255,6 @@
     </ClInclude>
     <ClInclude Include="src\systems\LoadingSystem.h">
       <Filter>Header Files\systems</Filter>
-    </ClInclude>
-    <ClInclude Include="src\components\AnimatedImage.h">
     </ClInclude>
     <ClInclude Include="src\components\CharacterType.h">
       <Filter>Header Files\components</Filter>
@@ -1228,6 +1286,21 @@
     <ClInclude Include="src\factories\FacadeFactory.h">
       <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
+    <ClInclude Include="src\factories\DiscFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Disc.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\SeekEntitySystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\SeekEntity.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\DiscReturnSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
     <ClInclude Include="src\components\CharacterType.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
@@ -1236,6 +1309,9 @@
     </ClInclude>
     <ClInclude Include="src\factories\entities\LevelDemoFactory.h">
       <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\fsm\AnimationStateMachine.h">
+      <Filter>Header Files\fsm</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\WindowParameters.h">
       <Filter>Header Files\parameters</Filter>
@@ -1255,17 +1331,17 @@
     <ClInclude Include="..\ArgoShared\src\shared\utilities\ByteConverter.h">
       <Filter>Header Files\utilities</Filter>
     </ClInclude>
-    <ClInclude Include="..\ArgoShared\src\shared\network\PacketParser.h">
-      <Filter>Header Files\network</Filter>
+    <ClInclude Include="src\factories\TutorialLevelFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
-    <ClInclude Include="src\components\LobbyDisplay.h">
+    <ClInclude Include="src\components\Facade.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="src\commands\buttons\ButtonLobbySelectCommand.h">
-      <Filter>Header Files\commands\buttons</Filter>
+    <ClInclude Include="src\components\Tiled.h">
+      <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="src\tags\LobbyTag.h">
-      <Filter>Header Files\tags</Filter>
+    <ClInclude Include="src\components\AnimatedImage.h">
+      <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="..\ArgoShared\src\shared\utilities\variant.h">
       <Filter>Header Files\utilities</Filter>
@@ -1287,6 +1363,12 @@
     </ClInclude>
     <ClInclude Include="src\systems\SendPlayerDataSystem.h">
       <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\fsm\states\AxeRunAnimationState.h">
+      <Filter>Header Files\fsm\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Background.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

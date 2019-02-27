@@ -43,7 +43,7 @@ app::Entity const app::fact::PlayerFactory::create()
 	m_registry.assign<decltype(location)>(entity, std::move(location));
 
 	auto dimensions = comp::Dimensions();
-	dimensions.size = { 100.0f, 100.0f };
+	dimensions.size = { 50.0f, 100.0f };
 	dimensions.origin = dimensions.size / 2.0f;
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
 
@@ -53,26 +53,31 @@ app::Entity const app::fact::PlayerFactory::create()
 	motion.angularSpeed = 0.0f;
 	m_registry.assign<decltype(motion)>(entity, std::move(motion));
 
+	auto layer = comp::Layer();
+	layer.zIndex = 135u;
+	m_registry.assign<decltype(layer)>(entity, std::move(layer));
+
+	auto render = comp::Render();
+	render.texture = m_resourceManager.getTexture(app::res::TextureKey::AxeRun);
+	render.border = math::Vector2f{ 30.0f, 4.0f };
+	render.offset = math::Vector2f{ 15.0f, 2.0f };
+	m_registry.assign<decltype(render)>(entity, std::move(render));
+
+
 	auto animator = comp::Animator();
 	animator.loop = true; // tell animator to loop animation when it reaches the end.
 	animator.time = 0.0f; // Separate time tracking for the animation, leave it at zero
 	animator.currentFrame = math::Vector2i{ 0, 0 }; // Starting frame
 	animator.position = { 0, 0 }; // Starting position
-	animator.frameSize = math::Vector2i{ 200, 150 }; // width,height of each frame
-	animator.numOfFrames = math::Vector2i{ 3, 0 }; // number of frames in the X axis and Y axis
+	animator.frameSize = math::Vector2i{ 500, 500 }; // width,height of each frame
+	animator.numOfFrames = math::Vector2i{ 7, 12 }; // number of frames in the X axis and Y axis
+	animator.maxFrames = 82;
 	// time it takes to switch from one frame to another.
 	// calculating it by taking full_duration / (number of total frames)
 	// while dealing with edge case of any of the frames being zero
-	animator.perFrame = 90.0f / (std::max(animator.numOfFrames.x, 1) * std::max(animator.numOfFrames.y, 1));
+	animator.perFrame = 0.02f;
 	m_registry.assign<decltype(animator)>(entity, std::move(animator));
 
-	auto layer = comp::Layer();
-	layer.zIndex = 90u;
-	m_registry.assign<decltype(layer)>(entity, std::move(layer));
-
-	auto render = comp::Render();
-	render.texture = m_resourceManager.getTexture(app::res::TextureKey::DebugAnimation);
-	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	auto input = comp::Input();
 	input.isRight = true;
@@ -118,7 +123,7 @@ app::Entity const app::fact::PlayerFactory::create()
 
 	//NOTE: Type should be set on character select screen
 	auto charType = comp::CharacterType();
-	charType.type = comp::CharacterType::Type::AXE;
+	charType.type = comp::CharacterType::Type::DISC;
 	m_registry.assign<decltype(charType)>(entity, std::move(charType));
 
 	return entity;

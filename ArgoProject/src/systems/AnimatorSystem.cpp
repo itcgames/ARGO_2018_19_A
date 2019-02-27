@@ -14,10 +14,11 @@ void app::sys::AnimatorSystem::update(app::time::seconds const & dt)
 		auto const & zero = decltype(animator.currentFrame)::zero;
 		while (animator.perFrame * calculateStep(animator.currentFrame) < animator.time)
 		{
-			if (animator.currentFrame.x < (animator.numOfFrames.x - 1)) { ++animator.currentFrame.x; }
-			else if (animator.currentFrame.y < (animator.numOfFrames.y - 1)) { animator.currentFrame.x = zero; ++animator.currentFrame.y; }
-			else if (animator.loop) { animator.currentFrame = zero; animator.time = 0.0f; }
+			if (animator.currentFrame.x < (animator.numOfFrames.x - 1) && animator.frameCount < animator.maxFrames) { ++animator.currentFrame.x; }
+			else if (animator.currentFrame.y < (animator.numOfFrames.y - 1) && animator.frameCount < animator.maxFrames) { animator.currentFrame.x = zero; ++animator.currentFrame.y; }
+			else if (animator.loop) { animator.currentFrame = zero; animator.time = 0.0f; animator.frameCount = 0; }
 			else { animator.time = 0.0f; }
+			animator.frameCount++;
 		}
 		m_rect.x = animator.position.x + static_cast<std::int32_t>(animator.frameSize.x * animator.currentFrame.x);
 		m_rect.y = animator.position.y + static_cast<std::int32_t>(animator.frameSize.y * animator.currentFrame.y);

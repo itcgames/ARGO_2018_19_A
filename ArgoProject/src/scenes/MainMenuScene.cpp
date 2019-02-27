@@ -4,6 +4,8 @@
 #include "factories/entities/LevelDemoFactory.h"
 #include "components/Destroy.h"
 #include "singletons/ClientSingleton.h"
+#include "components/AI.h"
+#include "components/Background.h"
 
 app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 	: BaseScene(sceneManagerType
@@ -29,7 +31,7 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),
 			DrawSystem(std::in_place_type<app::sys::RenderSystem>)
 			}))
-	, m_client(app::sin::Client::get())
+		, m_client(app::sin::Client::get())
 {
 	if constexpr (DEBUG_MODE)
 	{
@@ -39,8 +41,11 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 
 void app::sce::MainMenuScene::start()
 {
-	auto const & entities = fact::sce::MainMenuSceneFactory(m_sceneManagerType, m_demoFactory).create();
-	m_registry.destruction<comp::Destroy>().connect<MainMenuScene, &MainMenuScene::startDemo>(this);
+	m_registry.destruction<comp::Background>().connect<MainMenuScene, &MainMenuScene::startDemo>(this);
+	m_registry.destruction<comp::AI>().connect<MainMenuScene, &MainMenuScene::reset>(this);
+	auto sceneFactory = fact::sce::MainMenuSceneFactory(m_sceneManagerType, m_demoFactory);
+	auto entities = BaseScene::createEntities(sceneFactory);
+
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("MAIN MENU SCENE: Creating entities");
@@ -53,7 +58,8 @@ void app::sce::MainMenuScene::start()
 
 void app::sce::MainMenuScene::end()
 {
-	m_registry.destruction<comp::Destroy>().disconnect<MainMenuScene, &MainMenuScene::startDemo>(this);
+	m_registry.destruction<comp::Background>().disconnect<MainMenuScene, &MainMenuScene::startDemo>(this);
+	m_registry.destruction<comp::AI>().disconnect<MainMenuScene, &MainMenuScene::reset>(this);
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("MAIN MENU SCENE: Destroying entities");
@@ -69,13 +75,28 @@ void app::sce::MainMenuScene::end()
 void app::sce::MainMenuScene::startDemo(app::Registry & registry, app::Entity inputEntity)
 {
 	if (!m_demoFactory.has_value()) { throw std::exception("Demo factory must be initialized"); }
-	auto entities = m_demoFactory->create();
+	m_demoEntities = m_demoFactory->create();
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("MAIN MENU SCENE: Creating entities");
-		for (auto const & entity : entities)
+		for (auto const & entity : m_demoEntities)
 		{
 			Console::writeLine({ "  Created entity[", std::to_string(entity), "]" });
 		}
 	}
+}
+
+void app::sce::MainMenuScene::reset(app::Registry & registry, app::Entity inputEntity)
+{
+	if (resetDemo)
+	{
+		resetDemo = false;
+		for (auto const & e : m_demoEntities)
+		{
+			if (m_registry.valid(e)) { m_registry.assign<comp::Destroy>(e); }
+		}
+		m_demoEntities.clear();
+	}
+	resetDemo = true;
+	startDemo(m_registry, 1);
 }

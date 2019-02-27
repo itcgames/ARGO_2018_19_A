@@ -44,12 +44,16 @@ namespace app::net
 	protected: // Protected Static Variables
 	protected: // Protected Member Variables
 	private: // Private Static Functions
+		static void merge(std::vector<Lobby> & lobbies, Lobby const & lobby);
 	private: // Private Member Functions
 		bool processClientName();
 		bool processLobbyWasCreated();
 		bool processLobbyCreate();
 		bool processLobbyGetAll();
+		bool processLobbyJoined();
+		bool processLobbyJoinedMy();
 		bool processDefault();
+
 
 		void output(std::string const & msg) const;
 		void output(std::initializer_list<app::Console::Variant> const & msgs) const;
@@ -59,6 +63,7 @@ namespace app::net
 		TCPsocket m_socket;
 		SDLNet_SocketSet m_socketSet;
 		std::vector<Lobby> m_lobbies;
+		std::int32_t m_id;
 	};
 }
 

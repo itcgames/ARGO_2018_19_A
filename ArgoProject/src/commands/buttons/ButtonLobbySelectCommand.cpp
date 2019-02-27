@@ -54,7 +54,15 @@ void app::cmnd::ButtonLobbySelectCommand::execute()
 		{
 			this->output({ "Failed to retrieve player index" });
 		}
-		m_registry.accommodate<tag::Lobby>(m_registry.create(), std::move(lobbyTag));
+		if (m_registry.has<tag::Lobby>())
+		{
+			auto & existingLobbyTag = m_registry.get<tag::Lobby>();
+			existingLobbyTag = lobbyTag;
+		}
+		else
+		{
+			m_registry.assign<tag::Lobby>(entt::tag_t(), m_registry.create(), std::move(lobbyTag));
+		}
 	}
 }
 
