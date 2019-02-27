@@ -32,7 +32,7 @@ namespace app::sce
 			, sce::LoadingScene
 		>;
 	public: // Constructors/Destructor/Assignments
-		SceneManager();
+		SceneManager(bool & gameRunning);
 		~SceneManager();
 
 		SceneManager(SceneManager const &) = default;
@@ -60,6 +60,7 @@ namespace app::sce
 		std::unordered_map<SceneType, Scene> m_scenes;
 		SceneType m_currentScene;
 		SceneType m_targetScene;
+		bool & m_gameRunning;
 	};
 }
 
