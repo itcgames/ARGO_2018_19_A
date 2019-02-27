@@ -24,6 +24,8 @@ void app::sys::DashSystem::update(app::time::seconds const & dt)
 			m_registry.remove<comp::Dash>(entity);
 			auto airComp = comp::AirMotion();
 			m_registry.assign<decltype(airComp)>(entity, std::move(airComp));
+
+			//TODO: Remove the collision box
 		}
 		location.position += velocity * dt.count();
 	});
