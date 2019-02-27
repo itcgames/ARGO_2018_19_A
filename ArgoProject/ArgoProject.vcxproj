@@ -230,7 +230,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\DoubleJump.cpp" />
     <ClCompile Include="src\components\Enemy.cpp" />
     <ClCompile Include="src\components\Facade.cpp" />
-    <ClCompile Include="src\components\FollowEntity.cpp" />
+    <ClCompile Include="src\components\Follow.cpp" />
     <ClCompile Include="src\components\Goal.cpp" />
     <ClCompile Include="src\components\Hazard.cpp" />
     <ClCompile Include="src\components\Health.cpp" />
@@ -288,6 +288,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\scenes\MultiplayerLevelSceneFactory.cpp" />
     <ClCompile Include="src\factories\scenes\TutorialLevelSceneFactory.cpp" />
     <ClCompile Include="src\factories\SwordLegsDashAttackFactory.cpp" />
+    <ClCompile Include="src\factories\SwordLegsFallAttackFactory.cpp" />
     <ClCompile Include="src\factories\TutorialLevelFactory.cpp" />
     <ClCompile Include="src\factories\WallFactory.cpp" />
     <ClCompile Include="src\factories\scenes\SplashSceneFactory.cpp" />
@@ -431,7 +432,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\DoubleJump.h" />
     <ClInclude Include="src\components\Enemy.h" />
     <ClInclude Include="src\components\Facade.h" />
-    <ClInclude Include="src\components\FollowEntity.h" />
+    <ClInclude Include="src\components\Follow.h" />
     <ClInclude Include="src\components\Goal.h" />
     <ClInclude Include="src\components\Hazard.h" />
     <ClInclude Include="src\components\Health.h" />
@@ -489,6 +490,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\scenes\MultiplayerLevelSceneFactory.h" />
     <ClInclude Include="src\factories\scenes\TutorialLevelSceneFactory.h" />
     <ClInclude Include="src\factories\SwordLegsDashAttackFactory.h" />
+    <ClInclude Include="src\factories\SwordLegsFallAttackFactory.h" />
     <ClInclude Include="src\factories\TutorialLevelFactory.h" />
     <ClInclude Include="src\factories\WallFactory.h" />
     <ClInclude Include="src\factories\scenes\SplashSceneFactory.h" />

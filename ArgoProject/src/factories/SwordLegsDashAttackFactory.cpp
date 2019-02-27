@@ -4,7 +4,7 @@
 #include "components/Location.h"
 #include "components/Dimensions.h"
 #include "components/Collision.h"
-#include "components/FollowEntity.h"
+#include "components/Follow.h"
 #include "components/Render.h"
 #include "components/Layer.h"
 #include "components/Input.h"
@@ -41,7 +41,7 @@ app::Entity const app::fact::SwordLegsDashAttackFactory::create()
 		m_registry.assign<decltype(collision)>(entity, std::move(collision));
 
 		//follow entity component
-		auto followEnt = comp::FollowEntity();
+		auto followEnt = comp::Follow();
 		followEnt.entity = m_entity;
 		followEnt.offset = { dimensions.size.x / 2 + dimensionsComp.size.x / 2 + 0.5f, 0.0f };
 		m_registry.assign<decltype(followEnt)>(entity, std::move(followEnt));

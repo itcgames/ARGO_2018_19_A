@@ -10,7 +10,7 @@
 #include "components/Dimensions.h"
 #include "components/Location.h"
 #include "components/Collision.h"
-#include "components/FollowEntity.h"
+#include "components/Follow.h"
 #include "components/Layer.h"
 #include "components/Render.h"
 #include "factories/SwordLegsDashAttackFactory.h"

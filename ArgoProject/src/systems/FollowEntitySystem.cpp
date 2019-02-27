@@ -1,27 +1,27 @@
 ﻿#include "stdafx.h"
 #include "FollowEntitySystem.h"
-#include "components/FollowEntity.h"
+#include "components/Follow.h"
 #include "components/Location.h"
 #include "components/Input.h"
 
 void app::sys::FollowEntitySystem::update(app::time::seconds const & dt)
 {
 
-	m_registry.view<comp::FollowEntity, comp::Location>()
-		.each([&, this](app::Entity const entity, comp::FollowEntity & followEntity, comp::Location & location)
+	auto locationView = m_registry.view<comp::Location>();
+	auto inputView = m_registry.view<comp::Location, comp::Input>();
+	m_registry.view<comp::Follow, comp::Location>()
+		.each([&, this](app::Entity const entity, comp::Follow & follow, comp::Location & location)
 	{
-		auto inputView = m_registry.view<comp::Input>();
-		if (m_registry.valid(followEntity.entity) && inputView.contains(followEntity.entity))
+		if (m_registry.valid(follow.entity) && locationView.contains(follow.entity))
 		{
-			auto& entityToFollowLocation = m_registry.get<comp::Location>(followEntity.entity);
-			auto& entityToFollowInput = m_registry.get<comp::Input>(followEntity.entity);
-			if (entityToFollowInput.isRight)
+			auto& entityToFollowLocation = locationView.get(follow.entity);
+			if (inputView.contains(follow.entity) && !inputView.get<comp::Input>(follow.entity).isRight)
 			{
-				location.position = entityToFollowLocation.position + followEntity.offset;
+				location.position = entityToFollowLocation.position - follow.offset;
 			}
 			else
 			{
-				location.position = entityToFollowLocation.position - followEntity.offset;
+				location.position = entityToFollowLocation.position + follow.offset;
 			}
 		}
 	});

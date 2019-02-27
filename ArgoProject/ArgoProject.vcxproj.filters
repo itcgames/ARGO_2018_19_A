@@ -636,9 +636,6 @@
     <ClCompile Include="src\commands\AttackCommand.cpp">
       <Filter>Source Files\commands</Filter>
     </ClCompile>
-    <ClCompile Include="src\components\FollowEntity.cpp">
-      <Filter>Source Files\components</Filter>
-    </ClCompile>
     <ClCompile Include="src\systems\FollowEntitySystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
@@ -730,6 +727,12 @@
       <Filter>Source Files\factories\entities</Filter>
     </ClCompile>
     <ClCompile Include="src\components\DashAttack.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\factories\SwordLegsFallAttackFactory.cpp">
+      <Filter>Source Files\factories\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Follow.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1225,9 +1228,6 @@
     <ClInclude Include="src\commands\AttackCommand.h">
       <Filter>Header Files\commands</Filter>
     </ClInclude>
-    <ClInclude Include="src\components\FollowEntity.h">
-      <Filter>Header Files\components</Filter>
-    </ClInclude>
     <ClInclude Include="src\systems\FollowEntitySystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
@@ -1316,6 +1316,12 @@
       <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
     <ClInclude Include="src\components\DashAttack.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\factories\SwordLegsFallAttackFactory.h">
+      <Filter>Header Files\factories\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Follow.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
   </ItemGroup>

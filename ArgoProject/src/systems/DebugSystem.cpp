@@ -3,6 +3,8 @@
 #include "singletons/KeyHandlerSingleton.h"
 #include "singletons/ClientSingleton.h"
 
+#include "components/CharacterType.h"
+
 app::sys::DebugSystem::DebugSystem(app::sce::SceneType& _targetScene)
 	: m_keyHandler(app::sin::KeyHandler::get())
 	, m_client(app::sin::Client::get())
@@ -16,6 +18,7 @@ void app::sys::DebugSystem::update(app::time::seconds const & dt)
 	if constexpr (s_DEBUG_MODE)
 	{
 		this->sceneSwapping();
+		this->changeChatacterType();
 	}
 }
 
@@ -74,6 +77,40 @@ void app::sys::DebugSystem::serverTesting()
 		app::net::PacketType packetType = app::net::PacketType::LOBBY_CREATE;
 		//m_client.send(name, packetType);
 	}
+}
+
+void app::sys::DebugSystem::changeChatacterType()
+{
+	using CharType = app::comp::CharacterType::Type;
+	if (m_keyHandler.isKeyPressed(SDLK_a))
+	{
+		m_registry.view<comp::CharacterType>().each([&, this](app::Entity const entity, comp::CharacterType & characterType)
+		{
+			characterType.type = CharType::AXE;
+		});
+	}
+	if (m_keyHandler.isKeyPressed(SDLK_s))
+	{
+		m_registry.view<comp::CharacterType>().each([&, this](app::Entity const entity, comp::CharacterType & characterType)
+		{
+			characterType.type = CharType::DISC;
+		});
+	}
+	if (m_keyHandler.isKeyPressed(SDLK_d))
+	{
+		m_registry.view<comp::CharacterType>().each([&, this](app::Entity const entity, comp::CharacterType & characterType)
+		{
+			characterType.type = CharType::BOMB;
+		});
+	}
+	if (m_keyHandler.isKeyPressed(SDLK_f))
+	{
+		m_registry.view<comp::CharacterType>().each([&, this](app::Entity const entity, comp::CharacterType & characterType)
+		{
+			characterType.type = CharType::SWORD_LEGS;
+		});
+	}
+
 }
 
 void app::sys::DebugSystem::sceneSwapping()
