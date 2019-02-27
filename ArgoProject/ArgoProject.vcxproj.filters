@@ -693,9 +693,6 @@
     <ClCompile Include="src\fsm\AnimationStateMachine.cpp">
       <Filter>Source Files\fsm</Filter>
     </ClCompile>
-    <ClCompile Include="src\fsm\states\AiWalkingAnimationState.cpp">
-      <Filter>Source Files\fsm\states</Filter>
-    </ClCompile>
     <ClCompile Include="src\factories\scenes\LoadingSceneFactory.cpp">
       <Filter>Source Files\factories\scenes</Filter>
     </ClCompile>
@@ -716,6 +713,9 @@
     </ClCompile>
     <ClCompile Include="src\components\Tiled.cpp">
       <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fsm\states\AxeRunAnimationState.cpp">
+      <Filter>Source Files\fsm\states</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1259,9 +1259,6 @@
     <ClInclude Include="src\fsm\AnimationStateMachine.h">
       <Filter>Header Files\fsm</Filter>
     </ClInclude>
-    <ClInclude Include="src\fsm\states\AiWalkingAnimationState.h">
-      <Filter>Header Files\fsm\states</Filter>
-    </ClInclude>
     <ClInclude Include="src\graphics\WindowParameters.h">
       <Filter>Header Files\parameters</Filter>
     </ClInclude>
@@ -1288,6 +1285,9 @@
     </ClInclude>
     <ClInclude Include="src\components\AnimatedImage.h">
       <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\fsm\states\AxeRunAnimationState.h">
+      <Filter>Header Files\fsm\states</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

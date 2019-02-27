@@ -20,7 +20,7 @@ app::fact::DestructibleBlockFactory::DestructibleBlockFactory(app::par::Destruct
 {
 }
 
-app::Entity const app::fact::DestructibleBlockFactory::create()
+std::vector<app::Entity> app::fact::DestructibleBlockFactory::create()
 {
 	app::math::Vector2f m_position = parameters.position;
 	app::math::Vector2f m_size = parameters.size;
@@ -59,14 +59,6 @@ app::Entity const app::fact::DestructibleBlockFactory::create()
 	dimensions.origin = dimensions.size / 2.0f;
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
 
-	//auto layer = comp::Layer();
-	//layer.zIndex = 130u;
-	//m_registry.assign<decltype(layer)>(entity, std::move(layer));
-
-	//auto render = comp::Render();
-	//render.texture = m_resourceManager.getTexture(app::res::TextureKey::LevelWall);
-	//m_registry.assign<decltype(render)>(entity, std::move(render));
-
 	auto collision = comp::Collision();
 	collision.bounds = cute::c2AABB();
 	m_registry.assign<decltype(collision)>(entity, std::move(collision));
@@ -89,5 +81,7 @@ app::Entity const app::fact::DestructibleBlockFactory::create()
 	tiled.tiles = entities;
 	m_registry.assign<decltype(tiled)>(entity, std::move(tiled));
 
-	return entity;	
+	entities.push_back(entity);
+
+	return entities;	
 }

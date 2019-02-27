@@ -28,7 +28,7 @@
 #include "components/Health.h"
 
 #include "fsm/AnimationStateMachine.h"
-#include "fsm/states/AiWalkingAnimationState.h"
+#include "fsm/states/AxeRunAnimationState.h"
 
 app::fact::AIFactory::AIFactory(math::Vector2f const & pos, math::Vector2f const & size)
 	: m_position(pos), m_size(size)
@@ -84,7 +84,7 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	// Make sure render and animator components are already assigned before assigning a finite state machine.
 	auto stateMachine = comp::StateMachine();
 	stateMachine.instance = std::make_unique<fsm::AnimationStateMachine>();
-	stateMachine.instance->setState(std::make_shared<fsm::sta::AiWalkingAnimationState>(entity));
+	stateMachine.instance->setState(std::make_shared<fsm::sta::AxeRunAnimationState>(entity));
 	m_registry.assign<decltype(stateMachine)>(entity, std::move(stateMachine));
 
 	auto collision = comp::Collision();

@@ -290,7 +290,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\fsm\AnimationStateMachine.cpp" />
     <ClCompile Include="src\fsm\BaseState.cpp" />
     <ClCompile Include="src\fsm\BaseStateMachine.cpp" />
-    <ClCompile Include="src\fsm\states\AiWalkingAnimationState.cpp" />
+    <ClCompile Include="src\fsm\states\AxeRunAnimationState.cpp" />
     <ClCompile Include="src\fsm\states\AnimationState.cpp" />
     <ClCompile Include="src\fsm\states\EntityState.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -486,7 +486,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\fsm\AnimationStateMachine.h" />
     <ClInclude Include="src\fsm\BaseState.h" />
     <ClInclude Include="src\fsm\BaseStateMachine.h" />
-    <ClInclude Include="src\fsm\states\AiWalkingAnimationState.h" />
+    <ClInclude Include="src\fsm\states\AxeRunAnimationState.h" />
     <ClInclude Include="src\fsm\states\AnimationState.h" />
     <ClInclude Include="src\fsm\states\EntityState.h" />
     <ClInclude Include="src\Game.h" />

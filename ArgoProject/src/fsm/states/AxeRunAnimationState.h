@@ -1,21 +1,21 @@
-﻿#ifndef _AI_WALKING_ANIMATION_STATE_H
-#define _AI_WALKING_ANIMATION_STATE_H
+﻿#ifndef	_AXE_RUN_ANIMATION_STATE_H
+#define _AXE_RUN_ANIMATION_STATE_H
 
 #include "AnimationState.h"
 
 namespace app::fsm::sta
 {
-	class AiWalkingAnimationState : public AnimationState
+	class AxeRunAnimationState : public AnimationState
 	{
 	public: // Constructors/Destructor/Assignments
-		AiWalkingAnimationState(app::Entity const entity);
-		virtual ~AiWalkingAnimationState() = default;
+		AxeRunAnimationState(app::Entity const entity);
+		virtual ~AxeRunAnimationState() = default;
 
-		AiWalkingAnimationState(AiWalkingAnimationState const &) = default;
-		AiWalkingAnimationState & operator=(AiWalkingAnimationState const &) = default;
+		AxeRunAnimationState(AxeRunAnimationState const &) = default;
+		AxeRunAnimationState & operator=(AxeRunAnimationState const &) = default;
 
-		AiWalkingAnimationState(AiWalkingAnimationState &&) = default;
-		AiWalkingAnimationState & operator=(AiWalkingAnimationState &&) = default;
+		AxeRunAnimationState(AxeRunAnimationState &&) = default;
+		AxeRunAnimationState & operator=(AxeRunAnimationState &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions

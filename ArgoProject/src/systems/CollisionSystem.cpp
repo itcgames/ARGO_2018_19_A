@@ -46,7 +46,7 @@ app::sys::CollisionSystem::CollisionSystem()
 	m_registry.prepare<comp::Collision, comp::Impenetrable, comp::Location, comp::Dimensions>();
 	m_registry.prepare<comp::Collision, comp::Enemy, comp::Location, comp::Dimensions, comp::Motion, comp::CurrentGround>();
 	m_registry.prepare<comp::Collision, comp::Enemy, comp::Location, comp::Dimensions, comp::Motion>();
-	m_registry.prepare<comp::Collision, comp::Location, comp::Dimensions, comp::Health>();
+	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Health>();
 	m_registry.prepare<comp::Collision, comp::Input, comp::Location, comp::Dimensions>();
 	m_registry.prepare<comp::Collision, comp::Enemy, comp::Health>();
 	m_registry.prepare<comp::Collision, comp::Attack, comp::Location, comp::Dimensions, comp::Damage>();
@@ -486,8 +486,8 @@ void app::sys::CollisionSystem::updateCollisionBoxes()
 
 void app::sys::CollisionSystem::playerHazardCollisions()
 {
-	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Health>(entt::persistent_t())
-		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions, comp::Health & health)
+	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Health>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Input & input, comp::Location & location, comp::Dimensions & dimensions, comp::Health & health)
 	{
 		m_registry.view<comp::Hazard, comp::Collision, comp::Damage>(entt::persistent_t())
 			.each([&, this](app::Entity const secEntity, comp::Hazard & hazard, comp::Collision & secCollision, comp::Damage & damage)

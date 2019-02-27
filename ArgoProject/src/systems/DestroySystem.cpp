@@ -14,9 +14,8 @@ void app::sys::DestroySystem::update(app::time::seconds const & dt)
 		{
 			if (tilesView.contains(entity))
 			{
-				auto tileComp = tilesView.get(entity);
-				auto images = tileComp.tiles;
-				for (auto & e : images)
+				auto const & tileComp = tilesView.get(entity);
+				for (auto & e : tileComp.tiles)
 				{
 					m_registry.destroy(e);
 				}

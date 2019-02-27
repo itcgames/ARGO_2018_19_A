@@ -1,14 +1,14 @@
 ﻿#ifndef _FACTORY_HAZARD_H
 #define _FACTORY_HAZARD_H
 
-#include"EntityFactory.h"
+#include"EntitiesFactory.h"
 
 namespace app::fact
 {
-	class HazardFactory : public EntityFactory
+	class HazardFactory : public EntitiesFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		HazardFactory(app::math::Vector2f const & pos, app::math::Vector2f const & size);
+		HazardFactory(app::math::Vector2f const & pos, app::math::Vector2f const & size, std::uint32_t const & hazardWidth);
 		virtual ~HazardFactory() = default;
 
 		HazardFactory(HazardFactory const &) = default;
@@ -19,7 +19,7 @@ namespace app::fact
 
 	public: // Public Static Functions
 	public: // Public Member Functions
-		virtual app::Entity const create() override;
+		virtual std::vector<app::Entity> create() override;
 	public: // Public Static Variables
 	public: // Public Member Variables
 
@@ -32,7 +32,8 @@ namespace app::fact
 	private: // Private Static Variables
 	private: // Private Member Variables
 		app::math::Vector2f const & m_position;
-		app::math::Vector2f const & m_size;
+		app::math::Vector2f const & m_sizeOfTile;
+		std::uint32_t const & m_hazardWidth;
 	};
 }
 
