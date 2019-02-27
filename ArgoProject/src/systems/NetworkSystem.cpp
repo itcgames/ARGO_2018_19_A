@@ -2,10 +2,14 @@
 #include "NetworkSystem.h"
 #include "singletons/ClientSingleton.h"
 #include "commands/buttons/ButtonLobbySelectCommand.h"
+#include "commands/buttons/ButtonLobbySelectRefreshCommand.h"
 #include "factories/entities/LobbyDisplayFactory.h"
 
 #include "components/LobbyDisplay.h"
 #include "components/Widget.h"
+#include "components/Layer.h"
+#include "components/Commandable.h"
+#include "systems/RenderSystem.h"
 #include "tags/LobbyTag.h"
 
 app::sys::NetworkSystem::NetworkSystem(app::sce::SceneType & sceneControl)
@@ -91,11 +95,15 @@ void app::sys::NetworkSystem::handlePacketLobbyWasJoined()
 	{
 		if (!lobbyDisplayView.contains(entity)) { entities.push_back(entity); }
 	}
+	
+	{
+		auto refreshEntities = std::forward_list<app::Entity>();
+		refreshEntities.insert_after(refreshEntities.before_begin(), entities.begin(), entities.end());
 
-	auto const & lobbies = m_client.getLobbies();
-	auto params = par::LobbyDisplayFactoryParameters();
-	params.position = math::Vector2f{ -450.0f, -300.0f };
-	params.lobbies = lobbies;
-	params.entities.insert(params.entities.end(), entities.begin(), entities.end());
-	entities = fact::LobbyDisplayFactory(params, m_sceneControl).create();
+		auto entity = m_registry.create();
+
+		auto commandable = comp::Commandable();
+		commandable.list.emplace_front(std::make_unique<cmnd::ButtonLobbySelectRefreshCommand>(refreshEntities, m_sceneControl));
+		m_registry.assign<decltype(commandable)>(entity, std::move(commandable));
+	}
 }

@@ -9,7 +9,7 @@
 #include "commands/TestCommand.h"
 
 app::fact::sce::LobbySelectSceneFactory::LobbySelectSceneFactory(app::sce::SceneType & sceneControl)
-	: EntitiesFactory()
+	: SceneFactory()
 	, m_sceneControl(sceneControl)
 {
 }

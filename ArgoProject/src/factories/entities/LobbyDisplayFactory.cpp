@@ -37,7 +37,7 @@ std::vector<app::Entity> app::fact::LobbyDisplayFactory::create()
 		auto lobbyDisplayView = m_registry.view<comp::LobbyDisplay>();
 		for (auto const & entity : lobbyDisplayView)
 		{
-			m_registry.assign<comp::Destroy>(entity);
+			m_registry.destroy(entity);
 		}
 	}
 
