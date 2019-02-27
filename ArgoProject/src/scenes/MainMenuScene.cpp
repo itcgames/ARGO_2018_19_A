@@ -39,9 +39,11 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 
 void app::sce::MainMenuScene::start()
 {
-	auto const & entities = fact::sce::MainMenuSceneFactory(m_sceneManagerType, m_demoFactory).create();
 	m_registry.destruction<comp::Background>().connect<MainMenuScene, &MainMenuScene::startDemo>(this);
 	m_registry.destruction<comp::AI>().connect<MainMenuScene, &MainMenuScene::reset>(this);
+	auto sceneFactory = fact::sce::MainMenuSceneFactory(m_sceneManagerType, m_demoFactory);
+	auto entities = BaseScene::createEntities(sceneFactory);
+
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("MAIN MENU SCENE: Creating entities");
