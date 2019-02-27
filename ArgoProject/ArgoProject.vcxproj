@@ -201,10 +201,13 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\commands\buttons\ButtonLobbySelectCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonLobbySelectCreateLobbyCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonLobbySelectRefreshCommand.cpp" />
+    <ClCompile Include="src\commands\buttons\ButtonMainMenuCreditsCommand.cpp" />
+    <ClCompile Include="src\commands\buttons\ButtonMainMenuExitCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCancelCommand.cpp" />
     <ClCompile Include="src\commands\buttons\BaseMultiplayerCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectConfirmCommand.cpp" />
+    <ClCompile Include="src\commands\buttons\ButtonMainMenuSinglePlayerCommand.cpp" />
     <ClCompile Include="src\commands\DashCommand.cpp" />
     <ClCompile Include="src\commands\DropCommand.cpp" />
     <ClCompile Include="src\commands\FaceLeftCommand.cpp" />
@@ -404,10 +407,13 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\commands\buttons\ButtonLobbySelectCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonLobbySelectCreateLobbyCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonLobbySelectRefreshCommand.h" />
+    <ClInclude Include="src\commands\buttons\ButtonMainMenuCreditsCommand.h" />
+    <ClInclude Include="src\commands\buttons\ButtonMainMenuExitCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCancelCommand.h" />
     <ClInclude Include="src\commands\buttons\BaseMultiplayerCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectConfirmCommand.h" />
+    <ClInclude Include="src\commands\buttons\ButtonMainMenuSinglePlayerCommand.h" />
     <ClInclude Include="src\commands\DashCommand.h" />
     <ClInclude Include="src\commands\DropCommand.h" />
     <ClInclude Include="src\commands\FaceLeftCommand.h" />

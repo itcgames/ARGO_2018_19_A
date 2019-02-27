@@ -45,9 +45,7 @@ app::Entity const app::fact::ButtonFactory::create()
 	presseable.keyCommands = comp::Presseable::KeyCommands{
 		std::make_pair(SDLK_RETURN, m_params.command)
 	};
-	presseable.mouseCommands = comp::Presseable::MouseCommands{
-		std::make_pair(SDL_BUTTON_LEFT, m_params.command)
-	};
+	presseable.mouseCommands = comp::Presseable::MouseCommands{};
 	presseable.buttonCommands = comp::Presseable::ButtonCommands{
 		std::make_pair(app::inp::ControllerButtonCode::SDL_CONTROLLER_BUTTON_A, m_params.command)
 	};
