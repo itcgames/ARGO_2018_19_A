@@ -59,14 +59,6 @@ std::vector<app::Entity> app::fact::DestructibleBlockFactory::create()
 	dimensions.origin = dimensions.size / 2.0f;
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
 
-	//auto layer = comp::Layer();
-	//layer.zIndex = 130u;
-	//m_registry.assign<decltype(layer)>(entity, std::move(layer));
-
-	//auto render = comp::Render();
-	//render.texture = m_resourceManager.getTexture(app::res::TextureKey::LevelWall);
-	//m_registry.assign<decltype(render)>(entity, std::move(render));
-
 	auto collision = comp::Collision();
 	collision.bounds = cute::c2AABB();
 	m_registry.assign<decltype(collision)>(entity, std::move(collision));

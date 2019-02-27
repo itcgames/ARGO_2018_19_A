@@ -50,14 +50,6 @@ std::vector<app::Entity> app::fact::FacadeFactory::create()
 	dimensions.origin = dimensions.size / 2.0f;
 	m_registry.assign<decltype(dimensions)>(entity, std::move(dimensions));
 
-	//auto layer = comp::Layer();
-	//layer.zIndex = 140u;
-	//m_registry.assign<decltype(layer)>(entity, std::move(layer));
-
-	//auto render = comp::Render();
-	//render.texture = m_resourceManager.getTexture(app::res::TextureKey::LevelWall);
-	//m_registry.assign<decltype(render)>(entity, std::move(render));
-
 	auto facade = comp::Facade();
 	m_registry.assign<decltype(facade)>(entity, std::move(facade));
 
