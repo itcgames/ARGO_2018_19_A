@@ -25,6 +25,7 @@ namespace app::sce
 		virtual void start() final override;
 		virtual void end() final override;
 		void startDemo(app::Registry & registry, app::Entity inputEntity);
+		void reset(app::Registry & registry, app::Entity inputEntity);
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -36,6 +37,8 @@ namespace app::sce
 	private: // Private Static Variables
 	private: // Private Member Variables
 		std::optional<fact::LevelDemoFactory> m_demoFactory;
+		std::vector<app::Entity> m_demoEntities;
+		bool resetDemo = true;
 	};
 }
 

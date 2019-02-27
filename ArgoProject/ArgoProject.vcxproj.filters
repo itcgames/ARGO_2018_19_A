@@ -750,6 +750,9 @@
     <ClCompile Include="src\commands\buttons\ButtonMainMenuExitCommand.cpp">
       <Filter>Source Files\commands\buttons</Filter>
     </ClCompile>
+    <ClCompile Include="src\components\Background.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -1345,6 +1348,9 @@
     </ClInclude>
     <ClInclude Include="src\commands\buttons\ButtonMainMenuExitCommand.h">
       <Filter>Header Files\commands\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Background.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -9,6 +9,7 @@
 #include "factories/LevelFactory.h"
 
 #include "components/Destroy.h"
+#include "components/Background.h"
 
 #include "commands/buttons/ButtonMainMenuSinglePlayerCommand.h"
 #include "commands/buttons/ButtonMainMenuMultiplayerConnectCommand.h"
@@ -38,6 +39,7 @@ std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 		auto destroy = comp::Destroy();
 		destroy.timeToLive = 5.0f;
 		m_registry.assign<decltype(destroy)>(background, std::move(destroy));
+		m_registry.assign<comp::Background>(background);
 		entities.push_back(background);
 
 		auto cameraParams = app::par::CameraParameters();
