@@ -18,6 +18,8 @@ app::sce::MultiplayerLevelScene::MultiplayerLevelScene(SceneType & sceneManagerT
 			UpdateSystem(std::in_place_type<app::sys::FollowEntitySystem>),
 			UpdateSystem(std::in_place_type<app::sys::CollisionSystem>),
 			UpdateSystem(std::in_place_type<app::sys::HealthSystem>),
+			UpdateSystem(std::in_place_type<app::sys::NetworkSystem>, sceneManagerType),
+			UpdateSystem(std::in_place_type<app::sys::SendPlayerDataSystem>),
 			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType),
 			UpdateSystem(std::in_place_type<app::sys::DestroySystem>)
 			})

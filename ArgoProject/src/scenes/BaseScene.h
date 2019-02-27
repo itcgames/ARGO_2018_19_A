@@ -23,6 +23,7 @@
 #include "systems/AISystem.h"
 #include "systems/LoadingSystem.h"
 #include "systems/FollowEntitySystem.h"
+#include "systems/SendPlayerDataSystem.h"
 
 namespace app::sce
 {
@@ -48,6 +49,7 @@ namespace app::sce
 			, sys::WidgetNavigationSystem
 			, sys::DestroySystem
 			, sys::FollowEntitySystem
+			, sys::SendPlayerDataSystem
 		>;
 		using UpdateSystems = std::vector<UpdateSystem>;
 		using DrawSystem = std::variant<

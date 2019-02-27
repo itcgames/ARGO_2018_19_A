@@ -50,7 +50,7 @@ void app::sys::NetworkSystem::update(app::time::seconds const & dt)
 					ghostView.each([&, this](app::Entity const entity, comp::Ghost & ghost, comp::Location & location)
 					{
 						if (ghost.id != playerId) { return; }
-							location.position = newPosition;
+						location.position = newPosition;
 					});
 				}
 			}

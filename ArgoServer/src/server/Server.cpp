@@ -352,7 +352,7 @@ bool app::net::Server::processLevelNewPlayerInfo(int id)
 	auto currentPlayerId = std::int32_t();
 	if (!this->get(id, currentPlayerId)) { return false; }
 	//get current player position
-	auto playerPosition = int();
+	auto playerPosition = math::Vector2f();
 	if (!this->get(id, playerPosition)) { return false; }
 	//get all players
 	auto const & players = lobby.getPlayers();
@@ -372,6 +372,8 @@ bool app::net::Server::processLevelNewPlayerInfo(int id)
 			if (playerId == currentPlayerId) { continue; }
 			//send packet to say information is coming
 			if (!this->send(playerId, PacketType::LEVEL_NEW_PLAYER_INFO)) { return false; }
+			//sending player id
+			if (!this->send(playerId, playerId)) { return false; }
 			//send player position 
 			if (!this->send(playerId, playerPosition)) { return false; }
 		}

@@ -720,6 +720,9 @@
     <ClCompile Include="src\parameters\GhostPlayerFactoryParameters.cpp">
       <Filter>Source Files\parameters</Filter>
     </ClCompile>
+    <ClCompile Include="src\systems\SendPlayerDataSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -1281,6 +1284,9 @@
     </ClInclude>
     <ClInclude Include="src\parameters\GhostPlayerFactoryParameters.h">
       <Filter>Header Files\parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\SendPlayerDataSystem.h">
+      <Filter>Header Files\systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

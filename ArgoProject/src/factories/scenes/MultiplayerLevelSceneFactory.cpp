@@ -5,6 +5,7 @@
 #include "factories/LevelFactory.h"
 #include "factories/GhostPlayerFactory.h"
 #include "parameters/GhostPlayerFactoryParameters.h"
+#include "tags/LobbyTag.h"
 
 std::vector<app::Entity> app::fact::sce::MultiplayerLevelSceneFactory::create()
 {
@@ -22,21 +23,19 @@ std::vector<app::Entity> app::fact::sce::MultiplayerLevelSceneFactory::create()
 
 	//GHOST PLAYERS
 	auto params = app::par::GhostPlayerFactoryParameters();
+	auto const & lobbyTag = m_registry.get<tag::Lobby>();
+	auto const & [currentPlayerId, currentPlayerName] = lobbyTag.players.at(lobbyTag.playerIndex).value();
+	for (auto const & player : lobbyTag.players)
 	{
+		if (!player.has_value() || player->first == currentPlayerId) { continue; }
+
+		auto const &[id, name] = player.value();
+
 		params.position = math::Vector2f(900, 100);
-		params.id = entities.size();
+		params.id = id;
 		entities.push_back(fact::GhostPlayerFactory(params).create());
 	}
-	{
-		params.position = math::Vector2f(920, 100);
-		params.id = entities.size();
-		entities.push_back(fact::GhostPlayerFactory(params).create());
-	}
-	{
-		params.position = math::Vector2f(930, 100);
-		params.id = entities.size();
-		entities.push_back(fact::GhostPlayerFactory(params).create());
-	}
+
 	auto cameraParams = app::par::CameraParameters();
 	cameraParams.targetEntity = player;
 	cameraParams.clampRect = math::Rectf({ -800.0f, 300.0f }, { 2000.0f, 1000.0f });
