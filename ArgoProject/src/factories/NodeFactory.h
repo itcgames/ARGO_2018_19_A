@@ -9,7 +9,7 @@ namespace app::fact
 	class NodeFactory : public EntityFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		NodeFactory(math::Vector2f const & pos, std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & lcmnds, std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & icmnds);
+		NodeFactory(math::Vector2f const & pos, std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & lcmnds, std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & icmnds, float TimeToLoopCommands);
 		virtual ~NodeFactory() = default;
 
 		NodeFactory(NodeFactory const &) = default;
@@ -35,6 +35,7 @@ namespace app::fact
 		math::Vector2f const & m_position;
 		std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & m_loopCommands;
 		std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & m_initialCommands;
+		float m_timeToLoopCommands;
 	};
 }
 

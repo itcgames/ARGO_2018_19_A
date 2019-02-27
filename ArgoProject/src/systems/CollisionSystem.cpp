@@ -253,14 +253,18 @@ void app::sys::CollisionSystem::checkAINodeCollisions()
 			bool const & collisionCheck = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
 			if (collisionCheck)
 			{
-				ai.currentNode = secEntity;
-				ai.initialCommands = node.initialCommands;
-				node.active = false;
+
+					ai.currentNode = secEntity;
+					if (node.active)
+					{
+						ai.initialCommands = node.initialCommands;
+						node.active = false;
+					}
 			}
 			else
 			{
 				//TODO: make sure one node activates once (while colliding set back to active when not colliding
-				node.active = true;
+				//node.active = true;
 			}
 		});
 	});
