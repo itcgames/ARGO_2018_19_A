@@ -121,8 +121,8 @@ std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 		}
 	}
 	{
-		auto const & position = app::math::Vector2f(750, -300);
-		auto const & sizePerLetter = math::Vector2f{ 20.0f, 40.0f };
+		auto const & position = app::math::Vector2f(750.0f, -200.0f);
+		auto const & sizePerLetter = math::Vector2f{ 20.0f, 40.0f } * 1.25f;
 		auto const & text = std::string("ARGO SOULS");
 		auto const & stepSize = math::Vector2f{ static_cast<float>(text.size()), 1.0f };
 		entities.push_back(fact::TextFactory(position, sizePerLetter * stepSize, text).create());
