@@ -443,11 +443,20 @@ bool app::net::Server::processLevelNewPlayerInfo(int id)
 			// Not the current player
 			if (playerId == currentPlayerId) { continue; }
 			//send packet to say information is coming
-			if (!this->send(playerId, PacketType::LEVEL_NEW_PLAYER_INFO)) { return false; }
+			if (!this->send(playerId, PacketType::LEVEL_NEW_PLAYER_INFO)) 
+			{
+				return false;
+			}
 			//sending player id
-			if (!this->send(playerId, playerId)) { return false; }
+			if (!this->send(playerId, playerId)) 
+			{ 
+				return false; 
+			}
 			//send player position 
-			if (!this->send(playerId, playerPosition)) { return false; }
+			if (!this->send(playerId, playerPosition))
+			{
+				return false; 
+			}
 		}
 	}
 

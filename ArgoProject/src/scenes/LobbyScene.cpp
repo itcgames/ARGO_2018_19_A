@@ -29,16 +29,16 @@ app::sce::LobbyScene::LobbyScene(SceneType & sceneManagerType)
 
 void app::sce::LobbyScene::start()
 {
-	auto sceneFactory = fact::sce::LobbySceneFactory();
-	auto entities = BaseScene::createEntities(sceneFactory);
-	if constexpr (DEBUG_MODE)
-	{
-		Console::writeLine("LOBBY SCENE: Creating entities");
-		for (auto const & entity : entities)
-		{
-			Console::writeLine({ "  Created entity[", std::to_string(entity), "]" });
-		}
-	}
+//	//auto sceneFactory = fact::sce::LobbySceneFactory();
+////	auto entities = BaseScene::createEntities(sceneFactory);
+//	if constexpr (DEBUG_MODE)
+//	{
+//		Console::writeLine("LOBBY SCENE: Creating entities");
+//		for (auto const & entity : entities)
+//		{
+//	/		Console::writeLine({ "  Created entity[", std::to_string(entity), "]" });
+//		}
+//	}
 }
 
 void app::sce::LobbyScene::end()
@@ -52,5 +52,6 @@ void app::sce::LobbyScene::end()
 		});
 	}
 	if (m_client.hasInit() && m_sceneManagerType != SceneType::LobbySelect && m_sceneManagerType != SceneType::MultiplayerLevel) { m_client.deinitNetwork(); }
+
 }
 

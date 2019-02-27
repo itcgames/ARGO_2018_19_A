@@ -206,6 +206,7 @@ bool app::net::Client::processPacket(PacketType _packetType)
 			return true;
 		case PacketType::UNKNOWN:
 			this->output("Unknown Packet type!");
+			return false;
 		case PacketType::LOBBY_CREATE:
 		default:
 			return this->processDefault();
