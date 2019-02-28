@@ -231,17 +231,6 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	node = app::fact::NodeFactory(math::Vector2f(2900.0f, -50.0f), loopCmnds, initialCmnds, timeToLoopCommands).create();
 	entities.push_back(node);
 
-	//12.5 NODE TO BE DYNAMICALLY CREATED
-	loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
-			moveLeftCmnd
-	};
-	initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
-			std::make_shared<cmnd::MoveCommand>(entity, 180.0f, 20.0f),
-			std::make_shared<cmnd::DashCommand>(entity)
-	};
-	node = app::fact::NodeFactory(math::Vector2f(2900.0f, 200.0f), loopCmnds, initialCmnds, timeToLoopCommands).create();
-	entities.push_back(node);
-
 	//13
 	timeToLoopCommands = 0.4f;
 	loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{

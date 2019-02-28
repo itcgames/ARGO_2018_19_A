@@ -263,11 +263,6 @@ void app::sys::CollisionSystem::checkAINodeCollisions()
 						node.active = false;
 					}
 			}
-			else
-			{
-				//TODO: make sure one node activates once (while colliding set back to active when not colliding
-				//node.active = true;
-			}
 		});
 	});
 }
