@@ -28,6 +28,7 @@
 #include "components/Hazard.h"
 #include "components/Destructible.h"
 #include "components/Bomb.h"
+#include "components/CharacterType.h"
 
 //visitors
 #include "visitors/CollisionUpdateVisitor.h"
@@ -59,20 +60,21 @@ app::sys::CollisionSystem::CollisionSystem()
 void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 {
 	this->updateCollisionBoxes();
+	this->attackEnemyCollisions();
 	this->groundCollisions();
 	this->airCollisions();
 	this->checkPlatformCollisions();
 	this->dashCollisions();
 	this->enemyWallCollisions();
 	this->enemyEnemyCollisions();	
-	this->playerHazardCollisions();
 	this->checkAINodeCollisions();
 	this->playerGoalCollisions();
-	this->attackEnemyCollisions();
 	this->attackDestructibleCollisions();
 	this->playerEnemyCollisions();
+	this->playerHazardCollisions();
 	this->checkDiscCollisions();
 	this->checkBombCollisions();
+	this->AIHazardCollisions();
 }
 
 void app::sys::CollisionSystem::groundCollisions()
@@ -253,6 +255,25 @@ void app::sys::CollisionSystem::checkAINodeCollisions()
 			{
 				ai.currentNode = secEntity;
 				ai.initialCommands = node.initialCommands;
+			}
+		});
+	});
+}
+
+void app::sys::CollisionSystem::AIHazardCollisions()
+{
+	m_registry.view<comp::Collision, comp::AI, comp::Location, comp::Dimensions, comp::Health>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::AI & ai, comp::Location & location, comp::Dimensions & dimensions, comp::Health & health)
+	{
+		m_registry.view<comp::Hazard, comp::Collision, comp::Damage>(entt::persistent_t())
+			.each([&, this](app::Entity const secEntity, comp::Hazard & hazard, comp::Collision & secCollision, comp::Damage & damage)
+		{
+			if (entity != secEntity)
+			{
+				if (app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds))
+				{
+					health.health -= damage.damage;
+				}
 			}
 		});
 	});

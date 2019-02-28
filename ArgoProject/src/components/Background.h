@@ -1,26 +1,25 @@
-﻿#ifndef _COMP_FOLLOW_ENTITY_H
-#define _COMP_FOLLOW_ENTITY_H
+﻿#ifndef _COMPONENTS_BACKGROUND_H
+#define _COMPONENTS_BACKGROUND_H
 
 namespace app::comp
 {
-	struct FollowEntity
+	struct Background
 	{
 	public: // Constructors/Destructor/Assignments
-		FollowEntity() = default;
-		FollowEntity(FollowEntity const &) = default;
-		FollowEntity(FollowEntity &&) = default;
+		Background() = default;
+		~Background() = default;
 
-		~FollowEntity() = default;
+		Background(Background const &) = default;
+		Background & operator=(Background const &) = default;
 
-		FollowEntity & operator=(FollowEntity const &) = default;
-		FollowEntity & operator=(FollowEntity &&) = default;
+		Background(Background &&) = default;
+		Background & operator=(Background &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		app::Entity entity;
-		math::Vector2f offset = { 0.0f, 0.0f };
+
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -32,4 +31,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_COMP_FOLLOW_ENTITY_H
+#endif // !_COMPONENTS_BACKGROUND_H

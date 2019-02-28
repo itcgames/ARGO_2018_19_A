@@ -14,10 +14,11 @@ void app::sys::DestroySystem::update(app::time::seconds const & dt)
 		{
 			if (tilesView.contains(entity))
 			{
+				auto destroyView = m_registry.view<comp::Destroy>();
 				auto const & tileComp = tilesView.get(entity);
 				for (auto & e : tileComp.tiles)
 				{
-					m_registry.destroy(e);
+					if (!destroyView.contains(e)) { m_registry.assign<comp::Destroy>(e); }
 				}
 			}
 			m_registry.destroy(entity);

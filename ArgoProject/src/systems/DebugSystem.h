@@ -33,6 +33,7 @@ namespace app::sys
 	private: // Private Static Functions
 	private: // Private Member Functions
 		void serverTesting();
+		void changeChatacterType();
 		void sceneSwapping();
 	private: // Private Static Variables
 		constexpr static bool s_DEBUG_MODE = true;
