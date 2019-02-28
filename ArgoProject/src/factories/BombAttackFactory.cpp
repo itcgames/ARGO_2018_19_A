@@ -10,6 +10,7 @@
 #include "components/Render.h"
 #include "components/AirMotion.h"
 #include "components/Bomb.h"
+#include "components/Facing.h"
 
 app::fact::BombAttackFactory::BombAttackFactory(app::Entity const entity)
 	: m_entity(entity)
@@ -19,12 +20,12 @@ app::fact::BombAttackFactory::BombAttackFactory(app::Entity const entity)
 app::Entity const app::fact::BombAttackFactory::create()
 {
 
-	auto view = m_registry.view<comp::Input, comp::Dimensions, comp::Location>();
+	auto view = m_registry.view<comp::Facing, comp::Dimensions, comp::Location>();
 	app::Entity const entity = EntityFactory::create();
 
 	if (view.contains(m_entity))
 	{
-		auto[input, dimensions, location] = view.get<comp::Input, comp::Dimensions, comp::Location>(m_entity);
+		auto[facing, dimensions, location] = view.get<comp::Facing, comp::Dimensions, comp::Location>(m_entity);
 
 
 		//dimensions
@@ -50,7 +51,7 @@ app::Entity const app::fact::BombAttackFactory::create()
 
 		//location
 		auto locationComp = comp::Location();
-		if (input.isRight)
+		if (facing.isRight)
 		{
 			locationComp.position = { location.position.x + dimensions.size.x, location.position.y};
 			airMotion.direction = 0;

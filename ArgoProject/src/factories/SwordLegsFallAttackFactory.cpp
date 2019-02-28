@@ -34,7 +34,7 @@ app::Entity const app::fact::SwordLegsFallAttackFactory::create()
 
 		//dimensions
 		auto dimensionsComp = comp::Dimensions();
-		dimensionsComp.size = { dimensions.size.x, 100.0f };
+		dimensionsComp.size = { dimensions.size.x, 10.0f };
 		dimensionsComp.origin = { dimensionsComp.size.x / 2, dimensionsComp.size.y / 2 };
 		m_registry.assign<decltype(dimensionsComp)>(entity, std::move(dimensionsComp));
 

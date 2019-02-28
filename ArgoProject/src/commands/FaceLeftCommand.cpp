@@ -11,5 +11,4 @@ app::cmnd::FaceLeftCommand::FaceLeftCommand(app::Entity const _entity)
 void app::cmnd::FaceLeftCommand::execute()
 {
 	auto& input = m_registry.get<comp::Input>(m_entity);
-	input.isRight = false;
 }

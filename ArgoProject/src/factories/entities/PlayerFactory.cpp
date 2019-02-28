@@ -16,6 +16,7 @@
 #include "components/Layer.h"
 #include "components/DoubleJump.h"
 #include "components/Dashable.h"
+#include "components/Facing.h"
 
 #include "commands/MoveCommand.h"
 #include "commands/JumpCommand.h"
@@ -80,7 +81,6 @@ app::Entity const app::fact::PlayerFactory::create()
 
 
 	auto input = comp::Input();
-	input.isRight = true;
 	//Here is where commands get binded to keys
 	input.keyDownCommands.insert(std::pair(SDLK_RIGHT, std::make_shared<app::cmnd::MoveCommand>(entity, 0.0f, 20.0f)));
 	input.keyDownCommands.insert(std::pair(SDLK_LEFT, std::make_shared<app::cmnd::MoveCommand>(entity, 180.0f, 20.0f)));
@@ -125,6 +125,11 @@ app::Entity const app::fact::PlayerFactory::create()
 	auto charType = comp::CharacterType();
 	charType.type = comp::CharacterType::Type::SWORD_LEGS;
 	m_registry.assign<decltype(charType)>(entity, std::move(charType));
+
+	auto facing = comp::Facing();
+	facing.isRight = true;
+	m_registry.assign<decltype(facing)>(entity, std::move(facing));
+
 
 	return entity;
 }

@@ -44,6 +44,8 @@ namespace app::sys
 		void checkDiscCollisions();
 		void checkBombCollisions();
 		void AIHazardCollisions();
+		void AIGoalCollision();
+		void AIEnemyCollision();
 
 	private: // Private Static Variables
 		constexpr static bool DEBUG_MODE = false;
