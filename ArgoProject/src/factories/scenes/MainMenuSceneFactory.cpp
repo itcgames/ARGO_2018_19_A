@@ -28,6 +28,7 @@ std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 {
 	m_audioPlayer.playAudioMusic(app::res::AudioKey::BackgroundMusicTitle, app::gra::AudioPlayer::s_LOOP_FOREVER);
 	auto entities = std::vector<app::Entity>();
+	auto cameraEntity = app::Entity();
 
 	{
 		auto const & size = math::Vector2f{ 1366.0f, 768.0f };
@@ -44,13 +45,14 @@ std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 
 		auto cameraParams = app::par::CameraParameters();
 		cameraParams.targetEntity = background;
-		auto cameraEntity = fact::CameraFactory(std::move(cameraParams)).create();
+		cameraEntity = fact::CameraFactory(std::move(cameraParams)).create();
 		entities.push_back(cameraEntity);
 		m_levelFactory.emplace(cameraEntity);
 	}
 	// Create all buttons
 	{
 		auto params = app::par::ButtonFactoryParameters();
+		params.follow = cameraEntity;
 		{
 			params.text = std::string("Singleplayer");
 			auto const & sizePerLetter = math::Vector2f{ 20.0f, 40.0f };

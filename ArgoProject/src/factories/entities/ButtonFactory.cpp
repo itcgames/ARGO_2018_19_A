@@ -8,6 +8,7 @@
 #include "components/Render.h"
 #include "components/Layer.h"
 #include "components/Widget.h"
+#include "components/FollowEntity.h"
 
 app::fact::ButtonFactory::ButtonFactory(par::ButtonFactoryParameters const & params) noexcept
 	: EntityFactory()
@@ -50,6 +51,20 @@ app::Entity const app::fact::ButtonFactory::create()
 		std::make_pair(app::inp::ControllerButtonCode::SDL_CONTROLLER_BUTTON_A, m_params.command)
 	};
 	m_registry.assign<decltype(presseable)>(entity, std::move(presseable));
+
+	if (m_params.follow.has_value())
+	{
+		auto locationView = m_registry.view<comp::Location>();
+		auto const & followEntity = m_params.follow.value();
+		//auto follow = comp::Follow();
+		//follow.entity = followEntity;
+		//if (locationView.contains(follow.entity))
+		//{
+		//	auto const & followLocation = locationView.get(follow.entity);
+		//	follow.offset = followLocation.position - m_params.position;
+		//}
+		//m_registry.assign<decltype(follow)>(entity, std::move(follow));
+	}
 
 	auto widget = comp::Widget();
 	widget.state = m_params.state;
