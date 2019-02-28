@@ -145,6 +145,14 @@ namespace app::math
 		return v;
 	}
 
+	// Negate operator
+
+	template<typename T> Vector2<T> operator-(Vector2<T> v)
+	{
+		v.x = -v.x; v.y = -v.y;
+		return v;
+	}
+
 	// Multiplication operators
 
 	template<typename T> Vector2<T> operator*(Vector2<T> leftV, Vector2<T> const & rightV)
