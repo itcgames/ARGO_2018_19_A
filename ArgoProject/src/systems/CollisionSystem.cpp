@@ -27,6 +27,8 @@
 #include "components/SeekEntity.h"
 #include "components/Hazard.h"
 #include "components/Destructible.h"
+#include "components/Bomb.h"
+#include "components/CharacterType.h"
 
 //visitors
 #include "visitors/CollisionUpdateVisitor.h"
@@ -58,19 +60,20 @@ app::sys::CollisionSystem::CollisionSystem()
 void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 {
 	this->updateCollisionBoxes();
+	this->attackEnemyCollisions();
 	this->groundCollisions();
 	this->airCollisions();
 	this->checkPlatformCollisions();
 	this->dashCollisions();
 	this->enemyWallCollisions();
 	this->enemyEnemyCollisions();	
-	this->playerHazardCollisions();
 	this->checkAINodeCollisions();
 	this->playerGoalCollisions();
-	this->attackEnemyCollisions();
 	this->attackDestructibleCollisions();
 	this->playerEnemyCollisions();
+	this->playerHazardCollisions();
 	this->checkDiscCollisions();
+	this->checkBombCollisions();
 	this->AIHazardCollisions();
 }
 
@@ -378,6 +381,51 @@ void app::sys::CollisionSystem::checkDiscCollisions()
 			m_registry.assign<comp::Destroy>(discEnt);
 		}
 	});
+}
+
+void app::sys::CollisionSystem::checkBombCollisions()
+{
+	//view bomb
+	m_registry.view<comp::Collision, comp::Bomb>(entt::persistent_t())
+		.each([&, this](app::Entity const bombEntity, comp::Collision & collision, comp::Bomb& bombComp)
+	{
+		//if the bomb did not explode yet
+		if (!bombComp.exploded)
+		{
+			//with walls
+			m_registry.view<comp::Collision, comp::Impenetrable>(entt::persistent_t())
+				.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Impenetrable const & impenetrable)
+			{
+				bool const & collided = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+				if (collided)
+				{
+					bombComp.exploded = true;
+				}
+			});
+			//with enemies
+			m_registry.view<comp::Collision, comp::Enemy>(entt::persistent_t())
+				.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Enemy const & enemy)
+			{
+				bool const & collided = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+				if (collided)
+				{
+					bombComp.exploded = true;
+				}
+			});
+			//with facades
+			m_registry.view<comp::Collision, comp::Destructible>(entt::persistent_t())
+				.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Destructible const & facade)
+			{
+				bool const & collided = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+				if (collided)
+				{
+					bombComp.exploded = true;
+				}
+			});
+		}
+		
+	});
+
 }
 
 void app::sys::CollisionSystem::dashCollisions()

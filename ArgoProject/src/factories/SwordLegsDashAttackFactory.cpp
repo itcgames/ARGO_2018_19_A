@@ -1,5 +1,5 @@
 ﻿#include "stdafx.h"
-#include "AxeAttackFactory.h"
+#include "SwordLegsDashAttackFactory.h"
 #include "components/Destroy.h"
 #include "components/Location.h"
 #include "components/Dimensions.h"
@@ -10,13 +10,14 @@
 #include "components/Input.h"
 #include "components/Damage.h"
 #include "components/Attack.h"
+#include "components/DashAttack.h"
 
-app::fact::AxeAttackFactory::AxeAttackFactory(app::Entity const _entity)
+app::fact::SwordLegsDashAttackFactory::SwordLegsDashAttackFactory(app::Entity const _entity)
 	: m_entity(_entity)
 {
 }
 
-app::Entity const app::fact::AxeAttackFactory::create()
+app::Entity const app::fact::SwordLegsDashAttackFactory::create()
 {
 	auto view = m_registry.view<comp::Input, comp::Dimensions, comp::Location>();
 	app::Entity const entity = EntityFactory::create();
@@ -25,14 +26,12 @@ app::Entity const app::fact::AxeAttackFactory::create()
 	{
 		auto[input, dimensions, location] = view.get<comp::Input, comp::Dimensions, comp::Location>(m_entity);
 
-		auto destroy = comp::Destroy();
-		destroy.timeToLive = 0.5f;
-		m_registry.assign<decltype(destroy)>(entity, std::move(destroy));
+
 
 
 		//dimensions
 		auto dimensionsComp = comp::Dimensions();
-		dimensionsComp.size = { dimensions.size.x / 2, 100.0f };
+		dimensionsComp.size = { dimensions.size.x, 100.0f };
 		dimensionsComp.origin = { dimensionsComp.size.x / 2, dimensionsComp.size.y / 2 };
 		m_registry.assign<decltype(dimensionsComp)>(entity, std::move(dimensionsComp));
 
@@ -67,6 +66,9 @@ app::Entity const app::fact::AxeAttackFactory::create()
 		auto attack = comp::Attack();
 		m_registry.assign<decltype(attack)>(entity, std::move(attack));
 
+		auto dashAttack = comp::DashAttack();
+		m_registry.assign<decltype(dashAttack)>(entity, std::move(dashAttack));
+
 		if constexpr (DEBUG_MODE)
 		{
 			auto layer = comp::Layer();
@@ -79,5 +81,4 @@ app::Entity const app::fact::AxeAttackFactory::create()
 		}
 	}
 	return entity;
-
 }

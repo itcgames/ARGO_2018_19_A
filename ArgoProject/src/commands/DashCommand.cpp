@@ -6,6 +6,15 @@
 #include "components/AirMotion.h"
 #include "components/Input.h"
 #include "components/Dashable.h"
+#include "components/CharacterType.h"
+#include "components/Dimensions.h"
+#include "components/Location.h"
+#include "components/Collision.h"
+#include "components/Follow.h"
+#include "components/Layer.h"
+#include "components/Render.h"
+#include "factories/SwordLegsDashAttackFactory.h"
+
 
 app::cmnd::DashCommand::DashCommand(app::Entity const _entity)
 	: m_entity(_entity)
@@ -34,5 +43,17 @@ void app::cmnd::DashCommand::execute()
 		dash.speed = 5000.0f;
 		m_registry.assign<decltype(dash)>(m_entity, std::move(dash));
 		dashable.canDash = false;
+
+		auto characterTypeView = m_registry.view<comp::CharacterType>();
+		if (characterTypeView.contains(m_entity))
+		{
+			auto charType = m_registry.get<comp::CharacterType>(m_entity);
+			if (charType.type == app::comp::CharacterType::Type::SWORD_LEGS)
+			{
+				auto swordDashAttackFactory = app::fact::SwordLegsDashAttackFactory(m_entity);
+				swordDashAttackFactory.create();
+			}
+		}
+
 	}
 }
