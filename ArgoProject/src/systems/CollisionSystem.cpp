@@ -379,9 +379,11 @@ void app::sys::CollisionSystem::checkBombCollisions()
 				if (collided)
 				{
 					bombComp.exploded = true;
+					return;
 				}
 			});
 			//with enemies
+			if (bombComp.exploded) { return; }
 			m_registry.view<comp::Collision, comp::Enemy>(entt::persistent_t())
 				.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Enemy const & enemy)
 			{
@@ -389,9 +391,11 @@ void app::sys::CollisionSystem::checkBombCollisions()
 				if (collided)
 				{
 					bombComp.exploded = true;
+					return;
 				}
 			});
 			//with facades
+			if (bombComp.exploded) { return; }
 			m_registry.view<comp::Collision, comp::Destructible>(entt::persistent_t())
 				.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Destructible const & facade)
 			{
@@ -399,6 +403,7 @@ void app::sys::CollisionSystem::checkBombCollisions()
 				if (collided)
 				{
 					bombComp.exploded = true;
+					return;
 				}
 			});
 		}
