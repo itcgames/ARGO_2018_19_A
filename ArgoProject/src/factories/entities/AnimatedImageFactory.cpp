@@ -19,6 +19,7 @@ app::fact::AnimatedImageFactory::AnimatedImageFactory(
 	, m_noFrames(params.frameNumber)
 	, m_animationLoop(params.animationLoop)
 	, m_zIndex(params.zIndex)
+	, m_maxFrames(params.maxFrames)
 {
 }
 
@@ -43,6 +44,7 @@ app::Entity const app::fact::AnimatedImageFactory::create()
 	animator.position = { 0, 0 }; // Starting position
 	animator.frameSize = m_frameSize;
 	animator.numOfFrames = m_noFrames;
+	animator.maxFrames = m_maxFrames;
 	// time it takes to switch from one frame to another.
 	// calculating it by taking full_duration / (number of total frames)
 	// while dealing with edge case of any of the frames being zero
