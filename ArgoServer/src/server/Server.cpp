@@ -293,6 +293,7 @@ bool app::net::Server::processLobbyReady(int id)
 		{
 			if (!player.has_value()) { continue; }
 			if (!this->send(player->first, PACKET_TYPE)) { return false; }
+			if (!this->send(player->first, lobby)) { return false; }
 		}
 	}
 
@@ -423,6 +424,7 @@ bool app::net::Server::processLevelNewPlayerInfo(int id)
 	//get current player id
 	auto currentPlayerId = std::int32_t();
 	if (!this->get(id, currentPlayerId)) { return false; }
+	//std::cout << currentPlayerId << std::endl;
 	//get current player position
 	auto playerPosition = math::Vector2f();
 	if (!this->get(id, playerPosition)) { return false; }
@@ -438,10 +440,18 @@ bool app::net::Server::processLevelNewPlayerInfo(int id)
 			//std::int32_t const & id = pair.first;
 			//std::string const & name = pair.second;
 			//// Same as below
-
 			auto const &[playerId, name] = player.value();
 			// Not the current player
 			if (playerId == currentPlayerId) { continue; }
+			/*if (playerId == 0)
+			{
+				std::cout << "Player 1 is sending their position to player 2. Their position is " << playerPosition.x << " and its completely fucked" << std::endl;
+			}
+			else
+			{
+				std::cout << "Player 2 is sending their position to player 1. Their position is " << playerPosition.x << " and its completely fucked" << std::endl;
+			}*/
+			
 			//send packet to say information is coming
 			if (!this->send(playerId, PacketType::LEVEL_NEW_PLAYER_INFO)) 
 			{

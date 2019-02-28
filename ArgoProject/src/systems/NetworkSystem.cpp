@@ -148,6 +148,14 @@ void app::sys::NetworkSystem::handlePacketLobbyReady()
 {
 	if (m_packetType != app::net::PacketType::LOBBY_READY) { return; }
 
+	auto lobby = app::net::Lobby();
+	if (!m_client.get(lobby)) { }
+	
+	auto & lobbyTag = m_registry.get<tag::Lobby>();
+	lobbyTag.id = lobby.getId();
+	lobbyTag.name = lobby.getName();
+	lobbyTag.players = lobby.getPlayers();
+
 	m_sceneControl = app::sce::SceneType::MultiplayerLevel;
 }
 
@@ -160,9 +168,9 @@ void app::sys::NetworkSystem::updateLobbyTag()
 	if (auto const & result = std::find_if(lobbies.begin(), lobbies.end(), predicate); result != lobbies.end())
 	{
 		auto & lobby = *result;
+		lobbyTag.id = lobby.getId();
 		lobbyTag.name = lobby.getName();
 		lobbyTag.players = lobby.getPlayers();
-		lobbyTag.name = lobby.getName();
 	}
 	else
 	{
