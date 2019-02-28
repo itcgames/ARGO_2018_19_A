@@ -777,6 +777,15 @@
     <ClCompile Include="src\utilities\Random.cpp">
       <Filter>Source Files\utilities</Filter>
     </ClCompile>
+    <ClCompile Include="src\systems\DynamicNodeSystem.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\DynamicNodeAi.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tags\DynamicNodes.cpp">
+      <Filter>Source Files\tags</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -1399,6 +1408,15 @@
     </ClInclude>
     <ClInclude Include="src\utilities\Random.h">
       <Filter>Header Files\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\systems\DynamicNodeSystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\DynamicNodeAi.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tags\DynamicNodes.h">
+      <Filter>Header Files\tags</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

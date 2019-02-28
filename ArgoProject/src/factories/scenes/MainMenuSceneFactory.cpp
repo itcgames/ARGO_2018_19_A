@@ -1,5 +1,7 @@
 ﻿#include "stdafx.h"
 #include "MainMenuSceneFactory.h"
+#include "network/Client.h"
+
 #include "factories/entities/CameraFactory.h"
 #include "factories/entities/ImageFactory.h"
 #include "factories/entities/ButtonFactory.h"
@@ -15,7 +17,8 @@
 #include "commands/buttons/ButtonMainMenuMultiplayerConnectCommand.h"
 #include "commands/buttons/ButtonMainMenuCreditsCommand.h"
 #include "commands/buttons/ButtonMainMenuExitCommand.h"
-#include "network/Client.h"
+
+#include "tags/DynamicNodes.h"
 
 app::fact::sce::MainMenuSceneFactory::MainMenuSceneFactory(app::sce::SceneType & targetScene, std::optional<app::fact::LevelDemoFactory> & levelFactory)
 	: SceneFactory()
@@ -129,5 +132,8 @@ std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 			entities.push_back(fact::ButtonFactory(params).create());
 		}
 	}
+
+	if (!m_registry.has<tag::DynamicNodes>()) { m_registry.assign<tag::DynamicNodes>(entt::tag_t(), m_registry.create()); }
+
 	return entities;
 }

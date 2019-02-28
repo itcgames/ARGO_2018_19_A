@@ -55,6 +55,13 @@ app::sys::CollisionSystem::CollisionSystem()
 	m_registry.prepare<comp::Hazard, comp::Collision, comp::Damage>();
 	m_registry.prepare<comp::Collision, comp::Location, comp::Dimensions, comp::Health, comp::Input>();
 	m_registry.prepare<comp::Collision, comp::Location, comp::Dimensions, comp::Motion, comp::Disc>();
+	m_registry.prepare<comp::Collision, comp::AI, comp::Location, comp::Dimensions, comp::Health>();
+	m_registry.prepare<comp::Collision, comp::Location, comp::Dimensions, comp::Health, comp::AI>();
+	m_registry.prepare<comp::Enemy, comp::Collision, comp::Damage>();
+	m_registry.prepare<comp::Collision, comp::Destructible, comp::Health>();
+	m_registry.prepare<comp::Disc, comp::Collision, comp::Motion>();
+	m_registry.prepare<comp::Collision, comp::Impenetrable>();
+	m_registry.prepare<comp::Collision, comp::Enemy>();
 }
 
 void app::sys::CollisionSystem::update(app::time::seconds const & dt)
@@ -66,7 +73,7 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 	this->checkPlatformCollisions();
 	this->dashCollisions();
 	this->enemyWallCollisions();
-	this->enemyEnemyCollisions();	
+	this->enemyEnemyCollisions();
 	this->checkAINodeCollisions();
 	this->playerGoalCollisions();
 	this->attackDestructibleCollisions();
@@ -81,7 +88,7 @@ void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 
 void app::sys::CollisionSystem::groundCollisions()
 {
-	auto discView = m_registry.view< comp::Collision, comp::Location, comp::Dimensions, comp::Motion, comp::Disc>(entt::persistent_t());
+	auto discView = m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Motion, comp::Disc>(entt::persistent_t());
 	//view player
 	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Motion>(entt::persistent_t())
 		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions, comp::Motion & motion)
@@ -103,7 +110,7 @@ void app::sys::CollisionSystem::groundCollisions()
 					auto const & penetration = manifold.depths[0];
 					auto const & pushback = (direction*penetration);
 					location.position += pushback;
-					std::visit(vis::CollisionUpdateVisitor{ location, dimensions}, collision.bounds);
+					std::visit(vis::CollisionUpdateVisitor{ location, dimensions }, collision.bounds);
 
 					if constexpr (DEBUG_MODE)
 					{
@@ -198,47 +205,47 @@ void app::sys::CollisionSystem::checkPlatformCollisions()
 			//if we are not the player
 			if (entity != secEntity)
 			{
-					//if we collide
-					auto const & manifold = app::vis::CollisionBoundsManiVisitor::collisionBetween(collision.bounds, secCollision.bounds);
-					if (manifold.count)
+				//if we collide
+				auto const & manifold = app::vis::CollisionBoundsManiVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+				if (manifold.count)
+				{
+					if (location.position.y + (dimensions.size.y / 2) < secLocation.position.y - (secDimensions.size.y / 2) + 10.0f)
 					{
-						if (location.position.y + (dimensions.size.y / 2) < secLocation.position.y - (secDimensions.size.y / 2) + 10.0f)
+						// collision has occurred
+						if (manifold.n.y == -1 && math::toVector(airMotion.direction).y > 0 && !dropCheck.falling)
 						{
-							// collision has occurred
-							if (manifold.n.y == -1 && math::toVector(airMotion.direction).y > 0 && !dropCheck.falling)
+							auto const & direction = math::Vector2f{ manifold.n.x, manifold.n.y };
+							auto const & penetration = manifold.depths[0];
+							location.position += direction * penetration;
+
+							ground.currentGround = secEntity;
+							auto groundMotion = comp::Motion();
+							groundMotion.speed = airMotion.speed;
+							groundMotion.direction = airMotion.direction;
+							if (dashJumpView.contains(entity))
 							{
-								auto const & direction = math::Vector2f{ manifold.n.x, manifold.n.y };
-								auto const & penetration = manifold.depths[0];
-								location.position += direction * penetration;
-
-								ground.currentGround = secEntity;
-								auto groundMotion = comp::Motion();
-								groundMotion.speed = airMotion.speed;
-								groundMotion.direction = airMotion.direction;
-								if (dashJumpView.contains(entity))
-								{
-									auto & doubleJump = dashJumpView.get<comp::DoubleJump>(entity);
-									auto & dashable = dashJumpView.get<comp::Dashable>(entity);
-									doubleJump.canDoubleJump = true;
-									dashable.canDash = true;
-								}
-
-								auto const & velocity = ((math::toVector(groundMotion.direction) * groundMotion.speed) * math::Vector2f(1.0f, 0.0f));
-								groundMotion.direction = velocity.toAngle();
-								groundMotion.speed = velocity.magnitude();
-
-
-								m_registry.assign<comp::Motion>(entity, std::move(groundMotion));
-								m_registry.remove<comp::AirMotion>(entity);
-
-								std::visit(vis::CollisionUpdateVisitor{ location, dimensions }, collision.bounds);
+								auto & doubleJump = dashJumpView.get<comp::DoubleJump>(entity);
+								auto & dashable = dashJumpView.get<comp::Dashable>(entity);
+								doubleJump.canDoubleJump = true;
+								dashable.canDash = true;
 							}
-						}
-						else
-						{
-							dropCheck.falling = false;
+
+							auto const & velocity = ((math::toVector(groundMotion.direction) * groundMotion.speed) * math::Vector2f(1.0f, 0.0f));
+							groundMotion.direction = velocity.toAngle();
+							groundMotion.speed = velocity.magnitude();
+
+
+							m_registry.assign<comp::Motion>(entity, std::move(groundMotion));
+							m_registry.remove<comp::AirMotion>(entity);
+
+							std::visit(vis::CollisionUpdateVisitor{ location, dimensions }, collision.bounds);
 						}
 					}
+					else
+					{
+						dropCheck.falling = false;
+					}
+				}
 			}
 		});
 	});
@@ -256,12 +263,12 @@ void app::sys::CollisionSystem::checkAINodeCollisions()
 			if (collisionCheck)
 			{
 
-					ai.currentNode = secEntity;
-					if (node.active)
-					{
-						ai.initialCommands = node.initialCommands;
-						node.active = false;
-					}
+				ai.currentNode = secEntity;
+				if (node.active)
+				{
+					ai.initialCommands = node.initialCommands;
+					node.active = false;
+				}
 			}
 		});
 	});
@@ -473,7 +480,7 @@ void app::sys::CollisionSystem::checkBombCollisions()
 				}
 			});
 		}
-		
+
 	});
 
 }
@@ -586,7 +593,7 @@ void app::sys::CollisionSystem::enemyEnemyCollisions()
 							motion.direction = 0;
 						if (secMotion.direction == 0)
 							secMotion.direction = -180;
-					}					
+					}
 				}
 			}
 		});

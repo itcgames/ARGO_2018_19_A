@@ -33,6 +33,8 @@
 #include "fsm/AnimationStateMachine.h"
 #include "fsm/states/AxeRunAnimationState.h"
 
+#include "tags/DynamicNodes.h"
+
 app::fact::AIFactory::AIFactory(math::Vector2f const & pos, math::Vector2f const & size)
 	: m_position(pos), m_size(size)
 {
@@ -391,6 +393,13 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	node = app::fact::NodeFactory(math::Vector2f(3850.0f, 100.0f), loopCmnds, initialCmnds, timeToLoopCommands).create();
 	entities.push_back(node);
 
+	auto const & dynamicNodes = m_registry.get<tag::DynamicNodes>();
+	for (auto const & dynamicNode : dynamicNodes.nodes)
+	{
+		constexpr auto LOOP_FORERER = std::numeric_limits<float>::max();
+		auto nodeFactory = app::fact::NodeFactory(dynamicNode.position, dynamicNode.loopCommands, dynamicNode.oneTimeCommands, LOOP_FORERER);
+		entities.push_back(nodeFactory.create());
+	}
 
 	m_registry.assign<decltype(ai)>(entity, std::move(ai));
 
