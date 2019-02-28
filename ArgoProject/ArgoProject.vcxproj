@@ -392,6 +392,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\WidgetNavigationSystem.cpp" />
     <ClCompile Include="src\tags\LobbyTag.cpp" />
     <ClCompile Include="src\utilities\cute_c2.cpp" />
+    <ClCompile Include="src\utilities\Random.cpp" />
     <ClCompile Include="src\utilities\Time.cpp" />
     <ClCompile Include="src\utilities\makers.cpp" />
     <ClCompile Include="src\visitors\CollisionAabbBoolVisitor.cpp" />
@@ -598,6 +599,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\systems\WidgetNavigationSystem.h" />
     <ClInclude Include="src\tags\LobbyTag.h" />
     <ClInclude Include="src\utilities\cute_c2.h" />
+    <ClInclude Include="src\utilities\Random.h" />
     <ClInclude Include="src\utilities\Time.h" />
     <ClInclude Include="src\utilities\makers.h" />
     <ClInclude Include="src\visitors\CollisionAabbBoolVisitor.h" />
