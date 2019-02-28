@@ -1,29 +1,25 @@
-﻿#ifndef _INPUT_H
-#define _INPUT_H
-
-#include "commands/BaseCommand.h"
+﻿#ifndef _COMP_FACING_H
+#define _COMP_FACING_H
 
 namespace app::comp
 {
-	struct Input
+	struct Facing
 	{
 	public: // Constructors/Destructor/Assignments
-		Input() = default;
-		~Input() = default;
+		Facing() = default;
+		~Facing() = default;
 
-		Input(Input const &) = default;
-		Input(Input &&) noexcept = default;
+		Facing(Facing const &) = default;
+		Facing & operator=(Facing const &) = default;
 
-		Input & operator=(Input const &) = default;
-		Input & operator=(Input &&) = default;
+		Facing(Facing &&) = default;
+		Facing & operator=(Facing &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions
 	public: // Public Static Variables
 	public: // Public Member Variables
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyDownCommands;
-		std::map<app::inp::KeyCode, std::shared_ptr<app::cmnd::BaseCommand>> keyPressedCommands;
-		bool canAttack = true;
+		bool isRight;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables
@@ -35,4 +31,4 @@ namespace app::comp
 	};
 }
 
-#endif // !_INPUT_H
+#endif // !_COMP_FACING_H

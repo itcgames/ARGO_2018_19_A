@@ -771,6 +771,9 @@
     <ClCompile Include="src\components\Follow.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
+    <ClCompile Include="src\components\Facing.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -1386,6 +1389,9 @@
       <Filter>Header Files\factories\entities</Filter>
     </ClInclude>
     <ClInclude Include="src\components\Follow.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Facing.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
   </ItemGroup>

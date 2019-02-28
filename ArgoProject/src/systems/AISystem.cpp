@@ -17,8 +17,15 @@ void app::sys::AISystem::update(app::time::seconds const & dt)
 		if (ai.currentNode.has_value() && nodeView.contains(ai.currentNode.value()))
 		{
 			auto & currentNode = nodeView.get(ai.currentNode.value());
-			currentNode.loopCommands.front()->execute();
+			if (currentNode.loopCommands.size() > 0)
+			{
+				if (currentNode.timeCommandsLooped <= currentNode.timeToLoopCommands)
+				{
+					currentNode.loopCommands.front()->execute();
+				}
+				currentNode.timeCommandsLooped += dt.count();
 
+			}
 			if (ai.initialCommands.size() > 0)
 			{
 				ai.initialCommands.front()->execute();
