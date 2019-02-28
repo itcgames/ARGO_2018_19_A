@@ -25,6 +25,7 @@ namespace app::comp
 	public: // Public Static Variables
 	public: // Public Member Variables
 		State state = State::Deactive;
+		State prevState = State::Deactive;
 		std::optional<app::Entity> up = std::nullopt
 			, down = std::nullopt
 			, left = std::nullopt

@@ -738,8 +738,17 @@
     <ClCompile Include="src\fsm\states\AxeRunAnimationState.cpp">
       <Filter>Source Files\fsm\states</Filter>
     </ClCompile>
+    <ClCompile Include="src\commands\buttons\ButtonMainMenuSinglePlayerCommand.cpp">
+      <Filter>Source Files\commands\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\buttons\ButtonMainMenuCreditsCommand.cpp">
+      <Filter>Source Files\commands\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\buttons\ButtonMainMenuExitCommand.cpp">
+      <Filter>Source Files\commands\buttons</Filter>
+    </ClCompile>
     <ClCompile Include="src\components\Background.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\components</Filter>
     </ClCompile>
     <ClCompile Include="src\factories\BombAttackFactory.cpp">
       <Filter>Source Files\factories\entities</Filter>
@@ -1349,8 +1358,17 @@
     <ClInclude Include="src\fsm\states\AxeRunAnimationState.h">
       <Filter>Header Files\fsm\states</Filter>
     </ClInclude>
+    <ClInclude Include="src\commands\buttons\ButtonMainMenuSinglePlayerCommand.h">
+      <Filter>Header Files\commands\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\buttons\ButtonMainMenuCreditsCommand.h">
+      <Filter>Header Files\commands\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\buttons\ButtonMainMenuExitCommand.h">
+      <Filter>Header Files\commands\buttons</Filter>
+    </ClInclude>
     <ClInclude Include="src\components\Background.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="src\factories\BombAttackFactory.h">
       <Filter>Header Files\factories\entities</Filter>
