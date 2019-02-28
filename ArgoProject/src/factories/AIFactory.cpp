@@ -107,34 +107,61 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	characterType.type = comp::CharacterType::Type::AXE;
 	m_registry.assign<decltype(characterType)>(entity, std::move(characterType));
 
-	float timeToLoopCommands = 0.75f;
-
 	auto facing = comp::Facing();
 	facing.isRight = true;
 	m_registry.assign<decltype(facing)>(entity, std::move(facing));
 
-	app::util::
+	float timeToLoopCommands = 0.75f;
+	//auto rng = app::util::Random::gen(1, 3);
+	auto rng = app::util::Random::gen(1,3);
 	auto moveLeftCmnd = std::make_shared<cmnd::MoveCommand>(entity, -180.0f, 20.0f);
 	auto moveRightCmnd = std::make_shared<cmnd::MoveCommand>(entity, 0.0f, 20.0f);
 	auto jumpCmnd = std::make_shared<cmnd::JumpCommand>(entity, 400.0f);
-
+	//fuzzification when hitting a node do one of a few commands and see how the ai responds
 	//1
 	//run command until it hits a new node
-	auto loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
-		moveRightCmnd
-	};
-	//run the command once 
-	auto initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
-	};
+	auto loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{};
+	auto initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{};
+	if (rng == 1)
+	{
+		loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+			moveRightCmnd
+		};
+		//run the command once 
+		initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+		};
+	}
+	else if (rng == 2)
+	{
+		loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+			moveRightCmnd
+		};
+		//run the command once 
+		initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+			jumpCmnd
+		};	
+	}
+	else if (rng == 3)
+	{
+		loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+			moveLeftCmnd
+		};
+		//run the command once 
+		initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+			jumpCmnd
+		};
+	}
+
 	auto node = app::fact::NodeFactory(math::Vector2f(750.0f, 200.0f), loopCmnds, initialCmnds, timeToLoopCommands).create();
 	entities.push_back(node);
+
 	//2
 	timeToLoopCommands = 0.15f;
 	loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
 		moveRightCmnd
 	};
 	initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
-			jumpCmnd
+			jumpCmnd 
 	};
 	node = app::fact::NodeFactory(math::Vector2f(950.0f, 200.0f), loopCmnds, initialCmnds, timeToLoopCommands).create();
 	entities.push_back(node);
@@ -233,6 +260,17 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
 	};
 	node = app::fact::NodeFactory(math::Vector2f(2900.0f, -50.0f), loopCmnds, initialCmnds, timeToLoopCommands).create();
+	entities.push_back(node);
+
+	//12.5 NODE TO BE DYNAMICALLY CREATED (DESTROY)
+	loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+			moveLeftCmnd
+	};
+	initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+			std::make_shared<cmnd::MoveCommand>(entity, 180.0f, 20.0f),
+			std::make_shared<cmnd::DashCommand>(entity)
+	};
+	node = app::fact::NodeFactory(math::Vector2f(2900.0f, 200.0f), loopCmnds, initialCmnds, timeToLoopCommands).create();
 	entities.push_back(node);
 
 	//13
