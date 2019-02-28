@@ -9,23 +9,25 @@
 app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 	: BaseScene(sceneManagerType
 		, util::make_vector<UpdateSystem>({
-					UpdateSystem(std::in_place_type<app::sys::InputSystem>),
-					UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
-					UpdateSystem(std::in_place_type<app::sys::AISystem>),
-					UpdateSystem(std::in_place_type<app::sys::MotionSystem>),
-					UpdateSystem(std::in_place_type<app::sys::AirMotionSystem>),
-					UpdateSystem(std::in_place_type<app::sys::DashSystem>),
-					UpdateSystem(std::in_place_type<app::sys::StateMachineSystem>),
-					UpdateSystem(std::in_place_type<app::sys::CameraSystem>),
-					UpdateSystem(std::in_place_type<app::sys::CurrentGroundSystem>),
-					UpdateSystem(std::in_place_type<app::sys::FollowEntitySystem>),
-					UpdateSystem(std::in_place_type<app::sys::SeekEntitySystem>),
-					UpdateSystem(std::in_place_type<app::sys::DiscReturnSystem>),
-					UpdateSystem(std::in_place_type<app::sys::CollisionSystem>),
-					UpdateSystem(std::in_place_type<app::sys::HealthSystem>),
-					UpdateSystem(std::in_place_type<app::sys::BombExplosionSystem>),
-					UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType),
-					UpdateSystem(std::in_place_type<app::sys::DestroySystem>)
+			UpdateSystem(std::in_place_type<app::sys::InputSystem>),
+			UpdateSystem(std::in_place_type<app::sys::ButtonSystem>),
+			UpdateSystem(std::in_place_type<app::sys::WidgetNavigationSystem>),
+			UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
+			UpdateSystem(std::in_place_type<app::sys::AISystem>),
+			UpdateSystem(std::in_place_type<app::sys::MotionSystem>),
+			UpdateSystem(std::in_place_type<app::sys::AirMotionSystem>),
+			UpdateSystem(std::in_place_type<app::sys::DashSystem>),
+			UpdateSystem(std::in_place_type<app::sys::StateMachineSystem>),
+			UpdateSystem(std::in_place_type<app::sys::CameraSystem>),
+			UpdateSystem(std::in_place_type<app::sys::CurrentGroundSystem>),
+			UpdateSystem(std::in_place_type<app::sys::FollowEntitySystem>),
+			UpdateSystem(std::in_place_type<app::sys::SeekEntitySystem>),
+			UpdateSystem(std::in_place_type<app::sys::DiscReturnSystem>),
+			UpdateSystem(std::in_place_type<app::sys::CollisionSystem>),
+			UpdateSystem(std::in_place_type<app::sys::HealthSystem>),
+			UpdateSystem(std::in_place_type<app::sys::BombExplosionSystem>),
+			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType),
+			UpdateSystem(std::in_place_type<app::sys::DestroySystem>)
 			})
 		, util::make_vector<DrawSystem>({
 			DrawSystem(std::in_place_type<app::sys::AnimatorSystem>),

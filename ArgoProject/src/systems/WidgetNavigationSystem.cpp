@@ -17,11 +17,8 @@ void app::sys::WidgetNavigationSystem::update(app::time::seconds const & dt)
 	widgetView.each([&, this](app::Entity const entity, comp::Widget & widget)
 	{
 		if (widget.state != comp::Widget::State::Highlighted) { return; }
-		if (widget.prevState == comp::Widget::State::Active)
-		{
-			widget.prevState = widget.state;
-			return;
-		}
+		widget.prevState = widget.state;
+		if (widget.prevState == comp::Widget::State::Active) { return; }
 		if (widget.left.has_value() && m_keyHandler.isKeyPressed({ SDLK_a, SDLK_LEFT }))
 		{
 			assert(widgetView.contains(widget.left.value()));

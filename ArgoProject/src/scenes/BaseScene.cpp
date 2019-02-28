@@ -32,8 +32,10 @@ void app::sce::BaseScene::render(app::time::seconds const & dt)
 std::vector<app::Entity> app::sce::BaseScene::createEntities(fact::sce::SceneFactory & scenesFactory)
 {
 	m_registry.construction<comp::Layer>().disconnect<&app::sys::RenderSystem::onLayerConstruction>();
+	m_registry.destruction<comp::Layer>().disconnect<&app::sys::RenderSystem::onLayerConstruction>();
 	auto && entities = scenesFactory.create();
 	app::sys::RenderSystem::onLayerConstruction(m_registry, 0);
 	m_registry.construction<comp::Layer>().connect<&app::sys::RenderSystem::onLayerConstruction>();
+	m_registry.destruction<comp::Layer>().connect<&app::sys::RenderSystem::onLayerConstruction>();
 	return entities;
 }

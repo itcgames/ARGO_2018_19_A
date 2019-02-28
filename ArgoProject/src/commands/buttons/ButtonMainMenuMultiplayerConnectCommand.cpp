@@ -5,12 +5,13 @@ app::cmnd::ButtonMainMenuMultiplayerConnectCommand::ButtonMainMenuMultiplayerCon
 	  std::string && serverIp
 	, std::int32_t serverPort
 	, app::Entity const callingEntity
+	, app::Entity const followEntity
 	, app::sce::SceneType & sceneManagerControl
 )
 	: BaseMultiplayerCommand()
 	, m_serverIp(serverIp)
 	, m_serverPort(serverPort)
-	, m_askNameFactory(callingEntity, sceneManagerControl)
+	, m_askNameFactory(callingEntity, followEntity, sceneManagerControl)
 {
 }
 
