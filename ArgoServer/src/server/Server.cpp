@@ -257,6 +257,8 @@ bool app::net::Server::processPacket(int id, PacketType _packetType)
 			return this->processLobbyGetAll(id);
 		case PacketType::LOBBY_JOINED:
 			return this->processLobbyJoined(id);
+		case PacketType::LOBBY_READY:
+			return this->processLobbyReady(id);
 		case PacketType::UNKNOWN:
 		default:
 			return this->processDefault(id);
@@ -378,6 +380,21 @@ bool app::net::Server::processLobbyJoined(int id)
 	else
 	{
 		this->output(id, { "Failed to find lobby with id[", lobbyId, "]" });
+	}
+	return true;
+}
+
+bool app::net::Server::processLobbyReady(int id)
+{
+	auto lobbyId = std::uint8_t(); 
+	auto const & predicate = [&lobbyId](app::net::Lobby const & lobby) { return lobby.getId() == lobbyId; };
+	if (auto const & lobbyResult = std::find_if(m_lobbies.begin(), m_lobbies.end(), predicate); lobbyResult != m_lobbies.end())
+	{
+		this->output(id, { "Ready" });
+	}
+	else
+	{
+		return false;
 	}
 	return true;
 }

@@ -6,8 +6,10 @@ namespace app::net
 	class Lobby
 	{
 	public: // Usings/typedefs/enums
+		struct PlayerData { std::optional<std::int32_t> id; std::optional<std::string> name; std::optional<bool> ready = false; };
 		using Player = std::optional<std::pair<std::int32_t, std::string>>;
 		using Players = std::array<Player, 4>;
+
 	public: // Constructors/Destructor/Assignments
 		Lobby() = default;
 		~Lobby() = default;

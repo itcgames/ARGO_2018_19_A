@@ -2,13 +2,14 @@
 #define _FACTORY_LOBBY_SCENE_H
 
 #include "../SceneFactory.h"
+#include "scenes/SceneType.h"
 
 namespace app::fact::sce
 {
 	class LobbySceneFactory : public SceneFactory
 	{
 	public: // Constructors/Destructor/Assignments
-		LobbySceneFactory() = default;
+		LobbySceneFactory(app::sce::SceneType & sceneControl);
 		virtual ~LobbySceneFactory() = default;
 
 		LobbySceneFactory(LobbySceneFactory const &) = default;
@@ -30,6 +31,7 @@ namespace app::fact::sce
 	private: // Private Member Functions
 	private: // Private Static Variables
 	private: // Private Member Variables
+		app::sce::SceneType & m_sceneControl;
 	};
 }
 
