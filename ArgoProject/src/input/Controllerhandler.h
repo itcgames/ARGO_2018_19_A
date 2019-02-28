@@ -40,8 +40,8 @@ namespace app::inp
 		bool isButtonDown(Index const & index, std::initializer_list<Button> const & buttons) const;
 		bool isButtonUp(Index const & index, Button const & button) const;
 		bool isButtonUp(Index const & index, std::initializer_list<Button> const & buttons) const;
-		bool isButtonPressed(Index const & index, Button const & button) const;
-		bool isButtonPressed(Index const & index, std::initializer_list<Button> const & buttons) const;
+		bool isAxisOver(Index const & index, Button const & button) const;
+		bool isAxisOver(Index const & index, std::initializer_list<Button> const & buttons) const;
 		bool isButtonUnpressed(Index const & index, Button const & button) const;
 		bool isButtonUnpressed(Index const & index, std::initializer_list<Button> const & buttons) const;
 		double getAxis(Index const & index, Axis const & axis) const;
@@ -64,8 +64,8 @@ namespace app::inp
 		static bool isButtonDown(ButtonMap const & map, std::initializer_list<Button> const & buttons);
 		static bool isButtonUp(ButtonMap const & map, Button const & button);
 		static bool isButtonUp(ButtonMap const & map, std::initializer_list<Button> const & buttons);
-		static bool isButtonPressed(ButtonMap const & map, ButtonMap const & prevMap, Button const & button);
-		static bool isButtonPressed(ButtonMap const & map, ButtonMap const & prevMap, std::initializer_list<Button> const & buttons);
+		static bool isAxisOver(ButtonMap const & map, ButtonMap const & prevMap, Button const & button);
+		static bool isAxisOver(ButtonMap const & map, ButtonMap const & prevMap, std::initializer_list<Button> const & buttons);
 		static bool isButtonUnpressed(ButtonMap const & map, ButtonMap const & prevMap, Button const & button);
 		static bool isButtonUnpressed(ButtonMap const & map, ButtonMap const & prevMap, std::initializer_list<Button> const & buttons);
 		static double getAxis(AxisMap const & map, Axis const & axis);
@@ -162,23 +162,23 @@ namespace app::inp
 	}
 
 	template<typename Index, typename Axis, typename AxisValue, typename Button>
-	bool Controllerhandler<Index, Axis, AxisValue, Button>::isButtonPressed(Index const & index, Button const & button) const
+	bool Controllerhandler<Index, Axis, AxisValue, Button>::isAxisOver(Index const & index, Button const & button) const
 	{
 		if (auto const & controllerItt = m_controllers.find(index); controllerItt != m_controllers.end())
 		{
 			auto const & controller = std::get<Controller>(*controllerItt);
-			return Controllerhandler<Index, Axis, AxisValue, Button>::isButtonPressed(controller.buttonNowMap, controller.buttonPrevMap, button);
+			return Controllerhandler<Index, Axis, AxisValue, Button>::isAxisOver(controller.buttonNowMap, controller.buttonPrevMap, button);
 		}
 		return false;
 	}
 
 	template<typename Index, typename Axis, typename AxisValue, typename Button>
-	bool Controllerhandler<Index, Axis, AxisValue, Button>::isButtonPressed(Index const & index, std::initializer_list<Button> const & buttons) const
+	bool Controllerhandler<Index, Axis, AxisValue, Button>::isAxisOver(Index const & index, std::initializer_list<Button> const & buttons) const
 	{
 		if (auto const & controllerItt = m_controllers.find(index); controllerItt != m_controllers.end())
 		{
 			auto const & controller = std::get<Controller>(*controllerItt);
-			return Controllerhandler<Index, Axis, AxisValue, Button>::isButtonPressed(controller.buttonNowMap, controller.buttonPrevMap, buttons);
+			return Controllerhandler<Index, Axis, AxisValue, Button>::isAxisOver(controller.buttonNowMap, controller.buttonPrevMap, buttons);
 		}
 		return false;
 	}
@@ -337,7 +337,7 @@ namespace app::inp
 	}
 
 	template<typename Index, typename Axis, typename AxisValue, typename Button>
-	inline bool Controllerhandler<Index, Axis, AxisValue, Button>::isButtonPressed(ButtonMap const & map, ButtonMap const & prevMap, Button const & button)
+	inline bool Controllerhandler<Index, Axis, AxisValue, Button>::isAxisOver(ButtonMap const & map, ButtonMap const & prevMap, Button const & button)
 	{
 		if (auto const & itt = map.find(button); itt != map.end())
 		{
@@ -350,7 +350,7 @@ namespace app::inp
 	}
 
 	template<typename Index, typename Axis, typename AxisValue, typename Button>
-	inline bool Controllerhandler<Index, Axis, AxisValue, Button>::isButtonPressed(ButtonMap const & map, ButtonMap const & prevMap, std::initializer_list<Button> const & buttons)
+	inline bool Controllerhandler<Index, Axis, AxisValue, Button>::isAxisOver(ButtonMap const & map, ButtonMap const & prevMap, std::initializer_list<Button> const & buttons)
 	{
 		for (auto const &[mapKey, mapValue] : map)
 		{

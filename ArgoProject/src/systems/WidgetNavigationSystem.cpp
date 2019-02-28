@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "WidgetNavigationSystem.h"
 #include "singletons/KeyHandlerSingleton.h"
+#include "singletons/ControllerHandlerSingleton.h"
 
 // components
 #include "components/Widget.h"
@@ -8,12 +9,21 @@
 app::sys::WidgetNavigationSystem::WidgetNavigationSystem()
 	: BaseSystem()
 	, m_keyHandler(app::sin::KeyHandler::get())
+	, m_controllerHandler(app::sin::ControllerHandler::get())
 {
 }
 
 void app::sys::WidgetNavigationSystem::update(app::time::seconds const & dt)
 {
+	using Axis = app::inp::ControllerAxisCode;
 	auto widgetView = m_registry.view<comp::Widget>();
+	auto const & LEFT_PRESSED =
+		m_keyHandler.isKeyPressed({ SDLK_a, SDLK_LEFT })
+		|| this->isAxisOver({ Axis::SDL_CONTROLLER_AXIS_LEFTX }, s_THRESHOLD);
+	auto const & DOWN_PRESSED =
+		m_keyHandler.isKeyPressed({ SDLK_s, SDLK_DOWN })
+		|| this->isAxisOver({ Axis::SDL_CONTROLLER_AXIS_LEFTY }, s_THRESHOLD);
+
 	widgetView.each([&, this](app::Entity const entity, comp::Widget & widget)
 	{
 		if (widget.state != comp::Widget::State::Highlighted) { return; }
@@ -22,7 +32,7 @@ void app::sys::WidgetNavigationSystem::update(app::time::seconds const & dt)
 			widget.prevState = widget.state;
 			return;
 		}
-		if (widget.left.has_value() && m_keyHandler.isKeyPressed({ SDLK_a, SDLK_LEFT }))
+		if (widget.left.has_value() && LEFT_PRESSED)
 		{
 			assert(widgetView.contains(widget.left.value()));
 			widget.prevState = comp::Widget::State::Highlighted;
@@ -64,7 +74,7 @@ void app::sys::WidgetNavigationSystem::update(app::time::seconds const & dt)
 			}
 			return;
 		}
-		if (widget.down.has_value() && m_keyHandler.isKeyPressed({ SDLK_s, SDLK_DOWN }))
+		if (widget.down.has_value() && DOWN_PRESSED)
 		{
 			assert(widgetView.contains(widget.down.value()));
 			widget.prevState = comp::Widget::State::Highlighted;
@@ -79,4 +89,23 @@ void app::sys::WidgetNavigationSystem::update(app::time::seconds const & dt)
 			return;
 		}
 	});
+}
+
+bool app::sys::WidgetNavigationSystem::isAxisOver(std::initializer_list<app::inp::ControllerAxisCode> const & axises, double const & threshold)
+{
+	constexpr auto MAX_CONTROLLERS = 8;
+	for (auto i = 0; i < MAX_CONTROLLERS; ++i)
+	{
+		for (auto const & axis : axises)
+		{
+			auto const & controllerAxis = m_controllerHandler.getAxis(i, axis);
+			if ((threshold < 0.0)
+				? controllerAxis < threshold
+				: controllerAxis > threshold)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
 }

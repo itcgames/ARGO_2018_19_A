@@ -28,10 +28,13 @@ namespace app::sys
 	protected: // Protected Member Variables
 	private: // Private Static Functions
 	private: // Private Member Functions
+		bool isAxisOver(std::initializer_list<app::inp::ControllerAxisCode> const &, double const &);
 	private: // Private Static Variables
 		constexpr static bool s_DEBUG_MODE = true;
+		constexpr static double s_THRESHOLD = 0.6;
 	private: // Private Member Variables
 		app::inp::KeyHandler & m_keyHandler;
+		app::inp::ControllerHandler & m_controllerHandler;
 	};
 }
 

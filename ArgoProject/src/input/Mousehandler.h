@@ -36,8 +36,8 @@ namespace app::inp
 		bool isButtonDown(std::initializer_list<ButtonType> const & buttons) const;
 		bool isButtonUp(ButtonType const & button) const;
 		bool isButtonUp(std::initializer_list<ButtonType> const & buttons) const;
-		bool isButtonPressed(ButtonType const & button) const;
-		bool isButtonPressed(std::initializer_list<ButtonType> const & buttons) const;
+		bool isAxisOver(ButtonType const & button) const;
+		bool isAxisOver(std::initializer_list<ButtonType> const & buttons) const;
 		bool isButtonUnpressed(ButtonType const & button) const;
 		bool isButtonUnpressed(std::initializer_list<ButtonType> const & buttons) const;
 		constexpr math::Vector2i const getPosition() const { return m_mouse; }
@@ -115,14 +115,14 @@ namespace app::inp
 	}
 
 	template<typename ButtonType>
-	bool app::inp::Mousehandler<ButtonType>::isButtonPressed(ButtonType const & button) const
+	bool app::inp::Mousehandler<ButtonType>::isAxisOver(ButtonType const & button) const
 	{
 		return app::inp::Mousehandler<ButtonType>::isButtonUp(m_keyPrevMap, button)
 			&& app::inp::Mousehandler<ButtonType>::isButtonDown(m_keyNowMap, button);
 	}
 
 	template<typename ButtonType>
-	bool app::inp::Mousehandler<ButtonType>::isButtonPressed(std::initializer_list<ButtonType> const & buttons) const
+	bool app::inp::Mousehandler<ButtonType>::isAxisOver(std::initializer_list<ButtonType> const & buttons) const
 	{
 		for (auto const &[mapKey, mapValue] : m_keyNowMap)
 		{

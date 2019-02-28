@@ -44,7 +44,7 @@ void app::sys::ButtonSystem::update(app::time::seconds const & dt)
 		{
 			for (auto const &[key, command] : presseable.mouseCommands.value())
 			{
-				if (widget.state == WidgetState::Highlighted && m_mouseHandler.isButtonPressed(key))
+				if (widget.state == WidgetState::Highlighted && m_mouseHandler.isAxisOver(key))
 				{
 					widget.state = WidgetState::Pressed;
 					command->execute();
@@ -65,7 +65,7 @@ void app::sys::ButtonSystem::update(app::time::seconds const & dt)
 			{
 				for (auto const &[key, command] : presseable.buttonCommands.value())
 				{
-					if (widget.state == WidgetState::Highlighted && m_controllerHandler.isButtonPressed(i, key))
+					if (widget.state == WidgetState::Highlighted && m_controllerHandler.isAxisOver(i, key))
 					{
 						widget.state = WidgetState::Pressed;
 						command->execute();
