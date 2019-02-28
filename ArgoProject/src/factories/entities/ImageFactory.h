@@ -13,7 +13,8 @@ namespace app::fact
 			, math::Vector2f const & size
 			, math::Vector2f const & origin
 			, app::res::TextureKey const & textureKey
-			, std::uint32_t const & zIndex);
+			, std::uint32_t const & zIndex
+			, std::optional<app::Entity> const & follow = std::nullopt);
 		virtual ~ImageFactory() = default;
 
 		ImageFactory(ImageFactory const &) = default;
@@ -40,6 +41,7 @@ namespace app::fact
 		math::Vector2f const & m_origin;
 		app::res::TextureKey const & m_textureKey;
 		std::uint32_t const & m_zIndex;
+		std::optional<app::Entity> const m_follow;
 	};
 }
 
