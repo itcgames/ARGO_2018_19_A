@@ -1,23 +1,24 @@
 ﻿#include "stdafx.h"
-#include "AxeAttackFactory.h"
-#include "components/Destroy.h"
-#include "components/Location.h"
-#include "components/Dimensions.h"
-#include "components/Collision.h"
-#include "components/Follow.h"
-#include "components/Render.h"
-#include "components/Layer.h"
+#include "BombAttackFactory.h"
 #include "components/Input.h"
+#include "components/Dimensions.h"
+#include "components/Location.h"
+#include "components/Collision.h"
 #include "components/Damage.h"
 #include "components/Attack.h"
+#include "components/Layer.h"
+#include "components/Render.h"
+#include "components/AirMotion.h"
+#include "components/Bomb.h"
 
-app::fact::AxeAttackFactory::AxeAttackFactory(app::Entity const _entity)
-	: m_entity(_entity)
+app::fact::BombAttackFactory::BombAttackFactory(app::Entity const entity)
+	: m_entity(entity)
 {
 }
 
-app::Entity const app::fact::AxeAttackFactory::create()
+app::Entity const app::fact::BombAttackFactory::create()
 {
+
 	auto view = m_registry.view<comp::Input, comp::Dimensions, comp::Location>();
 	app::Entity const entity = EntityFactory::create();
 
@@ -25,14 +26,10 @@ app::Entity const app::fact::AxeAttackFactory::create()
 	{
 		auto[input, dimensions, location] = view.get<comp::Input, comp::Dimensions, comp::Location>(m_entity);
 
-		auto destroy = comp::Destroy();
-		destroy.timeToLive = 0.5f;
-		m_registry.assign<decltype(destroy)>(entity, std::move(destroy));
-
 
 		//dimensions
 		auto dimensionsComp = comp::Dimensions();
-		dimensionsComp.size = { dimensions.size.x / 2, 100.0f };
+		dimensionsComp.size = { dimensions.size.x / 2, dimensions.size.y / 2 };
 		dimensionsComp.origin = { dimensionsComp.size.x / 2, dimensionsComp.size.y / 2 };
 		m_registry.assign<decltype(dimensionsComp)>(entity, std::move(dimensionsComp));
 
@@ -41,24 +38,31 @@ app::Entity const app::fact::AxeAttackFactory::create()
 		collision.bounds = cute::c2AABB();
 		m_registry.assign<decltype(collision)>(entity, std::move(collision));
 
-		//follow entity component
-		auto followEnt = comp::Follow();
-		followEnt.entity = m_entity;
-		followEnt.offset = { dimensions.size.x / 2 + dimensionsComp.size.x / 2 + 0.5f, 0.0f };
-		m_registry.assign<decltype(followEnt)>(entity, std::move(followEnt));
+		//bomb component
+		auto bomb = comp::Bomb();
+		bomb.impulse = 1000.0f;
+		m_registry.assign<decltype(bomb)>(entity, std::move(bomb));
+
+		//air motion comp
+		auto airMotion = comp::AirMotion();
+		airMotion.speed = bomb.impulse;
+		airMotion.angularSpeed = 0;
 
 		//location
 		auto locationComp = comp::Location();
 		if (input.isRight)
 		{
-			locationComp.position = location.position + followEnt.offset;
+			locationComp.position = { location.position.x + dimensions.size.x, location.position.y};
+			airMotion.direction = 0;
 		}
 		else
 		{
-			locationComp.position = location.position - followEnt.offset;
+			locationComp.position = { location.position.x - dimensions.size.x, location.position.y};
+			airMotion.direction = 180;
 		}
 		locationComp.orientation = location.orientation;
 		m_registry.assign<decltype(locationComp)>(entity, std::move(locationComp));
+		m_registry.assign<decltype(airMotion)>(entity, std::move(airMotion));
 
 		auto damage = comp::Damage();
 		damage.damage = 1;
@@ -66,6 +70,7 @@ app::Entity const app::fact::AxeAttackFactory::create()
 
 		auto attack = comp::Attack();
 		m_registry.assign<decltype(attack)>(entity, std::move(attack));
+
 
 		if constexpr (DEBUG_MODE)
 		{
@@ -79,5 +84,4 @@ app::Entity const app::fact::AxeAttackFactory::create()
 		}
 	}
 	return entity;
-
 }
