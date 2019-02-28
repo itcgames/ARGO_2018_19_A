@@ -751,7 +751,7 @@
       <Filter>Source Files\commands\buttons</Filter>
     </ClCompile>
     <ClCompile Include="src\components\Background.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1350,7 +1350,7 @@
       <Filter>Header Files\commands\buttons</Filter>
     </ClInclude>
     <ClInclude Include="src\components\Background.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
