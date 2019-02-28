@@ -40,6 +40,7 @@ namespace app::fact
 		math::Vector2f const & m_noFrames;
 		bool const & m_animationLoop;
 		std::uint32_t const & m_zIndex;
+		std::uint32_t const & m_maxFrames;
 	};
 }
 
