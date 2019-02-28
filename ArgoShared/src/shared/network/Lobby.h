@@ -6,9 +6,9 @@ namespace app::net
 	class Lobby
 	{
 	public: // Usings/typedefs/enums
-		struct PlayerData { std::optional<std::int32_t> id; std::optional<std::string> name; std::optional<bool> ready = false; };
 		using Player = std::optional<std::pair<std::int32_t, std::string>>;
 		using Players = std::array<Player, 4>;
+		using PlayerReady = std::array<bool, 4>;
 
 	public: // Constructors/Destructor/Assignments
 		Lobby() = default;
@@ -27,7 +27,10 @@ namespace app::net
 
 		Players & getPlayers() { return m_players; }
 		Players const & getPlayers() const { return m_players; }
+		PlayerReady & getReady() { return m_playersReady; }
+		PlayerReady const & getReady() const { return m_playersReady; }
 		std::optional<std::size_t> addPlayer(std::int32_t const & id, const std::string& name);
+		void setReady(int id, bool e) { m_playersReady[id] = e; }
 
 		std::uint8_t const & getId() const { return m_id; }
 		void setId(std::uint8_t const & id) { m_id = id; }
@@ -42,6 +45,7 @@ namespace app::net
 	private: // Private Static Variables
 	private: // Private Member Variables
 		Players m_players;
+		PlayerReady m_playersReady;
 		//name of the lobby
 		std::string m_lobbyName;
 		std::uint8_t m_id;

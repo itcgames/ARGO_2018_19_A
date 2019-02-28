@@ -29,6 +29,7 @@ namespace app::cmnd
 	protected: // Protected Member Variables
 		std::forward_list<app::Entity> m_entities;
 		app::sce::SceneType & m_sceneControl;
+		bool m_ready = false;
 	private: // Private Static Functions
 	private: // Private Member Functions
 	private: // Private Static Variables

@@ -390,7 +390,35 @@ bool app::net::Server::processLobbyReady(int id)
 	auto const & predicate = [&lobbyId](app::net::Lobby const & lobby) { return lobby.getId() == lobbyId; };
 	if (auto const & lobbyResult = std::find_if(m_lobbies.begin(), m_lobbies.end(), predicate); lobbyResult != m_lobbies.end())
 	{
-		this->output(id, { "Ready" });
+		auto & lobby = *lobbyResult;
+		auto readyBool = bool();
+		if (!this->get(id, readyBool)) { return false; }
+		lobby.setReady(id, readyBool);
+		if (readyBool)
+		{
+			auto lobbyPlayers = std::vector<app::net::Lobby::Player::value_type>();
+			for (auto const & player : lobby.getPlayers())
+			{
+				if (player.has_value()) { lobbyPlayers.push_back(player.value()); }
+			}
+			bool play = true;
+			auto readyChecks = std::vector<app::net::Lobby::PlayerReady::value_type>();
+			for (auto const & ready : lobby.getReady())
+			{
+				if (!ready)
+				{
+					play = false;
+				}
+			}
+			if (play)
+			{
+				for (auto const & lobby : m_lobbies)
+				{
+					if (!this->send(id, lobby)) { return false; }
+				}
+			}
+		}
+		this->output(id, { "Ready: " , std::to_string(readyBool) });
 	}
 	else
 	{

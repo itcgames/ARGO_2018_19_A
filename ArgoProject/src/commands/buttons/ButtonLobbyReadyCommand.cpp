@@ -21,6 +21,12 @@ void app::cmnd::ButtonLobbyReadyCommand::execute()
 			this->output("Sending 'lobby ready' packet type failed");
 			return;
 		}
+		m_ready = !m_ready;
+		if (!m_client.send(m_ready))
+		{
+			this->output("Sending ready status failed");
+			return;
+		}
 		this->output("Sending 'lobby ready' packet type successfull");
 	}
 }
