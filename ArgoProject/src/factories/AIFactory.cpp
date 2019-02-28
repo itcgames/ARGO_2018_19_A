@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "AIFactory.h"
 
+
 #include "factories/NodeFactory.h"
 
 // components
@@ -112,14 +113,17 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	facing.isRight = true;
 	m_registry.assign<decltype(facing)>(entity, std::move(facing));
 
+	app::util::
 	auto moveLeftCmnd = std::make_shared<cmnd::MoveCommand>(entity, -180.0f, 20.0f);
 	auto moveRightCmnd = std::make_shared<cmnd::MoveCommand>(entity, 0.0f, 20.0f);
 	auto jumpCmnd = std::make_shared<cmnd::JumpCommand>(entity, 400.0f);
 
 	//1
+	//run command until it hits a new node
 	auto loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
 		moveRightCmnd
 	};
+	//run the command once 
 	auto initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
 	};
 	auto node = app::fact::NodeFactory(math::Vector2f(750.0f, 200.0f), loopCmnds, initialCmnds, timeToLoopCommands).create();
