@@ -25,7 +25,6 @@ app::cmnd::DashCommand::DashCommand(app::Entity const _entity)
 
 void app::cmnd::DashCommand::execute()
 {
-	auto& input = m_registry.get<comp::Input>(m_entity);
 	auto& dashable = m_registry.get<comp::Dashable>(m_entity);
 	auto facingView = m_registry.view<comp::Facing>();
 	if (!m_registry.has<comp::Dash>(m_entity) && dashable.canDash)

@@ -40,10 +40,10 @@ app::sce::MainMenuScene::MainMenuScene(SceneType & sceneManagerType)
 
 void app::sce::MainMenuScene::start()
 {
-	m_registry.destruction<comp::Background>().connect<MainMenuScene, &MainMenuScene::startDemo>(this);
-	m_registry.destruction<comp::AI>().connect<MainMenuScene, &MainMenuScene::reset>(this);
 	auto sceneFactory = fact::sce::MainMenuSceneFactory(m_sceneManagerType, m_demoFactory);
 	auto entities = BaseScene::createEntities(sceneFactory);
+	m_registry.destruction<comp::Background>().connect<MainMenuScene, &MainMenuScene::startDemo>(this);
+	m_registry.destruction<comp::AI>().connect<MainMenuScene, &MainMenuScene::reset>(this);
 
 	if constexpr (DEBUG_MODE)
 	{
@@ -57,8 +57,6 @@ void app::sce::MainMenuScene::start()
 
 void app::sce::MainMenuScene::end()
 {
-	m_registry.destruction<comp::Background>().disconnect<MainMenuScene, &MainMenuScene::startDemo>(this);
-	m_registry.destruction<comp::AI>().disconnect<MainMenuScene, &MainMenuScene::reset>(this);
 	if constexpr (DEBUG_MODE)
 	{
 		Console::writeLine("MAIN MENU SCENE: Destroying entities");
@@ -68,6 +66,8 @@ void app::sce::MainMenuScene::end()
 		});
 	}
 	if (m_client.hasInit() && m_sceneManagerType != SceneType::LobbySelect) { m_client.deinitNetwork(); }
+	m_registry.destruction<comp::Background>().disconnect<MainMenuScene, &MainMenuScene::startDemo>(this);
+	m_registry.destruction<comp::AI>().disconnect<MainMenuScene, &MainMenuScene::reset>(this);
 	m_registry.reset();
 }
 
@@ -92,7 +92,7 @@ void app::sce::MainMenuScene::reset(app::Registry & registry, app::Entity inputE
 		resetDemo = false;
 		for (auto const & e : m_demoEntities)
 		{
-			if (m_registry.valid(e)) { m_registry.assign<comp::Destroy>(e); }
+			if (m_registry.valid(e)) { m_registry.accommodate<comp::Destroy>(e); }
 		}
 		m_demoEntities.clear();
 	}

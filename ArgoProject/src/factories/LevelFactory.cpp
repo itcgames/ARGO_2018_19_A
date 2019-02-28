@@ -39,13 +39,13 @@ std::vector<app::Entity> app::fact::LevelFactory::create()
 		//size = math::Vector2f(50, 50);
 		//entities.push_back(enemyFactory.create());
 
-		position = math::Vector2f(3000, 950);
-		size = math::Vector2f(50, 50);
-		entities.push_back(enemyFactory.create());
+		//position = math::Vector2f(2920, 950);
+		//size = math::Vector2f(50, 50);
+		//entities.push_back(enemyFactory.create());
 
-		position = math::Vector2f(4125, 275);
-		size = math::Vector2f(50, 50);
-		entities.push_back(enemyFactory.create());
+		//position = math::Vector2f(4125, 275);
+		//size = math::Vector2f(50, 50);
+		//entities.push_back(enemyFactory.create());
 	}
 
 	// walls
