@@ -28,6 +28,7 @@
 #include "components/StateMachine.h"
 #include "components/Health.h"
 #include "components/CharacterType.h"
+#include "components/Facing.h"
 
 #include "fsm/AnimationStateMachine.h"
 #include "fsm/states/AxeRunAnimationState.h"
@@ -69,7 +70,6 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	auto input = comp::Input();
-	input.isRight = true;
 	m_registry.assign<decltype(input)>(entity, std::move(input));
 
 	auto doubleJump = comp::DoubleJump();
@@ -110,6 +110,11 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	m_registry.assign<decltype(characterType)>(entity, std::move(characterType));
 
 	float timeToLoopCommands = 0.75f;
+
+	auto facing = comp::Facing();
+	facing.isRight = true;
+	m_registry.assign<decltype(facing)>(entity, std::move(facing));
+
 
 	//1
 	auto loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
@@ -225,6 +230,18 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	};
 	node = app::fact::NodeFactory(math::Vector2f(2900.0f, -50.0f), loopCmnds, initialCmnds, timeToLoopCommands).create();
 	entities.push_back(node);
+
+	//12.5 NODE TO BE DYNAMICALLY CREATED
+	loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+			std::make_shared<cmnd::MoveCommand>(entity, -180.0f, 20.0f)
+	};
+	initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+			std::make_shared<cmnd::MoveCommand>(entity, 180.0f, 20.0f),
+			std::make_shared<cmnd::DashCommand>(entity)
+	};
+	node = app::fact::NodeFactory(math::Vector2f(2950.0f, 200.0f), loopCmnds, initialCmnds, timeToLoopCommands).create();
+	entities.push_back(node);
+
 
 	m_registry.assign<decltype(ai)>(entity, std::move(ai));
 

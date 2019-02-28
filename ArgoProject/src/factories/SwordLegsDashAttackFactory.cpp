@@ -11,6 +11,7 @@
 #include "components/Damage.h"
 #include "components/Attack.h"
 #include "components/DashAttack.h"
+#include "components/Facing.h"
 
 app::fact::SwordLegsDashAttackFactory::SwordLegsDashAttackFactory(app::Entity const _entity)
 	: m_entity(_entity)
@@ -19,12 +20,12 @@ app::fact::SwordLegsDashAttackFactory::SwordLegsDashAttackFactory(app::Entity co
 
 app::Entity const app::fact::SwordLegsDashAttackFactory::create()
 {
-	auto view = m_registry.view<comp::Input, comp::Dimensions, comp::Location>();
+	auto view = m_registry.view<comp::Facing, comp::Dimensions, comp::Location>();
 	app::Entity const entity = EntityFactory::create();
 
 	if (view.contains(m_entity))
 	{
-		auto[input, dimensions, location] = view.get<comp::Input, comp::Dimensions, comp::Location>(m_entity);
+		auto[facing, dimensions, location] = view.get<comp::Facing, comp::Dimensions, comp::Location>(m_entity);
 
 
 
@@ -48,7 +49,7 @@ app::Entity const app::fact::SwordLegsDashAttackFactory::create()
 
 		//location
 		auto locationComp = comp::Location();
-		if (input.isRight)
+		if (facing.isRight)
 		{
 			locationComp.position = location.position + followEnt.offset;
 		}

@@ -13,6 +13,7 @@
 #include "components/Follow.h"
 #include "components/Layer.h"
 #include "components/Render.h"
+#include "components/Facing.h"
 #include "factories/SwordLegsDashAttackFactory.h"
 
 
@@ -26,6 +27,7 @@ void app::cmnd::DashCommand::execute()
 {
 	auto& input = m_registry.get<comp::Input>(m_entity);
 	auto& dashable = m_registry.get<comp::Dashable>(m_entity);
+	auto facingView = m_registry.view<comp::Facing>();
 	if (!m_registry.has<comp::Dash>(m_entity) && dashable.canDash)
 	{
 		if (m_registry.has<comp::Motion>(m_entity))
@@ -37,7 +39,11 @@ void app::cmnd::DashCommand::execute()
 			m_registry.remove<comp::AirMotion>(m_entity);
 		}
 		auto dash = comp::Dash();
-		input.isRight ? dash.direction = 0 : dash.direction = -180;
+		if (facingView.contains(m_entity))
+		{
+			auto& facingComp = m_registry.get<comp::Facing>(m_entity);
+			facingComp.isRight ? dash.direction = 0 : dash.direction = -180;
+		}
 		dash.drag = 0.8f;
 		dash.dragCutoff = 10.0f;
 		dash.speed = 5000.0f;

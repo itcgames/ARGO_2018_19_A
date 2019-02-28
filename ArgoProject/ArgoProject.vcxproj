@@ -235,6 +235,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\DoubleJump.cpp" />
     <ClCompile Include="src\components\Enemy.cpp" />
     <ClCompile Include="src\components\Facade.cpp" />
+    <ClCompile Include="src\components\Facing.cpp" />
     <ClCompile Include="src\components\Follow.cpp" />
     <ClCompile Include="src\components\Goal.cpp" />
     <ClCompile Include="src\components\Hazard.cpp" />
@@ -444,6 +445,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\DoubleJump.h" />
     <ClInclude Include="src\components\Enemy.h" />
     <ClInclude Include="src\components\Facade.h" />
+    <ClInclude Include="src\components\Facing.h" />
     <ClInclude Include="src\components\Follow.h" />
     <ClInclude Include="src\components\Goal.h" />
     <ClInclude Include="src\components\Hazard.h" />
