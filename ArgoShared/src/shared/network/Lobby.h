@@ -8,7 +8,7 @@ namespace app::net
 	public: // Usings/typedefs/enums
 		using Player = std::optional<std::pair<std::int32_t, std::string>>;
 		using Players = std::array<Player, 4>;
-		using PlayerReady = std::array<bool, 4>;
+		using PlayerReady = std::array<std::optional<bool>, 4>;
 
 	public: // Constructors/Destructor/Assignments
 		Lobby() = default;

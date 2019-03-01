@@ -14,6 +14,7 @@ namespace app::net
 		, LOBBY_JOINED
 		, LOBBY_JOINED_MY
 		, LOBBY_READY
+		, LOBBY_START
 	};
 }
 

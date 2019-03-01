@@ -346,6 +346,7 @@ bool app::net::Server::processLobbyJoined(int id)
 		if (!this->get(id, playerName)) { return false; }
 		if (auto const & addResult = lobby.addPlayer(id, playerName); addResult.has_value())
 		{
+			lobby.setReady(id, false);
 			if (!this->send(id, addResult.value())) { return false; }
 			this->output(id, { "Player joined lobby[", lobby.getId(), "] in slot[", addResult.value(), "]" });
 
@@ -405,16 +406,23 @@ bool app::net::Server::processLobbyReady(int id)
 			auto readyChecks = std::vector<app::net::Lobby::PlayerReady::value_type>();
 			for (auto const & ready : lobby.getReady())
 			{
-				if (!ready)
-				{
-					play = false;
-				}
+				if (!ready.has_value()) { continue; }
+				if (!ready.value()) { play = false; }
 			}
 			if (play)
 			{
-				for (auto const & lobby : m_lobbies)
+				auto lobbyPlayers = std::vector<app::net::Lobby::Player::value_type>();
+				for (auto const & player : lobby.getPlayers())
 				{
-					if (!this->send(id, lobby)) { return false; }
+					if (player.has_value()) { lobbyPlayers.push_back(player.value()); }
+				}
+				if (lobbyPlayers.size() > 1)
+				{
+					for (auto const &[playerId, name] : lobbyPlayers)
+					{
+						constexpr auto PACKET_TYPE = PacketType::LOBBY_START;
+						if (!this->send(playerId, PACKET_TYPE)) { return false; }
+					}
 				}
 			}
 		}

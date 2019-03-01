@@ -37,6 +37,8 @@ void app::sys::NetworkSystem::update(app::time::seconds const & dt)
 				case app::sce::SceneType::LobbySelect:
 					this->handlePacketLobbyWasCreated();
 					this->handlePacketLobbyWasJoined();
+				case app::sce::SceneType::Lobby:
+					this->handlePacketLobbyStart();
 				default:
 					break;
 			}
@@ -106,4 +108,10 @@ void app::sys::NetworkSystem::handlePacketLobbyWasJoined()
 		commandable.list.emplace_front(std::make_unique<cmnd::ButtonLobbySelectRefreshCommand>(refreshEntities, m_sceneControl));
 		m_registry.assign<decltype(commandable)>(entity, std::move(commandable));
 	}
+}
+
+void app::sys::NetworkSystem::handlePacketLobbyStart()
+{
+	if (m_packetType != app::net::PacketType::LOBBY_START) { return; }
+	m_sceneControl = app::sce::SceneType::MultiplayerLevel;
 }
