@@ -30,6 +30,7 @@ namespace app::par
 		app::comp::Widget::State state;
 		std::optional<app::Entity> entity;
 		std::optional<app::Entity> up, down, left, right;
+		std::optional<app::Entity> follow;
 		std::uint32_t zIndex;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions

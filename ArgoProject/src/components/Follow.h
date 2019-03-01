@@ -3,17 +3,17 @@
 
 namespace app::comp
 {
-	struct FollowEntity
+	struct Follow
 	{
 	public: // Constructors/Destructor/Assignments
-		FollowEntity() = default;
-		FollowEntity(FollowEntity const &) = default;
-		FollowEntity(FollowEntity &&) = default;
+		Follow() = default;
+		Follow(Follow const &) = default;
+		Follow(Follow &&) = default;
 
-		~FollowEntity() = default;
+		~Follow() = default;
 
-		FollowEntity & operator=(FollowEntity const &) = default;
-		FollowEntity & operator=(FollowEntity &&) = default;
+		Follow & operator=(Follow const &) = default;
+		Follow & operator=(Follow &&) = default;
 
 	public: // Public Static Functions
 	public: // Public Member Functions

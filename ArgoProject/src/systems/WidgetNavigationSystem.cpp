@@ -17,11 +17,15 @@ void app::sys::WidgetNavigationSystem::update(app::time::seconds const & dt)
 	widgetView.each([&, this](app::Entity const entity, comp::Widget & widget)
 	{
 		if (widget.state != comp::Widget::State::Highlighted) { return; }
+		widget.prevState = widget.state;
+		if (widget.prevState == comp::Widget::State::Active) { return; }
 		if (widget.left.has_value() && m_keyHandler.isKeyPressed({ SDLK_a, SDLK_LEFT }))
 		{
 			assert(widgetView.contains(widget.left.value()));
+			widget.prevState = comp::Widget::State::Highlighted;
 			widget.state = comp::Widget::State::Active;
 			auto & leftWidget = widgetView.get(widget.left.value());
+			leftWidget.prevState = comp::Widget::State::Active;
 			leftWidget.state = comp::Widget::State::Highlighted;
 			if constexpr (s_DEBUG_MODE)
 			{
@@ -32,8 +36,10 @@ void app::sys::WidgetNavigationSystem::update(app::time::seconds const & dt)
 		if (widget.right.has_value() && m_keyHandler.isKeyPressed({ SDLK_d, SDLK_RIGHT }))
 		{
 			assert(widgetView.contains(widget.right.value()));
+			widget.prevState = comp::Widget::State::Highlighted;
 			widget.state = comp::Widget::State::Active;
 			auto & rightWidget = widgetView.get(widget.right.value());
+			rightWidget.prevState = comp::Widget::State::Active;
 			rightWidget.state = comp::Widget::State::Highlighted;
 			if constexpr (s_DEBUG_MODE)
 			{
@@ -44,8 +50,10 @@ void app::sys::WidgetNavigationSystem::update(app::time::seconds const & dt)
 		if (widget.up.has_value() && m_keyHandler.isKeyPressed({ SDLK_w, SDLK_UP }))
 		{
 			assert(widgetView.contains(widget.up.value()));
+			widget.prevState = comp::Widget::State::Highlighted;
 			widget.state = comp::Widget::State::Active;
 			auto & upWidget = widgetView.get(widget.up.value());
+			upWidget.prevState = comp::Widget::State::Active;
 			upWidget.state = comp::Widget::State::Highlighted;
 			if constexpr (s_DEBUG_MODE)
 			{
@@ -56,8 +64,10 @@ void app::sys::WidgetNavigationSystem::update(app::time::seconds const & dt)
 		if (widget.down.has_value() && m_keyHandler.isKeyPressed({ SDLK_s, SDLK_DOWN }))
 		{
 			assert(widgetView.contains(widget.down.value()));
+			widget.prevState = comp::Widget::State::Highlighted;
 			widget.state = comp::Widget::State::Active;
 			auto & downWidget = widgetView.get(widget.down.value());
+			downWidget.prevState = comp::Widget::State::Active;
 			downWidget.state = comp::Widget::State::Highlighted;
 			if constexpr (s_DEBUG_MODE)
 			{

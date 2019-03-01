@@ -18,6 +18,7 @@ std::vector<app::Entity> app::fact::sce::SplashSceneFactory::create()
 		params.frameSize = math::Vector2f(200, 150);
 		params.frameNumber = math::Vector2f(4, 0);
 		params.animationLoop = false;
+		params.maxFrames = 3;
 		entities.push_back(fact::AnimatedImageFactory(params).create());
 	}
 

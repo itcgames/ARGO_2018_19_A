@@ -34,6 +34,8 @@ app::sce::SplashScene::SplashScene(SceneType & sceneManagerType)
 	m_resourceManager.loadTexture(TextureKey::PlatformMiddle, "./res/Level/Platform/platform1_middle.png");
 	m_resourceManager.loadTexture(TextureKey::PlatformRight, "./res/Level/Platform/platform1_right.png");
 	m_resourceManager.loadTexture(TextureKey::DebugCollisionBox, "./res/Debug/colBox.png");
+	m_resourceManager.loadTexture(TextureKey::Title, "./res/GUI/title.png");
+	m_resourceManager.loadTexture(TextureKey::MainMenuBackground, "./res/GUI/main_menu.png");
 	using FontKey = app::res::FontKey;
 	m_resourceManager.loadFont(FontKey::Debug, "./res/Fonts/arial.ttf");
 	using AudioKey = app::res::AudioKey;

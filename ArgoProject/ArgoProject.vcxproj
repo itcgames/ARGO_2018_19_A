@@ -202,10 +202,13 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\commands\buttons\ButtonLobbySelectCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonLobbySelectCreateLobbyCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonLobbySelectRefreshCommand.cpp" />
+    <ClCompile Include="src\commands\buttons\ButtonMainMenuCreditsCommand.cpp" />
+    <ClCompile Include="src\commands\buttons\ButtonMainMenuExitCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCancelCommand.cpp" />
     <ClCompile Include="src\commands\buttons\BaseMultiplayerCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectConfirmCommand.cpp" />
+    <ClCompile Include="src\commands\buttons\ButtonMainMenuSinglePlayerCommand.cpp" />
     <ClCompile Include="src\commands\DashCommand.cpp" />
     <ClCompile Include="src\commands\DropCommand.cpp" />
     <ClCompile Include="src\commands\FaceLeftCommand.cpp" />
@@ -218,6 +221,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\AnimatedImage.cpp" />
     <ClCompile Include="src\components\Animator.cpp" />
     <ClCompile Include="src\components\Attack.cpp" />
+    <ClCompile Include="src\components\Bomb.cpp" />
     <ClCompile Include="src\components\Background.cpp" />
     <ClCompile Include="src\components\CharacterType.cpp" />
     <ClCompile Include="src\components\Collision.cpp" />
@@ -226,6 +230,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\CurrentGround.cpp" />
     <ClCompile Include="src\components\Damage.cpp" />
     <ClCompile Include="src\components\Dash.cpp" />
+    <ClCompile Include="src\components\DashAttack.cpp" />
     <ClCompile Include="src\components\Destroy.cpp" />
     <ClCompile Include="src\components\Dashable.cpp" />
     <ClCompile Include="src\components\Destructible.cpp" />
@@ -234,7 +239,8 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\DoubleJump.cpp" />
     <ClCompile Include="src\components\Enemy.cpp" />
     <ClCompile Include="src\components\Facade.cpp" />
-    <ClCompile Include="src\components\FollowEntity.cpp" />
+    <ClCompile Include="src\components\Facing.cpp" />
+    <ClCompile Include="src\components\Follow.cpp" />
     <ClCompile Include="src\components\Goal.cpp" />
     <ClCompile Include="src\components\Hazard.cpp" />
     <ClCompile Include="src\components\Health.cpp" />
@@ -259,6 +265,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\AIFactory.cpp" />
     <ClCompile Include="src\deleters\SdlTtfDeleter.cpp" />
     <ClCompile Include="src\factories\BaseFactory.cpp" />
+    <ClCompile Include="src\factories\BombAttackFactory.cpp" />
     <ClCompile Include="src\factories\DestructibleBlockFactory.cpp" />
     <ClCompile Include="src\factories\DiscFactory.cpp" />
     <ClCompile Include="src\factories\EntitiesFactory.cpp" />
@@ -291,6 +298,8 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\factories\scenes\LobbySceneFactory.cpp" />
     <ClCompile Include="src\factories\scenes\MultiplayerLevelSceneFactory.cpp" />
     <ClCompile Include="src\factories\scenes\TutorialLevelSceneFactory.cpp" />
+    <ClCompile Include="src\factories\SwordLegsDashAttackFactory.cpp" />
+    <ClCompile Include="src\factories\SwordLegsFallAttackFactory.cpp" />
     <ClCompile Include="src\factories\TutorialLevelFactory.cpp" />
     <ClCompile Include="src\factories\WallFactory.cpp" />
     <ClCompile Include="src\factories\scenes\SplashSceneFactory.cpp" />
@@ -362,6 +371,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\AISystem.cpp" />
     <ClCompile Include="src\systems\AnimatorSystem.cpp" />
     <ClCompile Include="src\systems\BaseSystem.cpp" />
+    <ClCompile Include="src\systems\BombExplosionSystem.cpp" />
     <ClCompile Include="src\systems\ButtonSystem.cpp" />
     <ClCompile Include="src\systems\CollisionSystem.cpp" />
     <ClCompile Include="src\systems\CommandSystem.cpp" />
@@ -383,6 +393,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\systems\WidgetNavigationSystem.cpp" />
     <ClCompile Include="src\tags\LobbyTag.cpp" />
     <ClCompile Include="src\utilities\cute_c2.cpp" />
+    <ClCompile Include="src\utilities\Random.cpp" />
     <ClCompile Include="src\utilities\Time.cpp" />
     <ClCompile Include="src\utilities\makers.cpp" />
     <ClCompile Include="src\visitors\CollisionAabbBoolVisitor.cpp" />
@@ -406,10 +417,13 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\commands\buttons\ButtonLobbySelectCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonLobbySelectCreateLobbyCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonLobbySelectRefreshCommand.h" />
+    <ClInclude Include="src\commands\buttons\ButtonMainMenuCreditsCommand.h" />
+    <ClInclude Include="src\commands\buttons\ButtonMainMenuExitCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCancelCommand.h" />
     <ClInclude Include="src\commands\buttons\BaseMultiplayerCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonMainMenuMultiplayerConnectConfirmCommand.h" />
+    <ClInclude Include="src\commands\buttons\ButtonMainMenuSinglePlayerCommand.h" />
     <ClInclude Include="src\commands\DashCommand.h" />
     <ClInclude Include="src\commands\DropCommand.h" />
     <ClInclude Include="src\commands\FaceLeftCommand.h" />
@@ -422,6 +436,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\AnimatedImage.h" />
     <ClInclude Include="src\components\Animator.h" />
     <ClInclude Include="src\components\Attack.h" />
+    <ClInclude Include="src\components\Bomb.h" />
     <ClInclude Include="src\components\Background.h" />
     <ClInclude Include="src\components\CharacterType.h" />
     <ClInclude Include="src\components\Collision.h" />
@@ -430,6 +445,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\CurrentGround.h" />
     <ClInclude Include="src\components\Damage.h" />
     <ClInclude Include="src\components\Dash.h" />
+    <ClInclude Include="src\components\DashAttack.h" />
     <ClInclude Include="src\components\Destroy.h" />
     <ClInclude Include="src\components\Dashable.h" />
     <ClInclude Include="src\components\Destructible.h" />
@@ -438,7 +454,8 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\components\DoubleJump.h" />
     <ClInclude Include="src\components\Enemy.h" />
     <ClInclude Include="src\components\Facade.h" />
-    <ClInclude Include="src\components\FollowEntity.h" />
+    <ClInclude Include="src\components\Facing.h" />
+    <ClInclude Include="src\components\Follow.h" />
     <ClInclude Include="src\components\Goal.h" />
     <ClInclude Include="src\components\Hazard.h" />
     <ClInclude Include="src\components\Health.h" />
@@ -463,6 +480,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\AIFactory.h" />
     <ClInclude Include="src\deleters\SdlTtfDeleter.h" />
     <ClInclude Include="src\factories\BaseFactory.h" />
+    <ClInclude Include="src\factories\BombAttackFactory.h" />
     <ClInclude Include="src\factories\DestructibleBlockFactory.h" />
     <ClInclude Include="src\factories\DiscFactory.h" />
     <ClInclude Include="src\factories\EntitiesFactory.h" />
@@ -495,6 +513,8 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\factories\scenes\LobbySceneFactory.h" />
     <ClInclude Include="src\factories\scenes\MultiplayerLevelSceneFactory.h" />
     <ClInclude Include="src\factories\scenes\TutorialLevelSceneFactory.h" />
+    <ClInclude Include="src\factories\SwordLegsDashAttackFactory.h" />
+    <ClInclude Include="src\factories\SwordLegsFallAttackFactory.h" />
     <ClInclude Include="src\factories\TutorialLevelFactory.h" />
     <ClInclude Include="src\factories\WallFactory.h" />
     <ClInclude Include="src\factories\scenes\SplashSceneFactory.h" />
@@ -559,6 +579,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\systems\AISystem.h" />
     <ClInclude Include="src\systems\AnimatorSystem.h" />
     <ClInclude Include="src\systems\BaseSystem.h" />
+    <ClInclude Include="src\systems\BombExplosionSystem.h" />
     <ClInclude Include="src\systems\ButtonSystem.h" />
     <ClInclude Include="src\systems\CollisionSystem.h" />
     <ClInclude Include="src\systems\CommandSystem.h" />
@@ -580,6 +601,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\systems\WidgetNavigationSystem.h" />
     <ClInclude Include="src\tags\LobbyTag.h" />
     <ClInclude Include="src\utilities\cute_c2.h" />
+    <ClInclude Include="src\utilities\Random.h" />
     <ClInclude Include="src\utilities\Time.h" />
     <ClInclude Include="src\utilities\makers.h" />
     <ClInclude Include="src\visitors\CollisionAabbBoolVisitor.h" />

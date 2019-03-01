@@ -1,28 +1,37 @@
 ﻿#include "stdafx.h"
 #include "FollowEntitySystem.h"
-#include "components/FollowEntity.h"
+#include "components/Follow.h"
 #include "components/Location.h"
-#include "components/Input.h"
+#include "components/Camera.h"
+#include "components/Facing.h"
 
 void app::sys::FollowEntitySystem::update(app::time::seconds const & dt)
 {
 
-	m_registry.view<comp::FollowEntity, comp::Location>()
-		.each([&, this](app::Entity const entity, comp::FollowEntity & followEntity, comp::Location & location)
+	auto locationView = m_registry.view<comp::Location>();
+	auto cameraView = m_registry.view<comp::Camera>();
+	auto facingView = m_registry.view<comp::Location, comp::Facing>();
+	m_registry.view<comp::Follow, comp::Location>()
+		.each([&, this](app::Entity const entity, comp::Follow & follow, comp::Location & location)
 	{
-		auto inputView = m_registry.view<comp::Input>();
-		if (m_registry.valid(followEntity.entity) && inputView.contains(followEntity.entity))
+		if (!m_registry.valid(follow.entity)) { return; }
+
+		if (locationView.contains(follow.entity))
 		{
-			auto& entityToFollowLocation = m_registry.get<comp::Location>(followEntity.entity);
-			auto& entityToFollowInput = m_registry.get<comp::Input>(followEntity.entity);
-			if (entityToFollowInput.isRight)
+			auto& entityToFollowLocation = locationView.get(follow.entity);
+			if (facingView.contains(follow.entity) && !facingView.get<comp::Facing>(follow.entity).isRight)
 			{
-				location.position = entityToFollowLocation.position + followEntity.offset;
+				location.position = entityToFollowLocation.position - follow.offset;
 			}
 			else
 			{
-				location.position = entityToFollowLocation.position - followEntity.offset;
+				location.position = entityToFollowLocation.position + follow.offset;
 			}
+		}
+		else if (cameraView.contains(follow.entity))
+		{
+			auto const & camera = cameraView.get(follow.entity);
+			location.position = camera.center + follow.offset;
 		}
 	});
 }

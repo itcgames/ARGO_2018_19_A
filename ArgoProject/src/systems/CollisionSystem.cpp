@@ -27,6 +27,8 @@
 #include "components/SeekEntity.h"
 #include "components/Hazard.h"
 #include "components/Destructible.h"
+#include "components/Bomb.h"
+#include "components/CharacterType.h"
 
 //visitors
 #include "visitors/CollisionUpdateVisitor.h"
@@ -58,20 +60,23 @@ app::sys::CollisionSystem::CollisionSystem()
 void app::sys::CollisionSystem::update(app::time::seconds const & dt)
 {
 	this->updateCollisionBoxes();
+	this->attackEnemyCollisions();
 	this->groundCollisions();
 	this->airCollisions();
 	this->checkPlatformCollisions();
 	this->dashCollisions();
 	this->enemyWallCollisions();
 	this->enemyEnemyCollisions();	
-	this->playerHazardCollisions();
 	this->checkAINodeCollisions();
 	this->playerGoalCollisions();
-	this->attackEnemyCollisions();
 	this->attackDestructibleCollisions();
 	this->playerEnemyCollisions();
+	this->playerHazardCollisions();
 	this->checkDiscCollisions();
+	this->checkBombCollisions();
 	this->AIHazardCollisions();
+	this->AIGoalCollision();
+	this->AIEnemyCollision();
 }
 
 void app::sys::CollisionSystem::groundCollisions()
@@ -250,8 +255,13 @@ void app::sys::CollisionSystem::checkAINodeCollisions()
 			bool const & collisionCheck = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
 			if (collisionCheck)
 			{
-				ai.currentNode = secEntity;
-				ai.initialCommands = node.initialCommands;
+
+					ai.currentNode = secEntity;
+					if (node.active)
+					{
+						ai.initialCommands = node.initialCommands;
+						node.active = false;
+					}
 			}
 		});
 	});
@@ -264,6 +274,44 @@ void app::sys::CollisionSystem::AIHazardCollisions()
 	{
 		m_registry.view<comp::Hazard, comp::Collision, comp::Damage>(entt::persistent_t())
 			.each([&, this](app::Entity const secEntity, comp::Hazard & hazard, comp::Collision & secCollision, comp::Damage & damage)
+		{
+			if (entity != secEntity)
+			{
+				if (app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds))
+				{
+					health.health -= damage.damage;
+				}
+			}
+		});
+	});
+}
+
+void app::sys::CollisionSystem::AIGoalCollision()
+{
+	m_registry.view<comp::Collision, comp::AI, comp::Location, comp::Dimensions, comp::Health>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::AI & ai, comp::Location & location, comp::Dimensions & dimensions, comp::Health & health)
+	{
+		m_registry.view<comp::Collision, comp::Goal>()
+			.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Goal & goal)
+		{
+			if (entity != secEntity)
+			{
+				if (app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds))
+				{
+					health.health = 0;
+				}
+			}
+		});
+	});
+}
+
+void app::sys::CollisionSystem::AIEnemyCollision()
+{
+	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Health, comp::AI>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions, comp::Health & health, comp::AI & ai)
+	{
+		m_registry.view<comp::Enemy, comp::Collision, comp::Damage>(entt::persistent_t())
+			.each([&, this](app::Entity const secEntity, comp::Enemy & enemy, comp::Collision & secCollision, comp::Damage & damage)
 		{
 			if (entity != secEntity)
 			{
@@ -380,11 +428,61 @@ void app::sys::CollisionSystem::checkDiscCollisions()
 	});
 }
 
+void app::sys::CollisionSystem::checkBombCollisions()
+{
+	//view bomb
+	m_registry.view<comp::Collision, comp::Bomb>(entt::persistent_t())
+		.each([&, this](app::Entity const bombEntity, comp::Collision & collision, comp::Bomb& bombComp)
+	{
+		//if the bomb did not explode yet
+		if (!bombComp.exploded)
+		{
+			//with walls
+			m_registry.view<comp::Collision, comp::Impenetrable>(entt::persistent_t())
+				.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Impenetrable const & impenetrable)
+			{
+				bool const & collided = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+				if (collided)
+				{
+					bombComp.exploded = true;
+					return;
+				}
+			});
+			//with enemies
+			if (bombComp.exploded) { return; }
+			m_registry.view<comp::Collision, comp::Enemy>(entt::persistent_t())
+				.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Enemy const & enemy)
+			{
+				bool const & collided = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+				if (collided)
+				{
+					bombComp.exploded = true;
+					return;
+				}
+			});
+			//with facades
+			if (bombComp.exploded) { return; }
+			m_registry.view<comp::Collision, comp::Destructible>(entt::persistent_t())
+				.each([&, this](app::Entity const secEntity, comp::Collision & secCollision, comp::Destructible const & facade)
+			{
+				bool const & collided = app::vis::CollisionBoundsBoolVisitor::collisionBetween(collision.bounds, secCollision.bounds);
+				if (collided)
+				{
+					bombComp.exploded = true;
+					return;
+				}
+			});
+		}
+		
+	});
+
+}
+
 void app::sys::CollisionSystem::dashCollisions()
 {
 	//view player
-	m_registry.view<comp::Collision, comp::Input, comp::Location, comp::Dimensions, comp::Dash>(entt::persistent_t())
-		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Input & input, comp::Location & location, comp::Dimensions & dimensions, comp::Dash & dash)
+	m_registry.view<comp::Collision, comp::Location, comp::Dimensions, comp::Dash>(entt::persistent_t())
+		.each([&, this](app::Entity const entity, comp::Collision & collision, comp::Location & location, comp::Dimensions & dimensions, comp::Dash & dash)
 	{
 		//view everything with collisions
 		m_registry.view<comp::Collision, comp::Impenetrable, comp::Location, comp::Dimensions>(entt::persistent_t())

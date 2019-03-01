@@ -21,6 +21,7 @@ app::sce::LevelScene::LevelScene(SceneType & sceneManagerType)
 			UpdateSystem(std::in_place_type<app::sys::DiscReturnSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CollisionSystem>),
 			UpdateSystem(std::in_place_type<app::sys::HealthSystem>),
+			UpdateSystem(std::in_place_type<app::sys::BombExplosionSystem>),
 			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType),
 			UpdateSystem(std::in_place_type<app::sys::DestroySystem>)
 		})

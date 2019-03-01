@@ -25,6 +25,7 @@
 #include "systems/FollowEntitySystem.h"
 #include "systems/SeekEntitySystem.h"
 #include "systems/DiscReturnSystem.h"
+#include "systems/BombExplosionSystem.h"
 #include "factories/SceneFactory.h"
 
 namespace app::sce
@@ -53,6 +54,7 @@ namespace app::sce
 			, sys::FollowEntitySystem
 			, sys::SeekEntitySystem
 			, sys::DiscReturnSystem
+			, sys::BombExplosionSystem
 		>;
 		using UpdateSystems = std::vector<UpdateSystem>;
 		using DrawSystem = std::variant<

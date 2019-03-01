@@ -132,6 +132,7 @@
 #include "utilities/Time.h"
 #include "shared/utilities/Console.h"
 #include "utilities/makers.h"
+#include "utilities/Random.h"
 
 namespace app
 {
