@@ -84,7 +84,14 @@ app::Entity const app::fact::ButtonFactory::create()
 	m_registry.assign<decltype(widget)>(entity, std::move(widget));
 
 	auto render = comp::Render();
-	render.texture = m_resourceManager.getTexture(app::res::TextureKey::Debug);
+	if (widget.state == comp::Widget::State::Active)
+	{
+		render.texture = m_resourceManager.getTexture(app::res::TextureKey::Debug);
+	}
+	else
+	{
+		render.texture = m_resourceManager.getTexture(app::res::TextureKey::DebugRed);
+	}
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	return entity;

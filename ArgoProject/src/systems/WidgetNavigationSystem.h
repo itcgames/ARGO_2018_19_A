@@ -2,6 +2,7 @@
 #define _WIDGET_NAVIGATION_SYSTEM_H
 
 #include "BaseSystem.h"
+#include "resources/ResourceManager.h"
 
 namespace app::sys
 {
@@ -32,6 +33,7 @@ namespace app::sys
 		constexpr static bool s_DEBUG_MODE = true;
 	private: // Private Member Variables
 		app::inp::KeyHandler & m_keyHandler;
+		app::res::ResourceManager<true> & m_resourceManager;
 	};
 }
 

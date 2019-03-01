@@ -6,10 +6,9 @@ app::sce::LobbyScene::LobbyScene(SceneType & sceneManagerType)
 	: BaseScene(sceneManagerType
 		, util::make_vector<UpdateSystem>({
 			UpdateSystem(std::in_place_type<app::sys::InputSystem>),
+			UpdateSystem(std::in_place_type<app::sys::ButtonSystem>),
+			UpdateSystem(std::in_place_type<app::sys::WidgetNavigationSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CommandSystem>),
-			UpdateSystem(std::in_place_type<app::sys::MotionSystem>),
-			UpdateSystem(std::in_place_type<app::sys::AirMotionSystem>),
-			UpdateSystem(std::in_place_type<app::sys::DashSystem>),
 			UpdateSystem(std::in_place_type<app::sys::StateMachineSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CameraSystem>),
 			UpdateSystem(std::in_place_type<app::sys::NetworkSystem>, sceneManagerType),
@@ -29,7 +28,7 @@ app::sce::LobbyScene::LobbyScene(SceneType & sceneManagerType)
 
 void app::sce::LobbyScene::start()
 {
-	auto sceneFactory = fact::sce::LobbySceneFactory();
+	auto sceneFactory = fact::sce::LobbySceneFactory(m_sceneManagerType);
 	auto entities = BaseScene::createEntities(sceneFactory);
 	if constexpr (DEBUG_MODE)
 	{

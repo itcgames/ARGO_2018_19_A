@@ -6,6 +6,7 @@ namespace app::res
 	enum class TextureKey
 	{
 		Debug,
+		DebugRed,
 		DebugBig,
 		DebugHuge,
 		DebugAnimation,

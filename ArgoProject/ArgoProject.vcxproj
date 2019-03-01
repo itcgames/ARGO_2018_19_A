@@ -198,6 +198,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="..\ArgoShared\src\shared\utilities\Console.cpp" />
     <ClCompile Include="..\ArgoShared\src\shared\utilities\variant.cpp" />
     <ClCompile Include="src\commands\BaseCommand.cpp" />
+    <ClCompile Include="src\commands\buttons\ButtonLobbyReadyCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonLobbySelectCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonLobbySelectCreateLobbyCommand.cpp" />
     <ClCompile Include="src\commands\buttons\ButtonLobbySelectRefreshCommand.cpp" />
@@ -412,6 +413,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="..\ArgoShared\src\shared\utilities\Console.h" />
     <ClInclude Include="..\ArgoShared\src\shared\utilities\variant.h" />
     <ClInclude Include="src\commands\BaseCommand.h" />
+    <ClInclude Include="src\commands\buttons\ButtonLobbyReadyCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonLobbySelectCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonLobbySelectCreateLobbyCommand.h" />
     <ClInclude Include="src\commands\buttons\ButtonLobbySelectRefreshCommand.h" />

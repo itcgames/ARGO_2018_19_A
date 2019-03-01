@@ -49,6 +49,7 @@ namespace app::net
 		bool processLobbyCreate(int id);
 		bool processLobbyGetAll(int id);
 		bool processLobbyJoined(int id);
+		bool processLobbyReady(int id);
 		bool processDefault(int id);
 
 		void outputIP(IPaddress const & ip);
