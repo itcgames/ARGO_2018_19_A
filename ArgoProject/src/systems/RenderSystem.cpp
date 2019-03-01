@@ -9,6 +9,7 @@
 #include "components/Text.h"
 #include "components/Layer.h"
 #include "components/Camera.h"
+#include "components/Facing.h"
 
 bool app::sys::RenderSystem::s_dependencyConnected = false;
 
@@ -37,6 +38,7 @@ void app::sys::RenderSystem::update(app::time::seconds const & dt)
 		m_window.setView(m_view);
 		auto renderView = m_registry.view<comp::Layer, comp::Location, comp::Dimensions, comp::Render>();
 		auto textView = m_registry.view<comp::Layer, comp::Location, comp::Dimensions, comp::Text>();
+		auto facingView = m_registry.view<comp::Layer, comp::Render, comp::Facing>();
 		m_registry.view<comp::Layer>()
 			.each([&, this](app::Entity const entity, comp::Layer & layer)
 		{
@@ -49,6 +51,15 @@ void app::sys::RenderSystem::update(app::time::seconds const & dt)
 				m_renderRect.setOrigin(dimensions.origin + render.border);
 				m_renderRect.setTexture(render.texture);
 				m_renderRect.setSourceRect(render.source);
+				if (facingView.contains(entity))
+				{
+					auto const & facing = facingView.get<comp::Facing>(entity);
+					m_renderRect.setFacing(facing.isRight);
+				}
+				else 
+				{
+					m_renderRect.setFacing(true);
+				}
 				m_window.render(m_renderRect);
 			}
 			if (textView.contains(entity))
