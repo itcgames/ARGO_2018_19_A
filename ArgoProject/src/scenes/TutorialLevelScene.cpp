@@ -112,5 +112,5 @@ void app::sce::TutorialLevelScene::reset()
 
 void app::sce::TutorialLevelScene::levelComplete()
 {
-	m_sceneManagerType = (SceneType::MainMenu);
+	m_sceneManagerType = (SceneType::Level);
 }
