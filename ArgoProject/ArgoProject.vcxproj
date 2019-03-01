@@ -326,6 +326,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\math\Math.cpp" />
     <ClCompile Include="src\math\Rect.cpp" />
     <ClCompile Include="src\math\Vector2.cpp" />
+    <ClCompile Include="src\observer\Observer.cpp" />
     <ClCompile Include="src\parameters\AnimatedImageFactoryParameters.cpp" />
     <ClCompile Include="src\parameters\DestructibleParameters.cpp" />
     <ClCompile Include="src\network\Client.cpp" />
@@ -539,6 +540,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\math\Math.h" />
     <ClInclude Include="src\math\Rect.h" />
     <ClInclude Include="src\math\Vector2.h" />
+    <ClInclude Include="src\observer\Observer.h" />
     <ClInclude Include="src\parameters\AnimatedImageFactoryParameters.h" />
     <ClInclude Include="src\parameters\DestructibleParameters.h" />
     <ClInclude Include="src\network\Client.h" />

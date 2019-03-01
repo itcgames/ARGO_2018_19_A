@@ -4,6 +4,9 @@
 #include "graphics/Window.h"
 #include "scenes/SceneManager.h"
 #include "resources/ResourceManager.h"
+#include "observer/Observer.h"
+
+
 
 namespace app
 {
@@ -43,6 +46,7 @@ namespace app
 		app::Registry & m_registry;
 		app::res::ResourceManager<true> & m_resourceManager;
 		app::sce::SceneManager m_sceneManager;
+		app::obs::AudioObserver m_audioObserver;
 	};
 }
 

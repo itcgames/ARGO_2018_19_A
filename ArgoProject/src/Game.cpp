@@ -6,6 +6,9 @@
 #include "singletons/RegistrySingleton.h"
 #include "singletons/WindowSingleton.h"
 #include "singletons/ResourceManagerSingleton.h"
+#include "observer/Observer.h"
+
+std::vector<app::obs::Observer*> app::obs::Listener::Obs = { };
 
 app::Game::Game()
 	: m_running(true)
@@ -16,7 +19,10 @@ app::Game::Game()
 	, m_registry(app::sin::Registry::get())
 	, m_resourceManager(app::sin::ResourceManager::get())
 	, m_sceneManager(m_running)
+	
 {
+	app::obs::Listener::Obs.push_back(&m_audioObserver);
+	app::obs::Listener::onNotify("SDF", PLAYAUDIO);
 }
 
 app::Game::~Game()
