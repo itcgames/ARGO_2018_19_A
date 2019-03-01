@@ -36,3 +36,9 @@ app::gra::RenderRect & app::gra::RenderRect::setSize(app::math::Vector2d const &
 	m_size = size;
 	return *this;
 }
+
+app::gra::RenderRect & app::gra::RenderRect::setFacing(bool isRight)
+{
+	m_isRight = isRight;
+	return *this;
+}

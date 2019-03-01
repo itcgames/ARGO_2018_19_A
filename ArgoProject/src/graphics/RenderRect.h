@@ -25,6 +25,7 @@ namespace app::gra
 		constexpr double const & getRotation() const { return m_rotation; }
 		constexpr math::Vector2d const & getOrigin() const { return m_origin; }
 		constexpr math::Vector2d const & getSize() const { return m_size; }
+		constexpr bool const & getFacing() const { return m_isRight; }
 
 		RenderRect & setTexture(std::shared_ptr<app::gra::Texture> texture);
 		RenderRect & setSourceRect(std::optional<SDL_Rect> const & sourceRect);
@@ -32,6 +33,7 @@ namespace app::gra
 		RenderRect & setRotation(double const & rotation);
 		RenderRect & setOrigin(app::math::Vector2d const & origin);
 		RenderRect & setSize(app::math::Vector2d const & size);
+		RenderRect & setFacing(bool isRight);
 	public: // Public Static Variables
 	public: // Public Member Variables
 	protected: // Protected Static Functions
@@ -48,6 +50,7 @@ namespace app::gra
 		math::Vector2d m_origin;
 		math::Vector2d m_size;
 		double m_rotation;
+		bool m_isRight;
 	};
 }
 
