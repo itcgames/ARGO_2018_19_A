@@ -22,6 +22,7 @@ app::sce::TutorialLevelScene::TutorialLevelScene(SceneType & sceneManagerType)
 			UpdateSystem(std::in_place_type<app::sys::DiscReturnSystem>),
 			UpdateSystem(std::in_place_type<app::sys::CollisionSystem>),
 			UpdateSystem(std::in_place_type<app::sys::HealthSystem>),
+			UpdateSystem(std::in_place_type<app::sys::BombExplosionSystem>),
 			UpdateSystem(std::in_place_type<app::sys::DebugSystem>, sceneManagerType),
 			UpdateSystem(std::in_place_type<app::sys::DestroySystem>)
 			})
@@ -111,5 +112,5 @@ void app::sce::TutorialLevelScene::reset()
 
 void app::sce::TutorialLevelScene::levelComplete()
 {
-	m_sceneManagerType = (SceneType::MainMenu);
+	m_sceneManagerType = (SceneType::Level);
 }

@@ -10,6 +10,7 @@
 #include "components/Layer.h"
 #include "components/Disc.h"
 #include "components/Attack.h"
+#include "components/Facing.h"
 
 app::fact::DiscFactory::DiscFactory(app::Entity const _entity)
 	: m_entity(_entity)
@@ -18,12 +19,12 @@ app::fact::DiscFactory::DiscFactory(app::Entity const _entity)
 
 app::Entity const app::fact::DiscFactory::create()
 {
-	auto view = m_registry.view<comp::Input, comp::Dimensions, comp::Location>();
+	auto view = m_registry.view<comp::Facing, comp::Dimensions, comp::Location>();
 	app::Entity const entity = EntityFactory::create();
 
 	if (view.contains(m_entity))
 	{
-		auto[input, dimensions, location] = view.get<comp::Input, comp::Dimensions, comp::Location>(m_entity);
+		auto[facing, dimensions, location] = view.get<comp::Facing, comp::Dimensions, comp::Location>(m_entity);
 
 		//dimensions
 		auto dimensionsComp = comp::Dimensions();
@@ -52,7 +53,7 @@ app::Entity const app::fact::DiscFactory::create()
 
 		//location
 		auto locationComp = comp::Location();
-		if (input.isRight)
+		if (facing.isRight)
 		{
 			locationComp.position = location.position + discCmp.offset;
 			motionCmp.direction = 0;

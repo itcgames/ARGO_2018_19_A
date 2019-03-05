@@ -29,6 +29,7 @@ namespace app::par
 		math::Vector2f frameNumber;
 		bool animationLoop = false;
 		std::uint32_t zIndex;
+		std::uint32_t maxFrames;
 	protected: // Protected Static Functions
 	protected: // Protected Member Functions
 	protected: // Protected Static Variables

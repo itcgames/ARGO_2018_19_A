@@ -10,7 +10,7 @@ namespace app::cmnd
 	class ButtonMainMenuMultiplayerConnectCommand : public BaseMultiplayerCommand
 	{
 	public: // Constructors/Destructor/Assignments
-		ButtonMainMenuMultiplayerConnectCommand(std::string && serverIp, std::int32_t serverPort, app::Entity const callingEntity, app::sce::SceneType & sceneManagerControl);
+		ButtonMainMenuMultiplayerConnectCommand(std::string && serverIp, std::int32_t serverPort, app::Entity const callingEntity, app::Entity const followEntity, app::sce::SceneType & sceneManagerControl);
 		virtual ~ButtonMainMenuMultiplayerConnectCommand() = default;
 
 		ButtonMainMenuMultiplayerConnectCommand(ButtonMainMenuMultiplayerConnectCommand const &) = default;

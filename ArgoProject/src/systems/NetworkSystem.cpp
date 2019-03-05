@@ -39,6 +39,7 @@ void app::sys::NetworkSystem::update(app::time::seconds const & dt)
 				case app::sce::SceneType::Lobby:
 					this->handlePacketLobbyIJoined();
 					this->handlePacketLobbyReady();
+					this->handlePacketLobbyStart();
 					break;
 				case app::sce::SceneType::LobbySelect:
 					this->handlePacketLobbyWasCreated();
@@ -176,4 +177,9 @@ void app::sys::NetworkSystem::updateLobbyTag()
 	{
 		throw std::exception("Lobby Tag contains invalid lobby id");
 	}
+}
+void app::sys::NetworkSystem::handlePacketLobbyStart()
+{
+	if (m_packetType != app::net::PacketType::LOBBY_START) { return; }
+	m_sceneControl = app::sce::SceneType::MultiplayerLevel;
 }

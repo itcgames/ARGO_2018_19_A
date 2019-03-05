@@ -3,9 +3,10 @@
 #include "components/Location.h"
 #include "components/Dimensions.h"
 #include "components/CharacterType.h"
+#include "components/Input.h"
 #include "factories/entities/AxeAttackFactory.h"
 #include "factories/DiscFactory.h"
-#include "components/Input.h"
+#include "factories/BombAttackFactory.h"
 
 
 app::cmnd::AttackCommand::AttackCommand(app::Entity const _entity)
@@ -29,6 +30,10 @@ void app::cmnd::AttackCommand::execute()
 		}
 			break;
 		case comp::CharacterType::Type::BOMB:
+		{
+			auto bombAttackFactory = fact::BombAttackFactory(m_entity);
+			bombAttackFactory.create();
+		}
 			break;
 		case comp::CharacterType::Type::DISC:
 		{

@@ -4,12 +4,13 @@
 #include "components/Location.h"
 #include "components/Dimensions.h"
 #include "components/Collision.h"
-#include "components/FollowEntity.h"
+#include "components/Follow.h"
 #include "components/Render.h"
 #include "components/Layer.h"
 #include "components/Input.h"
 #include "components/Damage.h"
 #include "components/Attack.h"
+#include "components/Facing.h"
 
 app::fact::AxeAttackFactory::AxeAttackFactory(app::Entity const _entity)
 	: m_entity(_entity)
@@ -18,12 +19,12 @@ app::fact::AxeAttackFactory::AxeAttackFactory(app::Entity const _entity)
 
 app::Entity const app::fact::AxeAttackFactory::create()
 {
-	auto view = m_registry.view<comp::Input, comp::Dimensions, comp::Location>();
+	auto view = m_registry.view<comp::Facing, comp::Dimensions, comp::Location>();
 	app::Entity const entity = EntityFactory::create();
 
 	if (view.contains(m_entity))
 	{
-		auto[input, dimensions, location] = view.get<comp::Input, comp::Dimensions, comp::Location>(m_entity);
+		auto[facing, dimensions, location] = view.get<comp::Facing, comp::Dimensions, comp::Location>(m_entity);
 
 		auto destroy = comp::Destroy();
 		destroy.timeToLive = 0.5f;
@@ -42,14 +43,14 @@ app::Entity const app::fact::AxeAttackFactory::create()
 		m_registry.assign<decltype(collision)>(entity, std::move(collision));
 
 		//follow entity component
-		auto followEnt = comp::FollowEntity();
+		auto followEnt = comp::Follow();
 		followEnt.entity = m_entity;
 		followEnt.offset = { dimensions.size.x / 2 + dimensionsComp.size.x / 2 + 0.5f, 0.0f };
 		m_registry.assign<decltype(followEnt)>(entity, std::move(followEnt));
 
 		//location
 		auto locationComp = comp::Location();
-		if (input.isRight)
+		if (facing.isRight)
 		{
 			locationComp.position = location.position + followEnt.offset;
 		}

@@ -182,6 +182,11 @@ bool app::net::Client::processLobbyJoinedMy()
 	return true;
 }
 
+bool app::net::Client::processLobbyStart()
+{
+	return true;
+}
+
 bool app::net::Client::processDefault()
 {
 	this->output("No proccessing done for this packet type");
@@ -204,6 +209,8 @@ bool app::net::Client::processPacket(PacketType _packetType)
 			return this->processLobbyJoinedMy();
 		case PacketType::LOBBY_READY:
 			return true;
+		case PacketType::LOBBY_START:
+			return this->processLobbyStart();
 		case PacketType::UNKNOWN:
 			this->output("Unknown Packet type!");
 			return false;

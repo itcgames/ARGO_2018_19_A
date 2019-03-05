@@ -16,6 +16,7 @@ namespace app::sce
 		TutorialLevel,
 		Splash,
 		Loading,
+		Exit,
 		Count
 	};
 }

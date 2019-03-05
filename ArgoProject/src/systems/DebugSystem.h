@@ -33,6 +33,7 @@ namespace app::sys
 	private: // Private Static Functions
 	private: // Private Member Functions
 		void serverTesting();
+		void changeChatacterType();
 		void sceneSwapping();
 		void playersInLobbyReady();
 	private: // Private Static Variables

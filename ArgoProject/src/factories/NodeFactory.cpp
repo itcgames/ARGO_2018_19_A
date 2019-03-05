@@ -8,8 +8,8 @@
 #include "components/Node.h"
 #include "components/Collision.h"
 
-app::fact::NodeFactory::NodeFactory(math::Vector2f const & pos, std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & lcmnds, std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & icmnds)
-	: m_position(pos), m_loopCommands(lcmnds), m_initialCommands(icmnds)
+app::fact::NodeFactory::NodeFactory(math::Vector2f const & pos, std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & lcmnds, std::list<std::shared_ptr<app::cmnd::BaseCommand>> const & icmnds, float timeToLoopCommands)
+	: m_position(pos), m_loopCommands(lcmnds), m_initialCommands(icmnds), m_timeToLoopCommands(timeToLoopCommands)
 {
 }
 
@@ -42,6 +42,8 @@ app::Entity const app::fact::NodeFactory::create()
 	auto node = comp::Node();
 	node.loopCommands = m_loopCommands;
 	node.initialCommands = m_initialCommands;
+	node.timeToLoopCommands = m_timeToLoopCommands;
+	node.active = true;
 	m_registry.assign<decltype(node)>(entity, std::move(node));
 
 	return entity;

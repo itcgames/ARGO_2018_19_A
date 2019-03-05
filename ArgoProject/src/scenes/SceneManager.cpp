@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 #include "SceneManager.h"
 
-app::sce::SceneManager::SceneManager()
+app::sce::SceneManager::SceneManager(bool & gameRunning)
 	: m_scenes(util::make_unordered_map<SceneType, Scene>({
 		  std::make_pair(SceneType::Splash, Scene(std::in_place_type<sce::SplashScene>, m_targetScene))
 		, std::make_pair(SceneType::CharacterSelect, Scene(std::in_place_type<sce::CharacterSelectScene>, m_targetScene))
@@ -16,7 +16,8 @@ app::sce::SceneManager::SceneManager()
 		, std::make_pair(SceneType::Loading, Scene(std::in_place_type<sce::LoadingScene>, m_targetScene))
 	}))
 	, m_currentScene(SceneType::Count)
-	, m_targetScene(SceneType::Level)
+	, m_targetScene(SceneType::Splash)
+	, m_gameRunning(gameRunning)
 {
 }
 
@@ -40,6 +41,7 @@ void app::sce::SceneManager::render(app::time::seconds const & dt)
 
 void app::sce::SceneManager::changeScene()
 {
+	if (m_targetScene == SceneType::Exit) { m_gameRunning = false; return; }
 	if (m_currentScene == SceneType::Count)
 	{
 		// Setting scene for the first time

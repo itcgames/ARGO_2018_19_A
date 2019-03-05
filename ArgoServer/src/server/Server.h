@@ -51,6 +51,7 @@ namespace app::net
 		bool processLobbyGetAll(int id);
 		bool processLobbyJoined(int id);
 		bool processLevelNewPlayerInfo(int id);
+		bool processLobbyReady(int id);
 		bool processDefault(int id);
 
 		void outputIP(IPaddress const & ip);

@@ -8,6 +8,8 @@
 #include "components/Render.h"
 #include "components/Layer.h"
 #include "components/Widget.h"
+#include "components/Follow.h"
+#include "components/Camera.h"
 
 app::fact::ButtonFactory::ButtonFactory(par::ButtonFactoryParameters const & params) noexcept
 	: EntityFactory()
@@ -17,6 +19,8 @@ app::fact::ButtonFactory::ButtonFactory(par::ButtonFactoryParameters const & par
 
 app::Entity const app::fact::ButtonFactory::create()
 {
+	auto const IGNORE_X = math::Vector2f{ 0.0f, 1.0f };
+
 	app::Entity const entity = m_params.entity.has_value()
 		? m_params.entity.value()
 		: EntityFactory::create();
@@ -45,13 +49,31 @@ app::Entity const app::fact::ButtonFactory::create()
 	presseable.keyCommands = comp::Presseable::KeyCommands{
 		std::make_pair(SDLK_RETURN, m_params.command)
 	};
-	presseable.mouseCommands = comp::Presseable::MouseCommands{
-		std::make_pair(SDL_BUTTON_LEFT, m_params.command)
-	};
+	presseable.mouseCommands = comp::Presseable::MouseCommands{};
 	presseable.buttonCommands = comp::Presseable::ButtonCommands{
 		std::make_pair(app::inp::ControllerButtonCode::SDL_CONTROLLER_BUTTON_A, m_params.command)
 	};
 	m_registry.assign<decltype(presseable)>(entity, std::move(presseable));
+
+	if (m_params.follow.has_value())
+	{
+		auto locationView = m_registry.view<comp::Location>();
+		auto cameraView = m_registry.view<comp::Camera>();
+		auto const & followEntity = m_params.follow.value();
+		auto follow = comp::Follow();
+		follow.entity = followEntity;
+		if (locationView.contains(follow.entity))
+		{
+			auto const & followLocation = locationView.get(follow.entity);
+			follow.offset = m_params.position - followLocation.position;
+		}
+		else if (cameraView.contains(follow.entity))
+		{
+			auto const & camera = cameraView.get(follow.entity);
+			follow.offset = (m_params.position - camera.center);
+		}
+		m_registry.assign<decltype(follow)>(entity, std::move(follow));
+	}
 
 	auto widget = comp::Widget();
 	widget.state = m_params.state;
@@ -62,7 +84,14 @@ app::Entity const app::fact::ButtonFactory::create()
 	m_registry.assign<decltype(widget)>(entity, std::move(widget));
 
 	auto render = comp::Render();
-	render.texture = m_resourceManager.getTexture(app::res::TextureKey::Debug);
+	if (widget.state == comp::Widget::State::Active)
+	{
+		render.texture = m_resourceManager.getTexture(app::res::TextureKey::Debug);
+	}
+	else
+	{
+		render.texture = m_resourceManager.getTexture(app::res::TextureKey::DebugRed);
+	}
 	m_registry.assign<decltype(render)>(entity, std::move(render));
 
 	return entity;

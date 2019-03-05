@@ -6,6 +6,7 @@ namespace app::res
 	enum class TextureKey
 	{
 		Debug,
+		DebugRed,
 		DebugBig,
 		DebugHuge,
 		DebugAnimation,
@@ -19,6 +20,8 @@ namespace app::res
 		PlatformLeft,
 		PlatformMiddle,
 		PlatformRight,
+		Title,
+		MainMenuBackground,
 		DebugCollisionBox,
 		Count // Keep this one at the bottom of the enum list
 	};

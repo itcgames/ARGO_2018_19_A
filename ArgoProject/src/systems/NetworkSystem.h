@@ -39,6 +39,7 @@ namespace app::sys
 		void handlePacketLobbyReady();
 
 		void updateLobbyTag();
+		void handlePacketLobbyStart();
 	private: // Private Static Variables
 		constexpr static bool s_DEBUG_MODE = true;
 	private: // Private Member Variables
