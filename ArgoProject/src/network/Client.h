@@ -52,6 +52,7 @@ namespace app::net
 		bool processLobbyGetAll();
 		bool processLobbyJoined();
 		bool processLobbyJoinedMy();
+		bool processLobbyStart();
 		bool processDefault();
 
 

@@ -34,6 +34,7 @@ namespace app::sys
 		void output(std::initializer_list<app::Console::Variant> const & msgs) const;
 		void handlePacketLobbyWasCreated();
 		void handlePacketLobbyWasJoined();
+		void handlePacketLobbyStart();
 	private: // Private Static Variables
 		constexpr static bool s_DEBUG_MODE = true;
 	private: // Private Member Variables

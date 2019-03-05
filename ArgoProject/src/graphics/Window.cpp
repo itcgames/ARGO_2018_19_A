@@ -92,7 +92,7 @@ void app::gra::Window::clear() const
 
 void app::gra::Window::render(app::gra::RenderRect const & rect) const
 {
-	constexpr auto FLIP_FLAG = SDL_RendererFlip::SDL_FLIP_NONE;
+	auto const & flipFlag = rect.getFacing() ? SDL_RendererFlip::SDL_FLIP_NONE : SDL_RendererFlip::SDL_FLIP_HORIZONTAL;
 	auto const & position = static_cast<math::Vector2i>(rect.getPosition());
 	auto const & origin = static_cast<math::Vector2i>(rect.getOrigin());
 	auto const & size = static_cast<math::Vector2i>(rect.getSize());
@@ -110,7 +110,7 @@ void app::gra::Window::render(app::gra::RenderRect const & rect) const
 		static_cast<int32_t>(origin.x * scale.x),
 		static_cast<int32_t>(origin.y * scale.y)
 	};
-	SDL_RenderCopyEx(m_renderer.get(), rect.getTexture(), source.has_value() ? &source.value() : nullptr, &destination, rect.getRotation(), &center, FLIP_FLAG);
+	SDL_RenderCopyEx(m_renderer.get(), rect.getTexture(), source.has_value() ? &source.value() : nullptr, &destination, rect.getRotation(), &center, flipFlag);
 }
 
 void app::gra::Window::render(app::gra::RenderText const & rect) const

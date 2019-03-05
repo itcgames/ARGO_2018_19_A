@@ -9,5 +9,5 @@ app::cmnd::ButtonMainMenuSinglePlayerCommand::ButtonMainMenuSinglePlayerCommand(
 
 void app::cmnd::ButtonMainMenuSinglePlayerCommand::execute()
 {
-	m_sceneControl = app::sce::SceneType::CharacterSelect;
+	m_sceneControl = app::sce::SceneType::TutorialLevel;
 }

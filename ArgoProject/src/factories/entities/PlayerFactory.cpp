@@ -123,7 +123,7 @@ app::Entity const app::fact::PlayerFactory::create()
 
 	//NOTE: Type should be set on character select screen
 	auto charType = comp::CharacterType();
-	charType.type = comp::CharacterType::Type::SWORD_LEGS;
+	charType.type = comp::CharacterType::Type::AXE;
 	m_registry.assign<decltype(charType)>(entity, std::move(charType));
 
 	auto facing = comp::Facing();

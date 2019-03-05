@@ -744,6 +744,9 @@
     <ClCompile Include="src\fsm\states\AxeRunAnimationState.cpp">
       <Filter>Source Files\fsm\states</Filter>
     </ClCompile>
+    <ClCompile Include="src\commands\buttons\ButtonLobbyReadyCommand.cpp">
+      <Filter>Source Files\commands\buttons</Filter>
+    </ClCompile>
     <ClCompile Include="src\commands\buttons\ButtonMainMenuSinglePlayerCommand.cpp">
       <Filter>Source Files\commands\buttons</Filter>
     </ClCompile>
@@ -1369,6 +1372,9 @@
     </ClInclude>
     <ClInclude Include="src\fsm\states\AxeRunAnimationState.h">
       <Filter>Header Files\fsm\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\buttons\ButtonLobbyReadyCommand.h">
+      <Filter>Header Files\commands\buttons</Filter>
     </ClInclude>
     <ClInclude Include="src\commands\buttons\ButtonMainMenuSinglePlayerCommand.h">
       <Filter>Header Files\commands\buttons</Filter>
