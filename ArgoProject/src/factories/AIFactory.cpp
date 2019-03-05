@@ -112,9 +112,8 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	m_registry.assign<decltype(facing)>(entity, std::move(facing));
 
 	float timeToLoopCommands = 0.75f;
-	//auto rng = app::util::Random::gen(1, 3);
-	auto rng = app::util::Random::gen(1,3);
-	rng = 1;
+	auto rng = 1;
+	bool useRandom = true;
 	auto moveLeftCmnd = std::make_shared<cmnd::MoveCommand>(entity, -180.0f, 20.0f);
 	auto moveRightCmnd = std::make_shared<cmnd::MoveCommand>(entity, 0.0f, 20.0f);
 	auto jumpCmnd = std::make_shared<cmnd::JumpCommand>(entity, 400.0f);
@@ -123,6 +122,10 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	//run command until it hits a new node
 	auto loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{};
 	auto initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{};
+	if (useRandom == true)
+	{
+		auto rng = app::util::Random::gen(1, 3);
+	}
 	if (rng == 1)
 	{
 		loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
@@ -159,7 +162,10 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 
 	//2
 	timeToLoopCommands = 0.15f;
-	//rng = app::util::Random::gen(1, 3);
+	if (useRandom == true)
+	{
+		auto rng = app::util::Random::gen(1, 3);
+	}
 	if (rng == 1)
 	{
 		loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
@@ -195,7 +201,10 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	entities.push_back(node);
 
 	//3
-	//rng = app::util::Random::gen(1, 3);
+	if (useRandom == true)
+	{
+		auto rng = app::util::Random::gen(1, 3);
+	}
 	if (rng == 1)
 	{
 		loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
@@ -228,7 +237,10 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 
 	//4
 	timeToLoopCommands = 0.45f;
-//	rng = app::util::Random::gen(1, 3);
+	if (useRandom == true)
+	{
+		auto rng = app::util::Random::gen(1, 3);
+	}
 	if (rng == 1)
 	{
 		loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
@@ -263,7 +275,10 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	entities.push_back(node);
 
 	//5
-	//rng = app::util::Random::gen(1, 3);
+	if (useRandom == true)
+	{
+		auto rng = app::util::Random::gen(1, 3);
+	}
 	if (rng == 1)
 	{
 		loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
@@ -298,7 +313,10 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	entities.push_back(node);
 
 	//6 
-	//rng = app::util::Random::gen(1, 3);
+	if (useRandom == true)
+	{
+		auto rng = app::util::Random::gen(1, 3);
+	}
 	if (rng == 1)
 	{
 		loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
@@ -334,7 +352,10 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 
 	//7
 	timeToLoopCommands = 0.5f;
-	//rng = app::util::Random::gen(1, 3);
+	if (useRandom == true)
+	{
+		auto rng = app::util::Random::gen(1, 3);
+	}
 	if (rng == 1)
 	{
 		loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
@@ -371,7 +392,10 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 
 	//8
 	timeToLoopCommands = 0.3f;
-	//rng = app::util::Random::gen(1, 3);
+	if (useRandom == true)
+	{
+		auto rng = app::util::Random::gen(1, 3);
+	}
 	if (rng == 1)
 	{
 		loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
@@ -407,6 +431,10 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	entities.push_back(node);
 
 	//9
+	if (useRandom == true)
+	{
+		auto rng = app::util::Random::gen(1, 3);
+	}
 	if (rng == 1)
 	{
 		loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
@@ -441,6 +469,10 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	entities.push_back(node);
 
 	//10
+	if (useRandom == true)
+	{
+		auto rng = app::util::Random::gen(1, 3);
+	}
 	if (rng == 1)
 	{
 		loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
@@ -476,6 +508,10 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	entities.push_back(node);
 
 	//11
+	if (useRandom == true)
+	{
+		auto rng = app::util::Random::gen(1, 3);
+	}
 	timeToLoopCommands = 0.7f;
 	if (rng == 1)
 	{
@@ -521,15 +557,15 @@ std::vector<app::Entity> app::fact::AIFactory::create()
 	entities.push_back(node);
 
 	////12.5 NODE TO BE DYNAMICALLY CREATED (DESTROY)
-	//loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
-	//		moveLeftCmnd
-	//};
-	//initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
-	//		std::make_shared<cmnd::MoveCommand>(entity, 180.0f, 20.0f),
-	//		std::make_shared<cmnd::DashCommand>(entity)
-	//};
-	//node = app::fact::NodeFactory(math::Vector2f(2900.0f, 200.0f), loopCmnds, initialCmnds, timeToLoopCommands).create();
-	//entities.push_back(node);
+	loopCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+			moveLeftCmnd
+	};
+	initialCmnds = std::list<std::shared_ptr<cmnd::BaseCommand>>{
+			std::make_shared<cmnd::MoveCommand>(entity, 180.0f, 20.0f),
+			std::make_shared<cmnd::DashCommand>(entity)
+	};
+	node = app::fact::NodeFactory(math::Vector2f(2900.0f, 200.0f), loopCmnds, initialCmnds, timeToLoopCommands).create();
+	entities.push_back(node);
 
 	//13
 	timeToLoopCommands = 0.4f;
