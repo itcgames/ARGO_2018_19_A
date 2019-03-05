@@ -148,6 +148,12 @@
     <Filter Include="Header Files\tags">
       <UniqueIdentifier>{fa2ee7f7-050b-4b7e-a5da-e52bb9abe376}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\observer">
+      <UniqueIdentifier>{b93de5a4-8f63-439d-8fc2-cb63e18c9de1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\observer">
+      <UniqueIdentifier>{3fb1ef58-8690-4fc4-8f51-d3b546bd6bbe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -780,6 +786,9 @@
     <ClCompile Include="src\utilities\Random.cpp">
       <Filter>Source Files\utilities</Filter>
     </ClCompile>
+    <ClCompile Include="src\observer\Observer.cpp">
+      <Filter>Source Files\observer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -1405,6 +1414,9 @@
     </ClInclude>
     <ClInclude Include="src\utilities\Random.h">
       <Filter>Header Files\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\observer\Observer.h">
+      <Filter>Header Files\observer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
