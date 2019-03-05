@@ -9,6 +9,8 @@
 #include "components/DoubleJump.h"
 #include "components/Dash.h"
 
+#include "observer/Observer.h"
+
 app::cmnd::JumpCommand::JumpCommand(app::Entity const _entity, float _force)
 	: m_entity(_entity)
 	, m_force(_force)
@@ -30,7 +32,8 @@ void app::cmnd::JumpCommand::execute()
 			airMotion.direction = velocity.toAngle();
 			airMotion.speed = velocity.magnitude();
 			doubleJump.canDoubleJump = false;
-			m_audioPlayer.playAudioSFX(app::res::AudioKey::PlayerJump);
+			//m_audioPlayer.playAudioSFX(app::res::AudioKey::PlayerJump);
+			app::obs::Listener::onNotify("JUMP", PLAYAUDIO);
 		}
 	}
 	else //if player tries jumping from ground
@@ -50,7 +53,7 @@ void app::cmnd::JumpCommand::execute()
 			airMotion.angularSpeed = motion.angularSpeed;
 			m_registry.assign<comp::AirMotion>(m_entity, std::move(airMotion));
 			m_registry.remove<comp::Motion>(m_entity);
-			m_audioPlayer.playAudioSFX(app::res::AudioKey::PlayerJump);
+			app::obs::Listener::onNotify("JUMP", PLAYAUDIO);
 		}
 		else if (m_registry.has<comp::Dash>(m_entity)) //if player currently in the middle of a dash
 		{
@@ -66,7 +69,7 @@ void app::cmnd::JumpCommand::execute()
 			m_registry.assign<comp::AirMotion>(m_entity, std::move(airMotion));
 			m_registry.remove<comp::Dash>(m_entity);
 			doubleJump.canDoubleJump = false;
-			m_audioPlayer.playAudioSFX(app::res::AudioKey::PlayerJump);
+			app::obs::Listener::onNotify("JUMP", PLAYAUDIO);
 		}
 
 	}

@@ -242,7 +242,6 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\components\DoubleJump.cpp" />
     <ClCompile Include="src\components\Enemy.cpp" />
     <ClCompile Include="src\components\Facade.cpp" />
-
     <ClCompile Include="src\components\Ghost.cpp" />
     <ClCompile Include="src\components\Facing.cpp" />
     <ClCompile Include="src\components\Follow.cpp" />
@@ -330,6 +329,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClCompile Include="src\input\Keyhandler.cpp" />
     <ClCompile Include="src\input\Mousehandler.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\observer\Observer.cpp" />
     <ClCompile Include="src\parameters\AnimatedImageFactoryParameters.cpp" />
     <ClCompile Include="src\parameters\DestructibleParameters.cpp" />
     <ClCompile Include="src\network\Client.cpp" />
@@ -547,6 +547,7 @@ C:\windows\system32\xcopy /Y "$(ProjectDir)deps\bin\$(IntDir)*.pdg" "$(TargetDir
     <ClInclude Include="src\input\Controllerhandler.h" />
     <ClInclude Include="src\input\Keyhandler.h" />
     <ClInclude Include="src\input\Mousehandler.h" />
+    <ClInclude Include="src\observer\Observer.h" />
     <ClInclude Include="src\parameters\AnimatedImageFactoryParameters.h" />
     <ClInclude Include="src\parameters\DestructibleParameters.h" />
     <ClInclude Include="src\network\Client.h" />

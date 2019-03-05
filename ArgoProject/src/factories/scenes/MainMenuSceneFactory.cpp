@@ -17,6 +17,8 @@
 #include "commands/buttons/ButtonMainMenuExitCommand.h"
 #include "network/Client.h"
 
+#include "observer/Observer.h"
+
 app::fact::sce::MainMenuSceneFactory::MainMenuSceneFactory(app::sce::SceneType & targetScene, std::optional<app::fact::LevelDemoFactory> & levelFactory)
 	: SceneFactory()
 	, m_targetScene(targetScene)
@@ -26,7 +28,7 @@ app::fact::sce::MainMenuSceneFactory::MainMenuSceneFactory(app::sce::SceneType &
 
 std::vector<app::Entity> app::fact::sce::MainMenuSceneFactory::create()
 {
-	m_audioPlayer.playAudioMusic(app::res::AudioKey::BackgroundMusicTitle, app::gra::AudioPlayer::s_LOOP_FOREVER);
+	app::obs::Listener::onNotify("BGM", PLAYAUDIO);
 	auto entities = std::vector<app::Entity>();
 	auto cameraEntity = app::Entity();
 
